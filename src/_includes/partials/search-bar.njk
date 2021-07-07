@@ -1,0 +1,13 @@
+<form id="search-form">
+  <div role="search" class="searchbox__wrapper">
+    <label class="fcc_sr_only" for='search-input'>
+      {% t 'search.label' %}
+    </label>
+    <input type="search" placeholder="{% t 'search.placeholder' %}" id="search-input" />
+    <button type="submit" class="ais-SearchBox-submit">
+      {% include "partials/icons/magnifying-glass.njk" %}
+      <span class="fcc_sr_only">{% t 'search.accessible-name' %}</span>
+    </button>
+    <div id='dropdown-container'></div>
+  </div>
+</form>

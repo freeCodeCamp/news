@@ -1,0 +1,78 @@
+{% set postCount = author.count.posts %}
+
+<div class="under-header-content">
+    {% if author.profile_image %}
+        {% 
+            image
+            author.profile_image,
+            "author-profile-image",
+            author.name,
+            "150px",
+            [150]
+        %}
+    {% endif %}
+    <h1 class="site-title">{{ author.name }}</h1>
+    {% if author.bio %}
+        <h2 class="author-bio">{{ author.bio | safe }}</h2>
+    {% endif %}
+    <div class="author-meta">
+        {% if author.location %}
+            <div class="author-location">
+                {{author.location}} 
+                <span class="bull">
+                    &bull;
+                </span>
+            </div>
+        {% endif %}
+        <div class="author-stats">
+            {% if postCount == 0 %}
+                {% t 'author.page.no-posts' %}
+            {% elif postCount == 1 %}
+                {% t 'author.page.one-post' %}
+            {% else %}
+                {% t 'author.page.multiple-posts', { postCount: postCount } %}
+            {% endif %}
+            <span class="bull">
+                &bull;
+            </span>
+        </div>
+        {% if author.website %}
+            <a
+                class="social-link social-link-wb"
+                href="{{ author.website }}"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                {% include "partials/icons/website.njk" %}
+            </a>
+        {% endif %}
+        {% if author.twitter %}
+            <a
+                class="social-link social-link-tw"
+                href="https://twitter.com/{{ author.twitter | replace("@", "") }}"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                {% include "partials/icons/twitter.njk" %}
+            </a>
+        {% endif %}
+        {% if author.facebook %}
+            <a
+                class="social-link social-link-fb"
+                href="https://facebook.com/{{ author.facebook }}"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                {% include "partials/icons/facebook.njk" %}
+            </a>
+        {% endif %}
+        <a
+            class="social-link social-link-rss"
+            href="https://feedly.com/i/subscription/feed/{{ author.absolute_url }}rss/"
+            target="_blank"
+            rel="noopener"
+        >
+            {% include "partials/icons/rss.njk" %}
+        </a>
+    </div>
+</div>

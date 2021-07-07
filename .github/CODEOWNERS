@@ -1,1 +1,6 @@
 * @freecodecamp/dev-team
+
+# --- Remove protection from package files to allow renovate to automerge ---
+
+/package.json
+/package-lock.json

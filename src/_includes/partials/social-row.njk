@@ -1,0 +1,15 @@
+<p class="social-row">
+    {% if post.primary_author.twitter %}
+        {% t 'social-row.author-has-twitter' %}
+        <a id='tweet-btn' class='cta-button'>{% t 'buttons.author-has-twitter' %}</a>
+    {% else %}
+        {% t 'social-row.author-no-twitter' %}, <a id='tweet-btn' class='cta-button'>{% t 'buttons.author-no-twitter' %}</a>
+    {% endif %}
+</p>
+
+{% block scripts %}
+    {% set js %}
+        {% include "assets/js/social-row.js" %}
+    {% endset %}
+    <script>{{ js | jsMin | safe }}</script>
+{% endblock %}

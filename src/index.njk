@@ -1,0 +1,38 @@
+---
+pagination:
+  data: ghost.posts
+  size: 25
+  alias: posts
+---
+
+{# 
+    size must be set manually,
+    and be the same number as env.POSTS_PER_PAGE
+#}
+
+{% extends 'layouts/default.njk' %}
+{% from "partials/card.njk" import card %}
+
+{% block content %}
+    <main id="site-main" class="site-main outer">
+        <div class="inner">
+            <section class="post-feed">
+                {% for post in posts %}
+                    {{ card(post, loop.index0) }}
+                {% endfor %}
+            </section>
+            {% include "partials/pagination.njk" %}
+        </div>
+    </main>
+{% endblock%}
+
+{% block scripts %}
+    {% set js %}
+        {% include "assets/js/time-ago.js" %}
+    {% endset %}
+    <script>{{ js | jsMin | safe }}</script>
+{% endblock %}
+
+{% block jsonLd %}
+    <script type="application/ld+json">{% createJsonLd 'index', site %}</script>
+{% endblock %}

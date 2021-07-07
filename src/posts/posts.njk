@@ -1,0 +1,11 @@
+---
+pagination:
+  data: ghost.posts
+  size: 1
+  alias: post
+  addAllPagesToCollections: true
+layout: 'layouts/post.njk'
+permalink: '{{ post.path }}'
+---
+
+{{ post.html | safe if post.html }}

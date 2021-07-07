@@ -1,0 +1,109 @@
+{% macro card(post, index) %}
+    {% set originalAuthor = post.original_post.primary_author %}
+    <article class="post-card {{post.class}}">
+        {% if post.feature_image %}
+            <a class="post-card-image-link" href="{{post.path}}" aria-label="{{post.title}}">
+                {% 
+                    image
+                    post.feature_image,
+                    "post-card-image lazyload",
+                    (post.title | escape),
+                    "(max-width: 360px) 300px,
+                     (max-width: 655px) 600px,
+                     (max-width: 767px) 1000px,
+                     (min-width: 768px) 300px,
+                     92vw",
+                    [300, 600, 1000, 2000],
+                    index
+                %}
+            </a>
+        {% else %}
+            <div class="no-feature-image-offsetter"></div>
+        {% endif %}
+
+        <div class="post-card-content">
+            <div class="post-card-content-link">
+                <header class="post-card-header">
+                    {%if post.primary_tag %}
+                        <span class="post-card-tags">
+                            <a href="{{post.primary_tag.path}}">
+                                #{{post.primary_tag.name}}
+                            </a>
+                        </span>
+                    {% endif %}
+                    <h2 class="post-card-title">
+                        <a href="{{post.path}}">
+                            {{post.title}}
+                        </a>
+                    </h2>
+                </header>
+            </div>
+            <footer class="post-card-meta">
+                {% if post.primary_author.name == "freeCodeCamp.org" %}
+                    <time class="meta-item-single" datetime="{{ post.published_at }}">{% timeAgo post.published_at %}</time>
+                {% else %}
+                    <ul class="author-list">
+                        {% if post.original_post %}
+                            <li class="author-list-item">
+                                <div class="author-name-tooltip">
+                                    {{ originalAuthor.name }}
+                                </div>
+                                {% if originalAuthor.profile_image %}
+                                    <a href="{{ originalAuthor.url}}" class="static-avatar">
+                                        {% 
+                                            image
+                                            originalAuthor.profile_image,
+                                            "author-profile-image",
+                                            originalAuthor.name,
+                                            "30px",
+                                            [30]
+                                        %}
+                                    </a>
+                                {% else %}
+                                    <a href="{{originalAuthor.url}}" class="static-avatar author-profile-image">
+                                        {% include "partials/icons/avatar.njk" %}
+                                    </a>
+                                {% endif %}
+                                <span class="meta-content">
+                                    <a class="meta-item" href="{{originalAuthor.url}}">{% t 'localization-meta.author', { authorName: originalAuthor.name } %} ({% t 'localization-meta.languages.en' %})</a>
+                                    <time class="meta-item" datetime="{{ post.original_post.published_at }}">{% timeAgo post.original_post.published_at %}</time>
+                                </span>
+                            </li>
+                        {% endif %}
+                        <li class="author-list-item">
+                            <div class="author-name-tooltip">
+                                {{ post.primary_author.name }}
+                            </div>
+                            {% if post.primary_author.profile_image %}
+                                <a href="{{ post.primary_author.path }}" class="static-avatar">
+                                    {% 
+                                        image
+                                        post.primary_author.profile_image,
+                                        "author-profile-image",
+                                        post.primary_author.name,
+                                        "30px",
+                                        [30]
+                                    %}
+                                </a>
+                            {% else %}
+                                <a href="{{ post.primary_author.path }}" class="static-avatar author-profile-image">
+                                    {% include "partials/icons/avatar.njk" %}
+                                </a>
+                            {% endif %}
+                            <span class="meta-content">
+                                <a class="meta-item" href="{{ post.primary_author.path }}">
+                                    {% if post.original_post %}
+                                        {% t 'localization-meta.translator', { translatorName: post.primary_author.name } %}
+                                    {% else %}
+                                        {{post.primary_author.name}}
+                                    {% endif %}
+                                </a>
+                                <time class="meta-item" datetime="{{ post.published_at }}">{% timeAgo post.published_at %}</time>
+                            </span>
+                        </li>
+                    </ul>
+                {% endif %}
+            </footer>
+        </div>
+    </article>
+{% endmacro %}

@@ -1,0 +1,13 @@
+---
+pagination:
+  data: ghost.pages
+  size: 1
+  alias: 'doc'
+  addAllPagesToCollections: true
+layout: 'layouts/doc.njk'
+permalink: '{{ doc.path }}'
+---
+
+{# pages are aliased as 'doc' to prevent conflict with the 11ty page object #}
+
+{{ doc.html | safe if doc.html }}
