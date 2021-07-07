@@ -1,0 +1,26 @@
+<section class="author-card">
+    {% if post.primary_author.profile_image %}
+        {% 
+            image
+            post.primary_author.profile_image,
+            "author-profile-image",
+            post.primary_author.name,
+            "60px",
+            [60]
+        %}
+    {% else %}
+        <span class="avatar-wrapper">{% include "partials/icons/avatar.njk" %}</span>
+    {% endif %}
+    <section class="author-card-content">
+        <span class="author-card-name">
+            <a href="{{ post.primary_author.path }}">{{ post.primary_author.name }}</a>
+        </span>
+        {% if post.primary_author.bio %}
+            <p>{{ post.primary_author.bio }}</p>
+        {% else %}
+            <p>
+                {% t 'author.byline.read-more', { authorUrl: post.primary_author.path } %}{% fullStopHandler site.lang %}
+            </p>
+        {% endif %}
+    </section>
+</section>

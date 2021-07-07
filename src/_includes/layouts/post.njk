@@ -1,0 +1,110 @@
+{% extends 'layouts/default.njk' %}
+
+{% set title = post.title %}
+{% set codeinjection_head = post.codeinjection_head %}
+{% set codeinjection_foot = post.codeinjection_foot %}
+
+{% block content %}
+    <main id="site-main" class="post-template site-main outer">
+        <div class="inner">
+            <article class="post-full post {{ "no-image" if not (post.feature_image) }}">
+                <header class="post-full-header">
+                    <section class="post-full-meta">
+                        <time class="post-full-meta-date" datetime="{{ post.published_at }}">
+                            {% publishedDate post.published_at %}
+                        </time>
+                        {% if post.primary_tag %}
+                            <span class="date-divider">/</span>
+                            <a href="{{ post.primary_tag.path }}">
+                                #{{ post.primary_tag.name }}
+                            </a>
+                        {% endif %}
+                    </section>
+                    <h1 class="post-full-title">{{ title }}</h1>
+                </header>
+                <div class="post-full-author-header">
+                    {% if post.primary_author.name != "freeCodeCamp.org" %}
+                        {% include "partials/byline-no-bio.njk" %}
+                    {% endif %}
+                </div>
+                {% if post.feature_image %}
+                    <figure class="post-full-image">
+                        {% 
+                            featureImage
+                            post.feature_image,
+                            (post.title | escape),
+                            "(max-width: 800px) 400px,
+                             (max-width: 1170px) 700px,
+                             1400px",
+                            [300, 600, 1000, 2000]
+                        %}
+                    </figure>
+                {% endif %}
+                <section class="post-full-content">
+                    <section class="post-content {{ "medium-migrated-article" if (post.primary_author.name == "freeCodeCamp.org") }}">
+                        {{ content | safe }}
+                    </section>
+                    <hr />
+                    {% if post.primary_author.name != "freeCodeCamp.org" %}
+                        <div class="post-full-author-header">
+                            {% include "partials/byline.njk" %}
+                        </div>
+                        <hr />
+                    {% endif %}
+
+                    {# Conditionally include partials based on Ghost language setting #}
+                    {% ifAsync site.lang == "zh" or site.lang == "zh-cn" %}
+                        {% include "partials/learn-cta-row.njk" %}
+                        {% include "partials/comments.njk" %}
+                    {% else %}
+                        {% include "partials/social-row.njk" %}
+                        {% include "partials/learn-cta-row.njk" %}
+                    {% endif %}
+                </section>
+            </article>
+        </div>
+    </main>
+{% endblock %}
+
+{% block scripts %}
+    {% set js %}
+        {% include "assets/js/fitvids.js" %}
+        document.addEventListener('DOMContentLoaded', () => {
+            const postContent = document.querySelector('.post-full-content');
+            if (postContent) fitVids(postContent);
+        });
+    {% endset %}
+    <script>{{ js | jsMin | safe }}</script>
+{% endblock %}
+
+{%- block seo -%}
+    <!--Twitter Card-->
+    <meta name="twitter:site" content="{{ site.twitter }}">
+    <meta name="twitter:creator" content="{{ post.primary_author.twitter }}">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="{{ site.url + post.path }}">
+    <meta name="twitter:title" content="{{ title }} – {{ site.title }}">
+    <meta name="twitter:description" content="{{ post.excerpt }}">
+    <meta name="twitter:image" content="{{ post.feature_image }}">
+
+    <!--Schema-->
+    <link rel="author" href="{{ post.primary_author.website }}">
+    <link rel="publisher" href="{{ site.url }}">
+    <meta itemprop="name" content="{{ title }} – {{ site.title }}">
+    <meta itemprop="description" content="{{ post.excerpt }}">
+    <meta itemprop="image" content="{{ post.feature_image }}">
+
+    <!-- Facebook OpenGraph -->
+    <meta property="og:url" content="{{ site.url + post.path }}/">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="{{ title }} – {{ site.title }}">
+    <meta property="og:image" content="{{ post.feature_image }}">
+    <meta property="og:description" content="{{ post.excerpt }}">
+    <meta property="og:site_name" content="{{ site.title }}">
+    <meta property="og:locale" content="{{ site.lang }}">
+    <meta property="article:author" content="{{ site.url }}">
+{%- endblock -%}
+
+{% block jsonLd %}
+    <script type="application/ld+json">{% createJsonLd 'article', post %}</script>
+{% endblock %}

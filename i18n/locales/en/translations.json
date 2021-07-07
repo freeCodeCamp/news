@@ -1,0 +1,79 @@
+{
+  "keyword-meta": "freeCodeCamp, programming, front-end, programmer, article, regular expressions, Python, JavaScript, AWS, JSON, HTML, CSS, Bootstrap, React, Vue, Webpack",
+  "buttons": {
+    "forum": "Forum",
+    "donate": "Donate",
+    "load-more-articles": "Load More Articles",
+    "author-has-twitter": "Tweet a thanks",
+    "author-no-twitter": "tweet it",
+    "learn-to-code-cta": "Get started"
+  },
+  "search": {
+    "label": "Search",
+    "accessible-name": "Submit your search query",
+    "placeholder": "Search 7,000+ tutorials",
+    "see-results": "See all results for {{searchQuery}}",
+    "no-tutorials": "No tutorials found"
+  },
+  "banner": {
+    "text": "Learn to code — <span>free 3,000-hour curriculum</span>"
+  },
+  "author": {
+    "page": {
+      "no-posts": "No posts",
+      "one-post": "1 post",
+      "multiple-posts": "{{postCount}} posts"
+    },
+    "byline": {
+      "read-more": "Read <a href='{{authorUrl}}'>more posts</a> by this author"
+    }
+  },
+  "tag-page": {
+    "collection-of-posts": "A collection of posts",
+    "one-post": "A collection of 1 post",
+    "multiple-posts": "A collection of {{postCount}} posts"
+  },
+  "404-page": {
+    "page-not-found": "Page not found",
+    "go-to-front-page": "Go to the front page"
+  },
+  "social-row": {
+    "author-has-twitter": "If you read this far, tweet to the author to show them you care.",
+    "author-no-twitter": "If this article was helpful",
+    "default-tweet": "Thank you {{twitter}} for writing this helpful article"
+  },
+  "learn-to-code-cta": {
+    "text": "Learn to code for free. freeCodeCamp's open source curriculum has helped more than 40,000 people get jobs as developers."
+  },
+  "localization-meta": {
+    "author": "Author: {{authorName}}",
+    "translator": "Translator: {{translatorName}}",
+    "languages": {
+      "en": "English",
+      "es": "Spanish",
+      "zh": "Chinese"
+    }
+  },
+  "footer": {
+    "tax-exempt-status": "freeCodeCamp is a donor-supported tax-exempt 501(c)(3) nonprofit organization (United States Federal Tax Identification Number: 82-0779546)",
+    "mission-statement": "Our mission: to help people learn to code for free. We accomplish this by creating thousands of videos, articles, and interactive coding lessons - all freely available to the public. We also have thousands of freeCodeCamp study groups around the world.",
+    "donation-initiatives": "Donations to freeCodeCamp go toward our education initiatives, and help pay for servers, services, and staff.",
+    "donate-text": "You can",
+    "donate-link": "make a tax-deductible donation here",
+    "trending-guides": "Trending Guides",
+    "our-nonprofit": "Our Nonprofit",
+    "links": {
+      "about": "About",
+      "alumni": "Alumni Network",
+      "open-source": "Open Source",
+      "shop": "Shop",
+      "support": "Support",
+      "sponsors": "Sponsors",
+      "honesty": "Academic Honesty",
+      "coc": "Code of Conduct",
+      "privacy": "Privacy Policy",
+      "tos": "Terms of Service",
+      "copyright": "Copyright Policy"
+    }
+  }
+}

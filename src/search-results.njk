@@ -1,0 +1,27 @@
+---
+permalink: '/search/'
+---
+
+{% extends 'layouts/default.njk' %}
+
+{% set codeinjection_head = doc.codeinjection_head %}
+{% set codeinjection_foot = doc.codeinjection_foot %}
+
+{% set title = "Search – " + site.title %}
+
+{% block content %}
+    <main id="site-main" class="site-main outer">
+        <div class="inner">
+            <div class="post-feed">
+            </div>
+        </div>
+    </main>
+{% endblock %}
+
+{% block scripts %}
+    {% set js %}
+        {% include "assets/js/search-results.js" %}
+        {% include "assets/js/published-date.js" %}
+    {% endset %}
+    <script>{{ js | jsMin | safe }}</script>
+{% endblock %}

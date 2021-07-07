@@ -1,0 +1,47 @@
+---
+permalink: rss.xml
+eleventyExcludeFromCollections: true
+---
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/"
+    xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" version="2.0">
+    <channel>
+        <title>
+            <![CDATA[ {{ site.title }} ]]>
+        </title>
+        <description>
+            <![CDATA[ {{ site.description }} ]]>
+        </description>
+        <link>{{ site.url }}</link>
+        <image>
+            <url>{{ site.url }}/favicon.png</url>
+            <title>{{ site.title }}</title>
+            <link>{{ site.url }}</link>
+        </image>
+        <lastBuildDate>{% buildDateFormatter %}</lastBuildDate>
+        <atom:link href="{{ site.url }}" rel="self" type="application/rss+xml" />
+        <ttl>60</ttl>
+        {% for post in ghost.posts.slice(0, 10) %}
+            <item>
+                <title>
+                    <![CDATA[ {% fullEscaper post.title %} ]]>
+                </title>
+                <description>
+                    <![CDATA[ {{ post.excerpt | safe }} ]]>
+                </description>
+                <link>{{ post.url }}</link>
+                <guid isPermaLink="false">{{ post.comment_id }}</guid>
+                <category>
+                    <![CDATA[ {{ post.primary_tag.name }} ]]>
+                </category>
+                <dc:creator>
+                    <![CDATA[ {{ post.primary_author.name }} ]]>
+                </dc:creator>
+                <pubDate>{% buildDateFormatter post.published_at %}</pubDate>
+                <media:content url="{{ post.feature_image }}" medium="image" />
+                <content:encoded>
+                    <![CDATA[ {{ post.excerpt | safe }} ]]>
+                </content:encoded>
+            </item>
+        {% endfor %}
+    </channel>
+</rss>

@@ -1,0 +1,30 @@
+<nav class="site-nav nav-padding">
+    <div class="site-nav-left">
+        {% include "partials/search-bar.njk" %}
+    </div>
+    <div class="site-nav-middle">
+        {% if site.logo %}
+            <a class="site-nav-logo" href="{{ site.url }}"><img src="{{ site.logo }}" alt="{{ site.title }}" /></a>
+        {% else %}
+            <a class="site-nav-logo" href="{{ site.url }}">{{ site.title }}</a>
+        {% endif %}
+    </div>
+    <div class="site-nav-right">
+        <div class="nav-group">
+            <a
+                class="nav-forum"
+                id="nav-forum"
+                rel="noopener noreferrer"
+                href="{% t 'links:forum-url' %}"
+                target="_blank"
+            >{% t 'buttons.forum' %}</a>
+            <a
+                class="toggle-button-nav"
+                id="nav-donate"
+                rel="noopener noreferrer"
+                href="{% t 'links:donate-url' %}"
+                target="_blank"
+            >{% t 'buttons.donate' %}</a>
+        </div>
+    </div>
+</nav>
