@@ -4,10 +4,7 @@ const htmlMin = require("./utils/transforms/html-min");
 const cssMin = require("./utils/transforms/css-min");
 const jsMin = require("./utils/transforms/js-min");
 const { readFileSync, readdirSync, writeFileSync } = require("fs");
-const { basename, extname } = require("path");
-const Image = require("@11ty/eleventy-img");
 const pluginRSS = require("@11ty/eleventy-plugin-rss");
-const { api } = require("./utils/ghost-api");
 const i18next = require("./i18n/config");
 const dayjs = require("./utils/dayjs");
 const cacheBuster = require("@mightyplow/eleventy-plugin-cache-buster");
@@ -50,29 +47,25 @@ module.exports = function(config) {
   // Assist RSS feed template
   config.addPlugin(pluginRSS);
 
-  // Copy images over from Ghost
-  function imageShortcode(src, cls, alt, sizes, widths, index) {
-    const imageFormats = ["webp"];
-    const imageExtension = extname(src);
-    const imageName = basename(src, imageExtension).split('?')[0]; // strip off url params, if any
-    const options = {
-      widths: widths,
-      formats: imageFormats,
-      outputDir: "./dist/assets/images/",
-      filenameFormat: function (id, src, width, format, options) {
-        return `${imageName}-${width}w.${format}`
-      }
-    }
+  // Note: Update this and image shortcodes once we
+  // sync all Ghost images to an S3 bucket
+  const ghostImageRe = /\/content\/images\/\d+\/\d+\//g;
 
-    // generate images, while this is async we don’t wait
-    Image(src, options);
+  // Handle images from Ghost and from third-parties
+  function imageShortcode(src, cls, alt, sizes, widths, index) {
+    const imageUrls = src.match(ghostImageRe) ?
+      widths.map(width => src.replace('/content/images/', `/content/images/size/w${width}/`)) :
+      [src];
 
     return `
       <img
         ${index === 0 ? `rel="preload" as="image"` : ''}
-        ${(cls.includes('lazyload') && index > 0) ? 'data-srcset' : 'srcset'}="${widths.map(width => `/assets/images/${imageName}-${width}w.webp ${width}w`).join()}"
+        ${(cls.includes('lazyload') && index > 0) ? 'data-srcset' : 'srcset'}="${imageUrls.length === widths.length ?
+          widths.map((width, i) => `${imageUrls[i]} ${width}w`).join() :
+          imageUrls[0]
+        }"
         sizes="${sizes.replace(/\s+/g, ' ').trim()}"
-        ${(cls.includes('lazyload') && index > 0) ? 'data-src' : 'src'}="/assets/images/${imageName}-${widths[0]}w.webp"
+        ${(cls.includes('lazyload') && index > 0) ? 'data-src' : 'src'}="${imageUrls[imageUrls.length - 1]}"
         class="${index === 0 ? cls.replace('lazyload', '') : cls}"
         alt="${alt}"
         onerror="this.style.display='none'"
@@ -84,20 +77,9 @@ module.exports = function(config) {
 
   // Copy images over from Ghost
   function featureImageShortcode(src, alt, sizes, widths) {
-    const imageFormats = ["webp"];
-    const imageExtension = extname(src);
-    const imageName = basename(src, imageExtension).split('?')[0]; // strip off url params, if any
-    const options = {
-      widths: widths,
-      formats: imageFormats,
-      outputDir: "./dist/assets/images/",
-      filenameFormat: function (id, src, width, format, options) {
-        return `${imageName}-${width}w.${format}`
-      }
-    }
-
-    // generate images, while this is async we don’t wait
-    Image(src, options);
+    const imageUrls = src.match(ghostImageRe) ?
+      widths.map(width => src.replace('/content/images/', `/content/images/size/w${width}/`)) :
+      [src];
 
     return `
       <picture>
@@ -109,11 +91,14 @@ module.exports = function(config) {
         <source 
           media="(min-width: 701px)"
           sizes="${sizes.replace(/\s+/g, ' ').trim()}"
-          srcset="${widths.map(width => `/assets/images/${imageName}-${width}w.webp ${width}w`).join()}"
+          srcset="${imageUrls.length === widths.length ?
+            widths.map((width, i) => `${imageUrls[i]} ${width}w`).join() :
+            imageUrls[0]
+          }"
         />
         <img
           onerror="this.style.display='none'"
-          src="/assets/images/${imageName}-${widths[0]}w.webp"
+          src="${imageUrls[imageUrls.length - 1]}"
           alt="${alt}"
         >
       </picture>
