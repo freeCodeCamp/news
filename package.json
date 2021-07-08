@@ -44,7 +44,7 @@
     "cross-env": "^7.0.3",
     "dayjs": "^1.10.4",
     "dotenv": "^10.0.0",
-    "eslint-utils": "^2.1.0",
+    "eslint-utils": "^3.0.0",
     "html-minifier": "^4.0.0",
     "i18next": "^20.2.2",
     "i18next-fs-backend": "^1.1.1",
