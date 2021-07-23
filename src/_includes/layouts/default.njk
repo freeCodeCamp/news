@@ -71,14 +71,13 @@
 
             <meta property="og:image:width" content="{{ site.image_dimensions.cover_image.width }}">
             <meta property="og:image:height" content="{{ site.image_dimensions.cover_image.height }}">
-
-            <link rel="alternate" type="application/rss+xml" title="{{ orgName }}" href="{{ site.url + '/rss/' }}">
         {% endblock %}
 
         {% block jsonLd %}
         {% endblock %}
 
         <meta name="generator" content="Eleventy">
+        <link rel="alternate" type="application/rss+xml" title="{{ orgName }}" href="{{ site.url + "/rss/" }}">
 
         {{ site.codeinjection_head | safe if site.codeinjection_head }}
         {{ codeinjection_head | safe if codeinjection_head }}
