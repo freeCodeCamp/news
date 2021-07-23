@@ -1,54 +1,21 @@
+{% set orgName = "freeCodeCamp.org" %}
+
 <!DOCTYPE html>
-<html lang="{{ site.lang }}" class="no-js">
+<html lang="{{ site.lang }}">
     <head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <title>
-            <!-- Fall back to site.title if no specific title is set -->
-            {%- if title -%}
+            <!-- Fall back to meta:title if no specific title is set from a post, page, etc. -->
+            {% if title %}
                 {{ title }}
-            {%- else -%}
-                {{ site.title }}
-            {%- endif -%}
+            {% else %}
+                {% t 'meta:title' %}
+            {% endif %}
         </title>
-        <meta name="description" content="{% block description %}{{ site.description }}{% endblock %}">
-        <meta name="robots" content="index,follow">
-        <meta name="generator" content="Eleventy">
         <meta name="HandheldFriendly" content="True" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        {%- block seo -%}
-            <!-- Twitter Card -->
-            <meta name="twitter:site" content="{{ site.twitter }}">
-            <meta name="twitter:creator" content="{{ site.twitter }}">
-            <meta name="twitter:card" content="summary_large_image">
-            <meta name="twitter:url" content="{{ site.url + page.url }}">
-            <meta name="twitter:title" content="{{ title + " – " + site.title if title else title }}">
-            <meta name="twitter:description" content="{{ site.description }}">
-            <meta name="twitter:image" content="{{ site.cover_image }}">
-
-            <!-- Schema -->
-            <link rel="author" href="{{ site.url }}">
-            <link rel="publisher" href="{{ site.url }}">
-            <meta itemprop="name" content="{{ title + " – " + site.title if title else title }}">
-            <meta itemprop="description" content="{{ site.description }}">
-            <meta itemprop="image" content="{{ site.cover_image }}">
-
-            <!-- Facebook OpenGraph -->
-            <meta property="og:url" content="{{site.url + page.url}}">
-            <meta property="og:type" content="website">
-            <meta property="og:title" content="{{ title + " – " + site.title if title else title }}">
-            <meta property="og:image" content="{{ site.cover_image }}">
-            <meta property="og:description" content="{{ site.description }}">
-            <meta property="og:site_name" content="{{ site.title }}">
-            <meta property="og:locale" content="{{ site.lang }}">
-            <meta property="article:author" content="{{ site.url }}">
-        {%- endblock -%}
-
-        {% block jsonLd %}
-        {% endblock %}
-
-        <link rel="icon" href="https://cdn.freecodecamp.org/universal/favicons/favicon.ico" type="image/png">
         <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="https://cdn.freecodecamp.org/news-assets/prism-1-16-0/prism.min.css" />
         <noscript><link rel="stylesheet" href="https://cdn.freecodecamp.org/news-assets/prism-1-16-0/prism.min.css"></noscript>
         <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'"
@@ -78,13 +45,46 @@
         <!-- Lazysizes -->
         <script defer type="text/javascript" src="{{ '/assets/js/lazysizes.min.js' | url }}"></script>
 
-        <script>document.documentElement.classList.remove('no-js');</script>
+        <meta name="keywords" content="{% t 'meta:keywords' %}">
+        <meta name="description" content="{% block description %}{% t 'meta:description' %}{% endblock %}">
+        <link rel="icon" href="https://cdn.freecodecamp.org/universal/favicons/favicon.ico" type="image/png">
+        <link rel="canonical" href="{{ site.url }}">
+        <meta name="referrer" content="no-referrer-when-downgrade">
+
+        {% block seo %}
+            <!-- Facebook OpenGraph -->
+            <meta property="og:site_name" content="{{ orgName }}">
+            <meta property="og:type" content="website">
+            <meta property="og:title" content="{{ title + " – " + orgName if title else orgName }}">
+            <meta property="og:description" content="{% t 'meta:description' %}">
+            <meta property="og:url" content="{{site.url + page.url}}">
+            <meta property="og:image" content="{{ site.cover_image }}">
+            <meta property="article:publisher" content="https://www.facebook.com/freecodecamp">
+
+            <!-- Twitter Card -->
+            <meta name="twitter:card" content="summary_large_image">
+            <meta name="twitter:title" content="{{ title + " – " + orgName if title else orgName }}">
+            <meta name="twitter:description" content="{% t 'meta:description' %}">
+            <meta name="twitter:url" content="{{ site.url + page.url }}">
+            <meta name="twitter:image" content="{{ site.cover_image }}">
+            <meta name="twitter:site" content="{{ site.twitter }}">
+
+            <meta property="og:image:width" content="{{ site.image_dimensions.cover_image.width }}">
+            <meta property="og:image:height" content="{{ site.image_dimensions.cover_image.height }}">
+
+            <link rel="alternate" type="application/rss+xml" title="{{ orgName }}" href="{{ site.url + '/rss/' }}">
+        {% endblock %}
+
+        {% block jsonLd %}
+        {% endblock %}
+
+        <meta name="generator" content="Eleventy">
 
         {{ site.codeinjection_head | safe if site.codeinjection_head }}
         {{ codeinjection_head | safe if codeinjection_head }}
     </head>
 
-    <body>
+    <body class="home-template">
         <div class="site-wrapper">
             {% include "partials/site-nav.njk" %}
 
