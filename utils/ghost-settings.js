@@ -42,6 +42,8 @@ const ghostSettings = async () => {
     }
   }
 
+  // Set default title across all publications
+  settings.title = 'freeCodeCamp.org';
   settings.lang = siteLangHandler(settings.lang);
 
   return settings;
