@@ -55,7 +55,7 @@
             <!-- Facebook OpenGraph -->
             <meta property="og:site_name" content="{{ orgName }}">
             <meta property="og:type" content="website">
-            <meta property="og:title" content="{{ title + " – " + orgName if title else orgName }}">
+            <meta property="og:title" content="{{ orgName }}">
             <meta property="og:description" content="{% t 'meta:description' %}">
             <meta property="og:url" content="{{site.url + page.url}}">
             <meta property="og:image" content="{{ site.cover_image }}">
@@ -63,7 +63,7 @@
 
             <!-- Twitter Card -->
             <meta name="twitter:card" content="summary_large_image">
-            <meta name="twitter:title" content="{{ title + " – " + orgName if title else orgName }}">
+            <meta name="twitter:title" content="{{ orgName }}">
             <meta name="twitter:description" content="{% t 'meta:description' %}">
             <meta name="twitter:url" content="{{ site.url + page.url }}">
             <meta name="twitter:image" content="{{ site.cover_image }}">
