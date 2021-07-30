@@ -61,8 +61,10 @@
     <meta property="og:site_name" content="{{ orgName }}">
     <meta property="og:type" content="article">
     <meta property="og:title" content="{{ title }}">
-    <meta property="og:description" content="{{ post.excerpt }}">
-    <meta property="og:url" content="{{ site.url + post.path }}/">
+    {% if post.excerpt %}
+        <meta property="og:description" content="{% createExcerpt post.excerpt %}">
+    {% endif %}
+    <meta property="og:url" content="{{ site.url + post.path }}">
     <meta property="og:image" content="{{ post.feature_image }}">
     <meta property="article:published_time" content="{{ post.published_at }}">
     <meta property="article:modified_time" content="{{ post.updated_at }}">
@@ -77,7 +79,9 @@
     <!--Twitter Card-->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="{{ title }}">
-    <meta name="twitter:description" content="{{ post.excerpt }}">
+    {% if post.excerpt %}
+        <meta name="twitter:description" content="{% createExcerpt post.excerpt %}">
+    {% endif %}
     <meta name="twitter:url" content="{{ site.url + post.path }}">
     <meta name="twitter:image" content="{{ post.feature_image }}">
     <meta name="twitter:label1" content="Written by">

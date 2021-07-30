@@ -210,10 +210,6 @@ module.exports = function(config) {
     }
     const returnData =  {...baseData};
 
-    // Would probably be better to look up image dimensions in ghost.js,
-    // to prevent looking up the same dimensions for each author image.
-    // Could also keep a map of article or page feature_images, if we want
-    // to calculate all that there, too
     const createImageObj = (url, obj) => {
       let { width, height } = obj;
 
@@ -308,6 +304,12 @@ module.exports = function(config) {
   }
 
   config.addNunjucksAsyncShortcode("createJsonLd", createJsonLdShortcode);
+
+  const createExcerptShortcode = (excerpt) => {
+    return excerpt.replace(/\n+/g, ' ').split(' ').slice(0, 50).join(' ');
+  }
+
+  config.addNunjucksShortcode("createExcerpt", createExcerptShortcode);
 
   // Don't ignore the same files ignored in the git repo
   config.setUseGitIgnore(false);
