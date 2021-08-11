@@ -149,7 +149,7 @@ module.exports = function(config) {
   // Format dates for RSS feed
   const buildDateFormatterShortcode = dateStr => {
     const dateObj = dateStr ? new Date(dateStr) : new Date();
-    return dateObj.toUTCString();
+    return dayjs.tz(dateObj).locale('en').format('ddd, DD MMM YYYY HH:mm:ss ZZ');
   }
 
   config.addNunjucksShortcode("buildDateFormatter", buildDateFormatterShortcode);
@@ -314,18 +314,27 @@ module.exports = function(config) {
   // Don't ignore the same files ignored in the git repo
   config.setUseGitIgnore(false);
 
-  // Display 404 page in BrowserSnyc
+  // Display 404 and RSS pages in BrowserSnyc
   config.setBrowserSyncConfig({
     callbacks: {
       ready: (err, bs) => {
         const content_404 = readFileSync("dist/404.html");
+        const content_RSS = readFileSync("dist/rss.xml");
 
         bs.addMiddleware("*", (req, res) => {
-          res.writeHead(404, { "Content-Type": "text/html; charset=UTF-8" });
+          if (req.url.match(/^\/rss\/?$/)) {
+            res.writeHead(302, { "Content-Type": "text/xml; charset=UTF-8" });
           
-          // Provides the 404 content without redirect.
-          res.write(content_404);
-          res.end();
+            // Provides the RSS feed content without redirect
+            res.write(content_RSS);
+            res.end();
+          } else {
+            res.writeHead(404, { "Content-Type": "text/html; charset=UTF-8" });
+          
+            // Provides the 404 content without redirect
+            res.write(content_404);
+            res.end();
+          }
         });
       }
     }
