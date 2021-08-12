@@ -5,12 +5,6 @@ eleventyExcludeFromCollections: true
 <?xml version="1.0" encoding="utf-8"?>
 <?xml-stylesheet type="text/xsl" href="{{ site.url }}/sitemap.xsl"?>
 <sitemapindex
-	xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-	{% set siteMapPages = ["pages", "posts", "authors", "tags"] %}
-  {% for siteMapPage in siteMapPages %}
-    <sitemap>
-      <loc>{{ site.url }}/sitemap-{{ siteMapPage }}.xml</loc>
-      <lastmod></lastmod>
-    </sitemap>
-  {% endfor %}
+  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    {% siteMapFetcher 'index' %}
 </sitemapindex>

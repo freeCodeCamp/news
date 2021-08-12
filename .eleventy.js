@@ -10,6 +10,8 @@ const dayjs = require("./utils/dayjs");
 const cacheBuster = require("@mightyplow/eleventy-plugin-cache-buster");
 const { settings } = require('./utils/ghost-settings');
 const { escape } = require('lodash');
+const fetch = require('node-fetch');
+const xml2js = require('xml2js');
 
 module.exports = function(config) {
   // Minify HTML
@@ -175,6 +177,9 @@ module.exports = function(config) {
     .replace(/&#39;/g, '&#x27;')
     .replace(/`/g, '&#x60;')
     .replace(/=/g, '&#x3D;');
+  
+  // Simpler escaping for sitemaps
+  const partialEscaper = s => escape(s);
 
   config.addNunjucksShortcode("fullEscaper", fullEscaper);
 
@@ -316,6 +321,56 @@ module.exports = function(config) {
   }
 
   config.addNunjucksShortcode("createExcerpt", createExcerptShortcode);
+
+  const siteMapFetcherShortcode = async (page) => {
+    const apiUrl = process.env.GHOST_API_URL;
+    // will need some sort of map to handle all locales
+    const url = page === 'index' ?
+      `${apiUrl}/sitemap.xml` :
+      `${apiUrl}/sitemap-${page}.xml`;
+
+    const ghostXml = await fetch(url)
+      .then(res => res.text())
+      .then(res => res)
+      .catch(err => console.log(err));
+
+    const parser = new xml2js.Parser();
+    const ghostXmlObj = await parser.parseStringPromise(ghostXml)
+      .then((res) => res)
+      .catch((err) => console.log(err));
+
+    const target = page === 'index' ?
+      ghostXmlObj.sitemapindex.sitemap :
+      ghostXmlObj.urlset.url;
+
+    const urlSwapper = url => url.replace(apiUrl, process.env.SITE_URL);
+
+    let xmlStr = target.reduce((acc, curr) => {
+      const wrapper = page === 'index' ? 'sitemap' : 'url';
+
+      acc += `
+        <${wrapper}>
+        <loc>${urlSwapper(curr.loc[0])}</loc>
+        <lastmod>${curr.lastmod[0]}</lastmod>
+        ${curr['image:image'] ? `
+          <image:image>
+            <image:loc>${partialEscaper(urlSwapper(curr['image:image'][0]['image:loc'][0]))}</image:loc>
+            <image:caption>${partialEscaper(curr['image:image'][0]['image:caption'][0])}</image:caption>
+          </image:image>` : ''
+        }
+      </${wrapper}>`;
+
+      return acc;
+    }, '');
+
+    xmlStr = xmlStr.replace(/\s+/g, '');
+    if (page === 'pages') console.log(target, xmlStr);
+
+    // To do: minify xml after build
+    return xmlStr;
+  }
+
+  config.addNunjucksAsyncShortcode("siteMapFetcher", siteMapFetcherShortcode);
 
   // Don't ignore the same files ignored in the git repo
   config.setUseGitIgnore(false);

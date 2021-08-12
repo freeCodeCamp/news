@@ -5,20 +5,7 @@ eleventyExcludeFromCollections: true
 <?xml version="1.0" encoding="utf-8"?>
 <?xml-stylesheet type="text/xsl" href="{{ site.url }}/sitemap.xsl"?>
 <urlset
-	xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-	xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
-	{# {% for author in ghost.authors | sort(reverse = true, attribute = "updated_at") %} #}
-	{% for author in ghost.authors %}
-    <url>
-      <loc>{{ site.url + author.path }}</loc>
-			{# Problem: the Ghost API doesn't show when author pages were last updated #}
-      <lastmod></lastmod>
-			{% if author.profile_image %}
-				<image:image>
-					<image:loc>{{ author.profile_image }}</image:loc>
-					<image:caption>fcc-banner.jpg</image:caption>
-				</image:image>
-			{% endif %}
-    </url>
-  {% endfor %}
+  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+    {% siteMapFetcher 'authors' %}
 </urlset>

@@ -5,20 +5,7 @@ eleventyExcludeFromCollections: true
 <?xml version="1.0" encoding="utf-8"?>
 <?xml-stylesheet type="text/xsl" href="{{ site.url }}/sitemap.xsl"?>
 <urlset
-	xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-	xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
-	{# {% for tag in ghost.tags | sort(reverse = true, attribute = "updated_at") %} #}
-	{% for tag in ghost.tags %}
-    <url>
-      <loc>{{ site.url + tag.path }}</loc>
-			{# Problem: the Ghost API doesn't show when tag pages were last updated #}
-      <lastmod></lastmod>
-			{% if tag.feature_image %}
-				<image:image>
-					<image:loc>{{ tag.feature_image }}</image:loc>
-					<image:caption>fcc-banner.jpg</image:caption>
-				</image:image>
-			{% endif %}
-    </url>
-  {% endfor %}
+  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+    {% siteMapFetcher 'tags' %}
 </urlset>
