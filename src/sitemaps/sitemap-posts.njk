@@ -7,16 +7,16 @@ eleventyExcludeFromCollections: true
 <urlset
   xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
-  {% for post in ghost.posts | sort(reverse = true, attribute = "updated_at") %}
-    <url>
-      <loc>{{ site.url + post.path }}</loc>
-      <lastmod>{% utcDateFormatter post.updated_at %}</lastmod>
-      {% if post.feature_image %}
-        <image:image>
-          <image:loc>{{ post.feature_image }}</image:loc>
-          <image:caption>fcc-banner.jpg</image:caption>
-        </image:image>
-      {% endif %}
-    </url>
-  {% endfor %}
+    {% for post in ghost.posts | sort(reverse = true, attribute = "updated_at") %}
+        <url>
+            <loc>{{ site.url + post.path }}</loc>
+            <lastmod>{% utcDateFormatter post.updated_at %}</lastmod>
+              {% if post.feature_image %}
+                  <image:image>
+                      <image:loc>{{ post.feature_image }}</image:loc>
+                      <image:caption>fcc-banner.jpg</image:caption>
+                  </image:image>
+              {% endif %}
+        </url>
+    {% endfor %}
 </urlset>

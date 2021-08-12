@@ -7,20 +7,5 @@ eleventyExcludeFromCollections: true
 <urlset
   xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
-  {% set allPages = [{ path: "/" }, { path: "/search/" }, { path: "/rss/" }] %}
-  {% for ghostPage in ghost.pages %}
-    {% set allPages = (allPages.push(ghostPage), allPages) %}
-  {% endfor %}
-  {% for page in allPages %}
-    <url>
-      <loc>{{ site.url + page.path }}</loc>
-      <lastmod>{{ page.updated_at if page.updated_at else page.date }}</lastmod>
-      {% if page.feature_image %}
-        <image:image>
-          <image:loc>{{ page.feature_image }}</image:loc>
-          <image:caption>fcc-banner.jpg</image:caption>
-        </image:image>
-      {% endif %}
-    </url>
-  {% endfor %}
+    {% sitemapFetcher 'pages' %}
 </urlset>

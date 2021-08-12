@@ -322,7 +322,7 @@ module.exports = function(config) {
 
   config.addNunjucksShortcode("createExcerpt", createExcerptShortcode);
 
-  const siteMapFetcherShortcode = async (page) => {
+  const sitemapFetcherShortcode = async (page) => {
     const apiUrl = process.env.GHOST_API_URL;
     // will need some sort of map to handle all locales
     const url = page === 'index' ?
@@ -363,14 +363,13 @@ module.exports = function(config) {
       return acc;
     }, '');
 
-    xmlStr = xmlStr.replace(/\s+/g, '');
-    if (page === 'pages') console.log(target, xmlStr);
+    // xmlStr = xmlStr.replace(/\s+/g, '');
 
     // To do: minify xml after build
     return xmlStr;
   }
 
-  config.addNunjucksAsyncShortcode("siteMapFetcher", siteMapFetcherShortcode);
+  config.addNunjucksAsyncShortcode("sitemapFetcher", sitemapFetcherShortcode);
 
   // Don't ignore the same files ignored in the git repo
   config.setUseGitIgnore(false);
