@@ -3,8 +3,8 @@
     <head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <!-- Fall back to meta:title if no specific title is set from a post, page, etc. -->
         <title>
-            <!-- Fall back to meta:title if no specific title is set from a post, page, etc. -->
             {% if title %}
                 {{ title }}
             {% else %}
