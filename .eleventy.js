@@ -154,6 +154,12 @@ module.exports = function(config) {
 
   config.addNunjucksShortcode("buildDateFormatter", buildDateFormatterShortcode);
 
+  const utcDateFormatterShortcode = dateStr => {
+    return dayjs.utc(dateStr).format();
+  }
+  
+  config.addNunjucksShortcode("utcDateFormatter", utcDateFormatterShortcode);
+
   config.addFilter("commentsEnabled", tagsArr => {
     return !tagsArr.map(tag => tag.name).includes('#disable-comments');
   });
