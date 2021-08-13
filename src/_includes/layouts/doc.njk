@@ -55,46 +55,46 @@
 {% endblock %}
 
 {%- block seo -%}
-    <link rel="amphtml" href="{{ site.url + post.path + "amp/" }}">
+    <link rel="amphtml" href="{{ site.url + doc.path + "amp/" }}">
 
     <!-- Facebook OpenGraph -->
     <meta property="og:site_name" content="{{ site.title }}">
     <meta property="og:type" content="article">
     <meta property="og:title" content="{{ title }}">
-    {% if post.excerpt %}
-        <meta property="og:description" content="{% createExcerpt post.excerpt %}">
+    {% if doc.excerpt %}
+        <meta property="og:description" content="{{ doc.excerpt }}">
     {% endif %}
-    <meta property="og:url" content="{{ site.url + post.path }}">
-    <meta property="og:image" content="{{ post.feature_image }}">
-    <meta property="article:published_time" content="{{ post.published_at }}">
-    <meta property="article:modified_time" content="{{ post.updated_at }}">
-    {% for tag in post.tags %}
+    <meta property="og:url" content="{{ site.url + doc.path }}">
+    <meta property="og:image" content="{{ doc.feature_image }}">
+    <meta property="article:published_time" content="{{ doc.published_at }}">
+    <meta property="article:modified_time" content="{{ doc.updated_at }}">
+    {% for tag in doc.tags %}
         <meta property="article:tag" content="{{ tag.name }}">
     {% endfor %}
     <meta property="article:publisher" content="https://www.facebook.com/freecodecamp">
-    {% if post.primary_author.facebook %}
-        <meta property="article:author" content="{{ post.primary_author.facebook }}">
+    {% if doc.primary_author.facebook %}
+        <meta property="article:author" content="{{ doc.primary_author.facebook }}">
     {% endif %}
 
     <!--Twitter Card-->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="{{ title }}">
-    {% if post.excerpt %}
-        <meta name="twitter:description" content="{% createExcerpt post.excerpt %}">
+    {% if doc.excerpt %}
+        <meta name="twitter:description" content="{{ doc.excerpt }}">
     {% endif %}
-    <meta name="twitter:url" content="{{ site.url + post.path }}">
-    <meta name="twitter:image" content="{{ post.feature_image }}">
+    <meta name="twitter:url" content="{{ site.url + doc.path }}">
+    <meta name="twitter:image" content="{{ doc.feature_image }}">
     <meta name="twitter:label1" content="Written by">
-    <meta name="twitter:data1" content="{{ post.primary_author.name }}">
+    <meta name="twitter:data1" content="{{ doc.primary_author.name }}">
     <meta name="twitter:label2" content="Filed under">
-    <meta name="twitter:data2" content="{{ post.tags | join(", ", "name") }}">
+    <meta name="twitter:data2" content="{{ doc.tags | join(", ", "name") }}">
     <meta name="twitter:site" content="{{ site.twitter }}">
-    {% if post.primary_author.twitter %}
-        <meta name="twitter:creator" content="{{ post.primary_author.twitter }}">
+    {% if doc.primary_author.twitter %}
+        <meta name="twitter:creator" content="{{ doc.primary_author.twitter }}">
     {% endif %}
 
-    <meta property="og:image:width" content="{{ post.image_dimensions.feature_image.width }}">
-    <meta property="og:image:height" content="{{ post.image_dimensions.feature_image.height }}">
+    <meta property="og:image:width" content="{{ doc.image_dimensions.feature_image.width }}">
+    <meta property="og:image:height" content="{{ doc.image_dimensions.feature_image.height }}">
 {%- endblock -%}
 
 {% block jsonLd %}
