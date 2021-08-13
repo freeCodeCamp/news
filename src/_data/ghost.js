@@ -1,7 +1,7 @@
 const postsPerPage = process.env.POSTS_PER_PAGE;
 const { api, enApi } = require('../../utils/ghost-api');
 const getImageDimensions = require('../../utils/image-dimensions');
-const { escape } = require('lodash');
+const { escape, chunk } = require('lodash');
 
 const wait = seconds => {
   return new Promise(resolve => {
@@ -13,18 +13,6 @@ const wait = seconds => {
 
 // Strip Ghost domain from urls
 const stripDomain = url => url.replace(process.env.GHOST_API_URL, "");
-
-// For custom tag and author post pagination
-const chunkArray = (arr, size) => {
-  const chunkedArr = [];
-  const copy = [...arr];
-  const numOfChunks = Math.ceil(copy.length / size);
-  for (let i = 0; i < numOfChunks; i++) {
-    chunkedArr.push(copy.splice(0, size));
-  }
-
-  return chunkedArr;
-}
 
 const getUniqueList = (arr, key) => [...new Map(arr.map(item => [item[key], item])).values()];
 
@@ -183,7 +171,7 @@ module.exports = async () => {
 
     if (currAuthorPosts.length) author.posts = currAuthorPosts;
 
-    const paginatedCurrAuthorPosts = chunkArray(currAuthorPosts, postsPerPage);
+    const paginatedCurrAuthorPosts = chunk(currAuthorPosts, postsPerPage);
 
     paginatedCurrAuthorPosts.forEach((arr, i) => {
       // For each entry in paginatedCurrAuthorPosts, add the author object
@@ -215,7 +203,7 @@ module.exports = async () => {
       posts: currTagPosts.length
     }
 
-    const paginatedCurrTagPosts = chunkArray(currTagPosts, postsPerPage);
+    const paginatedCurrTagPosts = chunk(currTagPosts, postsPerPage);
 
     paginatedCurrTagPosts.forEach((arr, i) => {
       // For each entry in paginatedCurrTagPosts, add the tag object
