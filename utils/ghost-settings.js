@@ -1,8 +1,6 @@
 const { api } = require('./ghost-api');
 const siteLangHandler = require('./site-lang-handler');
 const getImageDimensions = require('./image-dimensions');
-const { createReadStream } = require('fs');
-const path = require('path');
 
 const ghostSettings = async () => {
   const settings = await api.settings
@@ -15,21 +13,17 @@ const ghostSettings = async () => {
 
   if (process.env.SITE_URL) settings.url = process.env.SITE_URL;
 
-  // Note: Consider setting these through the CDN repo later
-  // Add passthrough image URLs to settings object
-  const logoPath = 'assets/images/fcc_primary_large_24X210.svg';
-  const logoUrl = `${settings.url}/${logoPath}`;
+  const logoUrl = 'https://cdn.freecodecamp.org/platform/universal/fcc_primary.svg'
   settings.logo = logoUrl;
 
-  const coverImagePath = 'assets/images/fcc_ghost_publication_cover.png';
-  const coverImageUrl = `${settings.url}/${coverImagePath}`;
+  const coverImageUrl = 'https://cdn.freecodecamp.org/platform/universal/fcc_meta_1920X1080-indigo.png';
   settings.cover_image = coverImageUrl;
   settings.og_image = coverImageUrl;
   settings.twitter_image = coverImageUrl;
   
   // Determine image dimensions before server runs for structured data
-  const logoDimensions = await getImageDimensions(createReadStream(path.resolve(__dirname, `../src/_includes/${logoPath}`)));
-  const coverImageDimensions = await getImageDimensions(createReadStream(path.resolve(__dirname, `../src/_includes/${coverImagePath}`)));
+  const logoDimensions = await getImageDimensions(logoUrl);
+  const coverImageDimensions = await getImageDimensions(coverImageUrl);
 
   settings.image_dimensions = {
     logo: {
