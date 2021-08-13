@@ -10,6 +10,8 @@ const dayjs = require("./utils/dayjs");
 const cacheBuster = require("@mightyplow/eleventy-plugin-cache-buster");
 const { settings } = require('./utils/ghost-settings');
 const { escape } = require('lodash');
+const fetch = require('node-fetch');
+const xml2js = require('xml2js');
 
 module.exports = function(config) {
   // Minify HTML
@@ -149,10 +151,16 @@ module.exports = function(config) {
   // Format dates for RSS feed
   const buildDateFormatterShortcode = dateStr => {
     const dateObj = dateStr ? new Date(dateStr) : new Date();
-    return dateObj.toUTCString();
+    return dayjs.tz(dateObj).locale('en').format('ddd, DD MMM YYYY HH:mm:ss ZZ');
   }
 
   config.addNunjucksShortcode("buildDateFormatter", buildDateFormatterShortcode);
+
+  const utcDateFormatterShortcode = dateStr => {
+    return dayjs.utc(dateStr).format();
+  }
+  
+  config.addNunjucksShortcode("utcDateFormatter", utcDateFormatterShortcode);
 
   config.addFilter("commentsEnabled", tagsArr => {
     return !tagsArr.map(tag => tag.name).includes('#disable-comments');
@@ -169,6 +177,9 @@ module.exports = function(config) {
     .replace(/&#39;/g, '&#x27;')
     .replace(/`/g, '&#x60;')
     .replace(/=/g, '&#x3D;');
+  
+  // Simpler escaping for sitemaps
+  const partialEscaper = s => escape(s);
 
   config.addNunjucksShortcode("fullEscaper", fullEscaper);
 
@@ -210,10 +221,6 @@ module.exports = function(config) {
     }
     const returnData =  {...baseData};
 
-    // Would probably be better to look up image dimensions in ghost.js,
-    // to prevent looking up the same dimensions for each author image.
-    // Could also keep a map of article or page feature_images, if we want
-    // to calculate all that there, too
     const createImageObj = (url, obj) => {
       let { width, height } = obj;
 
@@ -309,21 +316,85 @@ module.exports = function(config) {
 
   config.addNunjucksAsyncShortcode("createJsonLd", createJsonLdShortcode);
 
+  const createExcerptShortcode = (excerpt) => {
+    return excerpt.replace(/\n+/g, ' ').split(' ').slice(0, 50).join(' ');
+  }
+
+  config.addNunjucksShortcode("createExcerpt", createExcerptShortcode);
+
+  const sitemapFetcherShortcode = async (page) => {
+    const apiUrl = process.env.GHOST_API_URL;
+    // will need some sort of map to handle all locales
+    const url = page === 'index' ?
+      `${apiUrl}/sitemap.xml` :
+      `${apiUrl}/sitemap-${page}.xml`;
+
+    const ghostXml = await fetch(url)
+      .then(res => res.text())
+      .then(res => res)
+      .catch(err => console.log(err));
+
+    const parser = new xml2js.Parser();
+    const ghostXmlObj = await parser.parseStringPromise(ghostXml)
+      .then((res) => res)
+      .catch((err) => console.log(err));
+
+    const target = page === 'index' ?
+      ghostXmlObj.sitemapindex.sitemap :
+      ghostXmlObj.urlset.url;
+
+    const urlSwapper = url => url.replace(apiUrl, process.env.SITE_URL);
+
+    let xmlStr = target.reduce((acc, curr) => {
+      const wrapper = page === 'index' ? 'sitemap' : 'url';
+
+      acc += `
+        <${wrapper}>
+        <loc>${urlSwapper(curr.loc[0])}</loc>
+        <lastmod>${curr.lastmod[0]}</lastmod>
+        ${curr['image:image'] ? `
+          <image:image>
+            <image:loc>${partialEscaper(urlSwapper(curr['image:image'][0]['image:loc'][0]))}</image:loc>
+            <image:caption>${partialEscaper(curr['image:image'][0]['image:caption'][0])}</image:caption>
+          </image:image>` : ''
+        }
+      </${wrapper}>`;
+
+      return acc;
+    }, '');
+
+    // xmlStr = xmlStr.replace(/\s+/g, '');
+
+    // To do: minify xml after build
+    return xmlStr;
+  }
+
+  config.addNunjucksAsyncShortcode("sitemapFetcher", sitemapFetcherShortcode);
+
   // Don't ignore the same files ignored in the git repo
   config.setUseGitIgnore(false);
 
-  // Display 404 page in BrowserSnyc
+  // Display 404 and RSS pages in BrowserSnyc
   config.setBrowserSyncConfig({
     callbacks: {
       ready: (err, bs) => {
         const content_404 = readFileSync("dist/404.html");
+        const content_RSS = readFileSync("dist/rss.xml");
 
         bs.addMiddleware("*", (req, res) => {
-          res.writeHead(404, { "Content-Type": "text/html; charset=UTF-8" });
+          if (req.url.match(/^\/rss\/?$/)) {
+            res.writeHead(302, { "Content-Type": "text/xml; charset=UTF-8" });
           
-          // Provides the 404 content without redirect.
-          res.write(content_404);
-          res.end();
+            // Provides the RSS feed content without redirect
+            res.write(content_RSS);
+            res.end();
+          } else {
+            res.writeHead(404, { "Content-Type": "text/html; charset=UTF-8" });
+          
+            // Provides the 404 content without redirect
+            res.write(content_404);
+            res.end();
+          }
         });
       }
     }

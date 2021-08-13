@@ -5,13 +5,26 @@
   
   const fetchNextPage = async () => {
     try {
-      const res = await fetch(`${window.location.href}/${nextPageNum}/`);
-      nextPageNum++;
+      const nextPageUrl = `${window.location.href}${nextPageNum}/`;
+      const res = await fetch(nextPageUrl);
 
       if (res.ok) {
         const text = await res.text();
         const parser = new DOMParser();
+        const nextTag = document.querySelector('link[rel="next"]');
 
+        if (nextTag) {
+          nextTag.href = nextPageUrl;
+        } else {
+          const head = document.getElementsByTagName('head')[0];
+          const link = document.createElement('link');
+          link.rel = 'next';
+          link.href = nextPageUrl;
+
+          head.appendChild(link);
+        }
+
+        nextPageNum++;
         return await parser.parseFromString(text, 'text/html');
       } else {
         readMoreBtn.style.display = 'none';
