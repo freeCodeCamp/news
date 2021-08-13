@@ -7,7 +7,7 @@ const { readFileSync, readdirSync, writeFileSync } = require("fs");
 const pluginRSS = require("@11ty/eleventy-plugin-rss");
 const i18next = require("./i18n/config");
 const dayjs = require("./utils/dayjs");
-const cacheBuster = require("@mightyplow/eleventy-plugin-cache-buster");
+// const cacheBuster = require("@mightyplow/eleventy-plugin-cache-buster");
 const { settings } = require('./utils/ghost-settings');
 const { escape } = require('lodash');
 const fetch = require('node-fetch');
@@ -39,12 +39,12 @@ module.exports = function(config) {
     });
   });
 
-  // Basic cache busting
-  config.addPlugin(
-    cacheBuster({
-      outputDirectory: './dist',
-    })
-  );
+  // // Basic cache busting
+  // config.addPlugin(
+  //   cacheBuster({
+  //     outputDirectory: './dist',
+  //   })
+  // );
 
   // Assist RSS feed template
   config.addPlugin(pluginRSS);
@@ -177,9 +177,6 @@ module.exports = function(config) {
     .replace(/&#39;/g, '&#x27;')
     .replace(/`/g, '&#x60;')
     .replace(/=/g, '&#x3D;');
-  
-  // Simpler escaping for sitemaps
-  const partialEscaper = s => escape(s);
 
   config.addNunjucksShortcode("fullEscaper", fullEscaper);
 
@@ -316,12 +313,6 @@ module.exports = function(config) {
 
   config.addNunjucksAsyncShortcode("createJsonLd", createJsonLdShortcode);
 
-  const createExcerptShortcode = (excerpt) => {
-    return excerpt.replace(/\n+/g, ' ').split(' ').slice(0, 50).join(' ');
-  }
-
-  config.addNunjucksShortcode("createExcerpt", createExcerptShortcode);
-
   const sitemapFetcherShortcode = async (page) => {
     const apiUrl = process.env.GHOST_API_URL;
     // will need some sort of map to handle all locales
@@ -354,8 +345,8 @@ module.exports = function(config) {
         <lastmod>${curr.lastmod[0]}</lastmod>
         ${curr['image:image'] ? `
           <image:image>
-            <image:loc>${partialEscaper(urlSwapper(curr['image:image'][0]['image:loc'][0]))}</image:loc>
-            <image:caption>${partialEscaper(curr['image:image'][0]['image:caption'][0])}</image:caption>
+            <image:loc>${escape(urlSwapper(curr['image:image'][0]['image:loc'][0]))}</image:loc>
+            <image:caption>${escape(curr['image:image'][0]['image:caption'][0])}</image:caption>
           </image:image>` : ''
         }
       </${wrapper}>`;

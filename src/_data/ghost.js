@@ -1,6 +1,7 @@
 const postsPerPage = process.env.POSTS_PER_PAGE;
 const { api, enApi } = require('../../utils/ghost-api');
 const getImageDimensions = require('../../utils/image-dimensions');
+const { escape } = require('lodash');
 
 const wait = seconds => {
   return new Promise(resolve => {
@@ -118,6 +119,13 @@ const fetchFromGhost = async (endpoint, options) => {
         // Original author / translator feature
         if (obj.codeinjection_head) obj = await originalPostHandler(obj);
 
+        if (obj.excerpt) obj.excerpt = escape(
+          obj.excerpt.replace(/\n+/g, ' ')
+            .split(' ')
+            .slice(0, 50)
+            .join(' ')
+          );
+
         return obj;
       })
     );
@@ -138,18 +146,15 @@ module.exports = async () => {
   const ghostPosts = await fetchFromGhost('posts', {
     include: ['tags', 'authors'],
     filter: 'status:published',
-    limit: 200
+    limit: 100
   });
   const ghostPages = await fetchFromGhost('pages', {
     include: ['tags', 'authors'],
     filter: 'status:published',
-    limit: 200
+    limit: 100
   });
 
-  const posts = [];
-  for (let i in ghostPosts) {
-    const post = ghostPosts[i];
-
+  const posts = ghostPosts.map(post => {
     post.path = stripDomain(post.url);
     post.primary_author.path = stripDomain(post.primary_author.url);
     post.tags.map(tag => (tag.path = stripDomain(tag.url)));
@@ -159,8 +164,8 @@ module.exports = async () => {
     // Convert publish date into a Date object
     post.published_at = new Date(post.published_at);
 
-    posts.push(post);
-  }
+    return post;
+  });
 
   const pages = ghostPages.map(page => {
     page.path = stripDomain(page.url);
