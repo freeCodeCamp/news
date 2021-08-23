@@ -143,18 +143,12 @@ module.exports = function(config) {
   });
 
   // Format dates for RSS feed
-  const buildDateFormatterShortcode = dateStr => {
+  const buildDateFormatterShortcode = (timezone, dateStr) => {
     const dateObj = dateStr ? new Date(dateStr) : new Date();
-    return dayjs.tz(dateObj).locale('en').format('ddd, DD MMM YYYY HH:mm:ss ZZ');
+    return dayjs(dateObj).tz(timezone).locale('en').format('ddd, DD MMM YYYY HH:mm:ss ZZ');
   }
 
   config.addNunjucksShortcode("buildDateFormatter", buildDateFormatterShortcode);
-
-  const utcDateFormatterShortcode = dateStr => {
-    return dayjs.utc(dateStr).format();
-  }
-  
-  config.addNunjucksShortcode("utcDateFormatter", utcDateFormatterShortcode);
 
   config.addFilter("commentsEnabled", tagsArr => {
     return !tagsArr.map(tag => tag.name).includes('#disable-comments');

@@ -16,7 +16,7 @@ permalink: rss.xml
             <title>{{ site.title }}</title>
             <link>{{ site.url }}</link>
         </image>
-        <lastBuildDate>{% buildDateFormatter %}</lastBuildDate>
+        <lastBuildDate>{% buildDateFormatter site.timezone %}</lastBuildDate>
         <atom:link href="{{ site.url }}" rel="self" type="application/rss+xml" />
         <ttl>60</ttl>
         {% for post in ghost.posts.slice(0, 10) %}
@@ -27,7 +27,7 @@ permalink: rss.xml
                 <description>
                     <![CDATA[ {{ post.excerpt | safe }} ]]>
                 </description>
-                <link>{{ post.url }}</link>
+                <link>{{ site.url + post.path }}</link>
                 <guid isPermaLink="false">{{ post.comment_id }}</guid>
                 <category>
                     <![CDATA[ {{ post.primary_tag.name }} ]]>
@@ -35,7 +35,7 @@ permalink: rss.xml
                 <dc:creator>
                     <![CDATA[ {{ post.primary_author.name }} ]]>
                 </dc:creator>
-                <pubDate>{% buildDateFormatter post.published_at %}</pubDate>
+                <pubDate>{% buildDateFormatter site.timezone, post.published_at %}</pubDate>
                 <media:content url="{{ post.feature_image }}" medium="image" />
                 <content:encoded>
                     <![CDATA[ {{ post.excerpt | safe }} ]]>

@@ -3,7 +3,7 @@ const localizedFormat = require('dayjs/plugin/localizedFormat');
 const relativeTime = require('dayjs/plugin/relativeTime');
 const utc = require('dayjs/plugin/utc');
 const timezone = require('dayjs/plugin/timezone');
-const { settings } = require('./ghost-settings');
+const lang = process.env.CLIENT_LOCALE;
 
 // Include dayjs locales
 require('dayjs/locale/es');
@@ -15,12 +15,6 @@ dayjs.extend(relativeTime);
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
-(async () => {
-  const lang = process.env.CLIENT_LOCALE;
-  const { timezone } = await settings;
-  
-  dayjs.locale(lang);
-  dayjs.tz.setDefault(timezone);
-})();
+dayjs.locale(lang);
 
 module.exports = dayjs;
