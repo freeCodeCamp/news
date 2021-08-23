@@ -23,27 +23,17 @@ const keys = {
   }
 };
 
-const { url, key, version } = keys[ghostApiSource];
-
 // Init Ghost API
-const api = new ghostContentApi({
-  url: url,
-  key: key,
-  version: version,
-});
+const api = new ghostContentApi(keys[ghostApiSource]);
 
 // For the translator / original author citation feature
 // To do: Refactor this to work for any language using the keys above
-const enApi = new ghostContentApi({
-  url: process.env.GHOST_API_URL,
-  key: process.env.GHOST_CONTENT_API_KEY,
-  version: process.env.GHOST_API_VERSION,
-});
+const enApi = new ghostContentApi(keys['en']);
 
 // Export API instances and target API URL for link swapping,
 // fetching sitemaps, etc.
 module.exports = {
   api,
   enApi,
-  apiUrl: url
+  apiUrl: keys[ghostApiSource].url
 };
