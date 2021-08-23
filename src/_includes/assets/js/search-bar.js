@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 document.addEventListener('DOMContentLoaded', () => {
   const screenWidth = window.screen.width;
   const screenHeight = window.screen.height;
@@ -20,6 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
     submitSearch();
   });
 
+  // eslint-disable-next-line no-undef
   const search = autocomplete(
     '#search-input',
     {
@@ -31,6 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
     },
     [
       {
+        // eslint-disable-next-line no-undef
         source: autocomplete.sources.hits(index, { hitsPerPage: hitsToRender }),
         debounce: 250,
         templates: {
