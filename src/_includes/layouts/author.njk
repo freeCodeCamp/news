@@ -49,5 +49,5 @@
 {%- endblock -%}
 
 {% block jsonLd %}
-    <script type="application/ld+json">{% createJsonLd 'author', author %}</script>
+    <script type="application/ld+json">{% createJsonLd 'author', site, author %}</script>
 {% endblock %}

@@ -121,5 +121,5 @@
 {%- endblock -%}
 
 {% block jsonLd %}
-    <script type="application/ld+json">{% createJsonLd 'article', post %}</script>
+    <script type="application/ld+json">{% createJsonLd 'article', site, post %}</script>
 {% endblock %}

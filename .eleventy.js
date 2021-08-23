@@ -8,7 +8,6 @@ const pluginRSS = require("@11ty/eleventy-plugin-rss");
 const i18next = require("./i18n/config");
 const dayjs = require("./utils/dayjs");
 // const cacheBuster = require("@mightyplow/eleventy-plugin-cache-buster");
-const { settings } = require('./utils/ghost-settings');
 const { apiUrl } = require('./utils/ghost-api');
 const { escape } = require('lodash');
 const fetch = require('node-fetch');
@@ -181,10 +180,10 @@ module.exports = function(config) {
 
   config.addNunjucksShortcode("fullEscaper", fullEscaper);
 
-  async function createJsonLdShortcode(type, data) {
-    // Main site settings from Ghost API
-    let { url, logo, cover_image, image_dimensions } = await settings;
-    url = `${url}/`
+  async function createJsonLdShortcode(type, site, data) {
+    // Main site settings from site object
+    const { logo, cover_image, image_dimensions } = site;
+    const url = `${site.url}/`;
     const typeMap = {
       index: 'WebSite',
       article: 'Article',
@@ -259,53 +258,55 @@ module.exports = function(config) {
       return authorObj;
     }
 
-    // Remove first slash from path
-    if (data.path) returnData.url += data.path.substring(1);
+    if (type !== 'index' && data) {
+      // Remove first slash from path
+      if (data.path) returnData.url += data.path.substring(1);
 
-    if (data.description) returnData.description = fullEscaper(data.description);
+      if (data.description) returnData.description = fullEscaper(data.description);
 
-    if (type === 'article') {
-      if (data.published_at) returnData.datePublished = new Date(data.published_at).toISOString();
-      if (data.updated_at) returnData.dateModified = new Date(data.updated_at).toISOString();
-      if (data.tags && data.tags.length > 1) {
-        // Filter out internal Ghost tags
-        const keywords = data.tags.map(tag => tag.name).filter(keyword => !keyword.startsWith('#'));
+      if (type === 'article') {
+        if (data.published_at) returnData.datePublished = new Date(data.published_at).toISOString();
+        if (data.updated_at) returnData.dateModified = new Date(data.updated_at).toISOString();
+        if (data.tags && data.tags.length > 1) {
+          // Filter out internal Ghost tags
+          const keywords = data.tags.map(tag => tag.name).filter(keyword => !keyword.startsWith('#'));
 
-        returnData.keywords = keywords.length === 1 ? keywords[0] : keywords;
-      };
-      if (data.excerpt) returnData.description = fullEscaper(data.excerpt);
-      if (data.title) returnData.headline = fullEscaper(data.title);
+          returnData.keywords = keywords.length === 1 ? keywords[0] : keywords;
+        };
+        if (data.excerpt) returnData.description = fullEscaper(data.excerpt);
+        if (data.title) returnData.headline = fullEscaper(data.title);
 
-      if (data.feature_image) {
-        returnData.image = await createImageObj(data.feature_image, data.image_dimensions.feature_image);
+        if (data.feature_image) {
+          returnData.image = await createImageObj(data.feature_image, data.image_dimensions.feature_image);
+        }
+
+        returnData.author = await createAuthorObj(data.primary_author);
       }
 
-      returnData.author = await createAuthorObj(data.primary_author);
-    }
-
-    // Handle images for both types
-    if (type === 'tag' || type === 'author') {
-      if (data.cover_image) {
-        returnData.image = createImageObj(data.cover_image, data.image_dimensions.cover_image);
-      } else if (data.feature_image) {
-        returnData.image = createImageObj(data.feature_image, data.image_dimensions.feature_image);
-      } else {
-        delete returnData.image;
+      // Handle images for both types
+      if (type === 'tag' || type === 'author') {
+        if (data.cover_image) {
+          returnData.image = createImageObj(data.cover_image, data.image_dimensions.cover_image);
+        } else if (data.feature_image) {
+          returnData.image = createImageObj(data.feature_image, data.image_dimensions.feature_image);
+        } else {
+          delete returnData.image;
+        }
       }
-    }
 
-    if (type === 'tag') {
-      if (data.cover_image) returnData.image = createImageObj(data.cover_image, data.image_dimensions.cover_image);
-      returnData.name = data.name;
-    }
+      if (type === 'tag') {
+        if (data.cover_image) returnData.image = createImageObj(data.cover_image, data.image_dimensions.cover_image);
+        returnData.name = data.name;
+      }
 
-    if (type === 'author') {
-      // This schema type is the only one without publisher info
-      delete returnData.publisher;
-      const authorObj = await createAuthorObj(data);
-      
-      returnData.sameAs = authorObj.sameAs;
-      returnData.name = fullEscaper(authorObj.name);
+      if (type === 'author') {
+        // This schema type is the only one without publisher info
+        delete returnData.publisher;
+        const authorObj = await createAuthorObj(data);
+        
+        returnData.sameAs = authorObj.sameAs;
+        returnData.name = fullEscaper(authorObj.name);
+      }
     }
 
     return JSON.stringify(returnData, null, '\t'); // Pretty print for testing
