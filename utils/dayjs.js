@@ -16,7 +16,8 @@ dayjs.extend(utc);
 dayjs.extend(timezone);
 
 (async () => {
-  const { lang, timezone } = await settings;
+  const lang = process.env.CLIENT_LOCALE;
+  const { timezone } = await settings;
   
   dayjs.locale(lang);
   dayjs.tz.setDefault(timezone);

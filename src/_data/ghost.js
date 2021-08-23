@@ -1,5 +1,5 @@
 const postsPerPage = process.env.POSTS_PER_PAGE;
-const { api, enApi } = require('../../utils/ghost-api');
+const { api, enApi, apiUrl } = require('../../utils/ghost-api');
 const getImageDimensions = require('../../utils/image-dimensions');
 const { escape, chunk } = require('lodash');
 
@@ -12,7 +12,7 @@ const wait = seconds => {
 };
 
 // Strip Ghost domain from urls
-const stripDomain = url => url.replace(process.env.GHOST_API_URL, "");
+const stripDomain = url => url.replace(apiUrl, '');
 
 const getUniqueList = (arr, key) => [...new Map(arr.map(item => [item[key], item])).values()];
 

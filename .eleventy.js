@@ -9,6 +9,7 @@ const i18next = require("./i18n/config");
 const dayjs = require("./utils/dayjs");
 // const cacheBuster = require("@mightyplow/eleventy-plugin-cache-buster");
 const { settings } = require('./utils/ghost-settings');
+const { apiUrl } = require('./utils/ghost-api');
 const { escape } = require('lodash');
 const fetch = require('node-fetch');
 const xml2js = require('xml2js');
@@ -168,7 +169,7 @@ module.exports = function(config) {
 
   // This counts on all images, including the site logo, being stored like on Ghost with the
   // same directory structure
-  const domainReplacer = url => url.replace(process.env.GHOST_API_URL, process.env.SITE_URL);
+  const domainReplacer = url => url.replace(apiUrl, process.env.SITE_URL);
 
   // Mimic Ghost/Handlebars escaping
   // raw: & < > " ' ` =
@@ -314,7 +315,6 @@ module.exports = function(config) {
   config.addNunjucksAsyncShortcode("createJsonLd", createJsonLdShortcode);
 
   const sitemapFetcherShortcode = async (page) => {
-    const apiUrl = process.env.GHOST_API_URL;
     // will need some sort of map to handle all locales
     const url = page === 'index' ?
       `${apiUrl}/sitemap.xml` :
