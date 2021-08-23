@@ -1,5 +1,4 @@
 const { api } = require('./ghost-api');
-const siteLangHandler = require('./site-lang-handler');
 const getImageDimensions = require('./image-dimensions');
 
 const ghostSettings = async () => {
@@ -11,7 +10,8 @@ const ghostSettings = async () => {
       console.error(err);
     });
 
-  if (process.env.SITE_URL) settings.url = process.env.SITE_URL;
+  settings.url = process.env.SITE_URL;
+  settings.lang = process.env.CLIENT_LOCALE;
 
   const logoUrl = 'https://cdn.freecodecamp.org/platform/universal/fcc_primary.svg'
   settings.logo = logoUrl;
@@ -38,7 +38,6 @@ const ghostSettings = async () => {
 
   // Set default title across all publications
   settings.title = 'freeCodeCamp.org';
-  settings.lang = siteLangHandler(settings.lang);
 
   return settings;
 };
