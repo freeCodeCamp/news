@@ -7,9 +7,9 @@ const keys = {
     version: process.env.LOCAL_GHOST_API_VERSION
   },
   en: {
-    url: process.env.GHOST_API_URL,
-    key: process.env.GHOST_CONTENT_API_KEY,
-    version: process.env.GHOST_API_VERSION,
+    url: process.env.EN_GHOST_API_URL,
+    key: process.env.EN_GHOST_CONTENT_API_KEY,
+    version: process.env.EN_GHOST_API_VERSION,
   },
   zh: {
     url: process.env.ZH_GHOST_API_URL,
