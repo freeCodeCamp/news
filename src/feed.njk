@@ -5,15 +5,15 @@ permalink: rss.xml
     xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" version="2.0">
     <channel>
         <title>
-            <![CDATA[ {{ site.title }} ]]>
+            <![CDATA[ {% t 'meta:title' %} ]]>
         </title>
         <description>
-            <![CDATA[ {{ site.description }} ]]>
+            <![CDATA[ {% t 'meta:description' %} ]]>
         </description>
         <link>{{ site.url }}</link>
         <image>
             <url>{{ site.url }}/favicon.png</url>
-            <title>{{ site.title }}</title>
+            <title>{% t 'meta:title' %}</title>
             <link>{{ site.url }}</link>
         </image>
         <lastBuildDate>{% buildDateFormatter site.timezone %}</lastBuildDate>
