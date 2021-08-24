@@ -26,7 +26,7 @@ permalink: '/search/'
     <script>{{ js | jsMin | safe }}</script>
 {% endblock %}
 
-{%- block seo -%}
+{% block seo %}
     {# Facebook OpenGraph #}
     <meta property="og:site_name" content="{{ site.title }}">
     <meta property="og:type" content="website">
@@ -39,4 +39,4 @@ permalink: '/search/'
     <meta name="twitter:title" content="{{ site.title }}">
     <meta name="twitter:url" content="{{ site.url + permalink }}">
     <meta name="twitter:site" content="{{ site.twitter }}">
-{%- endblock -%}
+{% endblock %}

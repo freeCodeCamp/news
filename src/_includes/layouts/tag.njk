@@ -40,7 +40,7 @@
     </main>
 {% endblock %}
 
-{%- block seo -%}
+{% block seo %}
     {# Facebook OpenGraph #}
     <meta property="og:site_name" content="{{ site.title }}">
     <meta property="og:type" content="website">
@@ -60,7 +60,7 @@
 
     <meta property="og:image:width" content="{{ tag.image_dimensions.feature_image.width if tag.feature_image else site.image_dimensions.cover_image.width }}">
     <meta property="og:image:height" content="{{ tag.image_dimensions.feature_image.height if tag.feature_image else site.image_dimensions.cover_image.height }}">
-{%- endblock -%}
+{% endblock %}
 
 {% block jsonLd %}
     <script type="application/ld+json">{% createJsonLd 'tag', site, tag %}</script>
