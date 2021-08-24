@@ -1,16 +1,19 @@
-const htmlmin = require('html-minifier');
+const minifyHtml = require('@minify-html/js');
 
-// Minify HTML
 module.exports = (content, outputPath) => {
-  // Eleventy 1.0+: use this.inputPath and this.outputPath instead
-  if( outputPath && outputPath.endsWith('.html') ) {
-    let minified = htmlmin.minify(content, {
-      useShortDoctype: true,
-      removeComments: true,
-      collapseWhitespace: true
-    });
-    return minified;
+  if (outputPath && outputPath.endsWith('.html')) {
+    try {
+      const cfg = minifyHtml.createConfiguration({
+        keep_closing_tags: true,
+        keep_spaces_between_attributes: true
+      });
+      const minified = minifyHtml.minify(content, cfg);
+
+      return minified;
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   return content;
-};
+}
