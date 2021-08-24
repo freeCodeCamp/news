@@ -57,7 +57,7 @@
 {%- block seo -%}
     <link rel="amphtml" href="{{ site.url + doc.path + "amp/" }}">
 
-    <!-- Facebook OpenGraph -->
+    {# Facebook OpenGraph #}
     <meta property="og:site_name" content="{{ site.title }}">
     <meta property="og:type" content="article">
     <meta property="og:title" content="{{ title }}">
@@ -76,7 +76,7 @@
         <meta property="article:author" content="{{ doc.primary_author.facebook }}">
     {% endif %}
 
-    <!--Twitter Card-->
+    {# Twitter Card #}
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="{{ title }}">
     {% if doc.excerpt %}

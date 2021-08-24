@@ -3,14 +3,12 @@
     <head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <!-- Fall back to meta:title if no specific title is set from a post, page, etc. -->
-        <title>
-            {% if title %}
-                {{ title }}
-            {% else %}
-                {% t 'meta:title' %}
-            {% endif %}
-        </title>
+        {# Fall back to meta:title if no specific title is set from a post, page, etc. #}
+        {% if title %}
+            <title>{{ title }}</title>
+        {% else %}
+            <title>{% t 'meta:title' %}</title>
+        {% endif %}
         <meta name="HandheldFriendly" content="True" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -22,25 +20,25 @@
 
         <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700|Roboto+Mono:400,700?&display=swap">
 
-        <!-- News Theme Styles -->
+        {# News Theme Styles #}
         <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="{{ '/assets/css/global.css' | url }}" />
         <link rel="stylesheet" type="text/css" href="{{ '/assets/css/screen.css' | url }}" />
         <link rel="stylesheet" type="text/css" href="{{ '/assets/css/search-bar.css' | url }}" />
 
-        <!-- Algolia search assets -->
+        {# Algolia search assets #}
         <script defer src="https://cdn.freecodecamp.org/news-assets/algolia/algoliasearch-3-33-0/algoliasearch.min.js"></script>
         <script defer src="https://cdn.freecodecamp.org/news-assets/algolia/autocomplete-0-36-0/autocomplete.min.js"></script>
 
-        <!-- Day.js and plugins for search results page date localization -->
+        {# Day.js and plugins for localization and formatting #}
         <script defer src="https://cdn.freecodecamp.org/news-assets/dayjs/1.10.4/dayjs.min.js"></script>
         <script defer src="https://cdn.freecodecamp.org/news-assets/dayjs/1.10.4/localizedFormat.min.js"></script>
         <script defer src="https://cdn.freecodecamp.org/news-assets/dayjs/1.10.4/relativeTime.min.js"></script>
 
-        <!-- Day.js locales -->
+        {# Day.js locales #}
         <script defer src="https://cdn.freecodecamp.org/news-assets/dayjs/1.10.4/locale/zh.min.js"></script>
         <script defer src="https://cdn.freecodecamp.org/news-assets/dayjs/1.10.4/locale/es.min.js"></script>
 
-        <!-- Lazysizes -->
+        {# Lazysizes #}
         <script defer type="text/javascript" src="{{ '/assets/js/lazysizes.min.js' | url }}"></script>
 
         <meta name="keywords" content="{% t 'meta:keywords' %}">
@@ -49,8 +47,15 @@
         <link rel="canonical" href="{{ site.url }}">
         <meta name="referrer" content="no-referrer-when-downgrade">
 
+        {% set nextPageRegExp = r/\/\d+\/$/g %}
+
+        {% if pagination.nextPageHref and nextPageRegExp.test(pagination.nextPageHref) %}
+            {# Updated dynamically by pagination.js #}
+            <link rel="next" href="">
+        {% endif %}
+
         {% block seo %}
-            <!-- Facebook OpenGraph -->
+            {# Facebook OpenGraph #}
             <meta property="og:site_name" content="{{ site.title }}">
             <meta property="og:type" content="website">
             <meta property="og:title" content="{{ site.title }}">
@@ -59,7 +64,7 @@
             <meta property="og:image" content="{{ site.cover_image }}">
             <meta property="article:publisher" content="https://www.facebook.com/freecodecamp">
 
-            <!-- Twitter Card -->
+            {# Twitter Card #}
             <meta name="twitter:card" content="summary_large_image">
             <meta name="twitter:title" content="{{ site.title }}">
             <meta name="twitter:description" content="{% t 'meta:description' %}">
@@ -85,7 +90,7 @@
         <div class="site-wrapper">
             {% include "partials/site-nav.njk" %}
 
-            <!-- CTA banner -->
+            {# CTA banner #}
             {% include "partials/banner.njk" %}
 
             <div id="error-message"></div>

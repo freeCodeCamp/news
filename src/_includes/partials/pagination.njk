@@ -1,14 +1,12 @@
 {% set nextPageRegExp = r/\/\d+\/$/g %}
 
-{% if pagination.nextPageHref %}
-    {% if nextPageRegExp.test(pagination.nextPageHref) %}
-        <div class="read-more-row">
-            <button id="readMoreBtn">{% t 'buttons.load-more-articles' %}</button>
-        </div>
+{% if pagination.nextPageHref and nextPageRegExp.test(pagination.nextPageHref) %}
+    <div class="read-more-row">
+        <button id="readMoreBtn">{% t 'buttons.load-more-articles' %}</button>
+    </div>
 
-        {% set js %}
-            {% include "assets/js/pagination.js" %}
-        {% endset %}
-        <script>{{ js | jsMin | safe }}</script>
-    {% endif %}
+    {% set js %}
+        {% include "assets/js/pagination.js" %}
+    {% endset %}
+    <script>{{ js | jsMin | safe }}</script>
 {% endif %}
