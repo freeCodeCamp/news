@@ -246,6 +246,8 @@ module.exports = function(config) {
       return authorObj;
     }
 
+    if (type === 'index') returnData.description = translateShortcode('meta:description');
+    
     if (type !== 'index' && data) {
       // Remove first slash from path
       if (data.path) returnData.url += data.path.substring(1);
