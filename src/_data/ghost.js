@@ -16,19 +16,19 @@ const stripDomain = url => url.replace(apiUrl, '');
 
 const getUniqueList = (arr, key) => [...new Map(arr.map(item => [item[key], item])).values()];
 
-const imageDimensionHandler = async (targetObj, type, mapObj, mapKey) => {
+const imageDimensionHandler = async (targetObj, imageKey, mapObj, mapKey) => {
   // Check map for existing dimensions
-  if (mapObj[mapKey] && mapObj[mapKey][type]) {
+  if (mapObj[mapKey] && mapObj[mapKey][imageKey]) {
     targetObj.image_dimensions = mapObj[mapKey];
   } else {
     // Get dimensions and append to targetObj and map
     targetObj.image_dimensions = {...targetObj.image_dimensions};
     mapObj[mapKey] = {...mapObj[mapKey]};
 
-    const { width, height } = await getImageDimensions(targetObj[type]);
+    const { width, height } = await getImageDimensions(targetObj[imageKey], targetObj.title);
 
-    targetObj.image_dimensions[type] = { width, height };
-    mapObj[mapKey][type] = { width, height };
+    targetObj.image_dimensions[imageKey] = { width, height };
+    mapObj[mapKey][imageKey] = { width, height };
   }
 }
 
