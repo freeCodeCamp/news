@@ -2,6 +2,7 @@
 {% from "partials/card.njk" import card %}
 
 {% set title = author.name + " - " + site.title %}
+{% set canonicalUrl = site.url + author.path %}
 
 {% block content %}
     {% include "partials/author-info.njk" %}

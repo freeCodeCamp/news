@@ -2,6 +2,7 @@
 {% from "partials/card.njk" import card %}
 
 {% set title = tag.name + " - " + site.title %}
+{% set canonicalUrl = site.url + tag.path %}
 {% set postCount = tag.count.posts %}
 {% set popularTags = ghost.popularTags %}
 

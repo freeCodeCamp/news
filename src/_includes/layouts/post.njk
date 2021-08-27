@@ -1,6 +1,7 @@
 {% extends 'layouts/default.njk' %}
 
 {% set title = post.title %}
+{% set canonicalUrl = site.url + post.path %}
 {% set codeinjection_head = post.codeinjection_head %}
 {% set codeinjection_foot = post.codeinjection_foot %}
 
