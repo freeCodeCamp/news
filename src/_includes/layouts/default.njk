@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        {# Fall back to meta:title if no specific title is set from a post, page, etc. #}
+        {# Fall back to localized meta title if no specific title is set from a post, page, etc. #}
         {% if title %}
             <title>{{ title }}</title>
         {% else %}
@@ -50,7 +50,7 @@
         {% set nextPageRegExp = r/\/\d+\/$/g %}
 
         {% if pagination.nextPageHref and nextPageRegExp.test(pagination.nextPageHref) %}
-            {# Updated dynamically by pagination.js #}
+            {# Updated dynamically by src/_includes/pagination.js #}
             <link rel="next" href="">
         {% endif %}
 
@@ -174,7 +174,7 @@
         {# Pulls scripts from other template files and include them after all assets 
         have loaded / global setup is complete. For example, there's some JS which
         we only want to use in search-results.njk, but it needs to be included here
-        after the global Algolia setup in _includes/assets/js/algolia.js. #}
+        after the global Algolia setup in src/_includes/assets/js/algolia.js. #}
         {% block scripts %}
         {% endblock scripts %}
 
