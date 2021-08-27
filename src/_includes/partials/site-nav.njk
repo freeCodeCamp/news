@@ -3,11 +3,7 @@
         {% include "partials/search-bar.njk" %}
     </div>
     <div class="site-nav-middle">
-        {% if site.logo %}
-            <a class="site-nav-logo" href="{{ site.url }}"><img src="{{ site.logo }}" alt="{{ site.title }}" /></a>
-        {% else %}
-            <a class="site-nav-logo" href="{{ site.url }}">{{ site.title }}</a>
-        {% endif %}
+        <a class="site-nav-logo" href="{{ site.url }}"><img src="{{ site.logo }}" alt="{{ site.title }}" /></a>
     </div>
     <div class="site-nav-right">
         <div class="nav-group">
