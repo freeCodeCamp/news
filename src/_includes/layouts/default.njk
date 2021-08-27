@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ "zh-cn" if site.lang == "zh" else site.lang }}">
+<html lang="{{ site.lang }}">
     <head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -21,9 +21,9 @@
         <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700|Roboto+Mono:400,700?&display=swap">
 
         {# News Theme Styles #}
-        <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="{{ '/assets/css/global.css' | url }}" />
-        <link rel="stylesheet" type="text/css" href="{{ '/assets/css/screen.css' | url }}" />
-        <link rel="stylesheet" type="text/css" href="{{ '/assets/css/search-bar.css' | url }}" />
+        <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="{% cacheBuster '/assets/css/global.css' %}" />
+        <link rel="stylesheet" type="text/css" href="{% cacheBuster '/assets/css/screen.css' %}" />
+        <link rel="stylesheet" type="text/css" href="{% cacheBuster '/assets/css/search-bar.css' %}" />
 
         {# Algolia search assets #}
         <script defer src="https://cdn.freecodecamp.org/news-assets/algolia/algoliasearch-3-33-0/algoliasearch.min.js"></script>
@@ -39,7 +39,21 @@
         <script defer src="https://cdn.freecodecamp.org/news-assets/dayjs/1.10.4/locale/es.min.js"></script>
 
         {# Lazysizes #}
-        <script defer type="text/javascript" src="{{ '/assets/js/lazysizes.min.js' | url }}"></script>
+        <script defer type="text/javascript" src="{% cacheBuster '/assets/js/lazysizes.min.js' %}"></script>
+
+        {% set js %}
+            {% include "assets/js/algolia-locale-setup.js" %}
+            {% include "assets/js/search-bar.js" %}
+            {% include "assets/js/client-dayjs.js" %}
+        {% endset %}
+        <script>{{ js | jsMin | safe }}</script>
+
+        {# Pulls scripts that can be safely cached and placed / defered
+        in the head, but that we want to include only when readers go to
+        specific pages that require them (ex. published-date.js on the
+        search results page). #}
+        {% block headScripts %}
+        {% endblock %}
 
         <meta name="keywords" content="{% t 'meta:keywords' %}">
         <meta name="description" content="{% block description %}{% t 'meta:description' %}{% endblock %}">
@@ -168,13 +182,6 @@
             src="https://cdn.freecodecamp.org/news-assets/prism-1-16-0/prism-typescript.min.js"></script>
         <script defer type="text/javascript"
             src="https://cdn.freecodecamp.org/news-assets/prism-1-16-0/prism-yaml.min.js"></script>
-
-        {% set js %}
-            {% include "assets/js/algolia-locale-setup.js" %}
-            {% include "assets/js/search-bar.js" %}
-            {% include "assets/js/client-dayjs.js" %}
-        {% endset %}
-        <script>{{ js | jsMin | safe }}</script>
 
         {# Pulls scripts from other template files and include them after all assets 
         have loaded / global setup is complete. For example, there's some JS which

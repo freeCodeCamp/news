@@ -3,7 +3,8 @@ require("dotenv").config();
 const htmlMin = require("./utils/transforms/html-min");
 const cssMin = require("./utils/transforms/css-min");
 const jsMin = require("./utils/transforms/js-min");
-const { readFileSync, readdirSync, writeFileSync } = require("fs");
+const { readFileSync, readdirSync, writeFileSync, mkdirSync } = require("fs");
+const { basename } = require('path');
 const pluginRSS = require("@11ty/eleventy-plugin-rss");
 const i18next = require("./i18n/config");
 const dayjs = require("./utils/dayjs");
@@ -12,6 +13,8 @@ const { apiUrl } = require('./utils/ghost-api');
 const { escape } = require('lodash');
 const fetch = require('node-fetch');
 const xml2js = require('xml2js');
+const md5 = require('md5');
+const manifest = {};
 
 module.exports = function(config) {
   // Minify HTML
@@ -23,8 +26,42 @@ module.exports = function(config) {
   // Minify inline JS
   config.addNunjucksAsyncFilter("jsMin", jsMin);
 
-  // Allow passthrough for styles, scripts, and images
-  config.addPassthroughCopy({'./src/_includes/assets': './assets/'});
+  // // Copy styles, scripts, and images to dist/assets/...
+  // config.addPassthroughCopy({'./src/_includes/assets': './assets/'});
+
+  // Copy styles, scripts, and images to dist/assets/...
+  // with hashed filenames for cache busting
+  config.on('beforeBuild', () => {
+    const basePath = './src/_includes/assets';
+    const innerDirs = ['css', 'js'];
+    const assetGroups = innerDirs.map(dir => readdirSync(`${basePath}/${dir}`));
+    
+    assetGroups.forEach((arr, i) => {
+      const dirName = innerDirs[i];
+      
+      arr.forEach(filename => {
+        const filePath = `${basePath}/${dirName}/${filename}`;
+        const finalBasePath = `./dist/assets/${dirName}`;
+
+        // Create the directory if it doesn't already exist
+        mkdirSync(finalBasePath, { recursive: true });
+
+        // Generate 10 char MD5 hash of file content, a manifest
+        // of original filenames --> hashed equivalents, and
+        // write hashed version of file
+        const content = readFileSync(filePath);
+        const hash = md5(content).slice(0, 10);
+        const hashedFilename = `${filename}?v=${hash}`;
+
+        // original vers
+        writeFileSync(`${finalBasePath}/${filename}`, content);
+
+        // hashed vers
+        writeFileSync(`${finalBasePath}/${hashedFilename}`, content);
+        manifest[filename] = hashedFilename;
+      });
+    });
+  });
 
   // Minify CSS
   config.on('afterBuild', () => {
@@ -108,6 +145,15 @@ module.exports = function(config) {
   }
   
   config.addNunjucksShortcode("featureImage", featureImageShortcode);
+
+  function cacheBusterShortcode(filePath) {
+    const filename = basename(filePath);
+
+    return filePath.replace(filename, manifest[filename]);
+    // return `${process.env.SITE_URL}/${manifest[filename]}`;
+  }
+
+  config.addNunjucksShortcode('cacheBuster', cacheBusterShortcode);
 
   // Date and time shortcodes
   function publishedDateShortcode(dateStr) {
@@ -393,6 +439,6 @@ module.exports = function(config) {
     templateFormats: ["css", "njk", "md", "txt", "hbs"],
     htmlTemplateEngine: "njk",
     markdownTemplateEngine: "njk",
-    passthroughFileCopy: true
+    // passthroughFileCopy: true
   };
 };

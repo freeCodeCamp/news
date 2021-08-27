@@ -41,6 +41,10 @@
     </main>
 {% endblock %}
 
+{% block scripts %}
+    <script defer src="{% cacheBuster '/assets/js/pagination.js' %}"></script>
+{% endblock %}
+
 {% block seo %}
     {# Facebook OpenGraph #}
     <meta property="og:site_name" content="{{ site.title }}">
