@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 document.addEventListener('DOMContentLoaded', () => {
   const urlParams = new URLSearchParams(window.location.search);
   const queryStr = urlParams.get('query');
@@ -6,6 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let currPage = 0;
 
   function getHits(pageNo) {
+    // eslint-disable-next-line no-undef
     return index
       .search({
         query: queryStr,

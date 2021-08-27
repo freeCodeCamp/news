@@ -77,15 +77,15 @@
     <script>{{ js | jsMin | safe }}</script>
 {% endblock %}
 
-{%- block seo -%}
+{% block seo %}
     <link rel="amphtml" href="{{ site.url + post.path + "amp/" }}">
 
-    <!-- Facebook OpenGraph -->
+    {# Facebook OpenGraph #}
     <meta property="og:site_name" content="{{ site.title }}">
     <meta property="og:type" content="article">
     <meta property="og:title" content="{{ title }}">
     {% if post.excerpt %}
-        <meta property="og:description" content="{% createExcerpt post.excerpt %}">
+        <meta property="og:description" content="{{ post.excerpt }}">
     {% endif %}
     <meta property="og:url" content="{{ site.url + post.path }}">
     <meta property="og:image" content="{{ post.feature_image }}">
@@ -99,11 +99,11 @@
         <meta property="article:author" content="{{ post.primary_author.facebook }}">
     {% endif %}
 
-    <!--Twitter Card-->
+    {# Twitter Card #}
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="{{ title }}">
     {% if post.excerpt %}
-        <meta name="twitter:description" content="{% createExcerpt post.excerpt %}">
+        <meta name="twitter:description" content="{{ post.excerpt }}">
     {% endif %}
     <meta name="twitter:url" content="{{ site.url + post.path }}">
     <meta name="twitter:image" content="{{ post.feature_image }}">
@@ -118,8 +118,8 @@
 
     <meta property="og:image:width" content="{{ post.image_dimensions.feature_image.width }}">
     <meta property="og:image:height" content="{{ post.image_dimensions.feature_image.height }}">
-{%- endblock -%}
+{% endblock %}
 
 {% block jsonLd %}
-    <script type="application/ld+json">{% createJsonLd 'article', post %}</script>
+    <script type="application/ld+json">{% createJsonLd 'article', site, post %}</script>
 {% endblock %}

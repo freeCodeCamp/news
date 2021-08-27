@@ -1,10 +1,10 @@
-/* eslint-disable no-undef */
 document.addEventListener('DOMContentLoaded', () => {
   const postFeed = document.querySelector('.post-feed');
   const postDates = [...document.getElementsByClassName('post-full-meta-date')];
   const localizeDates = (datesList) => {
     datesList.forEach((date) => {
       const dateStr = date.getAttribute('datetime');
+      // eslint-disable-next-line no-undef
       const dateObj = dayjs(dateStr);
 
       // Display either time since published or month, day, and year

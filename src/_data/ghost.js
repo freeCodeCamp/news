@@ -1,6 +1,7 @@
 const postsPerPage = process.env.POSTS_PER_PAGE;
-const { api, enApi } = require('../../utils/ghost-api');
+const { api, enApi, apiUrl } = require('../../utils/ghost-api');
 const getImageDimensions = require('../../utils/image-dimensions');
+const { escape, chunk } = require('lodash');
 
 const wait = seconds => {
   return new Promise(resolve => {
@@ -11,35 +12,23 @@ const wait = seconds => {
 };
 
 // Strip Ghost domain from urls
-const stripDomain = url => url.replace(process.env.GHOST_API_URL, "");
-
-// For custom tag and author post pagination
-const chunkArray = (arr, size) => {
-  const chunkedArr = [];
-  const copy = [...arr];
-  const numOfChunks = Math.ceil(copy.length / size);
-  for (let i = 0; i < numOfChunks; i++) {
-    chunkedArr.push(copy.splice(0, size));
-  }
-
-  return chunkedArr;
-}
+const stripDomain = url => url.replace(apiUrl, '');
 
 const getUniqueList = (arr, key) => [...new Map(arr.map(item => [item[key], item])).values()];
 
-const imageDimensionHandler = async (targetObj, type, mapObj, mapKey) => {
+const imageDimensionHandler = async (targetObj, imageKey, mapObj, mapKey) => {
   // Check map for existing dimensions
-  if (mapObj[mapKey] && mapObj[mapKey][type]) {
+  if (mapObj[mapKey] && mapObj[mapKey][imageKey]) {
     targetObj.image_dimensions = mapObj[mapKey];
   } else {
     // Get dimensions and append to targetObj and map
     targetObj.image_dimensions = {...targetObj.image_dimensions};
     mapObj[mapKey] = {...mapObj[mapKey]};
 
-    const { width, height } = await getImageDimensions(targetObj[type]);
+    const { width, height } = await getImageDimensions(targetObj[imageKey], targetObj.title);
 
-    targetObj.image_dimensions[type] = { width, height };
-    mapObj[mapKey][type] = { width, height };
+    targetObj.image_dimensions[imageKey] = { width, height };
+    mapObj[mapKey][imageKey] = { width, height };
   }
 }
 
@@ -118,6 +107,13 @@ const fetchFromGhost = async (endpoint, options) => {
         // Original author / translator feature
         if (obj.codeinjection_head) obj = await originalPostHandler(obj);
 
+        if (obj.excerpt) obj.excerpt = escape(
+          obj.excerpt.replace(/\n+/g, ' ')
+            .split(' ')
+            .slice(0, 50)
+            .join(' ')
+          );
+
         return obj;
       })
     );
@@ -138,18 +134,15 @@ module.exports = async () => {
   const ghostPosts = await fetchFromGhost('posts', {
     include: ['tags', 'authors'],
     filter: 'status:published',
-    limit: 200
+    limit: 100
   });
   const ghostPages = await fetchFromGhost('pages', {
     include: ['tags', 'authors'],
     filter: 'status:published',
-    limit: 200
+    limit: 100
   });
 
-  const posts = [];
-  for (let i in ghostPosts) {
-    const post = ghostPosts[i];
-
+  const posts = ghostPosts.map(post => {
     post.path = stripDomain(post.url);
     post.primary_author.path = stripDomain(post.primary_author.url);
     post.tags.map(tag => (tag.path = stripDomain(tag.url)));
@@ -159,8 +152,8 @@ module.exports = async () => {
     // Convert publish date into a Date object
     post.published_at = new Date(post.published_at);
 
-    posts.push(post);
-  }
+    return post;
+  });
 
   const pages = ghostPages.map(page => {
     page.path = stripDomain(page.url);
@@ -178,7 +171,7 @@ module.exports = async () => {
 
     if (currAuthorPosts.length) author.posts = currAuthorPosts;
 
-    const paginatedCurrAuthorPosts = chunkArray(currAuthorPosts, postsPerPage);
+    const paginatedCurrAuthorPosts = chunk(currAuthorPosts, postsPerPage);
 
     paginatedCurrAuthorPosts.forEach((arr, i) => {
       // For each entry in paginatedCurrAuthorPosts, add the author object
@@ -210,7 +203,7 @@ module.exports = async () => {
       posts: currTagPosts.length
     }
 
-    const paginatedCurrTagPosts = chunkArray(currTagPosts, postsPerPage);
+    const paginatedCurrTagPosts = chunk(currTagPosts, postsPerPage);
 
     paginatedCurrTagPosts.forEach((arr, i) => {
       // For each entry in paginatedCurrTagPosts, add the tag object

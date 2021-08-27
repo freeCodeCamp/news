@@ -26,17 +26,17 @@ permalink: '/search/'
     <script>{{ js | jsMin | safe }}</script>
 {% endblock %}
 
-{%- block seo -%}
-    <!-- Facebook OpenGraph -->
+{% block seo %}
+    {# Facebook OpenGraph #}
     <meta property="og:site_name" content="{{ site.title }}">
     <meta property="og:type" content="website">
     <meta property="og:title" content="{{ site.title }}">
     <meta property="og:url" content="{{ site.url + permalink }}">
     <meta property="article:publisher" content="https://www.facebook.com/freecodecamp">
 
-    <!--Twitter Card-->
+    {# Twitter Card #}
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="{{ site.title }}">
     <meta name="twitter:url" content="{{ site.url + permalink }}">
     <meta name="twitter:site" content="{{ site.twitter }}">
-{%- endblock -%}
+{% endblock %}

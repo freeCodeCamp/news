@@ -20,8 +20,8 @@
     </main>
 {% endblock %}
 
-{%- block seo -%}
-    <!-- Facebook OpenGraph -->
+{% block seo %}
+    {# Facebook OpenGraph #}
     <meta property="og:site_name" content="{{ site.title }}">
     <meta property="og:type" content="profile">
     <meta property="og:title" content="{{ title }}">
@@ -33,7 +33,7 @@
         <meta property="article:author" content="{{ post.primary_author.facebook }}">
     {% endif %}
 
-    <!--Twitter Card-->
+    {# Twitter Card #}
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="{{ title }}">
     <meta property="twitter:description" content="{% t 'meta:description' %}">
@@ -46,8 +46,8 @@
 
     <meta property="og:image:width" content="{{ author.image_dimensions.cover_image.width if author.cover_image else site.image_dimensions.cover_image.width }}">
     <meta property="og:image:height" content="{{ author.image_dimensions.cover_image.height if author.cover_image else site.image_dimensions.cover_image.height }}">
-{%- endblock -%}
+{% endblock %}
 
 {% block jsonLd %}
-    <script type="application/ld+json">{% createJsonLd 'author', author %}</script>
+    <script type="application/ld+json">{% createJsonLd 'author', site, author %}</script>
 {% endblock %}

@@ -7,8 +7,8 @@ const { readFileSync, readdirSync, writeFileSync } = require("fs");
 const pluginRSS = require("@11ty/eleventy-plugin-rss");
 const i18next = require("./i18n/config");
 const dayjs = require("./utils/dayjs");
-const cacheBuster = require("@mightyplow/eleventy-plugin-cache-buster");
-const { settings } = require('./utils/ghost-settings');
+// const cacheBuster = require("@mightyplow/eleventy-plugin-cache-buster");
+const { apiUrl } = require('./utils/ghost-api');
 const { escape } = require('lodash');
 const fetch = require('node-fetch');
 const xml2js = require('xml2js');
@@ -39,12 +39,12 @@ module.exports = function(config) {
     });
   });
 
-  // Basic cache busting
-  config.addPlugin(
-    cacheBuster({
-      outputDirectory: './dist',
-    })
-  );
+  // // Basic cache busting
+  // config.addPlugin(
+  //   cacheBuster({
+  //     outputDirectory: './dist',
+  //   })
+  // );
 
   // Assist RSS feed template
   config.addPlugin(pluginRSS);
@@ -137,30 +137,18 @@ module.exports = function(config) {
 
   config.addNunjucksShortcode("fullStopHandler", fullStopHandlerShortcode);
 
-  config.addFilter("getReadingTime", text => {
-    const wordsPerMinute = 200;
-    const numberOfWords = text.split(/\s/g).length;
-    return Math.ceil(numberOfWords / wordsPerMinute);
-  });
-
   // Date formatting filter
   config.addFilter("htmlDateString", dateObj => {
     return new Date(dateObj).toISOString().split("T")[0];
   });
 
   // Format dates for RSS feed
-  const buildDateFormatterShortcode = dateStr => {
+  const buildDateFormatterShortcode = (timezone, dateStr) => {
     const dateObj = dateStr ? new Date(dateStr) : new Date();
-    return dayjs.tz(dateObj).locale('en').format('ddd, DD MMM YYYY HH:mm:ss ZZ');
+    return dayjs(dateObj).tz(timezone).locale('en').format('ddd, DD MMM YYYY HH:mm:ss ZZ');
   }
 
   config.addNunjucksShortcode("buildDateFormatter", buildDateFormatterShortcode);
-
-  const utcDateFormatterShortcode = dateStr => {
-    return dayjs.utc(dateStr).format();
-  }
-  
-  config.addNunjucksShortcode("utcDateFormatter", utcDateFormatterShortcode);
 
   config.addFilter("commentsEnabled", tagsArr => {
     return !tagsArr.map(tag => tag.name).includes('#disable-comments');
@@ -168,7 +156,7 @@ module.exports = function(config) {
 
   // This counts on all images, including the site logo, being stored like on Ghost with the
   // same directory structure
-  const domainReplacer = url => url.replace(process.env.GHOST_API_URL, process.env.SITE_URL);
+  const domainReplacer = url => url.replace(apiUrl, process.env.SITE_URL);
 
   // Mimic Ghost/Handlebars escaping
   // raw: & < > " ' ` =
@@ -177,16 +165,13 @@ module.exports = function(config) {
     .replace(/&#39;/g, '&#x27;')
     .replace(/`/g, '&#x60;')
     .replace(/=/g, '&#x3D;');
-  
-  // Simpler escaping for sitemaps
-  const partialEscaper = s => escape(s);
 
   config.addNunjucksShortcode("fullEscaper", fullEscaper);
 
-  async function createJsonLdShortcode(type, data) {
-    // Main site settings from Ghost API
-    let { url, logo, cover_image, image_dimensions } = await settings;
-    url = `${url}/`
+  async function createJsonLdShortcode(type, site, data) {
+    // Main site settings from site object
+    const { logo, cover_image, image_dimensions } = site;
+    const url = `${site.url}/`;
     const typeMap = {
       index: 'WebSite',
       article: 'Article',
@@ -261,53 +246,57 @@ module.exports = function(config) {
       return authorObj;
     }
 
-    // Remove first slash from path
-    if (data.path) returnData.url += data.path.substring(1);
+    if (type === 'index') returnData.description = translateShortcode('meta:description');
+    
+    if (type !== 'index' && data) {
+      // Remove first slash from path
+      if (data.path) returnData.url += data.path.substring(1);
 
-    if (data.description) returnData.description = fullEscaper(data.description);
+      if (data.description) returnData.description = fullEscaper(data.description);
 
-    if (type === 'article') {
-      if (data.published_at) returnData.datePublished = new Date(data.published_at).toISOString();
-      if (data.updated_at) returnData.dateModified = new Date(data.updated_at).toISOString();
-      if (data.tags && data.tags.length > 1) {
-        // Filter out internal Ghost tags
-        const keywords = data.tags.map(tag => tag.name).filter(keyword => !keyword.startsWith('#'));
+      if (type === 'article') {
+        if (data.published_at) returnData.datePublished = new Date(data.published_at).toISOString();
+        if (data.updated_at) returnData.dateModified = new Date(data.updated_at).toISOString();
+        if (data.tags && data.tags.length > 1) {
+          // Filter out internal Ghost tags
+          const keywords = data.tags.map(tag => tag.name).filter(keyword => !keyword.startsWith('#'));
 
-        returnData.keywords = keywords.length === 1 ? keywords[0] : keywords;
-      };
-      if (data.excerpt) returnData.description = fullEscaper(data.excerpt);
-      if (data.title) returnData.headline = fullEscaper(data.title);
+          returnData.keywords = keywords.length === 1 ? keywords[0] : keywords;
+        };
+        if (data.excerpt) returnData.description = fullEscaper(data.excerpt);
+        if (data.title) returnData.headline = fullEscaper(data.title);
 
-      if (data.feature_image) {
-        returnData.image = await createImageObj(data.feature_image, data.image_dimensions.feature_image);
+        if (data.feature_image) {
+          returnData.image = await createImageObj(data.feature_image, data.image_dimensions.feature_image);
+        }
+
+        returnData.author = await createAuthorObj(data.primary_author);
       }
 
-      returnData.author = await createAuthorObj(data.primary_author);
-    }
-
-    // Handle images for both types
-    if (type === 'tag' || type === 'author') {
-      if (data.cover_image) {
-        returnData.image = createImageObj(data.cover_image, data.image_dimensions.cover_image);
-      } else if (data.feature_image) {
-        returnData.image = createImageObj(data.feature_image, data.image_dimensions.feature_image);
-      } else {
-        delete returnData.image;
+      // Handle images for both types
+      if (type === 'tag' || type === 'author') {
+        if (data.cover_image) {
+          returnData.image = createImageObj(data.cover_image, data.image_dimensions.cover_image);
+        } else if (data.feature_image) {
+          returnData.image = createImageObj(data.feature_image, data.image_dimensions.feature_image);
+        } else {
+          delete returnData.image;
+        }
       }
-    }
 
-    if (type === 'tag') {
-      if (data.cover_image) returnData.image = createImageObj(data.cover_image, data.image_dimensions.cover_image);
-      returnData.name = data.name;
-    }
+      if (type === 'tag') {
+        if (data.cover_image) returnData.image = createImageObj(data.cover_image, data.image_dimensions.cover_image);
+        returnData.name = data.name;
+      }
 
-    if (type === 'author') {
-      // This schema type is the only one without publisher info
-      delete returnData.publisher;
-      const authorObj = await createAuthorObj(data);
-      
-      returnData.sameAs = authorObj.sameAs;
-      returnData.name = fullEscaper(authorObj.name);
+      if (type === 'author') {
+        // This schema type is the only one without publisher info
+        delete returnData.publisher;
+        const authorObj = await createAuthorObj(data);
+        
+        returnData.sameAs = authorObj.sameAs;
+        returnData.name = fullEscaper(authorObj.name);
+      }
     }
 
     return JSON.stringify(returnData, null, '\t'); // Pretty print for testing
@@ -316,14 +305,7 @@ module.exports = function(config) {
 
   config.addNunjucksAsyncShortcode("createJsonLd", createJsonLdShortcode);
 
-  const createExcerptShortcode = (excerpt) => {
-    return excerpt.replace(/\n+/g, ' ').split(' ').slice(0, 50).join(' ');
-  }
-
-  config.addNunjucksShortcode("createExcerpt", createExcerptShortcode);
-
   const sitemapFetcherShortcode = async (page) => {
-    const apiUrl = process.env.GHOST_API_URL;
     // will need some sort of map to handle all locales
     const url = page === 'index' ?
       `${apiUrl}/sitemap.xml` :
@@ -354,8 +336,8 @@ module.exports = function(config) {
         <lastmod>${curr.lastmod[0]}</lastmod>
         ${curr['image:image'] ? `
           <image:image>
-            <image:loc>${partialEscaper(urlSwapper(curr['image:image'][0]['image:loc'][0]))}</image:loc>
-            <image:caption>${partialEscaper(curr['image:image'][0]['image:caption'][0])}</image:caption>
+            <image:loc>${escape(urlSwapper(curr['image:image'][0]['image:loc'][0]))}</image:loc>
+            <image:caption>${escape(curr['image:image'][0]['image:caption'][0])}</image:caption>
           </image:image>` : ''
         }
       </${wrapper}>`;

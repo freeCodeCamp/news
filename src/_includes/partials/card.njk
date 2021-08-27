@@ -24,7 +24,7 @@
         <div class="post-card-content">
             <div class="post-card-content-link">
                 <header class="post-card-header">
-                    {%if post.primary_tag %}
+                    {% if post.primary_tag %}
                         <span class="post-card-tags">
                             <a href="{{post.primary_tag.path}}">
                                 #{{post.primary_tag.name}}
