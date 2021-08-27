@@ -4,11 +4,10 @@ const htmlMin = require("./utils/transforms/html-min");
 const cssMin = require("./utils/transforms/css-min");
 const jsMin = require("./utils/transforms/js-min");
 const { readFileSync, readdirSync, writeFileSync, mkdirSync } = require("fs");
-const { basename } = require('path');
+const { parse } = require('path');
 const pluginRSS = require("@11ty/eleventy-plugin-rss");
 const i18next = require("./i18n/config");
 const dayjs = require("./utils/dayjs");
-// const cacheBuster = require("@mightyplow/eleventy-plugin-cache-buster");
 const { apiUrl } = require('./utils/ghost-api');
 const { escape } = require('lodash');
 const fetch = require('node-fetch');
@@ -26,43 +25,6 @@ module.exports = function(config) {
   // Minify inline JS
   config.addNunjucksAsyncFilter("jsMin", jsMin);
 
-  // // Copy styles, scripts, and images to dist/assets/...
-  // config.addPassthroughCopy({'./src/_includes/assets': './assets/'});
-
-  // Copy styles, scripts, and images to dist/assets/...
-  // with hashed filenames for cache busting
-  config.on('beforeBuild', () => {
-    const basePath = './src/_includes/assets';
-    const innerDirs = ['css', 'js'];
-    const assetGroups = innerDirs.map(dir => readdirSync(`${basePath}/${dir}`));
-    
-    assetGroups.forEach((arr, i) => {
-      const dirName = innerDirs[i];
-      
-      arr.forEach(filename => {
-        const filePath = `${basePath}/${dirName}/${filename}`;
-        const finalBasePath = `./dist/assets/${dirName}`;
-
-        // Create the directory if it doesn't already exist
-        mkdirSync(finalBasePath, { recursive: true });
-
-        // Generate 10 char MD5 hash of file content, a manifest
-        // of original filenames --> hashed equivalents, and
-        // write hashed version of file
-        const content = readFileSync(filePath);
-        const hash = md5(content).slice(0, 10);
-        const hashedFilename = `${filename}?v=${hash}`;
-
-        // original vers
-        writeFileSync(`${finalBasePath}/${filename}`, content);
-
-        // hashed vers
-        writeFileSync(`${finalBasePath}/${hashedFilename}`, content);
-        manifest[filename] = hashedFilename;
-      });
-    });
-  });
-
   // Minify CSS
   config.on('afterBuild', () => {
     const path = './dist/assets/css';
@@ -75,13 +37,6 @@ module.exports = function(config) {
       writeFileSync(fullPath, cssMin(content));
     });
   });
-
-  // // Basic cache busting
-  // config.addPlugin(
-  //   cacheBuster({
-  //     outputDirectory: './dist',
-  //   })
-  // );
 
   // Assist RSS feed template
   config.addPlugin(pluginRSS);
@@ -147,10 +102,29 @@ module.exports = function(config) {
   config.addNunjucksShortcode("featureImage", featureImageShortcode);
 
   function cacheBusterShortcode(filePath) {
-    const filename = basename(filePath);
+    // Handle cases where filePath doesn't start with /
+    filePath = filePath.startsWith('/') ? filePath : `/${filePath}`;
+    const { dir, base, name, ext } = parse(filePath);
+    const localFilePath = `./src/_includes${filePath}`;
 
-    return filePath.replace(filename, manifest[filename]);
-    // return `${process.env.SITE_URL}/${manifest[filename]}`;
+    if (!manifest[base]) {
+      // Create the final directory if it doesn't already exist
+      const finalBasePath = `./dist${dir}`;
+      mkdirSync(finalBasePath, { recursive: true });
+
+      // Generate 10 char MD5 hash of file content
+      // of original filenames --> hashed equivalents
+      const content = readFileSync(localFilePath);
+      const hash = md5(content).slice(0, 10);
+      const hashedFilename = `${name}-${hash}${ext}`;
+
+      // Write hashed version of file and save to manifest
+      writeFileSync(`${finalBasePath}/${hashedFilename}`, content);
+      manifest[base] = hashedFilename;
+    }
+
+    // Return path with hashed filename to template
+    return filePath.replace(base, manifest[base]);
   }
 
   config.addNunjucksShortcode('cacheBuster', cacheBusterShortcode);
