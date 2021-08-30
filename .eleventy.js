@@ -3,15 +3,17 @@ require("dotenv").config();
 const htmlMin = require("./utils/transforms/html-min");
 const cssMin = require("./utils/transforms/css-min");
 const jsMin = require("./utils/transforms/js-min");
-const { readFileSync, readdirSync, writeFileSync } = require("fs");
+const { readFileSync, readdirSync, writeFileSync, mkdirSync } = require("fs");
+const { parse } = require('path');
 const pluginRSS = require("@11ty/eleventy-plugin-rss");
 const i18next = require("./i18n/config");
 const dayjs = require("./utils/dayjs");
-// const cacheBuster = require("@mightyplow/eleventy-plugin-cache-buster");
 const { apiUrl } = require('./utils/ghost-api');
 const { escape } = require('lodash');
 const fetch = require('node-fetch');
 const xml2js = require('xml2js');
+const md5 = require('md5');
+const manifest = {};
 
 module.exports = function(config) {
   // Minify HTML
@@ -22,9 +24,6 @@ module.exports = function(config) {
 
   // Minify inline JS
   config.addNunjucksAsyncFilter("jsMin", jsMin);
-
-  // Allow passthrough for styles, scripts, and images
-  config.addPassthroughCopy({'./src/_includes/assets': './assets/'});
 
   // Minify CSS
   config.on('afterBuild', () => {
@@ -38,13 +37,6 @@ module.exports = function(config) {
       writeFileSync(fullPath, cssMin(content));
     });
   });
-
-  // // Basic cache busting
-  // config.addPlugin(
-  //   cacheBuster({
-  //     outputDirectory: './dist',
-  //   })
-  // );
 
   // Assist RSS feed template
   config.addPlugin(pluginRSS);
@@ -108,6 +100,34 @@ module.exports = function(config) {
   }
   
   config.addNunjucksShortcode("featureImage", featureImageShortcode);
+
+  function cacheBusterShortcode(filePath) {
+    // Handle cases where filePath doesn't start with /
+    filePath = filePath.startsWith('/') ? filePath : `/${filePath}`;
+    const { dir, base, name, ext } = parse(filePath);
+    const localFilePath = `./src/_includes${filePath}`;
+
+    if (!manifest[base]) {
+      // Create the final directory if it doesn't already exist
+      const finalBasePath = `./dist${dir}`;
+      mkdirSync(finalBasePath, { recursive: true });
+
+      // Generate 10 char MD5 hash of file content
+      // of original filenames --> hashed equivalents
+      const content = readFileSync(localFilePath);
+      const hash = md5(content).slice(0, 10);
+      const hashedFilename = `${name}-${hash}${ext}`;
+
+      // Write hashed version of file and save to manifest
+      writeFileSync(`${finalBasePath}/${hashedFilename}`, content);
+      manifest[base] = hashedFilename;
+    }
+
+    // Return path with hashed filename to template
+    return filePath.replace(base, manifest[base]);
+  }
+
+  config.addNunjucksShortcode('cacheBuster', cacheBusterShortcode);
 
   // Date and time shortcodes
   function publishedDateShortcode(dateStr) {
@@ -393,6 +413,6 @@ module.exports = function(config) {
     templateFormats: ["css", "njk", "md", "txt", "hbs"],
     htmlTemplateEngine: "njk",
     markdownTemplateEngine: "njk",
-    passthroughFileCopy: true
+    // passthroughFileCopy: true
   };
 };

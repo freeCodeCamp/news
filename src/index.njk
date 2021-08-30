@@ -26,11 +26,8 @@ pagination:
     </main>
 {% endblock %}
 
-{% block scripts %}
-    {% set js %}
-        {% include "assets/js/time-ago.js" %}
-    {% endset %}
-    <script>{{ js | jsMin | safe }}</script>
+{% block headScripts %}
+    <script defer src="{% cacheBuster '/assets/js/time-ago.js' %}"></script>
 {% endblock %}
 
 {% block jsonLd %}

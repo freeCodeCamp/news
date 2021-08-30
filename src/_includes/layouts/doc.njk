@@ -32,7 +32,7 @@
                     <hr />
 
                     {# Conditionally include partials based on Ghost language setting #}
-                    {% ifAsync site.lang == "zh" or site.lang == "zh-cn" %}
+                    {% ifAsync site.lang == "zh" %}
                         {% include "partials/learn-cta-row.njk" %}
                     {% else %}
                         {% include "partials/social-row.njk" %}
@@ -44,9 +44,9 @@
     </main>
 {% endblock %}
 
-{% block scripts %}
+{% block headScripts %}
+    <script defer src="{% cacheBuster '/assets/js/fitvids.js' %}"></script>
     {% set js %}
-        {% include "assets/js/fitvids.js" %}
         document.addEventListener('DOMContentLoaded', () => {
             const postContent = document.querySelector('.post-full-content');
             if (postContent) fitVids(postContent);

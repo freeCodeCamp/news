@@ -17,8 +17,8 @@ const discourseEmbedInfo = discourseEmbedMap[hostname] ? discourseEmbedMap[hostn
 const { file, discourseUrl } = discourseEmbedInfo;
 
 function loadDiscourseComments() {
-  var xhr = new XMLHttpRequest();
-  var randomNum = Math.round(Math.random() * 10000);
+  const xhr = new XMLHttpRequest();
+  const randomNum = Math.round(Math.random() * 10000);
   xhr.open('HEAD', file + '?rand=' + randomNum, true);
   xhr.send();
   xhr.addEventListener('readystatechange', processRequest, false);
@@ -31,7 +31,7 @@ function loadDiscourseComments() {
           discourseUrl,
           discourseEmbedUrl: '{{ site.url + post.path }}'
         };
-        var d = document.createElement('script');
+        let d = document.createElement('script');
         d.type = 'text/javascript';
         d.async = true;
         d.src = discourseUrl + 'javascripts/embed.js';
