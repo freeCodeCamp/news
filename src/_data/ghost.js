@@ -6,6 +6,11 @@ const jsdom = require('jsdom');
 const { JSDOM } = jsdom;
 const i18next = require('../../i18n/config');
 
+// Image dimension maps
+const featureImageDimensions = {};
+const authorImageDimensions = {};
+const postImageDimensions = {};
+
 const wait = seconds => {
   return new Promise(resolve => {
     setTimeout(() => {
@@ -85,8 +90,15 @@ const lazyLoadHandler = async (html, title) => {
 
       // Add explicit width and height only for non-hotlinked images
       // Note: will need to modify this when we move Ghost instances
-      if (image.src.includes(apiUrl) || image.src.includes(/freecodecamp\.org.*\/news/)) {
-        const { width, height } = await getImageDimensions(image.src, title);
+      if (image.src.includes(apiUrl) || image.src.match(/freecodecamp\.org.*\/news/)) {
+
+        if (!postImageDimensions[image.src]) {
+          const { width, height } = await getImageDimensions(image.src, title);
+
+          postImageDimensions[image.src] = { width, height };
+        }
+
+        const { width, height } = postImageDimensions[image.src];
       
         image.setAttribute('width', width);
         image.setAttribute('height', height);
@@ -117,8 +129,6 @@ const fetchFromGhost = async (endpoint, options) => {
   let currPage = 1;
   let lastPage = 5;
   let data = [];
-  const featureImageDimensions = {};
-  const authorImageDimensions = {};
 
   while (currPage && currPage <= lastPage) {
     const ghostRes = await api[endpoint].browse({
@@ -179,15 +189,16 @@ const fetchFromGhost = async (endpoint, options) => {
 };
 
 module.exports = async () => {
+  const limit = 100;
   const ghostPosts = await fetchFromGhost('posts', {
     include: ['tags', 'authors'],
     filter: 'status:published',
-    limit: 100
+    limit
   });
   const ghostPages = await fetchFromGhost('pages', {
     include: ['tags', 'authors'],
     filter: 'status:published',
-    limit: 100
+    limit
   });
 
   const posts = ghostPosts.map(post => {
