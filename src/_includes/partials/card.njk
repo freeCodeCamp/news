@@ -53,10 +53,11 @@
                                         {% 
                                             image
                                             originalAuthor.profile_image,
-                                            "author-profile-image",
+                                            "author-profile-image lazyload",
                                             originalAuthor.name,
                                             "30px",
-                                            [30]
+                                            [30],
+                                            index
                                         %}
                                     </a>
                                 {% else %}
@@ -79,10 +80,11 @@
                                     {% 
                                         image
                                         post.primary_author.profile_image,
-                                        "author-profile-image",
+                                        "author-profile-image lazyload",
                                         post.primary_author.name,
                                         "30px",
-                                        [30]
+                                        [30],
+                                        index
                                     %}
                                 </a>
                             {% else %}
