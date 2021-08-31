@@ -84,7 +84,8 @@ const lazyLoadHandler = async (html, title) => {
       // with an S3 bucket
 
       // Add explicit width and height only for non-hotlinked images
-      if (image.src.includes(apiUrl)) {
+      // Note: will need to modify this when we move Ghost instances
+      if (image.src.includes(apiUrl) || image.src.includes(/freecodecamp\.org.*\/news/)) {
         const { width, height } = await getImageDimensions(image.src, title);
       
         image.setAttribute('width', width);
