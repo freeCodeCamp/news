@@ -105,6 +105,7 @@ const lazyLoadHandler = async (html, title) => {
       // Prep for lazysizes library
       image.setAttribute('data-srcset', image.srcset);
       image.setAttribute('data-src', image.src);
+      image.removeAttribute('src');
       image.className = `${image.className} lazyloaded`;
     }),
 
