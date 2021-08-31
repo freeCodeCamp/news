@@ -2,6 +2,20 @@ const postsPerPage = process.env.POSTS_PER_PAGE;
 const { api, enApi, apiUrl } = require('../../utils/ghost-api');
 const getImageDimensions = require('../../utils/image-dimensions');
 const { escape, chunk } = require('lodash');
+const jsdom = require('jsdom');
+const { JSDOM } = jsdom;
+
+const ghostApiSource = process.env.GHOST_API_SOURCE;
+
+// const fetchKeys = (locale) => {
+//   const upperLocale = locale.toUpperCase();
+
+//   return {
+//     url: process.env[`${upperLocale}_GHOST_API_URL`],
+//     key: process.env[`${upperLocale}_GHOST_CONTENT_API_KEY`],
+//     version: process.env[`${upperLocale}_GHOST_API_VERSION`]
+//   }
+// }
 
 const wait = seconds => {
   return new Promise(resolve => {
@@ -69,6 +83,40 @@ const originalPostHandler = async (post) => {
   return post;
 }
 
+const lazyLoadHandler = async (html, title) => {
+  const dom = new JSDOM(html);
+  const document = dom.window.document;
+  const images = [...document.querySelectorAll('img.kg-image')];
+  const iframes = [...document.querySelectorAll('figure.kg-embed-card iframe')];
+
+  await Promise.all(
+    images.map(async image => {
+      // To do: swap out the image URLs here once we have them auto synced
+      // with an S3 bucket
+
+      // Add explicit width and height only for non-hotlinked images
+      if (image.src.includes(process.env[`${ghostApiSource.toUpperCase()}_GHOST_API_URL`])) {
+        const { width, height } = await getImageDimensions(image.src, title);
+      
+        image.setAttribute('width', width);
+        image.setAttribute('height', height);
+      }
+
+      // Prep for lazysizes library
+      image.setAttribute('data-srcset', image.srcset);
+      image.setAttribute('data-src', image.src);
+      image.className = `${image.className} lazyloaded`;
+    }),
+
+    iframes.map(async iframe => {
+      // Add native lazy loading to all iframes (YouTube, CodePen, etc.)
+      iframe.setAttribute('loading', 'lazy');
+    })
+  );
+
+  return dom.serialize();
+}
+
 const fetchFromGhost = async (endpoint, options) => {
   let currPage = 1;
   let lastPage = 5;
@@ -107,12 +155,16 @@ const fetchFromGhost = async (endpoint, options) => {
         // Original author / translator feature
         if (obj.codeinjection_head) obj = await originalPostHandler(obj);
 
+        // To do: handle this in the JSON LD function
         if (obj.excerpt) obj.excerpt = escape(
           obj.excerpt.replace(/\n+/g, ' ')
             .split(' ')
             .slice(0, 50)
             .join(' ')
           );
+        
+        // Lazy load images and embedded videos
+        if (obj.html) obj.html = await lazyLoadHandler(obj.html, obj.title);
 
         return obj;
       })
