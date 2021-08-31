@@ -6,18 +6,6 @@ const jsdom = require('jsdom');
 const { JSDOM } = jsdom;
 const i18next = require('../../i18n/config');
 
-const ghostApiSource = process.env.GHOST_API_SOURCE;
-
-// const fetchKeys = (locale) => {
-//   const upperLocale = locale.toUpperCase();
-
-//   return {
-//     url: process.env[`${upperLocale}_GHOST_API_URL`],
-//     key: process.env[`${upperLocale}_GHOST_CONTENT_API_KEY`],
-//     version: process.env[`${upperLocale}_GHOST_API_VERSION`]
-//   }
-// }
-
 const wait = seconds => {
   return new Promise(resolve => {
     setTimeout(() => {
@@ -96,7 +84,7 @@ const lazyLoadHandler = async (html, title) => {
       // with an S3 bucket
 
       // Add explicit width and height only for non-hotlinked images
-      if (image.src.includes(process.env[`${ghostApiSource.toUpperCase()}_GHOST_API_URL`])) {
+      if (image.src.includes(apiUrl)) {
         const { width, height } = await getImageDimensions(image.src, title);
       
         image.setAttribute('width', width);
