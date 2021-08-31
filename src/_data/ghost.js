@@ -4,6 +4,7 @@ const getImageDimensions = require('../../utils/image-dimensions');
 const { escape, chunk } = require('lodash');
 const jsdom = require('jsdom');
 const { JSDOM } = jsdom;
+const i18next = require('../../i18n/config');
 
 const ghostApiSource = process.env.GHOST_API_SOURCE;
 
@@ -102,16 +103,21 @@ const lazyLoadHandler = async (html, title) => {
         image.setAttribute('height', height);
       }
 
-      // Prep for lazysizes library
+      // lazysizes
       image.setAttribute('data-srcset', image.srcset);
       image.setAttribute('data-src', image.src);
       image.removeAttribute('src');
-      image.className = `${image.className} lazyloaded`;
+      image.className = `${image.className} lazyload`;
     }),
 
     iframes.map(async iframe => {
-      // Add native lazy loading to all iframes (YouTube, CodePen, etc.)
-      iframe.setAttribute('loading', 'lazy');
+      iframe.setAttribute('title', `${i18next.t('embed-title')}`);
+
+      // To do: consider adding a low quality facade image via src
+      // lazysizes
+      iframe.setAttribute('data-src', iframe.src);
+      iframe.removeAttribute('src');
+      iframe.className = `${iframe.className} lazyload`;
     })
   );
 
