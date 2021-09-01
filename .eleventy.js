@@ -12,7 +12,7 @@ const { escape } = require('lodash');
 const fetch = require('node-fetch');
 const xml2js = require('xml2js');
 const md5 = require('md5');
-const manifest = {};
+let manifest = {};
 
 module.exports = function (config) {
   // Minify inline CSS
@@ -20,6 +20,12 @@ module.exports = function (config) {
 
   // Minify inline JS
   config.addNunjucksAsyncFilter('jsMin', jsMin);
+
+  // Empty manifest to load new versions of cached files
+  // for hot reloading
+  config.on('beforeBuild', () => {
+    manifest = {};
+  });
 
   // Minify CSS
   config.on('afterBuild', () => {
