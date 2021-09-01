@@ -1287,6 +1287,7 @@ pre.runkit-element {
     justify-content: space-between;
     flex-direction: column;
 }
+
 .author-card-content-no-bio {
     justify-content: center;
 }
@@ -1327,6 +1328,10 @@ pre.runkit-element {
     border-color: var(--dark-blue);
     color: var(--dark-blue);
     text-decoration: none;
+}
+
+.post-full-content .author-card:last-of-type {
+    padding-bottom: 0;
 }
 
 /* 7.1.2 Multiple Author Byline
@@ -1654,9 +1659,6 @@ pre.runkit-element {
     line-height: 1.5em;
     text-align: center;
     max-width: 1040px;
-}
-.post-full-content .author-card {
-    padding-bottom: 0px;
 }
 
 .kg-width-full figcaption {

@@ -11,7 +11,7 @@
     "label": "Buscar",
     "accessible-name": "Enviar su consulta de búsqueda",
     "placeholder": "Buscar 200+ tutoriales",
-    "see-results": "Ver todos los resultados de {{searchQuery}}",
+    "see-results": "Ver todos los resultados de {{ searchQuery }}",
     "no-tutorials": "No se encontraron tutoriales"
   },
   "banner": {
@@ -21,16 +21,16 @@
     "page": {
       "no-posts": "No hay artículos",
       "one-post": "1 artículo",
-      "multiple-posts": "{{postCount}} artículos"
+      "multiple-posts": "{{ postCount }} artículos"
     },
     "byline": {
-      "read-more": "Leer <a href='{{authorUrl}}'>más publicaciones</a> de este autor"
+      "read-more": "Leer <a href='{{ authorUrl }}'>más publicaciones</a> de este {{ role }}"
     }
   },
   "tag-page": {
     "collection-of-posts": "Una colección de artículos",
     "one-post": "Una colección de 1 artículo",
-    "multiple-posts": "Una colección de {{postCount}} artículos"
+    "multiple-posts": "Una colección de {{ postCount }} artículos"
   },
   "404-page": {
     "page-not-found": "Página no encontrada",
@@ -39,14 +39,17 @@
   "social-row": {
     "author-has-twitter": "Si leíste hasta aquí, haz un tweet al autor para mostrarle que te importa su trabajo.",
     "author-no-twitter": "Si este artículo te fue útil",
-    "default-tweet": "Gracias {{twitter}} por escribir este útil artículo"
+    "default-tweet": "Gracias {{ twitter }} por escribir este útil artículo"
   },
   "learn-to-code-cta": {
     "text": "Aprende a codificar de forma gratuita. El plan de estudios de código abierto de freeCodeCamp ha ayudado a más de 40,000 personas a obtener trabajos como desarrolladores."
   },
   "localization-meta": {
-    "author": "Autor: {{authorName}}",
-    "translator": "Traductor: {{translatorName}}",
+    "roles": {
+      "author": "autor",
+      "translator": "traductor"
+    },
+    "card-name": "{{ role }}: {{ name }}",
     "languages": {
       "en": "Inglés",
       "es": "Español",
