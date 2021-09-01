@@ -1,6 +1,5 @@
 require("dotenv").config();
 
-const htmlMin = require("./utils/transforms/html-min");
 const cssMin = require("./utils/transforms/css-min");
 const jsMin = require("./utils/transforms/js-min");
 const { readFileSync, readdirSync, writeFileSync, mkdirSync } = require("fs");
@@ -16,9 +15,6 @@ const md5 = require('md5');
 const manifest = {};
 
 module.exports = function(config) {
-  // Minify HTML
-  // config.addTransform("htmlMin", htmlMin);
-
   // Minify inline CSS
   config.addFilter("cssMin", cssMin);
 
