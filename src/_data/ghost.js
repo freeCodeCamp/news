@@ -2,6 +2,14 @@ const postsPerPage = process.env.POSTS_PER_PAGE;
 const { api, enApi, apiUrl } = require('../../utils/ghost-api');
 const getImageDimensions = require('../../utils/image-dimensions');
 const { escape, chunk } = require('lodash');
+const jsdom = require('jsdom');
+const { JSDOM } = jsdom;
+const i18next = require('../../i18n/config');
+
+// Image dimension maps
+const featureImageDimensions = {};
+const authorImageDimensions = {};
+const postImageDimensions = {};
 
 const wait = seconds => {
   return new Promise(resolve => {
@@ -69,12 +77,58 @@ const originalPostHandler = async (post) => {
   return post;
 }
 
+const lazyLoadHandler = async (html, title) => {
+  const dom = new JSDOM(html);
+  const document = dom.window.document;
+  const images = [...document.querySelectorAll('img.kg-image')];
+  const iframes = [...document.querySelectorAll('figure.kg-embed-card iframe')];
+
+  await Promise.all(
+    images.map(async image => {
+      // To do: swap out the image URLs here once we have them auto synced
+      // with an S3 bucket
+
+      // Add explicit width and height only for non-hotlinked images
+      // Note: will need to modify this when we move Ghost instances
+      if (image.src.includes(apiUrl) || image.src.match(/freecodecamp\.org.*\/news/)) {
+
+        if (!postImageDimensions[image.src]) {
+          const { width, height } = await getImageDimensions(image.src, title);
+
+          postImageDimensions[image.src] = { width, height };
+        }
+
+        const { width, height } = postImageDimensions[image.src];
+      
+        image.setAttribute('width', width);
+        image.setAttribute('height', height);
+      }
+
+      // lazysizes
+      image.setAttribute('data-srcset', image.srcset);
+      image.setAttribute('data-src', image.src);
+      image.removeAttribute('src');
+      image.className = `${image.className} lazyload`;
+    }),
+
+    iframes.map(async iframe => {
+      iframe.setAttribute('title', `${i18next.t('embed-title')}`);
+
+      // To do: consider adding a low quality facade image via src
+      // lazysizes
+      iframe.setAttribute('data-src', iframe.src);
+      iframe.removeAttribute('src');
+      iframe.className = `${iframe.className} lazyload`;
+    })
+  );
+
+  return dom.serialize();
+}
+
 const fetchFromGhost = async (endpoint, options) => {
   let currPage = 1;
   let lastPage = 5;
   let data = [];
-  const featureImageDimensions = {};
-  const authorImageDimensions = {};
 
   while (currPage && currPage <= lastPage) {
     const ghostRes = await api[endpoint].browse({
@@ -107,12 +161,16 @@ const fetchFromGhost = async (endpoint, options) => {
         // Original author / translator feature
         if (obj.codeinjection_head) obj = await originalPostHandler(obj);
 
+        // To do: handle this in the JSON LD function
         if (obj.excerpt) obj.excerpt = escape(
           obj.excerpt.replace(/\n+/g, ' ')
             .split(' ')
             .slice(0, 50)
             .join(' ')
           );
+        
+        // Lazy load images and embedded videos
+        if (obj.html) obj.html = await lazyLoadHandler(obj.html, obj.title);
 
         return obj;
       })
@@ -131,15 +189,16 @@ const fetchFromGhost = async (endpoint, options) => {
 };
 
 module.exports = async () => {
+  const limit = 100;
   const ghostPosts = await fetchFromGhost('posts', {
     include: ['tags', 'authors'],
     filter: 'status:published',
-    limit: 100
+    limit
   });
   const ghostPages = await fetchFromGhost('pages', {
     include: ['tags', 'authors'],
     filter: 'status:published',
-    limit: 100
+    limit
   });
 
   const posts = ghostPosts.map(post => {

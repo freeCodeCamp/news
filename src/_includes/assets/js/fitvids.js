@@ -15,11 +15,11 @@ if (window) {
 
     [...postContent.children].forEach((node) => {
       const selectors = [
-        'iframe[src*="player.vimeo.com"]',
-        'iframe[src*="youtube.com"]',
-        'iframe[src*="youtube-nocookie.com"]',
-        'iframe[src*="kickstarter.com"][src*="video.html"]',
-        'iframe[src*="player.bilibili.com"]',
+        'iframe[data-src*="player.vimeo.com"]',
+        'iframe[data-src*="youtube.com"]',
+        'iframe[data-src*="youtube-nocookie.com"]',
+        'iframe[data-src*="kickstarter.com"][data-src*="video.html"]',
+        'iframe[data-src*="player.bilibili.com"]',
         'object',
         'embed'
       ];

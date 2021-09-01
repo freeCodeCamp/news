@@ -17,7 +17,7 @@ const manifest = {};
 
 module.exports = function(config) {
   // Minify HTML
-  config.addTransform("htmlMin", htmlMin);
+  // config.addTransform("htmlMin", htmlMin);
 
   // Minify inline CSS
   config.addFilter("cssMin", cssMin);

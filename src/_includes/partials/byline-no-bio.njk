@@ -9,7 +9,8 @@
                 "author-profile-image",
                 originalAuthor.name,
                 "60px",
-                [60]
+                [60],
+                0
             %}
         {% else %}
             <span class="avatar-wrapper">{% include "partials/icons/avatar.njk" %}</span>
@@ -27,7 +28,8 @@
             "author-profile-image",
             post.primary_author.name,
             "60px",
-            [60]
+            [60],
+            0
         %}
     {% else %}
         <span class="avatar-wrapper">{% include "partials/icons/avatar.njk" %}</span>
