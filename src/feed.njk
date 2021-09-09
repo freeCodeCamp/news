@@ -5,15 +5,16 @@ permalink: rss.xml
     xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" version="2.0">
     <channel>
         <title>
-            <![CDATA[ {% t 'meta:title' %} ]]>
+            <![CDATA[ freeCodeCamp.org ]]>
         </title>
         <description>
             <![CDATA[ {% t 'meta:description' %} ]]>
         </description>
         <link>{{ site.url }}</link>
         <image>
-            <url>{{ site.url }}/favicon.png</url>
-            <title>{% t 'meta:title' %}</title>
+            <url>{{ site.icon }}</url>
+            {% set metaTitle %}{% t 'meta:title' %}{% endset %}
+            <title>{{ metaTitle | escape }}</title>
             <link>{{ site.url }}</link>
         </image>
         <lastBuildDate>{% buildDateFormatter site.timezone %}</lastBuildDate>
