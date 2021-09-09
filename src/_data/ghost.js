@@ -283,11 +283,29 @@ module.exports = async () => {
     a.name.toLowerCase().localeCompare(b.name.toLowerCase(), 'en', { sensitivity: 'base' }
   )).slice(0, 15);
 
+  // Handle various RSS feeds
+  const feedPostLimit = 10;
+  const getCollectionFeeds = collection => [...collection].map(obj => {
+    const allPosts = obj.posts.flat();
+
+    obj.posts = allPosts.slice(0, feedPostLimit);
+    return obj;
+  });
+  const feeds = [
+    {
+      path: '/',
+      posts: posts.slice(0, feedPostLimit)
+    },
+    getCollectionFeeds(authors),
+    getCollectionFeeds(tags)
+  ].flat();
+
   return {
     posts,
     pages,
     authors,
     tags,
-    popularTags
+    popularTags,
+    feeds
   };
 };
