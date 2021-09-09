@@ -122,7 +122,10 @@ const lazyLoadHandler = async (html, title) => {
     })
   );
 
-  return dom.serialize();
+  // The jsdom parser wraps the incomplete HTML from the Ghost
+  // API with HTML, head, and body elements, so return whatever
+  // is within the new body element it added
+  return dom.window.document.body.innerHTML;
 }
 
 const fetchFromGhost = async (endpoint, options) => {
@@ -295,7 +298,13 @@ module.exports = async () => {
     .map(obj => {
       const allPosts = obj.posts.flat();
 
-      obj.posts = allPosts.slice(0, feedPostLimit);
+      obj.posts = allPosts.slice(0, feedPostLimit)
+        .map(post => {
+          post.html = `<img src="${post.feature_image}" alt="${post.title}">` + post.html;
+
+          return post;
+        });
+
       return obj;
     });
 
