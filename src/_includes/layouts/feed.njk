@@ -17,13 +17,13 @@
         <lastBuildDate>{% buildDateFormatter site.timezone %}</lastBuildDate>
         <atom:link href="{{ site.url }}" rel="self" type="application/rss+xml" />
         <ttl>60</ttl>
-        {% for post in feed.posts.slice(0, 10) %}
+        {% for post in feed.posts %}
             <item>
                 <title>
                     <![CDATA[ {% fullEscaper post.title %} ]]>
                 </title>
                 <description>
-                    <![CDATA[ {{ post.excerpt | safe }} ]]>
+                    <![CDATA[ {{ post.short_excerpt | escape }} ]]>
                 </description>
                 <link>{{ site.url + post.path }}</link>
                 <guid isPermaLink="false">{{ post.comment_id }}</guid>
@@ -36,7 +36,7 @@
                 <pubDate>{% buildDateFormatter site.timezone, post.published_at %}</pubDate>
                 <media:content url="{{ post.feature_image }}" medium="image" />
                 <content:encoded>
-                    <![CDATA[ {{ post.excerpt | safe }} ]]>
+                    <![CDATA[ {{ (post.short_excerpt | escape) if feed.path == "/" else (post.html | safe) }} ]]>
                 </content:encoded>
             </item>
         {% endfor %}
