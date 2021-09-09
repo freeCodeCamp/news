@@ -50,10 +50,8 @@
     "terser": "^5.7.0"
   },
   "devDependencies": {
-    "@minify-html/js": "0.6.8",
     "eslint": "7.32.0",
     "eslint-plugin-ghost": "2.6.0",
-    "html-minifier": "^4.0.0",
     "jsdom": "^17.0.0",
     "lodash": "4.17.21",
     "md5": "2.3.0",

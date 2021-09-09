@@ -9,7 +9,7 @@
     "label": "搜索",
     "accessible-name": "提交您的搜索查询",
     "placeholder": "搜索 500+ 篇教程",
-    "see-results": "查看 {{searchQuery}} 的所有结果",
+    "see-results": "查看 {{ searchQuery }} 的所有结果",
     "no-tutorials": "未找到教程"
   },
   "comments": {
@@ -23,16 +23,16 @@
     "page": {
       "no-posts": "没有文章",
       "one-post": "1 篇文章",
-      "multiple-posts": "{{postCount}} 篇文章"
+      "multiple-posts": "{{ postCount }} 篇文章"
     },
     "byline": {
-      "read-more": "阅读该作者的<a href='{{authorUrl}}'>更多文章</a>"
+      "read-more": "阅读该{{ role }}的<a href='{{ authorUrl }}'>更多文章</a>"
     }
   },
   "tag-page": {
     "collection-of-posts": "文章汇总",
     "one-post": "共 1 篇文章",
-    "multiple-posts": "共 {{postCount}} 篇文章"
+    "multiple-posts": "共 {{ postCount }} 篇文章"
   },
   "404-page": {
     "page-not-found": "页面不存在",
@@ -42,8 +42,11 @@
     "text": "在 freeCodeCamp 免费学习编程。 freeCodeCamp 的开源课程已帮助 40,000 多人获得开发者工作。"
   },
   "localization-meta": {
-    "author": "作者: {{authorName}}",
-    "translator": "翻译: {{translatorName}}",
+    "roles": {
+      "author": "作者",
+      "translator": "翻译"
+    },
+    "card-name": "{{ role }}: {{ name }}",
     "languages": {
       "en": "英语",
       "es": "西班牙语",

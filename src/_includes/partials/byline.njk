@@ -1,27 +1,45 @@
-<section class="author-card">
-    {% if post.primary_author.profile_image %}
-        {% 
-            image
-            post.primary_author.profile_image,
-            "author-profile-image lazyload",
-            post.primary_author.name,
-            "60px",
-            [60],
-            1
-        %}
-    {% else %}
-        <span class="avatar-wrapper">{% include "partials/icons/avatar.njk" %}</span>
-    {% endif %}
-    <section class="author-card-content">
-        <span class="author-card-name">
-            <a href="{{ post.primary_author.path }}">{{ post.primary_author.name }}</a>
-        </span>
-        {% if post.primary_author.bio %}
-            <p>{{ post.primary_author.bio }}</p>
+{% macro byline(author, siteLang, lazyLoad, showBio, role) %}
+    {% set lazy = 1 if lazyLoad else 0 %}
+    {% set authorUrl = author.url if role == 'author' else author.path %}
+    {% set localizedRole %}{% t "localization-meta.roles." + (role if role else "author") %}{% endset %}
+
+    <section class="author-card">
+        {% if author.profile_image %}
+            {% 
+                image
+                author.profile_image,
+                "author-profile-image",
+                author.name,
+                "60px",
+                [60],
+                lazy
+            %}
         {% else %}
-            <p>
-                {% t 'author.byline.read-more', { authorUrl: post.primary_author.path } %}{% fullStopHandler site.lang %}
-            </p>
+            <span class="avatar-wrapper">{% include "partials/icons/avatar.njk" %}</span>
         {% endif %}
+
+        <section class="author-card-content {{ "author-card-content-no-bio" if not showBio }}">
+            <span class="author-card-name">
+                <a href="{{ authorUrl }}">
+                    {% if role %}
+                        {% t 'localization-meta.card-name', { role: (localizedRole | capitalize), name: author.name } %}
+                        {% if role == "author" %}
+                            ({% t "localization-meta.languages." + siteLang %})
+                        {% endif %}
+                    {% else %}
+                        {{ author.name }}
+                    {% endif %}
+                </a>
+            </span>
+            {% if showBio %}
+                {% if author.bio %}
+                    <p>{{ author.bio }}</p>
+                {% else %}
+                    <p>
+                        {% t 'author.byline.read-more', { url: authorUrl, role: localizedRole } %}{% fullStopHandler siteLang %}
+                    </p>
+                {% endif %}
+            {% endif %}
+        </section>
     </section>
-</section>
+{% endmacro %}

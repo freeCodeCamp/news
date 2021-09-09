@@ -1,4 +1,5 @@
 {% extends 'layouts/default.njk' %}
+{% from "partials/byline.njk" import byline %}
 
 {% set title = post.title %}
 {% set canonicalUrl = site.url + post.path %}
@@ -25,7 +26,14 @@
                 </header>
                 <div class="post-full-author-header">
                     {% if post.primary_author.name != "freeCodeCamp.org" %}
-                        {% include "partials/byline-no-bio.njk" %}
+                        {% if post.original_post %}
+                            {# To do: Figure out original article source and add to post.original_post.primary_author
+                                as language code (en, zh, etc.) and use that to show original article source [ex: (English)]  #}
+                            {{ byline(post.original_post.primary_author, site.lang, true, false, 'author') }}
+                            {{ byline(post.primary_author, site.lang, true, false, 'translator') }}
+                        {% else %}
+                            {{ byline(post.primary_author, site.lang, true, false) }}
+                        {% endif %}
                     {% endif %}
                 </div>
                 {% if post.feature_image %}
@@ -48,7 +56,14 @@
                     <hr />
                     {% if post.primary_author.name != "freeCodeCamp.org" %}
                         <div class="post-full-author-header">
-                            {% include "partials/byline.njk" %}
+                            {% if post.original_post %}
+                                {# To do: Figure out original article source and add to post.original_post.primary_author
+                                as language code (en, zh, etc.) and use that to show original article source [ex: (English)]  #}
+                                {{ byline(post.original_post.primary_author, site.lang, true, true, 'author') }}
+                                {{ byline(post.primary_author, site.lang, true, true, 'translator') }}
+                            {% else %}
+                                {{ byline(post.primary_author, site.lang, true, true) }}
+                            {% endif %}
                         </div>
                         <hr />
                     {% endif %}

@@ -1,36 +1,38 @@
-require("dotenv").config();
+require('dotenv').config();
 
-const htmlMin = require("./utils/transforms/html-min");
-const cssMin = require("./utils/transforms/css-min");
-const jsMin = require("./utils/transforms/js-min");
-const { readFileSync, readdirSync, writeFileSync, mkdirSync } = require("fs");
+const cssMin = require('./utils/transforms/css-min');
+const jsMin = require('./utils/transforms/js-min');
+const { readFileSync, readdirSync, writeFileSync, mkdirSync } = require('fs');
 const { parse } = require('path');
-const pluginRSS = require("@11ty/eleventy-plugin-rss");
-const i18next = require("./i18n/config");
-const dayjs = require("./utils/dayjs");
+const pluginRSS = require('@11ty/eleventy-plugin-rss');
+const i18next = require('./i18n/config');
+const dayjs = require('./utils/dayjs');
 const { apiUrl } = require('./utils/ghost-api');
 const { escape } = require('lodash');
 const fetch = require('node-fetch');
 const xml2js = require('xml2js');
 const md5 = require('md5');
-const manifest = {};
+let manifest = {};
 
-module.exports = function(config) {
-  // Minify HTML
-  // config.addTransform("htmlMin", htmlMin);
-
+module.exports = function (config) {
   // Minify inline CSS
-  config.addFilter("cssMin", cssMin);
+  config.addFilter('cssMin', cssMin);
 
   // Minify inline JS
-  config.addNunjucksAsyncFilter("jsMin", jsMin);
+  config.addNunjucksAsyncFilter('jsMin', jsMin);
+
+  // Empty manifest to load new versions of cached files
+  // for hot reloading
+  config.on('beforeBuild', () => {
+    manifest = {};
+  });
 
   // Minify CSS
   config.on('afterBuild', () => {
     const path = './dist/assets/css';
     const cssFiles = readdirSync(path);
 
-    cssFiles.forEach(filename => {
+    cssFiles.forEach((filename) => {
       const fullPath = `${path}/${filename}`;
       const content = readFileSync(fullPath);
 
@@ -47,33 +49,40 @@ module.exports = function(config) {
 
   // Handle images from Ghost and from third-parties
   function imageShortcode(src, cls, alt, sizes, widths, index) {
-    const imageUrls = src.match(ghostImageRe) ?
-      widths.map(width => src.replace('/content/images/', `/content/images/size/w${width}/`)) :
-      [src];
+    const imageUrls = src.match(ghostImageRe)
+      ? widths.map((width) =>
+          src.replace('/content/images/', `/content/images/size/w${width}/`)
+        )
+      : [src];
 
     return `
       <img
         ${index === 0 ? `rel="preload" as="image"` : ''}
-        ${(cls.includes('lazyload') && index > 0) ? 'data-srcset' : 'srcset'}="${imageUrls.length === widths.length ?
-          widths.map((width, i) => `${imageUrls[i]} ${width}w`).join() :
-          imageUrls[0]
-        }"
+        ${cls.includes('lazyload') && index > 0 ? 'data-srcset' : 'srcset'}="${
+      imageUrls.length === widths.length
+        ? widths.map((width, i) => `${imageUrls[i]} ${width}w`).join()
+        : imageUrls[0]
+    }"
         sizes="${sizes.replace(/\s+/g, ' ').trim()}"
-        ${(cls.includes('lazyload') && index > 0) ? 'data-src' : 'src'}="${imageUrls[imageUrls.length - 1]}"
+        ${cls.includes('lazyload') && index > 0 ? 'data-src' : 'src'}="${
+      imageUrls[imageUrls.length - 1]
+    }"
         class="${index === 0 ? cls.replace('lazyload', '') : cls}"
         alt="${alt}"
         onerror="this.style.display='none'"
       />
     `;
   }
-  
-  config.addNunjucksShortcode("image", imageShortcode);
+
+  config.addNunjucksShortcode('image', imageShortcode);
 
   // Copy images over from Ghost
   function featureImageShortcode(src, alt, sizes, widths) {
-    const imageUrls = src.match(ghostImageRe) ?
-      widths.map(width => src.replace('/content/images/', `/content/images/size/w${width}/`)) :
-      [src];
+    const imageUrls = src.match(ghostImageRe)
+      ? widths.map((width) =>
+          src.replace('/content/images/', `/content/images/size/w${width}/`)
+        )
+      : [src];
 
     return `
       <picture>
@@ -85,9 +94,10 @@ module.exports = function(config) {
         <source 
           media="(min-width: 701px)"
           sizes="${sizes.replace(/\s+/g, ' ').trim()}"
-          srcset="${imageUrls.length === widths.length ?
-            widths.map((width, i) => `${imageUrls[i]} ${width}w`).join() :
-            imageUrls[0]
+          srcset="${
+            imageUrls.length === widths.length
+              ? widths.map((width, i) => `${imageUrls[i]} ${width}w`).join()
+              : imageUrls[0]
           }"
         />
         <img
@@ -98,8 +108,8 @@ module.exports = function(config) {
       </picture>
     `;
   }
-  
-  config.addNunjucksShortcode("featureImage", featureImageShortcode);
+
+  config.addNunjucksShortcode('featureImage', featureImageShortcode);
 
   function cacheBusterShortcode(filePath) {
     // Handle cases where filePath doesn't start with /
@@ -134,19 +144,19 @@ module.exports = function(config) {
     return dayjs(dateStr).format('LL');
   }
 
-  config.addNunjucksShortcode("publishedDate", publishedDateShortcode);
+  config.addNunjucksShortcode('publishedDate', publishedDateShortcode);
 
   function timeAgoShortcode(dateStr) {
     return dayjs().to(dayjs(dateStr));
   }
 
-  config.addNunjucksShortcode("timeAgo", timeAgoShortcode);
+  config.addNunjucksShortcode('timeAgo', timeAgoShortcode);
 
   function translateShortcode(key, data) {
     return i18next.t(key, { ...data });
   }
 
-  config.addNunjucksShortcode("t", translateShortcode);
+  config.addNunjucksShortcode('t', translateShortcode);
 
   // Special handling for full stops
   function fullStopHandlerShortcode(siteLang) {
@@ -155,38 +165,45 @@ module.exports = function(config) {
     return ideographicFullStopLanguageCodes.includes(siteLang) ? '。' : '.';
   }
 
-  config.addNunjucksShortcode("fullStopHandler", fullStopHandlerShortcode);
+  config.addNunjucksShortcode('fullStopHandler', fullStopHandlerShortcode);
 
   // Date formatting filter
-  config.addFilter("htmlDateString", dateObj => {
-    return new Date(dateObj).toISOString().split("T")[0];
+  config.addFilter('htmlDateString', (dateObj) => {
+    return new Date(dateObj).toISOString().split('T')[0];
   });
 
   // Format dates for RSS feed
   const buildDateFormatterShortcode = (timezone, dateStr) => {
     const dateObj = dateStr ? new Date(dateStr) : new Date();
-    return dayjs(dateObj).tz(timezone).locale('en').format('ddd, DD MMM YYYY HH:mm:ss ZZ');
-  }
+    return dayjs(dateObj)
+      .tz(timezone)
+      .locale('en')
+      .format('ddd, DD MMM YYYY HH:mm:ss ZZ');
+  };
 
-  config.addNunjucksShortcode("buildDateFormatter", buildDateFormatterShortcode);
+  config.addNunjucksShortcode(
+    'buildDateFormatter',
+    buildDateFormatterShortcode
+  );
 
-  config.addFilter("commentsEnabled", tagsArr => {
-    return !tagsArr.map(tag => tag.name).includes('#disable-comments');
+  config.addFilter('commentsEnabled', (tagsArr) => {
+    return !tagsArr.map((tag) => tag.name).includes('#disable-comments');
   });
 
   // This counts on all images, including the site logo, being stored like on Ghost with the
   // same directory structure
-  const domainReplacer = url => url.replace(apiUrl, process.env.SITE_URL);
+  const domainReplacer = (url) => url.replace(apiUrl, process.env.SITE_URL);
 
   // Mimic Ghost/Handlebars escaping
   // raw: & < > " ' ` =
   // html-escaped: &amp; &lt; &gt; &quot; &#x27; &#x60; &#x3D;
-  const fullEscaper = s => escape(s)
-    .replace(/&#39;/g, '&#x27;')
-    .replace(/`/g, '&#x60;')
-    .replace(/=/g, '&#x3D;');
+  const fullEscaper = (s) =>
+    escape(s)
+      .replace(/&#39;/g, '&#x27;')
+      .replace(/`/g, '&#x60;')
+      .replace(/=/g, '&#x3D;');
 
-  config.addNunjucksShortcode("fullEscaper", fullEscaper);
+  config.addNunjucksShortcode('fullEscaper', fullEscaper);
 
   async function createJsonLdShortcode(type, site, data) {
     // Main site settings from site object
@@ -196,46 +213,46 @@ module.exports = function(config) {
       index: 'WebSite',
       article: 'Article',
       author: 'Person',
-      tag: 'Series'
-    }
+      tag: 'Series',
+    };
     const baseData = {
-      "@context": "https://schema.org",
-      "@type": typeMap[type],
+      '@context': 'https://schema.org',
+      '@type': typeMap[type],
       publisher: {
-        "@type": "Organization",
-        name: "freeCodeCamp.org",
+        '@type': 'Organization',
+        name: 'freeCodeCamp.org',
         url: url,
         logo: {
-          "@type": "ImageObject",
+          '@type': 'ImageObject',
           url: domainReplacer(logo),
           width: image_dimensions.logo.width,
-          height: image_dimensions.logo.height
-        }
+          height: image_dimensions.logo.height,
+        },
       },
       image: {
-        "@type": "ImageObject",
+        '@type': 'ImageObject',
         url: domainReplacer(cover_image),
         width: image_dimensions.cover_image.width,
-        height: image_dimensions.cover_image.height
+        height: image_dimensions.cover_image.height,
       },
       url: url,
       mainEntityOfPage: {
-        "@type": "WebPage",
-        "@id": url
-      }
-    }
-    const returnData =  {...baseData};
+        '@type': 'WebPage',
+        '@id': url,
+      },
+    };
+    const returnData = { ...baseData };
 
     const createImageObj = (url, obj) => {
       let { width, height } = obj;
 
       return {
-        "@type": "ImageObject",
+        '@type': 'ImageObject',
         url,
         width,
-        height
-      }
-    }
+        height,
+      };
+    };
 
     // Conditionally set other properties based on
     // objects passed to shortcodes
@@ -246,7 +263,7 @@ module.exports = function(config) {
         image_dimensions,
         website,
         twitter,
-        facebook
+        facebook,
       } = primaryAuthor;
       const authorObj = {
         '@type': 'Person',
@@ -255,39 +272,51 @@ module.exports = function(config) {
         sameAs: [
           website ? fullEscaper(website) : null,
           facebook ? `https://www.facebook.com/${facebook}` : null,
-          twitter ? twitter.replace('@', 'https://twitter.com/') : null
-        ].filter(url => url)
-      }
+          twitter ? twitter.replace('@', 'https://twitter.com/') : null,
+        ].filter((url) => url),
+      };
 
       if (profile_image) {
-        authorObj.image = createImageObj(profile_image, image_dimensions.profile_image);
-      }  
+        authorObj.image = createImageObj(
+          profile_image,
+          image_dimensions.profile_image
+        );
+      }
 
       return authorObj;
-    }
+    };
 
-    if (type === 'index') returnData.description = translateShortcode('meta:description');
-    
+    if (type === 'index')
+      returnData.description = translateShortcode('meta:description');
+
     if (type !== 'index' && data) {
       // Remove first slash from path
       if (data.path) returnData.url += data.path.substring(1);
 
-      if (data.description) returnData.description = fullEscaper(data.description);
+      if (data.description)
+        returnData.description = fullEscaper(data.description);
 
       if (type === 'article') {
-        if (data.published_at) returnData.datePublished = new Date(data.published_at).toISOString();
-        if (data.updated_at) returnData.dateModified = new Date(data.updated_at).toISOString();
+        if (data.published_at)
+          returnData.datePublished = new Date(data.published_at).toISOString();
+        if (data.updated_at)
+          returnData.dateModified = new Date(data.updated_at).toISOString();
         if (data.tags && data.tags.length > 1) {
           // Filter out internal Ghost tags
-          const keywords = data.tags.map(tag => tag.name).filter(keyword => !keyword.startsWith('#'));
+          const keywords = data.tags
+            .map((tag) => tag.name)
+            .filter((keyword) => !keyword.startsWith('#'));
 
           returnData.keywords = keywords.length === 1 ? keywords[0] : keywords;
-        };
+        }
         if (data.excerpt) returnData.description = fullEscaper(data.excerpt);
         if (data.title) returnData.headline = fullEscaper(data.title);
 
         if (data.feature_image) {
-          returnData.image = await createImageObj(data.feature_image, data.image_dimensions.feature_image);
+          returnData.image = await createImageObj(
+            data.feature_image,
+            data.image_dimensions.feature_image
+          );
         }
 
         returnData.author = await createAuthorObj(data.primary_author);
@@ -296,16 +325,26 @@ module.exports = function(config) {
       // Handle images for both types
       if (type === 'tag' || type === 'author') {
         if (data.cover_image) {
-          returnData.image = createImageObj(data.cover_image, data.image_dimensions.cover_image);
+          returnData.image = createImageObj(
+            data.cover_image,
+            data.image_dimensions.cover_image
+          );
         } else if (data.feature_image) {
-          returnData.image = createImageObj(data.feature_image, data.image_dimensions.feature_image);
+          returnData.image = createImageObj(
+            data.feature_image,
+            data.image_dimensions.feature_image
+          );
         } else {
           delete returnData.image;
         }
       }
 
       if (type === 'tag') {
-        if (data.cover_image) returnData.image = createImageObj(data.cover_image, data.image_dimensions.cover_image);
+        if (data.cover_image)
+          returnData.image = createImageObj(
+            data.cover_image,
+            data.image_dimensions.cover_image
+          );
         returnData.name = data.name;
       }
 
@@ -313,7 +352,7 @@ module.exports = function(config) {
         // This schema type is the only one without publisher info
         delete returnData.publisher;
         const authorObj = await createAuthorObj(data);
-        
+
         returnData.sameAs = authorObj.sameAs;
         returnData.name = fullEscaper(authorObj.name);
       }
@@ -323,29 +362,32 @@ module.exports = function(config) {
     // return JSON.stringify(returnData);
   }
 
-  config.addNunjucksAsyncShortcode("createJsonLd", createJsonLdShortcode);
+  config.addNunjucksAsyncShortcode('createJsonLd', createJsonLdShortcode);
 
   const sitemapFetcherShortcode = async (page) => {
     // will need some sort of map to handle all locales
-    const url = page === 'index' ?
-      `${apiUrl}/sitemap.xml` :
-      `${apiUrl}/sitemap-${page}.xml`;
+    const url =
+      page === 'index'
+        ? `${apiUrl}/sitemap.xml`
+        : `${apiUrl}/sitemap-${page}.xml`;
 
     const ghostXml = await fetch(url)
-      .then(res => res.text())
-      .then(res => res)
-      .catch(err => console.log(err));
-
-    const parser = new xml2js.Parser();
-    const ghostXmlObj = await parser.parseStringPromise(ghostXml)
+      .then((res) => res.text())
       .then((res) => res)
       .catch((err) => console.log(err));
 
-    const target = page === 'index' ?
-      ghostXmlObj.sitemapindex.sitemap :
-      ghostXmlObj.urlset.url;
+    const parser = new xml2js.Parser();
+    const ghostXmlObj = await parser
+      .parseStringPromise(ghostXml)
+      .then((res) => res)
+      .catch((err) => console.log(err));
 
-    const urlSwapper = url => url.replace(apiUrl, process.env.SITE_URL);
+    const target =
+      page === 'index'
+        ? ghostXmlObj.sitemapindex.sitemap
+        : ghostXmlObj.urlset.url;
+
+    const urlSwapper = (url) => url.replace(apiUrl, process.env.SITE_URL);
 
     let xmlStr = target.reduce((acc, curr) => {
       const wrapper = page === 'index' ? 'sitemap' : 'url';
@@ -354,11 +396,18 @@ module.exports = function(config) {
         <${wrapper}>
         <loc>${urlSwapper(curr.loc[0])}</loc>
         <lastmod>${curr.lastmod[0]}</lastmod>
-        ${curr['image:image'] ? `
+        ${
+          curr['image:image']
+            ? `
           <image:image>
-            <image:loc>${escape(urlSwapper(curr['image:image'][0]['image:loc'][0]))}</image:loc>
-            <image:caption>${escape(curr['image:image'][0]['image:caption'][0])}</image:caption>
-          </image:image>` : ''
+            <image:loc>${escape(
+              urlSwapper(curr['image:image'][0]['image:loc'][0])
+            )}</image:loc>
+            <image:caption>${escape(
+              curr['image:image'][0]['image:caption'][0]
+            )}</image:caption>
+          </image:image>`
+            : ''
         }
       </${wrapper}>`;
 
@@ -369,9 +418,9 @@ module.exports = function(config) {
 
     // To do: minify xml after build
     return xmlStr;
-  }
+  };
 
-  config.addNunjucksAsyncShortcode("sitemapFetcher", sitemapFetcherShortcode);
+  config.addNunjucksAsyncShortcode('sitemapFetcher', sitemapFetcherShortcode);
 
   // Don't ignore the same files ignored in the git repo
   config.setUseGitIgnore(false);
@@ -380,39 +429,38 @@ module.exports = function(config) {
   config.setBrowserSyncConfig({
     callbacks: {
       ready: (err, bs) => {
-        const content_404 = readFileSync("dist/404.html");
-        const content_RSS = readFileSync("dist/rss.xml");
+        const content_404 = readFileSync('dist/404.html');
+        const content_RSS = readFileSync('dist/rss.xml');
 
-        bs.addMiddleware("*", (req, res) => {
+        bs.addMiddleware('*', (req, res) => {
           if (req.url.match(/^\/rss\/?$/)) {
-            res.writeHead(302, { "Content-Type": "text/xml; charset=UTF-8" });
-          
+            res.writeHead(302, { 'Content-Type': 'text/xml; charset=UTF-8' });
+
             // Provides the RSS feed content without redirect
             res.write(content_RSS);
             res.end();
           } else {
-            res.writeHead(404, { "Content-Type": "text/html; charset=UTF-8" });
-          
+            res.writeHead(404, { 'Content-Type': 'text/html; charset=UTF-8' });
+
             // Provides the 404 content without redirect
             res.write(content_404);
             res.end();
           }
         });
-      }
-    }
+      },
+    },
   });
 
   // Eleventy configuration
   return {
     dir: {
-      input: "src",
-      output: "dist"
+      input: 'src',
+      output: 'dist',
     },
 
     // Files read by Eleventy, add as needed
-    templateFormats: ["css", "njk", "md", "txt", "hbs"],
-    htmlTemplateEngine: "njk",
-    markdownTemplateEngine: "njk",
-    // passthroughFileCopy: true
+    templateFormats: ['css', 'njk'],
+    htmlTemplateEngine: 'njk',
+    markdownTemplateEngine: 'njk',
   };
 };
