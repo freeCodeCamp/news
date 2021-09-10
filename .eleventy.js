@@ -40,7 +40,7 @@ module.exports = function (config) {
     });
   });
 
-  // Assist RSS feed template
+  // RSS and AMP plugins
   config.addPlugin(pluginRSS);
 
   // Note: Update this and image shortcodes once we
@@ -185,6 +185,10 @@ module.exports = function (config) {
     'buildDateFormatter',
     buildDateFormatterShortcode
   );
+
+  const fullYearShortcode = () =>  dayjs(new Date).format('YYYY');
+
+  config.addNunjucksShortcode('fullYear', fullYearShortcode);
 
   config.addFilter('commentsEnabled', (tagsArr) => {
     return !tagsArr.map((tag) => tag.name).includes('#disable-comments');

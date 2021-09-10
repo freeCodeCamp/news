@@ -1,0 +1,11 @@
+---
+pagination:
+  data: ghost.posts
+  size: 1
+  alias: post
+  addAllPagesToCollections: false
+layout: 'layouts/amp.njk'
+permalink: '{{ post.path }}/amp/'
+---
+
+{{ post.amp_html | safe if post.amp_html }}
