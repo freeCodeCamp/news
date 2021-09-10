@@ -300,7 +300,7 @@ module.exports = async () => {
 
       obj.posts = allPosts.slice(0, feedPostLimit)
         .map(post => {
-          post.html = `<img src="${post.feature_image}" alt="${post.title}">` + post.html;
+          if (post.feature_image) post.html = `<img src="${post.feature_image}" alt="${post.title}">` + post.html;
 
           return post;
         });
