@@ -57,7 +57,7 @@
 
         <meta name="keywords" content="{% t 'meta:keywords' %}">
         <meta name="description" content="{% block description %}{% t 'meta:description' %}{% endblock %}">
-        <link rel="icon" href="https://cdn.freecodecamp.org/universal/favicons/favicon.ico" type="image/png">
+        <link rel="icon" href="{{ site.icon }}" type="image/png">
         {# Fall back to site URL if no canonical URL is set #}
         {% if canonicalUrl %}
             <link rel="canonical" href="{{ canonicalUrl }}">

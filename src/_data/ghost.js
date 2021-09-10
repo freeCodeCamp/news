@@ -1,7 +1,7 @@
 const postsPerPage = process.env.POSTS_PER_PAGE;
 const { api, enApi, apiUrl } = require('../../utils/ghost-api');
 const getImageDimensions = require('../../utils/image-dimensions');
-const { escape, chunk } = require('lodash');
+const { escape, chunk, cloneDeep } = require('lodash');
 const jsdom = require('jsdom');
 const { JSDOM } = jsdom;
 const i18next = require('../../i18n/config');
@@ -122,7 +122,10 @@ const lazyLoadHandler = async (html, title) => {
     })
   );
 
-  return dom.serialize();
+  // The jsdom parser wraps the incomplete HTML from the Ghost
+  // API with HTML, head, and body elements, so return whatever
+  // is within the new body element it added
+  return dom.window.document.body.innerHTML;
 }
 
 const fetchFromGhost = async (endpoint, options) => {
@@ -168,6 +171,12 @@ const fetchFromGhost = async (endpoint, options) => {
             .slice(0, 50)
             .join(' ')
           );
+
+        // Short excerpt for RSS feed, etc.
+        if (obj.excerpt) obj.short_excerpt = obj.excerpt.replace(/\n+/g, ' ')
+          .split(' ')
+          .slice(0, 50)
+          .join(' ');
         
         // Lazy load images and embedded videos
         if (obj.html) obj.html = await lazyLoadHandler(obj.html, obj.title);
@@ -283,11 +292,37 @@ module.exports = async () => {
     a.name.toLowerCase().localeCompare(b.name.toLowerCase(), 'en', { sensitivity: 'base' }
   )).slice(0, 15);
 
+  // Handle various RSS feeds
+  const feedPostLimit = 10;
+  const getCollectionFeeds = collection => cloneDeep(collection)
+    .map(obj => {
+      const allPosts = obj.posts.flat();
+
+      obj.posts = allPosts.slice(0, feedPostLimit)
+        .map(post => {
+          if (post.feature_image) post.html = `<img src="${post.feature_image}" alt="${post.title}">` + post.html;
+
+          return post;
+        });
+
+      return obj;
+    });
+
+  const feeds = [
+    {
+      path: '/',
+      posts: [...posts].slice(0, feedPostLimit)
+    },
+    getCollectionFeeds(authors),
+    getCollectionFeeds(tags)
+  ].flat();
+
   return {
     posts,
     pages,
     authors,
     tags,
-    popularTags
+    popularTags,
+    feeds
   };
 };

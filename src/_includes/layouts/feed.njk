@@ -1,31 +1,29 @@
----
-permalink: rss.xml
----
 <rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/"
     xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" version="2.0">
     <channel>
         <title>
-            <![CDATA[ {% t 'meta:title' %} ]]>
+            <![CDATA[ freeCodeCamp.org ]]>
         </title>
         <description>
             <![CDATA[ {% t 'meta:description' %} ]]>
         </description>
         <link>{{ site.url }}</link>
         <image>
-            <url>{{ site.url }}/favicon.png</url>
-            <title>{% t 'meta:title' %}</title>
+            <url>{{ site.icon }}</url>
+            {% set metaTitle %}{% t 'meta:title' %}{% endset %}
+            <title>{{ metaTitle | escape }}</title>
             <link>{{ site.url }}</link>
         </image>
         <lastBuildDate>{% buildDateFormatter site.timezone %}</lastBuildDate>
         <atom:link href="{{ site.url }}" rel="self" type="application/rss+xml" />
         <ttl>60</ttl>
-        {% for post in ghost.posts.slice(0, 10) %}
+        {% for post in feed.posts %}
             <item>
                 <title>
                     <![CDATA[ {% fullEscaper post.title %} ]]>
                 </title>
                 <description>
-                    <![CDATA[ {{ post.excerpt | safe }} ]]>
+                    <![CDATA[ {{ post.short_excerpt | escape }} ]]>
                 </description>
                 <link>{{ site.url + post.path }}</link>
                 <guid isPermaLink="false">{{ post.comment_id }}</guid>
@@ -38,7 +36,7 @@ permalink: rss.xml
                 <pubDate>{% buildDateFormatter site.timezone, post.published_at %}</pubDate>
                 <media:content url="{{ post.feature_image }}" medium="image" />
                 <content:encoded>
-                    <![CDATA[ {{ post.excerpt | safe }} ]]>
+                    <![CDATA[ {{ (post.short_excerpt | escape) if feed.path == "/" else (post.html | safe) }} ]]>
                 </content:encoded>
             </item>
         {% endfor %}
