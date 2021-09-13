@@ -1,13 +1,22 @@
 const probe = require('probe-image-size');
+// Cache image dimensions during build
+const imageDimensionMap = {};
 
 module.exports = async (url, title) => {
-  try {
-    return await probe(url);
-  } catch(err) {
-    console.log(err, url, title);
-    return {
-      width: null,
-      height: null
+  if (!imageDimensionMap[url]) {
+    try {
+      const { width, height } = await probe(url);
+
+      imageDimensionMap[url] = { width, height };
+    } catch(err) {
+      console.log(err, url, title);
+      
+      imageDimensionMap[url] = {
+        width: null,
+        height: null
+      }
     }
   }
+
+  return imageDimensionMap[url];
 }

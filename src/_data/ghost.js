@@ -7,11 +7,6 @@ const jsdom = require('jsdom');
 const { JSDOM } = jsdom;
 const i18next = require('../../i18n/config');
 
-// Image dimension maps
-const featureImageDimensions = {};
-const authorImageDimensions = {};
-const postImageDimensions = {};
-
 const wait = seconds => {
   return new Promise(resolve => {
     setTimeout(() => {
@@ -25,20 +20,13 @@ const stripDomain = url => url.replace(apiUrl, '');
 
 const getUniqueList = (arr, key) => [...new Map(arr.map(item => [item[key], item])).values()];
 
-const imageDimensionHandler = async (targetObj, imageKey, mapObj, mapKey) => {
-  // Check map for existing dimensions
-  if (mapObj[mapKey] && mapObj[mapKey][imageKey]) {
-    targetObj.image_dimensions = mapObj[mapKey];
-  } else {
-    // Get dimensions and append to targetObj and map
-    targetObj.image_dimensions = {...targetObj.image_dimensions};
-    mapObj[mapKey] = {...mapObj[mapKey]};
+const jsonLdImageDimensionHandler = async (targetObj, targetKey, imageUrl) => {
+  // Set image_dimensions to existing object or undefined
+  targetObj.image_dimensions = { ...targetObj.image_dimensions };
 
-    const { width, height } = await getImageDimensions(targetObj[imageKey], targetObj.title);
+  const { width, height } = await getImageDimensions(imageUrl, targetObj.title);
 
-    targetObj.image_dimensions[imageKey] = { width, height };
-    mapObj[mapKey][imageKey] = { width, height };
-  }
+  targetObj.image_dimensions[targetKey] = { width, height };
 }
 
 const originalPostHandler = async (post) => {
@@ -92,14 +80,7 @@ const lazyLoadHandler = async (html, title) => {
       // Add explicit width and height only for non-hotlinked images
       // Note: will need to modify this when we move Ghost instances
       if (image.src.includes(apiUrl) || image.src.match(/freecodecamp\.org.*\/news/)) {
-
-        if (!postImageDimensions[image.src]) {
-          const { width, height } = await getImageDimensions(image.src, title);
-
-          postImageDimensions[image.src] = { width, height };
-        }
-
-        const { width, height } = postImageDimensions[image.src];
+        const { width, height } = getImageDimensions(image.src, title);
       
         image.setAttribute('width', width);
         image.setAttribute('height', height);
@@ -147,19 +128,19 @@ const fetchFromGhost = async (endpoint, options) => {
     const resolvedData = await Promise.all(
       ghostRes.map(async obj => {
         // Post image resolutions for structured data
-        if (obj.feature_image) await imageDimensionHandler(obj, 'feature_image', featureImageDimensions, obj.feature_image);
+        if (obj.feature_image) await jsonLdImageDimensionHandler(obj, 'feature_image', obj.feature_image);
 
         // Author image resolutions for structured data
         if (obj.primary_author.profile_image) {
-          await imageDimensionHandler(obj.primary_author, 'profile_image', authorImageDimensions, obj.primary_author.slug);
+          await jsonLdImageDimensionHandler(obj.primary_author, 'profile_image', obj.primary_author.profile_image);
         }
 
         if (obj.primary_author.cover_image) {
-          await imageDimensionHandler(obj.primary_author, 'cover_image', authorImageDimensions, obj.primary_author.slug);
+          await jsonLdImageDimensionHandler(obj.primary_author, 'cover_image', obj.primary_author.profile_image);
         }
 
         obj.tags.map(async tag => {
-          if (tag.feature_image) await imageDimensionHandler(tag, 'feature_image', featureImageDimensions, tag.feature_image);
+          if (tag.feature_image) await jsonLdImageDimensionHandler(tag, 'feature_image', tag.feature_image);
         });
         
         // Original author / translator feature
