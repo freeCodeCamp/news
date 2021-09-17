@@ -1,7 +1,9 @@
-const Amperize = require('amperize');
 const sanitizeHtml = require('sanitize-html');
 const jsdom = require('jsdom');
 const { JSDOM } = jsdom;
+const { extname } = require('path');
+const { getImageDimensions } = require('./image-dimensions');
+const defaultDimensions = { width: 600, height: 400 };
 
 const allowedAMPTags = ['html', 'body', 'article', 'section', 'nav', 'aside', 'h1', 'h2',
   'h3', 'h4', 'h5', 'h6', 'header', 'footer', 'address', 'p', 'hr',
@@ -95,43 +97,96 @@ const allowedAMPAttributes = {
   'amp-youtube': ['src', 'width', 'height', 'layout', 'frameborder', 'autoplay', 'loop', 'data-videoid', 'data-live-channelid']
 };
 
-const getAmpHtml = (html) => {
-  const amperize = new Amperize();
+const setAttributes = (source, target) => {
+  const attributes = source.getAttributeNames();
 
-  return new Promise((resolve) => {
-    amperize.parse(html, (err, res) => {
-      if (err) {
-        console.log(err);
-
-        // Return original HTML
-        return resolve(html);
-      }
-
-      return resolve(res);
-    });
+  attributes.forEach((attr) => {
+    target.setAttribute(attr, source.getAttribute(attr));
   });
+
+  return target;
 };
 
-const ampHandler = async (html) => {
-  const ampHtml = await getAmpHtml(html);
-  
-  // Further sanitization
-  const dom = new JSDOM(ampHtml);
+const ampHandler = async (html, title) => {
+  const dom = new JSDOM(html);
   const document = dom.window.document;
-  const videoEls = [...document.getElementsByTagName('video')];
-  const audioEls = [...document.getElementsByTagName('audio')];
+  const imgEls = [...document.getElementsByTagName('img')];
+  const iframeEls = [...document.getElementsByTagName('iframe')];
 
   await Promise.all(
-    videoEls.map((videoEl) => {
-      const sourceEls = [...videoEl.getElementsByTagName('source')];
+    imgEls.map(async (img) => {
+      const { width, height } = await getImageDimensions(
+        img.src,
+        title,
+        defaultDimensions
+      );
+      // Special handling for small image sizes
+      const layoutType = width < 300 ? 'fixed' : 'responsive';
+      const extension = extname(img.src);
+      const targetEl = extension === '.gif' ? 'amp-anim' : 'amp-img';
+      let ampEl = document.createElement(targetEl);
 
-      sourceEls.forEach((sourceEl) => videoEl.removeChild(sourceEl));
+      // Copy image attributes to ampEl
+      ampEl = setAttributes(img, ampEl);
+
+      // Set required attributes
+      ampEl.setAttribute('layout', layoutType);
+      ampEl.setAttribute('width', width);
+      ampEl.setAttribute('height', height);
+
+      img.replaceWith(ampEl);
     }),
 
-    audioEls.map((audioEl) => {
-      const sourceEls = [...audioEl.getElementsByTagName('source')];
+    iframeEls.map((iframe) => {
+      // This code is based heavily on the implementation
+      // here: https://github.com/jbhannah/amperize
+      const youtubeRe = iframe.src.match(
+        /^.*(youtu.be\/|youtube(-nocookie)?.com\/(v\/|.*u\/\w\/|embed\/|.*v=))([\w-]{11}).*/
+      );
+      const targetEl = youtubeRe ? 'amp-youtube' : 'amp-iframe';
+      let ampEl = document.createElement(targetEl);
 
-      sourceEls.forEach((sourceEl) => audioEl.removeChild(sourceEl));
+      // Copy iframe attributes to ampEl
+      ampEl = setAttributes(iframe, ampEl);
+
+      // Make all iframes responsive
+      ampEl.setAttribute('layout', 'responsive');
+
+      if (youtubeRe) {
+        ampEl.setAttribute('data-videoid', youtubeRe[4]);
+
+        ampEl.removeAttribute('src');
+        ampEl.removeAttribute('sandbox');
+        ampEl.removeAttribute('allowfullscreen');
+        ampEl.removeAttribute('allow');
+        ampEl.removeAttribute('frameborder');
+      } else {
+        ampEl.sandbox
+          ? ampEl.sandbox
+          : ampEl.setAttribute(
+              'sandbox',
+              'allow-scripts allow-same-origin allow-popups'
+            );
+      }
+
+      ampEl.setAttribute('frameborder', '0');
+
+      if (
+        !ampEl.getAttribute('width') ||
+        !ampEl.getAttribute('height') ||
+        !ampEl.getAttribute('layout')
+      ) {
+        ampEl.setAttribute(
+          'width',
+          ampEl.width ? ampEl.width : defaultDimensions.width
+        );
+        ampEl.setAttribute(
+          'height',
+          ampEl.height ? ampEl.height : defaultDimensions.height
+        );
+      }
+
+      iframe.replaceWith(ampEl);
     })
   );
 

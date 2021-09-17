@@ -49,7 +49,6 @@
     <meta property="og:image:width" content="{{ post.image_dimensions.feature_image.width }}">
     <meta property="og:image:height" content="{{ post.image_dimensions.feature_image.height }}">
 
-    {# {{ amp_ghost_head }} #}
     <script type="application/ld+json">{% createJsonLd 'article', site, post %}</script>
 
     {# Styles'n'Scripts #}
@@ -61,6 +60,13 @@
     <script async src="https://cdn.ampproject.org/v0.js"></script>
     <script async custom-element="amp-lightbox-gallery" src="https://cdn.ampproject.org/v0/amp-lightbox-gallery-0.1.js"></script>
 
+    {# To do: figure out how to dynamically import these #}
+    {# gifs #}
+    <script async custom-element="amp-anim" src="https://cdn.ampproject.org/v0/amp-anim-0.1.js"></script>
+    {# iframes #}
+    <script async custom-element="amp-iframe" src="https://cdn.ampproject.org/v0/amp-iframe-0.1.js"></script>
+    {# YouTube #}
+    <script async custom-element="amp-youtube" src="https://cdn.ampproject.org/v0/amp-youtube-0.1.js"></script>
 </head>
 
 <body class="amp-template">
