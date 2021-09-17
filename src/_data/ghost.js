@@ -1,6 +1,6 @@
 const postsPerPage = process.env.POSTS_PER_PAGE;
 const { api, enApi, apiUrl } = require('../../utils/ghost-api');
-const getImageDimensions = require('../../utils/image-dimensions');
+const { getImageDimensions } = require('../../utils/image-dimensions');
 const { ampHandler } = require('../../utils/amp-handler');
 const { escape, chunk, cloneDeep } = require('lodash');
 const jsdom = require('jsdom');
@@ -80,7 +80,7 @@ const lazyLoadHandler = async (html, title) => {
       // Add explicit width and height only for non-hotlinked images
       // Note: will need to modify this when we move Ghost instances
       if (image.src.includes(apiUrl) || image.src.match(/freecodecamp\.org.*\/news/)) {
-        const { width, height } = getImageDimensions(image.src, title);
+        const { width, height } = await getImageDimensions(image.src, title);
       
         image.setAttribute('width', width);
         image.setAttribute('height', height);
