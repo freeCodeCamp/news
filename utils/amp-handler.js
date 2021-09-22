@@ -3,7 +3,6 @@ const jsdom = require('jsdom');
 const { JSDOM } = jsdom;
 const { extname } = require('path');
 const { getImageDimensions } = require('./image-dimensions');
-const defaultDimensions = { width: 600, height: 400 };
 
 const allowedAMPTags = ['html', 'body', 'article', 'section', 'nav', 'aside', 'h1', 'h2',
   'h3', 'h4', 'h5', 'h6', 'header', 'footer', 'address', 'p', 'hr',
@@ -115,11 +114,7 @@ const ampHandler = async (html, title) => {
 
   await Promise.all(
     imgEls.map(async (img) => {
-      const { width, height } = await getImageDimensions(
-        img.src,
-        title,
-        defaultDimensions
-      );
+      const { width, height } = await getImageDimensions(img.src, title);
       // Special handling for small image sizes
       const layoutType = width < 300 ? 'fixed' : 'responsive';
       const extension = extname(img.src);
@@ -176,14 +171,8 @@ const ampHandler = async (html, title) => {
         !ampEl.getAttribute('height') ||
         !ampEl.getAttribute('layout')
       ) {
-        ampEl.setAttribute(
-          'width',
-          ampEl.width ? ampEl.width : defaultDimensions.width
-        );
-        ampEl.setAttribute(
-          'height',
-          ampEl.height ? ampEl.height : defaultDimensions.height
-        );
+        ampEl.setAttribute('width', ampEl.width ? ampEl.width : 600);
+        ampEl.setAttribute('height', ampEl.height ? ampEl.height : 400);
       }
 
       iframe.replaceWith(ampEl);

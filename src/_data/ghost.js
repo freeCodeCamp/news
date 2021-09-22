@@ -76,15 +76,10 @@ const lazyLoadHandler = async (html, title) => {
     images.map(async image => {
       // To do: swap out the image URLs here once we have them auto synced
       // with an S3 bucket
-
-      // Add explicit width and height only for non-hotlinked images
-      // Note: will need to modify this when we move Ghost instances
-      if (image.src.includes(apiUrl) || image.src.match(/freecodecamp\.org.*\/news/)) {
-        const { width, height } = await getImageDimensions(image.src, title);
-      
-        image.setAttribute('width', width);
-        image.setAttribute('height', height);
-      }
+      const { width, height } = await getImageDimensions(image.src, title);
+    
+      image.setAttribute('width', width);
+      image.setAttribute('height', height);
 
       // lazysizes
       image.setAttribute('data-srcset', image.srcset);
