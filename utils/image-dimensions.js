@@ -13,7 +13,7 @@ const getImageDimensions = async (
 
       imageDimensionMap[url] = { width, height };
     } catch (err) {
-      if (err.status) console.log(err, url, title); // Only show HTTP status code errors
+      if (err.status) console.log(err, url, title); // Only print HTTP status code errors
 
       const { width, height } = defaultDimensions;
 
