@@ -429,7 +429,7 @@ module.exports = function (config) {
   // Don't ignore the same files ignored in the git repo
   config.setUseGitIgnore(false);
 
-  // Display 404 and RSS pages in BrowserSnyc
+  // Display 404 and RSS pages in BrowserSync
   config.setBrowserSyncConfig({
     callbacks: {
       ready: (err, bs) => {
