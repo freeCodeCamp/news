@@ -3,6 +3,7 @@ const jsdom = require('jsdom');
 const { JSDOM } = jsdom;
 const { extname } = require('path');
 const { getImageDimensions } = require('./image-dimensions');
+const i18next = require('../i18n/config');
 
 const allowedAMPTags = ['html', 'body', 'article', 'section', 'nav', 'aside', 'h1', 'h2',
   'h3', 'h4', 'h5', 'h6', 'header', 'footer', 'address', 'p', 'hr',
@@ -111,8 +112,35 @@ const ampHandler = async (html, title) => {
   const document = dom.window.document;
   const imgEls = [...document.getElementsByTagName('img')];
   const iframeEls = [...document.getElementsByTagName('iframe')];
+  const audioEls = [...document.getElementsByTagName('audio')];
+  const videoEls = [...document.getElementsByTagName('video')];
+
+  const createAmpAudioOrVideo = (type, originalEl) => {
+    const sourceEls = [...originalEl.getElementsByTagName('source')];
+    const fallbackDiv = document.createElement('div');
+    const fallbackParagraph = document.createElement('p');
+    const i18nKey = type.replace('amp-', '');
+    const fallbackElType = i18next.t(`fallback.${i18nKey}`);
+    let ampEl = document.createElement(type);
+
+    ampEl = setAttributes(originalEl, ampEl);
+
+    ampEl.setAttribute('src', sourceEls[0].src);
+
+    fallbackDiv.setAttribute('fallback', '');
+    fallbackParagraph.innerHTML = `${i18next.t('fallback.message', { element: fallbackElType })}`;
+    fallbackDiv.appendChild(fallbackParagraph);
+    ampEl.appendChild(fallbackDiv);
+
+    sourceEls.forEach((source) => {
+      ampEl.appendChild(source);
+    });
+
+    return ampEl;
+  }
 
   await Promise.all(
+    // Create <amp-img> and <amp-anim> elements
     imgEls.map(async (img) => {
       const { width, height } = await getImageDimensions(img.src, title);
       // Special handling for small image sizes
@@ -132,6 +160,7 @@ const ampHandler = async (html, title) => {
       img.replaceWith(ampEl);
     }),
 
+    // Create <amp-iframe> and <amp-youtube> elements
     iframeEls.map((iframe) => {
       // This code is based heavily on the implementation
       // here: https://github.com/jbhannah/amperize
@@ -176,6 +205,20 @@ const ampHandler = async (html, title) => {
       }
 
       iframe.replaceWith(ampEl);
+    }),
+
+    // Create <amp-audio> elements
+    audioEls.map((audio) => {
+      const ampAudio = createAmpAudioOrVideo('amp-audio', audio);
+
+      audio.replaceWith(ampAudio);
+    }),
+
+    // Create <amp-video> elements
+    videoEls.map((video) => {
+      const ampVideo = createAmpAudioOrVideo('amp-video', video);
+
+      video.replaceWith(ampVideo);
     })
   );
 
