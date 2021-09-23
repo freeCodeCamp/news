@@ -118,7 +118,7 @@ const ampHandler = async (html, title) => {
       // Special handling for small image sizes
       const layoutType = width < 300 ? 'fixed' : 'responsive';
       const extension = extname(img.src);
-      const targetEl = extension === '.gif' ? 'amp-anim' : 'amp-img';
+      const targetEl = extension.toLowerCase() === '.gif' ? 'amp-anim' : 'amp-img';
       let ampEl = document.createElement(targetEl);
 
       // Copy image attributes to ampEl
