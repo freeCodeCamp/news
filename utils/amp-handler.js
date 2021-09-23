@@ -246,7 +246,7 @@ const ampHandler = async (obj) => {
 
   ampObj.html = cleanHtml;
 
-  // Save results to post/page obj
+  // Save results to post obj
   obj.amp = ampObj;
 
   return obj;
