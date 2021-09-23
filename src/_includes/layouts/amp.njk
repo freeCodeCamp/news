@@ -1,4 +1,5 @@
 {% set title = post.title %}
+{% set ampEls = post.amp.elements %}
 
 <!DOCTYPE html>
 <html ⚡>
@@ -60,17 +61,22 @@
     <script async src="https://cdn.ampproject.org/v0.js"></script>
     <script async custom-element="amp-lightbox-gallery" src="https://cdn.ampproject.org/v0/amp-lightbox-gallery-0.1.js"></script>
 
-    {# To do: figure out how to dynamically import these #}
-    {# gifs #}
-    <script async custom-element="amp-anim" src="https://cdn.ampproject.org/v0/amp-anim-0.1.js"></script>
-    {# iframes #}
-    <script async custom-element="amp-iframe" src="https://cdn.ampproject.org/v0/amp-iframe-0.1.js"></script>
-    {# YouTube #}
-    <script async custom-element="amp-youtube" src="https://cdn.ampproject.org/v0/amp-youtube-0.1.js"></script>
-    {# Video #}
-    <script async custom-element="amp-video" src="https://cdn.ampproject.org/v0/amp-video-0.1.js"></script>
-    {# Audio #}
-    <script async custom-element="amp-audio" src="https://cdn.ampproject.org/v0/amp-audio-0.1.js"></script>
+    {# Conditionally include AMP scripts #}
+    {% if ampEls['amp-anim'] %}
+        <script async custom-element="amp-anim" src="https://cdn.ampproject.org/v0/amp-anim-0.1.js"></script>
+    {% endif %}
+    {% if ampEls['amp-iframe'] %}
+        <script async custom-element="amp-iframe" src="https://cdn.ampproject.org/v0/amp-iframe-0.1.js"></script>
+    {% endif %}
+    {% if ampEls['amp-youtube'] %}
+        <script async custom-element="amp-youtube" src="https://cdn.ampproject.org/v0/amp-youtube-0.1.js"></script>
+    {% endif %}
+    {% if ampEls['amp-video'] %}
+        <script async custom-element="amp-video" src="https://cdn.ampproject.org/v0/amp-video-0.1.js"></script>
+    {% endif %}
+    {% if ampEls['amp-audio'] %}
+        <script async custom-element="amp-audio" src="https://cdn.ampproject.org/v0/amp-audio-0.1.js"></script>
+    {% endif %}
 </head>
 
 <body class="amp-template">

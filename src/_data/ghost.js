@@ -156,7 +156,9 @@ const fetchFromGhost = async (endpoint, options) => {
           .join(' ');
 
         // Handle AMP processing before modifying the original HTML
-        if (obj.html) obj.amp_html = await ampHandler(obj.html, obj.title);
+        // and add flags to dynamically import AMP scripts
+        // if (obj.html) obj.amp_html = await ampHandler(obj.html, obj.title);
+        if (obj.html) obj = await ampHandler(obj);
         
         // Lazy load images and embedded videos
         if (obj.html) obj.html = await lazyLoadHandler(obj.html, obj.title);

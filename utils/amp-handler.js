@@ -107,7 +107,13 @@ const setAttributes = (source, target) => {
   return target;
 };
 
-const ampHandler = async (html, title) => {
+const ampHandler = async (obj) => {
+  // Create object to hold results
+  const ampObj = {
+    html: '',
+    elements: {}
+  };
+  const html = obj.html;
   const dom = new JSDOM(html);
   const document = dom.window.document;
   const imgEls = [...document.getElementsByTagName('img')];
@@ -122,6 +128,9 @@ const ampHandler = async (html, title) => {
     const i18nKey = type.replace('amp-', '');
     const fallbackElType = i18next.t(`fallback.${i18nKey}`);
     let ampEl = document.createElement(type);
+
+    // Set element type for dynamically loading scripts in template
+    ampObj.elements[type] = true;
 
     ampEl = setAttributes(originalEl, ampEl);
 
@@ -142,12 +151,16 @@ const ampHandler = async (html, title) => {
   await Promise.all(
     // Create <amp-img> and <amp-anim> elements
     imgEls.map(async (img) => {
+      const title = obj.title;
       const { width, height } = await getImageDimensions(img.src, title);
       // Special handling for small image sizes
       const layoutType = width < 300 ? 'fixed' : 'responsive';
       const extension = extname(img.src);
       const targetEl = extension.toLowerCase() === '.gif' ? 'amp-anim' : 'amp-img';
       let ampEl = document.createElement(targetEl);
+
+      // Set element type for dynamically loading scripts in template
+      ampObj.elements[targetEl] = true;
 
       // Copy image attributes to ampEl
       ampEl = setAttributes(img, ampEl);
@@ -169,6 +182,9 @@ const ampHandler = async (html, title) => {
       );
       const targetEl = youtubeRe ? 'amp-youtube' : 'amp-iframe';
       let ampEl = document.createElement(targetEl);
+
+      // Set element type for dynamically loading scripts in template
+      ampObj.elements[targetEl] = true;
 
       // Copy iframe attributes to ampEl
       ampEl = setAttributes(iframe, ampEl);
@@ -228,7 +244,12 @@ const ampHandler = async (html, title) => {
     selfClosing: ['source', 'track', 'br'],
   });
 
-  return cleanHtml;
+  ampObj.html = cleanHtml;
+
+  // Save results to post/page obj
+  obj.amp = ampObj;
+
+  return obj;
 };
 
 module.exports = {
