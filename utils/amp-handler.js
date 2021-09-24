@@ -42,7 +42,7 @@ const ampHandler = async (obj) => {
 
     ampEl = setAttributes(originalEl, ampEl);
 
-    ampEl.setAttribute('src', sourceEls[0].src);
+    ampEl.setAttribute('src', sourceEls[0] ? sourceEls[0].src : originalEl.getAttribute('src'));
 
     fallbackDiv.setAttribute('fallback', '');
     fallbackParagraph.innerHTML = `${i18next.t('fallback.message', { element: fallbackElType })}`;
