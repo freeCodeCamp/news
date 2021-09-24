@@ -179,7 +179,7 @@ const fetchFromGhost = async (endpoint, options) => {
 };
 
 module.exports = async () => {
-  const limit = 100;
+  const limit = 200;
   const ghostPosts = await fetchFromGhost('posts', {
     include: ['tags', 'authors'],
     filter: 'status:published',
@@ -213,7 +213,8 @@ module.exports = async () => {
   });
 
   const authors = [];
-  const primaryAuthors = getUniqueList(posts.map(post => post.primary_author), 'id');
+  const primaryAuthors = getUniqueList(posts.map(post => post.primary_author), 'id')
+    .filter((tag) => tag.path !== '/404/'); // Filter out possible 404 errors returned by Ghost API
   primaryAuthors.forEach(author => {
     // Attach posts to their respective author
     const currAuthorPosts = posts.filter(post => post.primary_author.id === author.id);
@@ -240,7 +241,7 @@ module.exports = async () => {
   const visibleTags = posts.reduce((arr, post) => {
     return [
       ...arr,
-      ...post.tags.filter(tag => tag.visibility === 'public')
+      ...post.tags.filter(tag => tag.visibility === 'public' && tag.path !== '/404/') // Filter out possible 404 errors returned by Ghost API
     ]
   }, []);
   const allTags = getUniqueList(visibleTags, 'id');
