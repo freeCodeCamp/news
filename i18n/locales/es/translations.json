@@ -78,5 +78,10 @@
       "tos": "Términos de servicio",
       "copyright": "Política de derechos de autor"
     }
+  },
+  "fallback": {
+    "message": "Su navegador no es compatible con HTML5 {{ element }}.",
+    "audio": "audio",
+    "video": "video"
   }
 }

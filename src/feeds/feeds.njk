@@ -3,7 +3,7 @@ pagination:
   data: ghost.feeds
   size: 1
   alias: feed
-  addAllPagesToCollections: false
+  addAllPagesToCollections: true
 layout: 'layouts/feed.njk'
 permalink: '{{ feed.path }}/{% if feed.page %}{{ feed.page }}/{% endif %}/rss.xml'
 ---

@@ -1,0 +1,11 @@
+---
+pagination:
+  data: ghost.posts
+  size: 1
+  alias: post
+  addAllPagesToCollections: ture
+layout: 'layouts/amp.njk'
+permalink: '{{ post.path }}/amp/'
+---
+
+{{ post.amp.html | safe if post.amp.html }}

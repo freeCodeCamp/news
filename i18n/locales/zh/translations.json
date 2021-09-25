@@ -75,5 +75,10 @@
       "tos": "服务条款",
       "copyright": "版权条例"
     }
+  },
+  "fallback": {
+    "message": "您的浏览器不支持 HTML5 {{ element }}。",
+    "audio": "音频",
+    "video": "视频"
   }
 }

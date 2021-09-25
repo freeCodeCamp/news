@@ -1,5 +1,5 @@
 const { api } = require('../../utils/ghost-api');
-const getImageDimensions = require('../../utils/image-dimensions');
+const { getImageDimensions } = require('../../utils/image-dimensions');
 
 module.exports = async () => {
   const site = await api.settings

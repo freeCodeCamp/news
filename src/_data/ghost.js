@@ -1,15 +1,11 @@
 const postsPerPage = process.env.POSTS_PER_PAGE;
 const { api, enApi, apiUrl } = require('../../utils/ghost-api');
-const getImageDimensions = require('../../utils/image-dimensions');
+const { getImageDimensions } = require('../../utils/image-dimensions');
+const { ampHandler } = require('../../utils/amp-handler');
 const { escape, chunk, cloneDeep } = require('lodash');
 const jsdom = require('jsdom');
 const { JSDOM } = jsdom;
 const i18next = require('../../i18n/config');
-
-// Image dimension maps
-const featureImageDimensions = {};
-const authorImageDimensions = {};
-const postImageDimensions = {};
 
 const wait = seconds => {
   return new Promise(resolve => {
@@ -24,20 +20,13 @@ const stripDomain = url => url.replace(apiUrl, '');
 
 const getUniqueList = (arr, key) => [...new Map(arr.map(item => [item[key], item])).values()];
 
-const imageDimensionHandler = async (targetObj, imageKey, mapObj, mapKey) => {
-  // Check map for existing dimensions
-  if (mapObj[mapKey] && mapObj[mapKey][imageKey]) {
-    targetObj.image_dimensions = mapObj[mapKey];
-  } else {
-    // Get dimensions and append to targetObj and map
-    targetObj.image_dimensions = {...targetObj.image_dimensions};
-    mapObj[mapKey] = {...mapObj[mapKey]};
+const jsonLdImageDimensionHandler = async (targetObj, targetKey, imageUrl) => {
+  // Set image_dimensions to existing object or undefined
+  targetObj.image_dimensions = { ...targetObj.image_dimensions };
 
-    const { width, height } = await getImageDimensions(targetObj[imageKey], targetObj.title);
+  const { width, height } = await getImageDimensions(imageUrl, targetObj.title);
 
-    targetObj.image_dimensions[imageKey] = { width, height };
-    mapObj[mapKey][imageKey] = { width, height };
-  }
+  targetObj.image_dimensions[targetKey] = { width, height };
 }
 
 const originalPostHandler = async (post) => {
@@ -87,22 +76,10 @@ const lazyLoadHandler = async (html, title) => {
     images.map(async image => {
       // To do: swap out the image URLs here once we have them auto synced
       // with an S3 bucket
-
-      // Add explicit width and height only for non-hotlinked images
-      // Note: will need to modify this when we move Ghost instances
-      if (image.src.includes(apiUrl) || image.src.match(/freecodecamp\.org.*\/news/)) {
-
-        if (!postImageDimensions[image.src]) {
-          const { width, height } = await getImageDimensions(image.src, title);
-
-          postImageDimensions[image.src] = { width, height };
-        }
-
-        const { width, height } = postImageDimensions[image.src];
-      
-        image.setAttribute('width', width);
-        image.setAttribute('height', height);
-      }
+      const { width, height } = await getImageDimensions(image.src, title);
+    
+      image.setAttribute('width', width);
+      image.setAttribute('height', height);
 
       // lazysizes
       image.setAttribute('data-srcset', image.srcset);
@@ -146,19 +123,19 @@ const fetchFromGhost = async (endpoint, options) => {
     const resolvedData = await Promise.all(
       ghostRes.map(async obj => {
         // Post image resolutions for structured data
-        if (obj.feature_image) await imageDimensionHandler(obj, 'feature_image', featureImageDimensions, obj.feature_image);
+        if (obj.feature_image) await jsonLdImageDimensionHandler(obj, 'feature_image', obj.feature_image);
 
         // Author image resolutions for structured data
         if (obj.primary_author.profile_image) {
-          await imageDimensionHandler(obj.primary_author, 'profile_image', authorImageDimensions, obj.primary_author.slug);
+          await jsonLdImageDimensionHandler(obj.primary_author, 'profile_image', obj.primary_author.profile_image);
         }
 
         if (obj.primary_author.cover_image) {
-          await imageDimensionHandler(obj.primary_author, 'cover_image', authorImageDimensions, obj.primary_author.slug);
+          await jsonLdImageDimensionHandler(obj.primary_author, 'cover_image', obj.primary_author.profile_image);
         }
 
         obj.tags.map(async tag => {
-          if (tag.feature_image) await imageDimensionHandler(tag, 'feature_image', featureImageDimensions, tag.feature_image);
+          if (tag.feature_image) await jsonLdImageDimensionHandler(tag, 'feature_image', tag.feature_image);
         });
         
         // Original author / translator feature
@@ -177,6 +154,10 @@ const fetchFromGhost = async (endpoint, options) => {
           .split(' ')
           .slice(0, 50)
           .join(' ');
+
+        // Handle AMP processing before modifying the original HTML
+        // and add flags to dynamically import AMP scripts
+        if (endpoint === 'posts' && obj.html) obj = await ampHandler(obj);
         
         // Lazy load images and embedded videos
         if (obj.html) obj.html = await lazyLoadHandler(obj.html, obj.title);
@@ -198,7 +179,7 @@ const fetchFromGhost = async (endpoint, options) => {
 };
 
 module.exports = async () => {
-  const limit = 100;
+  const limit = 200;
   const ghostPosts = await fetchFromGhost('posts', {
     include: ['tags', 'authors'],
     filter: 'status:published',
@@ -232,7 +213,8 @@ module.exports = async () => {
   });
 
   const authors = [];
-  const primaryAuthors = getUniqueList(posts.map(post => post.primary_author), 'id');
+  const primaryAuthors = getUniqueList(posts.map(post => post.primary_author), 'id')
+    .filter((tag) => tag.path !== '/404/'); // Filter out possible 404 errors returned by Ghost API
   primaryAuthors.forEach(author => {
     // Attach posts to their respective author
     const currAuthorPosts = posts.filter(post => post.primary_author.id === author.id);
@@ -259,7 +241,7 @@ module.exports = async () => {
   const visibleTags = posts.reduce((arr, post) => {
     return [
       ...arr,
-      ...post.tags.filter(tag => tag.visibility === 'public')
+      ...post.tags.filter(tag => tag.visibility === 'public' && tag.path !== '/404/') // Filter out possible 404 errors returned by Ghost API
     ]
   }, []);
   const allTags = getUniqueList(visibleTags, 'id');
@@ -292,23 +274,22 @@ module.exports = async () => {
     a.name.toLowerCase().localeCompare(b.name.toLowerCase(), 'en', { sensitivity: 'base' }
   )).slice(0, 15);
 
-  const getCollectionFeeds = collection => cloneDeep(collection)
-    .map(obj => {
-      // The main feed shows the last 10 posts. Tag and author
-      // pages show the last 15 posts
-      const feedPostLimit = obj.path === '/' ? 10 : 15;
-      const allPosts = obj.posts.flat();
+  const getCollectionFeeds = collection => collection.map(obj => {
+    // The main feed shows the last 10 posts. Tag and author
+    // pages show the last 15 posts
+    const feedPostLimit = obj.path === '/' ? 10 : 15;
+    const allPosts = cloneDeep(obj.posts);
 
-      obj.posts = allPosts.slice(0, feedPostLimit)
-        .map(post => {
-          // Append the feature image to the post content
-          if (post.feature_image) post.html = `<img src="${post.feature_image}" alt="${post.title}">` + post.html;
+    obj.posts = allPosts.slice(0, feedPostLimit)
+      .map(post => {
+        // Append the feature image to the post content
+        if (post.feature_image) post.html = `<img src="${post.feature_image}" alt="${post.title}">` + post.html;
 
-          return post;
-        });
+        return post;
+      });
 
-      return obj;
-    });
+    return obj;
+  });
 
   const feeds = [
     // Create custom collection for main RSS feed
@@ -318,8 +299,8 @@ module.exports = async () => {
         posts: [...posts]
       }
     ]),
-    getCollectionFeeds(authors),
-    getCollectionFeeds(tags)
+    getCollectionFeeds([...authors]),
+    getCollectionFeeds([...tags])
   ].flat();
 
   return {

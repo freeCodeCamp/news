@@ -78,5 +78,10 @@
       "tos": "Terms of Service",
       "copyright": "Copyright Policy"
     }
+  },
+  "fallback": {
+    "message": "Your browser doesn’t support HTML5 {{ element }}.",
+    "audio": "audio",
+    "video": "video"
   }
 }
