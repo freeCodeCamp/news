@@ -50,7 +50,7 @@
     "terser": "^5.7.0"
   },
   "devDependencies": {
-    "amperize": "^0.6.1",
+    "amperize": "0.6.1",
     "eslint": "7.32.0",
     "eslint-plugin-ghost": "2.6.0",
     "jsdom": "17.0.0",
@@ -58,7 +58,7 @@
     "md5": "2.3.0",
     "node-fetch": "2.6.2",
     "probe-image-size": "7.2.1",
-    "sanitize-html": "^2.5.0",
+    "sanitize-html": "2.5.0",
     "xml2js": "0.4.23"
   }
 }
