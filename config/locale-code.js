@@ -11,4 +11,6 @@ const localeCodes = {
   portuguese: 'pt-BR'
 };
 
-module.exports = localeCodes;
+const localeCode = localeCodes[process.env.CLIENT_LOCALE];
+
+module.exports = localeCode;

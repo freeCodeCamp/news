@@ -1,5 +1,6 @@
 const { api } = require('../../utils/ghost-api');
 const { getImageDimensions } = require('../../utils/image-dimensions');
+const localeCode = require('../../config/locale-code');
 
 module.exports = async () => {
   const site = await api.settings
@@ -11,7 +12,7 @@ module.exports = async () => {
     });
 
   site.url = process.env.SITE_URL;
-  site.lang = process.env.CLIENT_LOCALE;
+  site.lang = localeCode.toLowerCase();
 
   const logoUrl = 'https://cdn.freecodecamp.org/platform/universal/fcc_primary.svg'
   site.logo = logoUrl;
