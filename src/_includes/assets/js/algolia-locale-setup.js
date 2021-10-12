@@ -5,7 +5,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const algoliaIndices = {
     en: 'news',
     es: 'news-es',
-    zh: 'news-zh'
+    zh: 'news-zh',
+    'pt-br': 'news-pt-br',
+    it: 'news-it'
   };
 
   // load Algolia and set index globally
