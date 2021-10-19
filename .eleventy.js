@@ -158,15 +158,6 @@ module.exports = function (config) {
 
   config.addNunjucksShortcode('t', translateShortcode);
 
-  // Special handling for full stops
-  function fullStopHandlerShortcode(siteLang) {
-    const ideographicFullStopLanguageCodes = ['zh', 'zh-cn'];
-
-    return ideographicFullStopLanguageCodes.includes(siteLang) ? '。' : '.';
-  }
-
-  config.addNunjucksShortcode('fullStopHandler', fullStopHandlerShortcode);
-
   // Date formatting filter
   config.addFilter('htmlDateString', (dateObj) => {
     return new Date(dateObj).toISOString().split('T')[0];
