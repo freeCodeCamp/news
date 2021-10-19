@@ -1,5 +1,5 @@
 const postsPerPage = process.env.POSTS_PER_PAGE;
-const { api, enApi, apiUrl } = require('../../utils/ghost-api');
+const { sourceApi, sourceApiUrl, englishApi } = require('../../utils/ghost-api');
 const { getImageDimensions } = require('../../utils/image-dimensions');
 const { ampHandler } = require('../../utils/amp-handler');
 const { escape, chunk, cloneDeep } = require('lodash');
@@ -16,7 +16,7 @@ const wait = seconds => {
 };
 
 // Strip Ghost domain from urls
-const stripDomain = url => url.replace(apiUrl, '');
+const stripDomain = url => url.replace(sourceApiUrl, '');
 
 const getUniqueList = (arr, key) => [...new Map(arr.map(item => [item[key], item])).values()];
 
@@ -41,7 +41,7 @@ const originalPostHandler = async (post) => {
     const originalPostSlug = urlArr[urlArr.length - 1] ?
       urlArr[urlArr.length - 1] :
       urlArr[urlArr.length - 2];
-    const originalPostRes = await enApi.posts
+    const originalPostRes = await englishApi.posts
       .read({
         include: 'authors',
         slug: originalPostSlug
@@ -111,7 +111,7 @@ const fetchFromGhost = async (endpoint, options) => {
   let data = [];
 
   while (currPage && currPage <= lastPage) {
-    const ghostRes = await api[endpoint].browse({
+    const ghostRes = await sourceApi[endpoint].browse({
       ...options,
       page: currPage
     })

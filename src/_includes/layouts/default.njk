@@ -34,9 +34,8 @@
         <script defer src="https://cdn.freecodecamp.org/news-assets/dayjs/1.10.4/localizedFormat.min.js"></script>
         <script defer src="https://cdn.freecodecamp.org/news-assets/dayjs/1.10.4/relativeTime.min.js"></script>
 
-        {# Day.js locales #}
-        <script defer src="https://cdn.freecodecamp.org/news-assets/dayjs/1.10.4/locale/zh.min.js"></script>
-        <script defer src="https://cdn.freecodecamp.org/news-assets/dayjs/1.10.4/locale/es.min.js"></script>
+        {# Dynamically load Day.js locale #}
+        <script defer src="https://cdn.freecodecamp.org/news-assets/dayjs/1.10.4/locale/{{ site.lang }}.min.js"></script>
 
         {# Lazysizes #}
         <script defer type="text/javascript" src="{% cacheBuster '/assets/js/lazysizes.min.js' %}"></script>

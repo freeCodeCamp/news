@@ -1,3 +1,5 @@
+{% set donateUrl %}{% t "links:donate-url" %}{% endset %}
+
 <footer class="site-footer">
     <div class="footer-container">
         <div class="footer-top">
@@ -6,12 +8,13 @@
                 <p>{% t 'footer.mission-statement' %}</p>
                 <p>{% t 'footer.donation-initiatives' %}</p>
                 <p class="footer-donation">
-                    {% t 'footer.donate-text' %}&nbsp;<a
-                        class="inline"
-                        href="{% t 'links:donate-url' %}"
-                        rel="noopener noreferrer"
-                        target="_blank"
-                    >{% t 'footer.donate-link' %}</a>{% fullStopHandler site.lang %}
+                    {% t 'footer.donate-link', {
+                        '<0>': '<a href="' + ( donateUrl ) + '" class="inline" rel="noopener noreferrer" target="_blank" >',
+                        '</0>': '</a>',
+                        interpolation: {
+                            escapeValue: false
+                        }
+                    } %}
                 </p>
             </div>
             <div class="trending-guides">

@@ -7,7 +7,7 @@ const { parse } = require('path');
 const pluginRSS = require('@11ty/eleventy-plugin-rss');
 const i18next = require('./i18n/config');
 const dayjs = require('./utils/dayjs');
-const { apiUrl } = require('./utils/ghost-api');
+const { sourceApiUrl } = require('./utils/ghost-api');
 const { escape } = require('lodash');
 const fetch = require('node-fetch');
 const xml2js = require('xml2js');
@@ -158,15 +158,6 @@ module.exports = function (config) {
 
   config.addNunjucksShortcode('t', translateShortcode);
 
-  // Special handling for full stops
-  function fullStopHandlerShortcode(siteLang) {
-    const ideographicFullStopLanguageCodes = ['zh', 'zh-cn'];
-
-    return ideographicFullStopLanguageCodes.includes(siteLang) ? '。' : '.';
-  }
-
-  config.addNunjucksShortcode('fullStopHandler', fullStopHandlerShortcode);
-
   // Date formatting filter
   config.addFilter('htmlDateString', (dateObj) => {
     return new Date(dateObj).toISOString().split('T')[0];
@@ -196,7 +187,7 @@ module.exports = function (config) {
 
   // This counts on all images, including the site logo, being stored like on Ghost with the
   // same directory structure
-  const domainReplacer = (url) => url.replace(apiUrl, process.env.SITE_URL);
+  const domainReplacer = (url) => url.replace(sourceApiUrl, process.env.SITE_URL);
 
   // Mimic Ghost/Handlebars escaping
   // raw: & < > " ' ` =
@@ -372,8 +363,8 @@ module.exports = function (config) {
     // will need some sort of map to handle all locales
     const url =
       page === 'index'
-        ? `${apiUrl}/sitemap.xml`
-        : `${apiUrl}/sitemap-${page}.xml`;
+        ? `${sourceApiUrl}/sitemap.xml`
+        : `${sourceApiUrl}/sitemap-${page}.xml`;
 
     const ghostXml = await fetch(url)
       .then((res) => res.text())
@@ -391,7 +382,7 @@ module.exports = function (config) {
         ? ghostXmlObj.sitemapindex.sitemap
         : ghostXmlObj.urlset.url;
 
-    const urlSwapper = (url) => url.replace(apiUrl, process.env.SITE_URL);
+    const urlSwapper = (url) => url.replace(sourceApiUrl, process.env.SITE_URL);
 
     let xmlStr = target.reduce((acc, curr) => {
       const wrapper = page === 'index' ? 'sitemap' : 'url';

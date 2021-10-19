@@ -36,7 +36,14 @@
                     <p>{{ author.bio }}</p>
                 {% else %}
                     <p>
-                        {% t 'author.byline.read-more', { url: authorUrl, role: localizedRole } %}{% fullStopHandler siteLang %}
+                        {% t 'author.byline.read-more', {
+                            '<0>': '<a href="' + ( authorUrl ) + '">',
+                            '</0>': '</a>',
+                            role: localizedRole,
+                            interpolation: {
+                                escapeValue: false
+                            }
+                        } %}
                     </p>
                 {% endif %}
             {% endif %}

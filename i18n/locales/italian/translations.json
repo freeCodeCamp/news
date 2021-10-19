@@ -1,0 +1,88 @@
+{
+  "buttons": {
+    "forum": "Forum",
+    "donate": "Dona",
+    "load-more-articles": "Carica altri articoli",
+    "author-has-twitter": "Twitta un ringraziamento",
+    "author-no-twitter": "twittalo",
+    "learn-to-code-cta": "Inizia"
+  },
+  "search": {
+    "label": "Cerca",
+    "accessible-name": "Invia la tua query di cerca",
+    "placeholder": "Cerca tra gli articoli",
+    "see-results": "Vedi tutti i risultati per {{ searchQuery }}",
+    "no-tutorials": "Nessun articolo trovato"
+  },
+  "banner": {
+    "text": "<span>Chatta con altri programmatori in italiano</span>"
+  },
+  "author": {
+    "page": {
+      "no-posts": "Non ci sono articoli",
+      "one-post": "1 articolo",
+      "multiple-posts": "{{ postCount }} articoli"
+    },
+    "byline": {
+      "read-more": "Leggi {{ <0> }}altri articoli{{ </0> }} di questo {{ role }}."
+    }
+  },
+  "tag-page": {
+    "collection-of-posts": "Una collezione di articoli",
+    "one-post": "Una collezione di 1 articolo",
+    "multiple-posts": "Una collezione di % articoli"
+  },
+  "404-page": {
+    "page-not-found": "Pagina non trovata",
+    "go-to-front-page": "Vai alla Home"
+  },
+  "social-row": {
+    "author-has-twitter": "Se hai letto fino a qui, twitta al traduttore per ringraziarlo.",
+    "author-no-twitter": "Se questo articolo ti è stato utile,",
+    "default-tweet": "Grazie {{ twitter }} per avere tradotto questo utile articolo"
+  },
+  "learn-to-code-cta": {
+    "text": "Impara a programmare gratuitamente. il curriculum open source di freeCodeCamp ha aiutato più di 40.ooo persone ad ottenere un lavoro come programmatori."
+  },
+  "localization-meta": {
+    "roles": {
+      "author": "autore",
+      "translator": "traduttore"
+    },
+    "card-name": "{{ role }}: {{ name }}",
+    "languages": {
+      "en": "Inglese",
+      "es": "Spagnolo",
+      "zh": "Cinese",
+      "pt-br": "Portoghese",
+      "it": "Italiano"
+    }
+  },
+  "embed-title": "Contenuto incorporato",
+  "footer": {
+    "tax-exempt-status": "freeCodeCamp è una organizazione no-profit 501(c)(3) esentasse supportata da donazioni (Numero di identificazione per le tasse federali nelgi Stati Uniti d'America: 82-0779546)",
+    "mission-statement": "La nostra missione: aiutare le persone a imparare a programamre gratuitamente. Portiamo avanti la nostra missione creanto centinaia di video, articoli, e lezioni di programmazione interattive, tutti disponibile gratuitamente al pubblico. Abbiamo anche migliaia di gruppi di studi di freeCodeCamp aootrno al monsto.",
+    "donation-initiatives": "Le donazioni a freeCodeCamp supportano le nostre iniziative di educazione e aiutano a pagare i server, i servizi e lo staff.",
+    "donate-link": "Puoi {{ <0> }}fare una donazione qui{{ </0> }}.",
+    "trending-guides": "Articoli più cliccati",
+    "our-nonprofit": "La nostra no-profit",
+    "links": {
+      "about": "About",
+      "alumni": "Network degli alunni",
+      "open-source": "Open Source",
+      "shop": "Negozio",
+      "support": "Supporto",
+      "sponsors": "Sponsors",
+      "honesty": "Onestà accademica",
+      "coc": "Codice di condotta",
+      "privacy": "Politica sulla privacy",
+      "tos": "Termini di servizio",
+      "copyright": "Politica del Copyright"
+    }
+  },
+  "fallback": {
+    "message": "Il tuo browser non supporta HTML5 {{ element }}.",
+    "audio": "audio",
+    "video": "video"
+  }
+}

@@ -26,7 +26,7 @@
       "multiple-posts": "{{ postCount }} 篇文章"
     },
     "byline": {
-      "read-more": "阅读该{{ role }}的<a href='{{ authorUrl }}'>更多文章</a>"
+      "read-more": "阅读该{{ role }}的{{ <0> }}更多文章{{ </0> }}。"
     }
   },
   "tag-page": {
@@ -44,13 +44,15 @@
   "localization-meta": {
     "roles": {
       "author": "作者",
-      "translator": "翻译"
+      "translator": "译者"
     },
     "card-name": "{{ role }}: {{ name }}",
     "languages": {
       "en": "英语",
       "es": "西班牙语",
-      "zh": "中文"
+      "zh": "中文",
+      "pt-br": "葡萄牙语",
+      "it": "意大利语"
     }
   },
   "embed-title": "嵌入内容",
@@ -58,8 +60,7 @@
     "tax-exempt-status": "freeCodeCamp 是捐助者支持的 501(c)(3) 条款下具有免税资格的非营利性组织（税号：82-0779546)。",
     "mission-statement": "我们的使命：帮助人们免费学习编程。我们通过创建成千上万的视频、文章和交互式编程课程——所有内容向公众免费开放——来实现这一目标。学员在世界各地自发成立数千个 freeCodeCamp 学习小组。",
     "donation-initiatives": "所有给 freeCodeCamp 的捐款都将用于我们的教育项目，购买服务器和其他服务，以及聘用员工。",
-    "donate-text": "你可以",
-    "donate-link": "点击此处免税捐款",
+    "donate-link": "你可以{{ <0> }}点击此处免税捐款{{ </0> }}。",
     "trending-guides": "精选文章",
     "our-nonprofit": "关于我们",
     "links": {

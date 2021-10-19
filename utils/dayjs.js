@@ -3,11 +3,11 @@ const localizedFormat = require('dayjs/plugin/localizedFormat');
 const relativeTime = require('dayjs/plugin/relativeTime');
 const utc = require('dayjs/plugin/utc');
 const timezone = require('dayjs/plugin/timezone');
-const lang = process.env.CLIENT_LOCALE;
+let localeCode = require('../config/locale-code');
+localeCode = localeCode.toLowerCase();
 
-// Include dayjs locales
-require('dayjs/locale/es');
-require('dayjs/locale/zh');
+// Dynamically include dayjs locale
+require(`dayjs/locale/${localeCode}`);
 
 // Load dayjs plugins
 dayjs.extend(localizedFormat);
@@ -15,6 +15,6 @@ dayjs.extend(relativeTime);
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
-dayjs.locale(lang);
+dayjs.locale(localeCode);
 
 module.exports = dayjs;
