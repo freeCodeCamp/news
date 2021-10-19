@@ -44,7 +44,7 @@
   "localization-meta": {
     "roles": {
       "author": "作者",
-      "translator": "翻译"
+      "translator": "译者"
     },
     "card-name": "{{ role }}: {{ name }}",
     "languages": {
