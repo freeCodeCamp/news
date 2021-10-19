@@ -24,7 +24,8 @@
       "multiple-posts": "{{ postCount }} artículos"
     },
     "byline": {
-      "read-more": "Leer <a href='{{ authorUrl }}'>más publicaciones</a> de este {{ role }}."
+      "read-more": "Leer {{ <0> }}más publicaciones{{ </0> }} de este {{ role }}."
+
     }
   },
   "tag-page": {

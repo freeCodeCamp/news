@@ -26,7 +26,7 @@
       "multiple-posts": "{{ postCount }} 篇文章"
     },
     "byline": {
-      "read-more": "阅读该{{ role }}的<a href='{{ authorUrl }}'>更多文章</a>。"
+      "read-more": "阅读该{{ role }}的{{ <0> }}更多文章{{ </0> }}。"
     }
   },
   "tag-page": {
