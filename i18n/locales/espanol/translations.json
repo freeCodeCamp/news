@@ -53,7 +53,9 @@
     "languages": {
       "en": "Inglés",
       "es": "Español",
-      "zh": "Chino"
+      "zh": "Chino",
+      "pt-br": "Portugués",
+      "it": "Italiano"
     }
   },
   "embed-title": "Contenido incrustado",

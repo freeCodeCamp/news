@@ -53,7 +53,9 @@
     "languages": {
       "en": "English",
       "es": "Spanish",
-      "zh": "Chinese"
+      "zh": "Chinese",
+      "pt-br": "Portuguese",
+      "it": "Italian"
     }
   },
   "embed-title": "Embedded content",

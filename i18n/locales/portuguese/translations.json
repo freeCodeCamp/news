@@ -53,7 +53,9 @@
     "languages": {
       "en": "Inglês",
       "es": "Espanhol",
-      "zh": "Chinês"
+      "zh": "Chinês",
+      "pt-br": "Português",
+      "it": "Italiano"
     }
   },
   "embed-title": "Conteúdo incorporado",
