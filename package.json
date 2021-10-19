@@ -53,7 +53,7 @@
     "amperize": "0.6.1",
     "eslint": "7.32.0",
     "eslint-plugin-ghost": "2.6.0",
-    "jsdom": "17.0.0",
+    "jsdom": "18.0.0",
     "lodash": "4.17.21",
     "md5": "2.3.0",
     "node-fetch": "2.6.5",
