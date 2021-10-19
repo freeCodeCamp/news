@@ -24,7 +24,7 @@
       "multiple-posts": "{{ postCount }} posts"
     },
     "byline": {
-      "read-more": "Read <a href='{{ url }}'>more posts</a> by this {{ role }}"
+      "read-more": "Read <a href='{{ url }}'>more posts</a> by this {{ role }}."
     }
   },
   "tag-page": {
