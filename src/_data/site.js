@@ -1,9 +1,9 @@
-const { api } = require('../../utils/ghost-api');
+const { sourceApi } = require('../../utils/ghost-api');
 const { getImageDimensions } = require('../../utils/image-dimensions');
 const localeCode = require('../../config/locale-code');
 
 module.exports = async () => {
-  const site = await api.settings
+  const site = await sourceApi.settings
     .browse({
       include: 'url'
     })
