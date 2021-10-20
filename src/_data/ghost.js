@@ -274,22 +274,25 @@ module.exports = async () => {
     a.name.toLowerCase().localeCompare(b.name.toLowerCase(), 'en', { sensitivity: 'base' }
   )).slice(0, 15);
 
-  const getCollectionFeeds = collection => collection.map(obj => {
-    // The main feed shows the last 10 posts. Tag and author
-    // pages show the last 15 posts
-    const feedPostLimit = obj.path === '/' ? 10 : 15;
-    const allPosts = cloneDeep(obj.posts);
+  const getCollectionFeeds = collection => collection
+    // Filter out paginated authors / tags if they exist
+    .filter(obj => obj.page ? obj.page === 0 : obj)
+    .map(obj => {
+      // The main feed shows the last 10 posts. Tag and author
+      // pages show the last 15 posts
+      const feedPostLimit = obj.path === '/' ? 10 : 15;
+      const allPosts = cloneDeep(obj.posts);
 
-    obj.posts = allPosts.slice(0, feedPostLimit)
-      .map(post => {
-        // Append the feature image to the post content
-        if (post.feature_image) post.html = `<img src="${post.feature_image}" alt="${post.title}">` + post.html;
+      obj.posts = allPosts.slice(0, feedPostLimit)
+        .map(post => {
+          // Append the feature image to the post content
+          if (post.feature_image) post.html = `<img src="${post.feature_image}" alt="${post.title}">` + post.html;
 
-        return post;
-      });
+          return post;
+        });
 
-    return obj;
-  });
+      return obj;
+    });
 
   const feeds = [
     // Create custom collection for main RSS feed
