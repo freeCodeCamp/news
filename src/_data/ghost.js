@@ -6,6 +6,10 @@ const { escape, chunk, cloneDeep } = require('lodash');
 const jsdom = require('jsdom');
 const { JSDOM } = jsdom;
 const i18next = require('../../i18n/config');
+const { writeFileSync, unlinkSync } = require('fs');
+const fourOhFourLogName = '404-errors.log';
+const fourOhFourReportedErrors = [];
+const siteUrl = process.env.SITE_URL;
 
 const wait = seconds => {
   return new Promise(resolve => {
@@ -178,6 +182,15 @@ const fetchFromGhost = async (endpoint, options) => {
   return data;
 };
 
+const fourOhFourLogger = ({ type, name }) => {
+  if (!fourOhFourReportedErrors.includes(name)) {
+    const str = `${type}: ${name}\n`;
+
+    fourOhFourReportedErrors.push(name);
+    return writeFileSync(fourOhFourLogName, str, { flag: 'a+' });
+  }
+}
+
 module.exports = async () => {
   const limit = 200;
   const ghostPosts = await fetchFromGhost('posts', {
@@ -191,12 +204,35 @@ module.exports = async () => {
     limit
   });
 
+  // Remove 404 error log from previous build, if it exists
+  try {
+    unlinkSync(fourOhFourLogName);
+  } catch (err) {
+    console.log("Error log doesn't exist...");
+  }
+
   const posts = ghostPosts.map(post => {
     post.path = stripDomain(post.url);
     post.primary_author.path = stripDomain(post.primary_author.url);
-    post.tags.map(tag => (tag.path = stripDomain(tag.url)));
+    post.tags.forEach(tag => {
+      // Log and fix tag pages that point to 404 due to a Ghost error
+      if (tag.url.endsWith('/404/') && tag.visibility === 'public') {
+        fourOhFourLogger({ type: 'tag', name: tag.name });
+        tag.url = `${siteUrl}/${tag.slug}/`;
+      }
+
+      tag.path = stripDomain(tag.url);
+    });
     if (post.primary_tag) post.primary_tag.path = stripDomain(post.primary_tag.url);
-    post.authors.forEach(author => author.path = stripDomain(author.url));
+    post.authors.forEach(author => {
+      // Log and fix author pages that point to 404 due to a Ghost error
+      if (author.url.endsWith('/404/')) {
+        fourOhFourLogger({ type: 'author', name: author.name });
+        author.url = `${siteUrl}/${author.slug}/`;
+      }
+
+      author.path = stripDomain(author.url);
+    });
 
     // Convert publish date into a Date object
     post.published_at = new Date(post.published_at);
@@ -241,7 +277,7 @@ module.exports = async () => {
   const visibleTags = posts.reduce((arr, post) => {
     return [
       ...arr,
-      ...post.tags.filter(tag => tag.visibility === 'public' && tag.path !== '/404/') // Filter out possible 404 errors returned by Ghost API
+      ...post.tags.filter(tag => tag.visibility === 'public')
     ]
   }, []);
   const allTags = getUniqueList(visibleTags, 'id');
