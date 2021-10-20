@@ -123,6 +123,10 @@ const fetchFromGhost = async (endpoint, options) => {
       console.error(err);
     });
 
+    lastPage = ghostRes.meta.pagination.pages;
+    console.log(`Fetched ${endpoint} page ${currPage} of ${lastPage}...`);
+    currPage = ghostRes.meta.pagination.next;
+
     // Get image dimensions and append to post / page
     const resolvedData = await Promise.all(
       ghostRes.map(async obj => {
@@ -171,10 +175,6 @@ const fetchFromGhost = async (endpoint, options) => {
     );
 
     resolvedData.forEach(obj => data.push(obj));
-
-    lastPage = ghostRes.meta.pagination.pages;
-    console.log(`Fetched ${endpoint} page ${currPage} of ${lastPage}...`);
-    currPage = ghostRes.meta.pagination.next;
 
     await wait(0.1);
   }
