@@ -1,4 +1,4 @@
-const { sourceApi } = require('../../utils/ghost-api');
+const { sourceApi } = require('../../utils/ghost/api');
 const { getImageDimensions } = require('../../utils/image-dimensions');
 const localeCode = require('../../config/locale-code');
 

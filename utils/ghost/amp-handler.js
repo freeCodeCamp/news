@@ -1,10 +1,10 @@
 const jsdom = require('jsdom');
 const { JSDOM } = jsdom;
 const { extname } = require('path');
-const { getImageDimensions } = require('./image-dimensions');
-const i18next = require('../i18n/config');
-const { htmlSanitizer } = require('./transforms/html-sanitizer');
-const { setDefaultAlt } = require('./ghost/helpers');
+const { getImageDimensions } = require('../image-dimensions');
+const i18next = require('../../i18n/config');
+const { htmlSanitizer } = require('../transforms/html-sanitizer');
+const { setDefaultAlt } = require('./helpers');
 
 const setAttributes = (source, target) => {
   const attributes = source.getAttributeNames();
@@ -153,12 +153,7 @@ const ampHandler = async (obj) => {
 
   ampObj.html = cleanHtml;
 
-  // Save results to post obj
-  obj.amp = ampObj;
-
-  return obj;
+  return ampObj;
 };
 
-module.exports = {
-  ampHandler,
-};
+module.exports = ampHandler;

@@ -1,198 +1,14 @@
 const postsPerPage = process.env.POSTS_PER_PAGE;
-const { sourceApi, sourceApiUrl, englishApi } = require('../../utils/ghost-api');
-const { getImageDimensions } = require('../../utils/image-dimensions');
-const { ampHandler } = require('../../utils/amp-handler');
-const { escape, chunk, cloneDeep } = require('lodash');
-const jsdom = require('jsdom');
-const { JSDOM } = jsdom;
-const i18next = require('../../i18n/config');
-const { writeFileSync, unlinkSync } = require('fs');
-const { setDefaultAlt } = require('../../utils/ghost/helpers');
-const fourOhFourLogName = '404-errors.log';
-const fourOhFourReportedErrors = [];
+const { sourceApiUrl } = require('../../utils/ghost/api');
+const fetchFromGhost = require('../../utils/ghost/fetch-from-ghost');
+const { chunk, cloneDeep } = require('lodash');
+const errorLogger = require('../../utils/error-logger');
 const siteUrl = process.env.SITE_URL;
-
-const wait = seconds => {
-  return new Promise(resolve => {
-    setTimeout(() => {
-      resolve(seconds);
-    }, seconds * 1000);
-  });
-};
 
 // Strip Ghost domain from urls
 const stripDomain = url => url.replace(sourceApiUrl, '');
 
 const getUniqueList = (arr, key) => [...new Map(arr.map(item => [item[key], item])).values()];
-
-const jsonLdImageDimensionHandler = async (targetObj, targetKey, imageUrl) => {
-  // Set image_dimensions to existing object or undefined
-  targetObj.image_dimensions = { ...targetObj.image_dimensions };
-
-  const { width, height } = await getImageDimensions(imageUrl, targetObj.title);
-
-  targetObj.image_dimensions[targetKey] = { width, height };
-}
-
-const originalPostHandler = async (post) => {
-  const originalPostRegex = /const\s+fccOriginalPost\s+=\s+("|')(?<url>.*)\1;?/g;
-  const match = originalPostRegex.exec(post.codeinjection_head);
-  
-  if (match) {
-    const url = match.groups.url;
-    const urlArr = url.split('/');
-    // handle urls that end with a slash,
-    // then urls that don't end in a slash
-    const originalPostSlug = urlArr[urlArr.length - 1] ?
-      urlArr[urlArr.length - 1] :
-      urlArr[urlArr.length - 2];
-    const originalPostRes = await englishApi.posts
-      .read({
-        include: 'authors',
-        slug: originalPostSlug
-      })
-      .catch(err => {
-        console.error(err);
-      });
-    const {
-      title,
-      published_at,
-      primary_author
-    } = originalPostRes;
-
-    post.original_post = {
-      title,
-      published_at,
-      url,
-      primary_author
-    }
-  }
-
-  return post;
-}
-
-const lazyLoadHandler = async (html, title) => {
-  const dom = new JSDOM(html);
-  const document = dom.window.document;
-  const images = [...document.getElementsByTagName('img')];
-  const iframes = [...document.getElementsByTagName('iframe')];
-
-  await Promise.all(
-    images.map(async image => {
-      // To do: swap out the image URLs here once we have them auto synced
-      // with an S3 bucket
-      const { width, height } = await getImageDimensions(image.src, title);
-    
-      image.setAttribute('width', width);
-      image.setAttribute('height', height);
-
-      if (!image.alt) setDefaultAlt(image);
-
-      // lazysizes
-      image.setAttribute('data-srcset', image.srcset);
-      image.setAttribute('data-src', image.src);
-      image.removeAttribute('src');
-      image.className = `${image.className} lazyload`;
-    }),
-
-    iframes.map(async iframe => {
-      iframe.setAttribute('title', `${i18next.t('embed-title')}`);
-
-      // To do: consider adding a low quality facade image via src
-      // lazysizes
-      iframe.setAttribute('data-src', iframe.src);
-      iframe.removeAttribute('src');
-      iframe.className = `${iframe.className} lazyload`;
-    })
-  );
-
-  // The jsdom parser wraps the incomplete HTML from the Ghost
-  // API with HTML, head, and body elements, so return whatever
-  // is within the new body element it added
-  return dom.window.document.body.innerHTML;
-}
-
-const fetchFromGhost = async (endpoint, options) => {
-  let currPage = 1;
-  let lastPage = 5;
-  let data = [];
-
-  while (currPage && currPage <= lastPage) {
-    const ghostRes = await sourceApi[endpoint].browse({
-      ...options,
-      page: currPage
-    })
-    .catch(err => {
-      console.error(err);
-    });
-
-    lastPage = ghostRes.meta.pagination.pages;
-    console.log(`Fetched ${endpoint} page ${currPage} of ${lastPage}...`);
-    currPage = ghostRes.meta.pagination.next;
-
-    // Get image dimensions and append to post / page
-    const resolvedData = await Promise.all(
-      ghostRes.map(async obj => {
-        // Post image resolutions for structured data
-        if (obj.feature_image) await jsonLdImageDimensionHandler(obj, 'feature_image', obj.feature_image);
-
-        // Author image resolutions for structured data
-        if (obj.primary_author.profile_image) {
-          await jsonLdImageDimensionHandler(obj.primary_author, 'profile_image', obj.primary_author.profile_image);
-        }
-
-        if (obj.primary_author.cover_image) {
-          await jsonLdImageDimensionHandler(obj.primary_author, 'cover_image', obj.primary_author.profile_image);
-        }
-
-        obj.tags.map(async tag => {
-          if (tag.feature_image) await jsonLdImageDimensionHandler(tag, 'feature_image', tag.feature_image);
-        });
-        
-        // Original author / translator feature
-        if (obj.codeinjection_head) obj = await originalPostHandler(obj);
-
-        // To do: handle this in the JSON LD function
-        if (obj.excerpt) obj.excerpt = escape(
-          obj.excerpt.replace(/\n+/g, ' ')
-            .split(' ')
-            .slice(0, 50)
-            .join(' ')
-          );
-
-        // Short excerpt for RSS feed, etc.
-        if (obj.excerpt) obj.short_excerpt = obj.excerpt.replace(/\n+/g, ' ')
-          .split(' ')
-          .slice(0, 50)
-          .join(' ');
-
-        // Handle AMP processing before modifying the original HTML
-        // and add flags to dynamically import AMP scripts
-        if (endpoint === 'posts' && obj.html) obj = await ampHandler(obj);
-        
-        // Lazy load images and embedded videos
-        if (obj.html) obj.html = await lazyLoadHandler(obj.html, obj.title);
-
-        return obj;
-      })
-    );
-
-    resolvedData.forEach(obj => data.push(obj));
-
-    await wait(0.1);
-  }
-
-  return data;
-};
-
-const fourOhFourLogger = ({ type, name }) => {
-  if (!fourOhFourReportedErrors.includes(name)) {
-    const str = `${type}: ${name}\n`;
-
-    fourOhFourReportedErrors.push(name);
-    return writeFileSync(fourOhFourLogName, str, { flag: 'a+' });
-  }
-}
 
 module.exports = async () => {
   const limit = 200;
@@ -207,12 +23,12 @@ module.exports = async () => {
     limit
   });
 
-  // Remove 404 error log from previous build, if it exists
-  try {
-    unlinkSync(fourOhFourLogName);
-  } catch (err) {
-    console.log("Error log doesn't exist...");
-  }
+  // // Remove 404 error log from previous build, if it exists
+  // try {
+  //   unlinkSync(fourOhFourLogName);
+  // } catch (err) {
+  //   console.log("Error log doesn't exist...");
+  // }
 
   const posts = ghostPosts.map(post => {
     post.path = stripDomain(post.url);
@@ -220,7 +36,7 @@ module.exports = async () => {
     post.tags.forEach(tag => {
       // Log and fix tag pages that point to 404 due to a Ghost error
       if (tag.url.endsWith('/404/') && tag.visibility === 'public') {
-        fourOhFourLogger({ type: 'tag', name: tag.name });
+        errorLogger({ type: 'tag', name: tag.name });
         tag.url = `${siteUrl}/${tag.slug}/`;
       }
 
@@ -230,7 +46,7 @@ module.exports = async () => {
     post.authors.forEach(author => {
       // Log and fix author pages that point to 404 due to a Ghost error
       if (author.url.endsWith('/404/')) {
-        fourOhFourLogger({ type: 'author', name: author.name });
+        errorLogger({ type: 'author', name: author.name });
         author.url = `${siteUrl}/${author.slug}/`;
       }
 
