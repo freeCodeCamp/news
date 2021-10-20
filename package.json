@@ -35,29 +35,27 @@
   "contributors": [
     "https://github.com/freeCodeCamp/news/graphs/contributors"
   ],
-  "dependencies": {
-    "@11ty/eleventy": "^0.12.1",
-    "@11ty/eleventy-plugin-rss": "^1.1.1",
-    "@tryghost/content-api": "^1.5.4",
-    "@tryghost/helpers": "^1.1.43",
-    "clean-css": "^5.1.2",
-    "cross-env": "^7.0.3",
-    "dayjs": "^1.10.4",
-    "dotenv": "^10.0.0",
-    "eslint-utils": "^3.0.0",
-    "i18next": "^21.0.0",
-    "i18next-fs-backend": "^1.1.1",
-    "terser": "^5.7.0"
-  },
   "devDependencies": {
+    "@11ty/eleventy": "^0.12.1",
+    "@11ty/eleventy-plugin-rss": "^1.1.2",
+    "@tryghost/content-api": "^1.5.13",
+    "@tryghost/helpers": "^1.1.52",
+    "clean-css": "^5.2.1",
+    "cross-env": "^7.0.3",
+    "dayjs": "^1.10.7",
+    "dotenv": "^10.0.0",
     "eslint": "8.0.1",
     "eslint-plugin-ghost": "2.6.0",
+    "eslint-utils": "^3.0.0",
+    "i18next": "^21.3.2",
+    "i18next-fs-backend": "^1.1.1",
     "jsdom": "18.0.0",
     "lodash": "4.17.21",
     "md5": "2.3.0",
     "node-fetch": "2.6.5",
     "probe-image-size": "7.2.1",
     "sanitize-html": "2.5.2",
+    "terser": "^5.9.0",
     "xml2js": "0.4.23"
   }
 }
