@@ -73,8 +73,8 @@ const originalPostHandler = async (post) => {
 const lazyLoadHandler = async (html, title) => {
   const dom = new JSDOM(html);
   const document = dom.window.document;
-  const images = [...document.querySelectorAll('img.kg-image')];
-  const iframes = [...document.querySelectorAll('figure.kg-embed-card iframe')];
+  const images = [...document.getElementsByTagName('img')];
+  const iframes = [...document.getElementsByTagName('iframe')];
 
   await Promise.all(
     images.map(async image => {
