@@ -4,6 +4,7 @@ const { extname } = require('path');
 const { getImageDimensions } = require('./image-dimensions');
 const i18next = require('../i18n/config');
 const { htmlSanitizer } = require('./transforms/html-sanitizer');
+const { setDefaultAlt } = require('./ghost/helpers');
 
 const setAttributes = (source, target) => {
   const attributes = source.getAttributeNames();
@@ -69,6 +70,8 @@ const ampHandler = async (obj) => {
 
       // Set element type for dynamically loading scripts in template
       ampObj.elements[targetEl] = true;
+
+      if (!img.alt) setDefaultAlt(img);
 
       // Copy image attributes to ampEl
       ampEl = setAttributes(img, ampEl);

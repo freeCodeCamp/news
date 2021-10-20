@@ -7,6 +7,7 @@ const jsdom = require('jsdom');
 const { JSDOM } = jsdom;
 const i18next = require('../../i18n/config');
 const { writeFileSync, unlinkSync } = require('fs');
+const { setDefaultAlt } = require('../../utils/ghost/helpers');
 const fourOhFourLogName = '404-errors.log';
 const fourOhFourReportedErrors = [];
 const siteUrl = process.env.SITE_URL;
@@ -84,6 +85,8 @@ const lazyLoadHandler = async (html, title) => {
     
       image.setAttribute('width', width);
       image.setAttribute('height', height);
+
+      if (!image.alt) setDefaultAlt(image);
 
       // lazysizes
       image.setAttribute('data-srcset', image.srcset);
