@@ -23,13 +23,6 @@ module.exports = async () => {
     limit
   });
 
-  // // Remove 404 error log from previous build, if it exists
-  // try {
-  //   unlinkSync(fourOhFourLogName);
-  // } catch (err) {
-  //   console.log("Error log doesn't exist...");
-  // }
-
   const posts = ghostPosts.map(post => {
     post.path = stripDomain(post.url);
     post.primary_author.path = stripDomain(post.primary_author.url);

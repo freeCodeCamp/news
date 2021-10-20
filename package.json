@@ -4,9 +4,12 @@
   "description": "Eleventy for https://www.freecodecamp.org/news",
   "main": ".eleventy.js",
   "scripts": {
+    "clean": "npm run clean:error-logs && npm run clean:dist",
+    "clean:error-logs": "rm -f *-errors.log",
+    "clean:dist": "rm -rf dist",
     "start": "npm run dev",
-    "dev": "cross-env ELEVENTY_ENV=dev NODE_OPTIONS=--max-old-space-size=8192 eleventy --serve",
-    "build": "cross-env ELEVENTY_ENV=prod NODE_OPTIONS=--max-old-space-size=8192 eleventy",
+    "dev": "npm run clean && cross-env ELEVENTY_ENV=dev NODE_OPTIONS=--max-old-space-size=8192 eleventy --serve",
+    "build": "npm run clean && cross-env ELEVENTY_ENV=prod NODE_OPTIONS=--max-old-space-size=8192 eleventy",
     "test": "npm run build",
     "lint": "eslint . --ext .js --cache"
   },
