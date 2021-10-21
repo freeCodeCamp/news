@@ -5,6 +5,10 @@
 {% set codeinjection_head = doc.codeinjection_head %}
 {% set codeinjection_foot = doc.codeinjection_foot %}
 
+{% block prism %}
+    {% include "partials/prism.njk" %}
+{% endblock %}
+
 {% block content %}
     <main id="site-main" class="page-template site-main outer">
         <div class="inner">
