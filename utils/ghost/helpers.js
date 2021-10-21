@@ -1,5 +1,5 @@
 const { parse } = require('path');
-const { getImageDimensions } = require('../image-dimensions');
+const getImageDimensions = require('../get-image-dimensions');
 
 const setDefaultAlt = (el) => {
   const filename = parse(el.src).name;

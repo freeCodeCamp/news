@@ -27,6 +27,4 @@ const getImageDimensions = async (
   return imageDimensionMap[url];
 };
 
-module.exports = {
-  getImageDimensions,
-};
+module.exports = getImageDimensions;

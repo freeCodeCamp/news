@@ -1,7 +1,7 @@
 const jsdom = require('jsdom');
 const { JSDOM } = jsdom;
 const { extname } = require('path');
-const { getImageDimensions } = require('../image-dimensions');
+const getImageDimensions = require('../get-image-dimensions');
 const i18next = require('../../i18n/config');
 const { htmlSanitizer } = require('../transforms/html-sanitizer');
 const { setDefaultAlt } = require('./helpers');

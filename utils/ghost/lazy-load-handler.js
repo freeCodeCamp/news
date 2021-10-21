@@ -2,7 +2,7 @@ const jsdom = require('jsdom');
 const { JSDOM } = jsdom;
 const i18next = require('../../i18n/config');
 const { setDefaultAlt } = require('./helpers');
-const { getImageDimensions } = require('../image-dimensions');
+const getImageDimensions = require('../get-image-dimensions');
 
 const lazyLoadHandler = async (html, title) => {
   const dom = new JSDOM(html);
