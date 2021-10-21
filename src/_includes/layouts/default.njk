@@ -65,9 +65,7 @@
         {% endif %}
         <meta name="referrer" content="no-referrer-when-downgrade">
 
-        {% set nextPageRegExp = r/\/\d+\/$/g %}
-
-        {% if pagination.nextPageHref and nextPageRegExp.test(pagination.nextPageHref) %}
+        {% if pagination.nextPageHref | nextPageExists %}
             {# Updated dynamically by src/_includes/pagination.js #}
             <link rel="next" href="">
         {% endif %}

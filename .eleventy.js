@@ -81,6 +81,12 @@ module.exports = function (config) {
     return !tagsArr.map((tag) => tag.name).includes('#disable-comments');
   });
 
+  // Check for next page before showing 'Load More Articles' button
+  config.addFilter('nextPageExists', (href) => {
+    const nextPageRegExp = /\/\d+\/$/g;
+    return nextPageRegExp.test(href);
+  })
+
   // Don't ignore the same files ignored in the git repo
   config.setUseGitIgnore(false);
 
