@@ -21,7 +21,7 @@
         
         <div class="tags-row">
             {% for tag in popularTags %}
-                <a class='tag' href="{{ tag.path }}">
+                <a class='tag' href="{{ tag.path | url }}">
                     <h3>#{{ tag.name }} <small> | {{ tag.count.posts }}</small></h3>
                 </a>
             {% endfor %}

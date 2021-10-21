@@ -16,6 +16,7 @@ const {
   buildDateFormatterShortcode,
   fullYearShortcode
 } = require('./utils/shortcodes/dates');
+const sitePath = require('./utils/site-path');
 
 module.exports = function (config) {
   // Minify inline CSS
@@ -113,6 +114,7 @@ module.exports = function (config) {
           }
         });
       },
+      startPath: sitePath,
     },
   });
 
@@ -127,5 +129,6 @@ module.exports = function (config) {
     templateFormats: ['css', 'njk'],
     htmlTemplateEngine: 'njk',
     markdownTemplateEngine: 'njk',
+    pathPrefix: sitePath
   };
 };

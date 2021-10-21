@@ -60,7 +60,7 @@
 {% endblock %}
 
 {% block seo %}
-    <link rel="amphtml" href="{{ site.url + doc.path + "amp/" }}">
+    <link rel="amphtml" href="{{ site.url + doc.path + "amp/" | url }}">
 
     {# Facebook OpenGraph #}
     <meta property="og:site_name" content="{{ site.title }}">

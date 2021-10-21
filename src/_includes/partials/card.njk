@@ -1,8 +1,8 @@
 {% macro card(post, index) %}
     {% set originalAuthor = post.original_post.primary_author %}
-    <article class="post-card {{post.class}}">
+    <article class="post-card {{ post.class }}">
         {% if post.feature_image %}
-            <a class="post-card-image-link" href="{{post.path}}" aria-label="{{post.title}}">
+            <a class="post-card-image-link" href="{{ post.path | url }}" aria-label="{{ post.title }}">
                 {% 
                     image
                     post.feature_image,
@@ -26,14 +26,14 @@
                 <header class="post-card-header">
                     {% if post.primary_tag %}
                         <span class="post-card-tags">
-                            <a href="{{post.primary_tag.path}}">
-                                #{{post.primary_tag.name}}
+                            <a href="{{ post.primary_tag.path | url }}">
+                                #{{ post.primary_tag.name }}
                             </a>
                         </span>
                     {% endif %}
                     <h2 class="post-card-title">
-                        <a href="{{post.path}}">
-                            {{post.title}}
+                        <a href="{{ post.path | url }}">
+                            {{ post.title }}
                         </a>
                     </h2>
                 </header>
@@ -49,7 +49,8 @@
                                     {{ originalAuthor.name }}
                                 </div>
                                 {% if originalAuthor.profile_image %}
-                                    <a href="{{ originalAuthor.url}}" class="static-avatar">
+                                    {# Original author is coming from another Ghost instance, so no need to use the url filter #}
+                                    <a href="{{ originalAuthor.url }}" class="static-avatar">
                                         {% 
                                             image
                                             originalAuthor.profile_image,
@@ -61,12 +62,12 @@
                                         %}
                                     </a>
                                 {% else %}
-                                    <a href="{{originalAuthor.url}}" class="static-avatar author-profile-image">
+                                    <a href="{{ originalAuthor.url }}" class="static-avatar author-profile-image">
                                         {% include "partials/icons/avatar.njk" %}
                                     </a>
                                 {% endif %}
                                 <span class="meta-content">
-                                    <a class="meta-item" href="{{originalAuthor.url}}">{% t 'localization-meta.roles.author', { authorName: originalAuthor.name } %} ({% t 'localization-meta.languages.en' %})</a>
+                                    <a class="meta-item" href="{{ originalAuthor.url }}">{% t 'localization-meta.roles.author', { authorName: originalAuthor.name } %} ({% t 'localization-meta.languages.en' %})</a>
                                     <time class="meta-item" datetime="{{ post.original_post.published_at }}">{% timeAgo post.original_post.published_at %}</time>
                                 </span>
                             </li>
@@ -76,7 +77,7 @@
                                 {{ post.primary_author.name }}
                             </div>
                             {% if post.primary_author.profile_image %}
-                                <a href="{{ post.primary_author.path }}" class="static-avatar">
+                                <a href="{{ post.primary_author.path | url }}" class="static-avatar">
                                     {% 
                                         image
                                         post.primary_author.profile_image,
@@ -88,16 +89,16 @@
                                     %}
                                 </a>
                             {% else %}
-                                <a href="{{ post.primary_author.path }}" class="static-avatar author-profile-image">
+                                <a href="{{ post.primary_author.path | url }}" class="static-avatar author-profile-image">
                                     {% include "partials/icons/avatar.njk" %}
                                 </a>
                             {% endif %}
                             <span class="meta-content">
-                                <a class="meta-item" href="{{ post.primary_author.path }}">
+                                <a class="meta-item" href="{{ post.primary_author.path | url }}">
                                     {% if post.original_post %}
                                         {% t 'localization-meta.roles.translator', { translatorName: post.primary_author.name } %}
                                     {% else %}
-                                        {{post.primary_author.name}}
+                                        {{ post.primary_author.name }}
                                     {% endif %}
                                 </a>
                                 <time class="meta-item" datetime="{{ post.published_at }}">{% timeAgo post.published_at %}</time>

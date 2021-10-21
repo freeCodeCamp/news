@@ -1,6 +1,7 @@
 const { readFileSync, writeFileSync, mkdirSync } = require('fs');
 const md5 = require('md5');
-const { parse } = require('path');
+const { parse, normalize } = require('path');
+const sitePath = require('../site-path');
 let manifest = {};
 
 function cacheBusterShortcode(filePath) {
@@ -25,8 +26,10 @@ function cacheBusterShortcode(filePath) {
     manifest[base] = hashedFilename;
   }
 
-  // Return path with hashed filename to template
-  return filePath.replace(base, manifest[base]);
+  const hashedRelativeUrl = `${sitePath}${filePath.replace(base, manifest[base])}`;
+
+  // Return final path with hashed filename to the template
+  return normalize(hashedRelativeUrl);
 }
 
 module.exports = cacheBusterShortcode;
