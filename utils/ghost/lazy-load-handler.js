@@ -1,6 +1,6 @@
 const jsdom = require('jsdom');
 const { JSDOM } = jsdom;
-const i18next = require('../../i18n/config');
+const translate = require('../translate');
 const { setDefaultAlt } = require('./helpers');
 const getImageDimensions = require('../get-image-dimensions');
 
@@ -29,7 +29,7 @@ const lazyLoadHandler = async (html, title) => {
     }),
 
     iframes.map(async iframe => {
-      iframe.setAttribute('title', `${i18next.t('embed-title')}`);
+      iframe.setAttribute('title', `${translate('embed-title')}`);
 
       // To do: consider adding a low quality facade image via src
       // lazysizes

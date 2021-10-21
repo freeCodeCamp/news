@@ -2,7 +2,7 @@ const jsdom = require('jsdom');
 const { JSDOM } = jsdom;
 const { extname } = require('path');
 const getImageDimensions = require('../get-image-dimensions');
-const i18next = require('../../i18n/config');
+const translate = require('../translate');
 const { htmlSanitizer } = require('../transforms/html-sanitizer');
 const { setDefaultAlt } = require('./helpers');
 
@@ -35,7 +35,7 @@ const ampHandler = async (obj) => {
     const fallbackDiv = document.createElement('div');
     const fallbackParagraph = document.createElement('p');
     const i18nKey = type.replace('amp-', '');
-    const fallbackElType = i18next.t(`fallback.${i18nKey}`);
+    const fallbackElType = translate(`fallback.${i18nKey}`);
     let ampEl = document.createElement(type);
 
     // Set element type for dynamically loading scripts in template
@@ -46,7 +46,7 @@ const ampHandler = async (obj) => {
     ampEl.setAttribute('src', sourceEls[0] ? sourceEls[0].src : originalEl.getAttribute('src'));
 
     fallbackDiv.setAttribute('fallback', '');
-    fallbackParagraph.innerHTML = `${i18next.t('fallback.message', { element: fallbackElType })}`;
+    fallbackParagraph.innerHTML = `${translate('fallback.message', { element: fallbackElType })}`;
     fallbackDiv.appendChild(fallbackParagraph);
     ampEl.appendChild(fallbackDiv);
 
