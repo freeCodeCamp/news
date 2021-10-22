@@ -6,7 +6,7 @@
   "scripts": {
     "clean": "npm run clean:error-logs && npm run clean:dist",
     "clean:error-logs": "rm -f *-errors.log",
-    "clean:dist": "rm -rf dist",
+    "clean:dist": "rm -rf dist/",
     "start": "npm run dev",
     "dev": "npm run clean && cross-env ELEVENTY_ENV=dev NODE_OPTIONS=--max-old-space-size=8192 eleventy --serve",
     "build": "npm run clean && cross-env ELEVENTY_ENV=prod NODE_OPTIONS=--max-old-space-size=8192 eleventy",
