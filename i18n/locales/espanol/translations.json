@@ -10,7 +10,7 @@
   "search": {
     "label": "Buscar",
     "accessible-name": "Enviar su consulta de búsqueda",
-    "placeholder": "Buscar 200+ tutoriales",
+    "placeholder": "Buscar 300+ tutoriales",
     "see-results": "Ver todos los resultados de {{ searchQuery }}",
     "no-tutorials": "No se encontraron tutoriales"
   },

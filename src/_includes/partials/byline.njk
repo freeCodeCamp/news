@@ -1,6 +1,8 @@
 {% macro byline(author, siteLang, lazyLoad, showBio, role) %}
     {% set lazy = 1 if lazyLoad else 0 %}
-    {% set authorUrl = author.url if role == 'author' else author.path %}
+    {% set authorUrl %}
+        {{ author.url if role == 'author' else (author.path | url) }}
+    {% endset %}
     {% set localizedRole %}{% t "localization-meta.roles." + (role if role else "author") %}{% endset %}
 
     <section class="author-card">

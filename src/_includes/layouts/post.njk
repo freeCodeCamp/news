@@ -6,6 +6,10 @@
 {% set codeinjection_head = post.codeinjection_head %}
 {% set codeinjection_foot = post.codeinjection_foot %}
 
+{% block prism %}
+    {% include "partials/prism.njk" %}
+{% endblock %}
+
 {% block content %}
     <main id="site-main" class="post-template site-main outer">
         <div class="inner">
@@ -17,7 +21,7 @@
                         </time>
                         {% if post.primary_tag %}
                             <span class="date-divider">/</span>
-                            <a href="{{ post.primary_tag.path }}">
+                            <a href="{{ post.primary_tag.path | url }}">
                                 #{{ post.primary_tag.name }}
                             </a>
                         {% endif %}
@@ -94,7 +98,7 @@
 {% endblock %}
 
 {% block seo %}
-    <link rel="amphtml" href="{{ site.url + post.path + "amp/" }}">
+    <link rel="amphtml" href="{{ site.url + post.path + "amp/" | url }}">
 
     {# Facebook OpenGraph #}
     <meta property="og:site_name" content="{{ site.title }}">

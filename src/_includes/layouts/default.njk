@@ -12,13 +12,11 @@
         <meta name="HandheldFriendly" content="True" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="https://cdn.freecodecamp.org/news-assets/prism-1-16-0/prism.min.css" />
-        <noscript><link rel="stylesheet" href="https://cdn.freecodecamp.org/news-assets/prism-1-16-0/prism.min.css"></noscript>
-        <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'"
-            href="https://cdn.freecodecamp.org/news-assets/prism-1-16-0/prism-unescaped-markup.css" />
-        <noscript><link rel="stylesheet" href="https://cdn.freecodecamp.org/news-assets/prism-1-16-0/prism-unescaped-markup.css"></noscript>
-
         <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700|Roboto+Mono:400,700?&display=swap">
+
+        {# Load Prism styles and scripts only for posts / pages #}
+        {% block prism %}
+        {% endblock %}
 
         {# News Theme Styles #}
         <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="{% cacheBuster '/assets/css/global.css' %}" />
@@ -35,7 +33,9 @@
         <script defer src="https://cdn.freecodecamp.org/news-assets/dayjs/1.10.4/relativeTime.min.js"></script>
 
         {# Dynamically load Day.js locale #}
-        <script defer src="https://cdn.freecodecamp.org/news-assets/dayjs/1.10.4/locale/{{ site.lang }}.min.js"></script>
+        {% if not siteLang === "en" %}
+            <script defer src="https://cdn.freecodecamp.org/news-assets/dayjs/1.10.4/locale/{{ site.lang }}.min.js"></script>
+        {% endif %}
 
         {# Lazysizes #}
         <script defer type="text/javascript" src="{% cacheBuster '/assets/js/lazysizes.min.js' %}"></script>
@@ -57,17 +57,15 @@
         <meta name="keywords" content="{% t 'meta:keywords' %}">
         <meta name="description" content="{% block description %}{% t 'meta:description' %}{% endblock %}">
         <link rel="icon" href="{{ site.icon }}" type="image/png">
-        {# Fall back to site URL if no canonical URL is set #}
+        {# Fall back to site URL with trailing slash if no canonical URL is set #}
         {% if canonicalUrl %}
             <link rel="canonical" href="{{ canonicalUrl }}">
         {% else %}
-            <link rel="canonical" href="{{ site.url }}">
+            <link rel="canonical" href="{{ site.url + page.url }}">
         {% endif %}
         <meta name="referrer" content="no-referrer-when-downgrade">
 
-        {% set nextPageRegExp = r/\/\d+\/$/g %}
-
-        {% if pagination.nextPageHref and nextPageRegExp.test(pagination.nextPageHref) %}
+        {% if pagination.nextPageHref | nextPageExists %}
             {# Updated dynamically by src/_includes/pagination.js #}
             <link rel="next" href="">
         {% endif %}
@@ -78,7 +76,7 @@
             <meta property="og:type" content="website">
             <meta property="og:title" content="{{ site.title }}">
             <meta property="og:description" content="{% t 'meta:description' %}">
-            <meta property="og:url" content="{{site.url + page.url}}">
+            <meta property="og:url" content="{{ site.url + page.url }}">
             <meta property="og:image" content="{{ site.cover_image }}">
             <meta property="article:publisher" content="https://www.facebook.com/freecodecamp">
 
@@ -118,69 +116,6 @@
 
             {% include "partials/footer.njk" %}
         </div>
-
-        <script defer type="text/javascript" src="https://cdn.freecodecamp.org/news-assets/prism-1-16-0/prism.min.js"></script>
-        <script defer type="text/javascript"
-            src="https://cdn.freecodecamp.org/news-assets/prism-1-16-0/prism-unescaped-markup.min.js"></script>
-        <script defer type="text/javascript"
-            src="https://cdn.freecodecamp.org/news-assets/prism-1-16-0/prism-markup-templating.min.js"></script>
-        <script defer type="text/javascript"
-            src="https://cdn.freecodecamp.org/news-assets/prism-1-16-0/prism-bash.min.js"></script>
-        <script defer type="text/javascript" src="https://cdn.freecodecamp.org/news-assets/prism-1-16-0/prism-c.min.js"></script>
-        <script defer type="text/javascript"
-            src="https://cdn.freecodecamp.org/news-assets/prism-1-16-0/prism-clojure.min.js"></script>
-        <script defer type="text/javascript"
-            src="https://cdn.freecodecamp.org/news-assets/prism-1-16-0/prism-cpp.min.js"></script>
-        <script defer type="text/javascript"
-            src="https://cdn.freecodecamp.org/news-assets/prism-1-16-0/prism-csharp.min.js"></script>
-        <script defer type="text/javascript"
-            src="https://cdn.freecodecamp.org/news-assets/prism-1-16-0/prism-css.min.js"></script>
-        <script defer type="text/javascript"
-            src="https://cdn.freecodecamp.org/news-assets/prism-1-16-0/prism-docker.min.js"></script>
-        <script defer type="text/javascript"
-            src="https://cdn.freecodecamp.org/news-assets/prism-1-16-0/prism-elixir.min.js"></script>
-        <script defer type="text/javascript"
-            src="https://cdn.freecodecamp.org/news-assets/prism-1-16-0/prism-erlang.min.js"></script>
-        <script defer type="text/javascript"
-            src="https://cdn.freecodecamp.org/news-assets/prism-1-16-0/prism-git.min.js"></script>
-        <script defer type="text/javascript" src="https://cdn.freecodecamp.org/news-assets/prism-1-16-0/prism-go.min.js"></script>
-        <script defer type="text/javascript"
-            src="https://cdn.freecodecamp.org/news-assets/prism-1-16-0/prism-graphql.min.js"></script>
-        <script defer type="text/javascript"
-            src="https://cdn.freecodecamp.org/news-assets/prism-1-16-0/prism-haskell.min.js"></script>
-        <script defer type="text/javascript"
-            src="https://cdn.freecodecamp.org/news-assets/prism-1-16-0/prism-java.min.js"></script>
-        <script defer type="text/javascript"
-            src="https://cdn.freecodecamp.org/news-assets/prism-1-16-0/prism-javascript.min.js"></script>
-        <script defer type="text/javascript"
-            src="https://cdn.freecodecamp.org/news-assets/prism-1-16-0/prism-json.min.js"></script>
-        <script defer type="text/javascript"
-            src="https://cdn.freecodecamp.org/news-assets/prism-1-16-0/prism-jsx.min.js"></script>
-        <script defer type="text/javascript"
-            src="https://cdn.freecodecamp.org/news-assets/prism-1-16-0/prism-kotlin.min.js"></script>
-        <script defer type="text/javascript"
-            src="https://cdn.freecodecamp.org/news-assets/prism-1-16-0/prism-lua.min.js"></script>
-        <script defer type="text/javascript"
-            src="https://cdn.freecodecamp.org/news-assets/prism-1-16-0/prism-markup.min.js"></script>
-        <script defer type="text/javascript"
-            src="https://cdn.freecodecamp.org/news-assets/prism-1-16-0/prism-php.min.js"></script>
-        <script defer type="text/javascript"
-            src="https://cdn.freecodecamp.org/news-assets/prism-1-16-0/prism-python.min.js"></script>
-        <script defer type="text/javascript" src="https://cdn.freecodecamp.org/news-assets/prism-1-16-0/prism-r.min.js"></script>
-        <script defer type="text/javascript"
-            src="https://cdn.freecodecamp.org/news-assets/prism-1-16-0/prism-ruby.min.js"></script>
-        <script defer type="text/javascript"
-            src="https://cdn.freecodecamp.org/news-assets/prism-1-16-0/prism-rust.min.js"></script>
-        <script defer type="text/javascript"
-            src="https://cdn.freecodecamp.org/news-assets/prism-1-16-0/prism-scala.min.js"></script>
-        <script defer type="text/javascript"
-            src="https://cdn.freecodecamp.org/news-assets/prism-1-16-0/prism-sql.min.js"></script>
-        <script defer type="text/javascript"
-            src="https://cdn.freecodecamp.org/news-assets/prism-1-16-0/prism-swift.min.js"></script>
-        <script defer type="text/javascript"
-            src="https://cdn.freecodecamp.org/news-assets/prism-1-16-0/prism-typescript.min.js"></script>
-        <script defer type="text/javascript"
-            src="https://cdn.freecodecamp.org/news-assets/prism-1-16-0/prism-yaml.min.js"></script>
 
         {# Pulls scripts from other template files and include them after all assets 
         have loaded / global setup is complete. For example, there's some JS which

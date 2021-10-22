@@ -1,6 +1,4 @@
-{% set nextPageRegExp = r/\/\d+\/$/g %}
-
-{% if pagination.nextPageHref and nextPageRegExp.test(pagination.nextPageHref) %}
+{% if pagination.nextPageHref | nextPageExists %}
     <div class="read-more-row">
         <button id="readMoreBtn">{% t 'buttons.load-more-articles' %}</button>
     </div>
