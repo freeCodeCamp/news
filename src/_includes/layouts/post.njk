@@ -1,13 +1,29 @@
 {% extends 'layouts/default.njk' %}
 {% from "partials/byline.njk" import byline %}
+{% from "partials/ad.njk" import ad %}
 
 {% set title = post.title %}
 {% set canonicalUrl = site.url + post.path %}
 {% set codeinjection_head = post.codeinjection_head %}
 {% set codeinjection_foot = post.codeinjection_foot %}
+{% set adsEnabled = secrets.adsEnabled === 'true' %}
 
 {% block prism %}
     {% include "partials/prism.njk" %}
+{% endblock %}
+
+{% block monetization %}
+    {% if adsEnabled and site.lang !== "zh" %}
+        <script
+            data-ad-client="{{ secrets.googleAdsenseDataAdClient }}"
+            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+            crossorigin="anonymous"
+            async
+        ></script>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    {% endif %}
 {% endblock %}
 
 {% block content %}
@@ -54,9 +70,22 @@
                     </figure>
                 {% endif %}
                 <section class="post-full-content">
-                    <section class="post-content {{ "medium-migrated-article" if (post.primary_author.name == "freeCodeCamp.org") }}">
-                        {{ content | safe }}
-                    </section>
+                    <div class="post-and-sidebar">
+                        <section class="post-content {{ "medium-migrated-article" if (post.primary_author.name == "freeCodeCamp.org") }}">
+                            {{ content | safe }}
+                        </section>
+                        {% if adsEnabled and site.lang !== "zh" %}
+                            <div class="sidebar">
+                                {# Show 2 ads by default #}
+                                {{ ad() }}
+                                {{ ad() }}
+                                {# For every 2 mins of reading time, show another ad #}
+                                {% for i in range(1, post.reading_time, 2) %}
+                                    {{ ad() }}
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
                     <hr />
                     {% if post.primary_author.name != "freeCodeCamp.org" %}
                         <div class="post-full-author-header">
@@ -82,6 +111,11 @@
                     {% endif %}
                 </section>
             </article>
+            {% if adsEnabled and site.lang !== "zh" %}
+                <div class="banner-ad bottom">
+                    {{ ad() }}
+                </div>
+            {% endif %}
         </div>
     </main>
 {% endblock %}
@@ -93,6 +127,9 @@
             const postContent = document.querySelector('.post-full-content');
             if (postContent) fitVids(postContent);
         });
+
+        {# Toggle Google Ads #}
+        {% include "assets/js/handle-ads.js" %}
     {% endset %}
     <script>{{ js | jsMin | safe }}</script>
 {% endblock %}

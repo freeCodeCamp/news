@@ -1,7 +1,17 @@
-const { algoliaAppId, algoliaAPIKey, algoliaIndex } = require('../../config');
+const {
+  algoliaAppId,
+  algoliaAPIKey,
+  algoliaIndex,
+  adsEnabled,
+  googleAdsenseDataAdClient,
+  googleAdsenseDataAdSlot,
+} = require('../../config');
 
 module.exports = {
-  algoliaAppId, 
+  algoliaAppId,
   algoliaAPIKey,
-  algoliaIndex
-}
+  algoliaIndex,
+  adsEnabled,
+  googleAdsenseDataAdClient,
+  googleAdsenseDataAdSlot,
+};

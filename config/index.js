@@ -43,7 +43,10 @@ const {
   SITE_DOMAIN: siteDomain,
   POSTS_PER_PAGE: postsPerPage,
   ALGOLIA_APP_ID: algoliaAppId,
-  ALGOLIA_API_KEY: algoliaAPIKey
+  ALGOLIA_API_KEY: algoliaAPIKey,
+  ADS_ENABLED: adsEnabled,
+  GOOGLE_ADSENSE_DATA_AD_CLIENT: googleAdsenseDataAdClient,
+  GOOGLE_ADSENSE_DATA_AD_SLOT: googleAdsenseDataAdSlot
 } = process.env;
 
 // Validations
@@ -93,6 +96,15 @@ module.exports = Object.assign(
       !algoliaAPIKey || algoliaAPIKey === 'api_key_from_algolia_dashboard'
         ? ''
         : algoliaAPIKey,
-    algoliaIndex: algoliaIndices[localeForUI] || 'news'
+    algoliaIndex: algoliaIndices[localeForUI] || 'news',
+    adsEnabled: adsEnabled || 'false',
+    googleAdsenseDataAdClient:
+      !googleAdsenseDataAdClient || googleAdsenseDataAdClient === 'pub-1234567890'
+        ? ''
+        : googleAdsenseDataAdClient,
+    googleAdsenseDataAdSlot:
+      !googleAdsenseDataAdSlot || googleAdsenseDataAdSlot === '1234567890'
+        ? ''
+        : googleAdsenseDataAdSlot
   }
 );
