@@ -57,7 +57,7 @@
     "md5": "2.3.0",
     "node-fetch": "2.6.6",
     "probe-image-size": "7.2.1",
-    "sanitize-html": "2.5.2",
+    "sanitize-html": "2.5.3",
     "terser": "5.9.0",
     "xml2js": "0.4.23"
   }
