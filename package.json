@@ -55,7 +55,7 @@
     "jsdom": "18.0.0",
     "lodash": "4.17.21",
     "md5": "2.3.0",
-    "node-fetch": "2.6.5",
+    "node-fetch": "2.6.6",
     "probe-image-size": "7.2.1",
     "sanitize-html": "2.5.2",
     "terser": "5.9.0",
