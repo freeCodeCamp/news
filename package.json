@@ -42,7 +42,7 @@
     "@11ty/eleventy": "0.12.1",
     "@11ty/eleventy-plugin-rss": "1.1.2",
     "@tryghost/content-api": "1.5.14",
-    "@tryghost/helpers": "1.1.52",
+    "@tryghost/helpers": "1.1.53",
     "clean-css": "5.2.2",
     "cross-env": "7.0.3",
     "dayjs": "1.10.7",
