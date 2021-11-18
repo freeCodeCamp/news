@@ -1,6 +1,7 @@
 const { chunk, cloneDeep } = require('lodash');
 
 const fetchFromGhost = require('../../utils/ghost/fetch-from-ghost');
+const processGhostResponse = require('../../utils/ghost/process-ghost-response');
 const errorLogger = require('../../utils/error-logger');
 
 const { sourceApiUrl } = require('../../utils/ghost/api');
@@ -13,16 +14,26 @@ const getUniqueList = (arr, key) => [...new Map(arr.map(item => [item[key], item
 
 module.exports = async () => {
   const limit = 200;
-  const ghostPosts = await fetchFromGhost('posts', {
-    include: ['tags', 'authors'],
-    filter: 'status:published',
-    limit
-  });
-  const ghostPages = await fetchFromGhost('pages', {
-    include: ['tags', 'authors'],
-    filter: 'status:published',
-    limit
-  });
+  let ghostPosts, ghostPages;
+
+  if (process.env.ELEVENTY_ENV === 'ci') {
+    const testPosts = require('./test-posts.json');
+    const testPages = require('./test-pages.json');
+
+    ghostPosts = await processGhostResponse(testPosts, 'posts');
+    ghostPages = await processGhostResponse(testPages);
+  } else {
+    ghostPosts = await fetchFromGhost('posts', {
+      include: ['tags', 'authors'],
+      filter: 'status:published',
+      limit
+    });
+    ghostPages = await fetchFromGhost('pages', {
+      include: ['tags', 'authors'],
+      filter: 'status:published',
+      limit
+    });
+  }
 
   const posts = ghostPosts.map(post => {
     post.path = stripDomain(post.url);
