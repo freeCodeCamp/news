@@ -5,10 +5,13 @@ module.exports = {
     commonjs: true,
     es6: true
   },
-  extends: "eslint:recommended",
+  extends: [
+    'eslint:recommended',
+    'plugin:cypress/recommended'
+  ],
   globals: {
-    Atomics: "readonly",
-    SharedArrayBuffer: "readonly"
+    Atomics: 'readonly',
+    SharedArrayBuffer: 'readonly'
   },
   parserOptions: {
     ecmaVersion: 2020
