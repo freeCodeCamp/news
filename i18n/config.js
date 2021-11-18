@@ -1,4 +1,4 @@
-const i18next = require('i18next/dist/cjs/i18next');
+const i18next = require('i18next');
 const Backend = require('i18next-fs-backend');
 const { readdirSync, lstatSync } = require('fs');
 const { join } = require('path');
