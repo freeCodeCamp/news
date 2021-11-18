@@ -59,6 +59,7 @@
     "@tryghost/helpers": "1.1.54",
     "clean-css": "5.2.2",
     "cross-env": "7.0.3",
+    "cypress": "9.0.0",
     "dayjs": "1.10.7",
     "dotenv": "10.0.0",
     "eslint": "8.5.0",
