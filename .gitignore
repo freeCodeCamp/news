@@ -71,3 +71,7 @@ typings/
 yarn-error.log
 .netlify/
 dist/
+
+# Cypress.io
+cypress/videos
+cypress/screenshots
