@@ -73,3 +73,7 @@ yarn-error.log
 dist/
 *.tag.gz
 .secrets
+
+# Cypress.io
+cypress/videos
+cypress/screenshots
