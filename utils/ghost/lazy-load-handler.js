@@ -45,6 +45,4 @@ const lazyLoadHandler = async (html, title) => {
   return dom.window.document.body.innerHTML;
 }
 
-
-
 module.exports = lazyLoadHandler;

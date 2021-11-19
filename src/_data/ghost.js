@@ -8,7 +8,15 @@ const { sourceApiUrl } = require('../../utils/ghost/api');
 const { siteURL, postsPerPage } = require('../../config');
 
 // Strip Ghost domain from urls
-const stripDomain = url => url.replace(sourceApiUrl, '');
+const stripDomain = url => {
+  // To do: figure out a better way to strip out everything
+  // up to and including /news
+  const toReplace = process.env.ELEVENTY_ENV === 'ci' ?
+    'https://www.freecodecamp.org/news' :
+    sourceApiUrl;
+
+  return url.replace(toReplace, '');
+};
 
 const getUniqueList = (arr, key) => [...new Map(arr.map(item => [item[key], item])).values()];
 
