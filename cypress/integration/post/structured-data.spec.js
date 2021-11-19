@@ -39,7 +39,7 @@ describe('Landing page structured data (JSON-LD)', () => {
     },
     keywords: 'freeCodeCamp',
     description:
-      'As you may know, I&amp;amp;amp;#39;ve been a fan of Replit since way back in 2012. I used early versions of the website when I was learning to code.  For me, Replit was a place to code my solutions for Project Euler problems, and to practice my Python and JavaScript',
+      'As you may know, I&#x27;ve been a fan of Replit since way back in 2012. I used early versions of the website when I was learning to code.  For me, Replit was a place to code my solutions for Project Euler problems, and to practice my Python and JavaScript',
     mainEntityOfPage: {
       '@type': 'WebPage',
       '@id': 'http://localhost:8080/news/',
