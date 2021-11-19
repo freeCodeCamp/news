@@ -25,8 +25,8 @@ module.exports = async () => {
   let ghostPosts, ghostPages;
 
   if (process.env.ELEVENTY_ENV === 'ci') {
-    const testPosts = require('./test-posts.json');
-    const testPages = require('./test-pages.json');
+    const testPosts = require('../../cypress/seed-data/posts.json');
+    const testPages = require('../../cypress/seed-data/pages.json');
 
     ghostPosts = await processGhostResponse(testPosts, 'posts');
     ghostPages = await processGhostResponse(testPages);
