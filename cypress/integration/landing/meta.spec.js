@@ -1,5 +1,5 @@
 const metaContent = {
-  title: 'freeCodeCamp.org',
+  siteName: 'freeCodeCamp.org',
   url: 'http://localhost:8080/news/',
   keywords: 'freeCodeCamp, programming, front-end, programmer, article, regular expressions, Python, JavaScript, AWS, JSON, HTML, CSS, Bootstrap, React, Vue, Webpack',
   description: 'Browse thousands of programming tutorials written by experts. Learn Web Development, Data Science, DevOps, Security, and get developer career advice.',
@@ -54,7 +54,7 @@ describe('Landing page metadata', () => {
     cy.get('head meta[property="og:site_name"]').should(
       'have.attr',
       'content',
-      metaContent.title
+      metaContent.siteName
     );
   });
 
@@ -70,7 +70,7 @@ describe('Landing page metadata', () => {
     cy.get('head meta[property="og:title"]').should(
       'have.attr',
       'content',
-      metaContent.title
+      metaContent.siteName
     );
   });
 
@@ -134,7 +134,7 @@ describe('Landing page metadata', () => {
     cy.get('head meta[name="twitter:title"]').should(
       'have.attr',
       'content',
-      metaContent.title
+      metaContent.siteName
     );
   });
 
