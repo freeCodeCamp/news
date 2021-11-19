@@ -133,6 +133,7 @@
 
 {% block seo %}
     <link rel="amphtml" href="{{ site.url + post.path + "amp/" | url }}">
+    <meta name="description" content="{{ post.excerpt }}">
 
     {# Facebook OpenGraph #}
     <meta property="og:site_name" content="{{ site.title }}">

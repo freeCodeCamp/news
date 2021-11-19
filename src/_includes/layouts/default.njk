@@ -58,8 +58,13 @@
         {% block headScripts %}
         {% endblock %}
 
-        <meta name="keywords" content="{% t 'meta:keywords' %}">
-        <meta name="description" content="{% block description %}{% t 'meta:description' %}{% endblock %}">
+        {# These metatags only appear in this form on the landing page.
+        The description appears in other contexts. #}
+        {% if not permalink %}
+            <meta name="keywords" content="{% t 'meta:keywords' %}">
+            <meta name="description" content="{% t 'meta:description' %}">
+        {% endif %}
+
         <link rel="icon" href="{{ site.icon }}" type="image/png">
         {# Fall back to site URL with trailing slash if no canonical URL is set #}
         {% if canonicalUrl %}

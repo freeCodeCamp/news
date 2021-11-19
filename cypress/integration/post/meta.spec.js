@@ -1,8 +1,7 @@
 const metaContent = {
   title: "We're Building New Courses on Rust and Python + the Replit.web Framework",
   url: 'http://localhost:8080/news/announcing-rust-course-replit-web/',
-  keywords: 'freeCodeCamp, programming, front-end, programmer, article, regular expressions, Python, JavaScript, AWS, JSON, HTML, CSS, Bootstrap, React, Vue, Webpack',
-  description: 'Browse thousands of programming tutorials written by experts. Learn Web Development, Data Science, DevOps, Security, and get developer career advice.',
+  description: 'As you may know, I&#39;ve been a fan of Replit since way back in 2012. I used early versions of the website when I was learning to code.  For me, Replit was a place to code my solutions for Project Euler problems, and to practice my Python and JavaScript',
   image: 'https://www.freecodecamp.org/news/content/images/2021/08/sean-lim-NPlv2pkYoUA-unsplash--2-.jpg',
   excerpt: 'As you may know, I&#39;ve been a fan of Replit since way back in 2012. I used early versions of the website when I was learning to code.  For me, Replit was a place to code my solutions for Project Euler problems, and to practice my Python and JavaScript'
 }
@@ -16,14 +15,6 @@ describe('Post metadata', () => {
     cy.title().should(
       'eq',
       metaContent.title
-    );
-  });
-
-  it('<meta> keywords', () => {
-    cy.get('head meta[name="keywords"]').should(
-      'have.attr',
-      'content',
-      metaContent.keywords
     );
   });
 
