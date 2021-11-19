@@ -6,6 +6,16 @@ const { siteURL } = require('../../config');
 // This counts on all images, including the site logo, being stored like on Ghost with the
 // same directory structure
 const domainReplacer = (url) => url.replace(sourceApiUrl, siteURL);
+const { URL } = require('url');
+
+// This counts on all images, including the site logo, being stored like on Ghost with the
+// same directory structure
+const domainReplacer = (url) => {
+  let { pathname } = new URL(url);
+  pathname = pathname.replace('/news/', '');
+
+  return `${siteURL}/${pathname}`;
+};
 
 async function createJsonLdShortcode(type, site, data) {
   // Main site settings from site object
@@ -26,7 +36,7 @@ async function createJsonLdShortcode(type, site, data) {
       url: url,
       logo: {
         '@type': 'ImageObject',
-        url: domainReplacer(logo),
+        url: logo,
         width: image_dimensions.logo.width,
         height: image_dimensions.logo.height,
       },
@@ -66,6 +76,7 @@ async function createJsonLdShortcode(type, site, data) {
       website,
       twitter,
       facebook,
+      url
     } = primaryAuthor;
     const authorObj = {
       '@type': 'Person',
