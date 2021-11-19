@@ -18,14 +18,6 @@ describe('Landing page metadata', () => {
     );
   });
 
-  it('canonical URL', () => {
-    cy.get('head link[rel="canonical"]').should(
-      'have.attr',
-      'href',
-      metaContent.url
-    );
-  });
-
   it('<meta> keywords', () => {
     cy.get('head meta[name="keywords"]').should(
       'have.attr',
@@ -39,6 +31,14 @@ describe('Landing page metadata', () => {
       'have.attr',
       'content',
       metaContent.description
+    );
+  });
+
+  it('canonical URL', () => {
+    cy.get('head link[rel="canonical"]').should(
+      'have.attr',
+      'href',
+      metaContent.url
     );
   });
 
