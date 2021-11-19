@@ -43,7 +43,7 @@ async function createJsonLdShortcode(type, site, data) {
     },
     image: {
       '@type': 'ImageObject',
-      url: domainReplacer(cover_image),
+      url: cover_image,
       width: image_dimensions.cover_image.width,
       height: image_dimensions.cover_image.height,
     },
