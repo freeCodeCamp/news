@@ -38,7 +38,7 @@ describe('Page structured data (JSON-LD)', () => {
       height: 500,
     },
     description:
-      'Once you&amp;amp;#39;ve forwarded this receipt, we will award you with your donor badge on your freeCodeCamp profile. We will also turn off donation prompts for you. Thank you again for supporting our nonprofit. freeCodeCamp is a highly-efficient education NGO. This year alone, we&amp;amp;#39;ve provided million hours of free education to',
+      'Once you&#x27;ve forwarded this receipt, we will award you with your donor badge on\nyour freeCodeCamp profile. We will also turn off donation prompts for you.\n\nThank you again for supporting our nonprofit.\n\nfreeCodeCamp is a highly-efficient education NGO. This year alone, we&#x27;ve\nprovided million hours of free education to people around the world.\n\nAt our nonprofit&#x27;s current operating budget, every dollar you donate to\nfreeCodeCamp translates into 50 hours worth of technology education.\n\nSome members ',
     mainEntityOfPage: {
       '@type': 'WebPage',
       '@id': 'http://localhost:8080/news/',
