@@ -2,7 +2,7 @@ const selectors = {
   bannerText: "[data-test-label='banner-text']"
 }
 
-describe('Landing page', () => {
+describe('Landing', () => {
   before(() => {
     cy.visit('/');
   });
