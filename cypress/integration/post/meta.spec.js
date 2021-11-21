@@ -2,7 +2,7 @@ const metaContent = {
   title: "We're Building New Courses on Rust and Python + the Replit.web Framework",
   url: 'http://localhost:8080/news/announcing-rust-course-replit-web/',
   image: 'https://www.freecodecamp.org/news/content/images/2021/08/sean-lim-NPlv2pkYoUA-unsplash--2-.jpg',
-  excerpt: 'As you may know, I&#39;ve been a fan of Replit since way back in 2012. I used early versions of the website when I was learning to code.  For me, Replit was a place to code my solutions for Project Euler problems, and to practice my Python and JavaScript'
+  excerpt: "As you may know, I've been a fan of Replit since way back in 2012. I used early versions of the website when I was learning to code.  For me, Replit was a place to code my solutions for Project Euler problems, and to practice my Python and JavaScript"
 }
 
 describe('Post metadata', () => {

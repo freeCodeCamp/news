@@ -23,7 +23,7 @@
                     <![CDATA[ {% fullEscaper post.title %} ]]>
                 </title>
                 <description>
-                    <![CDATA[ {{ post.short_excerpt | escape }} ]]>
+                    <![CDATA[ {{ post.excerpt | escape }} ]]>
                 </description>
                 <link>{{ site.url + post.path }}</link>
                 <guid isPermaLink="false">{{ post.comment_id }}</guid>
@@ -36,7 +36,7 @@
                 <pubDate>{% buildDateFormatter site.timezone, post.published_at %}</pubDate>
                 <media:content url="{{ post.feature_image }}" medium="image" />
                 <content:encoded>
-                    <![CDATA[ {{ (post.short_excerpt | escape) if feed.path == "/" else (post.html | safe) }} ]]>
+                    <![CDATA[ {{ (post.excerpt | escape) if feed.path == "/" else (post.html | safe) }} ]]>
                 </content:encoded>
             </item>
         {% endfor %}

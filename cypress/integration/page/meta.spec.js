@@ -2,7 +2,7 @@ const metaContent = {
   title: "Please check your email for a donation receipt. Forward it to donors@freecodecamp.org.",
   url: 'http://localhost:8080/news/thank-you-for-donating/',
   image: 'https://www.freecodecamp.org/news/content/images/2020/03/fcc-banner.jpg',
-  excerpt: 'Once you&amp;#39;ve forwarded this receipt, we will award you with your donor badge on your freeCodeCamp profile. We will also turn off donation prompts for you. Thank you again for supporting our nonprofit. freeCodeCamp is a highly-efficient education NGO. This year alone, we&amp;#39;ve provided million hours of free education to'
+  excerpt: "Once you've forwarded this receipt, we will award you with your donor badge on your freeCodeCamp profile. We will also turn off donation prompts for you. Thank you again for supporting our nonprofit. freeCodeCamp is a highly-efficient education NGO. This year alone, we've provided million hours of free education to"
 }
 
 describe('Page metadata', () => {
