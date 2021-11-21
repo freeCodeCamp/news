@@ -6,7 +6,7 @@ const metaContent = {
   image: 'https://cdn.freecodecamp.org/platform/universal/fcc_meta_1920X1080-indigo.png'
 }
 
-describe('Landing page metadata', () => {
+describe('Landing metadata', () => {
   before(() => {
     cy.visit('/');
   });
