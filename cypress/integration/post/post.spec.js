@@ -1,4 +1,4 @@
-describe('Post page', () => {
+describe('Post', () => {
   before(() => {
     cy.visit('/announcing-rust-course-replit-web');
   });
