@@ -1,4 +1,4 @@
-describe('Landing page structured data (JSON-LD)', () => {
+describe('Post structured data (JSON-LD)', () => {
   let jsonLdObj;
   const jsonLdExpected = {
     '@context': 'https://schema.org',
