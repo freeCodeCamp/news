@@ -39,7 +39,7 @@ describe('Post structured data (JSON-LD)', () => {
     },
     keywords: 'freeCodeCamp',
     description:
-      'As you may know, I&#x27;ve been a fan of Replit since way back in 2012. I used early versions of the website when I was learning to code.  For me, Replit was a place to code my solutions for Project Euler problems, and to practice my Python and JavaScript',
+      'As you may know, I&#x27;ve been a fan of Replit since way back in 2012. I used early\nversions of the website when I was learning to code. \n\nFor me, Replit was a place to code my solutions for Project Euler problems, and\nto practice my Python and JavaScript skills.\n\nOver the past decade, Replit has come a long way [https://replit.com/]. Their\nteam has evolved the coding platform into a full-blown multiplayer IDE where you\ncan collaborate with other developers, and host your apps for free.\n\nOne way a l',
     mainEntityOfPage: {
       '@type': 'WebPage',
       '@id': 'http://localhost:8080/news/',

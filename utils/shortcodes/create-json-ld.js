@@ -122,7 +122,7 @@ async function createJsonLdShortcode(type, site, data) {
 
         returnData.keywords = keywords.length === 1 ? keywords[0] : keywords;
       }
-      if (data.excerpt) returnData.description = fullEscaper(data.excerpt);
+      if (data.original_excerpt) returnData.description = fullEscaper(data.original_excerpt);
       if (data.title) returnData.headline = fullEscaper(data.title);
 
       if (data.feature_image) {

@@ -2,7 +2,6 @@ const { setJsonLdImageDimensions } = require('./helpers');
 const ampHandler = require('./amp-handler');
 const lazyLoadHandler = require('./lazy-load-handler');
 const originalPostHandler = require('./original-post-handler');
-const { escape } = require('lodash');
 
 const processGhostResponse = async (ghostRes, context) => {
   // Process post / page
@@ -27,19 +26,17 @@ const processGhostResponse = async (ghostRes, context) => {
       // Original author / translator feature
       if (obj.codeinjection_head) obj = await originalPostHandler(obj);
 
-      // To do: handle this in the JSON LD function
-      if (obj.excerpt) obj.excerpt = escape(
-        obj.excerpt.replace(/\n+/g, ' ')
+      // Stash original excerpt and escape for structured data.
+      // Shorten the default excerpt and replace newlines -- the
+      // browser will normalize multiple spaces
+      if (obj.excerpt) {
+        obj.original_excerpt = obj.excerpt;
+
+        obj.excerpt = obj.excerpt.replace(/\n+/g, ' ')
           .split(' ')
           .slice(0, 50)
-          .join(' ')
-        );
-
-      // Short excerpt for RSS feed, etc.
-      if (obj.excerpt) obj.short_excerpt = obj.excerpt.replace(/\n+/g, ' ')
-        .split(' ')
-        .slice(0, 50)
-        .join(' ');
+          .join(' ');
+      }
 
       // Handle AMP processing for posts before modifying the original
       // HTML and add flags to dynamically import AMP scripts
