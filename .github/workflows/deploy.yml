@@ -1,0 +1,42 @@
+# This workflow will do a clean install of node dependencies, cache/restore them, build the source code and run tests across different versions of node
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+
+name: Deploy to Azure Static Web Apps
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - actions-*
+      - prod-*
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [16.x]
+        # languages: [english, italian, chinese, portuguese, espanol]
+        languages: [italian]
+
+    steps:
+    - name: Checkout source code
+      uses: actions/checkout@v2
+
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ matrix.node-version }}
+        # cache: 'npm'
+
+    - name: Install dependencies
+      run: npm ci
+    
+    - name: Build the source code
+      run: npm run build
+      env:
+        NODE_ENV: production
+        BUILD_LANG: ${{ matrix.languages }}
+
