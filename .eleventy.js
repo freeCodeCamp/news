@@ -1,5 +1,3 @@
-require('dotenv').config();
-
 const { readFileSync, readdirSync, writeFileSync } = require('fs');
 const pluginRSS = require('@11ty/eleventy-plugin-rss');
 const cssMin = require('./utils/transforms/css-min');
