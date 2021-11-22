@@ -71,3 +71,5 @@ typings/
 yarn-error.log
 .netlify/
 dist/
+*.tag.gz
+.secrets
