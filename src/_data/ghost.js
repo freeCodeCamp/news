@@ -1,9 +1,10 @@
-const postsPerPage = process.env.POSTS_PER_PAGE;
-const { sourceApiUrl } = require('../../utils/ghost/api');
-const fetchFromGhost = require('../../utils/ghost/fetch-from-ghost');
 const { chunk, cloneDeep } = require('lodash');
+
+const fetchFromGhost = require('../../utils/ghost/fetch-from-ghost');
 const errorLogger = require('../../utils/error-logger');
-const siteUrl = process.env.SITE_URL;
+
+const { sourceApiUrl } = require('../../utils/ghost/api');
+const { siteURL, postsPerPage } = require('../../config');
 
 // Strip Ghost domain from urls
 const stripDomain = url => url.replace(sourceApiUrl, '');
@@ -30,7 +31,7 @@ module.exports = async () => {
       // Log and fix tag pages that point to 404 due to a Ghost error
       if (tag.url.endsWith('/404/') && tag.visibility === 'public') {
         errorLogger({ type: 'tag', name: tag.name });
-        tag.url = `${siteUrl}/${tag.slug}/`;
+        tag.url = `${siteURL, postsPerPage}/${tag.slug}/`;
       }
 
       tag.path = stripDomain(tag.url);
@@ -40,7 +41,7 @@ module.exports = async () => {
       // Log and fix author pages that point to 404 due to a Ghost error
       if (author.url.endsWith('/404/')) {
         errorLogger({ type: 'author', name: author.name });
-        author.url = `${siteUrl}/${author.slug}/`;
+        author.url = `${siteURL, postsPerPage}/${author.slug}/`;
       }
 
       author.path = stripDomain(author.url);

@@ -3,8 +3,8 @@ const localizedFormat = require('dayjs/plugin/localizedFormat');
 const relativeTime = require('dayjs/plugin/relativeTime');
 const utc = require('dayjs/plugin/utc');
 const timezone = require('dayjs/plugin/timezone');
-let localeCode = require('../config/locale-code');
-localeCode = localeCode.toLowerCase();
+const { currentLocale_i18nISOCode } = require('../config');
+const localeCode = currentLocale_i18nISOCode.toLowerCase();
 
 // Dynamically include dayjs locale
 require(`dayjs/locale/${localeCode}`);

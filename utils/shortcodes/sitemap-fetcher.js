@@ -1,6 +1,7 @@
 const fetch = require('node-fetch');
 const xml2js = require('xml2js');
 const { sourceApiUrl } = require('../ghost/api');
+const { siteURL } = require('../../config');
 
 const sitemapFetcherShortcode = async (page) => {
   // will need some sort of map to handle all locales
@@ -25,7 +26,7 @@ const sitemapFetcherShortcode = async (page) => {
       ? ghostXmlObj.sitemapindex.sitemap
       : ghostXmlObj.urlset.url;
 
-  const urlSwapper = (url) => url.replace(sourceApiUrl, process.env.SITE_URL);
+  const urlSwapper = (url) => url.replace(sourceApiUrl, siteURL);
 
   let xmlStr = target.reduce((acc, curr) => {
     const wrapper = page === 'index' ? 'sitemap' : 'url';

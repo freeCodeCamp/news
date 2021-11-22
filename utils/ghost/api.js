@@ -1,14 +1,18 @@
 const ghostContentApi = require('@tryghost/content-api');
 
+const { currentLocale_ghost } = require('../../config');
+
 const fetchKeys = (ghostInstance) => {
-  const upperGhostInstance = ghostInstance ? ghostInstance.toUpperCase() : process.env.GHOST_SOURCE_API.toUpperCase();
+  const upperGhostInstance = ghostInstance
+    ? ghostInstance.toUpperCase()
+    : currentLocale_ghost.toUpperCase();
 
   return {
     url: process.env[`${upperGhostInstance}_GHOST_API_URL`],
     key: process.env[`${upperGhostInstance}_GHOST_CONTENT_API_KEY`],
     version: process.env[`${upperGhostInstance}_GHOST_API_VERSION`]
-  }
-}
+  };
+};
 
 const { url, key, version } = fetchKeys();
 

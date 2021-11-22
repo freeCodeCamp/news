@@ -2,13 +2,12 @@ const i18next = require('i18next');
 const Backend = require('i18next-fs-backend');
 const { readdirSync, lstatSync } = require('fs');
 const { join } = require('path');
-const localeCode = require('../config/locale-code');
-const clientLocale = process.env.CLIENT_LOCALE;
+const { currentLocale_i18n, currentLocale_i18nISOCode } = require('../config');
 
 i18next
   .use(Backend)
   .init({
-    lng: localeCode,
+    lng: currentLocale_i18nISOCode,
     fallbackLng: 'en',
     initImmediate: false,
     preload: readdirSync(join(__dirname, './locales')).filter((fileName) => {
@@ -19,7 +18,7 @@ i18next
     ns: ['translations', 'trending', 'meta', 'links'],
     defaultNS: 'translations',
     backend: {
-      loadPath: join(__dirname, `./locales/${clientLocale}/{{ ns }}.json`)
+      loadPath: join(__dirname, `./locales/${currentLocale_i18n}/{{ ns }}.json`)
     }
   });
 
