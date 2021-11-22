@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "Eleventy for https://www.freecodecamp.org/news",
   "main": ".eleventy.js",
+  "engines": {
+    "node": ">=16",
+    "npm": ">=8"
+  },
   "scripts": {
     "clean": "npm run clean:error-logs && npm run clean:dist",
     "clean:error-logs": "rm -f *-errors.log",
