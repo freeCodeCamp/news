@@ -4,44 +4,54 @@ on:
   push:
     branches:
       - prod-staging
-  pull_request:
-    types: [opened, synchronize, reopened, closed]
-    branches:
-      - prod-staging
 
 jobs:
-  build_and_deploy_job:
-    name: Build and Deploy Job
+  
+  build-and-deploy:
+    name: Build and Deploy
     runs-on: ubuntu-latest
-    if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
+    
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout source files
+        uses: actions/checkout@v2
+
+      - name: Use Node.js 16.x
+        uses: actions/setup-node@v2
         with:
-          submodules: true
-      - name: Build And Deploy
+          node-version: 16.x
+          cache: 'npm'
+      
+      - name: Install dependencies & Lint
+        run: |
+          npm ci
+          npm run lint
+      
+      - name: Build
+        # TODO: Configure a build matrix for different environments
+        env:
+          GHOST_SOURCE_API: 'italian'
+          SITE_URL: 'https://www.freecodecamp.org/italian/news'
+        run: |
+          npm run build
+
+      - name: Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
         with:
+          # TODO: Configure a build matrix for different environments
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
-          repo_token: ${{ secrets.GITHUB_TOKEN }} # Used for Github integrations (i.e. PR comments)
+          # Used for Github integrations (i.e. PR comments)
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: "upload"
           
-          ###### Repository/Build Configurations ######
+          #--------------------------------
+          # Repository/Build Configurations
+          # https://docs.microsoft.com/en-us/azure/static-web-apps/build-configuration?tabs=github-actions
+          
           app_location: '.'
           api_location: ''
           output_location: 'dist'
-          app_build_command: 'npm ci && npm run build'
-          # skip_app_build: true
-          ###### End of Repository/Build Configurations ######
+          skip_app_build: true
 
-  close_pull_request_job:
-    if: github.event_name == 'pull_request' && github.event.action == 'closed'
-    runs-on: ubuntu-latest
-    name: Close Pull Request Job
-    steps:
-      - name: Close Pull Request
-        id: closepullrequest
-        uses: Azure/static-web-apps-deploy@v1
-        with:
-          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
-          action: "close"
+          # Repository/Build Configurations
+          #--------------------------------
