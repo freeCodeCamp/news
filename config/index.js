@@ -29,6 +29,14 @@ const localeCodes = {
   portuguese: 'pt-BR'
 };
 
+const algoliaIndices = {
+  english: 'news',
+  espanol: 'news-es',
+  chinese: 'news-zh',
+  italian: 'news-it',
+  portuguese: 'news-pt-br'
+};
+
 const {
   LOCALE_FOR_UI: localeForUI,
   LOCALE_FOR_GHOST: localeForGhost,
@@ -84,6 +92,7 @@ module.exports = Object.assign(
     algoliaAPIKey:
       !algoliaAPIKey || algoliaAPIKey === 'api_key_from_algolia_dashboard'
         ? ''
-        : algoliaAPIKey
+        : algoliaAPIKey,
+    algoliaIndex: algoliaIndices[localeForUI] || 'news'
   }
 );
