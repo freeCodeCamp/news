@@ -19,7 +19,7 @@
     "cypress:run:chinese": "npm run cypress -- run --spec 'cypress/integration/chinese/**/*'",
     "cypress:run:espanol": "npm run cypress -- run --spec 'cypress/integration/espanol/**/*'",
     "cypress:watch": "npm run cypress -- open",
-    "dev"  : "npm run develop",
+    "dev": "npm run develop",
     "predevelop": "npm run clean",
     "develop": "cross-env ELEVENTY_ENV=dev  NODE_OPTIONS=--max-old-space-size=8192 eleventy --serve",
     "prebuild": "npm run clean",
