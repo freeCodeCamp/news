@@ -1,11 +1,6 @@
 const fullEscaper = require('../full-escaper');
 const translate = require('../translate');
-const { sourceApiUrl } = require('../ghost/api');
 const { siteURL } = require('../../config');
-
-// This counts on all images, including the site logo, being stored like on Ghost with the
-// same directory structure
-const domainReplacer = (url) => url.replace(sourceApiUrl, siteURL);
 const { URL } = require('url');
 
 // This counts on all images, including the site logo, being stored like on Ghost with the
