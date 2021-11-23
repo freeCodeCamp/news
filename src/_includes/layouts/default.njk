@@ -33,8 +33,8 @@
         <script defer src="https://cdn.freecodecamp.org/news-assets/dayjs/1.10.4/relativeTime.min.js"></script>
 
         {# Dynamically load Day.js locale #}
-        {% if not siteLang === "en" %}
-            <script defer src="https://cdn.freecodecamp.org/news-assets/dayjs/1.10.4/locale/{{ site.lang }}.min.js"></script>
+        {% if siteLang !== "en" %}
+            <script defer src="https://cdn.freecodecamp.org/news-assets/dayjs/1.10.4/locale/{{ site.lang | lower }}.min.js"></script>
         {% endif %}
 
         {# Lazysizes #}
