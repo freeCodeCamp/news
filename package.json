@@ -9,7 +9,7 @@
   },
   "scripts": {
     "start": "npm run dev",
-    "start-ci": "npm run clean && cross-env ELEVENTY_ENV=ci eleventy --serve",
+    "start-ci": "npm run clean && cross-env ELEVENTY_ENV=ci LOCALE_FOR_UI=english eleventy --serve",
     "clean": "npm-run-all -p clean:*",
     "clean:error-logs": "shx rm -f *-errors.log",
     "clean:dist": "shx rm -rf dist/",
