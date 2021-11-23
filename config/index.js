@@ -39,11 +39,11 @@ const {
 } = process.env;
 
 // Validations
-const lang = locales.find((e) => e === localeForGhost);
+const lang = locales.find((e) => e === localeForUI);
 if (!lang) {
-  throw new Error(`Unsupported locale: ${localeForGhost}`);
+  throw new Error(`Unsupported locale: ${localeForUI}`);
 }
-if (lang !== localeForUI) {
+if (lang !== localeForGhost && localeForGhost !== 'local') {
   console.warn(`
     ----------------------------------------------------
     Warning: Mismatch between UI locale and Ghost locale.
@@ -56,10 +56,16 @@ if (lang !== localeForUI) {
 
 // Config Computations
 const computedDomain = siteDomain || 'freecodecamp.org';
-const siteURL =
-  lang !== 'chinese'
-    ? `https://www.${computedDomain}/${lang}/news`
-    : `https://chinese.${computedDomain}/news`;
+const computedPath = (lang === 'english' || lang === 'chinese') ? 'news' : `${lang}/news`;
+let siteURL;
+
+if (localeForGhost === 'local') {
+  siteURL = `http://${siteDomain}/${computedPath}`;
+} else if (lang === 'chinese') {
+  siteURL = `https://chinese.${computedDomain}/${computedPath}`;
+} else {
+  siteURL = `https://www.${computedDomain}/${computedPath}`;
+}
 
 module.exports = Object.assign(
   {},
