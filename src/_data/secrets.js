@@ -1,5 +1,6 @@
-const { algoliaAppId, algoliaApiKey } = require('../../config');
+const { algoliaAppId, algoliaAPIKey } = require('../../config');
+
 module.exports = {
   algoliaAppId, 
-  algoliaApiKey
+  algoliaAPIKey
 }

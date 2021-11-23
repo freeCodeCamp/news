@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // eslint-disable-next-line no-undef
   client = algoliasearch(
     '{{ secrets.algoliaAppId }}',
-    '{{ secrets.algoliaApiKey }}'
+    '{{ secrets.algoliaAPIKey }}'
   );
 
   index = client.initIndex(algoliaIndices['{{ site.lang }}']);
