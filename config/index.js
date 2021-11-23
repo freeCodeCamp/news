@@ -67,8 +67,8 @@ const computedDomain = siteDomain || 'freecodecamp.org';
 const computedPath = (lang === 'english' || lang === 'chinese') ? 'news' : `${lang}/news`;
 let siteURL;
 
-if (localeForGhost === 'local') {
-  siteURL = `http://${siteDomain}/${computedPath}`;
+if (computedDomain.startsWith('localhost')) {
+  siteURL = `http://${computedDomain}/${computedPath}`;
 } else if (lang === 'chinese') {
   siteURL = `https://chinese.${computedDomain}/${computedPath}`;
 } else {
