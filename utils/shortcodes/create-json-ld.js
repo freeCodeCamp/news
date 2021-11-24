@@ -71,7 +71,8 @@ async function createJsonLdShortcode(type, site, data) {
       website,
       twitter,
       facebook,
-      url
+      url,
+      bio
     } = primaryAuthor;
     const authorObj = {
       '@type': 'Person',
@@ -90,6 +91,8 @@ async function createJsonLdShortcode(type, site, data) {
         image_dimensions.profile_image
       );
     }
+
+    if (bio) authorObj.description = bio;
 
     return authorObj;
   };
@@ -121,13 +124,13 @@ async function createJsonLdShortcode(type, site, data) {
       if (data.title) returnData.headline = fullEscaper(data.title);
 
       if (data.feature_image) {
-        returnData.image = await createImageObj(
+        returnData.image = createImageObj(
           data.feature_image,
           data.image_dimensions.feature_image
         );
       }
 
-      returnData.author = await createAuthorObj(data.primary_author);
+      returnData.author = createAuthorObj(data.primary_author);
     }
 
     // Handle images for both types
@@ -159,10 +162,11 @@ async function createJsonLdShortcode(type, site, data) {
     if (type === 'author') {
       // This schema type is the only one without publisher info
       delete returnData.publisher;
-      const authorObj = await createAuthorObj(data);
+      const authorObj = createAuthorObj(data);
 
       returnData.sameAs = authorObj.sameAs;
       returnData.name = fullEscaper(authorObj.name);
+      if (authorObj.description) returnData.description = authorObj.description;
     }
   }
 
