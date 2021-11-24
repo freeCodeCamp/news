@@ -8,7 +8,7 @@
 
 {% block content %}
     <div class="under-header-content">
-        <h1 class="site-title tags-title">#{{ tag.name }}</h1>
+        <h1 data-test-label="tag-name" class="site-title tags-title">#{{ tag.name | upper }}</h1>
         <h2 class="site-description">
             {% if postCount == 0 %}
                 {% t 'tag-page.collection-of-posts' %}
@@ -54,9 +54,9 @@
     {# Twitter Card #}
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="{{ title }}">
-    <meta property="twitter:description" content="{% t 'meta:description' %}">
+    <meta name="twitter:description" content="{% t 'meta:description' %}">
     <meta name="twitter:url" content="{{ site.url + tag.path }}">
-    <meta property="twitter:image" content="{{ tag.feature_image if tag.feature_image else site.cover_image }}">
+    <meta name="twitter:image" content="{{ tag.feature_image if tag.feature_image else site.cover_image }}">
     <meta name="twitter:site" content="{{ site.twitter }}">
 
     <meta property="og:image:width" content="{{ tag.image_dimensions.feature_image.width if tag.feature_image else site.image_dimensions.cover_image.width }}">
