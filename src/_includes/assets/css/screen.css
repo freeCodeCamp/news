@@ -126,10 +126,6 @@ body {
     color: white;
 }
 
-.under-header-content .tags-title {
-    text-transform: uppercase;
-}
-
 .site-title {
     z-index: 10;
     margin: 0;
