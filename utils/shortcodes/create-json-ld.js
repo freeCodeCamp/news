@@ -71,8 +71,7 @@ async function createJsonLdShortcode(type, site, data) {
       website,
       twitter,
       facebook,
-      url,
-      bio
+      url
     } = primaryAuthor;
     const authorObj = {
       '@type': 'Person',
@@ -91,8 +90,6 @@ async function createJsonLdShortcode(type, site, data) {
         image_dimensions.profile_image
       );
     }
-
-    if (bio) authorObj.description = bio;
 
     return authorObj;
   };
@@ -166,7 +163,7 @@ async function createJsonLdShortcode(type, site, data) {
 
       returnData.sameAs = authorObj.sameAs;
       returnData.name = fullEscaper(authorObj.name);
-      if (authorObj.description) returnData.description = authorObj.description;
+      if (data.bio) returnData.description = data.bio;
     }
   }
 
