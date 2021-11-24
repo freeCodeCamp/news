@@ -16,7 +16,7 @@ const processGhostResponse = async (ghostRes, context) => {
       }
 
       if (obj.primary_author.cover_image) {
-        await setJsonLdImageDimensions(obj.primary_author, 'cover_image', obj.primary_author.profile_image);
+        await setJsonLdImageDimensions(obj.primary_author, 'cover_image', obj.primary_author.cover_image);
       }
 
       obj.tags.map(async tag => {
