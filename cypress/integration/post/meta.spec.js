@@ -121,6 +121,15 @@ describe('Post metadata', () => {
     });
   });
 
+  // This article has just one tag
+  it('<meta> article:tag', () => {
+    cy.get('head meta[property="article:tag"]').should(
+      'have.attr',
+      'content',
+      'freeCodeCamp'
+    );
+  });
+
   it('<meta> article:publisher', () => {
     cy.get('head meta[property="article:publisher"]').should(
       'have.attr',
