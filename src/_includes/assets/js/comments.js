@@ -53,7 +53,7 @@ function loadDiscourseComments() {
 if (window && window.addEventListener) {
   // Create comments section
   const commentsDivHtml = `
-    <div id='discourse-comments'>
+    <div data-test-label='comments' id='discourse-comments'>
       <button id='trigger-load-comments'>{% t 'comments.show-comments' %}</button>
     </div>
   `;
