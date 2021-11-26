@@ -9,9 +9,9 @@
   },
   "scripts": {
     "start": "npm run dev",
-    "start:ci": "npm run clean && cross-env ELEVENTY_ENV=ci LOCALE_FOR_UI=english eleventy --serve",
-    "start:ci:chinese": "npm run clean && cross-env ELEVENTY_ENV=ci LOCALE_FOR_UI=chinese eleventy --serve",
-    "start:ci:espanol": "npm run clean && cross-env ELEVENTY_ENV=ci LOCALE_FOR_UI=espanol eleventy --serve",
+    "start:ci": "cross-env ELEVENTY_ENV=ci LOCALE_FOR_UI=english npm run dev",
+    "start:ci:chinese": "cross-env ELEVENTY_ENV=ci LOCALE_FOR_UI=chinese npm run dev",
+    "start:ci:espanol": "cross-env ELEVENTY_ENV=ci LOCALE_FOR_UI=espanol npm run dev",
     "clean": "npm-run-all -p clean:*",
     "clean:error-logs": "shx rm -f *-errors.log",
     "clean:dist": "shx rm -rf dist/",
@@ -21,8 +21,8 @@
     "cypress:run:espanol": "npm run cypress -- run --spec 'cypress/integration/espanol/**/*'",
     "cypress:watch": "npm run cypress -- open",
     "cypress:install-build-tools": "sh ./cypress-install.sh",
-    "dev": "npm run clean && cross-env ELEVENTY_ENV=dev  NODE_OPTIONS=--max-old-space-size=8192 eleventy --serve",
-    "build": "npm run clean && cross-env ELEVENTY_ENV=prod NODE_OPTIONS=--max-old-space-size=8192 eleventy",
+    "dev": "npm run build -- --serve",
+    "build": "npm run clean && cross-env NODE_OPTIONS=--max-old-space-size=8192 eleventy",
     "test": "npm run build",
     "lint": "eslint . --ext .js --cache"
   },
