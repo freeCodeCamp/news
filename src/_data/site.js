@@ -1,7 +1,14 @@
 const { sourceApi } = require('../../utils/ghost/api');
 const getImageDimensions = require('../../utils/get-image-dimensions');
 const { currentLocale_i18nISOCode, siteURL } = require('../../config');
-const twitterProfile = require('../../utils/twitter-profile');
+const translate = require('../../utils/translate');
+
+// Get Twitter profile based on links in i18n/locales/lang/links.json --
+// falls back to English Twitter profile if one for the current UI locale
+// isn't found
+const getTwitterProfile = (url) => url.replace('https://twitter.com/', '@');
+const twitterURL = translate('links:twitter-url');
+const twitterProfile = twitterURL !== 'twitter-url' ? getTwitterProfile(twitterURL) : '@freecodecamp';
 
 module.exports = async () => {
   const site = await sourceApi.settings
