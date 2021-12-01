@@ -20,7 +20,6 @@
     "cypress:run:chinese": "npm run cypress -- run --spec 'cypress/integration/chinese/**/*'",
     "cypress:run:espanol": "npm run cypress -- run --spec 'cypress/integration/espanol/**/*'",
     "cypress:watch": "npm run cypress -- open",
-    "cypress:install-build-tools": "sh ./cypress-install.sh",
     "dev": "npm run build -- --serve",
     "build": "npm run clean && cross-env NODE_OPTIONS=--max-old-space-size=8192 eleventy",
     "test": "npm run build",
