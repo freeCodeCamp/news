@@ -1,10 +1,4 @@
-const metaContent = {
-  siteName: 'freeCodeCamp.org',
-  url: 'http://localhost:8080/news/',
-  keywords: 'freeCodeCamp, programming, front-end, programmer, article, regular expressions, Python, JavaScript, AWS, JSON, HTML, CSS, Bootstrap, React, Vue, Webpack',
-  description: 'Browse thousands of programming tutorials written by experts. Learn Web Development, Data Science, DevOps, Security, and get developer career advice.',
-  image: 'https://cdn.freecodecamp.org/platform/universal/fcc_meta_1920X1080-indigo.png'
-}
+const commonMeta = require('../../../fixtures/common-meta.json');
 
 describe('Landing metadata', () => {
   before(() => {
@@ -14,7 +8,7 @@ describe('Landing metadata', () => {
   it('<title>', () => {
     cy.title().should(
       'eq',
-      'freeCodeCamp Programming Tutorials: Python, JavaScript, Git & More'
+      commonMeta.title
     );
   });
 
@@ -22,7 +16,7 @@ describe('Landing metadata', () => {
     cy.get('head meta[name="keywords"]').should(
       'have.attr',
       'content',
-      metaContent.keywords
+      commonMeta.keywords
     );
   });
 
@@ -30,7 +24,7 @@ describe('Landing metadata', () => {
     cy.get('head meta[name="description"]').should(
       'have.attr',
       'content',
-      metaContent.description
+      commonMeta.description
     );
   });
 
@@ -38,7 +32,7 @@ describe('Landing metadata', () => {
     cy.get('head link[rel="canonical"]').should(
       'have.attr',
       'href',
-      metaContent.url
+      commonMeta.siteUrl
     );
   });
 
@@ -46,7 +40,7 @@ describe('Landing metadata', () => {
     cy.get('head meta[name="generator"]').should(
       'have.attr',
       'content',
-      'Eleventy'
+      commonMeta.generator
     );
   });
 
@@ -54,7 +48,7 @@ describe('Landing metadata', () => {
     cy.get('head meta[property="og:site_name"]').should(
       'have.attr',
       'content',
-      metaContent.siteName
+      commonMeta.siteName
     );
   });
 
@@ -70,7 +64,7 @@ describe('Landing metadata', () => {
     cy.get('head meta[property="og:title"]').should(
       'have.attr',
       'content',
-      metaContent.siteName
+      commonMeta.siteName
     );
   });
 
@@ -78,7 +72,7 @@ describe('Landing metadata', () => {
     cy.get('head meta[property="og:description"]').should(
       'have.attr',
       'content',
-      metaContent.description
+      commonMeta.description
     );
   });
 
@@ -86,7 +80,7 @@ describe('Landing metadata', () => {
     cy.get('head meta[property="og:url"]').should(
       'have.attr',
       'content',
-      metaContent.url
+      commonMeta.siteUrl
     );
   });
 
@@ -94,7 +88,7 @@ describe('Landing metadata', () => {
     cy.get('head meta[property="og:image"]').should(
       'have.attr',
       'content',
-      metaContent.image
+      commonMeta.publicationCover.url
     );
   });
 
@@ -102,7 +96,7 @@ describe('Landing metadata', () => {
     cy.get('head meta[property="og:image:width"]').should(
       'have.attr',
       'content',
-      1920
+      commonMeta.publicationCover.width
     );
   });
 
@@ -110,7 +104,7 @@ describe('Landing metadata', () => {
     cy.get('head meta[property="og:image:height"]').should(
       'have.attr',
       'content',
-      1080
+      commonMeta.publicationCover.height
     );
   });
 
@@ -118,7 +112,7 @@ describe('Landing metadata', () => {
     cy.get('head meta[property="article:publisher"]').should(
       'have.attr',
       'content',
-      'https://www.facebook.com/freecodecamp'
+      commonMeta.facebook.url
     );
   });
 
@@ -126,7 +120,7 @@ describe('Landing metadata', () => {
     cy.get('head meta[name="twitter:card"]').should(
       'have.attr',
       'content',
-      'summary_large_image'
+      commonMeta.twitter.cardType
     );
   });
 
@@ -134,7 +128,7 @@ describe('Landing metadata', () => {
     cy.get('head meta[name="twitter:title"]').should(
       'have.attr',
       'content',
-      metaContent.siteName
+      commonMeta.siteName
     );
   });
 
@@ -142,7 +136,7 @@ describe('Landing metadata', () => {
     cy.get('head meta[name="twitter:description"]').should(
       'have.attr',
       'content',
-      metaContent.description
+      commonMeta.description
     );
   });
 
@@ -150,7 +144,7 @@ describe('Landing metadata', () => {
     cy.get('head meta[name="twitter:url"]').should(
       'have.attr',
       'content',
-      metaContent.url
+      commonMeta.siteUrl
     );
   });
 
@@ -158,7 +152,7 @@ describe('Landing metadata', () => {
     cy.get('head meta[name="twitter:image"]').should(
       'have.attr',
       'content',
-      metaContent.image
+      commonMeta.publicationCover.url
     );
   });
 
@@ -166,7 +160,7 @@ describe('Landing metadata', () => {
     cy.get('head meta[name="twitter:site"]').should(
       'have.attr',
       'content',
-      '@freecodecamp'
+      commonMeta.twitter.username
     );
   });
 });

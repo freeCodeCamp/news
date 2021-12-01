@@ -1,7 +1,12 @@
-const metaContent = {
+const commonMeta = require('../../../fixtures/common-meta.json');
+const pageMeta = {
   title: "Please check your email for a donation receipt. Forward it to donors@freecodecamp.org.",
   url: 'http://localhost:8080/news/thank-you-for-donating/',
-  image: 'https://www.freecodecamp.org/news/content/images/2020/03/fcc-banner.jpg',
+  image: {
+    url: 'https://www.freecodecamp.org/news/content/images/2020/03/fcc-banner.jpg',
+    width: 1500,
+    height: 500
+  },
   excerpt: "Once you've forwarded this receipt, we will award you with your donor badge on your freeCodeCamp profile. We will also turn off donation prompts for you. Thank you again for supporting our nonprofit. freeCodeCamp is a highly-efficient education NGO. This year alone, we've provided million hours of free education to"
 }
 
@@ -13,7 +18,7 @@ describe('Page metadata', () => {
   it('<title>', () => {
     cy.title().should(
       'eq',
-      metaContent.title
+      pageMeta.title
     );
   });
 
@@ -21,7 +26,7 @@ describe('Page metadata', () => {
     cy.get('head meta[name="description"]').should(
       'have.attr',
       'content',
-      metaContent.excerpt
+      pageMeta.excerpt
     );
   });
 
@@ -29,7 +34,7 @@ describe('Page metadata', () => {
     cy.get('head link[rel="canonical"]').should(
       'have.attr',
       'href',
-      metaContent.url
+      pageMeta.url
     );
   });
 
@@ -37,7 +42,7 @@ describe('Page metadata', () => {
     cy.get('head meta[name="generator"]').should(
       'have.attr',
       'content',
-      'Eleventy'
+      commonMeta.generator
     );
   });
 
@@ -45,7 +50,7 @@ describe('Page metadata', () => {
     cy.get('head meta[property="og:site_name"]').should(
       'have.attr',
       'content',
-      'freeCodeCamp.org'
+      commonMeta.siteName
     );
   });
 
@@ -61,7 +66,7 @@ describe('Page metadata', () => {
     cy.get('head meta[property="og:title"]').should(
       'have.attr',
       'content',
-      metaContent.title
+      pageMeta.title
     );
   });
 
@@ -69,7 +74,7 @@ describe('Page metadata', () => {
     cy.get('head meta[property="og:description"]').should(
       'have.attr',
       'content',
-      metaContent.excerpt
+      pageMeta.excerpt
     );
   });
 
@@ -77,7 +82,7 @@ describe('Page metadata', () => {
     cy.get('head meta[property="og:url"]').should(
       'have.attr',
       'content',
-      metaContent.url
+      pageMeta.url
     );
   });
 
@@ -85,7 +90,7 @@ describe('Page metadata', () => {
     cy.get('head meta[property="og:image"]').should(
       'have.attr',
       'content',
-      metaContent.image
+      pageMeta.image.url
     );
   });
 
@@ -93,7 +98,7 @@ describe('Page metadata', () => {
     cy.get('head meta[property="og:image:width"]').should(
       'have.attr',
       'content',
-      1500
+      pageMeta.image.width
     );
   });
 
@@ -101,7 +106,7 @@ describe('Page metadata', () => {
     cy.get('head meta[property="og:image:height"]').should(
       'have.attr',
       'content',
-      500
+      pageMeta.image.height
     );
   });
 
@@ -125,7 +130,7 @@ describe('Page metadata', () => {
     cy.get('head meta[property="article:publisher"]').should(
       'have.attr',
       'content',
-      'https://www.facebook.com/freecodecamp'
+      commonMeta.facebook.url
     );
   });
 
@@ -133,7 +138,7 @@ describe('Page metadata', () => {
     cy.get('head meta[name="twitter:card"]').should(
       'have.attr',
       'content',
-      'summary_large_image'
+      commonMeta.twitter.cardType
     );
   });
 
@@ -141,7 +146,7 @@ describe('Page metadata', () => {
     cy.get('head meta[name="twitter:title"]').should(
       'have.attr',
       'content',
-      metaContent.title
+      pageMeta.title
     );
   });
 
@@ -149,7 +154,7 @@ describe('Page metadata', () => {
     cy.get('head meta[name="twitter:description"]').should(
       'have.attr',
       'content',
-      metaContent.excerpt
+      pageMeta.excerpt
     );
   });
 
@@ -157,7 +162,7 @@ describe('Page metadata', () => {
     cy.get('head meta[name="twitter:url"]').should(
       'have.attr',
       'content',
-      metaContent.url
+      pageMeta.url
     );
   });
 
@@ -165,7 +170,7 @@ describe('Page metadata', () => {
     cy.get('head meta[name="twitter:image"]').should(
       'have.attr',
       'content',
-      metaContent.image
+      pageMeta.image.url
     );
   });
 
@@ -173,10 +178,11 @@ describe('Page metadata', () => {
     cy.get('head meta[name="twitter:label1"]').should(
       'have.attr',
       'content',
-      'Written by'
+      commonMeta.twitter.label1
     );
   });
 
+  // This page was authored by the freeCodeCamp.org owner account
   it('<meta> twitter:data1', () => {
     cy.get('head meta[name="twitter:data1"]').should(
       'have.attr',
@@ -189,7 +195,7 @@ describe('Page metadata', () => {
     cy.get('head meta[name="twitter:site"]').should(
       'have.attr',
       'content',
-      '@freecodecamp'
+      commonMeta.twitter.username
     );
   });
 });
