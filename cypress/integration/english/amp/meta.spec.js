@@ -1,7 +1,12 @@
-const metaContent = {
+const commonMeta = require('../../../fixtures/common-meta.json');
+const ampMeta = {
   title: "We're Building New Courses on Rust and Python + the Replit.web Framework",
   url: 'http://localhost:8080/news/announcing-rust-course-replit-web/',
-  image: 'https://www.freecodecamp.org/news/content/images/2021/08/sean-lim-NPlv2pkYoUA-unsplash--2-.jpg',
+  image: {
+    url: 'https://www.freecodecamp.org/news/content/images/2021/08/sean-lim-NPlv2pkYoUA-unsplash--2-.jpg',
+    width: 1920,
+    height: 1280
+  },
   excerpt: "As you may know, I've been a fan of Replit since way back in 2012. I used early versions of the website when I was learning to code.  For me, Replit was a place to code my solutions for Project Euler problems, and to practice my Python and JavaScript"
 }
 
@@ -13,7 +18,7 @@ describe('Post metadata', () => {
   it('<title>', () => {
     cy.title().should(
       'eq',
-      metaContent.title
+      ampMeta.title
     );
   });
 
@@ -21,7 +26,7 @@ describe('Post metadata', () => {
     cy.get('head link[rel="canonical"]').should(
       'have.attr',
       'href',
-      metaContent.url
+      ampMeta.url
     );
   });
 
@@ -29,7 +34,7 @@ describe('Post metadata', () => {
     cy.get('head meta[name="generator"]').should(
       'have.attr',
       'content',
-      'Eleventy'
+      commonMeta.generator
     );
   });
 
@@ -37,7 +42,7 @@ describe('Post metadata', () => {
     cy.get('head meta[property="og:site_name"]').should(
       'have.attr',
       'content',
-      'freeCodeCamp.org'
+      commonMeta.siteName
     );
   });
 
@@ -53,7 +58,7 @@ describe('Post metadata', () => {
     cy.get('head meta[property="og:title"]').should(
       'have.attr',
       'content',
-      metaContent.title
+      ampMeta.title
     );
   });
 
@@ -61,7 +66,7 @@ describe('Post metadata', () => {
     cy.get('head meta[property="og:description"]').should(
       'have.attr',
       'content',
-      metaContent.excerpt
+      ampMeta.excerpt
     );
   });
 
@@ -69,7 +74,7 @@ describe('Post metadata', () => {
     cy.get('head meta[property="og:url"]').should(
       'have.attr',
       'content',
-      metaContent.url
+      ampMeta.url
     );
   });
 
@@ -77,7 +82,7 @@ describe('Post metadata', () => {
     cy.get('head meta[property="og:image"]').should(
       'have.attr',
       'content',
-      metaContent.image
+      ampMeta.image.url
     );
   });
 
@@ -85,7 +90,7 @@ describe('Post metadata', () => {
     cy.get('head meta[property="og:image:width"]').should(
       'have.attr',
       'content',
-      1920
+      ampMeta.image.width
     );
   });
 
@@ -93,7 +98,7 @@ describe('Post metadata', () => {
     cy.get('head meta[property="og:image:height"]').should(
       'have.attr',
       'content',
-      1280
+      ampMeta.image.height
     );
   });
 
@@ -125,7 +130,7 @@ describe('Post metadata', () => {
     cy.get('head meta[property="article:publisher"]').should(
       'have.attr',
       'content',
-      'https://www.facebook.com/freecodecamp'
+      commonMeta.facebook.url
     );
   });
 
@@ -133,7 +138,7 @@ describe('Post metadata', () => {
     cy.get('head meta[name="twitter:card"]').should(
       'have.attr',
       'content',
-      'summary_large_image'
+      commonMeta.twitter.cardType
     );
   });
 
@@ -141,7 +146,7 @@ describe('Post metadata', () => {
     cy.get('head meta[name="twitter:title"]').should(
       'have.attr',
       'content',
-      metaContent.title
+      ampMeta.title
     );
   });
 
@@ -149,7 +154,7 @@ describe('Post metadata', () => {
     cy.get('head meta[name="twitter:description"]').should(
       'have.attr',
       'content',
-      metaContent.excerpt
+      ampMeta.excerpt
     );
   });
 
@@ -157,7 +162,7 @@ describe('Post metadata', () => {
     cy.get('head meta[name="twitter:url"]').should(
       'have.attr',
       'content',
-      metaContent.url
+      ampMeta.url
     );
   });
 
@@ -165,7 +170,7 @@ describe('Post metadata', () => {
     cy.get('head meta[name="twitter:image"]').should(
       'have.attr',
       'content',
-      metaContent.image
+      ampMeta.image.url
     );
   });
 
@@ -173,7 +178,7 @@ describe('Post metadata', () => {
     cy.get('head meta[name="twitter:label1"]').should(
       'have.attr',
       'content',
-      'Written by'
+      commonMeta.twitter.label1
     );
   });
 
@@ -189,7 +194,7 @@ describe('Post metadata', () => {
     cy.get('head meta[name="twitter:label2"]').should(
       'have.attr',
       'content',
-      'Filed under'
+      commonMeta.twitter.label2
     );
   });
 
@@ -205,7 +210,7 @@ describe('Post metadata', () => {
     cy.get('head meta[name="twitter:site"]').should(
       'have.attr',
       'content',
-      '@freecodecamp'
+      commonMeta.twitter.username
     );
   });
 
