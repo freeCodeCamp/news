@@ -1,6 +1,7 @@
 const { sourceApi } = require('../../utils/ghost/api');
 const getImageDimensions = require('../../utils/get-image-dimensions');
 const { currentLocale_i18nISOCode, siteURL } = require('../../config');
+const twitterProfile = require('../../utils/twitter-profile');
 
 module.exports = async () => {
   const site = await sourceApi.settings
@@ -42,6 +43,11 @@ module.exports = async () => {
 
   // Set default title across all publications
   site.title = 'freeCodeCamp.org';
+
+  // Set default Facebook account, and set Twitter account
+  // based on UI locale
+  site.facebook = 'https://www.facebook.com/freecodecamp';
+  site.twitter = twitterProfile;
 
   return site;
 };
