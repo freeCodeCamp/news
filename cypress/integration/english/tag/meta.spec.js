@@ -1,7 +1,7 @@
-const metaContent = {
+const commonMeta = require('../../../fixtures/common-meta.json');
+const tagMeta = {
   title: 'freeCodeCamp - freeCodeCamp.org',
   url: 'http://localhost:8080/news/tag/freecodecamp/',
-  image: 'https://cdn.freecodecamp.org/platform/universal/fcc_meta_1920X1080-indigo.png', // No custom image -- fallback to base blog image
   description: "Browse thousands of programming tutorials written by experts. Learn Web Development, Data Science, DevOps, Security, and get developer career advice."
 }
 
@@ -13,7 +13,7 @@ describe('Tag page metadata', () => {
   it('<title>', () => {
     cy.title().should(
       'eq',
-      metaContent.title
+      tagMeta.title
     );
   });
 
@@ -21,7 +21,7 @@ describe('Tag page metadata', () => {
     cy.get('head link[rel="canonical"]').should(
       'have.attr',
       'href',
-      metaContent.url
+      tagMeta.url
     );
   });
 
@@ -29,7 +29,7 @@ describe('Tag page metadata', () => {
     cy.get('head meta[name="generator"]').should(
       'have.attr',
       'content',
-      'Eleventy'
+      commonMeta.generator
     );
   });
 
@@ -37,7 +37,7 @@ describe('Tag page metadata', () => {
     cy.get('head meta[property="og:site_name"]').should(
       'have.attr',
       'content',
-      'freeCodeCamp.org'
+      commonMeta.siteName
     );
   });
 
@@ -53,7 +53,7 @@ describe('Tag page metadata', () => {
     cy.get('head meta[property="og:title"]').should(
       'have.attr',
       'content',
-      metaContent.title
+      tagMeta.title
     );
   });
 
@@ -61,7 +61,7 @@ describe('Tag page metadata', () => {
     cy.get('head meta[property="og:description"]').should(
       'have.attr',
       'content',
-      metaContent.description
+      tagMeta.description
     );
   });
 
@@ -69,15 +69,16 @@ describe('Tag page metadata', () => {
     cy.get('head meta[property="og:url"]').should(
       'have.attr',
       'content',
-      metaContent.url
+      tagMeta.url
     );
   });
 
+  // No custom image -- fall back to default publication cover
   it('<meta> og:image', () => {
     cy.get('head meta[property="og:image"]').should(
       'have.attr',
       'content',
-      metaContent.image
+      commonMeta.publicationCover.url
     );
   });
 
@@ -85,7 +86,7 @@ describe('Tag page metadata', () => {
     cy.get('head meta[property="og:image:width"]').should(
       'have.attr',
       'content',
-      1920
+      commonMeta.publicationCover.width
     );
   });
 
@@ -93,7 +94,7 @@ describe('Tag page metadata', () => {
     cy.get('head meta[property="og:image:height"]').should(
       'have.attr',
       'content',
-      1080
+      commonMeta.publicationCover.height
     );
   });
 
@@ -101,7 +102,7 @@ describe('Tag page metadata', () => {
     cy.get('head meta[property="article:publisher"]').should(
       'have.attr',
       'content',
-      'https://www.facebook.com/freecodecamp'
+      commonMeta.facebook.url
     );
   });
 
@@ -109,7 +110,7 @@ describe('Tag page metadata', () => {
     cy.get('head meta[name="twitter:card"]').should(
       'have.attr',
       'content',
-      'summary_large_image'
+      commonMeta.twitter.cardType
     );
   });
 
@@ -117,7 +118,7 @@ describe('Tag page metadata', () => {
     cy.get('head meta[name="twitter:title"]').should(
       'have.attr',
       'content',
-      metaContent.title
+      tagMeta.title
     );
   });
 
@@ -125,7 +126,7 @@ describe('Tag page metadata', () => {
     cy.get('head meta[name="twitter:description"]').should(
       'have.attr',
       'content',
-      metaContent.description
+      tagMeta.description
     );
   });
 
@@ -133,7 +134,7 @@ describe('Tag page metadata', () => {
     cy.get('head meta[name="twitter:url"]').should(
       'have.attr',
       'content',
-      metaContent.url
+      tagMeta.url
     );
   });
 
@@ -141,7 +142,7 @@ describe('Tag page metadata', () => {
     cy.get('head meta[name="twitter:image"]').should(
       'have.attr',
       'content',
-      metaContent.image
+      commonMeta.publicationCover.url
     );
   });
 
@@ -149,7 +150,7 @@ describe('Tag page metadata', () => {
     cy.get('head meta[name="twitter:site"]').should(
       'have.attr',
       'content',
-      '@freecodecamp'
+      commonMeta.twitter.username
     );
   });
 });

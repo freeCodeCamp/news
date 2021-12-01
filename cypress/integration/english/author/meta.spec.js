@@ -1,7 +1,12 @@
-const metaContent = {
+const commonMeta = require('../../../fixtures/common-meta.json');
+const authorMeta = {
   title: 'Quincy Larson - freeCodeCamp.org',
   url: 'http://localhost:8080/news/author/quincylarson/',
-  image: 'https://www.freecodecamp.org/news/content/images/2019/07/banner.png', // Custom banner image -- hidden on tag page
+  image: {
+    url: 'https://www.freecodecamp.org/news/content/images/2019/07/banner.png', // Custom banner image -- hidden on author page
+    width: 1500,
+    height: 500
+  },
   description: "The teacher who founded freeCodeCamp.org." // Custom author bio
 }
 
@@ -13,7 +18,7 @@ describe('Author page metadata', () => {
   it('<title>', () => {
     cy.title().should(
       'eq',
-      metaContent.title
+      authorMeta.title
     );
   });
 
@@ -21,7 +26,7 @@ describe('Author page metadata', () => {
     cy.get('head link[rel="canonical"]').should(
       'have.attr',
       'href',
-      metaContent.url
+      authorMeta.url
     );
   });
 
@@ -29,7 +34,7 @@ describe('Author page metadata', () => {
     cy.get('head meta[name="description"]').should(
       'have.attr',
       'content',
-      metaContent.description
+      authorMeta.description
     );
   });
 
@@ -37,7 +42,7 @@ describe('Author page metadata', () => {
     cy.get('head meta[name="generator"]').should(
       'have.attr',
       'content',
-      'Eleventy'
+      commonMeta.generator
     );
   });
 
@@ -45,7 +50,7 @@ describe('Author page metadata', () => {
     cy.get('head meta[property="og:site_name"]').should(
       'have.attr',
       'content',
-      'freeCodeCamp.org'
+      commonMeta.siteName
     );
   });
 
@@ -61,7 +66,7 @@ describe('Author page metadata', () => {
     cy.get('head meta[property="og:title"]').should(
       'have.attr',
       'content',
-      metaContent.title
+      authorMeta.title
     );
   });
 
@@ -69,7 +74,7 @@ describe('Author page metadata', () => {
     cy.get('head meta[property="og:description"]').should(
       'have.attr',
       'content',
-      metaContent.description
+      authorMeta.description
     );
   });
 
@@ -77,7 +82,7 @@ describe('Author page metadata', () => {
     cy.get('head meta[property="og:url"]').should(
       'have.attr',
       'content',
-      metaContent.url
+      authorMeta.url
     );
   });
 
@@ -85,7 +90,7 @@ describe('Author page metadata', () => {
     cy.get('head meta[property="og:image"]').should(
       'have.attr',
       'content',
-      metaContent.image
+      authorMeta.image.url
     );
   });
 
@@ -93,7 +98,7 @@ describe('Author page metadata', () => {
     cy.get('head meta[property="og:image:width"]').should(
       'have.attr',
       'content',
-      1500
+      authorMeta.image.width
     );
   });
 
@@ -101,7 +106,7 @@ describe('Author page metadata', () => {
     cy.get('head meta[property="og:image:height"]').should(
       'have.attr',
       'content',
-      500
+      authorMeta.image.height
     );
   });
 
@@ -109,7 +114,7 @@ describe('Author page metadata', () => {
     cy.get('head meta[property="article:publisher"]').should(
       'have.attr',
       'content',
-      'https://www.facebook.com/freecodecamp'
+      commonMeta.facebook.url
     );
   });
 
@@ -117,7 +122,7 @@ describe('Author page metadata', () => {
     cy.get('head meta[name="twitter:card"]').should(
       'have.attr',
       'content',
-      'summary_large_image'
+      commonMeta.twitter.cardType
     );
   });
 
@@ -125,7 +130,7 @@ describe('Author page metadata', () => {
     cy.get('head meta[name="twitter:title"]').should(
       'have.attr',
       'content',
-      metaContent.title
+      authorMeta.title
     );
   });
 
@@ -133,7 +138,7 @@ describe('Author page metadata', () => {
     cy.get('head meta[name="twitter:description"]').should(
       'have.attr',
       'content',
-      metaContent.description
+      authorMeta.description
     );
   });
 
@@ -141,7 +146,7 @@ describe('Author page metadata', () => {
     cy.get('head meta[name="twitter:url"]').should(
       'have.attr',
       'content',
-      metaContent.url
+      authorMeta.url
     );
   });
 
@@ -149,7 +154,7 @@ describe('Author page metadata', () => {
     cy.get('head meta[name="twitter:image"]').should(
       'have.attr',
       'content',
-      metaContent.image
+      authorMeta.image.url
     );
   });
 
@@ -157,7 +162,7 @@ describe('Author page metadata', () => {
     cy.get('head meta[name="twitter:site"]').should(
       'have.attr',
       'content',
-      '@freecodecamp'
+      commonMeta.twitter.username
     );
   });
 
