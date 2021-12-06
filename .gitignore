@@ -71,6 +71,8 @@ typings/
 yarn-error.log
 .netlify/
 dist/
+*.tag.gz
+.secrets
 
 # Cypress.io
 cypress/videos
