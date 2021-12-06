@@ -16,7 +16,7 @@ jobs:
         languages: [english, chinese, espanol]
 
     steps:
-      - name: Checkout Source Files
+      - name: Checkout source files
         uses: actions/checkout@v2
 
       - name: Use Node.js ${{ matrix.node-version }}
@@ -25,11 +25,10 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: "npm"
 
-      - name: Install Node Dependencies
-        run: |
-          npm ci
+      - name: Install dependencies
+        run: npm ci
 
-      - name: Cypress Run
+      - name: Start CI server and run Cypress
         uses: cypress-io/github-action@v2
         with:
           start: npm run start:ci:${{ matrix.languages }} & npm run cypress:run:${{ matrix.languages }}
