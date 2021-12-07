@@ -61,7 +61,7 @@ jobs:
       - name: Start CI server and run Cypress
         uses: cypress-io/github-action@v2
         with:
-          start: npm run start:ci:${{ matrix.languages }} & npm run cypress:run:${{ matrix.languages }}
+          start: npm run start:ci:${{ matrix.languages }}
           wait-on: http://localhost:8080
           wait-on-timeout: 60
           browser: ${{ matrix.browsers }}
