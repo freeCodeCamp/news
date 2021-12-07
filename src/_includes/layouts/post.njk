@@ -6,6 +6,8 @@
 {% set codeinjection_head = post.codeinjection_head %}
 {% set codeinjection_foot = post.codeinjection_foot %}
 {% set adsEnabled = secrets.adsEnabled === 'true' %}
+{# Show 1 ad for every 2 minutes of reading time, plus two by default #}
+{% set numOfSidebarAds = ((post.reading_time / 2) + 2) | round(0, 'floor') %}
 
 {% block prism %}
     {% include "partials/prism.njk" %}
@@ -75,11 +77,7 @@
                         </section>
                         {% if adsEnabled and site.lang !== "zh" %}
                             <div class="sidebar">
-                                {# Show 2 ads by default #}
-                                {% include "partials/ad.njk" %}
-                                {% include "partials/ad.njk" %}
-                                {# For every 2 mins of reading time, show another ad #}
-                                {% for i in range(1, post.reading_time, 2) %}
+                                {% for i in range(0, numOfSidebarAds) %}
                                     {% include "partials/ad.njk" %}
                                 {% endfor %}
                             </div>
