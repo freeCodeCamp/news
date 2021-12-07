@@ -60,6 +60,10 @@ jobs:
       PORTUGUESE_GHOST_CONTENT_API_KEY:
         ${{ secrets.PORTUGUESE_GHOST_CONTENT_API_KEY }}
 
+      ADS_ENABLED: ${{ secrets.ADS_ENABLED }}
+      GOOGLE_ADSENSE_DATA_AD_CLIENT: ${{ secrets.GOOGLE_ADSENSE_DATA_AD_CLIENT }}
+      GOOGLE_ADSENSE_DATA_AD_SLOT: ${{ secrets.GOOGLE_ADSENSE_DATA_AD_SLOT }}
+
       POSTS_PER_PAGE: ${{ secrets.POSTS_PER_PAGE }}
 
       SITE_DOMAIN: ${{ github.event.inputs.site_domain }}
