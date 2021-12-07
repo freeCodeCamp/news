@@ -16,6 +16,13 @@ const fetchKeys = (ghostInstance) => {
 
 const { url, key, version } = fetchKeys();
 
+console.log('local', version);
+console.log('english', fetchKeys('english').version);
+console.log('espanol', fetchKeys('espanol').version);
+console.log('chinese', fetchKeys('chinese').version);
+console.log('portuguese', fetchKeys('portuguese').version);
+console.log('italian', fetchKeys('italian').version);
+
 // Init Ghost APIs
 const sourceApi = new ghostContentApi({ url, key, version });
 const englishApi = new ghostContentApi({ ...fetchKeys('english') });
