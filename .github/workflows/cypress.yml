@@ -58,6 +58,12 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Echo debugging
+        run: |
+          echo "posts $POSTS_PER_PAGE"
+          echo "version $LOCAL_GHOST_API_VERSION"
+          echo "posts.env ${{ env.POSTS_PER_PAGE }}"
+
       - name: Start CI server and run Cypress
         uses: cypress-io/github-action@v2
         with:
