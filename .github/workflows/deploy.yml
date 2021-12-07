@@ -20,8 +20,8 @@ jobs:
       fail-fast: false
       matrix:
         node-version: [16.x]
-        # languages: [english, italian, chinese, portuguese, espanol]
-        languages: [italian]
+        # languages: [english, chinese, espanol, italian, portuguese, japanese, arabic, ukrainian]
+        languages: [espanol, italian, portuguese]
     
     env:
       BUILD_LANG: ${{ matrix.languages }}
@@ -34,15 +34,15 @@ jobs:
       ALGOLIA_API_KEY: ${{ secrets.ALGOLIA_API_KEY }}
       ALGOLIA_APP_ID: ${{ secrets.ALGOLIA_APP_ID }}
 
-      CHINESE_GHOST_API_URL: ${{ secrets.CHINESE_GHOST_API_URL }}
-      CHINESE_GHOST_API_VERSION: ${{ secrets.CHINESE_GHOST_API_VERSION }}
-      CHINESE_GHOST_CONTENT_API_KEY:
-        ${{ secrets.CHINESE_GHOST_CONTENT_API_KEY }}
-
       ENGLISH_GHOST_API_URL: ${{ secrets.ENGLISH_GHOST_API_URL }}
       ENGLISH_GHOST_API_VERSION: ${{ secrets.ENGLISH_GHOST_API_VERSION }}
       ENGLISH_GHOST_CONTENT_API_KEY:
         ${{ secrets.ENGLISH_GHOST_CONTENT_API_KEY }}
+
+      CHINESE_GHOST_API_URL: ${{ secrets.CHINESE_GHOST_API_URL }}
+      CHINESE_GHOST_API_VERSION: ${{ secrets.CHINESE_GHOST_API_VERSION }}
+      CHINESE_GHOST_CONTENT_API_KEY:
+        ${{ secrets.CHINESE_GHOST_CONTENT_API_KEY }}
 
       ESPANOL_GHOST_API_URL: ${{ secrets.ESPANOL_GHOST_API_URL }}
       ESPANOL_GHOST_API_VERSION: ${{ secrets.ESPANOL_GHOST_API_VERSION }}
