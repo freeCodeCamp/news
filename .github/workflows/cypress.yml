@@ -14,36 +14,6 @@ jobs:
         node-version: [16.x]
         browsers: [chrome, firefox]
         languages: [english, chinese, espanol]
-    env:
-      LOCAL_GHOST_API_URL: ${{ secrets.LOCAL_GHOST_API_URL }}
-      LOCAL_GHOST_API_VERSION: ${{ secrets.LOCAL_GHOST_API_VERSION }}
-      LOCAL_GHOST_CONTENT_API_KEY: ${{ secrets.LOCAL_GHOST_CONTENT_API_KEY }}
-
-      ALGOLIA_API_KEY: ${{ secrets.ALGOLIA_API_KEY }}
-      ALGOLIA_APP_ID: ${{ secrets.ALGOLIA_APP_ID }}
-
-      CHINESE_GHOST_API_URL: ${{ secrets.CHINESE_GHOST_API_URL }}
-      CHINESE_GHOST_API_VERSION: ${{ secrets.CHINESE_GHOST_API_VERSION }}
-      CHINESE_GHOST_CONTENT_API_KEY: ${{ secrets.CHINESE_GHOST_CONTENT_API_KEY }}
-
-      ENGLISH_GHOST_API_URL: ${{ secrets.ENGLISH_GHOST_API_URL }}
-      ENGLISH_GHOST_API_VERSION: ${{ secrets.ENGLISH_GHOST_API_VERSION }}
-      ENGLISH_GHOST_CONTENT_API_KEY: ${{ secrets.ENGLISH_GHOST_CONTENT_API_KEY }}
-
-      ESPANOL_GHOST_API_URL: ${{ secrets.ESPANOL_GHOST_API_URL }}
-      ESPANOL_GHOST_API_VERSION: ${{ secrets.ESPANOL_GHOST_API_VERSION }}
-      ESPANOL_GHOST_CONTENT_API_KEY: ${{ secrets.ESPANOL_GHOST_CONTENT_API_KEY }}
-
-      ITALIAN_GHOST_API_URL: ${{ secrets.ITALIAN_GHOST_API_URL }}
-      ITALIAN_GHOST_API_VERSION: ${{ secrets.ITALIAN_GHOST_API_VERSION }}
-      ITALIAN_GHOST_CONTENT_API_KEY: ${{ secrets.ITALIAN_GHOST_CONTENT_API_KEY }}
-
-      PORTUGUESE_GHOST_API_URL: ${{ secrets.PORTUGUESE_GHOST_API_URL }}
-      PORTUGUESE_GHOST_API_VERSION: ${{ secrets.PORTUGUESE_GHOST_API_VERSION }}
-      PORTUGUESE_GHOST_CONTENT_API_KEY: ${{ secrets.PORTUGUESE_GHOST_CONTENT_API_KEY }}
-
-      POSTS_PER_PAGE: ${{ secrets.POSTS_PER_PAGE }}
-      SITE_DOMAIN: localhost:8080
 
     steps:
       - name: Checkout source files
@@ -67,3 +37,33 @@ jobs:
           browser: ${{ matrix.browsers }}
           headless: true
           spec: cypress/integration/${{ matrix.languages }}/**/*
+        env:
+          LOCAL_GHOST_API_URL: ${{ secrets.LOCAL_GHOST_API_URL }}
+          LOCAL_GHOST_API_VERSION: ${{ secrets.LOCAL_GHOST_API_VERSION }}
+          LOCAL_GHOST_CONTENT_API_KEY: ${{ secrets.LOCAL_GHOST_CONTENT_API_KEY }}
+
+          ALGOLIA_API_KEY: ${{ secrets.ALGOLIA_API_KEY }}
+          ALGOLIA_APP_ID: ${{ secrets.ALGOLIA_APP_ID }}
+
+          CHINESE_GHOST_API_URL: ${{ secrets.CHINESE_GHOST_API_URL }}
+          CHINESE_GHOST_API_VERSION: ${{ secrets.CHINESE_GHOST_API_VERSION }}
+          CHINESE_GHOST_CONTENT_API_KEY: ${{ secrets.CHINESE_GHOST_CONTENT_API_KEY }}
+
+          ENGLISH_GHOST_API_URL: ${{ secrets.ENGLISH_GHOST_API_URL }}
+          ENGLISH_GHOST_API_VERSION: ${{ secrets.ENGLISH_GHOST_API_VERSION }}
+          ENGLISH_GHOST_CONTENT_API_KEY: ${{ secrets.ENGLISH_GHOST_CONTENT_API_KEY }}
+
+          ESPANOL_GHOST_API_URL: ${{ secrets.ESPANOL_GHOST_API_URL }}
+          ESPANOL_GHOST_API_VERSION: ${{ secrets.ESPANOL_GHOST_API_VERSION }}
+          ESPANOL_GHOST_CONTENT_API_KEY: ${{ secrets.ESPANOL_GHOST_CONTENT_API_KEY }}
+
+          ITALIAN_GHOST_API_URL: ${{ secrets.ITALIAN_GHOST_API_URL }}
+          ITALIAN_GHOST_API_VERSION: ${{ secrets.ITALIAN_GHOST_API_VERSION }}
+          ITALIAN_GHOST_CONTENT_API_KEY: ${{ secrets.ITALIAN_GHOST_CONTENT_API_KEY }}
+
+          PORTUGUESE_GHOST_API_URL: ${{ secrets.PORTUGUESE_GHOST_API_URL }}
+          PORTUGUESE_GHOST_API_VERSION: ${{ secrets.PORTUGUESE_GHOST_API_VERSION }}
+          PORTUGUESE_GHOST_CONTENT_API_KEY: ${{ secrets.PORTUGUESE_GHOST_CONTENT_API_KEY }}
+
+          POSTS_PER_PAGE: ${{ secrets.POSTS_PER_PAGE }}
+          SITE_DOMAIN: localhost:8080
