@@ -9,9 +9,9 @@
   },
   "scripts": {
     "start": "npm run dev",
-    "start:ci:english": "cross-env ELEVENTY_ENV=ci LOCALE_FOR_UI=english npm run dev",
-    "start:ci:chinese": "cross-env ELEVENTY_ENV=ci LOCALE_FOR_UI=chinese npm run dev",
-    "start:ci:espanol": "cross-env ELEVENTY_ENV=ci LOCALE_FOR_UI=espanol npm run dev",
+    "start:ci:english": "cross-env ELEVENTY_ENV=ci LOCALE_FOR_UI=english LOCALE_FOR_GHOST=english npm run dev",
+    "start:ci:chinese": "cross-env ELEVENTY_ENV=ci LOCALE_FOR_UI=chinese LOCALE_FOR_GHOST=chinese npm run dev",
+    "start:ci:espanol": "cross-env ELEVENTY_ENV=ci LOCALE_FOR_UI=espanol LOCALE_FOR_GHOST=espanol npm run dev",
     "clean": "npm-run-all -p clean:*",
     "clean:error-logs": "shx rm -f *-errors.log",
     "clean:dist": "shx rm -rf dist/",
