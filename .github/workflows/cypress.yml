@@ -33,7 +33,7 @@ jobs:
         with:
           start: npm run start:ci:${{ matrix.languages }}
           wait-on: http://localhost:8080
-          wait-on-timeout: 60
+          wait-on-timeout: 1200
           browser: ${{ matrix.browsers }}
           headless: true
           spec: cypress/integration/${{ matrix.languages }}/**/*
