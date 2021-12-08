@@ -21,14 +21,18 @@ document.addEventListener('DOMContentLoaded', () => {
       });
   }
 
+  const getSmallProfileImage = url => url.includes('/content/images/') ?
+    url.replace('/content/images/', '/content/images/size/w30/') :
+    url;
+
   async function renderSearchResults(arr) {
     arr.forEach((hit) => {
       const featureImage = hit.featureImage || null;
       const url = hit.url || '#';
       const title = hit.title || '#';
       const authorName = hit.author.name;
-      const authorImage = hit.author.profileImage
-        .replace('/content/images/', '/content/images/size/w30/'); // Get smaller author image
+      // Get smaller author image if one exists
+      const authorImage = getSmallProfileImage(hit.author.profileImage);
       const authorUrl = hit.author.url;
       const primaryTagCodeBlock =
         hit.tags.length === 0
@@ -41,8 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const publishedAt = hit.publishedAt;
       const originalPost = hit.originalPost || null;
       const originalAuthor = originalPost ? originalPost.primaryAuthor : null;
-      const originalAuthorImage = originalPost ? originalAuthor.profileImage
-        .replace('/content/images/', '/content/images/size/w30/') : null;
+      const originalAuthorImage = originalPost ? getSmallProfileImage(originalAuthor.profileImage) : null;
       const articleItem = document.createElement('article');
       articleItem.className =
         'post-card post';
