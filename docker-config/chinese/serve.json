@@ -1,0 +1,9 @@
+{
+  "directoryListing": false,
+  "redirects": [
+    {
+      "source": "/deno-oak-lian-jie-mysql-shi-zhan-jiao-cheng",
+      "destination": "/how-to-use-mysql-in-deno-oak"
+    }
+  ]
+}
