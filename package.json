@@ -8,12 +8,15 @@
     "npm": ">=8"
   },
   "scripts": {
-    "start": "npm run dev",
+    "start": "npm run develop",
     "clean": "npm-run-all -p clean:*",
     "clean:error-logs": "shx rm -f *-errors.log",
     "clean:dist": "shx rm -rf dist/",
-    "dev"  : "npm run clean && cross-env ELEVENTY_ENV=dev  NODE_OPTIONS=--max-old-space-size=8192 eleventy --serve",
-    "build": "npm run clean && cross-env ELEVENTY_ENV=prod NODE_OPTIONS=--max-old-space-size=8192 eleventy",
+    "dev"  : "npm run develop",
+    "predevelop": "npm run clean",
+    "develop": "cross-env ELEVENTY_ENV=dev  NODE_OPTIONS=--max-old-space-size=8192 eleventy --serve",
+    "prebuild": "npm run clean",
+    "build": "cross-env ELEVENTY_ENV=prod NODE_OPTIONS=--max-old-space-size=8192 eleventy",
     "test": "npm run build",
     "lint": "eslint . --ext .js --cache"
   },
