@@ -1,5 +1,8 @@
 {
   "directoryListing": false,
+  "rewrites": [
+    { "source": "/rss", "destination": "/rss.xml" }
+  ],
   "redirects": [
     {
       "source": "/@(.*)$",
