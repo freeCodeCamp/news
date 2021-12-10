@@ -3,19 +3,22 @@
 Follow these steps to build and test the mock website, redirects & other serve
 configs:
 
-1. Remember to run all the commands from the root of the project.
+1. Remember to run all the commands from the root of the project. And also note
+   that these commands use Docker Compose v2, which you can swap with v1 if you
+   want. That is, instead of `docker compose COMMAND`, you can use the older
+   `docker-compose COMMAND` format.
 
 2. Run `npm ci` to install all the dependencies.
 
 3. Copy & create a `.env` file following the contents of the `sample.env` file.
-   Most criticaly, ensure the values of these variables are correct:
+   Most critically, ensure the values of these variables are correct:
 
    ```
    LOCALE_FOR_GHOST="italian"
    LOCALE_FOR_UI="italian"
    ```
 
-   In this example we are going to pull posts from the Ghost instance for
+   In this example, we are going to pull posts from the Ghost instance for
    Italian.
 
 4. Run `npm run build` to build the news website.
@@ -26,7 +29,7 @@ configs:
 
 5. Build the containers with compose:
 
-   ```
+   ```console
    docker compose -f docker-compose.test.yml build --build-arg BUILD_LANGUAGE=dothraki
    ```
 
@@ -43,7 +46,7 @@ configs:
 
 6. Run the containers with compose:
 
-   ```
+   ```console
    docker compose -f docker-compose.test.yml up
    ```
 
