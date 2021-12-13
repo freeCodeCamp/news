@@ -109,13 +109,14 @@ async function createJsonLdShortcode(type, site, data) {
         returnData.datePublished = new Date(data.published_at).toISOString();
       if (data.updated_at)
         returnData.dateModified = new Date(data.updated_at).toISOString();
-      if (data.tags && data.tags.length > 1) {
+      if (data.tags) {
         // Filter out internal Ghost tags
-        const keywords = data.tags
+        const keywordString = data.tags
           .map((tag) => tag.name)
-          .filter((keyword) => !keyword.startsWith('#'));
+          .filter((keyword) => !keyword.startsWith('#'))
+          .join(', ');
 
-        returnData.keywords = keywords.length === 1 ? keywords[0] : keywords;
+        returnData.keywords = keywordString;
       }
       if (data.original_excerpt) returnData.description = fullEscaper(data.original_excerpt);
       if (data.title) returnData.headline = fullEscaper(data.title);
