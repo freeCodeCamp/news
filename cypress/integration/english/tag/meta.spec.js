@@ -1,5 +1,5 @@
-const commonMeta = require('../../../fixtures/common-meta.json');
-const tagMeta = {
+const commonExpectedMeta = require('../../../fixtures/common-expected-meta.json');
+const tagExpectedMeta = {
   title: 'freeCodeCamp - freeCodeCamp.org',
   url: 'http://localhost:8080/news/tag/freecodecamp/',
   description: "Browse thousands of programming tutorials written by experts. Learn Web Development, Data Science, DevOps, Security, and get developer career advice."
@@ -13,7 +13,7 @@ describe('Tag page metadata', () => {
   it('<title>', () => {
     cy.title().should(
       'eq',
-      tagMeta.title
+      tagExpectedMeta.title
     );
   });
 
@@ -21,7 +21,7 @@ describe('Tag page metadata', () => {
     cy.get('head link[rel="canonical"]').should(
       'have.attr',
       'href',
-      tagMeta.url
+      tagExpectedMeta.url
     );
   });
 
@@ -29,7 +29,7 @@ describe('Tag page metadata', () => {
     cy.get('head meta[name="generator"]').should(
       'have.attr',
       'content',
-      commonMeta.generator
+      commonExpectedMeta.generator
     );
   });
 
@@ -37,7 +37,7 @@ describe('Tag page metadata', () => {
     cy.get('head meta[property="og:site_name"]').should(
       'have.attr',
       'content',
-      commonMeta.siteName
+      commonExpectedMeta.siteName
     );
   });
 
@@ -53,7 +53,7 @@ describe('Tag page metadata', () => {
     cy.get('head meta[property="og:title"]').should(
       'have.attr',
       'content',
-      tagMeta.title
+      tagExpectedMeta.title
     );
   });
 
@@ -61,7 +61,7 @@ describe('Tag page metadata', () => {
     cy.get('head meta[property="og:description"]').should(
       'have.attr',
       'content',
-      tagMeta.description
+      tagExpectedMeta.description
     );
   });
 
@@ -69,7 +69,7 @@ describe('Tag page metadata', () => {
     cy.get('head meta[property="og:url"]').should(
       'have.attr',
       'content',
-      tagMeta.url
+      tagExpectedMeta.url
     );
   });
 
@@ -78,7 +78,7 @@ describe('Tag page metadata', () => {
     cy.get('head meta[property="og:image"]').should(
       'have.attr',
       'content',
-      commonMeta.publicationCover.url
+      commonExpectedMeta.publicationCover.url
     );
   });
 
@@ -86,7 +86,7 @@ describe('Tag page metadata', () => {
     cy.get('head meta[property="og:image:width"]').should(
       'have.attr',
       'content',
-      commonMeta.publicationCover.width
+      commonExpectedMeta.publicationCover.width
     );
   });
 
@@ -94,7 +94,7 @@ describe('Tag page metadata', () => {
     cy.get('head meta[property="og:image:height"]').should(
       'have.attr',
       'content',
-      commonMeta.publicationCover.height
+      commonExpectedMeta.publicationCover.height
     );
   });
 
@@ -102,7 +102,7 @@ describe('Tag page metadata', () => {
     cy.get('head meta[property="article:publisher"]').should(
       'have.attr',
       'content',
-      commonMeta.facebook.url
+      commonExpectedMeta.facebook.url
     );
   });
 
@@ -110,7 +110,7 @@ describe('Tag page metadata', () => {
     cy.get('head meta[name="twitter:card"]').should(
       'have.attr',
       'content',
-      commonMeta.twitter.cardType
+      commonExpectedMeta.twitter.cardType
     );
   });
 
@@ -118,7 +118,7 @@ describe('Tag page metadata', () => {
     cy.get('head meta[name="twitter:title"]').should(
       'have.attr',
       'content',
-      tagMeta.title
+      tagExpectedMeta.title
     );
   });
 
@@ -126,7 +126,7 @@ describe('Tag page metadata', () => {
     cy.get('head meta[name="twitter:description"]').should(
       'have.attr',
       'content',
-      tagMeta.description
+      tagExpectedMeta.description
     );
   });
 
@@ -134,7 +134,7 @@ describe('Tag page metadata', () => {
     cy.get('head meta[name="twitter:url"]').should(
       'have.attr',
       'content',
-      tagMeta.url
+      tagExpectedMeta.url
     );
   });
 
@@ -142,7 +142,7 @@ describe('Tag page metadata', () => {
     cy.get('head meta[name="twitter:image"]').should(
       'have.attr',
       'content',
-      commonMeta.publicationCover.url
+      commonExpectedMeta.publicationCover.url
     );
   });
 
@@ -150,7 +150,7 @@ describe('Tag page metadata', () => {
     cy.get('head meta[name="twitter:site"]').should(
       'have.attr',
       'content',
-      commonMeta.twitter.username
+      commonExpectedMeta.twitter.username
     );
   });
 });

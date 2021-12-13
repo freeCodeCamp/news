@@ -1,4 +1,4 @@
-const commonMeta = require('../../../fixtures/common-meta.json');
+const commonExpectedMeta = require('../../../fixtures/common-expected-meta.json');
 
 describe('Landing metadata', () => {
   before(() => {
@@ -8,7 +8,7 @@ describe('Landing metadata', () => {
   it('<title>', () => {
     cy.title().should(
       'eq',
-      commonMeta.title
+      commonExpectedMeta.title
     );
   });
 
@@ -16,7 +16,7 @@ describe('Landing metadata', () => {
     cy.get('head meta[name="keywords"]').should(
       'have.attr',
       'content',
-      commonMeta.keywords
+      commonExpectedMeta.keywords
     );
   });
 
@@ -24,7 +24,7 @@ describe('Landing metadata', () => {
     cy.get('head meta[name="description"]').should(
       'have.attr',
       'content',
-      commonMeta.description
+      commonExpectedMeta.description
     );
   });
 
@@ -32,7 +32,7 @@ describe('Landing metadata', () => {
     cy.get('head link[rel="canonical"]').should(
       'have.attr',
       'href',
-      commonMeta.siteUrl
+      commonExpectedMeta.siteUrl
     );
   });
 
@@ -40,7 +40,7 @@ describe('Landing metadata', () => {
     cy.get('head meta[name="generator"]').should(
       'have.attr',
       'content',
-      commonMeta.generator
+      commonExpectedMeta.generator
     );
   });
 
@@ -48,7 +48,7 @@ describe('Landing metadata', () => {
     cy.get('head meta[property="og:site_name"]').should(
       'have.attr',
       'content',
-      commonMeta.siteName
+      commonExpectedMeta.siteName
     );
   });
 
@@ -64,7 +64,7 @@ describe('Landing metadata', () => {
     cy.get('head meta[property="og:title"]').should(
       'have.attr',
       'content',
-      commonMeta.siteName
+      commonExpectedMeta.siteName
     );
   });
 
@@ -72,7 +72,7 @@ describe('Landing metadata', () => {
     cy.get('head meta[property="og:description"]').should(
       'have.attr',
       'content',
-      commonMeta.description
+      commonExpectedMeta.description
     );
   });
 
@@ -80,7 +80,7 @@ describe('Landing metadata', () => {
     cy.get('head meta[property="og:url"]').should(
       'have.attr',
       'content',
-      commonMeta.siteUrl
+      commonExpectedMeta.siteUrl
     );
   });
 
@@ -88,7 +88,7 @@ describe('Landing metadata', () => {
     cy.get('head meta[property="og:image"]').should(
       'have.attr',
       'content',
-      commonMeta.publicationCover.url
+      commonExpectedMeta.publicationCover.url
     );
   });
 
@@ -96,7 +96,7 @@ describe('Landing metadata', () => {
     cy.get('head meta[property="og:image:width"]').should(
       'have.attr',
       'content',
-      commonMeta.publicationCover.width
+      commonExpectedMeta.publicationCover.width
     );
   });
 
@@ -104,7 +104,7 @@ describe('Landing metadata', () => {
     cy.get('head meta[property="og:image:height"]').should(
       'have.attr',
       'content',
-      commonMeta.publicationCover.height
+      commonExpectedMeta.publicationCover.height
     );
   });
 
@@ -112,7 +112,7 @@ describe('Landing metadata', () => {
     cy.get('head meta[property="article:publisher"]').should(
       'have.attr',
       'content',
-      commonMeta.facebook.url
+      commonExpectedMeta.facebook.url
     );
   });
 
@@ -120,7 +120,7 @@ describe('Landing metadata', () => {
     cy.get('head meta[name="twitter:card"]').should(
       'have.attr',
       'content',
-      commonMeta.twitter.cardType
+      commonExpectedMeta.twitter.cardType
     );
   });
 
@@ -128,7 +128,7 @@ describe('Landing metadata', () => {
     cy.get('head meta[name="twitter:title"]').should(
       'have.attr',
       'content',
-      commonMeta.siteName
+      commonExpectedMeta.siteName
     );
   });
 
@@ -136,7 +136,7 @@ describe('Landing metadata', () => {
     cy.get('head meta[name="twitter:description"]').should(
       'have.attr',
       'content',
-      commonMeta.description
+      commonExpectedMeta.description
     );
   });
 
@@ -144,7 +144,7 @@ describe('Landing metadata', () => {
     cy.get('head meta[name="twitter:url"]').should(
       'have.attr',
       'content',
-      commonMeta.siteUrl
+      commonExpectedMeta.siteUrl
     );
   });
 
@@ -152,7 +152,7 @@ describe('Landing metadata', () => {
     cy.get('head meta[name="twitter:image"]').should(
       'have.attr',
       'content',
-      commonMeta.publicationCover.url
+      commonExpectedMeta.publicationCover.url
     );
   });
 
@@ -160,7 +160,7 @@ describe('Landing metadata', () => {
     cy.get('head meta[name="twitter:site"]').should(
       'have.attr',
       'content',
-      commonMeta.twitter.username
+      commonExpectedMeta.twitter.username
     );
   });
 });

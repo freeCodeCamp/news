@@ -1,5 +1,5 @@
-const commonMeta = require('../../../fixtures/common-meta.json');
-const postMeta = {
+const commonExpectedMeta = require('../../../fixtures/common-expected-meta.json');
+const postExpectedMeta = {
   title: "We're Building New Courses on Rust and Python + the Replit.web Framework",
   url: 'http://localhost:8080/news/announcing-rust-course-replit-web/',
   image: {
@@ -18,7 +18,7 @@ describe('Post metadata', () => {
   it('<title>', () => {
     cy.title().should(
       'eq',
-      postMeta.title
+      postExpectedMeta.title
     );
   });
 
@@ -26,7 +26,7 @@ describe('Post metadata', () => {
     cy.get('head meta[name="description"]').should(
       'have.attr',
       'content',
-      postMeta.excerpt
+      postExpectedMeta.excerpt
     );
   });
 
@@ -34,7 +34,7 @@ describe('Post metadata', () => {
     cy.get('head link[rel="canonical"]').should(
       'have.attr',
       'href',
-      postMeta.url
+      postExpectedMeta.url
     );
   });
 
@@ -42,7 +42,7 @@ describe('Post metadata', () => {
     cy.get('head meta[name="generator"]').should(
       'have.attr',
       'content',
-      commonMeta.generator
+      commonExpectedMeta.generator
     );
   });
 
@@ -50,7 +50,7 @@ describe('Post metadata', () => {
     cy.get('head meta[property="og:site_name"]').should(
       'have.attr',
       'content',
-      commonMeta.siteName
+      commonExpectedMeta.siteName
     );
   });
 
@@ -66,7 +66,7 @@ describe('Post metadata', () => {
     cy.get('head meta[property="og:title"]').should(
       'have.attr',
       'content',
-      postMeta.title
+      postExpectedMeta.title
     );
   });
 
@@ -74,7 +74,7 @@ describe('Post metadata', () => {
     cy.get('head meta[property="og:description"]').should(
       'have.attr',
       'content',
-      postMeta.excerpt
+      postExpectedMeta.excerpt
     );
   });
 
@@ -82,7 +82,7 @@ describe('Post metadata', () => {
     cy.get('head meta[property="og:url"]').should(
       'have.attr',
       'content',
-      postMeta.url
+      postExpectedMeta.url
     );
   });
 
@@ -90,7 +90,7 @@ describe('Post metadata', () => {
     cy.get('head meta[property="og:image"]').should(
       'have.attr',
       'content',
-      postMeta.image.url
+      postExpectedMeta.image.url
     );
   });
 
@@ -98,7 +98,7 @@ describe('Post metadata', () => {
     cy.get('head meta[property="og:image:width"]').should(
       'have.attr',
       'content',
-      postMeta.image.width
+      postExpectedMeta.image.width
     );
   });
 
@@ -106,7 +106,7 @@ describe('Post metadata', () => {
     cy.get('head meta[property="og:image:height"]').should(
       'have.attr',
       'content',
-      postMeta.image.height
+      postExpectedMeta.image.height
     );
   });
 
@@ -139,7 +139,7 @@ describe('Post metadata', () => {
     cy.get('head meta[property="article:publisher"]').should(
       'have.attr',
       'content',
-      commonMeta.facebook.url
+      commonExpectedMeta.facebook.url
     );
   });
 
@@ -147,7 +147,7 @@ describe('Post metadata', () => {
     cy.get('head meta[name="twitter:card"]').should(
       'have.attr',
       'content',
-      commonMeta.twitter.cardType
+      commonExpectedMeta.twitter.cardType
     );
   });
 
@@ -155,7 +155,7 @@ describe('Post metadata', () => {
     cy.get('head meta[name="twitter:title"]').should(
       'have.attr',
       'content',
-      postMeta.title
+      postExpectedMeta.title
     );
   });
 
@@ -163,7 +163,7 @@ describe('Post metadata', () => {
     cy.get('head meta[name="twitter:description"]').should(
       'have.attr',
       'content',
-      postMeta.excerpt
+      postExpectedMeta.excerpt
     );
   });
 
@@ -171,7 +171,7 @@ describe('Post metadata', () => {
     cy.get('head meta[name="twitter:url"]').should(
       'have.attr',
       'content',
-      postMeta.url
+      postExpectedMeta.url
     );
   });
 
@@ -179,7 +179,7 @@ describe('Post metadata', () => {
     cy.get('head meta[name="twitter:image"]').should(
       'have.attr',
       'content',
-      postMeta.image.url
+      postExpectedMeta.image.url
     );
   });
 
@@ -187,7 +187,7 @@ describe('Post metadata', () => {
     cy.get('head meta[name="twitter:label1"]').should(
       'have.attr',
       'content',
-      commonMeta.twitter.label1
+      commonExpectedMeta.twitter.label1
     );
   });
 
@@ -203,7 +203,7 @@ describe('Post metadata', () => {
     cy.get('head meta[name="twitter:label2"]').should(
       'have.attr',
       'content',
-      commonMeta.twitter.label2
+      commonExpectedMeta.twitter.label2
     );
   });
 
@@ -220,7 +220,7 @@ describe('Post metadata', () => {
     cy.get('head meta[name="twitter:site"]').should(
       'have.attr',
       'content',
-      commonMeta.twitter.username
+      commonExpectedMeta.twitter.username
     );
   });
 
