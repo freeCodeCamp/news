@@ -1,0 +1,26 @@
+{
+  "directoryListing": false,
+  "rewrites": [{ "source": "/rss", "destination": "/rss.xml" }],
+  "redirects": [
+    {
+      "source": "/@(.*)$",
+      "destination": "/author/$1"
+    },
+    {
+      "source": "/tagged/(.*)$",
+      "destination": "/tag/$1"
+    },
+    {
+      "source": "/archive/(.*)$",
+      "destination": "/"
+    },
+    {
+      "source": "/our-sponsors",
+      "destination": "/sponsors"
+    },
+    {
+      "source": "/about-freecodecamp",
+      "destination": "/about"
+    }
+  ]
+}
