@@ -1,7 +1,6 @@
 describe('Post structured data (JSON-LD)', () => {
-  let jsonLdObj;
-  const commonStructuredData = require('../../../fixtures/common-structured-data.json');
-  const postStructuredData = {
+  const commonExpectedJsonLd = require('../../../fixtures/common-expected-json-ld.json');
+  const postExpectedJsonLd = {
     '@type': 'Article',
     author: {
       '@type': 'Person',
@@ -30,6 +29,7 @@ describe('Post structured data (JSON-LD)', () => {
     description:
       'As you may know, I&#x27;ve been a fan of Replit since way back in 2012. I used early\nversions of the website when I was learning to code. \n\nFor me, Replit was a place to code my solutions for Project Euler problems, and\nto practice my Python and JavaScript skills.\n\nOver the past decade, Replit has come a long way [https://replit.com/]. Their\nteam has evolved the coding platform into a full-blown multiplayer IDE where you\ncan collaborate with other developers, and host your apps for free.\n\nOne way a l'
   };
+  let jsonLdObj;
 
   before(() => {
     cy.visit('/announcing-rust-course-replit-web');
@@ -40,29 +40,29 @@ describe('Post structured data (JSON-LD)', () => {
   });
 
   it('matches the expected base values', () => {
-    expect(jsonLdObj['@context']).to.equal(commonStructuredData['@context']);
-    expect(jsonLdObj['@type']).to.equal(postStructuredData['@type']);
-    expect(jsonLdObj.url).to.equal(postStructuredData.url);
-    expect(jsonLdObj.datePublished).to.equal(postStructuredData.datePublished);
-    expect(jsonLdObj.dateModified).to.equal(postStructuredData.dateModified);
-    expect(jsonLdObj.description).to.equal(postStructuredData.description);
-    expect(jsonLdObj.headline).to.equal(postStructuredData.headline);
-    expect(jsonLdObj.keywords).to.equal(postStructuredData.keywords);
+    expect(jsonLdObj['@context']).to.equal(commonExpectedJsonLd['@context']);
+    expect(jsonLdObj['@type']).to.equal(postExpectedJsonLd['@type']);
+    expect(jsonLdObj.url).to.equal(postExpectedJsonLd.url);
+    expect(jsonLdObj.datePublished).to.equal(postExpectedJsonLd.datePublished);
+    expect(jsonLdObj.dateModified).to.equal(postExpectedJsonLd.dateModified);
+    expect(jsonLdObj.description).to.equal(postExpectedJsonLd.description);
+    expect(jsonLdObj.headline).to.equal(postExpectedJsonLd.headline);
+    expect(jsonLdObj.keywords).to.equal(postExpectedJsonLd.keywords);
   });
 
   it('matches the expected publisher values', () => {
-    expect(jsonLdObj.publisher).to.deep.equal(commonStructuredData.publisher);
+    expect(jsonLdObj.publisher).to.deep.equal(commonExpectedJsonLd.publisher);
   });
 
   it('matches the expected image values', () => {
-    expect(jsonLdObj.image).to.deep.equal(postStructuredData.image);
+    expect(jsonLdObj.image).to.deep.equal(postExpectedJsonLd.image);
   });
 
   it('matches the expected mainEntityOfPage values', () => {
-    expect(jsonLdObj.mainEntityOfPage).to.deep.equal(commonStructuredData.mainEntityOfPage);
+    expect(jsonLdObj.mainEntityOfPage).to.deep.equal(commonExpectedJsonLd.mainEntityOfPage);
   });
 
   it('matches the expected author values', () => {
-    expect(jsonLdObj.author).to.deep.equal(postStructuredData.author);
+    expect(jsonLdObj.author).to.deep.equal(postExpectedJsonLd.author);
   });
 });

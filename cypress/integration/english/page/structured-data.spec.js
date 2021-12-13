@@ -1,6 +1,6 @@
 describe('Page structured data (JSON-LD)', () => {
-  const commonStructuredData = require('../../../fixtures/common-structured-data.json');
-  const pageStructuredData = {
+  const commonExpectedJsonLd = require('../../../fixtures/common-expected-json-ld.json');
+  const pageExpectedJsonLd = {
     '@type': 'Article',
     author: {
       '@type': 'Person',
@@ -39,28 +39,28 @@ describe('Page structured data (JSON-LD)', () => {
   });
 
   it('matches the expected base values', () => {
-    expect(jsonLdObj['@context']).to.equal(commonStructuredData['@context']);
-    expect(jsonLdObj['@type']).to.equal(pageStructuredData['@type']);
-    expect(jsonLdObj.url).to.equal(pageStructuredData.url);
-    expect(jsonLdObj.datePublished).to.equal(pageStructuredData.datePublished);
-    expect(jsonLdObj.dateModified).to.equal(pageStructuredData.dateModified);
-    expect(jsonLdObj.description).to.equal(pageStructuredData.description);
-    expect(jsonLdObj.headline).to.equal(pageStructuredData.headline);
+    expect(jsonLdObj['@context']).to.equal(commonExpectedJsonLd['@context']);
+    expect(jsonLdObj['@type']).to.equal(pageExpectedJsonLd['@type']);
+    expect(jsonLdObj.url).to.equal(pageExpectedJsonLd.url);
+    expect(jsonLdObj.datePublished).to.equal(pageExpectedJsonLd.datePublished);
+    expect(jsonLdObj.dateModified).to.equal(pageExpectedJsonLd.dateModified);
+    expect(jsonLdObj.description).to.equal(pageExpectedJsonLd.description);
+    expect(jsonLdObj.headline).to.equal(pageExpectedJsonLd.headline);
   });
 
   it('matches the expected publisher values', () => {
-    expect(jsonLdObj.publisher).to.deep.equal(commonStructuredData.publisher);
+    expect(jsonLdObj.publisher).to.deep.equal(commonExpectedJsonLd.publisher);
   });
 
   it('matches the expected image values', () => {
-    expect(jsonLdObj.image).to.deep.equal(pageStructuredData.image);
+    expect(jsonLdObj.image).to.deep.equal(pageExpectedJsonLd.image);
   });
 
   it('matches the expected mainEntityOfPage values', () => {
-    expect(jsonLdObj.mainEntityOfPage).to.deep.equal(commonStructuredData.mainEntityOfPage);
+    expect(jsonLdObj.mainEntityOfPage).to.deep.equal(commonExpectedJsonLd.mainEntityOfPage);
   });
 
   it('matches the expected author values', () => {
-    expect(jsonLdObj.author).to.deep.equal(pageStructuredData.author);
+    expect(jsonLdObj.author).to.deep.equal(pageExpectedJsonLd.author);
   });
 });

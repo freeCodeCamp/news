@@ -1,6 +1,6 @@
 describe('Author page structured data (JSON-LD)', () => {
-  const commonStructuredData = require('../../../fixtures/common-structured-data.json');
-  const authorStructuredData = {
+  const commonExpectedJsonLd = require('../../../fixtures/common-expected-json-ld.json');
+  const authorExpectedJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Person',
     sameAs: ['https://www.freecodecamp.org', 'https://twitter.com/ossia'], // Site, Twitter
@@ -25,19 +25,19 @@ describe('Author page structured data (JSON-LD)', () => {
   });
 
   it('matches the expected base values', () => {
-    expect(jsonLdObj['@context']).to.equal(commonStructuredData['@context']);
-    expect(jsonLdObj['@type']).to.equal(authorStructuredData['@type']);
-    expect(jsonLdObj.sameAs).to.deep.equal(authorStructuredData.sameAs);
-    expect(jsonLdObj.name).to.equal(authorStructuredData.name);
-    expect(jsonLdObj.url).to.equal(authorStructuredData.url);
-    expect(jsonLdObj.description).to.equal(authorStructuredData.description);
+    expect(jsonLdObj['@context']).to.equal(commonExpectedJsonLd['@context']);
+    expect(jsonLdObj['@type']).to.equal(authorExpectedJsonLd['@type']);
+    expect(jsonLdObj.sameAs).to.deep.equal(authorExpectedJsonLd.sameAs);
+    expect(jsonLdObj.name).to.equal(authorExpectedJsonLd.name);
+    expect(jsonLdObj.url).to.equal(authorExpectedJsonLd.url);
+    expect(jsonLdObj.description).to.equal(authorExpectedJsonLd.description);
   });
 
   it('matches the expected image values', () => {
-    expect(jsonLdObj.image).to.deep.equal(authorStructuredData.image);
+    expect(jsonLdObj.image).to.deep.equal(authorExpectedJsonLd.image);
   });
 
   it('matches the expected mainEntityOfPage values', () => {
-    expect(jsonLdObj.mainEntityOfPage).to.deep.equal(commonStructuredData.mainEntityOfPage);
+    expect(jsonLdObj.mainEntityOfPage).to.deep.equal(commonExpectedJsonLd.mainEntityOfPage);
   });
 });
