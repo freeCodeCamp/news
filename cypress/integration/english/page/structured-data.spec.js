@@ -1,19 +1,7 @@
 describe('Page structured data (JSON-LD)', () => {
-  let jsonLdObj;
-  const jsonLdExpected = {
-    '@context': 'https://schema.org',
+  const commonStructuredData = require('../../../fixtures/common-structured-data.json');
+  const pageStructuredData = {
     '@type': 'Article',
-    publisher: {
-      '@type': 'Organization',
-      name: 'freeCodeCamp.org',
-      url: 'http://localhost:8080/news/',
-      logo: {
-        '@type': 'ImageObject',
-        url: 'https://cdn.freecodecamp.org/platform/universal/fcc_primary.svg',
-        width: 2100,
-        height: 240,
-      },
-    },
     author: {
       '@type': 'Person',
       name: 'freeCodeCamp.org',
@@ -38,12 +26,9 @@ describe('Page structured data (JSON-LD)', () => {
       height: 500,
     },
     description:
-      'Once you&#x27;ve forwarded this receipt, we will award you with your donor badge on\nyour freeCodeCamp profile. We will also turn off donation prompts for you.\n\nThank you again for supporting our nonprofit.\n\nfreeCodeCamp is a highly-efficient education NGO. This year alone, we&#x27;ve\nprovided million hours of free education to people around the world.\n\nAt our nonprofit&#x27;s current operating budget, every dollar you donate to\nfreeCodeCamp translates into 50 hours worth of technology education.\n\nSome members ',
-    mainEntityOfPage: {
-      '@type': 'WebPage',
-      '@id': 'http://localhost:8080/news/',
-    },
-  };    
+      'Once you&#x27;ve forwarded this receipt, we will award you with your donor badge on\nyour freeCodeCamp profile. We will also turn off donation prompts for you.\n\nThank you again for supporting our nonprofit.\n\nfreeCodeCamp is a highly-efficient education NGO. This year alone, we&#x27;ve\nprovided million hours of free education to people around the world.\n\nAt our nonprofit&#x27;s current operating budget, every dollar you donate to\nfreeCodeCamp translates into 50 hours worth of technology education.\n\nSome members '
+  };
+  let jsonLdObj;
 
   before(() => {
     cy.visit('/thank-you-for-donating');
@@ -54,28 +39,28 @@ describe('Page structured data (JSON-LD)', () => {
   });
 
   it('matches the expected base values', () => {
-    expect(jsonLdObj['@context']).to.equal(jsonLdExpected['@context']);
-    expect(jsonLdObj['@type']).to.equal(jsonLdExpected['@type']);
-    expect(jsonLdObj.url).to.equal(jsonLdExpected.url);
-    expect(jsonLdObj.datePublished).to.equal(jsonLdExpected.datePublished);
-    expect(jsonLdObj.dateModified).to.equal(jsonLdExpected.dateModified);
-    expect(jsonLdObj.description).to.equal(jsonLdExpected.description);
-    expect(jsonLdObj.headline).to.equal(jsonLdExpected.headline);
+    expect(jsonLdObj['@context']).to.equal(commonStructuredData['@context']);
+    expect(jsonLdObj['@type']).to.equal(pageStructuredData['@type']);
+    expect(jsonLdObj.url).to.equal(pageStructuredData.url);
+    expect(jsonLdObj.datePublished).to.equal(pageStructuredData.datePublished);
+    expect(jsonLdObj.dateModified).to.equal(pageStructuredData.dateModified);
+    expect(jsonLdObj.description).to.equal(pageStructuredData.description);
+    expect(jsonLdObj.headline).to.equal(pageStructuredData.headline);
   });
 
   it('matches the expected publisher values', () => {
-    expect(jsonLdObj.publisher).to.deep.equal(jsonLdExpected.publisher);
+    expect(jsonLdObj.publisher).to.deep.equal(commonStructuredData.publisher);
   });
 
   it('matches the expected image values', () => {
-    expect(jsonLdObj.image).to.deep.equal(jsonLdExpected.image);
+    expect(jsonLdObj.image).to.deep.equal(pageStructuredData.image);
   });
 
   it('matches the expected mainEntityOfPage values', () => {
-    expect(jsonLdObj.mainEntityOfPage).to.deep.equal(jsonLdExpected.mainEntityOfPage);
+    expect(jsonLdObj.mainEntityOfPage).to.deep.equal(commonStructuredData.mainEntityOfPage);
   });
 
   it('matches the expected author values', () => {
-    expect(jsonLdObj.author).to.deep.equal(jsonLdExpected.author);
+    expect(jsonLdObj.author).to.deep.equal(pageStructuredData.author);
   });
 });

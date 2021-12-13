@@ -1,19 +1,7 @@
 describe('Amp structured data (JSON-LD)', () => {
-  let jsonLdObj;
-  const jsonLdExpected = {
-    '@context': 'https://schema.org',
+  const commonStructuredData = require('../../../fixtures/common-structured-data.json');
+  const ampStructuredData = {
     '@type': 'Article',
-    publisher: {
-      '@type': 'Organization',
-      'name': 'freeCodeCamp.org',
-      'url': 'http://localhost:8080/news/',
-      'logo': {
-          '@type': 'ImageObject',
-          'url': 'https://cdn.freecodecamp.org/platform/universal/fcc_primary.svg',
-          'width': 2100,
-          'height': 240
-      }
-    },
     author: {
       '@type': 'Person',
       name: 'Quincy Larson',
@@ -39,12 +27,9 @@ describe('Amp structured data (JSON-LD)', () => {
     },
     keywords: 'freeCodeCamp',
     description:
-      'As you may know, I&#x27;ve been a fan of Replit since way back in 2012. I used early\nversions of the website when I was learning to code. \n\nFor me, Replit was a place to code my solutions for Project Euler problems, and\nto practice my Python and JavaScript skills.\n\nOver the past decade, Replit has come a long way [https://replit.com/]. Their\nteam has evolved the coding platform into a full-blown multiplayer IDE where you\ncan collaborate with other developers, and host your apps for free.\n\nOne way a l',
-    mainEntityOfPage: {
-      '@type': 'WebPage',
-      '@id': 'http://localhost:8080/news/',
-    },
+      'As you may know, I&#x27;ve been a fan of Replit since way back in 2012. I used early\nversions of the website when I was learning to code. \n\nFor me, Replit was a place to code my solutions for Project Euler problems, and\nto practice my Python and JavaScript skills.\n\nOver the past decade, Replit has come a long way [https://replit.com/]. Their\nteam has evolved the coding platform into a full-blown multiplayer IDE where you\ncan collaborate with other developers, and host your apps for free.\n\nOne way a l'
   };
+  let jsonLdObj;
     
 
   before(() => {
@@ -56,28 +41,28 @@ describe('Amp structured data (JSON-LD)', () => {
   });
 
   it('matches the expected base values', () => {
-    expect(jsonLdObj['@context']).to.equal(jsonLdExpected['@context']);
-    expect(jsonLdObj['@type']).to.equal(jsonLdExpected['@type']);
-    expect(jsonLdObj.url).to.equal(jsonLdExpected.url);
-    expect(jsonLdObj.datePublished).to.equal(jsonLdExpected.datePublished);
-    expect(jsonLdObj.dateModified).to.equal(jsonLdExpected.dateModified);
-    expect(jsonLdObj.description).to.equal(jsonLdExpected.description);
-    expect(jsonLdObj.headline).to.equal(jsonLdExpected.headline);
+    expect(jsonLdObj['@context']).to.equal(commonStructuredData['@context']);
+    expect(jsonLdObj['@type']).to.equal(ampStructuredData['@type']);
+    expect(jsonLdObj.url).to.equal(ampStructuredData.url);
+    expect(jsonLdObj.datePublished).to.equal(ampStructuredData.datePublished);
+    expect(jsonLdObj.dateModified).to.equal(ampStructuredData.dateModified);
+    expect(jsonLdObj.description).to.equal(ampStructuredData.description);
+    expect(jsonLdObj.headline).to.equal(ampStructuredData.headline);
   });
 
   it('matches the expected publisher values', () => {
-    expect(jsonLdObj.publisher).to.deep.equal(jsonLdExpected.publisher);
+    expect(jsonLdObj.publisher).to.deep.equal(commonStructuredData.publisher);
   });
 
   it('matches the expected image values', () => {
-    expect(jsonLdObj.image).to.deep.equal(jsonLdExpected.image);
+    expect(jsonLdObj.image).to.deep.equal(ampStructuredData.image);
   });
 
   it('matches the expected mainEntityOfPage values', () => {
-    expect(jsonLdObj.mainEntityOfPage).to.deep.equal(jsonLdExpected.mainEntityOfPage);
+    expect(jsonLdObj.mainEntityOfPage).to.deep.equal(commonStructuredData.mainEntityOfPage);
   });
 
   it('matches the expected author values', () => {
-    expect(jsonLdObj.author).to.deep.equal(jsonLdExpected.author);
+    expect(jsonLdObj.author).to.deep.equal(ampStructuredData.author);
   });
 });

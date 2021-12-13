@@ -1,6 +1,6 @@
 describe('Author page structured data (JSON-LD)', () => {
-  let jsonLdObj;
-  const jsonLdExpected = {
+  const commonStructuredData = require('../../../fixtures/common-structured-data.json');
+  const authorStructuredData = {
     '@context': 'https://schema.org',
     '@type': 'Person',
     sameAs: ['https://www.freecodecamp.org', 'https://twitter.com/ossia'], // Site, Twitter
@@ -12,12 +12,9 @@ describe('Author page structured data (JSON-LD)', () => {
       width: 1500,
       height: 500,
     },
-    mainEntityOfPage: {
-      '@type': 'WebPage',
-      '@id': 'http://localhost:8080/news/',
-    },
     description: 'The teacher who founded freeCodeCamp.org.',
-  };  
+  };
+  let jsonLdObj;
 
   before(() => {
     cy.visit('/author/quincylarson');
@@ -28,19 +25,19 @@ describe('Author page structured data (JSON-LD)', () => {
   });
 
   it('matches the expected base values', () => {
-    expect(jsonLdObj['@context']).to.equal(jsonLdExpected['@context']);
-    expect(jsonLdObj['@type']).to.equal(jsonLdExpected['@type']);
-    expect(jsonLdObj.sameAs).to.deep.equal(jsonLdExpected.sameAs);
-    expect(jsonLdObj.name).to.equal(jsonLdExpected.name);
-    expect(jsonLdObj.url).to.equal(jsonLdExpected.url);
-    expect(jsonLdObj.description).to.equal(jsonLdExpected.description);
+    expect(jsonLdObj['@context']).to.equal(commonStructuredData['@context']);
+    expect(jsonLdObj['@type']).to.equal(authorStructuredData['@type']);
+    expect(jsonLdObj.sameAs).to.deep.equal(authorStructuredData.sameAs);
+    expect(jsonLdObj.name).to.equal(authorStructuredData.name);
+    expect(jsonLdObj.url).to.equal(authorStructuredData.url);
+    expect(jsonLdObj.description).to.equal(authorStructuredData.description);
   });
 
   it('matches the expected image values', () => {
-    expect(jsonLdObj.image).to.deep.equal(jsonLdExpected.image);
+    expect(jsonLdObj.image).to.deep.equal(authorStructuredData.image);
   });
 
   it('matches the expected mainEntityOfPage values', () => {
-    expect(jsonLdObj.mainEntityOfPage).to.deep.equal(jsonLdExpected.mainEntityOfPage);
+    expect(jsonLdObj.mainEntityOfPage).to.deep.equal(commonStructuredData.mainEntityOfPage);
   });
 });

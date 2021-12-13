@@ -1,19 +1,7 @@
 describe('Tag page structured data (JSON-LD)', () => {
-  let jsonLdObj;
-  const jsonLdExpected = {
-    '@context': 'https://schema.org',
+  const commonStructuredData = require('../../../fixtures/common-structured-data.json');
+  const tagStructuredData = {
     '@type': 'Series',
-    publisher: {
-      '@type': 'Organization',
-      name: 'freeCodeCamp.org',
-      url: 'http://localhost:8080/news/',
-      logo: {
-        '@type': 'ImageObject',
-        url: 'https://cdn.freecodecamp.org/platform/universal/fcc_primary.svg',
-        width: 2100,
-        height: 240,
-      },
-    },
     url: 'http://localhost:8080/news/tag/freecodecamp/',
     name: 'freeCodeCamp',
     mainEntityOfPage: {
@@ -21,6 +9,7 @@ describe('Tag page structured data (JSON-LD)', () => {
       '@id': 'http://localhost:8080/news/',
     },
   };
+  let jsonLdObj;
     
 
   before(() => {
@@ -32,17 +21,17 @@ describe('Tag page structured data (JSON-LD)', () => {
   });
 
   it('matches the expected base values', () => {
-    expect(jsonLdObj['@context']).to.equal(jsonLdExpected['@context']);
-    expect(jsonLdObj['@type']).to.equal(jsonLdExpected['@type']);
-    expect(jsonLdObj.url).to.equal(jsonLdExpected.url);
-    expect(jsonLdObj.name).to.equal(jsonLdExpected.name);
+    expect(jsonLdObj['@context']).to.equal(commonStructuredData['@context']);
+    expect(jsonLdObj['@type']).to.equal(tagStructuredData['@type']);
+    expect(jsonLdObj.url).to.equal(tagStructuredData.url);
+    expect(jsonLdObj.name).to.equal(tagStructuredData.name);
   });
 
   it('matches the expected publisher values', () => {
-    expect(jsonLdObj.publisher).to.deep.equal(jsonLdExpected.publisher);
+    expect(jsonLdObj.publisher).to.deep.equal(commonStructuredData.publisher);
   });
 
   it('matches the expected mainEntityOfPage values', () => {
-    expect(jsonLdObj.mainEntityOfPage).to.deep.equal(jsonLdExpected.mainEntityOfPage);
+    expect(jsonLdObj.mainEntityOfPage).to.deep.equal(commonStructuredData.mainEntityOfPage);
   });
 });
