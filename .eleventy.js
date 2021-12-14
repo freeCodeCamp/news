@@ -72,7 +72,7 @@ module.exports = function (config) {
 
   config.addNunjucksShortcode('fullYear', fullYearShortcode);
 
-  config.addFilter('toISOString', toISOStringShortcode);
+  config.addNunjucksShortcode('toISOString', toISOStringShortcode);
 
   // Selectively show comments section
   config.addFilter('commentsEnabled', (tagsArr) => {
