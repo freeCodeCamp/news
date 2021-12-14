@@ -1,9 +1,16 @@
 {
   "directoryListing": false,
+  "rewrites": [
+    {
+      "source": "/:authorOrTag?/:name?/rss",
+      "destination": "/:authorOrTag?/:name?/rss.xml"
+    }
+  ],
   "redirects": [
     {
       "source": "/deno-oak-lian-jie-mysql-shi-zhan-jiao-cheng",
-      "destination": "/how-to-use-mysql-in-deno-oak"
+      "destination": "/how-to-use-mysql-in-deno-oak",
+      "type": 302
     }
   ]
 }
