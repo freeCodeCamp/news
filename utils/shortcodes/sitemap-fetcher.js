@@ -2,6 +2,7 @@ const fetch = require('node-fetch');
 const xml2js = require('xml2js');
 const { sourceApiUrl } = require('../ghost/api');
 const { siteURL } = require('../../config');
+const { escape } = require('lodash');
 
 const sitemapFetcherShortcode = async (page) => {
   // will need some sort of map to handle all locales
