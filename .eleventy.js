@@ -12,7 +12,8 @@ const {
   publishedDateShortcode,
   timeAgoShortcode,
   buildDateFormatterShortcode,
-  fullYearShortcode
+  fullYearShortcode,
+  toISOStringFilter
 } = require('./utils/shortcodes/dates');
 const sitePath = require('./utils/site-path');
 
@@ -71,9 +72,7 @@ module.exports = function (config) {
 
   config.addNunjucksShortcode('fullYear', fullYearShortcode);
 
-  config.addFilter('htmlDateString', (dateObj) => {
-    return new Date(dateObj).toISOString().split('T')[0];
-  });
+  config.addFilter('toISOString', toISOStringFilter);
 
   // Selectively show comments section
   config.addFilter('commentsEnabled', (tagsArr) => {

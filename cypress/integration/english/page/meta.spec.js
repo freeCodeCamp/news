@@ -30,7 +30,7 @@ describe('Page metadata', () => {
     );
   });
 
-  it('canonical URL', () => {
+  it('<link> canonical', () => {
     cy.get('head link[rel="canonical"]').should(
       'have.attr',
       'href',

@@ -30,11 +30,19 @@ describe('Post metadata', () => {
     );
   });
 
-  it('canonical URL', () => {
+  it('<link> canonical', () => {
     cy.get('head link[rel="canonical"]').should(
       'have.attr',
       'href',
       postExpectedMeta.url
+    );
+  });
+
+  it('<link> amphtml', () => {
+    cy.get('head link[rel="amphtml"]').should(
+      'have.attr',
+      'href',
+      postExpectedMeta.url + 'amp/'
     );
   });
 
