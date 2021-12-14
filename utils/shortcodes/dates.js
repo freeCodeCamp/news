@@ -15,12 +15,12 @@ const buildDateFormatterShortcode = (timezone, dateStr) => {
     .format('ddd, DD MMM YYYY HH:mm:ss ZZ');
 };
 
-const toISOStringFilter = (dateStr) => new Date(dateStr).toISOString();
+const toISOStringShortcode = (dateStr) => new Date(dateStr).toISOString();
 
 module.exports = {
   publishedDateShortcode,
   timeAgoShortcode,
   buildDateFormatterShortcode,
   fullYearShortcode,
-  toISOStringFilter
+  toISOStringShortcode
 }

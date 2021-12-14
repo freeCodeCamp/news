@@ -72,8 +72,8 @@
     {% endif %}
     <meta property="og:url" content="{{ site.url + doc.path }}">
     <meta property="og:image" content="{{ doc.feature_image }}">
-    <meta property="article:published_time" content="{{ doc.published_at | toISOString }}">
-    <meta property="article:modified_time" content="{{ doc.updated_at | toISOString }}">
+    <meta property="article:published_time" content="{% toISOString doc.published_at %}">
+    <meta property="article:modified_time" content="{% toISOString doc.updated_at %}">
     {% for tag in doc.tags %}
         <meta property="article:tag" content="{{ tag.name }}">
     {% endfor %}
