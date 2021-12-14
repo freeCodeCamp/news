@@ -6,31 +6,5 @@
       "destination": "/:authorOrTag?/:name?/rss.xml"
     }
   ],
-  "redirects": [
-    {
-      "source": "/@:authorName",
-      "destination": "/italian/news/author/:authorName",
-      "type": 302
-    },
-    {
-      "source": "/tagged/:tagName",
-      "destination": "/italian/news/tag/:tagName",
-      "type": 302
-    },
-    {
-      "source": "/archive/:archiveSlug?",
-      "destination": "/italian/news/",
-      "type": 302
-    },
-    {
-      "source": "/our-sponsors",
-      "destination": "https://www.freecodecamp.org/news/sponsors/",
-      "type": 302
-    },
-    {
-      "source": "/about-freecodecamp",
-      "destination": "/italian/news/about",
-      "type": 302
-    }
-  ]
+  "redirects": []
 }

@@ -9,28 +9,23 @@
   "redirects": [
     {
       "source": "/@:authorName",
-      "destination": "/dothraki/news/author/:authorName",
-      "type": 302
+      "destination": "/dothraki/news/author/:authorName"
     },
     {
       "source": "/tagged/:tagName",
-      "destination": "/dothraki/news/tag/:tagName",
-      "type": 302
+      "destination": "/dothraki/news/tag/:tagName"
     },
     {
       "source": "/archive/:archiveSlug?",
-      "destination": "/dothraki/news/",
-      "type": 302
+      "destination": "/dothraki/news/"
     },
     {
       "source": "/our-sponsors",
-      "destination": "https://www.freecodecamp.org/news/sponsors/",
-      "type": 302
+      "destination": "/dothraki/news/sponsors"
     },
     {
       "source": "/about-freecodecamp",
-      "destination": "/dothraki/news/about",
-      "type": 302
+      "destination": "/dothraki/news/about"
     }
   ]
 }
