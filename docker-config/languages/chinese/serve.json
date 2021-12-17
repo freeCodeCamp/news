@@ -9,8 +9,7 @@
   "redirects": [
     {
       "source": "/deno-oak-lian-jie-mysql-shi-zhan-jiao-cheng",
-      "destination": "/how-to-use-mysql-in-deno-oak",
-      "type": 302
+      "destination": "/news/how-to-use-mysql-in-deno-oak"
     }
   ]
 }
