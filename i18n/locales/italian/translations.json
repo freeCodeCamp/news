@@ -14,9 +14,7 @@
     "see-results": "Vedi tutti i risultati per {{ searchQuery }}",
     "no-tutorials": "Nessun articolo trovato"
   },
-  "banner": {
-    "text": "<span>Chatta con altri programmatori in italiano</span>"
-  },
+  "banner": "<span>Chatta con altri programmatori in italiano</span>",
   "author": {
     "page": {
       "no-posts": "Non ci sono articoli",
@@ -41,9 +39,7 @@
     "author-no-twitter": "Se questo articolo ti è stato utile,",
     "default-tweet": "Grazie {{ twitter }} per avere tradotto questo utile articolo"
   },
-  "learn-to-code-cta": {
-    "text": "Impara a programmare gratuitamente. Il curriculum open source di freeCodeCamp ha aiutato più di 40.ooo persone ad ottenere un lavoro come programmatori."
-  },
+  "learn-to-code-cta": "Impara a programmare gratuitamente. Il curriculum open source di freeCodeCamp ha aiutato più di 40.ooo persone ad ottenere un lavoro come programmatori.",
   "localization-meta": {
     "roles": {
       "author": "autore",

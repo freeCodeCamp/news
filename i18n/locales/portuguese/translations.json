@@ -14,9 +14,7 @@
     "see-results": "Ver todos os resultados para {{ searchQuery }}",
     "no-tutorials": "Não foram encontrados tutoriais"
   },
-  "banner": {
-    "text": "<span>Converse com outros desenvolvedores em português</span>"
-  },
+  "banner": "<span>Converse com outros desenvolvedores em português</span>",
   "author": {
     "page": {
       "no-posts": "Não há artigos",
@@ -41,9 +39,7 @@
     "author-no-twitter": "Se este artigo foi útil, compartilhe-o no",
     "default-tweet": "Obrigado, {{ twitter }}, por ter escrito este artigo. Foi muito útil"
   },
-  "learn-to-code-cta": {
-    "text": "Aprenda a programar gratuitamente. O plano de estudos em código aberto do freeCodeCamp já ajudou mais de 40.000 pessoas a obter empregos como desenvolvedores."
-  },
+  "learn-to-code-cta": "Aprenda a programar gratuitamente. O plano de estudos em código aberto do freeCodeCamp já ajudou mais de 40.000 pessoas a obter empregos como desenvolvedores.",
   "localization-meta": {
     "roles": {
       "author": "autor",
