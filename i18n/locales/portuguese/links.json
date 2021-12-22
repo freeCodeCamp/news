@@ -1,20 +1,15 @@
 {
   "footer": {
-    "about-url": "https://www.freecodecamp.org/portuguese/news/sobre-o-freecodecamp-perguntas-frequentes/",
-    "shop-url": "https://www.freecodecamp.org/news/shop/",
-    "support-url": "https://www.freecodecamp.org/portuguese/news/perguntas-frequentes-sobre-suporte-tecnico-faq-do-freecodecamp/",
-    "sponsors-url": "https://www.freecodecamp.org/news/sponsors/",
-    "honesty-url": "https://www.freecodecamp.org/portuguese/news/politica-de-honestidade-academica-do-freecodecamp/",
-    "coc-url": "https://www.freecodecamp.org/portuguese/news/codigo-de-conduta-do-freecodecamp/",
-    "privacy-url": "https://www.freecodecamp.org/news/privacy-policy/",
-    "tos-url": "https://www.freecodecamp.org/news/terms-of-service/",
-    "copyright-url": "https://www.freecodecamp.org/news/copyright-policy/"
+    "about": "https://www.freecodecamp.org/portuguese/news/sobre-o-freecodecamp-perguntas-frequentes/",
+    "support": "https://www.freecodecamp.org/portuguese/news/perguntas-frequentes-sobre-suporte-tecnico-faq-do-freecodecamp/",
+    "honesty": "https://www.freecodecamp.org/portuguese/news/politica-de-honestidade-academica-do-freecodecamp/",
+    "coc": "https://www.freecodecamp.org/portuguese/news/codigo-de-conduta-do-freecodecamp/"
   },
   "nav": {
-    "forum-url": "https://forum.freecodecamp.org/c/portugues/534",
-    "donate-url": "https://www.freecodecamp.org/portuguese/donate/"
+    "forum": "https://forum.freecodecamp.org/c/portugues/534",
+    "donate": "https://www.freecodecamp.org/portuguese/donate/"
   },
-  "banner-url": "https://chat.freecodecamp.org/home",
-  "learn-to-code-cta-url": "https://www.freecodecamp.org/portuguese/learn/",
-  "twitter-url": "https://twitter.com/freecodecampPT"
+  "banner": "https://chat.freecodecamp.org/home",
+  "learn-to-code-cta": "https://www.freecodecamp.org/portuguese/learn/",
+  "twitter": "https://twitter.com/freecodecampPT"
 }

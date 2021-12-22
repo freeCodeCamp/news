@@ -1,20 +1,15 @@
 {
   "footer": {
-    "about-url": "https://www.freecodecamp.org/italian/news/faq/",
-    "shop-url": "https://www.freecodecamp.org/news/shop/",
-    "support-url": "https://www.freecodecamp.org/italian/news/domande-frequenti-supporto-tecnico-freecodecamp-faq/",
-    "sponsors-url": "https://www.freecodecamp.org/news/sponsors/",
-    "honesty-url": "https://www.freecodecamp.org/italian/news/freecodecamps-academic-honesty-policy/",
-    "coc-url": "https://www.freecodecamp.org/italian/news/codice-di-condotta/",
-    "privacy-url": "https://www.freecodecamp.org/news/privacy-policy/",
-    "tos-url": "https://www.freecodecamp.org/news/terms-of-service/",
-    "copyright-url": "https://www.freecodecamp.org/news/copyright-policy/"
+    "about": "https://www.freecodecamp.org/italian/news/faq/",
+    "support": "https://www.freecodecamp.org/italian/news/domande-frequenti-supporto-tecnico-freecodecamp-faq/",
+    "honesty": "https://www.freecodecamp.org/italian/news/freecodecamps-academic-honesty-policy/",
+    "coc": "https://www.freecodecamp.org/italian/news/codice-di-condotta/"
   },
   "nav": {
-    "forum-url": "https://forum.freecodecamp.org/c/italiano/535",
-    "donate-url": "https://www.freecodecamp.org/italian/donate/"
+    "forum": "https://forum.freecodecamp.org/c/italiano/535",
+    "donate": "https://www.freecodecamp.org/italian/donate/"
   },
-  "banner-url": "https://chat.freecodecamp.org/",
-  "learn-to-code-cta-url": "https://www.freecodecamp.org/italian/learn/",
-  "twitter-url": "https://twitter.com/freecodecampit"
+  "banner": "https://chat.freecodecamp.org/",
+  "learn-to-code-cta": "https://www.freecodecamp.org/italian/learn/",
+  "twitter": "https://twitter.com/freecodecampit"
 }
