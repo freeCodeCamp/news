@@ -42,7 +42,7 @@
     "default-tweet": "Grazie {{ twitter }} per avere tradotto questo utile articolo"
   },
   "learn-to-code-cta": {
-    "text": "Impara a programmare gratuitamente. il curriculum open source di freeCodeCamp ha aiutato più di 40.ooo persone ad ottenere un lavoro come programmatori."
+    "text": "Impara a programmare gratuitamente. Il curriculum open source di freeCodeCamp ha aiutato più di 40.ooo persone ad ottenere un lavoro come programmatori."
   },
   "localization-meta": {
     "roles": {
@@ -60,8 +60,8 @@
   },
   "embed-title": "Contenuto incorporato",
   "footer": {
-    "tax-exempt-status": "freeCodeCamp è una organizazione no-profit 501(c)(3) esentasse supportata da donazioni (Numero di identificazione per le tasse federali nelgi Stati Uniti d'America: 82-0779546)",
-    "mission-statement": "La nostra missione: aiutare le persone a imparare a programamre gratuitamente. Portiamo avanti la nostra missione creanto centinaia di video, articoli, e lezioni di programmazione interattive, tutti disponibile gratuitamente al pubblico. Abbiamo anche migliaia di gruppi di studi di freeCodeCamp aootrno al monsto.",
+    "tax-exempt-status": "freeCodeCamp è una organizazione no-profit 501(c)(3) esentasse supportata da donazioni (Numero di identificazione per le tasse federali negli Stati Uniti d'America: 82-0779546)",
+    "mission-statement": "La nostra missione: aiutare le persone a imparare a programamre gratuitamente. Portiamo avanti la nostra missione creando centinaia di video, articoli, e lezioni di programmazione interattive, tutto disponibile gratuitamente al pubblico. Abbiamo anche migliaia di gruppi di studi di freeCodeCamp attorno al mondo.",
     "donation-initiatives": "Le donazioni a freeCodeCamp supportano le nostre iniziative di educazione e aiutano a pagare i server, i servizi e lo staff.",
     "donate-link": "Puoi {{ <0> }}fare una donazione qui{{ </0> }}.",
     "trending-guides": "Articoli più cliccati",
