@@ -1,28 +1,47 @@
 const { chunk, cloneDeep } = require('lodash');
 
 const fetchFromGhost = require('../../utils/ghost/fetch-from-ghost');
+const processGhostResponse = require('../../utils/ghost/process-ghost-response');
 const errorLogger = require('../../utils/error-logger');
 
 const { sourceApiUrl } = require('../../utils/ghost/api');
 const { siteURL, postsPerPage } = require('../../config');
 
 // Strip Ghost domain from urls
-const stripDomain = url => url.replace(sourceApiUrl, '');
+const stripDomain = url => {
+  // To do: figure out a better way to strip out everything
+  // up to and including /news
+  const toReplace = process.env.ELEVENTY_ENV === 'ci' ?
+    'https://www.freecodecamp.org/news' :
+    sourceApiUrl;
+
+  return url.replace(toReplace, '');
+};
 
 const getUniqueList = (arr, key) => [...new Map(arr.map(item => [item[key], item])).values()];
 
 module.exports = async () => {
   const limit = 200;
-  const ghostPosts = await fetchFromGhost('posts', {
-    include: ['tags', 'authors'],
-    filter: 'status:published',
-    limit
-  });
-  const ghostPages = await fetchFromGhost('pages', {
-    include: ['tags', 'authors'],
-    filter: 'status:published',
-    limit
-  });
+  let ghostPosts, ghostPages;
+
+  if (process.env.ELEVENTY_ENV === 'ci') {
+    const testPosts = require('../../cypress/seed-data/posts.json');
+    const testPages = require('../../cypress/seed-data/pages.json');
+
+    ghostPosts = await processGhostResponse(testPosts, 'posts');
+    ghostPages = await processGhostResponse(testPages);
+  } else {
+    ghostPosts = await fetchFromGhost('posts', {
+      include: ['tags', 'authors'],
+      filter: 'status:published',
+      limit
+    });
+    ghostPages = await fetchFromGhost('pages', {
+      include: ['tags', 'authors'],
+      filter: 'status:published',
+      limit
+    });
+  }
 
   const posts = ghostPosts.map(post => {
     post.path = stripDomain(post.url);
@@ -31,21 +50,20 @@ module.exports = async () => {
       // Log and fix tag pages that point to 404 due to a Ghost error
       if (tag.url.endsWith('/404/') && tag.visibility === 'public') {
         errorLogger({ type: 'tag', name: tag.name });
-        tag.url = `${siteURL, postsPerPage}/${tag.slug}/`;
+        tag.url = `${siteURL}/tag/${tag.slug}/`;
       }
 
       tag.path = stripDomain(tag.url);
     });
     if (post.primary_tag) post.primary_tag.path = stripDomain(post.primary_tag.url);
-    post.authors.forEach(author => {
-      // Log and fix author pages that point to 404 due to a Ghost error
-      if (author.url.endsWith('/404/')) {
-        errorLogger({ type: 'author', name: author.name });
-        author.url = `${siteURL, postsPerPage}/${author.slug}/`;
-      }
 
-      author.path = stripDomain(author.url);
-    });
+    // Log and fix author pages that point to 404 due to a Ghost error
+    if (post.primary_author.url.endsWith('/404/')) {
+      errorLogger({ type: 'author', name: post.primary_author.name });
+      post.primary_author.url = `${siteURL}/author/${post.primary_author.slug}/`;
+    }
+
+    post.primary_author.path = stripDomain(post.primary_author.url);
 
     // Convert publish date into a Date object
     post.published_at = new Date(post.published_at);
@@ -62,8 +80,7 @@ module.exports = async () => {
   });
 
   const authors = [];
-  const primaryAuthors = getUniqueList(posts.map(post => post.primary_author), 'id')
-    .filter((tag) => tag.path !== '/404/'); // Filter out possible 404 errors returned by Ghost API
+  const primaryAuthors = getUniqueList(posts.map(post => post.primary_author), 'id');
   primaryAuthors.forEach(author => {
     // Attach posts to their respective author
     const currAuthorPosts = posts.filter(post => post.primary_author.id === author.id);

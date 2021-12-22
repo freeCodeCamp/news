@@ -22,8 +22,8 @@
     {% endif %}
     <meta property="og:url" content="{{ site.url + post.path }}">
     <meta property="og:image" content="{{ post.feature_image }}">
-    <meta property="article:published_time" content="{{ post.published_at }}">
-    <meta property="article:modified_time" content="{{ post.updated_at }}">
+    <meta property="article:published_time" content="{% toISOString post.published_at %}">
+    <meta property="article:modified_time" content="{% toISOString post.updated_at %}">
     {% for tag in post.tags %}
         <meta property="article:tag" content="{{ tag.name }}">
     {% endfor %}
@@ -42,6 +42,8 @@
     <meta name="twitter:image" content="{{ post.feature_image }}">
     <meta name="twitter:label1" content="Written by">
     <meta name="twitter:data1" content="{{ post.primary_author.name }}">
+    <meta name="twitter:label2" content="Filed under">
+    <meta name="twitter:data2" content="{{ post.tags | join(", ", "name") }}">
     <meta name="twitter:site" content="{{ site.twitter }}">
     {% if post.primary_author.twitter %}
         <meta name="twitter:creator" content="{{ post.primary_author.twitter }}">
@@ -51,6 +53,9 @@
     <meta property="og:image:height" content="{{ post.image_dimensions.feature_image.height }}">
 
     <script type="application/ld+json">{% createJsonLd 'article', site, post %}</script>
+
+    <meta name="generator" content="Eleventy">
+    <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ site.url + "/rss/" }}">
 
     {# Styles'n'Scripts #}
     <link href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,700,700i&display=swap" rel="stylesheet" type="text/css"/>
@@ -93,7 +98,6 @@
             </a>
         </nav>
     </header>
-
     <main class="content" role="main">
         <article class="post">
             <header class="post-header">

@@ -1,7 +1,7 @@
 {% extends 'layouts/default.njk' %}
 
 {% set title = doc.title %}
-{% set canonicalUrl = site.url + post.path %}
+{% set canonicalUrl = site.url + doc.path %}
 {% set codeinjection_head = doc.codeinjection_head %}
 {% set codeinjection_foot = doc.codeinjection_foot %}
 
@@ -61,6 +61,7 @@
 
 {% block seo %}
     <link rel="amphtml" href="{{ site.url + doc.path + "amp/" | url }}">
+    <meta name="description" content="{{ doc.excerpt }}">
 
     {# Facebook OpenGraph #}
     <meta property="og:site_name" content="{{ site.title }}">
@@ -71,8 +72,8 @@
     {% endif %}
     <meta property="og:url" content="{{ site.url + doc.path }}">
     <meta property="og:image" content="{{ doc.feature_image }}">
-    <meta property="article:published_time" content="{{ doc.published_at }}">
-    <meta property="article:modified_time" content="{{ doc.updated_at }}">
+    <meta property="article:published_time" content="{% toISOString doc.published_at %}">
+    <meta property="article:modified_time" content="{% toISOString doc.updated_at %}">
     {% for tag in doc.tags %}
         <meta property="article:tag" content="{{ tag.name }}">
     {% endfor %}

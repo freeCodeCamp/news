@@ -11,7 +11,7 @@
             [150]
         %}
     {% endif %}
-    <h1 class="site-title">{{ author.name }}</h1>
+    <h1 data-test-label="author-name" class="site-title">{{ author.name }}</h1>
     {% if author.bio %}
         <h2 class="author-bio">{{ author.bio | safe }}</h2>
     {% endif %}
@@ -68,7 +68,7 @@
         {% endif %}
         <a
             class="social-link social-link-rss"
-            href="https://feedly.com/i/subscription/feed/{{ author.url }}rss/"
+            href="https://feedly.com/i/subscription/feed/{{ site.url + author.path }}rss/"
             target="_blank"
             rel="noopener"
         >
