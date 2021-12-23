@@ -77,7 +77,7 @@
     }
   },
   "fallback": {
-    "message": "Your browser doesn’t support HTML5 {{ element }}.",
+    "message": "Your browser doesn't support HTML5 {{ element }}.",
     "audio": "audio",
     "video": "video"
   }
