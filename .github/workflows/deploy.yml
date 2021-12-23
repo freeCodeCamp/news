@@ -86,6 +86,9 @@ jobs:
         env:
           NODE_ENV: production
       
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
       - name: Docker login to Azure Container Registry
         uses: azure/docker-login@v1
         with:
@@ -101,3 +104,36 @@ jobs:
           --build-arg BUILD_LANGUAGE=${{ matrix.languages }} \
           --file docker-config/Dockerfile
           docker push --all-tags ${{ secrets.ACR_NAME }}.azurecr.io/${{ matrix.site_tlds }}/news-${{ matrix.languages }}
+
+  
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    needs:
+      - build
+    
+    strategy:
+      fail-fast: false
+      matrix:
+        # languages: [english, chinese, espanol, italian, portuguese, japanese, arabic, ukrainian]
+        # site_tlds: [dev, org]
+        languages: [espanol, italian, portuguese]
+        site_tlds: [dev]
+
+    # GitHub's deployment environment configuration.
+    environment:
+      name: ${{ matrix.site_tlds }}
+      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+
+    steps:
+      - name: Azure authentication
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Deploy to Azure Web App
+        id: deploy-to-webapp
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: freecodecamp-news-${{ matrix.site_tlds }}-${{ matrix.languages }}
+          images: ${{ secrets.ACR_NAME }}.azurecr.io/${{ matrix.site_tlds }}/news-${{ matrix.languages }}:${{ github.sha }}
