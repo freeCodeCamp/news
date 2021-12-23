@@ -14,14 +14,10 @@
   },
   "banner": "<span>Converse com outros desenvolvedores em português</span>",
   "author": {
-    "page": {
-      "no-posts": "Não há artigos",
-      "one-post": "1 artigo",
-      "multiple-posts": "{{ postCount }} artigos"
-    },
-    "byline": {
-      "read-more": "Ler {{ <0> }}mais publicações{{ </0> }} deste {{ role }}."
-    }
+    "no-posts": "Não há artigos",
+    "one-post": "1 artigo",
+    "multiple-posts": "{{ postCount }} artigos",
+    "read-more": "Ler {{ <0> }}mais publicações{{ </0> }} deste {{ role }}."
   },
   "tag": {
     "collection-of-posts": "Uma coleção de artigos",

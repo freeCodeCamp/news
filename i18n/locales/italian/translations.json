@@ -14,14 +14,10 @@
   },
   "banner": "<span>Chatta con altri programmatori in italiano</span>",
   "author": {
-    "page": {
-      "no-posts": "Non ci sono articoli",
-      "one-post": "1 articolo",
-      "multiple-posts": "{{ postCount }} articoli"
-    },
-    "byline": {
-      "read-more": "Leggi {{ <0> }}altri articoli{{ </0> }} di questo {{ role }}."
-    }
+    "no-posts": "Non ci sono articoli",
+    "one-post": "1 articolo",
+    "multiple-posts": "{{ postCount }} articoli",
+    "read-more": "Leggi {{ <0> }}altri articoli{{ </0> }} di questo {{ role }}."
   },
   "tag": {
     "collection-of-posts": "Una collezione di articoli",

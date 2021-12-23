@@ -14,15 +14,10 @@
   },
   "banner": "<span>Charla con otros desarrolladores en español</span>",
   "author": {
-    "page": {
-      "no-posts": "No hay artículos",
-      "one-post": "1 artículo",
-      "multiple-posts": "{{ postCount }} artículos"
-    },
-    "byline": {
-      "read-more": "Leer {{ <0> }}más publicaciones{{ </0> }} de este {{ role }}."
-
-    }
+    "no-posts": "No hay artículos",
+    "one-post": "1 artículo",
+    "multiple-posts": "{{ postCount }} artículos",
+    "read-more": "Leer {{ <0> }}más publicaciones{{ </0> }} de este {{ role }}."
   },
   "tag": {
     "collection-of-posts": "Una colección de artículos",

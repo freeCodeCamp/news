@@ -14,14 +14,10 @@
   },
   "banner": "Learn to code — <span>free 3,000-hour curriculum</span>",
   "author": {
-    "page": {
-      "no-posts": "No posts",
-      "one-post": "1 post",
-      "multiple-posts": "{{ postCount }} posts"
-    },
-    "byline": {
-      "read-more": "Read {{ <0> }}more posts{{ </0> }} by this {{ role }}."
-    }
+    "no-posts": "No posts",
+    "one-post": "1 post",
+    "multiple-posts": "{{ postCount }} posts",
+    "read-more": "Read {{ <0> }}more posts{{ </0> }} by this {{ role }}."
   },
   "tag": {
     "collection-of-posts": "A collection of posts",
