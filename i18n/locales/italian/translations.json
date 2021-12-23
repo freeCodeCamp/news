@@ -36,7 +36,7 @@
   "social-row": {
     "author-has-twitter": "Se hai letto fino a qui, twitta al traduttore per ringraziarlo.",
     "author-no-twitter": "Se questo articolo ti è stato utile, {{ <0> }}twittalo{{ </0> }}.",
-    "default-tweet": "Grazie {{ twitter }} per avere tradotto questo utile articolo"
+    "default-tweet": "Grazie {{ twitter }} per avere tradotto questo utile articolo."
   },
   "learn-to-code-cta": "Impara a programmare gratuitamente. Il curriculum open source di freeCodeCamp ha aiutato più di 40.ooo persone ad ottenere un lavoro come programmatori.",
   "localization-meta": {
