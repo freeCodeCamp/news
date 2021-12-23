@@ -25,12 +25,12 @@
       "read-more": "Read {{ <0> }}more posts{{ </0> }} by this {{ role }}."
     }
   },
-  "tag-page": {
+  "tag": {
     "collection-of-posts": "A collection of posts",
     "one-post": "A collection of 1 post",
     "multiple-posts": "A collection of {{ postCount }} posts"
   },
-  "404-page": {
+  "404": {
     "page-not-found": "Page not found",
     "go-to-front-page": "Go to the front page"
   },

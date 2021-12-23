@@ -26,12 +26,12 @@
 
     }
   },
-  "tag-page": {
+  "tag": {
     "collection-of-posts": "Una colección de artículos",
     "one-post": "Una colección de 1 artículo",
     "multiple-posts": "Una colección de {{ postCount }} artículos"
   },
-  "404-page": {
+  "404": {
     "page-not-found": "Página no encontrada",
     "go-to-front-page": "Ir a la página de inicio"
   },

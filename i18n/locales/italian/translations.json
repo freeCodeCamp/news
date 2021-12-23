@@ -25,12 +25,12 @@
       "read-more": "Leggi {{ <0> }}altri articoli{{ </0> }} di questo {{ role }}."
     }
   },
-  "tag-page": {
+  "tag": {
     "collection-of-posts": "Una collezione di articoli",
     "one-post": "Una collezione di 1 articolo",
     "multiple-posts": "Una collezione di {{ postCount }} articoli"
   },
-  "404-page": {
+  "404": {
     "page-not-found": "Pagina non trovata",
     "go-to-front-page": "Vai alla Home"
   },

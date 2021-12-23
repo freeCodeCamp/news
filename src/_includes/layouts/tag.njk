@@ -11,11 +11,11 @@
         <h1 data-test-label="tag-name" class="site-title tags-title">#{{ tag.name | upper }}</h1>
         <h2 class="site-description">
             {% if postCount == 0 %}
-                {% t 'tag-page.collection-of-posts' %}
+                {% t 'tag.collection-of-posts' %}
             {% elif postCount == 1 %}
-                {% t 'tag-page.one-post' %}
+                {% t 'tag.one-post' %}
             {% else %}
-                {% t 'tag-page.multiple-posts', { postCount: postCount } %}
+                {% t 'tag.multiple-posts', { postCount: postCount } %}
             {% endif %}
         </h2>
         
