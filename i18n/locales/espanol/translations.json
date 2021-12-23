@@ -3,7 +3,6 @@
     "forum": "Foro",
     "donate": "Donar",
     "load-more-articles": "Carga más Artículos",
-    "author-has-twitter": "Realiza un Tweet de agradecimiento",
     "learn-to-code-cta": "Empieza"
   },
   "search": {
@@ -35,7 +34,7 @@
     "go-to-front-page": "Ir a la página de inicio"
   },
   "social-row": {
-    "author-has-twitter": "Si leíste hasta aquí, haz un tweet al autor para mostrarle que te importa su trabajo.",
+    "author-has-twitter": "Si leíste hasta aquí, haz un tweet al autor para mostrarle que te importa su trabajo. {{ <0> }}Realiza un Tweet de agradecimiento{{ </0> }}",
     "author-no-twitter": "Si este artículo te fue útil, {{ <0> }}haz un tweet{{ </0> }}.",
     "default-tweet": "Gracias {{ twitter }} por escribir este útil artículo."
   },

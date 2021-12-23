@@ -3,7 +3,6 @@
     "forum": "Forum",
     "donate": "Donate",
     "load-more-articles": "Load More Articles",
-    "author-has-twitter": "Tweet a thanks",
     "learn-to-code-cta": "Get started"
   },
   "search": {
@@ -34,7 +33,7 @@
     "go-to-front-page": "Go to the front page"
   },
   "social-row": {
-    "author-has-twitter": "If you read this far, tweet to the author to show them you care.",
+    "author-has-twitter": "If you read this far, tweet to the author to show them you care. {{ <0> }}Tweet a thanks{{ </0> }}",
     "author-no-twitter": "If this article was helpful, {{ <0> }}tweet it{{ </0> }}.",
     "default-tweet": "Thank you {{ twitter }} for writing this helpful article."
   },

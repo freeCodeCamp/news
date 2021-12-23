@@ -1,16 +1,13 @@
+{% set i18nSocialRowTwitterKey = 'social-row.author-has-twitter' if post.primary_author.twitter else 'social-row.author-no-twitter' %}
+
 <p data-test-label="social-row" class="social-row">
-    {% if post.primary_author.twitter %}
-        {% t 'social-row.author-has-twitter' %}
-        <a id='tweet-btn' class='cta-button'>{% t 'buttons.author-has-twitter' %}</a>
-    {% else %}
-        {% t 'social-row.author-no-twitter', {
-            '<0>': '<a id="tweet-btn" class="cta-button">',
-            '</0>': '</a>',
-            interpolation: {
-                escapeValue: false
-            }
-        } %}
-    {% endif %}
+    {% t i18nSocialRowTwitterKey, {
+        '<0>': '<a id="tweet-btn" class="cta-button">',
+        '</0>': '</a>',
+        interpolation: {
+            escapeValue: false
+        }
+    } %}
 </p>
 
 {% block scripts %}
