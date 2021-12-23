@@ -95,7 +95,7 @@ async function createJsonLdShortcode(type, site, data) {
   };
 
   if (type === 'index')
-    returnData.description = translate('meta:description');
+    returnData.description = translate('meta-tags:description');
 
   if (type !== 'index' && data) {
     // Remove first slash from path

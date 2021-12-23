@@ -7,7 +7,7 @@
         {% if title %}
             <title>{{ title }}</title>
         {% else %}
-            <title>{% t 'meta:title' %}</title>
+            <title>{% t 'meta-tags:title' %}</title>
         {% endif %}
         <meta name="HandheldFriendly" content="True" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -58,8 +58,8 @@
         {# These metatags only appear in this form on the landing page.
         The description appears in other contexts. #}
         {% if not permalink %}
-            <meta name="keywords" content="{% t 'meta:keywords' %}">
-            <meta name="description" content="{% t 'meta:description' %}">
+            <meta name="keywords" content="{% t 'meta-tags:keywords' %}">
+            <meta name="description" content="{% t 'meta-tags:description' %}">
         {% endif %}
 
         <link rel="icon" href="{{ site.icon }}" type="image/png">
@@ -81,7 +81,7 @@
             <meta property="og:site_name" content="{{ site.title }}">
             <meta property="og:type" content="website">
             <meta property="og:title" content="{{ site.title }}">
-            <meta property="og:description" content="{% t 'meta:description' %}">
+            <meta property="og:description" content="{% t 'meta-tags:description' %}">
             <meta property="og:url" content="{{ site.url + page.url }}">
             <meta property="og:image" content="{{ site.cover_image }}">
             <meta property="article:publisher" content="https://www.facebook.com/freecodecamp">
@@ -89,7 +89,7 @@
             {# Twitter Card #}
             <meta name="twitter:card" content="summary_large_image">
             <meta name="twitter:title" content="{{ site.title }}">
-            <meta name="twitter:description" content="{% t 'meta:description' %}">
+            <meta name="twitter:description" content="{% t 'meta-tags:description' %}">
             <meta name="twitter:url" content="{{ site.url + page.url }}">
             <meta name="twitter:image" content="{{ site.cover_image }}">
             <meta name="twitter:site" content="{{ site.twitter }}">

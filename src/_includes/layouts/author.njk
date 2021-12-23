@@ -3,7 +3,7 @@
 
 {% set title = author.name + " - " + site.title %}
 {% set canonicalUrl = site.url + author.path %}
-{% set defaultDescription %}{% t 'meta:description' %}{% endset %}
+{% set defaultDescription %}{% t 'meta-tags:description' %}{% endset %}
 
 {% block content %}
     {% include "partials/author-info.njk" %}
