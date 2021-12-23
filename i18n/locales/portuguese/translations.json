@@ -4,7 +4,6 @@
     "donate": "Doar",
     "load-more-articles": "Carregar mais artigos",
     "author-has-twitter": "Agradeça no Twitter",
-    "author-no-twitter": "Twitter",
     "learn-to-code-cta": "Comece agora"
   },
   "search": {
@@ -36,7 +35,7 @@
   },
   "social-row": {
     "author-has-twitter": "Se você leu até aqui, envie uma mensagem no Twitter para o autor para mostrar que você se importa com o trabalho.",
-    "author-no-twitter": "Se este artigo foi útil, compartilhe-o no",
+    "author-no-twitter": "Se este artigo foi útil, compartilhe-o no {{ <0> }}Twitter{{ </0> }}.",
     "default-tweet": "Obrigado, {{ twitter }}, por ter escrito este artigo. Foi muito útil"
   },
   "learn-to-code-cta": "Aprenda a programar gratuitamente. O plano de estudos em código aberto do freeCodeCamp já ajudou mais de 40.000 pessoas a obter empregos como desenvolvedores.",

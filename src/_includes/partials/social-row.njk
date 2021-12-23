@@ -3,7 +3,13 @@
         {% t 'social-row.author-has-twitter' %}
         <a id='tweet-btn' class='cta-button'>{% t 'buttons.author-has-twitter' %}</a>
     {% else %}
-        {% t 'social-row.author-no-twitter' %}, <a id='tweet-btn' class='cta-button'>{% t 'buttons.author-no-twitter' %}</a>
+        {% t 'social-row.author-no-twitter', {
+            '<0>': '<a id="tweet-btn" class="cta-button">',
+            '</0>': '</a>',
+            interpolation: {
+                escapeValue: false
+            }
+        } %}
     {% endif %}
 </p>
 
