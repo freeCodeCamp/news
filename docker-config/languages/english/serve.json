@@ -17,7 +17,7 @@
     },
     {
       "source": "/archive/:archiveSlug?",
-      "destination": "/news/"
+      "destination": "/news"
     },
     {
       "source": "/our-sponsors",
@@ -114,7 +114,7 @@
     },
     {
       "source": "/how-to-make-a-pixel-art-editor",
-      "destination": "/news/",
+      "destination": "/news",
       "type": 302
     },
     {
@@ -129,7 +129,7 @@
     },
     {
       "source": "/is-google-amp-the-right-choice-for-your-website",
-      "destination": "/news/",
+      "destination": "/news",
       "type": 302
     },
     {
@@ -139,7 +139,7 @@
     },
     {
       "source": "/build-a-youtube-uploader-bot-using-google-apps-script",
-      "destination": "/news/",
+      "destination": "/news",
       "type": 302
     },
     {
@@ -404,7 +404,7 @@
     },
     {
       "source": "/clicks/track/?url=kino-m.com",
-      "destination": "/news/",
+      "destination": "/news",
       "type": 302
     },
     {
@@ -519,7 +519,7 @@
     },
     {
       "source": "/mailto:support@vimeo.com",
-      "destination": "/news/",
+      "destination": "/news",
       "type": 302
     },
     {
@@ -669,7 +669,7 @@
     },
     {
       "source": "/fake-it-till-you-make-it",
-      "destination": "/news/",
+      "destination": "/news",
       "type": 302
     },
     {
@@ -1204,12 +1204,12 @@
     },
     {
       "source": "/775fe7aa517c",
-      "destination": "/news/",
+      "destination": "/news",
       "type": 302
     },
     {
       "source": "/intellijs-serial-code-transformations-775fe7aa517c",
-      "destination": "/news/",
+      "destination": "/news",
       "type": 302
     },
     {

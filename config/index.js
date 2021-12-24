@@ -81,6 +81,7 @@ if (computedDomain.startsWith('localhost')) {
 module.exports = Object.assign(
   {},
   {
+    locales,
     currentLocale_i18n: localeForUI || 'italian',
     currentLocale_i18nISOCode: !localeCodes[localeForUI]
       ? localeCodes['italian']

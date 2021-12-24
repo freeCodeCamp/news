@@ -17,7 +17,7 @@
     },
     {
       "source": "/archive/:archiveSlug?",
-      "destination": "/dothraki/news/"
+      "destination": "/dothraki/news"
     },
     {
       "source": "/our-sponsors",
