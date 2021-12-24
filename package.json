@@ -27,7 +27,7 @@
     "develop:ci": "cross-env ELEVENTY_ENV=ci NODE_OPTIONS=--max-old-space-size=8192 eleventy --serve",
     "prebuild": "npm run clean",
     "build": "cross-env ELEVENTY_ENV=prod NODE_OPTIONS=--max-old-space-size=8192 eleventy",
-    "test": "npm run build",
+    "test": "jest",
     "lint": "eslint . --ext .js --cache"
   },
   "repository": {
@@ -71,6 +71,7 @@
     "eslint-utils": "3.0.0",
     "i18next": "21.6.3",
     "i18next-fs-backend": "1.1.4",
+    "jest": "^27.4.5",
     "jsdom": "18.1.1",
     "lodash": "4.17.21",
     "md5": "2.3.0",
