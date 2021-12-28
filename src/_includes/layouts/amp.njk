@@ -112,11 +112,6 @@
                     </time>
                 </section>
             </header>
-            {% if post.feature_image %}
-                <figure class="post-image">
-                    <amp-img src="{{ post.feature_image }}" width="600" height="400" layout="responsive"></amp-img>
-                </figure>
-            {% endif %}
             <section class="post-content {{ "medium-migrated-article" if (post.primary_author.name == "freeCodeCamp.org") }}">
                 {{ content | safe }}
             </section>
