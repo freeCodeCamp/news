@@ -1,0 +1,59 @@
+name: Self-Hosted (Debug)
+
+on:
+  workflow_dispatch:
+  # push:
+  #   branches:
+  #     - actions-*
+  #     - prod-*
+
+jobs:
+  debug_job_1:
+    name: Debug
+    runs-on: self-hosted
+
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version: [16.x]
+        languages: [espanol, italian, portuguese]
+
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v2
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+
+      - name: Check Node & NPM
+        run: |
+          echo "Checking Node & NPM..."
+          node --version
+          npm --version
+
+      - name: Echo language
+        run: |
+          echo "Language: ${{ matrix.languages }}"
+
+      - name: Echo Site TLD
+        run: |
+          echo "Site TLD: ${{ matrix.site_tlds }}"
+
+  debug_job_2:
+    name: Debug
+    runs-on: self-hosted
+    needs: [debug_job_1]
+
+    strategy:
+      fail-fast: false
+      matrix:
+        site_tlds: [dev, org]
+
+    steps:
+      - name: Echo Site TLD
+        run: |
+          echo "Site TLD: ${{ matrix.site_tlds }}"
+
