@@ -69,7 +69,7 @@
     "eslint-plugin-cypress": "2.12.1",
     "eslint-plugin-ghost": "2.11.0",
     "eslint-utils": "3.0.0",
-    "i18next": "21.6.3",
+    "i18next": "21.6.4",
     "i18next-fs-backend": "1.1.4",
     "jest": "27.4.5",
     "jsdom": "19.0.0",
