@@ -26,7 +26,6 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
-          cache: 'npm'
 
       - name: Check Node & NPM
         run: |
@@ -37,10 +36,6 @@ jobs:
       - name: Echo language
         run: |
           echo "Language: ${{ matrix.languages }}"
-
-      - name: Echo Site TLD
-        run: |
-          echo "Site TLD: ${{ matrix.site_tlds }}"
 
   debug_job_2:
     name: Debug
