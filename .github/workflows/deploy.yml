@@ -117,7 +117,7 @@ jobs:
       matrix:
         # languages: [english, chinese, espanol, italian, portuguese, japanese, arabic, ukrainian]
         # site_tlds: [dev, org]
-        languages: [espanol, italian, portuguese]
+        languages: [chinese, espanol, italian, portuguese]
         site_tlds: [dev]
 
     # GitHub's deployment environment configuration.
