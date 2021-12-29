@@ -1,24 +1,23 @@
-name: Build and Deploy to Azure
+name: Build and Deploy English News to Azure
 
 on:
   workflow_dispatch:
-  # push:
-  #   branches:
-  #     - actions-*
-  #     - prod-*
+  # build every 90 minutes
+  # schedule:
+  #   - cron: '00 0-21/3 * * *'
+  #   - cron: '30 1-22/3 * * *'
 
 jobs:
   build:
     name: Build
-    runs-on: self-hosted
+    runs-on: [self-hosted,on-aws]
 
     strategy:
       fail-fast: false
       matrix:
         node-version: [16.x]
-        # languages-pending: [japanese, arabic, ukrainian]
-        languages: [chinese, espanol, italian, portuguese]
-        site_tlds: [dev, org]
+        languages: [english]
+        site_tlds: [dev,org]
 
     env:
       BUILD_LANG: ${{ matrix.languages }}
@@ -35,27 +34,6 @@ jobs:
       ENGLISH_GHOST_API_VERSION: ${{ secrets.ENGLISH_GHOST_API_VERSION }}
       ENGLISH_GHOST_CONTENT_API_KEY:
         ${{ secrets.ENGLISH_GHOST_CONTENT_API_KEY }}
-
-      CHINESE_GHOST_API_URL: ${{ secrets.CHINESE_GHOST_API_URL }}
-      CHINESE_GHOST_API_VERSION: ${{ secrets.CHINESE_GHOST_API_VERSION }}
-      CHINESE_GHOST_CONTENT_API_KEY:
-        ${{ secrets.CHINESE_GHOST_CONTENT_API_KEY }}
-
-      ESPANOL_GHOST_API_URL: ${{ secrets.ESPANOL_GHOST_API_URL }}
-      ESPANOL_GHOST_API_VERSION: ${{ secrets.ESPANOL_GHOST_API_VERSION }}
-      ESPANOL_GHOST_CONTENT_API_KEY:
-        ${{ secrets.ESPANOL_GHOST_CONTENT_API_KEY }}
-
-      ITALIAN_GHOST_API_URL: ${{ secrets.ITALIAN_GHOST_API_URL }}
-      ITALIAN_GHOST_API_VERSION: ${{ secrets.ITALIAN_GHOST_API_VERSION }}
-      ITALIAN_GHOST_CONTENT_API_KEY:
-        ${{ secrets.ITALIAN_GHOST_CONTENT_API_KEY }}
-
-      PORTUGUESE_GHOST_API_URL: ${{ secrets.PORTUGUESE_GHOST_API_URL }}
-      PORTUGUESE_GHOST_API_VERSION:
-        ${{ secrets.PORTUGUESE_GHOST_API_VERSION }}
-      PORTUGUESE_GHOST_CONTENT_API_KEY:
-        ${{ secrets.PORTUGUESE_GHOST_CONTENT_API_KEY }}
 
       ADS_ENABLED: ${{ secrets.ADS_ENABLED }}
       GOOGLE_ADSENSE_DATA_AD_CLIENT: ${{ secrets.GOOGLE_ADSENSE_DATA_AD_CLIENT }}
@@ -108,16 +86,14 @@ jobs:
 
   deploy:
     name: Deploy
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, on-aws, english]
     needs:
       - build
 
     strategy:
       fail-fast: false
       matrix:
-        # languages: [english, chinese, espanol, italian, portuguese, japanese, arabic, ukrainian]
-        # site_tlds: [dev, org]
-        languages: [chinese, espanol, italian, portuguese]
+        languages: [english]
         site_tlds: [dev]
 
     # GitHub's deployment environment configuration.

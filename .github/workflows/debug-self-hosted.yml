@@ -2,10 +2,10 @@ name: Self-Hosted (Debug)
 
 on:
   workflow_dispatch:
-  # schedule a build every 90 minutes, the runners will scale down every 2 hours (check infra config).
-  schedule:
-    - cron: '00 0-21/3 * * *'
-    - cron: '30 1-22/3 * * *'
+  # schedule a build every 90 minutes
+  # schedule:
+  #   - cron: '00 0-21/3 * * *'
+  #   - cron: '30 1-22/3 * * *'
 
 jobs:
   debug_job_1:

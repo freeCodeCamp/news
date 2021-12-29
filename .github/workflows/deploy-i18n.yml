@@ -1,0 +1,136 @@
+name: Build and Deploy Localized News to Azure
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '00 0/6 * * *' # Build once every six hours
+
+jobs:
+  build:
+    name: Build
+    runs-on: [self-hosted, on-aws]
+
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version: [16.x]
+        # languages-pending: [japanese, arabic, ukrainian]
+        languages: [chinese, espanol, italian, portuguese]
+        site_tlds: [dev, org]
+
+    env:
+      BUILD_LANG: ${{ matrix.languages }}
+
+      LOCAL_GHOST_API_URL: ${{ secrets.LOCAL_GHOST_API_URL }}
+      LOCAL_GHOST_API_VERSION: ${{ secrets.LOCAL_GHOST_API_VERSION }}
+      LOCAL_GHOST_CONTENT_API_KEY:
+        ${{ secrets.LOCAL_GHOST_CONTENT_API_KEY }}
+
+      ALGOLIA_API_KEY: ${{ secrets.ALGOLIA_API_KEY }}
+      ALGOLIA_APP_ID: ${{ secrets.ALGOLIA_APP_ID }}
+
+      ENGLISH_GHOST_API_URL: ${{ secrets.ENGLISH_GHOST_API_URL }}
+      ENGLISH_GHOST_API_VERSION: ${{ secrets.ENGLISH_GHOST_API_VERSION }}
+      ENGLISH_GHOST_CONTENT_API_KEY:
+        ${{ secrets.ENGLISH_GHOST_CONTENT_API_KEY }}
+
+      CHINESE_GHOST_API_URL: ${{ secrets.CHINESE_GHOST_API_URL }}
+      CHINESE_GHOST_API_VERSION: ${{ secrets.CHINESE_GHOST_API_VERSION }}
+      CHINESE_GHOST_CONTENT_API_KEY:
+        ${{ secrets.CHINESE_GHOST_CONTENT_API_KEY }}
+
+      ESPANOL_GHOST_API_URL: ${{ secrets.ESPANOL_GHOST_API_URL }}
+      ESPANOL_GHOST_API_VERSION: ${{ secrets.ESPANOL_GHOST_API_VERSION }}
+      ESPANOL_GHOST_CONTENT_API_KEY:
+        ${{ secrets.ESPANOL_GHOST_CONTENT_API_KEY }}
+
+      ITALIAN_GHOST_API_URL: ${{ secrets.ITALIAN_GHOST_API_URL }}
+      ITALIAN_GHOST_API_VERSION: ${{ secrets.ITALIAN_GHOST_API_VERSION }}
+      ITALIAN_GHOST_CONTENT_API_KEY:
+        ${{ secrets.ITALIAN_GHOST_CONTENT_API_KEY }}
+
+      PORTUGUESE_GHOST_API_URL: ${{ secrets.PORTUGUESE_GHOST_API_URL }}
+      PORTUGUESE_GHOST_API_VERSION:
+        ${{ secrets.PORTUGUESE_GHOST_API_VERSION }}
+      PORTUGUESE_GHOST_CONTENT_API_KEY:
+        ${{ secrets.PORTUGUESE_GHOST_CONTENT_API_KEY }}
+
+      ADS_ENABLED: ${{ secrets.ADS_ENABLED }}
+      GOOGLE_ADSENSE_DATA_AD_CLIENT: ${{ secrets.GOOGLE_ADSENSE_DATA_AD_CLIENT }}
+      GOOGLE_ADSENSE_DATA_AD_SLOT: ${{ secrets.GOOGLE_ADSENSE_DATA_AD_SLOT }}
+
+      POSTS_PER_PAGE: ${{ secrets.POSTS_PER_PAGE }}
+
+      SITE_DOMAIN: freecodecamp.${{ matrix.site_tlds }}
+
+      LOCALE_FOR_UI: ${{ matrix.languages }}
+      LOCALE_FOR_GHOST: ${{ matrix.languages }}
+
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v2
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+          # cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build site
+        run: npm run build
+        env:
+          NODE_ENV: production
+
+      # - name: Set up Docker Buildx
+      #   uses: docker/setup-buildx-action@v1
+
+      - name: Docker login to Azure Container Registry
+        uses: azure/docker-login@v1
+        with:
+          login-server: ${{ secrets.ACR_NAME }}.azurecr.io
+          username: ${{ secrets.ACR_USERNAME }}
+          password: ${{ secrets.ACR_PASSWORD }}
+
+      - name: Build & Push Docker Images
+        run: |
+          docker build . \
+          --tag ${{ secrets.ACR_NAME }}.azurecr.io/${{ matrix.site_tlds }}/news-${{ matrix.languages }}:${{ github.sha }} \
+          --tag ${{ secrets.ACR_NAME }}.azurecr.io/${{ matrix.site_tlds }}/news-${{ matrix.languages }}:latest \
+          --build-arg BUILD_LANGUAGE=${{ matrix.languages }} \
+          --file docker-config/Dockerfile
+          docker push --all-tags ${{ secrets.ACR_NAME }}.azurecr.io/${{ matrix.site_tlds }}/news-${{ matrix.languages }}
+
+
+  deploy:
+    name: Deploy
+    runs-on: [self-hosted, on-aws, i18n]
+    needs:
+      - build
+
+    strategy:
+      fail-fast: false
+      matrix:
+        # languages-pending: [japanese, arabic, ukrainian]
+        languages: [chinese, espanol, italian, portuguese]
+        site_tlds: [dev]
+
+    # GitHub's deployment environment configuration.
+    environment:
+      name: ${{ matrix.site_tlds }}
+      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+
+    steps:
+      - name: Azure authentication
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Deploy to Azure Web App
+        id: deploy-to-webapp
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: freecodecamp-news-${{ matrix.site_tlds }}-${{ matrix.languages }}
+          images: ${{ secrets.ACR_NAME }}.azurecr.io/${{ matrix.site_tlds }}/news-${{ matrix.languages }}:${{ github.sha }}
