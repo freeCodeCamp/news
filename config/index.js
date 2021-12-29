@@ -1,5 +1,4 @@
 const path = require('path');
-
 const envPath = path.resolve(__dirname, '../.env');
 const { error } = require('dotenv').config({ path: envPath });
 
@@ -13,7 +12,7 @@ if (error) {
   to setup this environment.
   ----------------------------------------------------
   `);
-}
+};
 
 const locales = ['english', 'espanol', 'chinese', 'italian', 'portuguese'];
 
