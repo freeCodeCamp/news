@@ -28,6 +28,16 @@
       "destination": "/news/about"
     },
     {
+      "source": "/my-open-source-instagram-bot-got-me-2-500-real-followers-for-5-in-server-costs-e40491358340",
+      "destination": "/news/building-bots",
+      "type": 302
+    },
+    {
+      "source": "/e40491358340",
+      "destination": "/news/building-bots",
+      "type": 302
+    },
+    {
       "source": "/dive-into-dotfiles-part-1-e4eb1003cff6",
       "destination": "/news/dotfiles-what-is-a-dot-file-and-how-to-create-it-in-mac-and-linux",
       "type": 302
@@ -19275,11 +19285,6 @@
     {
       "source": "/2afb536504ed",
       "destination": "/news/my-latest-bugfix-or-how-i-went-spelunking-in-someone-elses-code-2afb536504ed",
-      "type": 302
-    },
-    {
-      "source": "/e40491358340",
-      "destination": "/news/my-open-source-instagram-bot-got-me-2-500-real-followers-for-5-in-server-costs-e40491358340",
       "type": 302
     },
     {
