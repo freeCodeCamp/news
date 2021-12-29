@@ -17,7 +17,7 @@ jobs:
       matrix:
         node-version: [16.x]
         # languages-pending: [japanese, arabic, ukrainian]
-        languages: [english, chinese, espanol, italian, portuguese]
+        languages: [chinese, espanol, italian, portuguese]
         site_tlds: [dev, org]
 
     env:
