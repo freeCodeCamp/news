@@ -3,7 +3,7 @@ name: Build and Deploy Localized News to Azure
 on:
   workflow_dispatch:
   schedule:
-    - cron: '00 0/6 * * *' # Build once every six hours
+    - cron: '0 0/6 * * *' # Build once every six hours
 
 jobs:
   build:
