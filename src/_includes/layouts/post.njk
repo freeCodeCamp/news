@@ -13,19 +13,22 @@
     {% include "partials/prism.njk" %}
 {% endblock %}
 
-{% block monetization %}
-    {% if adsEnabled and site.lang !== "zh" %}
+{% if adsEnabled and site.lang !== "zh" %}
+    {% block monetization %}
         <script
             data-ad-client="{{ secrets.googleAdsenseDataAdClient }}"
             src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
             crossorigin="anonymous"
             async
         ></script>
+    {% endblock %}
+
+    {% block scripts %}
         <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
+            document.addEventListener('DOMContentLoaded', () => (adsbygoogle = window.adsbygoogle || []).push({}));
         </script>
-    {% endif %}
-{% endblock %}
+    {% endblock %}
+{% endif %}
 
 {% block content %}
     <main id="site-main" class="post-template site-main outer">
