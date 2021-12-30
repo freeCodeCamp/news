@@ -112,8 +112,7 @@
         });
 
         {% if showAds %}
-            {# Toggle Google Ads #}
-            {% include "assets/js/handle-ads.js" %}
+            {% include "assets/js/toggle-ad-layout.js" %}
         {% endif %}
     {% endset %}
     <script>{{ js | jsMin | safe }}</script>
