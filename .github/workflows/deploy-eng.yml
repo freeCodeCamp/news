@@ -97,9 +97,9 @@ jobs:
         site_tlds: [dev]
 
     # GitHub's deployment environment configuration.
-    environment:
-      name: ${{ matrix.site_tlds }}
-      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+    # environment:
+    #   name: ${{ matrix.site_tlds }}
+    #   url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
     steps:
       - name: Azure authentication
