@@ -21,11 +21,6 @@ jobs:
     env:
       BUILD_LANG: ${{ matrix.languages }}
 
-      LOCAL_GHOST_API_URL: ${{ secrets.LOCAL_GHOST_API_URL }}
-      LOCAL_GHOST_API_VERSION: ${{ secrets.LOCAL_GHOST_API_VERSION }}
-      LOCAL_GHOST_CONTENT_API_KEY:
-        ${{ secrets.LOCAL_GHOST_CONTENT_API_KEY }}
-
       ALGOLIA_API_KEY: ${{ secrets.ALGOLIA_API_KEY }}
       ALGOLIA_APP_ID: ${{ secrets.ALGOLIA_APP_ID }}
 
