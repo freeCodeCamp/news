@@ -134,3 +134,10 @@ jobs:
         with:
           app-name: freecodecamp-news-${{ matrix.site_tlds }}-${{ matrix.languages }}
           images: ${{ secrets.ACR_NAME }}.azurecr.io/${{ matrix.site_tlds }}/news-${{ matrix.languages }}:${{ github.sha }}
+
+      - name: Remove Old images
+        run: |
+          az acr run \
+          --cmd "acr purge --filter '${{ matrix.site_tlds }}/news-${{ matrix.languages }}:.*' \
+          --untagged --ago 2d" \
+          --registry ${{ secrets.ACR_NAME }} /dev/null
