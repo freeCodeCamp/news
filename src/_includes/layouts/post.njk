@@ -5,27 +5,9 @@
 {% set canonicalUrl = site.url + post.path %}
 {% set codeinjection_head = post.codeinjection_head %}
 {% set codeinjection_foot = post.codeinjection_foot %}
-{% set adsEnabled = secrets.adsEnabled === 'true' %}
+{% set showAds = (secrets.adsEnabled === 'true') and (site.lang !== 'zh') and ('freecodecamp.org/' not in site.url) %}
 {# Show 1 ad for every 2 minutes of reading time, plus two by default #}
 {% set numOfSidebarAds = ((post.reading_time / 2) + 2) | round(0, 'floor') %}
-
-{% block prism %}
-    {% include "partials/prism.njk" %}
-{% endblock %}
-
-{% block monetization %}
-    {% if adsEnabled and site.lang !== "zh" %}
-        <script
-            data-ad-client="{{ secrets.googleAdsenseDataAdClient }}"
-            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
-            crossorigin="anonymous"
-            async
-        ></script>
-        <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-    {% endif %}
-{% endblock %}
 
 {% block content %}
     <main id="site-main" class="post-template site-main outer">
@@ -75,7 +57,7 @@
                         <section class="post-content {{ "medium-migrated-article" if (post.primary_author.name == "freeCodeCamp.org") }}">
                             {{ content | safe }}
                         </section>
-                        {% if adsEnabled and site.lang !== "zh" %}
+                        {% if showAds %}
                             <div class="sidebar">
                                 {% for i in range(0, numOfSidebarAds) %}
                                     {% include "partials/ad.njk" %}
@@ -108,13 +90,17 @@
                     {% endif %}
                 </section>
             </article>
-            {% if adsEnabled and site.lang !== "zh" %}
+            {% if showAds %}
                 <div class="banner-ad bottom">
                     {% include "partials/ad.njk" %}
                 </div>
             {% endif %}
         </div>
     </main>
+{% endblock %}
+
+{% block prism %}
+    {% include "partials/prism.njk" %}
 {% endblock %}
 
 {% block headScripts %}
@@ -125,10 +111,30 @@
             if (postContent) fitVids(postContent);
         });
 
-        {# Toggle Google Ads #}
-        {% include "assets/js/handle-ads.js" %}
+        {% if showAds %}
+            {% include "assets/js/toggle-ad-layout.js" %}
+        {% endif %}
     {% endset %}
     <script>{{ js | jsMin | safe }}</script>
+{% endblock %}
+
+{% block monetization %}
+    {% if showAds %}
+        <script
+            data-ad-client="{{ secrets.googleAdsenseDataAdClient }}"
+            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+            crossorigin="anonymous"
+            async
+        ></script>
+    {% endif %}
+{% endblock %}
+
+{% block scripts %}
+    {% if showAds %}
+        <script>
+            document.addEventListener('DOMContentLoaded', () => (adsbygoogle = window.adsbygoogle || []).push({}));
+        </script>
+    {% endif %}
 {% endblock %}
 
 {% block seo %}
