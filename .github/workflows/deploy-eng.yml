@@ -86,7 +86,7 @@ jobs:
 
   deploy:
     name: Deploy
-    runs-on: [self-hosted,on-aws]
+    runs-on: ubuntu-latest
     needs:
       - build
 

@@ -8,7 +8,7 @@ on:
 jobs:
   build:
     name: Build
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted,on-aws]
 
     strategy:
       fail-fast: false
@@ -106,7 +106,7 @@ jobs:
 
   deploy:
     name: Deploy
-    runs-on: [self-hosted,on-aws]
+    runs-on: ubuntu-latest
     needs:
       - build
 
