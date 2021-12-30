@@ -128,8 +128,10 @@
             if (postContent) fitVids(postContent);
         });
 
-        {# Toggle Google Ads #}
-        {% include "assets/js/handle-ads.js" %}
+        {% if adsEnabled and site.lang !== "zh" %}
+            {# Toggle Google Ads #}
+            {% include "assets/js/handle-ads.js" %}
+        {% endif %}
     {% endset %}
     <script>{{ js | jsMin | safe }}</script>
 {% endblock %}
