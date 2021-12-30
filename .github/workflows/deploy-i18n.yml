@@ -8,7 +8,7 @@ on:
 jobs:
   build:
     name: Build
-    runs-on: [self-hosted,on-aws]
+    runs-on: [self-hosted, on-aws]
 
     strategy:
       fail-fast: false
@@ -115,7 +115,7 @@ jobs:
       matrix:
         # languages-pending: [japanese, arabic, ukrainian]
         languages: [chinese, espanol, italian, portuguese]
-        site_tlds: [dev]
+        site_tlds: [dev, org]
 
     # GitHub's deployment environment configuration.
     # environment:

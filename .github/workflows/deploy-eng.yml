@@ -10,14 +10,14 @@ on:
 jobs:
   build:
     name: Build
-    runs-on: [self-hosted,on-aws]
+    runs-on: [self-hosted, on-aws]
 
     strategy:
       fail-fast: false
       matrix:
         node-version: [16.x]
         languages: [english]
-        site_tlds: [dev,org]
+        site_tlds: [dev, org]
 
     env:
       BUILD_LANG: ${{ matrix.languages }}
