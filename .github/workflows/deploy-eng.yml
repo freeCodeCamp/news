@@ -86,7 +86,7 @@ jobs:
 
   deploy:
     name: Deploy
-    runs-on: [self-hosted, on-aws, english]
+    runs-on: [self-hosted,on-aws]
     needs:
       - build
 

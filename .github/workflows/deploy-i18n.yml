@@ -106,7 +106,7 @@ jobs:
 
   deploy:
     name: Deploy
-    runs-on: [self-hosted, on-aws, i18n]
+    runs-on: [self-hosted,on-aws]
     needs:
       - build
 
