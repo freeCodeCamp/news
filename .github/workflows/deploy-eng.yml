@@ -10,7 +10,7 @@ on:
 jobs:
   build:
     name: Build
-    runs-on: [self-hosted, on-aws]
+    runs-on: [self-hosted, on-azure]
 
     strategy:
       fail-fast: false
@@ -29,6 +29,27 @@ jobs:
       ENGLISH_GHOST_API_VERSION: ${{ secrets.ENGLISH_GHOST_API_VERSION }}
       ENGLISH_GHOST_CONTENT_API_KEY:
         ${{ secrets.ENGLISH_GHOST_CONTENT_API_KEY }}
+
+      CHINESE_GHOST_API_URL: ${{ secrets.CHINESE_GHOST_API_URL }}
+      CHINESE_GHOST_API_VERSION: ${{ secrets.CHINESE_GHOST_API_VERSION }}
+      CHINESE_GHOST_CONTENT_API_KEY:
+        ${{ secrets.CHINESE_GHOST_CONTENT_API_KEY }}
+
+      ESPANOL_GHOST_API_URL: ${{ secrets.ESPANOL_GHOST_API_URL }}
+      ESPANOL_GHOST_API_VERSION: ${{ secrets.ESPANOL_GHOST_API_VERSION }}
+      ESPANOL_GHOST_CONTENT_API_KEY:
+        ${{ secrets.ESPANOL_GHOST_CONTENT_API_KEY }}
+
+      ITALIAN_GHOST_API_URL: ${{ secrets.ITALIAN_GHOST_API_URL }}
+      ITALIAN_GHOST_API_VERSION: ${{ secrets.ITALIAN_GHOST_API_VERSION }}
+      ITALIAN_GHOST_CONTENT_API_KEY:
+        ${{ secrets.ITALIAN_GHOST_CONTENT_API_KEY }}
+
+      PORTUGUESE_GHOST_API_URL: ${{ secrets.PORTUGUESE_GHOST_API_URL }}
+      PORTUGUESE_GHOST_API_VERSION:
+        ${{ secrets.PORTUGUESE_GHOST_API_VERSION }}
+      PORTUGUESE_GHOST_CONTENT_API_KEY:
+        ${{ secrets.PORTUGUESE_GHOST_CONTENT_API_KEY }}
 
       ADS_ENABLED: ${{ secrets.ADS_ENABLED }}
       GOOGLE_ADSENSE_DATA_AD_CLIENT: ${{ secrets.GOOGLE_ADSENSE_DATA_AD_CLIENT }}
@@ -97,7 +118,7 @@ jobs:
     #   url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
     steps:
-      - name: Azure authentication
+      - name: Azure Login
         uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
@@ -108,3 +129,10 @@ jobs:
         with:
           app-name: freecodecamp-news-${{ matrix.site_tlds }}-${{ matrix.languages }}
           images: ${{ secrets.ACR_NAME }}.azurecr.io/${{ matrix.site_tlds }}/news-${{ matrix.languages }}:${{ github.sha }}
+
+      - name: Remove Old images
+        run: |
+          az acr run \
+          --cmd "acr purge --filter '${{ matrix.site_tlds }}/news-${{ matrix.languages }}:.*' \
+          --untagged --ago 2d" \
+          --registry ${{ secrets.ACR_NAME }} /dev/null
