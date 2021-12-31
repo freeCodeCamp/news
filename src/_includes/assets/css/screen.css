@@ -2386,7 +2386,7 @@ a.banner:hover span {
     display: none;
 }
 
-.ad-container {
+ins.adsbygoogle {
     border: 3px solid var(--gray85);
 }
 
