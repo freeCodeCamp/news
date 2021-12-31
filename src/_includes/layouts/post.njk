@@ -132,7 +132,10 @@
 {% block scripts %}
     {% if showAds %}
         <script>
-            document.addEventListener('DOMContentLoaded', () => (adsbygoogle = window.adsbygoogle || []).push({}));
+            document.addEventListener('DOMContentLoaded', () => {
+                document.querySelectorAll('.adsbygoogle')
+                    .forEach(() => (adsbygoogle = window.adsbygoogle || []).push({}));
+            });
         </script>
     {% endif %}
 {% endblock %}
