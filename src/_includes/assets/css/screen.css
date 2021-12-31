@@ -2390,6 +2390,11 @@ a.banner:hover span {
     border: 3px solid var(--gray85);
 }
 
+/* Hide unfilled ads */
+ins.adsbygoogle[data-ad-status="unfilled"] {
+    display: none !important;
+}
+
 @media (max-width: 900px) {
     /* Override dynamically set styles */
     .post-and-sidebar {
