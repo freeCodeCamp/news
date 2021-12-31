@@ -129,17 +129,6 @@
     {% endif %}
 {% endblock %}
 
-{% block scripts %}
-    {% if showAds %}
-        <script>
-            document.addEventListener('DOMContentLoaded', () => {
-                document.querySelectorAll('.adsbygoogle')
-                    .forEach(() => (adsbygoogle = window.adsbygoogle || []).push({}));
-            });
-        </script>
-    {% endif %}
-{% endblock %}
-
 {% block seo %}
     <link rel="amphtml" href="{{ site.url + post.path + "amp/" | url }}">
     <meta name="description" content="{{ post.excerpt }}">
