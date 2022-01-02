@@ -56,8 +56,9 @@
     "https://github.com/freeCodeCamp/news/graphs/contributors"
   ],
   "devDependencies": {
-    "@11ty/eleventy": "0.12.1",
+    "@11ty/eleventy": "1.0.0",
     "@11ty/eleventy-plugin-rss": "1.1.2",
+    "@11ty/eleventy-upgrade-help": "1.0.1",
     "@tryghost/content-api": "1.5.16",
     "@tryghost/helpers": "1.1.54",
     "clean-css": "5.2.2",
@@ -69,6 +70,7 @@
     "eslint-plugin-cypress": "2.12.1",
     "eslint-plugin-ghost": "2.11.0",
     "eslint-utils": "3.0.0",
+    "graceful-fs": "4.2.9",
     "i18next": "21.6.5",
     "i18next-fs-backend": "1.1.4",
     "jest": "27.4.7",

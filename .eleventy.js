@@ -1,10 +1,15 @@
 const { readFileSync, readdirSync, writeFileSync } = require('fs');
 const pluginRSS = require('@11ty/eleventy-plugin-rss');
+const UpgradeHelper = require('@11ty/eleventy-upgrade-help');
+
 const cssMin = require('./utils/transforms/css-min');
 const jsMin = require('./utils/transforms/js-min');
 const fullEscaper = require('./utils/full-escaper');
 const translate = require('./utils/translate');
-const { imageShortcode, featureImageShortcode } = require('./utils/shortcodes/images');
+const {
+  imageShortcode,
+  featureImageShortcode
+} = require('./utils/shortcodes/images');
 const cacheBusterShortcode = require('./utils/shortcodes/cache-buster');
 const sitemapFetcherShortcode = require('./utils/shortcodes/sitemap-fetcher');
 const createJsonLdShortcode = require('./utils/shortcodes/create-json-ld');
@@ -18,6 +23,8 @@ const {
 const sitePath = require('./utils/site-path');
 
 module.exports = function (config) {
+  config.addPlugin(UpgradeHelper);
+
   // Minify inline CSS
   config.addFilter('cssMin', cssMin);
 
@@ -83,7 +90,7 @@ module.exports = function (config) {
   config.addFilter('nextPageExists', (href) => {
     const nextPageRegExp = /\/\d+\/$/g;
     return nextPageRegExp.test(href);
-  })
+  });
 
   // Don't ignore the same files ignored in the git repo
   config.setUseGitIgnore(false);
@@ -111,15 +118,15 @@ module.exports = function (config) {
           }
         });
       },
-      startPath: sitePath,
-    },
+      startPath: sitePath
+    }
   });
 
   // Eleventy configuration
   return {
     dir: {
       input: 'src',
-      output: 'dist',
+      output: 'dist'
     },
 
     // Files read by Eleventy, add as needed
