@@ -99,6 +99,9 @@ jobs:
           --file docker-config/Dockerfile
           docker push --all-tags ${{ secrets.ACR_NAME }}.azurecr.io/${{ matrix.site_tlds }}/news-${{ matrix.languages }}
 
+      - name: Clean up Self-hosted setup
+        uses: colpal/actions-clean@v1
+        if: ${{ always() }} # To ensure this step runs even when earlier steps fail
 
   deploy:
     name: Deploy
@@ -136,3 +139,7 @@ jobs:
           --cmd "acr purge --filter '${{ matrix.site_tlds }}/news-${{ matrix.languages }}:.*' \
           --untagged --ago 2d" \
           --registry ${{ secrets.ACR_NAME }} /dev/null
+
+      # - name: Clean up Self-hosted setup
+      #   uses: colpal/actions-clean@v1
+      #   if: ${{ always() }} # To ensure this step runs even when earlier steps fail
