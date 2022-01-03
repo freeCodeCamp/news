@@ -6,7 +6,7 @@
                 {% 
                     image
                     post.feature_image,
-                    "post-card-image lazyload",
+                    "post-card-image",
                     (post.title | escape),
                     "(max-width: 360px) 300px,
                      (max-width: 655px) 600px,
@@ -55,7 +55,7 @@
                                         {% 
                                             image
                                             originalAuthor.profile_image,
-                                            "author-profile-image lazyload",
+                                            "author-profile-image",
                                             originalAuthor.name,
                                             "30px",
                                             [30],
@@ -83,7 +83,7 @@
                                     {% 
                                         image
                                         post.primary_author.profile_image,
-                                        "author-profile-image lazyload",
+                                        "author-profile-image",
                                         post.primary_author.name,
                                         "30px",
                                         [30],

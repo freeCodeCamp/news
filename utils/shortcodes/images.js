@@ -13,20 +13,21 @@ function imageShortcode(src, cls, alt, sizes, widths, dimensions, index) {
   return `
     <img
       ${index === 0 ? `rel="preload" as="image"` : ''}
-      ${cls.includes('lazyload') && index > 0 ? 'data-srcset' : 'srcset'}="${
+      srcset="${
     imageUrls.length === widths.length
       ? widths.map((width, i) => `${imageUrls[i]} ${width}w`).join()
       : imageUrls[0]
   }"
       sizes="${sizes.replace(/\s+/g, ' ').trim()}"
-      ${cls.includes('lazyload') && index > 0 ? 'data-src' : 'src'}="${
+      src="${
     imageUrls[imageUrls.length - 1]
   }"
-      class="${index === 0 ? cls.replace('lazyload', '') : cls}"
+      class="${cls}"
       alt="${alt}"
       width="${dimensions.width}"
       height="${dimensions.height}"
       onerror="this.style.display='none'"
+      loading="lazy"
     />
   `;
 }

@@ -55,8 +55,8 @@ document.addEventListener('DOMContentLoaded', () => {
             ? `
           <a class="post-card-image-link" href="${url}" aria-label="${title}">
             <img
-              class="post-card-image lazyload"
-              data-srcset="
+              class="post-card-image"
+              srcset="
                 ${featureImage}  300w,
                 ${featureImage}  600w,
                 ${featureImage} 1000w,
@@ -70,8 +70,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 92vw
               "
               onerror="this.style.display='none'"
-              data-src="${featureImage}"
+              src="${featureImage}"
               alt="${title}"
+              loading="lazy"
             />
           </a>
         `
@@ -106,10 +107,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 ${originalAuthor.profileImage ? `
                   <a href="${originalAuthor.url}" class="static-avatar">
                     <img
-                      class="author-profile-image lazyload"
-                      data-srcset="${originalAuthorImage} 30w"
-                      data-src="${originalAuthorImage}"
+                      class="author-profile-image"
+                      srcset="${originalAuthorImage} 30w"
+                      src="${originalAuthorImage}"
                       alt="${originalAuthor.name}"
+                      loading="lazy"
                     >
                   </a>
                 ` : `
@@ -131,10 +133,11 @@ document.addEventListener('DOMContentLoaded', () => {
                   ? `
                 <a href="${authorUrl}" class="static-avatar">
                   <img
-                    class="author-profile-image lazyload"
-                    data-srcset="${authorImage} 30w"
-                    data-src="${authorImage}"
+                    class="author-profile-image"
+                    srcset="${authorImage} 30w"
+                    src="${authorImage}"
                     alt="${authorName}"
+                    loading="lazy"
                   >
                 </a>
               `
