@@ -18,6 +18,6 @@ document.addEventListener('DOMContentLoaded', () => {
     postAndSidebar.style.display = 'grid';
     postFullContent.style.padding = '70px 0 0';
 
-    fullWidthImages.forEach((image) => image.style.maxWidth = '750px');
+    fullWidthImages.forEach((image) => image.style.maxWidth = '700px');
   }
 });
