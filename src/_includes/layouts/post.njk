@@ -5,7 +5,7 @@
 {% set canonicalUrl = site.url + post.path %}
 {% set codeinjection_head = post.codeinjection_head %}
 {% set codeinjection_foot = post.codeinjection_foot %}
-{% set showAds = (secrets.adsEnabled === 'true') and (site.lang !== 'zh') and ('freecodecamp.org/' not in site.url) %}
+{% set showAds = (secrets.adsEnabled === 'true') and (site.lang !== 'zh') %}
 {# Show 1 ad for every 2 minutes of reading time, plus two by default #}
 {% set numOfSidebarAds = ((post.reading_time / 2) + 2) | round(0, 'floor') %}
 
