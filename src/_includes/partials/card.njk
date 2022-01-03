@@ -14,6 +14,7 @@
                      (min-width: 768px) 300px,
                      92vw",
                     [300, 600, 1000, 2000],
+                    post.image_dimensions.feature_image,
                     index
                 %}
             </a>
@@ -58,6 +59,7 @@
                                             originalAuthor.name,
                                             "30px",
                                             [30],
+                                            originalAuthor.image_dimensions.profile_image,
                                             index
                                         %}
                                     </a>
@@ -85,6 +87,7 @@
                                         post.primary_author.name,
                                         "30px",
                                         [30],
+                                        post.primary_author.image_dimensions.profile_image,
                                         index
                                     %}
                                 </a>

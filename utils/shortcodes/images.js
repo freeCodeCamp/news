@@ -3,34 +3,36 @@
 const ghostImageRe = /\/content\/images\/\d+\/\d+\//g;
 
 // Handle images from Ghost and from third-parties
-function imageShortcode(src, cls, alt, sizes, widths, index) {
-const imageUrls = src.match(ghostImageRe)
-  ? widths.map((width) =>
-      src.replace('/content/images/', `/content/images/size/w${width}/`)
-    )
-  : [src];
+function imageShortcode(src, cls, alt, sizes, widths, dimensions, index) {
+  const imageUrls = src.match(ghostImageRe)
+    ? widths.map((width) =>
+        src.replace('/content/images/', `/content/images/size/w${width}/`)
+      )
+    : [src];
 
-return `
-  <img
-    ${index === 0 ? `rel="preload" as="image"` : ''}
-    ${cls.includes('lazyload') && index > 0 ? 'data-srcset' : 'srcset'}="${
-  imageUrls.length === widths.length
-    ? widths.map((width, i) => `${imageUrls[i]} ${width}w`).join()
-    : imageUrls[0]
-}"
-    sizes="${sizes.replace(/\s+/g, ' ').trim()}"
-    ${cls.includes('lazyload') && index > 0 ? 'data-src' : 'src'}="${
-  imageUrls[imageUrls.length - 1]
-}"
-    class="${index === 0 ? cls.replace('lazyload', '') : cls}"
-    alt="${alt}"
-    onerror="this.style.display='none'"
-  />
-`;
+  return `
+    <img
+      ${index === 0 ? `rel="preload" as="image"` : ''}
+      ${cls.includes('lazyload') && index > 0 ? 'data-srcset' : 'srcset'}="${
+    imageUrls.length === widths.length
+      ? widths.map((width, i) => `${imageUrls[i]} ${width}w`).join()
+      : imageUrls[0]
+  }"
+      sizes="${sizes.replace(/\s+/g, ' ').trim()}"
+      ${cls.includes('lazyload') && index > 0 ? 'data-src' : 'src'}="${
+    imageUrls[imageUrls.length - 1]
+  }"
+      class="${index === 0 ? cls.replace('lazyload', '') : cls}"
+      alt="${alt}"
+      width="${dimensions.width}"
+      height="${dimensions.height}"
+      onerror="this.style.display='none'"
+    />
+  `;
 }
 
 // Copy images over from Ghost
-function featureImageShortcode(src, alt, sizes, widths) {
+function featureImageShortcode(src, alt, sizes, widths, dimensions) {
   const imageUrls = src.match(ghostImageRe)
     ? widths.map((width) =>
         src.replace('/content/images/', `/content/images/size/w${width}/`)
@@ -56,7 +58,9 @@ function featureImageShortcode(src, alt, sizes, widths) {
       <img
         onerror="this.style.display='none'"
         src="${imageUrls[imageUrls.length - 1]}"
-        alt="${alt}"
+        alt="${alt}",
+        width="${dimensions.width}"
+        height="${dimensions.height}"
       >
     </picture>
   `;
@@ -64,5 +68,5 @@ function featureImageShortcode(src, alt, sizes, widths) {
 
 module.exports = {
   imageShortcode,
-  featureImageShortcode
-}
+  featureImageShortcode,
+};
