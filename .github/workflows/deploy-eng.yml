@@ -97,8 +97,9 @@ jobs:
 
       - name: Build & Push Docker Images
         run: |
+          tagname=$(git rev-parse --short HEAD)-$(date +%Y%m%d)-$(date +%H%M)
           docker build . \
-          --tag ${{ secrets.ACR_NAME }}.azurecr.io/${{ matrix.site_tlds }}/news-${{ matrix.languages }}:${{ github.sha }} \
+          --tag ${{ secrets.ACR_NAME }}.azurecr.io/${{ matrix.site_tlds }}/news-${{ matrix.languages }}:$tagname \
           --tag ${{ secrets.ACR_NAME }}.azurecr.io/${{ matrix.site_tlds }}/news-${{ matrix.languages }}:latest \
           --build-arg BUILD_LANGUAGE=${{ matrix.languages }} \
           --file docker-config/Dockerfile
