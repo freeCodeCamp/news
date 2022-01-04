@@ -15,7 +15,14 @@ if (error) {
   `);
 }
 
-const locales = ['english', 'espanol', 'chinese', 'italian', 'portuguese'];
+const locales = [
+  'english',
+  'espanol',
+  'chinese',
+  'italian',
+  'portuguese',
+  'japanese'
+];
 
 /* These strings set the i18next language. It needs to be the two character
  * string for the language to take advantage of available functionality.
@@ -26,7 +33,8 @@ const localeCodes = {
   espanol: 'es',
   chinese: 'zh',
   italian: 'it',
-  portuguese: 'pt-BR'
+  portuguese: 'pt-BR',
+  japanese: 'ja'
 };
 
 const algoliaIndices = {
@@ -34,7 +42,8 @@ const algoliaIndices = {
   espanol: 'news-es',
   chinese: 'news-zh',
   italian: 'news-it',
-  portuguese: 'news-pt-br'
+  portuguese: 'news-pt-br',
+  japanese: 'news-ja'
 };
 
 const {
@@ -59,7 +68,7 @@ if (lang !== localeForGhost && localeForGhost !== 'local') {
     ----------------------------------------------------
     Warning: Mismatch between UI locale and Ghost locale.
     ----------------------------------------------------
-    You have set the LOCALE_FOR_UI and LOCALE_FOR_GHOST 
+    You have set the LOCALE_FOR_UI and LOCALE_FOR_GHOST
     to different values. This is not recommended.
     ----------------------------------------------------
   `);
@@ -67,7 +76,8 @@ if (lang !== localeForGhost && localeForGhost !== 'local') {
 
 // Config Computations
 const computedDomain = siteDomain || 'freecodecamp.org';
-const computedPath = (lang === 'english' || lang === 'chinese') ? 'news' : `${lang}/news`;
+const computedPath =
+  lang === 'english' || lang === 'chinese' ? 'news' : `${lang}/news`;
 let siteURL;
 
 if (computedDomain.startsWith('localhost')) {
@@ -100,7 +110,8 @@ module.exports = Object.assign(
     algoliaIndex: algoliaIndices[localeForUI] || 'news',
     adsEnabled: adsEnabled || 'false',
     googleAdsenseDataAdClient:
-      !googleAdsenseDataAdClient || googleAdsenseDataAdClient === 'pub-1234567890'
+      !googleAdsenseDataAdClient ||
+      googleAdsenseDataAdClient === 'pub-1234567890'
         ? ''
         : googleAdsenseDataAdClient,
     googleAdsenseDataAdSlot:
