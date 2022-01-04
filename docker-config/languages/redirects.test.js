@@ -16,7 +16,7 @@ describe('Redirect and rewrite tests:', () => {
       test('has a rewrite for RSS feeds', () => {
         const expectedRSSRewrite = {
           source: '/:authorOrTag?/:name?/rss',
-          destination: '/:authorOrTag?/:name?/rss.xml',
+          destination: '/:authorOrTag?/:name?/rss.xml'
         };
 
         expect(serveObj.rewrites).toEqual(
@@ -52,6 +52,7 @@ describe('Redirect and rewrite tests:', () => {
           espanol: /^\/espanol\/news/,
           italian: /^\/italian\/news/,
           portuguese: /^\/portuguese\/news/,
+          japanese: /^\/japanese\/news/
         };
 
         redirects

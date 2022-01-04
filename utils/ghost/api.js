@@ -23,6 +23,7 @@ const espanolApi = new ghostContentApi({ ...fetchKeys('espanol') });
 const chineseApi = new ghostContentApi({ ...fetchKeys('chinese') });
 const portugueseApi = new ghostContentApi({ ...fetchKeys('portuguese') });
 const italianApi = new ghostContentApi({ ...fetchKeys('italian') });
+const japaneseApi = new ghostContentApi({ ...fetchKeys('japanese') });
 
 // Export API instances and target API URL for link swapping,
 // fetching sitemaps, etc.
@@ -33,5 +34,6 @@ module.exports = {
   espanolApi,
   chineseApi,
   portugueseApi,
-  italianApi
+  italianApi,
+  japaneseApi
 };
