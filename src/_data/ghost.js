@@ -5,13 +5,13 @@ const processGhostResponse = require('../../utils/ghost/process-ghost-response')
 const errorLogger = require('../../utils/error-logger');
 
 const { sourceApiUrl } = require('../../utils/ghost/api');
-const { siteURL, postsPerPage } = require('../../config');
+const { eleventyEnv, siteURL, postsPerPage } = require('../../config');
 
 // Strip Ghost domain from urls
 const stripDomain = url => {
   // To do: figure out a better way to strip out everything
   // up to and including /news
-  const toReplace = process.env.ELEVENTY_ENV === 'ci' ?
+  const toReplace = eleventyEnv === 'ci' ?
     'https://www.freecodecamp.org/news' :
     sourceApiUrl;
 
@@ -24,7 +24,7 @@ module.exports = async () => {
   const limit = 200;
   let ghostPosts, ghostPages;
 
-  if (process.env.ELEVENTY_ENV === 'ci') {
+  if (eleventyEnv === 'ci') {
     const testPosts = require('../../cypress/seed-data/posts.json');
     const testPages = require('../../cypress/seed-data/pages.json');
 

@@ -55,7 +55,8 @@ const {
   ALGOLIA_API_KEY: algoliaAPIKey,
   ADS_ENABLED: adsEnabled,
   GOOGLE_ADSENSE_DATA_AD_CLIENT: googleAdsenseDataAdClient,
-  GOOGLE_ADSENSE_DATA_AD_SLOT: googleAdsenseDataAdSlot
+  GOOGLE_ADSENSE_DATA_AD_SLOT: googleAdsenseDataAdSlot,
+  ELEVENTY_ENV: eleventyEnv
 } = process.env;
 
 // Validations
@@ -117,6 +118,7 @@ module.exports = Object.assign(
     googleAdsenseDataAdSlot:
       !googleAdsenseDataAdSlot || googleAdsenseDataAdSlot === '1234567890'
         ? ''
-        : googleAdsenseDataAdSlot
+        : googleAdsenseDataAdSlot,
+    eleventyEnv: eleventyEnv || 'dev'
   }
 );
