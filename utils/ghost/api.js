@@ -1,39 +1,24 @@
-const ghostContentApi = require('@tryghost/content-api');
-
+const ghostContentAPI = require('@tryghost/content-api');
 const { currentLocale_ghost } = require('../../config');
 
-const fetchKeys = (ghostInstance) => {
-  const upperGhostInstance = ghostInstance
-    ? ghostInstance.toUpperCase()
-    : currentLocale_ghost.toUpperCase();
+const fetchKeys = (locale) => {
+  const upperLocale = locale.toUpperCase();
 
   return {
-    url: process.env[`${upperGhostInstance}_GHOST_API_URL`],
-    key: process.env[`${upperGhostInstance}_GHOST_CONTENT_API_KEY`],
-    version: process.env[`${upperGhostInstance}_GHOST_API_VERSION`]
+    url: process.env[`${upperLocale}_GHOST_API_URL`],
+    key: process.env[`${upperLocale}_GHOST_CONTENT_API_KEY`],
+    version: process.env[`${upperLocale}_GHOST_API_VERSION`]
   };
 };
 
-const { url, key, version } = fetchKeys();
+const { url, key, version } = fetchKeys(currentLocale_ghost);
 
-// Init Ghost APIs
-const sourceApi = new ghostContentApi({ url, key, version });
-const englishApi = new ghostContentApi({ ...fetchKeys('english') });
-const espanolApi = new ghostContentApi({ ...fetchKeys('espanol') });
-const chineseApi = new ghostContentApi({ ...fetchKeys('chinese') });
-const portugueseApi = new ghostContentApi({ ...fetchKeys('portuguese') });
-const italianApi = new ghostContentApi({ ...fetchKeys('italian') });
-const japaneseApi = new ghostContentApi({ ...fetchKeys('japanese') });
+const sourceApi = new ghostContentAPI({ url, key, version });
 
-// Export API instances and target API URL for link swapping,
+// Export source API instance and target API URL for link swapping,
 // fetching sitemaps, etc.
 module.exports = {
   sourceApi,
   sourceApiUrl: url,
-  englishApi,
-  espanolApi,
-  chineseApi,
-  portugueseApi,
-  italianApi,
-  japaneseApi
+  fetchKeys
 };
