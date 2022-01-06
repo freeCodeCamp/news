@@ -5,8 +5,8 @@
 {% set canonicalUrl = site.url + post.path %}
 {% set codeinjection_head = post.codeinjection_head %}
 {% set codeinjection_foot = post.codeinjection_foot %}
-{% set showAds = (secrets.adsEnabled === 'true') and (site.lang !== 'zh') %}
-{# Show 1 ad for every 2 minutes of reading time, plus two by default #}
+{% set adsEnabled = (secrets.adsEnabled === 'true') and (site.lang !== 'zh') %}
+{# Include 2 ads by default, and add 1 ad for every 2 mins of reading time #}
 {% set numOfSidebarAds = ((post.reading_time / 2) + 2) | round(0, 'floor') %}
 
 {% block content %}
@@ -57,7 +57,7 @@
                         <section class="post-content {{ "medium-migrated-article" if (post.primary_author.name == "freeCodeCamp.org") }}">
                             {{ content | safe }}
                         </section>
-                        {% if showAds %}
+                        {% if adsEnabled %}
                             <div class="sidebar">
                                 {% for i in range(0, numOfSidebarAds) %}
                                     {% include "partials/ad.njk" %}
@@ -90,7 +90,7 @@
                     {% endif %}
                 </section>
             </article>
-            {% if showAds %}
+            {% if adsEnabled %}
                 <div class="banner-ad bottom">
                     {% include "partials/ad.njk" %}
                 </div>
@@ -111,7 +111,7 @@
             if (postContent) fitVids(postContent);
         });
 
-        {% if showAds %}
+        {% if adsEnabled %}
             {% include "assets/js/toggle-ad-layout.js" %}
         {% endif %}
     {% endset %}
@@ -119,7 +119,7 @@
 {% endblock %}
 
 {% block monetization %}
-    {% if showAds %}
+    {% if adsEnabled %}
         <script
             data-ad-client="{{ secrets.googleAdsenseDataAdClient }}"
             src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
