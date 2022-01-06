@@ -110,10 +110,6 @@
             const postContent = document.querySelector('.post-full-content');
             if (postContent) fitVids(postContent);
         });
-
-        {% if adsEnabled %}
-            {% include "assets/js/toggle-ad-layout.js" %}
-        {% endif %}
     {% endset %}
     <script>{{ js | jsMin | safe }}</script>
 {% endblock %}
@@ -126,6 +122,7 @@
             crossorigin="anonymous"
             async
         ></script>
+        <script defer src="{% cacheBuster '/assets/js/toggle-ad-layout.js' %}"></script>
     {% endif %}
 {% endblock %}
 
