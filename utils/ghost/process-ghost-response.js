@@ -1,4 +1,4 @@
-const { setJsonLdImageDimensions } = require('./helpers');
+const { setImageDimensionObj } = require('./helpers');
 const ampHandler = require('./amp-handler');
 const lazyLoadHandler = require('./lazy-load-handler');
 const originalPostHandler = require('./original-post-handler');
@@ -8,19 +8,19 @@ const processGhostResponse = async (ghostRes, context) => {
   const processedData = await Promise.all(
     ghostRes.map(async obj => {
       // Post image resolutions for structured data
-      if (obj.feature_image) await setJsonLdImageDimensions(obj, 'feature_image', obj.feature_image);
+      if (obj.feature_image) await setImageDimensionObj(obj, 'feature_image', obj.feature_image);
 
       // Author image resolutions for structured data
       if (obj.primary_author.profile_image) {
-        await setJsonLdImageDimensions(obj.primary_author, 'profile_image', obj.primary_author.profile_image);
+        await setImageDimensionObj(obj.primary_author, 'profile_image', obj.primary_author.profile_image);
       }
 
       if (obj.primary_author.cover_image) {
-        await setJsonLdImageDimensions(obj.primary_author, 'cover_image', obj.primary_author.cover_image);
+        await setImageDimensionObj(obj.primary_author, 'cover_image', obj.primary_author.cover_image);
       }
 
       obj.tags.map(async tag => {
-        if (tag.feature_image) await setJsonLdImageDimensions(tag, 'feature_image', tag.feature_image);
+        if (tag.feature_image) await setImageDimensionObj(tag, 'feature_image', tag.feature_image);
       });
       
       // Original author / translator feature

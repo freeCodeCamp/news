@@ -8,7 +8,7 @@ const setDefaultAlt = (el) => {
   return el;
 }
 
-const setJsonLdImageDimensions = async (targetObj, targetKey, imageUrl) => {
+const setImageDimensionObj = async (targetObj, targetKey, imageUrl) => {
   // Set image_dimensions to existing object or undefined
   targetObj.image_dimensions = { ...targetObj.image_dimensions };
 
@@ -19,5 +19,5 @@ const setJsonLdImageDimensions = async (targetObj, targetKey, imageUrl) => {
 
 module.exports = {
   setDefaultAlt,
-  setJsonLdImageDimensions
+  setImageDimensionObj
 }
