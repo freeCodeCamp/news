@@ -1,4 +1,5 @@
 {% macro card(post, index) %}
+    {% set lazyLoad = true if (index >= 4) else false %}
     {% set originalAuthor = post.original_post.primary_author %}
     <article class="post-card {{ post.class }}">
         {% if post.feature_image %}
@@ -15,7 +16,7 @@
                      92vw",
                     [300, 600, 1000, 2000],
                     post.image_dimensions.feature_image,
-                    index
+                    lazyLoad
                 %}
             </a>
         {% else %}
@@ -60,7 +61,7 @@
                                             "30px",
                                             [30],
                                             originalAuthor.image_dimensions.profile_image,
-                                            index
+                                            lazyLoad
                                         %}
                                     </a>
                                 {% else %}
@@ -88,7 +89,7 @@
                                         "30px",
                                         [30],
                                         post.primary_author.image_dimensions.profile_image,
-                                        index
+                                        lazyLoad
                                     %}
                                 </a>
                             {% else %}
