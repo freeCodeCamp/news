@@ -1,5 +1,4 @@
 {% macro byline(author, siteLang, lazyLoad, showBio, role) %}
-    {% set lazy = 1 if lazyLoad else 0 %}
     {% set authorUrl %}{{ author.url if role == 'author' else (author.path | url) }}{% endset %}
     {% set localizedRole %}{% t "localization-meta.roles." + (role if role else "author") %}{% endset %}
 
@@ -12,7 +11,8 @@
                 author.name,
                 "60px",
                 [60],
-                lazy
+                author.image_dimensions.profile_image,
+                lazyLoad
             %}
         {% else %}
             <span class="avatar-wrapper">{% include "partials/icons/avatar.njk" %}</span>

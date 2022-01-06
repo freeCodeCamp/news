@@ -32,10 +32,10 @@
                         {% if post.original_post %}
                             {# To do: Figure out original article source and add to post.original_post.primary_author
                                 as language code (en, zh, etc.) and use that to show original article source [ex: (English)]  #}
-                            {{ byline(post.original_post.primary_author, site.lang, true, false, 'author') }}
-                            {{ byline(post.primary_author, site.lang, true, false, 'translator') }}
+                            {{ byline(post.original_post.primary_author, site.lang, false, false, 'author') }}
+                            {{ byline(post.primary_author, site.lang, false, false, 'translator') }}
                         {% else %}
-                            {{ byline(post.primary_author, site.lang, true, false) }}
+                            {{ byline(post.primary_author, site.lang, false, false) }}
                         {% endif %}
                     {% endif %}
                 </div>
@@ -48,7 +48,8 @@
                             "(max-width: 800px) 400px,
                              (max-width: 1170px) 700px,
                              1400px",
-                            [300, 600, 1000, 2000]
+                            [300, 600, 1000, 2000],
+                            post.image_dimensions.feature_image
                         %}
                     </figure>
                 {% endif %}

@@ -21,21 +21,13 @@ const lazyLoadHandler = async (html, title) => {
 
       if (!image.alt) setDefaultAlt(image);
 
-      // lazysizes
-      image.setAttribute('data-srcset', image.srcset);
-      image.setAttribute('data-src', image.src);
-      image.removeAttribute('src');
-      image.className = `${image.className} lazyload`;
+      image.setAttribute('loading', 'lazy');
     }),
 
     iframes.map(async iframe => {
       iframe.setAttribute('title', `${translate('embed-title')}`);
 
-      // To do: consider adding a low quality facade image via src
-      // lazysizes
-      iframe.setAttribute('data-src', iframe.src);
-      iframe.removeAttribute('src');
-      iframe.className = `${iframe.className} lazyload`;
+      iframe.setAttribute('loading', 'lazy');
     })
   );
 

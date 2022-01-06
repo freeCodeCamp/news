@@ -1,4 +1,5 @@
 {% macro card(post, index) %}
+    {% set lazyLoad = true if (index >= 4) else false %}
     {% set originalAuthor = post.original_post.primary_author %}
     <article class="post-card {{ post.class }}">
         {% if post.feature_image %}
@@ -6,7 +7,7 @@
                 {% 
                     image
                     post.feature_image,
-                    "post-card-image lazyload",
+                    "post-card-image",
                     (post.title | escape),
                     "(max-width: 360px) 300px,
                      (max-width: 655px) 600px,
@@ -14,7 +15,8 @@
                      (min-width: 768px) 300px,
                      92vw",
                     [300, 600, 1000, 2000],
-                    index
+                    post.image_dimensions.feature_image,
+                    lazyLoad
                 %}
             </a>
         {% else %}
@@ -54,11 +56,12 @@
                                         {% 
                                             image
                                             originalAuthor.profile_image,
-                                            "author-profile-image lazyload",
+                                            "author-profile-image",
                                             originalAuthor.name,
                                             "30px",
                                             [30],
-                                            index
+                                            originalAuthor.image_dimensions.profile_image,
+                                            lazyLoad
                                         %}
                                     </a>
                                 {% else %}
@@ -81,11 +84,12 @@
                                     {% 
                                         image
                                         post.primary_author.profile_image,
-                                        "author-profile-image lazyload",
+                                        "author-profile-image",
                                         post.primary_author.name,
                                         "30px",
                                         [30],
-                                        index
+                                        post.primary_author.image_dimensions.profile_image,
+                                        lazyLoad
                                     %}
                                 </a>
                             {% else %}

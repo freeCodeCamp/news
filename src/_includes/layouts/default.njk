@@ -37,9 +37,6 @@
             <script defer src="https://cdn.freecodecamp.org/news-assets/dayjs/1.10.4/locale/{{ site.lang | lower }}.min.js"></script>
         {% endif %}
 
-        {# Lazysizes #}
-        <script defer type="text/javascript" src="{% cacheBuster '/assets/js/lazysizes.min.js' %}"></script>
-
         {% set js %}
             {% include "assets/js/algolia-locale-setup.js" %}
             {% include "assets/js/search-bar.js" %}
