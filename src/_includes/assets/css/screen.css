@@ -2400,10 +2400,6 @@ a.banner:hover span {
     max-width: 720px;
 }
 
-.ad-layout ins.adsbygoogle {
-    border: 3px solid var(--gray85);
-}
-
 /* Hide unfilled ads */
 .ad-layout ins.adsbygoogle[data-ad-status="unfilled"] {
     display: none !important;
