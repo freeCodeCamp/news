@@ -1,5 +1,11 @@
 <a class="banner" id="banner" rel="noopener noreferrer" href="{% t 'links:banner' %}" target="_blank">
     <p data-test-label="banner-text">
-        {% t 'banner' %}
+        {% t 'banner', {
+            '<0>': '<span>',
+            '</0>': '</span>',
+            interpolation: {
+                escapeValue: false
+            }
+        } %}
     </p>
 </a>

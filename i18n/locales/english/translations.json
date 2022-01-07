@@ -12,7 +12,7 @@
     "see-results": "See all results for {{ searchQuery }}",
     "no-tutorials": "No tutorials found"
   },
-  "banner": "Learn to code — <span>free 3,000-hour curriculum</span>",
+  "banner": "Learn to code — {{ <0> }}free 3,000-hour curriculum{{ </0> }}",
   "author": {
     "no-posts": "No posts",
     "one-post": "1 post",

@@ -12,7 +12,7 @@
     "see-results": "Ver todos los resultados de {{ searchQuery }}",
     "no-tutorials": "No se encontraron tutoriales"
   },
-  "banner": "<span>Charla con otros desarrolladores en español</span>",
+  "banner": "{{ <0> }}Charla con otros desarrolladores en español{{ </0> }}",
   "author": {
     "no-posts": "No hay artículos",
     "one-post": "1 artículo",

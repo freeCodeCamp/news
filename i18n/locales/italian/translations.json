@@ -12,7 +12,7 @@
     "see-results": "Vedi tutti i risultati per {{ searchQuery }}",
     "no-tutorials": "Nessun articolo trovato"
   },
-  "banner": "<span>Chatta con altri programmatori in italiano</span>",
+  "banner": "{{ <0> }}Chatta con altri programmatori in italiano{{ </0> }}",
   "author": {
     "no-posts": "Non ci sono articoli",
     "one-post": "1 articolo",
