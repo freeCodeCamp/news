@@ -24,7 +24,7 @@
     "read-more": "阅读该{{ role }}的{{ <0> }}更多文章{{ </0> }}。"
   },
   "tag": {
-    "collection-of-posts": "文章汇总",
+    "no-posts": "文章汇总",
     "one-post": "共 1 篇文章",
     "multiple-posts": "共 {{ postCount }} 篇文章"
   },

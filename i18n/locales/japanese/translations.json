@@ -20,7 +20,7 @@
     "read-more": "この{{ role }}の{{ <0> }}他の投稿{{ </0> }}を読む。"
   },
   "tag": {
-    "collection-of-posts": "投稿の一覧",
+    "no-posts": "投稿の一覧",
     "one-post": "1 件の投稿",
     "multiple-posts": "{{ postCount }} 件の投稿"
   },

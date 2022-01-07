@@ -20,7 +20,7 @@
     "read-more": "Read {{ <0> }}more posts{{ </0> }} by this {{ role }}."
   },
   "tag": {
-    "collection-of-posts": "A collection of posts",
+    "no-posts": "A collection of posts",
     "one-post": "A collection of 1 post",
     "multiple-posts": "A collection of {{ postCount }} posts"
   },

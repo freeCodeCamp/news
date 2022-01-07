@@ -11,7 +11,7 @@
         <h1 data-test-label="tag-name" class="site-title tags-title">#{{ tag.name | upper }}</h1>
         <h2 class="site-description">
             {% if postCount == 0 %}
-                {% t 'tag.collection-of-posts' %}
+                {% t 'tag.no-posts' %}
             {% elif postCount == 1 %}
                 {% t 'tag.one-post' %}
             {% else %}

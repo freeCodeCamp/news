@@ -20,7 +20,7 @@
     "read-more": "Leer {{ <0> }}más publicaciones{{ </0> }} de este {{ role }}."
   },
   "tag": {
-    "collection-of-posts": "Una colección de artículos",
+    "no-posts": "Una colección de artículos",
     "one-post": "Una colección de 1 artículo",
     "multiple-posts": "Una colección de {{ postCount }} artículos"
   },
