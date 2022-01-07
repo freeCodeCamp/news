@@ -1,3 +1,12 @@
+#-------------------------------------------------
+#
+#   Warning: 
+#   We are not using this workflow as of now.
+#   Instead we are manually configuring a Azure
+#   Build pipeline to do build and deployments.
+#
+#-------------------------------------------------
+
 name: Build and Deploy English News to Azure
 
 on:
