@@ -41,7 +41,7 @@
                 </header>
             </div>
             <footer class="post-card-meta">
-                {% if post.primary_author.name == "freeCodeCamp.org" %}
+                {% if post.primary_author.name === "freeCodeCamp.org" %}
                     <time class="meta-item-single" datetime="{{ post.published_at }}">{% timeAgo post.published_at %}</time>
                 {% else %}
                     <ul class="author-list">

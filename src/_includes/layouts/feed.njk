@@ -36,7 +36,7 @@
                 <pubDate>{% buildDateFormatter site.timezone, post.published_at %}</pubDate>
                 <media:content url="{{ post.feature_image }}" medium="image" />
                 <content:encoded>
-                    <![CDATA[ {{ (post.excerpt | escape) if feed.path == "/" else (post.html | safe) }} ]]>
+                    <![CDATA[ {{ (post.excerpt | escape) if feed.path === "/" else (post.html | safe) }} ]]>
                 </content:encoded>
             </item>
         {% endfor %}

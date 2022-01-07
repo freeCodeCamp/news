@@ -26,9 +26,9 @@
             </div>
         {% endif %}
         <div class="author-stats">
-            {% if postCount == 0 %}
+            {% if postCount === 0 %}
                 {% t 'author.no-posts' %}
-            {% elif postCount == 1 %}
+            {% elif postCount === 1 %}
                 {% t 'author.one-post' %}
             {% else %}
                 {% t 'author.multiple-posts', { postCount: postCount } %}

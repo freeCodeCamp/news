@@ -1,5 +1,5 @@
 {% macro byline(author, siteLang, lazyLoad, showBio, role) %}
-    {% set authorUrl %}{{ author.url if role == 'author' else (author.path | url) }}{% endset %}
+    {% set authorUrl %}{{ author.url if role === 'author' else (author.path | url) }}{% endset %}
     {% set localizedRole %}{% t "localization-meta.roles." + (role if role else "author") %}{% endset %}
 
     <section class="author-card">
@@ -23,7 +23,7 @@
                 <a href="{{ authorUrl }}">
                     {% if role %}
                         {% t 'localization-meta.card-name', { role: (localizedRole | capitalize), name: author.name } %}
-                        {% if role == "author" %}
+                        {% if role === "author" %}
                             ({% t "localization-meta.languages." + siteLang %})
                         {% endif %}
                     {% else %}
