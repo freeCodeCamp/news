@@ -4,11 +4,11 @@
     <div class="footer-container">
         <div class="footer-top">
             <div class="footer-desc-col">
-                <p>{% t 'footer.tax-exempt-status' %}</p>
-                <p>{% t 'footer.mission-statement' %}</p>
-                <p>{% t 'footer.donation-initiatives' %}</p>
-                <p class="footer-donation">
-                    {% t 'footer.donate-link', {
+                <p data-test-label="tax-exempt-status">{% t 'footer.tax-exempt-status' %}</p>
+                <p data-test-label="mission-statement">{% t 'footer.mission-statement' %}</p>
+                <p data-test-label="donation-initiatives">{% t 'footer.donation-initiatives' %}</p>
+                <p class="footer-donation" data-test-label="donate-text">
+                    {% t 'footer.donate-text', {
                         '<0>': '<a href="' + ( donateUrl ) + '" class="inline" rel="noopener noreferrer" target="_blank" >',
                         '</0>': '</a>',
                         interpolation: {
@@ -17,7 +17,7 @@
                     } %}
                 </p>
             </div>
-            <div class="trending-guides">
+            <div class="trending-guides" data-test-label="trending-guides">
                 <div class="col-header">{% t 'footer.trending-guides' %}</div>
                 <div class="trending-guides-row">
                     <div class="footer-col footer-col-1">
@@ -125,40 +125,40 @@
             </div>
         </div>
         <div class='footer-bottom'>
-            <div class="col-header">{% t 'footer.our-nonprofit' %}</div>
+            <div class="col-header" data-test-label="our-nonprofit">{% t 'footer.our-nonprofit' %}</div>
             <div class="footer-divider"></div>
             <div class="our-nonprofit">
-                <a href="{% t 'links:footer.about' %}" rel="noopener noreferrer" target="_blank">
+                <a href="{% t 'links:footer.about' %}" rel="noopener noreferrer" target="_blank" data-test-label="about">
                     {% t 'footer.links.about' %}
                 </a>
-                <a href="https://www.linkedin.com/school/free-code-camp/people/" rel="noopener noreferrer" target="_blank">
+                <a href="https://www.linkedin.com/school/free-code-camp/people/" rel="noopener noreferrer" target="_blank" data-test-label="alumni">
                     {% t 'footer.links.alumni' %}
                 </a>
-                <a href="https://github.com/freeCodeCamp/" rel="noopener noreferrer" target="_blank">
+                <a href="https://github.com/freeCodeCamp/" rel="noopener noreferrer" target="_blank" data-test-label="open-source">
                     {% t 'footer.links.open-source' %}
                 </a>
-                <a href="https://www.freecodecamp.org/news/shop/" rel="noopener noreferrer" target="_blank">
+                <a href="https://www.freecodecamp.org/news/shop/" rel="noopener noreferrer" target="_blank" data-test-label="shop">
                     {% t 'footer.links.shop' %}
                 </a>
-                <a href="{% t 'links:footer.support' %}" rel="noopener noreferrer" target="_blank">
+                <a href="{% t 'links:footer.support' %}" rel="noopener noreferrer" target="_blank" data-test-label="support">
                     {% t 'footer.links.support' %}
                 </a>
-                <a href="https://www.freecodecamp.org/news/sponsors/" rel="noopener noreferrer" target="_blank">
+                <a href="https://www.freecodecamp.org/news/sponsors/" rel="noopener noreferrer" target="_blank" data-test-label="sponsors">
                     {% t 'footer.links.sponsors' %}
                 </a>
-                <a href="{% t 'links:footer.honesty' %}" rel="noopener noreferrer" target="_blank">
+                <a href="{% t 'links:footer.honesty' %}" rel="noopener noreferrer" target="_blank" data-test-label="honesty">
                     {% t 'footer.links.honesty' %}
                 </a>
-                <a href="{% t 'links:footer.coc' %}" rel="noopener noreferrer" target="_blank">
+                <a href="{% t 'links:footer.coc' %}" rel="noopener noreferrer" target="_blank" data-test-label="coc">
                     {% t 'footer.links.coc' %}
                 </a>
-                <a href="https://www.freecodecamp.org/news/privacy-policy/" rel="noopener noreferrer" target="_blank">
+                <a href="https://www.freecodecamp.org/news/privacy-policy/" rel="noopener noreferrer" target="_blank" data-test-label="privacy">
                     {% t 'footer.links.privacy' %}
                 </a>
-                <a href="https://www.freecodecamp.org/news/terms-of-service/" rel="noopener noreferrer" target="_blank">
+                <a href="https://www.freecodecamp.org/news/terms-of-service/" rel="noopener noreferrer" target="_blank" data-test-label="tos">
                     {% t 'footer.links.tos' %}
                 </a>
-                <a href="https://www.freecodecamp.org/news/copyright-policy/" rel="noopener noreferrer" target="_blank">
+                <a href="https://www.freecodecamp.org/news/copyright-policy/" rel="noopener noreferrer" target="_blank" data-test-label="copyright">
                     {% t 'footer.links.copyright' %}
                 </a>
             </div>

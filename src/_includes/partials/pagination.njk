@@ -1,6 +1,6 @@
 {% if pagination.nextPageHref | nextPageExists %}
     <div class="read-more-row">
-        <button id="readMoreBtn">{% t 'buttons.load-more-articles' %}</button>
+        <button id="readMoreBtn" data-test-label="load-more-articles-button">{% t 'buttons.load-more-articles' %}</button>
     </div>
 
     {% set js %}

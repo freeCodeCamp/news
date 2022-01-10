@@ -1,15 +1,13 @@
 {
+  "forum": "https://forum.freecodecamp.org/c/espanol/522",
+  "donate": "https://www.freecodecamp.org/espanol/donate/",
+  "banner": "https://chat.freecodecamp.org/home",
+  "learn-to-code-cta": "https://www.freecodecamp.org/espanol/learn/",
+  "twitter": "https://twitter.com/freecodecampes",
   "footer": {
     "about": "https://www.freecodecamp.org/espanol/news/acerca-de-freecodecamp-preguntas-frecuentes/",
     "support": "https://www.freecodecamp.org/espanol/news/preguntas-comunes-de-soporte-tecnico/",
     "honesty": "https://www.freecodecamp.org/espanol/news/politica-de-honestidad-academica/",
     "coc": "https://www.freecodecamp.org/espanol/news/codigo-de-conducta/"
-  },
-  "nav": {
-    "forum": "https://forum.freecodecamp.org/c/espanol/522",
-    "donate": "https://www.freecodecamp.org/espanol/donate/"
-  },
-  "banner": "https://chat.freecodecamp.org/home",
-  "learn-to-code-cta": "https://www.freecodecamp.org/espanol/learn/",
-  "twitter": "https://twitter.com/freecodecampes"
+  }
 }

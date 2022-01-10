@@ -1,7 +1,3 @@
-const selectors = {
-  bannerText: "[data-test-label='banner-text']"
-}
-
 describe('Landing', () => {
   before(() => {
     // Update baseUrl to include current language
@@ -9,7 +5,9 @@ describe('Landing', () => {
     cy.visit('/');
   });
 
-  it('should render', () => {
-    cy.contains(selectors.bannerText, 'Charla con otros desarrolladores en español');
+  it('should render basic components', () => {
+    cy.get('nav').should('be.visible');
+    cy.get('.banner').should('be.visible');
+    cy.get('footer').should('be.visible');
   });
 });
