@@ -2,8 +2,7 @@
   "buttons": {
     "forum": "フォーラム",
     "donate": "寄付",
-    "load-more-articles": "もっと見る",
-    "learn-to-code-cta": "始める"
+    "load-more-articles": "もっと見る"
   },
   "search": {
     "label": "探す",
@@ -33,7 +32,7 @@
     "author-no-twitter": "この記事が参考になりましたらぜひシェアしてください。{{ <0> }}ツイート{{ </0> }}.",
     "default-tweet": "この記事が参考になりました。{{ twitter }} さんありがとうございます。"
   },
-  "learn-to-code-cta": "無料でコーディングを学びましょう。freeCodeCamp のオープンソースカリキュラムの力を借りて 40,000 人以上の人々が開発者としての仕事を得ています。",
+  "learn-to-code-cta": "無料でコーディングを学びましょう。freeCodeCamp のオープンソースカリキュラムの力を借りて 40,000 人以上の人々が開発者としての仕事を得ています。{{ <0> }}始める{{ </0> }}",
   "localization-meta": {
     "roles": {
       "author": "著者",

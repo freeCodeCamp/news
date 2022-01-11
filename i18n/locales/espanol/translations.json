@@ -2,8 +2,7 @@
   "buttons": {
     "forum": "Foro",
     "donate": "Donar",
-    "load-more-articles": "Carga más Artículos",
-    "learn-to-code-cta": "Empieza"
+    "load-more-articles": "Carga más Artículos"
   },
   "search": {
     "label": "Buscar",
@@ -33,7 +32,7 @@
     "author-no-twitter": "Si este artículo te fue útil, {{ <0> }}haz un tweet{{ </0> }}.",
     "default-tweet": "Gracias {{ twitter }} por escribir este útil artículo."
   },
-  "learn-to-code-cta": "Aprende a codificar de forma gratuita. El plan de estudios de código abierto de freeCodeCamp ha ayudado a más de 40,000 personas a obtener trabajos como desarrolladores.",
+  "learn-to-code-cta": "Aprende a codificar de forma gratuita. El plan de estudios de código abierto de freeCodeCamp ha ayudado a más de 40,000 personas a obtener trabajos como desarrolladores. {{ <0> }}Empieza{{ </0> }}",
   "localization-meta": {
     "roles": {
       "author": "autor",

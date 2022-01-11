@@ -2,8 +2,7 @@
   "buttons": {
     "forum": "论坛",
     "donate": "捐款",
-    "load-more-articles": "加载更多文章",
-    "learn-to-code-cta": "开始学习"
+    "load-more-articles": "加载更多文章"
   },
   "search": {
     "label": "搜索",
@@ -32,7 +31,7 @@
     "page-not-found": "页面不存在",
     "go-to-front-page": "返回上一页"
   },
-  "learn-to-code-cta": "在 freeCodeCamp 免费学习编程。 freeCodeCamp 的开源课程已帮助 40,000 多人获得开发者工作。",
+  "learn-to-code-cta": "在 freeCodeCamp 免费学习编程。 freeCodeCamp 的开源课程已帮助 40,000 多人获得开发者工作。{{ <0> }}开始学习{{ </0> }}",
   "localization-meta": {
     "roles": {
       "author": "作者",
