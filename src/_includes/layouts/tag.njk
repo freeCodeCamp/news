@@ -9,7 +9,7 @@
 {% block content %}
     <div class="under-header-content">
         <h1 data-test-label="tag-name" class="site-title tags-title">#{{ tag.name | upper }}</h1>
-        <h2 class="site-description">
+        <h2 class="site-description" data-test-label="tag-post-count">
             {% if postCount == 0 %}
                 {% t 'tag.no-posts' %}
             {% elif postCount == 1 %}
