@@ -1,7 +1,8 @@
 const selectors = {
   nav: {
+    searchBar: "[data-test-label='search-bar']",
     forumButton: "[data-test-label='forum-button']",
-    donateButton: "[data-test-label='donate-button']",
+    donateButton: "[data-test-label='donate-button']"
   },
   banner: "[data-test-label='banner']",
   loadMoreArticlesButton: "[data-test-label='load-more-articles-button']",
@@ -27,9 +28,9 @@ const selectors = {
       copyright: "[data-test-label='copyright']"
     }
   }
-}
+};
 
-describe('i18n', () => {
+describe('Landing i18n', () => {
   before(() => {
     cy.visit('/');
   });
@@ -45,13 +46,25 @@ describe('i18n', () => {
       .should('not.equal', 'donate');
   });
 
+  it('the search bar does not render its i18n keys', () => {
+    cy.get(`${selectors.nav.searchBar} label`)
+      .invoke('text')
+      .then((text) => text.trim())
+      .should('not.equal', 'search.label');
+    cy.get(`${selectors.nav.searchBar} input`)
+      .should('have.attr', 'placeholder')
+      .should('not.equal', 'search.placeholder');
+    cy.get(`${selectors.nav.searchBar} button span`)
+      .invoke('text')
+      .should('not.equal', 'search.accessible-name');
+  });
+
   it('the banner does not render its i18n key', () => {
     cy.get(selectors.banner).should('not.equal', 'banner');
   });
 
   it("the 'Load More Articles' button does not render its i18n key", () => {
-    cy.get(selectors.loadMoreArticlesButton)
-      .should('not.equal', 'buttons.load-more-articles');
+    cy.get(selectors.loadMoreArticlesButton).should('not.equal', 'buttons.load-more-articles');
   });
 
   it('the footer description elements do not render their i18n keys', () => {
