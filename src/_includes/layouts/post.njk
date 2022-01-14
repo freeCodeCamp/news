@@ -55,7 +55,7 @@
                 {% endif %}
                 <section class="post-full-content">
                     <div class="post-and-sidebar">
-                        <section class="post-content {{ "medium-migrated-article" if (post.primary_author.name == "freeCodeCamp.org") }}">
+                        <section class="post-content {{ "medium-migrated-article" if (post.primary_author.name === "freeCodeCamp.org") }}">
                             {{ content | safe }}
                         </section>
                         {% if adsEnabled %}
@@ -82,7 +82,7 @@
                     {% endif %}
 
                     {# Conditionally include partials based on Ghost language setting #}
-                    {% ifAsync site.lang == "zh" %}
+                    {% ifAsync site.lang === "zh" %}
                         {% include "partials/learn-cta-row.njk" %}
                         {% include "partials/comments.njk" %}
                     {% else %}

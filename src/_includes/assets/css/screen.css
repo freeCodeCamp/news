@@ -817,6 +817,11 @@ make sure this only happens on large viewports / desktop-ish devices.
     background: #fff;
 }
 
+/* Japanese font */
+.post-full-content:lang(ja) {
+    font-family: 'Lato', 'Noto Sans JP', sans-serif;
+}
+
 @media (max-width: 500px) {
     .post-full-content {
         padding: 0;

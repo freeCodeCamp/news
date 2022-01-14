@@ -2,8 +2,7 @@
   "buttons": {
     "forum": "论坛",
     "donate": "捐款",
-    "load-more-articles": "加载更多文章",
-    "learn-to-code-cta": "开始学习"
+    "load-more-articles": "加载更多文章"
   },
   "search": {
     "label": "搜索",
@@ -16,31 +15,23 @@
     "show-comments": "显示评论",
     "error": "抱歉，暂时无法加载评论，请稍后再试。"
   },
-  "banner": {
-    "text": "学习编程 — <span>3,000 小时免费课程</span>"
-  },
+  "banner": "学习编程 — {{ <0> }}3,000 小时免费课程{{ </0> }}",
   "author": {
-    "page": {
-      "no-posts": "没有文章",
-      "one-post": "1 篇文章",
-      "multiple-posts": "{{ postCount }} 篇文章"
-    },
-    "byline": {
-      "read-more": "阅读该{{ role }}的{{ <0> }}更多文章{{ </0> }}。"
-    }
+    "no-posts": "没有文章",
+    "one-post": "1 篇文章",
+    "multiple-posts": "{{ postCount }} 篇文章",
+    "read-more": "阅读该{{ role }}的{{ <0> }}更多文章{{ </0> }}。"
   },
-  "tag-page": {
-    "collection-of-posts": "文章汇总",
+  "tag": {
+    "no-posts": "文章汇总",
     "one-post": "共 1 篇文章",
     "multiple-posts": "共 {{ postCount }} 篇文章"
   },
-  "404-page": {
+  "404": {
     "page-not-found": "页面不存在",
     "go-to-front-page": "返回上一页"
   },
-  "learn-to-code-cta": {
-    "text": "在 freeCodeCamp 免费学习编程。 freeCodeCamp 的开源课程已帮助 40,000 多人获得开发者工作。"
-  },
+  "learn-to-code-cta": "在 freeCodeCamp 免费学习编程。 freeCodeCamp 的开源课程已帮助 40,000 多人获得开发者工作。{{ <0> }}开始学习{{ </0> }}",
   "localization-meta": {
     "roles": {
       "author": "作者",
@@ -60,7 +51,7 @@
     "tax-exempt-status": "freeCodeCamp 是捐助者支持的 501(c)(3) 条款下具有免税资格的非营利性组织（税号：82-0779546)。",
     "mission-statement": "我们的使命：帮助人们免费学习编程。我们通过创建成千上万的视频、文章和交互式编程课程——所有内容向公众免费开放——来实现这一目标。学员在世界各地自发成立数千个 freeCodeCamp 学习小组。",
     "donation-initiatives": "所有给 freeCodeCamp 的捐款都将用于我们的教育项目，购买服务器和其他服务，以及聘用员工。",
-    "donate-link": "你可以{{ <0> }}点击此处免税捐款{{ </0> }}。",
+    "donate-text": "你可以{{ <0> }}点击此处免税捐款{{ </0> }}。",
     "trending-guides": "精选文章",
     "our-nonprofit": "关于我们",
     "links": {

@@ -112,7 +112,7 @@
                     </time>
                 </section>
             </header>
-            <section class="post-content {{ "medium-migrated-article" if (post.primary_author.name == "freeCodeCamp.org") }}">
+            <section class="post-content {{ "medium-migrated-article" if (post.primary_author.name === "freeCodeCamp.org") }}">
                 {{ content | safe }}
             </section>
         </article>

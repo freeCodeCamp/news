@@ -7,12 +7,18 @@
         {% if title %}
             <title>{{ title }}</title>
         {% else %}
-            <title>{% t 'meta:title' %}</title>
+            <title>{% t 'meta-tags:title' %}</title>
         {% endif %}
         <meta name="HandheldFriendly" content="True" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700|Roboto+Mono:400,700?&display=swap">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        {% if site.lang === 'ja' %}
+            <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700&family=Roboto+Mono:wght@400;700&display=swap">
+        {% else %}
+            <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,400&family=Roboto+Mono:wght@400;700&display=swap">
+        {% endif %}
 
         {# Load Prism styles and scripts only for posts / pages #}
         {% block prism %}
@@ -58,8 +64,8 @@
         {# These metatags only appear in this form on the landing page.
         The description appears in other contexts. #}
         {% if not permalink %}
-            <meta name="keywords" content="{% t 'meta:keywords' %}">
-            <meta name="description" content="{% t 'meta:description' %}">
+            <meta name="keywords" content="{% t 'meta-tags:keywords' %}">
+            <meta name="description" content="{% t 'meta-tags:description' %}">
         {% endif %}
 
         <link rel="icon" href="{{ site.icon }}" type="image/png">
@@ -81,7 +87,7 @@
             <meta property="og:site_name" content="{{ site.title }}">
             <meta property="og:type" content="website">
             <meta property="og:title" content="{{ site.title }}">
-            <meta property="og:description" content="{% t 'meta:description' %}">
+            <meta property="og:description" content="{% t 'meta-tags:description' %}">
             <meta property="og:url" content="{{ site.url + page.url }}">
             <meta property="og:image" content="{{ site.cover_image }}">
             <meta property="article:publisher" content="https://www.facebook.com/freecodecamp">
@@ -89,7 +95,7 @@
             {# Twitter Card #}
             <meta name="twitter:card" content="summary_large_image">
             <meta name="twitter:title" content="{{ site.title }}">
-            <meta name="twitter:description" content="{% t 'meta:description' %}">
+            <meta name="twitter:description" content="{% t 'meta-tags:description' %}">
             <meta name="twitter:url" content="{{ site.url + page.url }}">
             <meta name="twitter:image" content="{{ site.cover_image }}">
             <meta name="twitter:site" content="{{ site.twitter }}">

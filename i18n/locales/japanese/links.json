@@ -1,16 +1,13 @@
 {
-  "forum-url": "https://forum.freecodecamp.org/",
-  "donate-url": "https://www.freecodecamp.org/donate/",
-  "banner-url": "https://www.freecodecamp.org/",
-  "learn-to-code-cta-url": "https://www.freecodecamp.org/learn/",
-  "about-url": "https://www.freecodecamp.org/news/about/",
-  "shop-url": "https://www.freecodecamp.org/shop/",
-  "support-url": "https://www.freecodecamp.org/news/support/",
-  "sponsors-url": "https://www.freecodecamp.org/news/sponsors/",
-  "honesty-url": "https://www.freecodecamp.org/news/academic-honesty-policy/",
-  "coc-url": "https://www.freecodecamp.org/news/code-of-conduct/",
-  "privacy-url": "https://www.freecodecamp.org/news/privacy-policy/",
-  "tos-url": "https://www.freecodecamp.org/news/terms-of-service/",
-  "copyright-url": "https://www.freecodecamp.org/news/copyright-policy/",
-  "twitter-url": "https://twitter.com/freecodecamp"
+  "forum": "https://forum.freecodecamp.org/c/japanese/552",
+  "donate": "https://www.freecodecamp.org/donate/",
+  "banner": "https://www.freecodecamp.org/",
+  "learn-to-code-cta": "https://www.freecodecamp.org/learn/",
+  "twitter": "https://twitter.com/freecodecampJA",
+  "footer": {
+    "about": "https://www.freecodecamp.org/japanese/news/about/",
+    "support": "https://www.freecodecamp.org/news/support/",
+    "honesty": "https://www.freecodecamp.org/japanese/news/academic-honesty-policy/",
+    "coc": "https://www.freecodecamp.org/japanese/news/code-of-conduct/"
+  }
 }

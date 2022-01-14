@@ -1,6 +1,6 @@
-describe('Landing', () => {
+describe('404', () => {
   before(() => {
-    cy.visit('/');
+    cy.visit('/testing-testing-1-2', { failOnStatusCode: false });
   });
 
   it('should render basic components', () => {

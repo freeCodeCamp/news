@@ -1,16 +1,13 @@
 {
-  "forum-url": "https://chinese.freecodecamp.org/forum/",
-  "donate-url": "https://chinese.freecodecamp.org/donate/",
-  "banner-url": "https://chinese.freecodecamp.org/",
-  "learn-to-code-cta-url": "https://chinese.freecodecamp.org/learn/",
-  "about-url": "https://chinese.freecodecamp.org/news/about/",
-  "shop-url": "https://www.freecodecamp.org/shop/",
-  "support-url": "https://chinese.freecodecamp.org/news/support/",
-  "sponsors-url": "https://www.freecodecamp.org/news/sponsors/",
-  "honesty-url": "https://chinese.freecodecamp.org/news/academic-honesty-policy/",
-  "coc-url": "https://chinese.freecodecamp.org/news/code-of-conduct/",
-  "privacy-url": "https://www.freecodecamp.org/news/privacy-policy/",
-  "tos-url": "https://www.freecodecamp.org/news/terms-of-service/",
-  "copyright-url": "https://www.freecodecamp.org/news/copyright-policy/",
-  "twitter-url": "https://twitter.com/freeCodeCampZH"
+  "forum": "https://chinese.freecodecamp.org/forum/",
+  "donate": "https://chinese.freecodecamp.org/donate/",
+  "banner": "https://chinese.freecodecamp.org/",
+  "learn-to-code-cta": "https://chinese.freecodecamp.org/learn/",
+  "twitter": "https://twitter.com/freeCodeCampZH",
+  "footer": {
+    "about": "https://chinese.freecodecamp.org/news/about/",
+    "support": "https://chinese.freecodecamp.org/news/support/",
+    "honesty": "https://chinese.freecodecamp.org/news/academic-honesty/",
+    "coc": "https://chinese.freecodecamp.org/news/code-of-conduct/"
+  }
 }

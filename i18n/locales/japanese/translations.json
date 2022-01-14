@@ -1,88 +1,77 @@
 {
   "buttons": {
-    "forum": "Forum",
-    "donate": "Donate",
-    "load-more-articles": "Load More Articles",
-    "author-has-twitter": "Tweet a thanks",
-    "author-no-twitter": "tweet it",
-    "learn-to-code-cta": "Get started"
+    "forum": "フォーラム",
+    "donate": "寄付",
+    "load-more-articles": "もっと見る"
   },
   "search": {
-    "label": "Search",
-    "accessible-name": "Submit your search query",
-    "placeholder": "Search 7,000+ tutorials",
-    "see-results": "See all results for {{ searchQuery }}",
-    "no-tutorials": "No tutorials found"
+    "label": "探す",
+    "accessible-name": "検索クエリを送信する",
+    "placeholder": "投稿を検索",
+    "see-results": "すべての結果を表示: {{ searchQuery }}",
+    "no-tutorials": "投稿が見つかりませんでした"
   },
-  "banner": {
-    "text": "Learn to code — <span>free 3,000-hour curriculum</span>"
-  },
+  "banner": "コーディングを学ぶ — {{ <0> }}約 3,000 時間のカリキュラムが無料{{ </0> }}",
   "author": {
-    "page": {
-      "no-posts": "No posts",
-      "one-post": "1 post",
-      "multiple-posts": "{{ postCount }} posts"
-    },
-    "byline": {
-      "read-more": "Read {{ <0> }}more posts{{ </0> }} by this {{ role }}."
-    }
+    "no-posts": "投稿なし",
+    "one-post": "1 件の投稿",
+    "multiple-posts": "{{ postCount }} 件の投稿",
+    "read-more": "この{{ role }}の{{ <0> }}他の投稿{{ </0> }}を読む。"
   },
-  "tag-page": {
-    "collection-of-posts": "A collection of posts",
-    "one-post": "A collection of 1 post",
-    "multiple-posts": "A collection of {{ postCount }} posts"
+  "tag": {
+    "no-posts": "投稿の一覧",
+    "one-post": "1 件の投稿",
+    "multiple-posts": "{{ postCount }} 件の投稿"
   },
-  "404-page": {
-    "page-not-found": "Page not found",
-    "go-to-front-page": "Go to the front page"
+  "404": {
+    "page-not-found": "ページが見つかりません",
+    "go-to-front-page": "フロントページに移動"
   },
   "social-row": {
-    "author-has-twitter": "If you read this far, tweet to the author to show them you care.",
-    "author-no-twitter": "If this article was helpful",
-    "default-tweet": "Thank you {{ twitter }} for writing this helpful article"
+    "author-has-twitter": "お読みいただきありがとうございます。ぜひ著者にツイートしてお知らせください。{{ <0> }}著者宛てにツイート{{ </0> }}",
+    "author-no-twitter": "この記事が参考になりましたらぜひシェアしてください。{{ <0> }}ツイート{{ </0> }}.",
+    "default-tweet": "この記事が参考になりました。{{ twitter }} さんありがとうございます。"
   },
-  "learn-to-code-cta": {
-    "text": "Learn to code for free. freeCodeCamp's open source curriculum has helped more than 40,000 people get jobs as developers."
-  },
+  "learn-to-code-cta": "無料でコーディングを学びましょう。freeCodeCamp のオープンソースカリキュラムの力を借りて 40,000 人以上の人々が開発者としての仕事を得ています。{{ <0> }}始める{{ </0> }}",
   "localization-meta": {
     "roles": {
-      "author": "author",
-      "translator": "translator"
+      "author": "著者",
+      "translator": "翻訳者"
     },
     "card-name": "{{ role }}: {{ name }}",
     "languages": {
-      "en": "English",
-      "es": "Spanish",
-      "zh": "Chinese",
-      "pt-br": "Portuguese",
-      "it": "Italian"
+      "en": "英語",
+      "es": "スペイン語",
+      "zh": "中国語",
+      "pt-br": "ポルトガル語",
+      "it": "イタリア語"
     }
   },
-  "embed-title": "Embedded content",
+  "embed-title": "埋め込まれたコンテンツ",
   "footer": {
-    "tax-exempt-status": "freeCodeCamp is a donor-supported tax-exempt 501(c)(3) nonprofit organization (United States Federal Tax Identification Number: 82-0779546)",
-    "mission-statement": "Our mission: to help people learn to code for free. We accomplish this by creating thousands of videos, articles, and interactive coding lessons - all freely available to the public. We also have thousands of freeCodeCamp study groups around the world.",
-    "donation-initiatives": "Donations to freeCodeCamp go toward our education initiatives, and help pay for servers, services, and staff.",
-    "donate-link": "You can {{ <0> }}make a tax-deductible donation here{{ </0> }}.",
-    "trending-guides": "Trending Guides",
-    "our-nonprofit": "Our Nonprofit",
+    "tax-exempt-status": "freeCodeCamp は皆様のご寄付により支えられている非課税の 501(c)(3) 非営利団体です。(United States Federal Tax Identification Number: 82-0779546)",
+    "mission-statement": "私たちのミッション: 人々が無料でコーディングを学べるよう支援することです。その実現のため、何千もの動画、記事、インタラクティブなコーディングレッスンを作成し、すべて無料で公開しています。さらに、数千の freeCodeCamp スタディグループが世界中に存在します。",
+    "donation-initiatives": "freeCodeCamp へのご寄付は教育活動のために用いられ、サーバー、サービス、スタッフなどの費用に充てられます。",
+    "donate-text": "{{ <0> }}こちらからご寄付を賜りますよう{{ </0> }}お願い申し上げます。(場合により税控除可能)",
+    "trending-guides": "人気の記事",
+    "our-nonprofit": "組織情報",
     "links": {
-      "about": "About",
-      "alumni": "Alumni Network",
-      "open-source": "Open Source",
-      "shop": "Shop",
-      "support": "Support",
-      "sponsors": "Sponsors",
-      "honesty": "Academic Honesty",
-      "coc": "Code of Conduct",
-      "privacy": "Privacy Policy",
-      "tos": "Terms of Service",
-      "copyright": "Copyright Policy"
+      "about": "私たちについて",
+      "alumni": "卒業生ネットワーク",
+      "open-source": "オープンソース",
+      "shop": "ショップ",
+      "support": "サポート",
+      "sponsors": "スポンサー",
+      "honesty": "学問的誠実性",
+      "coc": "行動規範",
+      "privacy": "プライバシーポリシー",
+      "tos": "利用規約",
+      "copyright": "コピーライトポリシー"
     }
   },
   "fallback": {
-    "message": "Your browser doesn’t support HTML5 {{ element }}.",
-    "audio": "audio",
-    "video": "video"
+    "message": "お使いのブラウザはHTML5{{ element }}をサポートしていません。",
+    "audio": "オーディオ",
+    "video": "ビデオ"
   }
 }

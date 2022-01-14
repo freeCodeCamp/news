@@ -28,7 +28,9 @@
     "prebuild": "npm run clean",
     "build": "cross-env ELEVENTY_ENV=prod NODE_OPTIONS=--max-old-space-size=8192 eleventy",
     "test": "jest",
-    "lint": "eslint . --ext .js --cache"
+    "lint": "npm-run-all lint:*",
+    "lint:code": "eslint . --ext .js --cache",
+    "lint:i18n-schema": "node ./i18n/schema-validation.js"
   },
   "repository": {
     "type": "git",
@@ -74,6 +76,7 @@
     "i18next": "21.6.5",
     "i18next-fs-backend": "1.1.4",
     "jest": "27.4.7",
+    "jest-json-schema-extended": "1.0.1",
     "jsdom": "19.0.0",
     "lodash": "4.17.21",
     "md5": "2.3.0",

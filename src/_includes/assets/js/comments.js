@@ -23,7 +23,7 @@ function loadDiscourseComments() {
   xhr.send();
   xhr.addEventListener('readystatechange', processRequest, false);
   function processRequest() {
-    if (xhr.readyState == 4) {
+    if (xhr.readyState === 4) {
       if (xhr.status >= 200 && xhr.status < 304) {
         document.getElementById('discourse-comments').innerHTML = '';
         // eslint-disable-next-line no-undef

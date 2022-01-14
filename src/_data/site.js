@@ -7,8 +7,8 @@ const translate = require('../../utils/translate');
 // falls back to English Twitter profile if one for the current UI locale
 // isn't found
 const getTwitterProfile = (url) => url.replace('https://twitter.com/', '@');
-const twitterURL = translate('links:twitter-url');
-const twitterProfile = twitterURL !== 'twitter-url' ? getTwitterProfile(twitterURL) : '@freecodecamp';
+const twitterURL = translate('links:twitter');
+const twitterProfile = twitterURL !== 'twitter' ? getTwitterProfile(twitterURL) : '@freecodecamp';
 
 module.exports = async () => {
   const site =

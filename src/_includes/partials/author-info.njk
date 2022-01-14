@@ -20,23 +20,23 @@
         {% if author.location %}
             <div class="author-location">
                 {{ author.location }} 
-                <span class="bull">
-                    &bull;
-                </span>
             </div>
-        {% endif %}
-        <div class="author-stats">
-            {% if postCount == 0 %}
-                {% t 'author.page.no-posts' %}
-            {% elif postCount == 1 %}
-                {% t 'author.page.one-post' %}
-            {% else %}
-                {% t 'author.page.multiple-posts', { postCount: postCount } %}
-            {% endif %}
             <span class="bull">
                 &bull;
             </span>
+        {% endif %}
+        <div class="author-stats" data-test-label="author-post-count">
+            {% if postCount === 0 %}
+                {% t 'author.no-posts' %}
+            {% elif postCount === 1 %}
+                {% t 'author.one-post' %}
+            {% else %}
+                {% t 'author.multiple-posts', { postCount: postCount } %}
+            {% endif %}
         </div>
+        <span class="bull">
+            &bull;
+        </span>
         {% if author.website %}
             <a
                 class="social-link social-link-wb"

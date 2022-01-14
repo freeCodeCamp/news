@@ -1,8 +1,13 @@
-<div class='learn-cta-row'>
+{% set learnURL %}{% t 'links:learn-to-code-cta' %}{% endset %}
+
+<div class="learn-cta-row" data-test-label="learn-cta-row">
     <p>
-        {% t 'learn-to-code-cta.text' %}
-        <a href="{% t 'links:learn-to-code-cta-url' %}" class="cta-button" id="learn-to-code-cta" rel="noopener noreferrer" target="_blank">
-          {% t 'buttons.learn-to-code-cta' %}
-        </a>
+        {% t 'learn-to-code-cta', {
+            '<0>': '<a href="' + ( learnURL ) + '" class="cta-button" id="learn-to-code-cta" rel="noopener noreferrer" target="_blank">',
+            '</0>': '</a>',
+            interpolation: {
+                escapeValue: false
+            }
+        } %}
     </p>
 </div>
