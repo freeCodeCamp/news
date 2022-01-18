@@ -11,7 +11,7 @@
     "see-results": "Vedi tutti i risultati per {{ searchQuery }}",
     "no-tutorials": "Nessun articolo trovato"
   },
-  "banner": "{{ <0> }}Chatta con altri programmatori in italiano{{ </0> }}",
+  "banner": "{{ <0> }}Contribuisci anche tu a freeCodeCamp!{{ </0> }}",
   "author": {
     "no-posts": "Non ci sono articoli",
     "one-post": "1 articolo",
