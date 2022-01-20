@@ -6,7 +6,9 @@
   const fetchNextPage = async () => {
     try {
       const nextTag = document.querySelector('link[rel="next"]');
-      const nextPageUrl = `${window.location.href}${nextPageNum}/`;
+      let href = window.location.href;
+      if (!href.endsWith('/')) href = `${href}/`
+      const nextPageUrl = `${href}${nextPageNum}/`;
       const res = await fetch(nextPageUrl);
 
       if (nextTag) nextTag.href = nextPageUrl;
@@ -16,7 +18,7 @@
         const parser = new DOMParser();
 
         nextPageNum++;
-        return await parser.parseFromString(text, 'text/html');
+        return parser.parseFromString(text, 'text/html');
       } else {
         readMoreBtn.style.display = 'none';
       }
