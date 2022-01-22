@@ -62,7 +62,7 @@
     "@11ty/eleventy-plugin-rss": "1.1.2",
     "@11ty/eleventy-upgrade-help": "1.0.1",
     "@tryghost/content-api": "1.5.17",
-    "@tryghost/helpers": "1.1.54",
+    "@tryghost/helpers": "1.1.55",
     "clean-css": "5.2.2",
     "cross-env": "7.0.3",
     "cypress": "9.2.1",
