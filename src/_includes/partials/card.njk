@@ -1,6 +1,11 @@
 {% macro card(post, index) %}
     {% set lazyLoad = true if (index >= 4) else false %}
-    {% set originalAuthor = post.original_post.primary_author %}
+    {% if post.original_post %}
+        {% set originalPost = post.original_post %}
+        {% set originalAuthor = originalPost.primary_author %}
+        {% set authorRole %}{% t 'localization-meta.roles.author' %}{% endset %}
+        {% set translatorRole %}{% t 'localization-meta.roles.translator' %}{% endset %}
+    {% endif %}
     <article class="post-card {{ post.class }}">
         {% if post.feature_image %}
             <a class="post-card-image-link" href="{{ post.path | url }}" aria-label="{{ post.title }}">
@@ -45,11 +50,9 @@
                     <time class="meta-item-single" datetime="{{ post.published_at }}">{% timeAgo post.published_at %}</time>
                 {% else %}
                     <ul class="author-list">
-                        {% if post.original_post %}
+                        {% if originalPost %}
                             <li class="author-list-item">
-                                <div class="author-name-tooltip">
-                                    {{ originalAuthor.name }}
-                                </div>
+                                <div class="author-name-tooltip">{{ originalAuthor.name }}</div>
                                 {% if originalAuthor.profile_image %}
                                     {# Original author is coming from another Ghost instance, so no need to use the url filter #}
                                     <a href="{{ originalAuthor.url }}" class="static-avatar">
@@ -70,15 +73,15 @@
                                     </a>
                                 {% endif %}
                                 <span class="meta-content">
-                                    <a class="meta-item" href="{{ originalAuthor.url }}">{% t 'localization-meta.roles.author', { authorName: originalAuthor.name } %} ({% t 'localization-meta.languages.en' %})</a>
-                                    <time class="meta-item" datetime="{{ post.original_post.published_at }}">{% timeAgo post.original_post.published_at %}</time>
+                                    <a class="meta-item" href="{{ originalAuthor.url }}">
+                                        {% t 'localization-meta.card-name', { role: authorRole, name: originalAuthor.name } %} ({% t "localization-meta.locales." + originalPost.locale_i18n %})
+                                    </a>
+                                    <time class="meta-item" datetime="{{ originalPost.published_at }}">{% timeAgo originalPost.published_at %}</time>
                                 </span>
                             </li>
                         {% endif %}
                         <li class="author-list-item">
-                            <div class="author-name-tooltip">
-                                {{ post.primary_author.name }}
-                            </div>
+                            <div class="author-name-tooltip">{{ post.primary_author.name }}</div>
                             {% if post.primary_author.profile_image %}
                                 <a href="{{ post.primary_author.path | url }}" class="static-avatar">
                                     {% 
@@ -99,8 +102,8 @@
                             {% endif %}
                             <span class="meta-content">
                                 <a class="meta-item" href="{{ post.primary_author.path | url }}">
-                                    {% if post.original_post %}
-                                        {% t 'localization-meta.roles.translator', { translatorName: post.primary_author.name } %}
+                                    {% if originalPost %}
+                                        {% t 'localization-meta.card-name', { role: translatorRole, name: post.primary_author.name } %}
                                     {% else %}
                                         {{ post.primary_author.name }}
                                     {% endif %}

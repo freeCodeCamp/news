@@ -1,4 +1,4 @@
-{% macro byline(author, siteLang, lazyLoad, showBio, role) %}
+{% macro byline(author, lazyLoad, showBio, role, locale) %}
     {% set authorUrl %}{{ author.url if role === 'author' else (author.path | url) }}{% endset %}
     {% set localizedRole %}{% t "localization-meta.roles." + (role if role else "author") %}{% endset %}
 
@@ -24,7 +24,7 @@
                     {% if role %}
                         {% t 'localization-meta.card-name', { role: (localizedRole | capitalize), name: author.name } %}
                         {% if role === "author" %}
-                            ({% t "localization-meta.languages." + siteLang %})
+                            ({% t "localization-meta.locales." + locale %})
                         {% endif %}
                     {% else %}
                         {{ author.name }}
@@ -39,7 +39,7 @@
                         {% t 'author.read-more', {
                             '<0>': '<a href="' + ( authorUrl ) + '">',
                             '</0>': '</a>',
-                            role: localizedRole,
+                            role: (localizedRole | lower ),
                             interpolation: {
                                 escapeValue: false
                             }

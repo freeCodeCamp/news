@@ -8,6 +8,10 @@
 {% set adsEnabled = (secrets.adsEnabled === 'true') and (site.lang !== 'zh') %}
 {# Include 2 ads by default, and add 1 ad for every 2 mins of reading time #}
 {% set numOfSidebarAds = ((post.reading_time / 2) + 2) | round(0, 'floor') %}
+{% if post.original_post %}
+    {% set originalPost = post.original_post %}
+    {% set originalAuthor = originalPost.primary_author %}
+{% endif %}
 
 {% block content %}
     <main id="site-main" class="post-template site-main outer">
@@ -29,13 +33,11 @@
                 </header>
                 <div class="post-full-author-header">
                     {% if post.primary_author.name != "freeCodeCamp.org" %}
-                        {% if post.original_post %}
-                            {# To do: Figure out original article source and add to post.original_post.primary_author
-                                as language code (en, zh, etc.) and use that to show original article source [ex: (English)]  #}
-                            {{ byline(post.original_post.primary_author, site.lang, false, false, 'author') }}
-                            {{ byline(post.primary_author, site.lang, false, false, 'translator') }}
+                        {% if originalPost %}
+                            {{ byline(originalPost.primary_author, false, false, 'author', originalPost.locale_i18n) }}
+                            {{ byline(post.primary_author, false, false, 'translator') }}
                         {% else %}
-                            {{ byline(post.primary_author, site.lang, false, false) }}
+                            {{ byline(post.primary_author, false, false) }}
                         {% endif %}
                     {% endif %}
                 </div>
@@ -69,13 +71,11 @@
                     <hr />
                     {% if post.primary_author.name != "freeCodeCamp.org" %}
                         <div class="post-full-author-header">
-                            {% if post.original_post %}
-                                {# To do: Figure out original article source and add to post.original_post.primary_author
-                                as language code (en, zh, etc.) and use that to show original article source [ex: (English)]  #}
-                                {{ byline(post.original_post.primary_author, site.lang, true, true, 'author') }}
-                                {{ byline(post.primary_author, site.lang, true, true, 'translator') }}
+                            {% if originalPost %}
+                                {{ byline(originalPost.primary_author, true, true, 'author', originalPost.locale_i18n) }}
+                                {{ byline(post.primary_author, true, true, 'translator') }}
                             {% else %}
-                                {{ byline(post.primary_author, site.lang, true, true) }}
+                                {{ byline(post.primary_author, true, true) }}
                             {% endif %}
                         </div>
                         <hr />
