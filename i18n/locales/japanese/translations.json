@@ -39,12 +39,13 @@
       "translator": "翻訳"
     },
     "card-name": "{{ role }}: {{ name }}",
-    "languages": {
-      "en": "英語",
-      "es": "スペイン語",
-      "zh": "中国語",
-      "pt-br": "ポルトガル語",
-      "it": "イタリア語"
+    "locales": {
+      "english": "英語",
+      "espanol": "スペイン語",
+      "chinese": "中国語",
+      "portuguese": "ポルトガル語",
+      "italian": "イタリア語",
+      "japanese": "日本語"
     }
   },
   "embed-title": "埋め込まれたコンテンツ",

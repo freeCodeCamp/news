@@ -39,12 +39,13 @@
       "translator": "traduttore"
     },
     "card-name": "{{ role }}: {{ name }}",
-    "languages": {
-      "en": "Inglese",
-      "es": "Spagnolo",
-      "zh": "Cinese",
-      "pt-br": "Portoghese",
-      "it": "Italiano"
+    "locales": {
+      "english": "inglese",
+      "espanol": "spagnolo",
+      "chinese": "cinese",
+      "portuguese": "portoghese",
+      "italian": "italiano",
+      "japanese": "giapponese"
     }
   },
   "embed-title": "Contenuto incorporato",

@@ -39,12 +39,13 @@
       "translator": "traductor"
     },
     "card-name": "{{ role }}: {{ name }}",
-    "languages": {
-      "en": "Inglés",
-      "es": "Español",
-      "zh": "Chino",
-      "pt-br": "Portugués",
-      "it": "Italiano"
+    "locales": {
+      "english": "inglés",
+      "espanol": "español",
+      "chinese": "chino",
+      "portuguese": "portugués",
+      "italian": "italiano",
+      "japanese": "japonés"
     }
   },
   "embed-title": "Contenido incrustado",
