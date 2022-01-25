@@ -30,10 +30,10 @@ const ghostURLToAPIMap = locales.reduce((obj, currLocale) => {
 }, {});
 
 const originalPostHandler = async (post) => {
-  const originalPostRegex =
-    /const\s+fccOriginalPost\s+=\s+("|')(?<url>.*)\1;?/g;
-  const match = originalPostRegex.exec(post.codeinjection_head);
-
+  const headAndFootCode = [post.codeinjection_head, post.codeinjection_foot].filter(Boolean).join();
+  const originalPostRegex = /const\s+fccOriginalPost\s+=\s+("|')(?<url>.*)\1;?/g;
+  const match = originalPostRegex.exec(headAndFootCode);
+  
   if (match) {
     try {
       const { origin, pathname } = new URL(match.groups.url);
