@@ -125,7 +125,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
                 <span class="meta-content">
                   <a class="meta-item" href="${originalAuthor.url}">
-                    {% t 'localization-meta.card-name', { role: ${authorRole}, name: ${originalAuthor.name} } %} ({% t "localization-meta.locales." + ${originalPost.locale_i18n} %})
+                    {% t 'localization-meta.card-name', { role: '${authorRole}', name: '${originalAuthor.name}' } %} ({% t 'localization-meta.locales.' + '${originalPost.locale_i18n}' %})
                   </a>
                   <time class="meta-item" datetime="${originalPost.publishedAt}"></time>
                 </span>
@@ -154,12 +154,9 @@ document.addEventListener("DOMContentLoaded", () => {
               }
               <span class="meta-content">
                 <a class="meta-item" href="${authorUrl}">
-                  ${
-                    originalPost
-                      ? `
-                    {% t 'localization-meta.card-name', { role: ${translatorRole}, name: ${authorName} } %}
-                  `
-                      : `
+                  ${originalPost ? `
+                    {% t 'localization-meta.card-name', { role: '${translatorRole}', name: '${authorName}' } %}
+                  ` : `
                     ${authorName}
                   `
                   }
