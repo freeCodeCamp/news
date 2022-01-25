@@ -1,21 +1,10 @@
 const { chunk, cloneDeep } = require("lodash");
 
-const fetchFromGhost = require("../../utils/ghost/fetch-from-ghost");
-const processGhostResponse = require("../../utils/ghost/process-ghost-response");
-const errorLogger = require("../../utils/error-logger");
-
-const { sourceApiUrl } = require("../../utils/ghost/api");
-const { eleventyEnv, siteURL, postsPerPage } = require("../../config");
-
-// Strip Ghost domain from urls
-const stripDomain = (url) => {
-  // To do: figure out a better way to strip out everything
-  // up to and including /news
-  const toReplace =
-    eleventyEnv === "ci" ? "https://www.freecodecamp.org/news" : sourceApiUrl;
-
-  return url.replace(toReplace, "");
-};
+const fetchFromGhost = require('../../utils/ghost/fetch-from-ghost');
+const processGhostResponse = require('../../utils/ghost/process-ghost-response');
+const errorLogger = require('../../utils/error-logger');
+const { eleventyEnv, siteURL, postsPerPage } = require('../../config');
+const stripDomain = require('../../utils/strip-domain');
 
 const getUniqueList = (arr, key) => [
   ...new Map(arr.map((item) => [item[key], item])).values(),
