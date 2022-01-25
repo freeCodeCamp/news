@@ -46,20 +46,12 @@ document.addEventListener("DOMContentLoaded", () => {
       const publishedAt = hit.publishedAt;
       const originalPost = hit.originalPost || null;
       const originalAuthor = originalPost ? originalPost.primaryAuthor : null;
-<<<<<<< HEAD
-      const originalAuthorImage = originalPost
-        ? getSmallProfileImage(originalAuthor.profileImage)
-        : null;
-      const articleItem = document.createElement("article");
-      articleItem.className = "post-card post";
-=======
       const originalAuthorImage = originalPost ? getSmallProfileImage(originalAuthor.profileImage) : null;
       const authorRole = '{% t "localization-meta.roles.author" %}';
       const translatorRole = '{% t "localization-meta.roles.translator" %}';
       const articleItem = document.createElement('article');
       articleItem.className =
         'post-card post';
->>>>>>> fix: author / translator feature for cards, posts, and search results page
       const articleHTML = `
         ${
           featureImage
@@ -114,12 +106,7 @@ document.addEventListener("DOMContentLoaded", () => {
               originalPost
                 ? `
               <li class="author-list-item">
-                <div class="author-name-tooltip">
-                  ${originalAuthor.name}
-                </div>
-                ${
-                  originalAuthor.profileImage
-                    ? `
+                ${originalAuthor.profileImage ? `
                   <a href="${originalAuthor.url}" class="static-avatar">
                     <img
                       class="author-profile-image"
@@ -137,29 +124,15 @@ document.addEventListener("DOMContentLoaded", () => {
                 `
                 }
                 <span class="meta-content">
-<<<<<<< HEAD
-                  <a class="meta-item" href="${
-                    originalAuthor.url
-                  }">{% t 'localization-meta.author', { authorName: '${
-                    originalAuthor.name
-                  }' } %} ({% t 'localization-meta.languages.en' %})</a>
-                  <time class="meta-item" datetime="${
-                    originalPost.publishedAt
-                  }"></time>
-=======
                   <a class="meta-item" href="${originalAuthor.url}">
                     {% t 'localization-meta.card-name', { role: ${authorRole}, name: ${originalAuthor.name} } %} ({% t "localization-meta.locales." + ${originalPost.locale_i18n} %})
                   </a>
                   <time class="meta-item" datetime="${originalPost.publishedAt}"></time>
->>>>>>> fix: author / translator feature for cards, posts, and search results page
                 </span>
             `
                 : ""
             }
             <li class="author-list-item">
-              <div class="author-name-tooltip">
-                ${authorName}
-              </div>
               ${
                 authorImage
                   ? `
