@@ -38,7 +38,10 @@
       "author": "author",
       "translator": "translator"
     },
-    "card-name": "{{ role }}: {{ name }}",
+    "bylines": {
+      "author": "{{ role }}: {{ name }} ({{ locale }})",
+      "translator": "{{ role }}: {{ name }}"
+    },
     "info": {
       "original-article": "{{ <0> }}Original article:{{ </0> }} {{ title }} by {{ author }}",
       "translated-by": "{{ <0> }}Translated by:{{ </0> }} {{ translator }}"

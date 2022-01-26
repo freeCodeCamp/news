@@ -1,6 +1,7 @@
 {% macro byline(authorOrTranslator, lazyLoad, showBio, role, locale) %}
     {% set authorOrTranslatorURL %}{{ authorOrTranslator.url if role === 'author' else (authorOrTranslator.path | url) }}{% endset %}
     {% set localizedRole %}{% t "localization-meta.roles." + (role if role else "author") %}{% endset %}
+    {% set localizedLocale %}{% t "localization-meta.locales." + locale %}{% endset %}
 
     <section class="author-card">
         {% if authorOrTranslator.profile_image %}
@@ -21,10 +22,19 @@
         <section class="author-card-content {{ "author-card-content-no-bio" if not showBio }}">
             <span class="author-card-name">
                 <a href="{{ authorOrTranslatorURL }}">
+                    {# Display original author / translator byline if role set #}
                     {% if role %}
-                        {% t 'localization-meta.card-name', { role: (localizedRole | capitalize), name: authorOrTranslator.name } %}
-                        {% if role === "author" %}
-                            ({% t "localization-meta.locales." + locale %})
+                        {% if role === 'author' %}
+                            {% t 'localization-meta.bylines.author', {
+                                role: (localizedRole | capitalize),
+                                name: authorOrTranslator.name,
+                                locale: localizedLocale
+                            } %}
+                        {% else %}
+                            {% t 'localization-meta.bylines.translator', {
+                                role: (localizedRole | capitalize),
+                                name: authorOrTranslator.name
+                            } %}
                         {% endif %}
                     {% else %}
                         {{ authorOrTranslator.name }}
@@ -37,9 +47,9 @@
                 {% else %}
                     <p>
                         {% t 'author.read-more', {
-                            '<0>': '<a href="' + ( authorOrTranslatorURL ) + '">',
+                            '<0>': '<a href="' + (authorOrTranslatorURL) + '">',
                             '</0>': '</a>',
-                            role: (localizedRole | lower ),
+                            role: (localizedRole | lower),
                             interpolation: {
                                 escapeValue: false
                             }

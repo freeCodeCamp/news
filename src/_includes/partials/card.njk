@@ -73,7 +73,11 @@
                                 {% endif %}
                                 <span class="meta-content">
                                     <a class="meta-item" href="{{ originalAuthor.url }}">
-                                        {% t 'localization-meta.card-name', { role: authorRole, name: originalAuthor.name } %} ({% t "localization-meta.locales." + originalPost.locale_i18n %})
+                                        {% t 'localization-meta.bylines.author', {
+                                            role: authorRole,
+                                            name: originalPost.primary_author.name,
+                                            locale: originalPost.locale_i18n
+                                        } %}
                                     </a>
                                     <time class="meta-item" datetime="{{ originalPost.published_at }}">{% timeAgo originalPost.published_at %}</time>
                                 </span>
@@ -101,7 +105,10 @@
                             <span class="meta-content">
                                 <a class="meta-item" href="{{ post.primary_author.path | url }}">
                                     {% if originalPost %}
-                                        {% t 'localization-meta.card-name', { role: translatorRole, name: post.primary_author.name } %}
+                                        {% t 'localization-meta.bylines.translator', {
+                                            role: translatorRole,
+                                            name: post.primary_author.name
+                                        } %}
                                     {% else %}
                                         {{ post.primary_author.name }}
                                     {% endif %}
