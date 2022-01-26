@@ -14,8 +14,8 @@ jobs:
       fail-fast: false
       matrix:
         node-version: [16.x]
-        # languages-pending: [japanese, arabic, ukrainian]
-        languages: [chinese, espanol, italian, portuguese]
+        # languages-pending: [arabic, ukrainian]
+        languages: [chinese, espanol, italian, portuguese, japanese]
         site_tlds: [dev, org]
 
     env:
@@ -45,8 +45,7 @@ jobs:
         ${{ secrets.ITALIAN_GHOST_CONTENT_API_KEY }}
 
       PORTUGUESE_GHOST_API_URL: ${{ secrets.PORTUGUESE_GHOST_API_URL }}
-      PORTUGUESE_GHOST_API_VERSION:
-        ${{ secrets.PORTUGUESE_GHOST_API_VERSION }}
+      PORTUGUESE_GHOST_API_VERSION: ${{ secrets.PORTUGUESE_GHOST_API_VERSION }}
       PORTUGUESE_GHOST_CONTENT_API_KEY:
         ${{ secrets.PORTUGUESE_GHOST_CONTENT_API_KEY }}
 
@@ -56,7 +55,8 @@ jobs:
         ${{ secrets.JAPANESE_GHOST_CONTENT_API_KEY }}
 
       ADS_ENABLED: ${{ secrets.ADS_ENABLED }}
-      GOOGLE_ADSENSE_DATA_AD_CLIENT: ${{ secrets.GOOGLE_ADSENSE_DATA_AD_CLIENT }}
+      GOOGLE_ADSENSE_DATA_AD_CLIENT:
+        ${{ secrets.GOOGLE_ADSENSE_DATA_AD_CLIENT }}
       GOOGLE_ADSENSE_DATA_AD_SLOT: ${{ secrets.GOOGLE_ADSENSE_DATA_AD_SLOT }}
 
       POSTS_PER_PAGE: ${{ secrets.POSTS_PER_PAGE }}
@@ -108,8 +108,6 @@ jobs:
         uses: colpal/actions-clean@v1
         if: ${{ always() }} # To ensure this step runs even when earlier steps fail
 
-
-
   deploy:
     name: Deploy
     runs-on: ubuntu-latest
@@ -138,8 +136,11 @@ jobs:
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
-          app-name: freecodecamp-news-${{ matrix.site_tlds }}-${{ matrix.languages }}
-          images: ${{ secrets.ACR_NAME }}.azurecr.io/${{ matrix.site_tlds }}/news-${{ matrix.languages }}:latest
+          app-name:
+            freecodecamp-news-${{ matrix.site_tlds }}-${{ matrix.languages }}
+          images:
+            ${{ secrets.ACR_NAME }}.azurecr.io/${{ matrix.site_tlds }}/news-${{
+            matrix.languages }}:latest
 
       - name: Remove Old images
         run: |
