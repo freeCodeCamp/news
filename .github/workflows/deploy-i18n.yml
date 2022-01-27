@@ -117,8 +117,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        # languages-pending: [japanese, arabic, ukrainian]
-        languages: [chinese, espanol, italian, portuguese]
+        # languages-pending: [arabic, ukrainian]
+        languages: [chinese, espanol, italian, portuguese, japanese]
         site_tlds: [dev, org]
 
     # GitHub's deployment environment configuration.
