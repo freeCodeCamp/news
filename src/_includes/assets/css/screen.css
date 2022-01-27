@@ -911,19 +911,6 @@ make sure this only happens on large viewports / desktop-ish devices.
     height: auto;
 }
 
-/* Full bleed images (#full)
-Super neat trick courtesy of @JoelDrapper
-
-Usage (In Ghost edtior):
-
-![img](/some/image.jpg#full)
-
-*/
-.post-full-content img[src$="#full"] {
-    max-width: none;
-    width: 100vw;
-}
-
 /* Image captions
 
 Usage (In Ghost editor):
