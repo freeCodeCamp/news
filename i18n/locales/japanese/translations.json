@@ -36,7 +36,7 @@
   "localization-meta": {
     "roles": {
       "author": "著者",
-      "translator": "翻訳者"
+      "translator": "翻訳"
     },
     "card-name": "{{ role }}: {{ name }}",
     "languages": {
