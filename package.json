@@ -30,7 +30,8 @@
     "test": "jest",
     "lint": "npm-run-all lint:*",
     "lint:code": "eslint . --ext .js --cache",
-    "lint:i18n-schema": "node ./i18n/schema-validation.js"
+    "lint:i18n-schema": "node ./i18n/schema-validation.js",
+    "format": "prettier --ignore-path .gitignore --write ."
   },
   "repository": {
     "type": "git",
@@ -69,6 +70,7 @@
     "dayjs": "1.10.7",
     "dotenv": "10.0.0",
     "eslint": "8.7.0",
+    "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-cypress": "2.12.1",
     "eslint-plugin-ghost": "2.12.0",
     "eslint-utils": "3.0.0",
@@ -82,6 +84,7 @@
     "md5": "2.3.0",
     "node-fetch": "2.6.7",
     "npm-run-all": "4.1.5",
+    "prettier": "2.5.1",
     "probe-image-size": "7.2.2",
     "sanitize-html": "2.6.1",
     "shx": "0.3.4",
