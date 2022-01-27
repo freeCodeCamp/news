@@ -113,8 +113,12 @@
         {{ site.codeinjection_head | safe if site.codeinjection_head }}
         {{ codeinjection_head | safe if codeinjection_head }}
     </head>
-
-    <body class="home-template">
+    
+    {% if site.lang === 'ar' or site.lang === 'fa' or site.lang === 'ur' or site.lang ===  'he'%}
+        <body class="home-template rtl-layout">
+    {% else %}
+        <body class="home-template ">
+    {% endif %}
         <div class="site-wrapper">
             {% include "partials/site-nav.njk" %}
 
