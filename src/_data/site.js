@@ -1,41 +1,48 @@
-const { sourceApi } = require('../../utils/ghost/api');
-const getImageDimensions = require('../../utils/get-image-dimensions');
-const { eleventyEnv, currentLocale_i18nISOCode, siteURL } = require('../../config');
-const translate = require('../../utils/translate');
+const { sourceApi } = require("../../utils/ghost/api");
+const getImageDimensions = require("../../utils/get-image-dimensions");
+const {
+  eleventyEnv,
+  currentLocale_i18nISOCode,
+  siteURL,
+} = require("../../config");
+const translate = require("../../utils/translate");
 
 // Get Twitter profile based on links in i18n/locales/lang/links.json --
 // falls back to English Twitter profile if one for the current UI locale
 // isn't found
-const getTwitterProfile = (url) => url.replace('https://twitter.com/', '@');
-const twitterURL = translate('links:twitter');
-const twitterProfile = twitterURL !== 'twitter' ? getTwitterProfile(twitterURL) : '@freecodecamp';
+const getTwitterProfile = (url) => url.replace("https://twitter.com/", "@");
+const twitterURL = translate("links:twitter");
+const twitterProfile =
+  twitterURL !== "twitter" ? getTwitterProfile(twitterURL) : "@freecodecamp";
 
 module.exports = async () => {
   const site =
-    eleventyEnv === 'ci'
+    eleventyEnv === "ci"
       ? {}
       : await sourceApi.settings
           .browse({
-            include: 'url',
+            include: "url",
           })
           .catch((err) => {
             console.error(err);
           });
 
   site.url = siteURL;
-  site.lang = currentLocale_i18nISOCode .toLowerCase();
+  site.lang = currentLocale_i18nISOCode.toLowerCase();
 
-  const logoUrl = 'https://cdn.freecodecamp.org/platform/universal/fcc_primary.svg'
+  const logoUrl =
+    "https://cdn.freecodecamp.org/platform/universal/fcc_primary.svg";
   site.logo = logoUrl;
 
-  const coverImageUrl = 'https://cdn.freecodecamp.org/platform/universal/fcc_meta_1920X1080-indigo.png';
+  const coverImageUrl =
+    "https://cdn.freecodecamp.org/platform/universal/fcc_meta_1920X1080-indigo.png";
   site.cover_image = coverImageUrl;
   site.og_image = coverImageUrl;
   site.twitter_image = coverImageUrl;
 
-  const iconUrl = 'https://cdn.freecodecamp.org/universal/favicons/favicon.ico';
+  const iconUrl = "https://cdn.freecodecamp.org/universal/favicons/favicon.ico";
   site.icon = iconUrl;
-  
+
   // Determine image dimensions before server runs for structured data
   const logoDimensions = await getImageDimensions(logoUrl);
   const coverImageDimensions = await getImageDimensions(coverImageUrl);
@@ -43,20 +50,20 @@ module.exports = async () => {
   site.image_dimensions = {
     logo: {
       width: logoDimensions.width,
-      height: logoDimensions.height
+      height: logoDimensions.height,
     },
     cover_image: {
       width: coverImageDimensions.width,
-      height: coverImageDimensions.height
-    }
-  }
+      height: coverImageDimensions.height,
+    },
+  };
 
   // Set default title across all publications
-  site.title = 'freeCodeCamp.org';
+  site.title = "freeCodeCamp.org";
 
   // Set default Facebook account, and set Twitter account
   // based on UI locale
-  site.facebook = 'https://www.facebook.com/freecodecamp';
+  site.facebook = "https://www.facebook.com/freecodecamp";
   site.twitter = twitterProfile;
 
   return site;

@@ -1,13 +1,13 @@
-const fetch = require('node-fetch');
-const xml2js = require('xml2js');
-const { sourceApiUrl } = require('../ghost/api');
-const { siteURL, eleventyEnv } = require('../../config');
-const { escape } = require('lodash');
+const fetch = require("node-fetch");
+const xml2js = require("xml2js");
+const { sourceApiUrl } = require("../ghost/api");
+const { siteURL, eleventyEnv } = require("../../config");
+const { escape } = require("lodash");
 
 const sitemapFetcherShortcode = async (page) => {
   try {
     const url =
-      page === 'index'
+      page === "index"
         ? `${sourceApiUrl}/sitemap.xml`
         : `${sourceApiUrl}/sitemap-${page}.xml`;
 
@@ -23,42 +23,42 @@ const sitemapFetcherShortcode = async (page) => {
       .catch((err) => console.log(err));
 
     const target =
-      page === 'index'
+      page === "index"
         ? ghostXmlObj.sitemapindex.sitemap
         : ghostXmlObj.urlset.url;
 
     const urlSwapper = (url) => url.replace(sourceApiUrl, siteURL);
 
     let xmlStr = target.reduce((acc, curr) => {
-      const wrapper = page === 'index' ? 'sitemap' : 'url';
+      const wrapper = page === "index" ? "sitemap" : "url";
 
       acc += `
         <${wrapper}>
         <loc>${urlSwapper(curr.loc[0])}</loc>
         <lastmod>${curr.lastmod[0]}</lastmod>
         ${
-          curr['image:image']
+          curr["image:image"]
             ? `
           <image:image>
             <image:loc>${escape(
-              urlSwapper(curr['image:image'][0]['image:loc'][0])
+              urlSwapper(curr["image:image"][0]["image:loc"][0])
             )}</image:loc>
             <image:caption>${escape(
-              curr['image:image'][0]['image:caption'][0]
+              curr["image:image"][0]["image:caption"][0]
             )}</image:caption>
           </image:image>`
-            : ''
+            : ""
         }
       </${wrapper}>`;
 
       return acc;
-    }, '');
+    }, "");
 
     return xmlStr;
-  } catch(err) {
+  } catch (err) {
     // To do: remove this check once Dockerized Ghost is
     // set up for testing
-    if (eleventyEnv !== 'ci') {
+    if (eleventyEnv !== "ci") {
       throw new Error(`Sitemap cannot be fetched`);
     }
   }

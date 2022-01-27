@@ -1,7 +1,7 @@
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", () => {
   const urlParams = new URLSearchParams(window.location.search);
-  const queryStr = urlParams.get('query');
-  const postFeed = document.querySelector('.post-feed');
+  const queryStr = urlParams.get("query");
+  const postFeed = document.querySelector(".post-feed");
   let currPage = 0;
 
   function getHits(pageNo) {
@@ -21,22 +21,23 @@ document.addEventListener('DOMContentLoaded', () => {
       });
   }
 
-  const getSmallProfileImage = url => url.includes('/content/images/') ?
-    url.replace('/content/images/', '/content/images/size/w30/') :
-    url;
+  const getSmallProfileImage = (url) =>
+    url.includes("/content/images/")
+      ? url.replace("/content/images/", "/content/images/size/w30/")
+      : url;
 
   async function renderSearchResults(arr) {
     arr.forEach((hit) => {
       const featureImage = hit.featureImage || null;
-      const url = hit.url || '#';
-      const title = hit.title || '#';
+      const url = hit.url || "#";
+      const title = hit.title || "#";
       const authorName = hit.author.name;
       // Get smaller author image if one exists
       const authorImage = getSmallProfileImage(hit.author.profileImage);
       const authorUrl = hit.author.url;
       const primaryTagCodeBlock =
         hit.tags.length === 0
-          ? ''
+          ? ""
           : `
           <a href="${hit.tags[0].url}">
             #${hit.tags[0].name}
@@ -45,10 +46,11 @@ document.addEventListener('DOMContentLoaded', () => {
       const publishedAt = hit.publishedAt;
       const originalPost = hit.originalPost || null;
       const originalAuthor = originalPost ? originalPost.primaryAuthor : null;
-      const originalAuthorImage = originalPost ? getSmallProfileImage(originalAuthor.profileImage) : null;
-      const articleItem = document.createElement('article');
-      articleItem.className =
-        'post-card post';
+      const originalAuthorImage = originalPost
+        ? getSmallProfileImage(originalAuthor.profileImage)
+        : null;
+      const articleItem = document.createElement("article");
+      articleItem.className = "post-card post";
       const articleHTML = `
         ${
           featureImage
@@ -95,16 +97,20 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
         <footer class="post-card-meta">
           ${
-            authorName === 'freeCodeCamp.org'
+            authorName === "freeCodeCamp.org"
               ? `<time class="meta-item-single" datetime="${publishedAt}"></time>`
               : `
           <ul class="author-list">
-            ${ originalPost ? `
+            ${
+              originalPost
+                ? `
               <li class="author-list-item">
                 <div class="author-name-tooltip">
                   ${originalAuthor.name}
                 </div>
-                ${originalAuthor.profileImage ? `
+                ${
+                  originalAuthor.profileImage
+                    ? `
                   <a href="${originalAuthor.url}" class="static-avatar">
                     <img
                       class="author-profile-image"
@@ -114,16 +120,26 @@ document.addEventListener('DOMContentLoaded', () => {
                       loading="lazy"
                     >
                   </a>
-                ` : `
+                `
+                    : `
                 <a href="${originalAuthor.url}" class="static-avatar author-profile-image">
                   {% include "partials/icons/avatar.njk" %}
                 </a>
-                `}
+                `
+                }
                 <span class="meta-content">
-                  <a class="meta-item" href="${originalAuthor.url}">{% t 'localization-meta.author', { authorName: '${originalAuthor.name}' } %} ({% t 'localization-meta.languages.en' %})</a>
-                  <time class="meta-item" datetime="${originalPost.publishedAt}"></time>
+                  <a class="meta-item" href="${
+                    originalAuthor.url
+                  }">{% t 'localization-meta.author', { authorName: '${
+                    originalAuthor.name
+                  }' } %} ({% t 'localization-meta.languages.en' %})</a>
+                  <time class="meta-item" datetime="${
+                    originalPost.publishedAt
+                  }"></time>
                 </span>
-            ` : ''}
+            `
+                : ""
+            }
             <li class="author-list-item">
               <div class="author-name-tooltip">
                 ${authorName}
@@ -149,11 +165,15 @@ document.addEventListener('DOMContentLoaded', () => {
               }
               <span class="meta-content">
                 <a class="meta-item" href="${authorUrl}">
-                  ${originalPost ? `
+                  ${
+                    originalPost
+                      ? `
                     {% t 'localization-meta.translator', { translatorName: '${authorName}' } %}
-                  ` : `
+                  `
+                      : `
                     ${authorName}
-                  `}
+                  `
+                  }
                 </a>
                 <time class="meta-item" datetime="${publishedAt}"></time>
               </span>
@@ -171,16 +191,16 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function renderLoadMoreBtn() {
-    const inner = document.querySelector('.inner');
+    const inner = document.querySelector(".inner");
 
-    const readMoreRow = document.createElement('div');
-    readMoreRow.className = 'read-more-row';
+    const readMoreRow = document.createElement("div");
+    readMoreRow.className = "read-more-row";
 
-    const loadMoreBtn = document.createElement('button');
+    const loadMoreBtn = document.createElement("button");
     loadMoreBtn.innerHTML = `{% t 'buttons.load-more-articles' %}`;
-    loadMoreBtn.id = 'readMoreBtn';
+    loadMoreBtn.id = "readMoreBtn";
 
-    loadMoreBtn.addEventListener('click', () => {
+    loadMoreBtn.addEventListener("click", () => {
       // Iterate currPage and load next set of hits
       populatePage(++currPage);
     });
@@ -191,7 +211,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function removeLoadMoreBtn() {
-    const readMoreRow = document.querySelector('.read-more-row');
+    const readMoreRow = document.querySelector(".read-more-row");
 
     readMoreRow.remove();
   }
@@ -207,10 +227,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // next API call
     if (hitsArr.length === 15) {
       // Check for existing button and render if none exists
-      document.querySelector('#readMoreBtn') ? '' : renderLoadMoreBtn();
+      document.querySelector("#readMoreBtn") ? "" : renderLoadMoreBtn();
     } else {
       // Remove readMoreRow if a button exists and there are less than 15 hits
-      document.querySelector('#readMoreBtn') ? removeLoadMoreBtn() : '';
+      document.querySelector("#readMoreBtn") ? removeLoadMoreBtn() : "";
     }
   }
 

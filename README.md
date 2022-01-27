@@ -29,11 +29,10 @@ Happy Contributing!
 
 ## Build Status
 
-| Language | Status |
-|:--------:|:------ |
-| English  | [![Build status](https://dev.azure.com/freeCodeCamp-org/news/_apis/build/status/build-deploy-eng)](https://dev.azure.com/freeCodeCamp-org/news/_build/latest?definitionId=31) |
-| Others   | [![Build and Deploy Localized News to Azure](https://github.com/freeCodeCamp/news/actions/workflows/deploy-i18n.yml/badge.svg)](https://github.com/freeCodeCamp/news/actions/workflows/deploy-i18n.yml) |
-
+| Language | Status                                                                                                                                                                                                  |
+| :------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| English  | [![Build status](https://dev.azure.com/freeCodeCamp-org/news/_apis/build/status/build-deploy-eng)](https://dev.azure.com/freeCodeCamp-org/news/_build/latest?definitionId=31)                           |
+|  Others  | [![Build and Deploy Localized News to Azure](https://github.com/freeCodeCamp/news/actions/workflows/deploy-i18n.yml/badge.svg)](https://github.com/freeCodeCamp/news/actions/workflows/deploy-i18n.yml) |
 
 ## Copyright & License
 
