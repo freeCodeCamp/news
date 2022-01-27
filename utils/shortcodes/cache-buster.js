@@ -1,12 +1,12 @@
-const { readFileSync, writeFileSync, mkdirSync } = require('fs');
-const md5 = require('md5');
-const { parse, normalize } = require('path');
-const sitePath = require('../site-path');
+const { readFileSync, writeFileSync, mkdirSync } = require("fs");
+const md5 = require("md5");
+const { parse, normalize } = require("path");
+const sitePath = require("../site-path");
 let manifest = {};
 
 function cacheBusterShortcode(filePath) {
   // Handle cases where filePath doesn't start with /
-  filePath = filePath.startsWith('/') ? filePath : `/${filePath}`;
+  filePath = filePath.startsWith("/") ? filePath : `/${filePath}`;
   const { dir, base, name, ext } = parse(filePath);
   const localFilePath = `./src/_includes${filePath}`;
 
@@ -26,7 +26,10 @@ function cacheBusterShortcode(filePath) {
     manifest[base] = hashedFilename;
   }
 
-  const hashedRelativeUrl = `${sitePath}${filePath.replace(base, manifest[base])}`;
+  const hashedRelativeUrl = `${sitePath}${filePath.replace(
+    base,
+    manifest[base]
+  )}`;
 
   // Return final path with hashed filename to the template
   return normalize(hashedRelativeUrl);

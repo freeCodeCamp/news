@@ -1,9 +1,9 @@
-const path = require('path');
-const { locales } = require('../config');
-const linksSchema = require('./locales/english/links.json');
-const metaTagsSchema = require('./locales/english/meta-tags.json');
-const translationsSchema = require('./locales/english/translations.json');
-const trendingSchema = require('./locales/english/trending.json');
+const path = require("path");
+const { locales } = require("../config");
+const linksSchema = require("./locales/english/links.json");
+const metaTagsSchema = require("./locales/english/meta-tags.json");
+const translationsSchema = require("./locales/english/translations.json");
+const trendingSchema = require("./locales/english/trending.json");
 
 /**
  * Flattens a nested object structure into a single
@@ -11,12 +11,12 @@ const trendingSchema = require('./locales/english/trending.json');
  * @param {Object} obj Object to flatten
  * @param {String} namespace Used for property chaining
  */
-const flattenAnObject = (obj, namespace = '') => {
+const flattenAnObject = (obj, namespace = "") => {
   const flattened = {};
-  Object.keys(obj).forEach(key => {
+  Object.keys(obj).forEach((key) => {
     if (Array.isArray(obj[key])) {
       flattened[namespace ? `${namespace}.${key}` : key] = obj[key];
-    } else if (typeof obj[key] === 'object') {
+    } else if (typeof obj[key] === "object") {
       Object.assign(
         flattened,
         flattenAnObject(obj[key], namespace ? `${namespace}.${key}` : key)
@@ -44,7 +44,7 @@ const findMissingKeys = (file, schema, path) => {
   }
   if (missingKeys.length) {
     console.warn(
-      `${path} is missing these required keys: ${missingKeys.join(', ')}`
+      `${path} is missing these required keys: ${missingKeys.join(", ")}`
     );
   }
 };
@@ -66,7 +66,7 @@ const findExtraneousKeys = (file, schema, path) => {
   if (extraKeys.length) {
     console.warn(
       `${path} has these keys that are not in the schema: ${extraKeys.join(
-        ', '
+        ", "
       )}`
     );
   }
@@ -78,14 +78,14 @@ const findExtraneousKeys = (file, schema, path) => {
  * @param {Object} obj The object to check the values of
  * @param {String} namespace String for tracking nested properties
  */
-const noEmptyObjectValues = (obj, namespace = '') => {
+const noEmptyObjectValues = (obj, namespace = "") => {
   const emptyKeys = [];
   for (const key of Object.keys(obj)) {
     if (Array.isArray(obj[key])) {
       if (!obj[key].length) {
         emptyKeys.push(namespace ? `${namespace}.${key}` : key);
       }
-    } else if (typeof obj[key] === 'object') {
+    } else if (typeof obj[key] === "object") {
       emptyKeys.push(
         noEmptyObjectValues(obj[key], namespace ? `${namespace}.${key}` : key)
       );
@@ -110,8 +110,8 @@ const trendingSchemaKeys = Object.keys(flattenAnObject(trendingSchema));
  * for each available client language.
  * @param {String[]} languages List of languages to test
  */
-const translationSchemaValidation = languages => {
-  languages.forEach(language => {
+const translationSchemaValidation = (languages) => {
+  languages.forEach((language) => {
     const filePath = path.join(
       __dirname,
       `/locales/${language}/translations.json`
@@ -132,7 +132,7 @@ const translationSchemaValidation = languages => {
     if (emptyKeys.length) {
       console.warn(
         `${language}/translation.json has these empty keys: ${emptyKeys.join(
-          ', '
+          ", "
         )}`
       );
     }
@@ -145,8 +145,8 @@ const translationSchemaValidation = languages => {
  * for each available client language.
  * @param {String[]} languages List of languages to test
  */
-const trendingSchemaValidation = languages => {
-  languages.forEach(language => {
+const trendingSchemaValidation = (languages) => {
+  languages.forEach((language) => {
     const filePath = path.join(__dirname, `/locales/${language}/trending.json`);
     const fileJson = require(filePath);
     const fileKeys = Object.keys(flattenAnObject(fileJson));
@@ -160,7 +160,7 @@ const trendingSchemaValidation = languages => {
     if (emptyKeys.length) {
       console.warn(
         `${language}/trending.json has these empty keys: ${emptyKeys.join(
-          ', '
+          ", "
         )}`
       );
     }
@@ -168,8 +168,8 @@ const trendingSchemaValidation = languages => {
   });
 };
 
-const metaTagsSchemaValidation = languages => {
-  languages.forEach(language => {
+const metaTagsSchemaValidation = (languages) => {
+  languages.forEach((language) => {
     const filePath = path.join(
       __dirname,
       `/locales/${language}/meta-tags.json`
@@ -186,7 +186,7 @@ const metaTagsSchemaValidation = languages => {
     if (emptyKeys.length) {
       console.warn(
         `${language}/metaTags.json has these empty keys: ${emptyKeys.join(
-          ', '
+          ", "
         )}`
       );
     }
@@ -194,8 +194,8 @@ const metaTagsSchemaValidation = languages => {
   });
 };
 
-const linksSchemaValidation = languages => {
-  languages.forEach(language => {
+const linksSchemaValidation = (languages) => {
+  languages.forEach((language) => {
     const filePath = path.join(__dirname, `/locales/${language}/links.json`);
     const fileJson = require(filePath);
     const fileKeys = Object.keys(flattenAnObject(fileJson));
@@ -204,14 +204,14 @@ const linksSchemaValidation = languages => {
     const emptyKeys = noEmptyObjectValues(fileJson);
     if (emptyKeys.length) {
       console.warn(
-        `${language}/links.json has these empty keys: ${emptyKeys.join(', ')}`
+        `${language}/links.json has these empty keys: ${emptyKeys.join(", ")}`
       );
     }
     console.info(`${language} links.json validation complete`);
   });
 };
 
-const translatedLangs = locales.filter(x => x !== 'english');
+const translatedLangs = locales.filter((x) => x !== "english");
 
 linksSchemaValidation(translatedLangs);
 metaTagsSchemaValidation(translatedLangs);

@@ -1,14 +1,14 @@
-document.addEventListener('DOMContentLoaded', () => {
-  const postFeed = document.querySelector('.post-feed');
-  const postDates = [...document.getElementsByClassName('post-full-meta-date')];
+document.addEventListener("DOMContentLoaded", () => {
+  const postFeed = document.querySelector(".post-feed");
+  const postDates = [...document.getElementsByClassName("post-full-meta-date")];
   const localizeDates = (datesList) => {
     datesList.forEach((date) => {
-      const dateStr = date.getAttribute('datetime');
+      const dateStr = date.getAttribute("datetime");
       // eslint-disable-next-line no-undef
       const dateObj = dayjs(dateStr);
 
       // Display either time since published or month, day, and year
-      date.innerHTML = dateObj.format('LL');
+      date.innerHTML = dateObj.format("LL");
     });
   };
 
@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
       .map((mutation) => [...mutation.addedNodes])
       .flat();
     const newPostDates = newNodes
-      .map((node) => [...node.querySelectorAll('time')])
+      .map((node) => [...node.querySelectorAll("time")])
       .flat(1);
 
     observer.disconnect();

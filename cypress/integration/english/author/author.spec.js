@@ -1,13 +1,13 @@
 const selectors = {
-  authorName: "[data-test-label='author-name']"
-}
+  authorName: "[data-test-label='author-name']",
+};
 
-describe('Author page', () => {
+describe("Author page", () => {
   before(() => {
-    cy.visit('/author/quincylarson');
+    cy.visit("/author/quincylarson");
   });
 
-  it('should render', () => {
-    cy.contains(selectors.authorName, 'Quincy Larson');
+  it("should render", () => {
+    cy.contains(selectors.authorName, "Quincy Larson");
   });
 });

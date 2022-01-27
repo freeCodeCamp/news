@@ -1,13 +1,13 @@
 const selectors = {
-  tagName: "[data-test-label='tag-name']"
-}
+  tagName: "[data-test-label='tag-name']",
+};
 
-describe('Tag page', () => {
+describe("Tag page", () => {
   before(() => {
-    cy.visit('/tag/freecodecamp');
+    cy.visit("/tag/freecodecamp");
   });
 
-  it('should render', () => {
-    cy.contains(selectors.tagName, '#FREECODECAMP');
+  it("should render", () => {
+    cy.contains(selectors.tagName, "#FREECODECAMP");
   });
 });
