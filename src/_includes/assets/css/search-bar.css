@@ -248,3 +248,19 @@ a:active {
     left: 30px;
   }
 }
+
+/* RTL layout */
+.rtl-layout #search-input {
+  padding: 0 30px 0 10px;
+}
+
+@media (min-width: 1000px) {
+  .rtl-layout .ais-SearchBox-submit {
+    left: auto;
+    right: 30px;
+  }
+}
+
+.rtl-layout input {
+  direction: RTL;
+}

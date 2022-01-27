@@ -27,6 +27,7 @@ on every page through _includes/layouts/default.njk
 14. learn-cta-row and social-row
 15. under-header-content donation
 16. Ads
+17. RTL layout
 
 */
 
@@ -2391,4 +2392,65 @@ a.banner:hover span {
     flex-direction: column;
     justify-content: space-between;
   }
+}
+
+/* 16. RTL layout
+/* ---------------------------------------------------------- */
+.rtl-layout {
+  direction: rtl;
+}
+
+.rtl-layout .author-card .avatar-wrapper,
+.rtl-layout .author-card img.author-profile-image {
+  margin: 0 0 0 15px;
+}
+
+.rtl-layout .post-card-meta {
+  padding: 0 4px 25px 25px;
+}
+
+.rtl-layout .meta-item,
+.rtl-layout .reading-time {
+  margin-left: 0;
+  margin-right: 20px;
+}
+
+.rtl-layout .post-card-tags a {
+  padding-right: 0px;
+  padding-left: 15px;
+}
+
+@media (min-width: 768px) {
+  .rtl-layout .post-card .post-card-content-link {
+    padding: 0 30px 0 0px;
+  }
+  .rtl-layout .post-card .post-card-meta {
+    padding: 0 34px 0 0px;
+  }
+}
+
+@media (max-width: 999px) {
+  .rtl-layout .site-nav-middle {
+    margin-left: auto;
+  }
+  .rtl-layout .site-nav-middle {
+    margin-right: 0;
+  }
+}
+
+.rtl-layout .nav-group {
+  margin-right: auto;
+  margin-left: 0;
+  display: flex;
+  align-items: center;
+}
+
+.rtl-layout .toggle-button-nav {
+  margin-right: auto;
+  margin-left: 5px;
+}
+
+.rtl-layout a.nav-forum {
+  margin-right: 0px;
+  margin-left: 19px;
 }
