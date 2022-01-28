@@ -5,6 +5,7 @@
         {% set originalAuthor = originalPost.primary_author %}
         {% set authorRole %}{% t 'localization-meta.roles.author' %}{% endset %}
         {% set translatorRole %}{% t 'localization-meta.roles.translator' %}{% endset %}
+        {% set localizedLocale %}{% t "localization-meta.locales." + originalPost.locale_i18n %}{% endset %}
     {% endif %}
     <article class="post-card {{ post.class }}">
         {% if post.feature_image %}
@@ -76,7 +77,7 @@
                                         {% t 'localization-meta.bylines.author', {
                                             role: authorRole,
                                             name: originalPost.primary_author.name,
-                                            locale: originalPost.locale_i18n
+                                            locale: localizedLocale
                                         } %}
                                     </a>
                                     <time class="meta-item" datetime="{{ originalPost.published_at }}">{% timeAgo originalPost.published_at %}</time>

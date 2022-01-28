@@ -36,7 +36,7 @@
   "localization-meta": {
     "roles": {
       "author": "autor",
-      "translator": "traductor"
+      "translator": "traducido por"
     },
     "bylines": {
       "author": "{{ role }}: {{ name }} ({{ locale }})",
@@ -44,7 +44,7 @@
     },
     "info": {
       "original-article": "{{ <0> }}Artículo original:{{ </0> }} {{ title }} por {{ author }}",
-      "translated-by": "{{ <0> }}Traducido por:{{ </0> }} {{ translator }}"
+      "translated-by": "{{ <0> }}Traducido y adaptado por:{{ </0> }} {{ translator }}"
     },
     "locales": {
       "english": "inglés",

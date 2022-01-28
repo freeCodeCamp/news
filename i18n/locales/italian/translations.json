@@ -44,7 +44,7 @@
     },
     "info": {
       "original-article": "{{ <0> }}Articolo originale:{{ </0> }} {{ title }} di {{ author }}",
-      "translated-by": "{{ <0> }}Tradotto da:{{ </0> }} {{ translator }}"
+      "translated-by": "{{ <0> }}Tradotto e adattato da:{{ </0> }} {{ translator }}"
     },
     "locales": {
       "english": "inglese",

@@ -43,8 +43,8 @@
       "translator": "{{ role }}: {{ name }}"
     },
     "info": {
-      "original-article": "{{ <0> }}原文:{{ </0> }} {{ author }}による{{ title }}",
-      "translated-by": "{{ <0> }}翻訳:{{ </0> }} {{ translator }}"
+      "original-article": "{{ <0> }}原文:{{ </0> }} {{ title }} ({{ author }})",
+      "translated-by": "{{ <0> }}翻訳・翻案:{{ </0> }} {{ translator }}"
     },
     "locales": {
       "english": "英語",
