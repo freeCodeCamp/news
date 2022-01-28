@@ -34,7 +34,8 @@ const processGhostResponse = async (ghostRes, context) => {
       });
 
       // Original author / translator feature
-      if (obj.codeinjection_head || obj.codeinjection_foot) obj = await originalPostHandler(obj);
+      if (obj.codeinjection_head || obj.codeinjection_foot)
+        obj = await originalPostHandler(obj);
 
       // Stash original excerpt and escape for structured data.
       // Shorten the default excerpt and replace newlines -- the

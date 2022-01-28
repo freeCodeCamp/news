@@ -46,12 +46,13 @@ document.addEventListener("DOMContentLoaded", () => {
       const publishedAt = hit.publishedAt;
       const originalPost = hit.originalPost || null;
       const originalAuthor = originalPost ? originalPost.primaryAuthor : null;
-      const originalAuthorImage = originalPost ? getSmallProfileImage(originalAuthor.profileImage) : null;
+      const originalAuthorImage = originalPost
+        ? getSmallProfileImage(originalAuthor.profileImage)
+        : null;
       const authorRole = '{% t "localization-meta.roles.author" %}';
       const translatorRole = '{% t "localization-meta.roles.translator" %}';
-      const articleItem = document.createElement('article');
-      articleItem.className =
-        'post-card post';
+      const articleItem = document.createElement("article");
+      articleItem.className = "post-card post";
       const articleHTML = `
         ${
           featureImage
@@ -106,7 +107,9 @@ document.addEventListener("DOMContentLoaded", () => {
               originalPost
                 ? `
               <li class="author-list-item">
-                ${originalAuthor.profileImage ? `
+                ${
+                  originalAuthor.profileImage
+                    ? `
                   <a href="${originalAuthor.url}" class="static-avatar">
                     <img
                       class="author-profile-image"
@@ -125,9 +128,15 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
                 <span class="meta-content">
                   <a class="meta-item" href="${originalAuthor.url}">
-                    {% t 'localization-meta.card-name', { role: '${authorRole}', name: '${originalAuthor.name}' } %} ({% t 'localization-meta.locales.' + '${originalPost.locale_i18n}' %})
+                    {% t 'localization-meta.card-name', { role: '${authorRole}', name: '${
+                    originalAuthor.name
+                  }' } %} ({% t 'localization-meta.locales.' + '${
+                    originalPost.locale_i18n
+                  }' %})
                   </a>
-                  <time class="meta-item" datetime="${originalPost.publishedAt}"></time>
+                  <time class="meta-item" datetime="${
+                    originalPost.publishedAt
+                  }"></time>
                 </span>
             `
                 : ""
@@ -154,9 +163,12 @@ document.addEventListener("DOMContentLoaded", () => {
               }
               <span class="meta-content">
                 <a class="meta-item" href="${authorUrl}">
-                  ${originalPost ? `
+                  ${
+                    originalPost
+                      ? `
                     {% t 'localization-meta.card-name', { role: '${translatorRole}', name: '${authorName}' } %}
-                  ` : `
+                  `
+                      : `
                     ${authorName}
                   `
                   }

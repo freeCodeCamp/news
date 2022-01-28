@@ -1,10 +1,10 @@
 const { chunk, cloneDeep } = require("lodash");
 
-const fetchFromGhost = require('../../utils/ghost/fetch-from-ghost');
-const processGhostResponse = require('../../utils/ghost/process-ghost-response');
-const errorLogger = require('../../utils/error-logger');
-const { eleventyEnv, siteURL, postsPerPage } = require('../../config');
-const stripDomain = require('../../utils/strip-domain');
+const fetchFromGhost = require("../../utils/ghost/fetch-from-ghost");
+const processGhostResponse = require("../../utils/ghost/process-ghost-response");
+const errorLogger = require("../../utils/error-logger");
+const { eleventyEnv, siteURL, postsPerPage } = require("../../config");
+const stripDomain = require("../../utils/strip-domain");
 
 const getUniqueList = (arr, key) => [
   ...new Map(arr.map((item) => [item[key], item])).values(),
