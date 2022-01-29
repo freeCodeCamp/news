@@ -907,8 +907,22 @@ make sure this only happens on large viewports / desktop-ish devices.
 .post-full-content video {
   display: block;
   margin: 1.5em auto;
-  max-width: 100%;
+  max-width: 1040px;
   height: auto;
+}
+
+@media (max-width: 1040px) {
+  .post-full-content img,
+  .post-full-content video {
+    width: 100%;
+  }
+}
+
+/* Adjust image body and video widths when ads are enabled */
+
+.ad-layout .post-full-content img,
+.ad-layout .post-full-content video {
+  width: 100%;
 }
 
 /* Image captions
@@ -2361,10 +2375,6 @@ a.banner:hover span {
 /* Apply the following styles for unauthenticated readers */
 .ad-layout .banner-ad {
   display: block;
-}
-
-.ad-layout .kg-width-wide .kg-image {
-  max-width: 720px;
 }
 
 /* Hide unfilled ads */
