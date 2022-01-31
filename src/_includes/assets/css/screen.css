@@ -2394,7 +2394,7 @@ a.banner:hover span {
   }
 }
 
-/* 16. RTL layout
+/* 17. RTL layout
 /* ---------------------------------------------------------- */
 .rtl-layout {
   direction: rtl;
@@ -2424,6 +2424,7 @@ a.banner:hover span {
   .rtl-layout .post-card .post-card-content-link {
     padding: 0 30px 0 0px;
   }
+
   .rtl-layout .post-card .post-card-meta {
     padding: 0 34px 0 0px;
   }
@@ -2433,6 +2434,7 @@ a.banner:hover span {
   .rtl-layout .site-nav-middle {
     margin-left: auto;
   }
+
   .rtl-layout .site-nav-middle {
     margin-right: 0;
   }

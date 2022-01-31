@@ -114,10 +114,10 @@
         {{ codeinjection_head | safe if codeinjection_head }}
     </head>
     
-    {% if site.lang === 'ar' or site.lang === 'fa' or site.lang === 'ur' or site.lang ===  'he'%}
+    {% if site.lang in ['ar', 'fa', 'ur', 'he'] %}
         <body class="home-template rtl-layout">
     {% else %}
-        <body class="home-template ">
+        <body class="home-template">
     {% endif %}
         <div class="site-wrapper">
             {% include "partials/site-nav.njk" %}
