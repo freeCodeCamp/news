@@ -19,7 +19,15 @@ describe("Author page", () => {
     cy.get(selectors.authorPostCount).should("be.visible");
   });
 
-  it("should not show the author's location and post count screens < 500px", () => {
+  it(`should show ${Cypress.env("postsPerPage")} posts on load`, () => {
+    cy.getPostCards().should("have.length", Cypress.env("postsPerPage"));
+  });
+
+  it("should show the correct number of total posts", () => {
+    cy.loadAndSumAllPostCards(selectors.authorPostCount);
+  });
+
+  it("should not show the author's location and post count on screens < 500px", () => {
     cy.viewport(499, 660);
     cy.get(selectors.authorLocation).should("not.be.visible");
     cy.get(selectors.authorPostCount).should("not.be.visible");
