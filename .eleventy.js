@@ -1,4 +1,4 @@
-const { readFileSync, readdirSync, writeFileSync } = require("fs");
+const { readFileSync, readdirSync, writeFileSync, unlinkSync } = require("fs");
 const pluginRSS = require("@11ty/eleventy-plugin-rss");
 const UpgradeHelper = require("@11ty/eleventy-upgrade-help");
 
@@ -20,6 +20,7 @@ const {
   fullYearShortcode,
   toISOStringShortcode,
 } = require("./utils/shortcodes/dates");
+const { currentLocale_i18n } = require("./config");
 const sitePath = require("./utils/site-path");
 
 module.exports = function (config) {
@@ -37,7 +38,7 @@ module.exports = function (config) {
     manifest = {};
   });
 
-  // Minify CSS
+  // Minify CSS and remove ads.txt from Chinese build
   config.on("afterBuild", () => {
     const path = "./dist/assets/css";
     const cssFiles = readdirSync(path);
@@ -48,6 +49,8 @@ module.exports = function (config) {
 
       writeFileSync(fullPath, cssMin(content));
     });
+
+    if (currentLocale_i18n === "chinese") unlinkSync("./dist/ads.txt");
   });
 
   // RSS and AMP plugins
