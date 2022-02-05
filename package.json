@@ -83,7 +83,7 @@
     "jest": "27.4.7",
     "jest-json-schema-extended": "1.0.1",
     "jsdom": "19.0.0",
-    "lint-staged": "12.3.2",
+    "lint-staged": "12.3.3",
     "lodash": "4.17.21",
     "md5": "2.3.0",
     "node-fetch": "2.6.7",
