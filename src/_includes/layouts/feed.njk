@@ -20,10 +20,10 @@
         {% for post in feed.posts %}
             <item>
                 <title>
-                    <![CDATA[ {% fullEscaper post.title %} ]]>
+                    <![CDATA[ {{ post.title | safe }} ]]>
                 </title>
                 <description>
-                    <![CDATA[ {{ post.excerpt | escape }} ]]>
+                    <![CDATA[ {{ post.excerpt | safe }} ]]>
                 </description>
                 <link>{{ site.url + post.path }}</link>
                 <guid isPermaLink="false">{{ post.comment_id }}</guid>
@@ -36,7 +36,7 @@
                 <pubDate>{% buildDateFormatter site.timezone, post.published_at %}</pubDate>
                 <media:content url="{{ post.feature_image }}" medium="image" />
                 <content:encoded>
-                    <![CDATA[ {{ (post.excerpt | escape) if feed.path === "/" else (post.html | safe) }} ]]>
+                    <![CDATA[ {{ (post.excerpt | safe) if feed.path === "/" else (post.html | safe) }} ]]>
                 </content:encoded>
             </item>
         {% endfor %}
