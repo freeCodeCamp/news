@@ -2378,9 +2378,8 @@ a.banner:hover span {
   display: block;
 }
 
-/* Hide unfilled ads */
-.ad-layout ins.adsbygoogle[data-ad-status="unfilled"] {
-  display: none !important;
+.ad-container {
+  background-color: var(--gray05);
 }
 
 /* Display sidebar for desktop readers */
