@@ -2,7 +2,7 @@
     xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" version="2.0">
     <channel>
         <title>
-            <![CDATA[ freeCodeCamp.org ]]>
+            <![CDATA[ {{ "freeCodeCamp.org" if feed.path === "/" else (feed.name | safe + " - freeCodeCamp.org") }} ]]>
         </title>
         <description>
             <![CDATA[ {% t 'meta-tags:description' %} ]]>
@@ -11,7 +11,7 @@
         <image>
             <url>{{ site.icon }}</url>
             {% set metaTitle %}{% t 'meta-tags:title' %}{% endset %}
-            <title>{{ metaTitle | escape }}</title>
+            <title>{{ (metaTitle | escape) if feed.path === "/" else (feed.name | safe + " - freeCodeCamp.org") }}</title>
             <link>{{ site.url }}</link>
         </image>
         <lastBuildDate>{% buildDateFormatter site.timezone %}</lastBuildDate>
