@@ -18,9 +18,9 @@
     {% endif %}
     <div class="author-meta">
         {% if author.location %}
-            <div class="author-location">
+            <div class="author-location" data-test-label="author-location">
                 {{ author.location }}
-                <span class="bull">
+                <span class="bull" data-test-label="bullet">
                     &bull;
                 </span>
             </div>
@@ -33,7 +33,7 @@
             {% else %}
                 {% t 'author.multiple-posts', { postCount: postCount } %}
             {% endif %}
-            <span class="bull">
+            <span class="bull" data-test-label="bullet">
                 &bull;
             </span>
         </div>
