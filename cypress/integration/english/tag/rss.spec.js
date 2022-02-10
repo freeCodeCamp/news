@@ -1,78 +1,86 @@
+const { decodeHTML, XMLToDOM } = require("../../../support/utils/rss");
 const commonExpectedMeta = require("../../../fixtures/common-expected-meta.json");
 const expectedTagTitle = `Community - ${commonExpectedMeta.siteName}`;
+const feedPath = "/tag/community/rss.xml";
 
 describe("Author page RSS feed", () => {
-  let feed;
+  it("should have the channel title <![CDATA[ Community - freeCodeCamp.org ]]>", () => {
+    cy.request(feedPath).then(async (res) => {
+      const feed = XMLToDOM(res.body);
+      const channelTitle = feed.querySelector("channel title").innerHTML.trim();
 
-  // To do: add this as a Cypress plugin in separate PR
-  function htmlDecode(input) {
-    const doc = new DOMParser().parseFromString(input, "text/html");
-    return doc.documentElement.textContent;
-  }
-
-  before(async () => {
-    // To do: add this as a Cypress plugin in separate PR
-    const parser = new DOMParser();
-    const res = await cy.request("/tag/community/rss.xml");
-    feed = parser.parseFromString(res.body, "application/xml");
-  });
-
-  it(`should have the channel title <![CDATA[ ${expectedTagTitle} ]]>`, () => {
-    const title = feed.querySelector("channel title").innerHTML.trim();
-
-    expect(title).to.equal(`<![CDATA[ ${expectedTagTitle} ]]>`);
+      expect(channelTitle).to.equal(`<![CDATA[ ${expectedTagTitle} ]]>`);
+    });
   });
 
   it(`should have the channel description <![CDATA[ ${commonExpectedMeta.description} ]]>`, () => {
-    const channelDescription = feed
-      .querySelector("channel description")
-      .innerHTML.trim();
+    cy.request(feedPath).then(async (res) => {
+      const feed = XMLToDOM(res.body);
+      const channelDescription = feed
+        .querySelector("channel description")
+        .innerHTML.trim();
 
-    expect(channelDescription).to.equal(
-      `<![CDATA[ ${commonExpectedMeta.description} ]]>`
-    );
+      expect(channelDescription).to.equal(
+        `<![CDATA[ ${commonExpectedMeta.description} ]]>`
+      );
+    });
   });
 
-  it(`should have the channel link ${commonExpectedMeta.siteUrl}`, () => {
-    const channelLink = feed.querySelector("channel link").innerHTML.trim();
+  it("should have the channel link http://localhost:8080/news/", () => {
+    cy.request(feedPath).then(async (res) => {
+      const feed = XMLToDOM(res.body);
+      const channelLink = feed.querySelector("channel link").innerHTML.trim();
 
-    expect(channelLink).to.equal(`${commonExpectedMeta.siteUrl}`);
+      expect(channelLink).to.equal(`${commonExpectedMeta.siteUrl}`);
+    });
   });
 
   it("should have the expected channel image elements and values", () => {
-    const channelImageURL = feed
-      .querySelector("channel image url")
-      .innerHTML.trim();
-    const channelImageTitle = htmlDecode(
-      feed.querySelector("channel image title").innerHTML.trim()
-    );
-    const channelImageLink = feed
-      .querySelector("channel image link")
-      .innerHTML.trim();
+    cy.request(feedPath).then(async (res) => {
+      const feed = XMLToDOM(res.body);
+      const channelImageURL = feed
+        .querySelector("channel image url")
+        .innerHTML.trim();
+      const channelImageTitle = decodeHTML(
+        feed.querySelector("channel image title").innerHTML.trim()
+      );
+      const channelImageLink = feed
+        .querySelector("channel image link")
+        .innerHTML.trim();
 
-    expect(channelImageURL).to.equal(commonExpectedMeta.faviconUrl);
-    expect(channelImageTitle).to.equal(expectedTagTitle);
-    expect(channelImageLink).to.equal(commonExpectedMeta.siteUrl);
+      expect(channelImageURL).to.equal(commonExpectedMeta.faviconUrl);
+      expect(channelImageTitle).to.equal(expectedTagTitle);
+      expect(channelImageLink).to.equal(commonExpectedMeta.siteUrl);
+    });
   });
 
   it("should have a channel lastBuildDate that's less than or equal to the current date", () => {
-    const lastBuildDate = new Date(
-      feed.querySelector("channel lastBuildDate").innerHTML.trim()
-    );
-    const currDate = new Date();
+    cy.request(feedPath).then(async (res) => {
+      const feed = XMLToDOM(res.body);
+      const lastBuildDate = new Date(
+        feed.querySelector("channel lastBuildDate").innerHTML.trim()
+      );
+      const currDate = new Date();
 
-    expect(lastBuildDate).to.be.lte(currDate);
+      expect(lastBuildDate).to.be.lte(currDate);
+    });
   });
 
   it("should have a channel ttl set to 60", () => {
-    const channelTTL = feed.querySelector("channel ttl").innerHTML.trim();
+    cy.request(feedPath).then(async (res) => {
+      const feed = XMLToDOM(res.body);
+      const channelTTL = feed.querySelector("channel ttl").innerHTML.trim();
 
-    expect(channelTTL).to.equal("60");
+      expect(channelTTL).to.equal("60");
+    });
   });
 
   it("should return 15 articles", () => {
-    const articles = feed.querySelectorAll("item");
+    cy.request(feedPath).then(async (res) => {
+      const feed = XMLToDOM(res.body);
+      const articles = feed.querySelectorAll("item");
 
-    expect([...articles]).to.have.lengthOf(15);
+      expect([...articles]).to.have.lengthOf(15);
+    });
   });
 });
