@@ -19,8 +19,8 @@ describe("Author page", () => {
     cy.get(selectors.authorPostCount).should("be.visible");
   });
 
-  it(`should show ${Cypress.env("postsPerPage")} posts on load`, () => {
-    cy.getPostCards().should("have.length", Cypress.env("postsPerPage"));
+  it(`should show 25 posts on load`, () => {
+    cy.getPostCards().should("have.length", 25);
   });
 
   it("should show the correct number of total posts", () => {

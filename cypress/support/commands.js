@@ -25,7 +25,7 @@
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
 const calculateClicks = (total) => {
-  const postsPerPage = Number(Cypress.env("postsPerPage"));
+  const postsPerPage = 25;
 
   // If returning the num of clicks, subtract 1 because the first page is
   // fully populated
