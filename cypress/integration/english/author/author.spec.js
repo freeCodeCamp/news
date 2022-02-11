@@ -1,3 +1,8 @@
+const {
+  getPostCards,
+  loadAndSumAllPostCards,
+} = require("../../../support/utils/post-cards");
+
 const selectors = {
   authorName: "[data-test-label='author-name']",
   authorLocation: "[data-test-label='author-location']",
@@ -20,11 +25,11 @@ describe("Author page", () => {
   });
 
   it(`should show 25 posts on load`, () => {
-    cy.getPostCards().should("have.length", 25);
+    getPostCards().should("have.length", 25);
   });
 
   it("should show the correct number of total posts", () => {
-    cy.loadAndSumAllPostCards(selectors.authorPostCount);
+    loadAndSumAllPostCards(selectors.authorPostCount);
   });
 
   it("should not show the author's location and post count on screens < 500px", () => {
