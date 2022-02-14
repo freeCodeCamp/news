@@ -19,7 +19,7 @@ describe("Tag page", () => {
 
   // To do: run tests against a tag with more total posts
   it(`should show 7 posts on load`, () => {
-    getPostCards().should("have.length", 7);
+    getPostCards().should("have.length.gte", 7);
   });
 
   it("should show the correct number of total posts", () => {
