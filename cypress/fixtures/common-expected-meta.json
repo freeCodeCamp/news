@@ -9,6 +9,7 @@
     "width": 1920,
     "height": 1080
   },
+  "faviconUrl": "https://cdn.freecodecamp.org/universal/favicons/favicon.ico",
   "generator": "Eleventy",
   "facebook": {
     "url": "https://www.facebook.com/freecodecamp"
