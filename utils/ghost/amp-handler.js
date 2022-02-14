@@ -62,6 +62,18 @@ const ampHandler = async (obj) => {
     return ampEl;
   };
 
+  const setDefaultDimensions = (ampEl) => {
+    const width = ampEl.getAttribute("width");
+    const height = ampEl.getAttribute("height");
+    const layout = ampEl.getAttribute("layout");
+
+    if (!width || width.includes("%")) ampEl.setAttribute("width", 600);
+    if (!height || height.includes("%")) ampEl.setAttribute("height", 400);
+    if (!layout) ampEl.setAttribute("layout", "responsive");
+
+    return ampEl;
+  };
+
   await Promise.all(
     // Create <amp-img> and <amp-anim> elements
     imgEls.map(async (img) => {
@@ -127,15 +139,7 @@ const ampHandler = async (obj) => {
       }
 
       ampEl.setAttribute("frameborder", "0");
-
-      if (
-        !ampEl.getAttribute("width") ||
-        !ampEl.getAttribute("height") ||
-        !ampEl.getAttribute("layout")
-      ) {
-        ampEl.setAttribute("width", ampEl.width ? ampEl.width : 600);
-        ampEl.setAttribute("height", ampEl.height ? ampEl.height : 400);
-      }
+      ampEl = setDefaultDimensions(ampEl);
 
       iframe.replaceWith(ampEl);
     }),
@@ -149,7 +153,8 @@ const ampHandler = async (obj) => {
 
     // Create <amp-video> elements
     videoEls.map((video) => {
-      const ampVideo = createAmpAudioOrVideo("amp-video", video);
+      let ampVideo = createAmpAudioOrVideo("amp-video", video);
+      ampVideo = setDefaultDimensions(ampVideo);
 
       video.replaceWith(ampVideo);
     })
