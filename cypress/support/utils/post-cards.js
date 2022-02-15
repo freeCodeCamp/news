@@ -14,7 +14,7 @@ const loadAndSumAllPostCards = (selector) => {
     .then((text) => {
       const loadMoreSelector = "[data-test-label='load-more-articles-button']";
       const totalPosts = Number(text.trim().match(/\d+/)[0]);
-      let numOfClicks = calculateClicks(totalPosts);
+      const numOfClicks = calculateClicks(totalPosts);
 
       cy.intercept("GET", /\/news\/(author|tag)\/.+\/\d+/).as("fetchNextPage");
 
