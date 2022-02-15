@@ -1,77 +1,77 @@
 {
   "buttons": {
-    "forum": "Forum",
-    "donate": "Donate",
-    "load-more-articles": "Load More Articles"
+    "forum": "المنتدي",
+    "donate": "تبرع",
+    "load-more-articles": "المزيد من المقالات"
   },
   "search": {
-    "label": "Search",
-    "accessible-name": "Submit your search query",
-    "placeholder": "Search 8,000+ tutorials",
-    "see-results": "See all results for {{ searchQuery }}",
-    "no-tutorials": "No tutorials found"
+    "label": "ابحث",
+    "accessible-name": "إرسال استعلام البحث الخاص بك",
+    "placeholder": "ابحث في ٦٠+ درس",
+    "see-results": "مشاهدة كافة النتائج لـ {{ searchQuery }}",
+    "no-tutorials": "لم يتم العثور على دروس"
   },
-  "banner": "Learn to code — {{ <0> }}free 3,000-hour curriculum{{ </0> }}",
+  "banner": "{{ <0> }}الدردشة مع المطورين الآخرين باللغة العربية{{ </0> }}",
   "author": {
-    "no-posts": "No posts",
-    "one-post": "1 post",
-    "multiple-posts": "{{ postCount }} posts",
-    "read-more": "Read {{ <0> }}more posts{{ </0> }} by this {{ role }}."
+    "no-posts": "لا يوجد مقالات",
+    "one-post": "مقال ١",
+    "multiple-posts": "{{ postCount }} مقالات",
+    "read-more": "اقرأ {{ <0> }}مقالات اكثر{{ </0> }} من تأليف {{ role }}."
   },
   "tag": {
-    "no-posts": "A collection of posts",
-    "one-post": "A collection of 1 post",
-    "multiple-posts": "A collection of {{ postCount }} posts"
+    "no-posts": "مجموعة من المقالات",
+    "one-post": "مجموعة من مقال ١",
+    "multiple-posts": "مجموعة من {{ postCount }} مقال/مقالات"
   },
   "404": {
-    "page-not-found": "Page not found",
-    "go-to-front-page": "Go to the front page"
+    "page-not-found": "الصفحة غير موجودة",
+    "go-to-front-page": "اذهب للصفحة الامامية"
   },
   "social-row": {
-    "author-has-twitter": "If you read this far, tweet to the author to show them you care. {{ <0> }}Tweet a thanks{{ </0> }}",
-    "author-no-twitter": "If this article was helpful, {{ <0> }}tweet it{{ </0> }}.",
-    "default-tweet": "Thank you {{ twitter }} for writing this helpful article."
+    "author-has-twitter": "إذا قرأت لهذا الحد ، فغرد للمؤلف لتظهر له أنك تهتم. {{ <0> }}اشكره علي تويتر{{ </0> }}",
+    "author-no-twitter": "إذا كانت هذه المقالة مفيدة, {{ <0> }}شاركها علي تويتر{{ </0> }}.",
+    "default-tweet": "شكرا لك {{ twitter }} لكتابة هذا المقال المفيد."
   },
-  "learn-to-code-cta": "Learn to code for free. freeCodeCamp's open source curriculum has helped more than 40,000 people get jobs as developers. {{ <0> }}Get started{{ </0> }}",
+  "learn-to-code-cta": "تعلم البرمجة مجانا. ساعد منهج freeCodeCamp مفتوح المصدر أكثر من ٤٠ ألف شخص في الحصول على وظائف كمطورين. {{ <0> }}ابدأ الان{{ </0> }}",
   "localization-meta": {
     "roles": {
-      "author": "author",
-      "translator": "translator"
+      "author": "المؤلف",
+      "translator": "المترجم"
     },
     "card-name": "{{ role }}: {{ name }}",
     "languages": {
-      "en": "English",
-      "es": "Spanish",
-      "zh": "Chinese",
-      "pt-br": "Portuguese",
-      "it": "Italian"
+      "en": "الانجليزية",
+      "es": "الاسبانية",
+      "zh": "الصينية",
+      "pt-br": "البرتغالية",
+      "it": "الايطالية"
     }
   },
-  "embed-title": "Embedded content",
+  "embed-title": "محتوى مضمن",
   "footer": {
-    "tax-exempt-status": "freeCodeCamp is a donor-supported tax-exempt 501(c)(3) nonprofit organization (United States Federal Tax Identification Number: 82-0779546)",
-    "mission-statement": "Our mission: to help people learn to code for free. We accomplish this by creating thousands of videos, articles, and interactive coding lessons - all freely available to the public. We also have thousands of freeCodeCamp study groups around the world.",
-    "donation-initiatives": "Donations to freeCodeCamp go toward our education initiatives, and help pay for servers, services, and staff.",
-    "donate-text": "You can {{ <0> }}make a tax-deductible donation here{{ </0> }}.",
-    "trending-guides": "Trending Guides",
-    "our-nonprofit": "Our Nonprofit",
+    "tax-exempt-status": "freeCodeCamp هي منظمة غير ربحية معفاة من الضرائب 501 (c) (3) مدعومة من المتبرعين (رقم التعريف الضريبي الفيدرالي للولايات المتحدة: 82-0779546)",
+    "mission-statement": "مهمتنا: مساعدة الناس على تعلم البرمجة مجانًا. نحقق ذلك من خلال إنشاء الآلاف من مقاطع الفيديو والمقالات ودروس البرمجة التفاعلية - وكلها متاحة مجانًا للجمهور. لدينا أيضًا الآلاف من مجموعات دراسة freeCodeCamp حول العالم.",
+    "donation-initiatives": "تذهب التبرعات إلى freeCodeCamp نحو مبادراتنا التعليمية وتساعد في دفع تكاليف الخوادم والخدمات والموظفين.",
+    "donate-text": "يمكنك {{ <0> }}تقديم تبرع معفى من الضرائب هنا{{ </0> }}.",
+    "trending-guides": "اشهر المقالات",
+    "our-nonprofit": "منظمتنا غير الربحية",
     "links": {
-      "about": "About",
-      "alumni": "Alumni Network",
-      "open-source": "Open Source",
-      "shop": "Shop",
-      "support": "Support",
-      "sponsors": "Sponsors",
-      "honesty": "Academic Honesty",
-      "coc": "Code of Conduct",
-      "privacy": "Privacy Policy",
-      "tos": "Terms of Service",
-      "copyright": "Copyright Policy"
+      "about": "حول المنظمة",
+      "alumni": "شبكة الخريجين",
+      "open-source": "المصدر المفتوح",
+      "shop": "تبضع",
+      "support": "الدعم",
+      "sponsors": "الرعاة",
+      "honesty": "الصدق الأكاديمي",
+      "coc": "قواعد السلوك",
+      "privacy": "سياسة الخصوصية",
+      "tos": "شروط الخدمة",
+      "copyright": "سياسة حقوق النشر"
     }
   },
   "fallback": {
-    "message": "Your browser doesn't support HTML5 {{ element }}.",
-    "audio": "audio",
-    "video": "video"
+    "message": "متصفحك لا يدعم HTML5 {{ element }}.",
+    "audio": "الصوت",
+    "video": "الفيديو"
   }
 }
