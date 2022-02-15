@@ -8,7 +8,7 @@ const calculateClicks = (total) => {
 
 const getPostCards = () => cy.get(".post-feed").find(".post-card");
 
-const loadAndSumAllPostCards = (selector) => {
+const loadAndCountAllPostCards = (selector) => {
   cy.get(selector)
     .invoke("text")
     .then((text) => {
@@ -30,5 +30,5 @@ const loadAndSumAllPostCards = (selector) => {
 
 module.exports = {
   getPostCards,
-  loadAndSumAllPostCards,
+  loadAndCountAllPostCards,
 };

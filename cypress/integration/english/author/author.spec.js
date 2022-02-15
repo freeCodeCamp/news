@@ -1,6 +1,6 @@
 const {
   getPostCards,
-  loadAndSumAllPostCards,
+  loadAndCountAllPostCards,
 } = require("../../../support/utils/post-cards");
 
 const selectors = {
@@ -29,7 +29,7 @@ describe("Author page", () => {
   });
 
   it("should show the correct number of total posts", () => {
-    loadAndSumAllPostCards(selectors.authorPostCount);
+    loadAndCountAllPostCards(selectors.authorPostCount);
   });
 
   it("should not show the author's location and post count on screens < 500px", () => {

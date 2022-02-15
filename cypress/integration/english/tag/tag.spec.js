@@ -1,6 +1,6 @@
 const {
   getPostCards,
-  loadAndSumAllPostCards,
+  loadAndCountAllPostCards,
 } = require("../../../support/utils/post-cards");
 
 const selectors = {
@@ -23,6 +23,6 @@ describe("Tag page", () => {
   });
 
   it("should show the correct number of total posts", () => {
-    loadAndSumAllPostCards(selectors.tagPostCount);
+    loadAndCountAllPostCards(selectors.tagPostCount);
   });
 });
