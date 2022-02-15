@@ -1,5 +1,5 @@
 const calculateClicks = (total) => {
-  const postsPerPage = 25;
+  const postsPerPage = Cypress.env("postsPerPage");
 
   // If returning the num of clicks, subtract 1 because the first page is
   // fully populated
