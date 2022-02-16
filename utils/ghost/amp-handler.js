@@ -65,11 +65,9 @@ const ampHandler = async (obj) => {
   const setDefaultDimensions = (ampEl) => {
     const width = ampEl.getAttribute("width");
     const height = ampEl.getAttribute("height");
-    const layout = ampEl.getAttribute("layout");
 
     if (!width || width.includes("%")) ampEl.setAttribute("width", 600);
     if (!height || height.includes("%")) ampEl.setAttribute("height", 400);
-    if (!layout) ampEl.setAttribute("layout", "responsive");
 
     return ampEl;
   };
@@ -154,6 +152,8 @@ const ampHandler = async (obj) => {
     // Create <amp-video> elements
     videoEls.map((video) => {
       let ampVideo = createAmpAudioOrVideo("amp-video", video);
+      // Make all videos responsive
+      ampVideo.setAttribute("layout", "responsive");
       ampVideo = setDefaultDimensions(ampVideo);
 
       video.replaceWith(ampVideo);
