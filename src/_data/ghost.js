@@ -156,12 +156,12 @@ module.exports = async () => {
       // Filter out paginated authors / tags if they exist
       .filter((obj) => (obj.page ? obj.page === 0 : obj))
       .map((obj) => {
+        const feedObj = cloneDeep(obj);
         // The main feed shows the last 10 posts. Tag and author
         // pages show the last 15 posts
-        const feedPostLimit = obj.path === "/" ? 10 : 15;
-        const allPosts = cloneDeep(obj.posts);
+        const feedPostLimit = feedObj.path === "/" ? 10 : 15;
 
-        obj.posts = allPosts.slice(0, feedPostLimit).map((post) => {
+        feedObj.posts = feedObj.posts.slice(0, feedPostLimit).map((post) => {
           // Append the feature image to the post content
           if (post.feature_image)
             post.html =
@@ -171,7 +171,7 @@ module.exports = async () => {
           return post;
         });
 
-        return obj;
+        return feedObj;
       });
 
   const feeds = [
@@ -179,11 +179,11 @@ module.exports = async () => {
     getCollectionFeeds([
       {
         path: "/",
-        posts: [...posts],
+        posts,
       },
     ]),
-    getCollectionFeeds([...authors]),
-    getCollectionFeeds([...tags]),
+    getCollectionFeeds(authors),
+    getCollectionFeeds(tags),
   ].flat();
 
   return {
