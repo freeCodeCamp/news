@@ -4,8 +4,8 @@ const {
   algoliaIndex,
   adsEnabled,
   googleAdsenseDataAdClient,
-  googleAdsenseDataAdSlot,
-} = require("../../config");
+  googleAdsenseDataAdSlot
+} = require('../../config');
 
 module.exports = {
   algoliaAppId,
@@ -13,5 +13,5 @@ module.exports = {
   algoliaIndex,
   adsEnabled,
   googleAdsenseDataAdClient,
-  googleAdsenseDataAdSlot,
+  googleAdsenseDataAdSlot
 };

@@ -1,34 +1,34 @@
-const calculateClicks = (total) => {
-  const postsPerPage = Cypress.env("postsPerPage");
+const calculateClicks = total => {
+  const postsPerPage = Cypress.env('postsPerPage');
 
   // If returning the num of clicks, subtract 1 because the first page is
   // fully populated
   return total <= postsPerPage ? 0 : Math.ceil(total / postsPerPage) - 1;
 };
 
-const getPostCards = () => cy.get(".post-feed").find(".post-card");
+const getPostCards = () => cy.get('.post-feed').find('.post-card');
 
-const loadAndCountAllPostCards = (selector) => {
+const loadAndCountAllPostCards = selector => {
   cy.get(selector)
-    .invoke("text")
-    .then((text) => {
+    .invoke('text')
+    .then(text => {
       const loadMoreSelector = "[data-test-label='load-more-articles-button']";
       const totalPosts = Number(text.trim().match(/\d+/)[0]);
       const numOfClicks = calculateClicks(totalPosts);
 
-      cy.intercept("GET", /\/news\/(author|tag)\/.+\/\d+/).as("fetchNextPage");
+      cy.intercept('GET', /\/news\/(author|tag)\/.+\/\d+/).as('fetchNextPage');
 
       Cypress._.times(numOfClicks, () => {
         cy.get(loadMoreSelector).click();
 
-        cy.wait("@fetchNextPage");
+        cy.wait('@fetchNextPage');
       });
 
-      getPostCards().should("have.length", totalPosts);
+      getPostCards().should('have.length', totalPosts);
     });
 };
 
 module.exports = {
   getPostCards,
-  loadAndCountAllPostCards,
+  loadAndCountAllPostCards
 };

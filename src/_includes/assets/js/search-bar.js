@@ -1,19 +1,19 @@
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener('DOMContentLoaded', () => {
   const screenWidth = window.screen.width;
   const screenHeight = window.screen.height;
   const hitsToRender = screenWidth >= 767 && screenHeight >= 768 ? 8 : 5;
-  const searchForm = document.getElementById("search-form");
-  const input = document.getElementById("search-input");
-  const dropdownContainer = document.getElementById("dropdown-container");
+  const searchForm = document.getElementById('search-form');
+  const input = document.getElementById('search-input');
+  const dropdownContainer = document.getElementById('dropdown-container');
   let searchQuery, hitSelected, hits;
 
-  input.addEventListener("input", (e) => {
+  input.addEventListener('input', e => {
     searchQuery = e.target.value;
   });
 
   // Prevent form from being submitted with magnifying
   // glass or enter when there is no query or hits
-  searchForm.addEventListener("submit", (e) => {
+  searchForm.addEventListener('submit', e => {
     e.preventDefault();
 
     submitSearch();
@@ -21,13 +21,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // eslint-disable-next-line no-undef
   const search = autocomplete(
-    "#search-input",
+    '#search-input',
     {
       hint: false,
-      keyboardShortcuts: ["s", 191],
+      keyboardShortcuts: ['s', 191],
       openOnFocus: true,
       appendTo: dropdownContainer,
-      debug: true, // allow tabbing through results
+      debug: true // allow tabbing through results
     },
     [
       {
@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
         source: autocomplete.sources.hits(index, { hitsPerPage: hitsToRender }),
         debounce: 250,
         templates: {
-          suggestion: (suggestion) => {
+          suggestion: suggestion => {
             hits = true;
             return `
             <a href="${suggestion.url}">
@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
             </div>
           `;
           },
-          footer: (query) => {
+          footer: query => {
             if (!query.isEmpty) {
               return `
               <div class="aa-suggestion footer-suggestion">
@@ -69,11 +69,11 @@ document.addEventListener("DOMContentLoaded", () => {
               </div>
             `;
             }
-          },
-        },
-      },
+          }
+        }
+      }
     ]
-  ).on("autocomplete:selected", (event, suggestion, dataset, context) => {
+  ).on('autocomplete:selected', (event, suggestion, dataset, context) => {
     // If article is selected, set to URL of the article.
     // If footer is selected, set to search results path
     hitSelected = suggestion
@@ -82,8 +82,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Let browser handle click, and do not go to selection on tab key press
     if (
-      context.selectionMethod === "click" ||
-      context.selectionMethod === "tabKey"
+      context.selectionMethod === 'click' ||
+      context.selectionMethod === 'tabKey'
     ) {
       return;
     }
@@ -97,10 +97,10 @@ document.addEventListener("DOMContentLoaded", () => {
   // Go to highlighted hit or search for current query
   // when magnifying glass or enter is pressed
   function submitSearch() {
-    hitSelected = document.getElementsByClassName("aa-cursor")[0];
+    hitSelected = document.getElementsByClassName('aa-cursor')[0];
 
     if (hitSelected && searchQuery) {
-      const articleUrl = hitSelected.querySelector("a").href;
+      const articleUrl = hitSelected.querySelector('a').href;
       window.location.assign(articleUrl);
     } else if (!hitSelected && searchQuery && hits) {
       window.location.assign(`{{ site.url }}/search?query=${searchQuery}`);
@@ -108,7 +108,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // close dropbar when clicking off
-  document.addEventListener("click", (e) => {
+  document.addEventListener('click', e => {
     if (e.target !== input) {
       search.autocomplete.close();
     }

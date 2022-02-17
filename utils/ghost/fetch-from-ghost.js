@@ -1,8 +1,8 @@
-const { sourceApi } = require("./api");
-const processGhostResponse = require("./process-ghost-response");
+const { sourceApi } = require('./api');
+const processGhostResponse = require('./process-ghost-response');
 
-const wait = (seconds) => {
-  return new Promise((resolve) => {
+const wait = seconds => {
+  return new Promise(resolve => {
     setTimeout(() => {
       resolve(seconds);
     }, seconds * 1000);
@@ -18,9 +18,9 @@ const fetchFromGhost = async (endpoint, options) => {
     const ghostRes = await sourceApi[endpoint]
       .browse({
         ...options,
-        page: currPage,
+        page: currPage
       })
-      .catch((err) => {
+      .catch(err => {
         console.error(err);
       });
 
@@ -29,7 +29,7 @@ const fetchFromGhost = async (endpoint, options) => {
     currPage = ghostRes.meta.pagination.next;
 
     const resolvedData = await processGhostResponse(ghostRes, endpoint);
-    resolvedData.forEach((post) => data.push(post));
+    resolvedData.forEach(post => data.push(post));
 
     await wait(0.1);
   }

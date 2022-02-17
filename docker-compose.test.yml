@@ -1,4 +1,4 @@
-version: "3"
+version: '3'
 services:
   mock-web:
     image: nginx
@@ -6,7 +6,7 @@ services:
       - ./mock-www/html:/usr/share/nginx/html
       - ./mock-www/nginx.conf:/etc/nginx/conf.d/default.conf
     ports:
-      - "80:80"
+      - '80:80'
     depends_on:
       - news
   news:
@@ -14,4 +14,4 @@ services:
       context: .
       dockerfile: ./docker-config/Dockerfile
     ports:
-      - "3000:3000"
+      - '3000:3000'

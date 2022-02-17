@@ -144,7 +144,9 @@ jobs:
         uses: azure/webapps-deploy@v2
         with:
           app-name: freecodecamp-news-${{ matrix.site_tlds }}-${{ matrix.languages }}
-          images: ${{ secrets.ACR_NAME }}.azurecr.io/${{ matrix.site_tlds }}/news-${{ matrix.languages }}:${{ github.sha }}
+          images:
+            ${{ secrets.ACR_NAME }}.azurecr.io/${{ matrix.site_tlds }}/news-${{
+            matrix.languages }}:${{ github.sha }}
 
       - name: Remove Old images
         run: |

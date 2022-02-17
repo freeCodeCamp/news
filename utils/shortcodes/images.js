@@ -5,8 +5,8 @@ const ghostImageRe = /\/content\/images\/\d+\/\d+\//g;
 // Handle images from Ghost and from third-parties
 function imageShortcode(src, cls, alt, sizes, widths, dimensions, lazyLoad) {
   const imageUrls = src.match(ghostImageRe)
-    ? widths.map((width) =>
-        src.replace("/content/images/", `/content/images/size/w${width}/`)
+    ? widths.map(width =>
+        src.replace('/content/images/', `/content/images/size/w${width}/`)
       )
     : [src];
 
@@ -17,14 +17,14 @@ function imageShortcode(src, cls, alt, sizes, widths, dimensions, lazyLoad) {
           ? widths.map((width, i) => `${imageUrls[i]} ${width}w`).join()
           : imageUrls[0]
       }"
-      sizes="${sizes.replace(/\s+/g, " ").trim()}"
+      sizes="${sizes.replace(/\s+/g, ' ').trim()}"
       src="${imageUrls[imageUrls.length - 1]}"
       class="${cls}"
       alt="${alt}"
       width="${dimensions.width}"
       height="${dimensions.height}"
       onerror="this.style.display='none'"
-      ${lazyLoad ? 'loading="lazy"' : ""}
+      ${lazyLoad ? 'loading="lazy"' : ''}
     />
   `;
 }
@@ -32,8 +32,8 @@ function imageShortcode(src, cls, alt, sizes, widths, dimensions, lazyLoad) {
 // Copy images over from Ghost
 function featureImageShortcode(src, alt, sizes, widths, dimensions) {
   const imageUrls = src.match(ghostImageRe)
-    ? widths.map((width) =>
-        src.replace("/content/images/", `/content/images/size/w${width}/`)
+    ? widths.map(width =>
+        src.replace('/content/images/', `/content/images/size/w${width}/`)
       )
     : [src];
 
@@ -46,7 +46,7 @@ function featureImageShortcode(src, alt, sizes, widths, dimensions) {
       />
       <source 
         media="(min-width: 701px)"
-        sizes="${sizes.replace(/\s+/g, " ").trim()}"
+        sizes="${sizes.replace(/\s+/g, ' ').trim()}"
         srcset="${
           imageUrls.length === widths.length
             ? widths.map((width, i) => `${imageUrls[i]} ${width}w`).join()
@@ -66,5 +66,5 @@ function featureImageShortcode(src, alt, sizes, widths, dimensions) {
 
 module.exports = {
   imageShortcode,
-  featureImageShortcode,
+  featureImageShortcode
 };

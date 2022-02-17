@@ -1,4 +1,4 @@
-const { postsPerPage } = require("../../config");
+const { postsPerPage } = require('../../config');
 
 module.exports = (on, config) => {
   config.env.postsPerPage = postsPerPage;

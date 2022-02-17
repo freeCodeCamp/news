@@ -1,8 +1,8 @@
-const ghostContentAPI = require("@tryghost/content-api");
-const { URL } = require("url");
-const { fetchKeys } = require("./api");
-const { locales } = require("../../config");
-const { setImageDimensionObj } = require("./helpers");
+const ghostContentAPI = require('@tryghost/content-api');
+const { URL } = require('url');
+const { fetchKeys } = require('./api');
+const { locales } = require('../../config');
+const { setImageDimensionObj } = require('./helpers');
 
 const ghostURLToAPIMap = locales.reduce((obj, currLocale) => {
   const { url, key, version } = fetchKeys(currLocale);
@@ -10,7 +10,7 @@ const ghostURLToAPIMap = locales.reduce((obj, currLocale) => {
   try {
     obj[url] = {
       api: new ghostContentAPI({ url, key, version }),
-      locale_i18n: currLocale,
+      locale_i18n: currLocale
     };
   } catch (err) {
     console.warn(`
@@ -29,7 +29,7 @@ const ghostURLToAPIMap = locales.reduce((obj, currLocale) => {
   return obj;
 }, {});
 
-const originalPostHandler = async (post) => {
+const originalPostHandler = async post => {
   const originalPostRegex =
     /const\s+fccOriginalPost\s+=\s+("|')(?<url>.*)\1;?/g;
   const match = originalPostRegex.exec(post.codeinjection_head);
@@ -37,13 +37,13 @@ const originalPostHandler = async (post) => {
   if (match) {
     try {
       const { origin, pathname } = new URL(match.groups.url);
-      let pathSegments = pathname.split("/").filter((str) => str);
+      let pathSegments = pathname.split('/').filter(str => str);
       const originalPostSlug = pathSegments.pop();
-      const originalPostGhostURL = `${origin}/${pathSegments.join("/")}`;
+      const originalPostGhostURL = `${origin}/${pathSegments.join('/')}`;
       const { api, locale_i18n } = ghostURLToAPIMap[originalPostGhostURL];
       const originalPostRes = await api.posts.read({
-        include: "authors",
-        slug: originalPostSlug,
+        include: 'authors',
+        slug: originalPostSlug
       });
 
       const { title, published_at, primary_author, url } = originalPostRes;
@@ -51,7 +51,7 @@ const originalPostHandler = async (post) => {
       if (originalPostRes.primary_author.profile_image) {
         await setImageDimensionObj(
           originalPostRes.primary_author,
-          "profile_image",
+          'profile_image',
           originalPostRes.primary_author.profile_image
         );
       }
@@ -61,7 +61,7 @@ const originalPostHandler = async (post) => {
         url,
         published_at,
         primary_author,
-        locale_i18n,
+        locale_i18n
       };
     } catch (err) {
       console.warn(err);

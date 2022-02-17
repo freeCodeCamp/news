@@ -1,21 +1,21 @@
-const { setImageDimensionObj } = require("./helpers");
-const ampHandler = require("./amp-handler");
-const lazyLoadHandler = require("./lazy-load-handler");
-const originalPostHandler = require("./original-post-handler");
+const { setImageDimensionObj } = require('./helpers');
+const ampHandler = require('./amp-handler');
+const lazyLoadHandler = require('./lazy-load-handler');
+const originalPostHandler = require('./original-post-handler');
 
 const processGhostResponse = async (ghostRes, context) => {
   // Process post / page
   const processedData = await Promise.all(
-    ghostRes.map(async (obj) => {
+    ghostRes.map(async obj => {
       // Post image resolutions for structured data
       if (obj.feature_image)
-        await setImageDimensionObj(obj, "feature_image", obj.feature_image);
+        await setImageDimensionObj(obj, 'feature_image', obj.feature_image);
 
       // Author image resolutions for structured data
       if (obj.primary_author.profile_image) {
         await setImageDimensionObj(
           obj.primary_author,
-          "profile_image",
+          'profile_image',
           obj.primary_author.profile_image
         );
       }
@@ -23,14 +23,14 @@ const processGhostResponse = async (ghostRes, context) => {
       if (obj.primary_author.cover_image) {
         await setImageDimensionObj(
           obj.primary_author,
-          "cover_image",
+          'cover_image',
           obj.primary_author.cover_image
         );
       }
 
-      obj.tags.map(async (tag) => {
+      obj.tags.map(async tag => {
         if (tag.feature_image)
-          await setImageDimensionObj(tag, "feature_image", tag.feature_image);
+          await setImageDimensionObj(tag, 'feature_image', tag.feature_image);
       });
 
       // Original author / translator feature
@@ -43,15 +43,15 @@ const processGhostResponse = async (ghostRes, context) => {
         obj.original_excerpt = obj.excerpt;
 
         obj.excerpt = obj.excerpt
-          .replace(/\n+/g, " ")
-          .split(" ")
+          .replace(/\n+/g, ' ')
+          .split(' ')
           .slice(0, 50)
-          .join(" ");
+          .join(' ');
       }
 
       // Handle AMP processing for posts before modifying the original
       // HTML and add flags to dynamically import AMP scripts
-      if (context === "posts" && obj.html) obj.amp = await ampHandler(obj);
+      if (context === 'posts' && obj.html) obj.amp = await ampHandler(obj);
 
       // Lazy load images and embedded videos
       if (obj.html) obj.html = await lazyLoadHandler(obj.html, obj.title);

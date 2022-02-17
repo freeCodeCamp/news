@@ -1,10 +1,10 @@
-const { parse } = require("path");
-const getImageDimensions = require("../get-image-dimensions");
+const { parse } = require('path');
+const getImageDimensions = require('../get-image-dimensions');
 
-const setDefaultAlt = (el) => {
+const setDefaultAlt = el => {
   const filename = parse(el.src).name;
 
-  el.setAttribute("alt", filename);
+  el.setAttribute('alt', filename);
   return el;
 };
 
@@ -19,5 +19,5 @@ const setImageDimensionObj = async (targetObj, targetKey, imageUrl) => {
 
 module.exports = {
   setDefaultAlt,
-  setImageDimensionObj,
+  setImageDimensionObj
 };
