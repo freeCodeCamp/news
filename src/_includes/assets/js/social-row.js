@@ -5,16 +5,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const thanks =
     `{% t 'social-row.default-tweet', { twitter: post.primary_author.twitter } %}` +
     `%0A%0A${title}%0A%0A${url}`;
-  const button = document.getElementById('tweet-btn');
-  const windowOpenStr = `window.open(
-    '${
-      twitter
-        ? `https://twitter.com/intent/tweet?text=${thanks}`
-        : `https://twitter.com/intent/tweet?text=${title}%0A%0A${url}`
-    }',
-    'share-twitter',
-    'width=550, height=235'
-  ); return false;`;
+  const button = document.getElementById("tweet-btn");
+  const twitterIntentStr = twitter
+    ? `https://twitter.com/intent/tweet?text=${thanks}`
+    : `https://twitter.com/intent/tweet?text=${title}%0A%0A${url}`;
 
-  button.setAttribute('onclick', windowOpenStr);
+  button.addEventListener("click", () => {
+    window.open(twitterIntentStr, "share-twitter", "width=550, height=235");
+    return false;
+  });
 });
