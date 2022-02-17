@@ -1,6 +1,6 @@
-document.addEventListener('DOMContentLoaded', () => {
-  const title = '{{ post.title | escape }}'.replace(/&#39;/g, '%27');
-  const twitter = '{{ post.primary_author.twitter }}';
+document.addEventListener("DOMContentLoaded", () => {
+  const title = "{{ post.title | urlencode }}".replace(/&#39;/g, "%27");
+  const twitter = "{{ post.primary_author.twitter }}";
   const url = window.location;
   const thanks =
     `{% t 'social-row.default-tweet', { twitter: post.primary_author.twitter } %}` +
