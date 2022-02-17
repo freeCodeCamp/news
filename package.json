@@ -32,7 +32,7 @@
     "lint:code": "eslint . --ext .js --cache",
     "lint:i18n-schema": "node ./i18n/schema-validation.js",
     "lint:pretty": "prettier --check .",
-    "format": "prettier --ignore-path .gitignore --write .",
+    "format": "prettier --write .",
     "prepare": "husky install"
   },
   "repository": {
