@@ -14,7 +14,7 @@ jobs:
       fail-fast: false
       matrix:
         node-version: [16.x]
-        languages: [chinese, espanol, italian, portuguese, japanese, arabic]
+        languages: [chinese, espanol, italian, portuguese, japanese]
         site_tlds: [dev, org]
 
     env:
