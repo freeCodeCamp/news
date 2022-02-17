@@ -3,7 +3,7 @@ name: Build and Deploy Localized News to Azure
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 0/6 * * *" # Build once every six hours
+    - cron: '0 0/6 * * *' # Build once every six hours
 
 jobs:
   build:
@@ -14,8 +14,7 @@ jobs:
       fail-fast: false
       matrix:
         node-version: [16.x]
-        # languages-pending: [arabic, ukrainian]
-        languages: [chinese, espanol, italian, portuguese, japanese]
+        languages: [chinese, espanol, italian, portuguese, japanese, arabic]
         site_tlds: [dev, org]
 
     env:
@@ -26,34 +25,41 @@ jobs:
 
       ENGLISH_GHOST_API_URL: ${{ secrets.ENGLISH_GHOST_API_URL }}
       ENGLISH_GHOST_API_VERSION: ${{ secrets.ENGLISH_GHOST_API_VERSION }}
-      ENGLISH_GHOST_CONTENT_API_KEY: ${{ secrets.ENGLISH_GHOST_CONTENT_API_KEY }}
+      ENGLISH_GHOST_CONTENT_API_KEY:
+        ${{ secrets.ENGLISH_GHOST_CONTENT_API_KEY }}
 
       CHINESE_GHOST_API_URL: ${{ secrets.CHINESE_GHOST_API_URL }}
       CHINESE_GHOST_API_VERSION: ${{ secrets.CHINESE_GHOST_API_VERSION }}
-      CHINESE_GHOST_CONTENT_API_KEY: ${{ secrets.CHINESE_GHOST_CONTENT_API_KEY }}
+      CHINESE_GHOST_CONTENT_API_KEY:
+        ${{ secrets.CHINESE_GHOST_CONTENT_API_KEY }}
 
       ESPANOL_GHOST_API_URL: ${{ secrets.ESPANOL_GHOST_API_URL }}
       ESPANOL_GHOST_API_VERSION: ${{ secrets.ESPANOL_GHOST_API_VERSION }}
-      ESPANOL_GHOST_CONTENT_API_KEY: ${{ secrets.ESPANOL_GHOST_CONTENT_API_KEY }}
+      ESPANOL_GHOST_CONTENT_API_KEY:
+        ${{ secrets.ESPANOL_GHOST_CONTENT_API_KEY }}
 
       ITALIAN_GHOST_API_URL: ${{ secrets.ITALIAN_GHOST_API_URL }}
       ITALIAN_GHOST_API_VERSION: ${{ secrets.ITALIAN_GHOST_API_VERSION }}
-      ITALIAN_GHOST_CONTENT_API_KEY: ${{ secrets.ITALIAN_GHOST_CONTENT_API_KEY }}
+      ITALIAN_GHOST_CONTENT_API_KEY:
+        ${{ secrets.ITALIAN_GHOST_CONTENT_API_KEY }}
 
       PORTUGUESE_GHOST_API_URL: ${{ secrets.PORTUGUESE_GHOST_API_URL }}
       PORTUGUESE_GHOST_API_VERSION: ${{ secrets.PORTUGUESE_GHOST_API_VERSION }}
-      PORTUGUESE_GHOST_CONTENT_API_KEY: ${{ secrets.PORTUGUESE_GHOST_CONTENT_API_KEY }}
+      PORTUGUESE_GHOST_CONTENT_API_KEY:
+        ${{ secrets.PORTUGUESE_GHOST_CONTENT_API_KEY }}
 
       JAPANESE_GHOST_API_URL: ${{ secrets.JAPANESE_GHOST_API_URL }}
       JAPANESE_GHOST_API_VERSION: ${{ secrets.JAPANESE_GHOST_API_VERSION }}
-      JAPANESE_GHOST_CONTENT_API_KEY: ${{ secrets.JAPANESE_GHOST_CONTENT_API_KEY }}
+      JAPANESE_GHOST_CONTENT_API_KEY:
+        ${{ secrets.JAPANESE_GHOST_CONTENT_API_KEY }}
 
       ARABIC_GHOST_API_URL: ${{ secrets.ARABIC_GHOST_API_URL }}
       ARABIC_GHOST_API_VERSION: ${{ secrets.ARABIC_GHOST_API_VERSION }}
       ARABIC_GHOST_CONTENT_API_KEY: ${{ secrets.ARABIC_GHOST_CONTENT_API_KEY }}
 
       ADS_ENABLED: ${{ secrets.ADS_ENABLED }}
-      GOOGLE_ADSENSE_DATA_AD_CLIENT: ${{ secrets.GOOGLE_ADSENSE_DATA_AD_CLIENT }}
+      GOOGLE_ADSENSE_DATA_AD_CLIENT:
+        ${{ secrets.GOOGLE_ADSENSE_DATA_AD_CLIENT }}
       GOOGLE_ADSENSE_DATA_AD_SLOT: ${{ secrets.GOOGLE_ADSENSE_DATA_AD_SLOT }}
 
       POSTS_PER_PAGE: ${{ secrets.POSTS_PER_PAGE }}
@@ -114,7 +120,6 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        # languages-pending: [arabic, ukrainian]
         languages: [chinese, espanol, italian, portuguese, japanese]
         site_tlds: [dev, org]
 
@@ -133,7 +138,8 @@ jobs:
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
-          app-name: freecodecamp-news-${{ matrix.site_tlds }}-${{ matrix.languages }}
+          app-name:
+            freecodecamp-news-${{ matrix.site_tlds }}-${{ matrix.languages }}
           images:
             ${{ secrets.ACR_NAME }}.azurecr.io/${{ matrix.site_tlds }}/news-${{
             matrix.languages }}:latest
