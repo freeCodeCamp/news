@@ -121,7 +121,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 40px 10px 30px 10px;
+  padding: 40px 10px 30px;
   margin-top: calc(var(--header-height) * 2);
   min-height: 200px;
   text-align: center;
@@ -234,7 +234,7 @@ The knock-on effect of this is ugly browser-scroll bars at the bottom, so 80px o
   display: block;
   width: 210px;
   height: 24px;
-  margin: 7px 0px;
+  margin: 7px 0;
 }
 
 .nav {
@@ -293,7 +293,7 @@ a.nav-forum {
 }
 
 .toggle-button-nav {
-  padding: 0px 14px;
+  padding: 0 14px;
   outline: none;
   cursor: pointer;
   margin-right: 5px;
@@ -388,7 +388,7 @@ a.nav-forum {
     padding-left: 0;
   }
   .site-nav-middle {
-    margin-left: 0px;
+    margin-left: 0;
   }
   .nav {
     display: none;
@@ -402,12 +402,12 @@ a.nav-forum {
 @media (min-width: 1000px) {
   .site-nav-middle {
     flex: 1 0 20%;
-    margin-right: 0px;
+    margin-right: 0;
   }
   .site-nav-left {
     display: flex;
     flex: 1 0 35%;
-    margin-left: 0px;
+    margin-left: 0;
   }
   .site-nav-logo {
     margin-left: auto;
@@ -428,7 +428,7 @@ a.nav-forum {
   flex-wrap: wrap;
   margin: 0 -20px;
   max-width: 875px;
-  padding: 40px 0 0 0;
+  padding: 40px 0 0;
 }
 
 .post-card {
@@ -460,7 +460,7 @@ a.nav-forum {
 .post-card-content-link {
   position: relative;
   display: block;
-  padding: 5px 0px 0px 0px;
+  padding: 5px 0 0;
   color: var(--gray90);
 }
 
@@ -611,7 +611,7 @@ a.nav-forum {
 
 .author-list-item:hover .author-name-tooltip {
   opacity: 1;
-  transform: translateY(0px);
+  transform: translateY(0);
 }
 
 @media (max-width: 650px) {
@@ -709,11 +709,11 @@ make sure this only happens on large viewports / desktop-ish devices.
   }
 
   .post-card .post-card-content-link {
-    padding: 0px 0px 0px 30px;
+    padding: 0 0 0 30px;
   }
 
   .post-card .post-card-meta {
-    padding: 0 0px 0px 34px;
+    padding: 0 0 0 34px;
   }
 }
 
@@ -747,12 +747,12 @@ make sure this only happens on large viewports / desktop-ish devices.
 /* ^ Required to make .post-full-content:before/after z-index stacking work */
 
 .post-full-header {
-  padding: 0vw 0vw 3vw;
+  padding: 0 0 3vw;
   max-width: 1040px;
 }
 @media (max-width: 500px) {
   .post-full-header {
-    padding: 0vw 0 8vw;
+    padding: 0 0 8vw;
   }
 }
 
@@ -953,7 +953,7 @@ Usage (In Ghost editor):
 }
 
 .post-full-content blockquote p {
-  margin: 0 0 1em 0;
+  margin: 0 0 1em;
   color: inherit;
   font-size: inherit;
   line-height: inherit;
@@ -1034,7 +1034,7 @@ Usage (In Ghost editor):
 }
 
 .post-full-content h1 {
-  margin: 0.5em 0 0.2em 0;
+  margin: 0.5em 0 0.2em;
   font-size: 4.6rem;
   font-weight: 700;
 }
@@ -1045,7 +1045,7 @@ Usage (In Ghost editor):
 }
 
 .post-full-content h2 {
-  margin: 0.5em 0 0.2em 0;
+  margin: 0.5em 0 0.2em;
   font-size: 3.6rem;
   font-weight: 700;
 }
@@ -1056,7 +1056,7 @@ Usage (In Ghost editor):
 }
 
 .post-full-content h3 {
-  margin: 0.5em 0 0.2em 0;
+  margin: 0.5em 0 0.2em;
   font-size: 2.8rem;
   font-weight: 700;
 }
@@ -1067,7 +1067,7 @@ Usage (In Ghost editor):
 }
 
 .post-full-content h4 {
-  margin: 0.5em 0 0.2em 0;
+  margin: 0.5em 0 0.2em;
   font-size: 2.8rem;
   font-weight: 700;
 }
@@ -1103,7 +1103,7 @@ Usage (In Ghost editor):
 }
 
 .post-full-content h6 {
-  margin: 0.5em 0 0.2em 0;
+  margin: 0.5em 0 0.2em;
   font-size: 2.3rem;
   font-weight: 700;
 }
@@ -1259,7 +1259,7 @@ pre.runkit-element {
 }
 
 .author-card-name {
-  margin: 8px 0 2px 0;
+  margin: 8px 0 2px;
   padding: 0;
   font-size: 2rem;
 }
@@ -1284,7 +1284,7 @@ pre.runkit-element {
 }
 
 .author-card-content span {
-  margin-top: 0px;
+  margin-top: 0;
   font-size: 2rem;
 }
 
@@ -1398,7 +1398,7 @@ pre.runkit-element {
 
 .author-list-item .author-card.hovered {
   opacity: 1;
-  transform: scale(1) translateY(0px);
+  transform: scale(1) translateY(0);
   pointer-events: auto;
 }
 
@@ -1406,7 +1406,7 @@ pre.runkit-element {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 30px 20px 20px 20px;
+  padding: 30px 20px 20px;
   color: #fff;
   background: var(--gray85);
 }
@@ -1567,7 +1567,7 @@ pre.runkit-element {
 
 .read-next-card-footer {
   position: relative;
-  margin: 15px 0 3px 0;
+  margin: 15px 0 3px;
   text-align: center;
 }
 
@@ -1694,7 +1694,7 @@ pre.runkit-element {
 }
 
 .kg-gallery-row:not(:first-of-type) {
-  margin: 0.75em 0 0 0;
+  margin: 0.75em 0 0;
 }
 
 .kg-gallery-image:not(:first-of-type) {
@@ -1743,7 +1743,7 @@ pre.runkit-element {
   color: var(--gray90);
   text-decoration: none;
   min-height: 148px;
-  box-shadow: 0px 2px 5px -1px rgba(0, 0, 0, 0.15), 0 0 1px rgba(0, 0, 0, 0.09);
+  box-shadow: 0 2px 5px -1px rgba(0, 0, 0, 0.15), 0 0 1px rgba(0, 0, 0, 0.09);
   border-radius: 3px;
 }
 
@@ -1855,7 +1855,7 @@ pre.runkit-element {
 .under-header-content .author-profile-image {
   z-index: 10;
   flex-shrink: 0;
-  margin: 0 0 20px 0;
+  margin: 0 0 20px;
   width: 150px;
   height: 150px;
   box-shadow: 0 0 0 6px var(--gray75);
@@ -1864,7 +1864,7 @@ pre.runkit-element {
 .under-header-content .author-bio {
   z-index: 10;
   flex-shrink: 0;
-  margin: 5px 0 10px 0;
+  margin: 5px 0 10px;
   max-width: 600px;
   font-size: 2rem;
   line-height: 1.3em;
@@ -1879,7 +1879,7 @@ pre.runkit-element {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0 0 10px 0;
+  margin: 0 0 10px;
   font-family: 'Lato', sans-serif;
   font-display: swap;
   font-style: italic;
@@ -1951,7 +1951,7 @@ pre.runkit-element {
 
 @media (max-width: 800px) {
   .error-description {
-    margin: 5px 0 0 0;
+    margin: 5px 0 0;
     font-size: 1.8rem;
   }
 }
@@ -2009,7 +2009,7 @@ pre.runkit-element {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  margin: 0px;
+  margin: 0;
 }
 
 .footer-col {
@@ -2029,7 +2029,7 @@ pre.runkit-element {
 }
 
 .footer-col a {
-  padding: 5px 0px;
+  padding: 5px 0;
 }
 
 .footer-desc-col {
@@ -2112,7 +2112,7 @@ p.footer-donation a:hover {
     flex-direction: column;
   }
   .footer-right {
-    padding-left: 0px;
+    padding-left: 0;
   }
   .footer-container .col-spacer {
     margin-top: 40px;
@@ -2259,7 +2259,7 @@ p.footer-donation a:hover {
   margin: 0 5px;
   background: var(--gray75);
   color: var(--gray15);
-  padding: 3px 4px 4px 4px;
+  padding: 3px 4px 4px;
   letter-spacing: 0.5px;
   margin-bottom: 8px;
 }
@@ -2279,11 +2279,11 @@ p.footer-donation a:hover {
 
 .social-row,
 .learn-cta-row {
-  margin: 2em 0 0 0;
+  margin: 2em 0 0;
 }
 
 .donation-row h4 {
-  margin: 0 0 1.5em 0;
+  margin: 0 0 1.5em;
 }
 
 /* a.donation-cta {
@@ -2317,7 +2317,7 @@ a.cta-button {
     flex-direction: row;
   }
   .donation-button {
-    margin: 0px 10px 0px 0px;
+    margin: 0 10px 0 0;
   }
 }
 
@@ -2342,7 +2342,7 @@ a.banner {
 }
 
 a.banner * {
-  margin: 0px;
+  margin: 0;
 }
 
 a.banner span {
@@ -2425,17 +2425,17 @@ a.banner:hover span {
 }
 
 .rtl-layout .post-card-tags a {
-  padding-right: 0px;
+  padding-right: 0;
   padding-left: 15px;
 }
 
 @media (min-width: 768px) {
   .rtl-layout .post-card .post-card-content-link {
-    padding: 0 30px 0 0px;
+    padding: 0 30px 0 0;
   }
 
   .rtl-layout .post-card .post-card-meta {
-    padding: 0 34px 0 0px;
+    padding: 0 34px 0 0;
   }
 }
 
@@ -2462,6 +2462,6 @@ a.banner:hover span {
 }
 
 .rtl-layout a.nav-forum {
-  margin-right: 0px;
+  margin-right: 0;
   margin-left: 19px;
 }
