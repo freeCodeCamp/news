@@ -344,7 +344,7 @@ ul,
 ol,
 dl,
 blockquote {
-  margin: 0 0 1.5em 0;
+  margin: 0 0 1.5em;
 }
 
 ol,
@@ -389,13 +389,13 @@ dt {
 }
 
 dd {
-  margin: 0 0 5px 0;
+  margin: 0 0 5px;
   text-align: left;
 }
 
 blockquote {
   margin: 1.5em 0;
-  padding: 0 1.6em 0 1.6em;
+  padding: 0 1.6em;
   border-left: var(--gray10) 0.5em solid;
 }
 
@@ -446,7 +446,7 @@ h6 {
 }
 
 h1 {
-  margin: 0 0 0.5em 0;
+  margin: 0 0 0.5em;
   font-size: 5rem;
   font-weight: 700;
 }
@@ -457,7 +457,7 @@ h1 {
 }
 
 h2 {
-  margin: 1.5em 0 0.5em 0;
+  margin: 1.5em 0 0.5em;
   font-size: 2rem;
 }
 @media (max-width: 500px) {
@@ -467,7 +467,7 @@ h2 {
 }
 
 h3 {
-  margin: 1.5em 0 0.5em 0;
+  margin: 1.5em 0 0.5em;
   font-size: 1.8rem;
   font-weight: 500;
 }
@@ -478,19 +478,19 @@ h3 {
 }
 
 h4 {
-  margin: 1.5em 0 0.5em 0;
+  margin: 1.5em 0 0.5em;
   font-size: 1.6rem;
   font-weight: 500;
 }
 
 h5 {
-  margin: 1.5em 0 0.5em 0;
+  margin: 1.5em 0 0.5em;
   font-size: 1.4rem;
   font-weight: 500;
 }
 
 h6 {
-  margin: 1.5em 0 0.5em 0;
+  margin: 1.5em 0 0.5em;
   font-size: 1.4rem;
   font-weight: 500;
 }
