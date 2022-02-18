@@ -2295,6 +2295,7 @@ p.footer-donation a:hover {
     margin-bottom: 1.5em;
 } */
 
+button.cta-button,
 a.cta-button {
   width: content;
   text-decoration: none;

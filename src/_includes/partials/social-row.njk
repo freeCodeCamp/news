@@ -1,9 +1,9 @@
 {% set i18nSocialRowTwitterKey = 'social-row.author-has-twitter' if post.primary_author.twitter else 'social-row.author-no-twitter' %}
 
-<p data-test-label="social-row" class="social-row" data-test-label="social-row">
+<p data-test-label="social-row" class="social-row">
     {% t i18nSocialRowTwitterKey, {
-        '<0>': '<a id="tweet-btn" class="cta-button">',
-        '</0>': '</a>',
+        '<0>': '<button id="tweet-btn" class="cta-button" data-test-label="tweet-button">',
+        '</0>': '</button>',
         interpolation: {
             escapeValue: false
         }
