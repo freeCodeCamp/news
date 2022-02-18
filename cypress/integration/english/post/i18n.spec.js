@@ -1,6 +1,7 @@
 const selectors = {
   socialRow: "[data-test-label='social-row']",
-  learnCtaRow: "[data-test-label='learn-cta-row']"
+  learnCtaRow: "[data-test-label='learn-cta-row']",
+  tweetButton: "[data-test-label='tweet-button']"
 };
 
 describe('Post i18n', () => {
@@ -17,7 +18,7 @@ describe('Post i18n', () => {
   it('the social row tweet button does not render its i18n keys', () => {
     cy.visit('/announcing-rust-course-replit-web');
 
-    cy.get(`${selectors.socialRow} a`)
+    cy.get(selectors.tweetButton)
       .should('have.attr', 'onclick')
       .should('not.contain', 'social-row.default-tweet');
   });
