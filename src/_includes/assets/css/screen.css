@@ -2409,8 +2409,7 @@ a.banner:hover span {
   direction: rtl;
 }
 
-.rtl-layout .post-full-content pre,
-.rtl-layout .post-full-content code {
+.rtl-layout .post-full-content pre {
   direction: ltr;
 }
 
