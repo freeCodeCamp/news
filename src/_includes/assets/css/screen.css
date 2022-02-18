@@ -2409,6 +2409,11 @@ a.banner:hover span {
   direction: rtl;
 }
 
+.rtl-layout .post-full-content pre,
+.rtl-layout .post-full-content code {
+  direction: ltr;
+}
+
 .rtl-layout .author-card .avatar-wrapper,
 .rtl-layout .author-card img.author-profile-image {
   margin: 0 0 0 15px;
