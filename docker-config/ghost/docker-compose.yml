@@ -1,0 +1,39 @@
+services:
+  english:
+    image: ghost:3
+    restart: always
+    ports:
+      - 3010:2368
+    environment:
+      url: http://localhost:3010
+    volumes:
+      - ./content/english/data:/var/lib/ghost/content/data
+      - ./content/english/images:/var/lib/ghost/content/images
+      - ./content/english/settings:/var/lib/ghost/content/settings
+      - ./config.production.json:/var/lib/ghost/config.production.json
+
+  chinese:
+    image: ghost:3
+    restart: always
+    ports:
+      - 3020:2368
+    environment:
+      url: http://localhost:3020
+    volumes:
+      - ./content/chinese/data:/var/lib/ghost/content/data
+      - ./content/chinese/images:/var/lib/ghost/content/images
+      - ./content/chinese/settings:/var/lib/ghost/content/settings
+      - ./config.production.json:/var/lib/ghost/config.production.json
+
+  espanol:
+    image: ghost:3
+    restart: always
+    ports:
+      - 3030:2368
+    environment:
+      url: http://localhost:3030
+    volumes:
+      - ./content/espanol/data:/var/lib/ghost/content/data
+      - ./content/espanol/images:/var/lib/ghost/content/images
+      - ./content/espanol/settings:/var/lib/ghost/content/settings
+      - ./config.production.json:/var/lib/ghost/config.production.json
