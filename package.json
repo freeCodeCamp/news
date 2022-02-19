@@ -72,7 +72,7 @@
     "dayjs": "1.10.7",
     "dotenv": "16.0.0",
     "eslint": "8.9.0",
-    "eslint-config-prettier": "8.3.0",
+    "eslint-config-prettier": "8.4.0",
     "eslint-plugin-cypress": "2.12.1",
     "eslint-plugin-ghost": "2.13.0",
     "eslint-utils": "3.0.0",
