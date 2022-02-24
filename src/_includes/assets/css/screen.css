@@ -2470,3 +2470,7 @@ a.banner:hover span {
   margin-right: 0;
   margin-left: 19px;
 }
+
+.rtl-layout .post-full-content p code {
+    word-break: break-word; 
+}
