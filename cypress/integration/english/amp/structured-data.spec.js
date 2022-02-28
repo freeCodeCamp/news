@@ -7,7 +7,7 @@ describe('Amp structured data (JSON-LD)', () => {
       name: 'Quincy Larson',
       image: {
         '@type': 'ImageObject',
-        url: 'https://www.freecodecamp.org/news/content/images/2021/03/Quincy-Larson-photo.jpg',
+        url: 'http://localhost:3010/content/images/2022/02/Quincy-Larson-photo.jpg',
         width: 2000,
         height: 2000
       },
@@ -18,7 +18,7 @@ describe('Amp structured data (JSON-LD)', () => {
       'We&#x27;re Building New Courses on Rust and Python + the Replit.web Framework',
     url: 'http://localhost:8080/news/announcing-rust-course-replit-web/',
     datePublished: '2021-08-23T17:03:24.000Z',
-    dateModified: '2021-08-23T17:03:24.000Z',
+    dateModified: '2022-02-19T13:00:03.000Z',
     image: {
       '@type': 'ImageObject',
       url: 'https://www.freecodecamp.org/news/content/images/2021/08/sean-lim-NPlv2pkYoUA-unsplash--2-.jpg',

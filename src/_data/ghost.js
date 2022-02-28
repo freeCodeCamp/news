@@ -60,6 +60,8 @@ module.exports = async () => {
 
   const pages = ghostPages.map(page => {
     page.path = stripDomain(page.url);
+    page.primary_author.path = stripDomain(page.primary_author.url);
+
     // Convert publish date into a Date object
     page.published_at = new Date(page.published_at);
 
