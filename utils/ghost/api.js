@@ -1,5 +1,5 @@
 const ghostContentAPI = require('@tryghost/content-api');
-const { eleventyEnv, currentLocale_ghost } = require('../../config');
+const { currentLocale_ghost } = require('../../config');
 
 const fetchKeys = locale => {
   const upperLocale = locale.toUpperCase();
@@ -13,13 +13,12 @@ const fetchKeys = locale => {
 
 const { url, key, version } = fetchKeys(currentLocale_ghost);
 
-const sourceApi =
-  eleventyEnv === 'ci' ? {} : new ghostContentAPI({ url, key, version });
+const sourceApi = new ghostContentAPI({ url, key, version });
 
 // Export source API instance and target API URL for link swapping,
 // fetching sitemaps, etc.
 module.exports = {
   sourceApi,
-  sourceApiUrl: eleventyEnv === 'ci' ? '' : url,
+  sourceApiUrl: url,
   fetchKeys
 };
