@@ -4,7 +4,7 @@ const selectors = {
 
 describe('Post i18n', () => {
   before(() => {
-    cy.visit('/announcing-rust-course-replit-web');
+    cy.visit('/javascript-array-length');
   });
 
   it('the comments section should not render its i18n keys', () => {
