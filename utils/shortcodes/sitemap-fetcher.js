@@ -56,7 +56,7 @@ const sitemapFetcherShortcode = async page => {
 
     return xmlStr;
   } catch (err) {
-    throw new Error(`Sitemap cannot be fetched`);
+    console.warn(`Sitemap cannot be fetched: ${err}`);
   }
 };
 
