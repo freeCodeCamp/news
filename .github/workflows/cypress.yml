@@ -51,7 +51,7 @@ jobs:
         run: npm ci
 
       - name: Start Ghost containers
-        run: docker-compose -f 'docker-config/ghost/docker-compose.yml' up -d
+        run: npm run start:containers
 
       - name: Start CI server and run Cypress
         uses: cypress-io/github-action@v2
@@ -64,4 +64,4 @@ jobs:
           spec: cypress/integration/${{ matrix.languages }}/**/*
 
       - name: Stop Ghost containers
-        run: docker-compose -f 'docker-config/ghost/docker-compose.yml' down
+        run: npm run stop:containers
