@@ -15,6 +15,28 @@ jobs:
         browsers: [chrome, firefox]
         languages: [english, chinese, espanol]
 
+    env:
+      BUILD_LANG: ${{ matrix.languages }}
+
+      ENGLISH_GHOST_API_URL: ${{ secrets.CI_ENGLISH_GHOST_API_URL }}
+      ENGLISH_GHOST_API_VERSION: ${{ secrets.CI_ENGLISH_GHOST_API_VERSION }}
+      ENGLISH_GHOST_CONTENT_API_KEY: ${{ secrets.CI_ENGLISH_GHOST_CONTENT_API_KEY }}
+
+      CHINESE_GHOST_API_URL: ${{ secrets.CI_CHINESE_GHOST_API_URL }}
+      CHINESE_GHOST_API_VERSION: ${{ secrets.CI_CHINESE_GHOST_API_VERSION }}
+      CHINESE_GHOST_CONTENT_API_KEY: ${{ secrets.CI_CHINESE_GHOST_CONTENT_API_KEY }}
+
+      ESPANOL_GHOST_API_URL: ${{ secrets.CI_ESPANOL_GHOST_API_URL }}
+      ESPANOL_GHOST_API_VERSION: ${{ secrets.CI_ESPANOL_GHOST_API_VERSION }}
+      ESPANOL_GHOST_CONTENT_API_KEY: ${{ secrets.CI_ESPANOL_GHOST_CONTENT_API_KEY }}
+
+      POSTS_PER_PAGE: ${{ secrets.POSTS_PER_PAGE }}
+
+      SITE_DOMAIN: localhost:8080
+
+      LOCALE_FOR_UI: ${{ matrix.languages }}
+      LOCALE_FOR_GHOST: ${{ matrix.languages }}
+
     steps:
       - name: Checkout source files
         uses: actions/checkout@v2
@@ -25,11 +47,11 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
 
-      - name: Set environment variables
-        run: cp sample.env .env
-
       - name: Install dependencies
         run: npm ci
+
+      - name: Start Ghost containers
+        run: npm run start:containers
 
       - name: Start CI server and run Cypress
         uses: cypress-io/github-action@v2
@@ -40,6 +62,6 @@ jobs:
           browser: ${{ matrix.browsers }}
           headless: true
           spec: cypress/integration/${{ matrix.languages }}/**/*
-        env:
-          POSTS_PER_PAGE: ${{ secrets.POSTS_PER_PAGE }}
-          SITE_DOMAIN: localhost:8080
+
+      - name: Stop Ghost containers
+        run: npm run stop:containers

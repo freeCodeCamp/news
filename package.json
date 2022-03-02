@@ -12,6 +12,8 @@
     "start:ci:english": "LOCALE_FOR_UI=english LOCALE_FOR_GHOST=english npm run develop:ci",
     "start:ci:chinese": "LOCALE_FOR_UI=chinese LOCALE_FOR_GHOST=chinese npm run develop:ci",
     "start:ci:espanol": "LOCALE_FOR_UI=espanol LOCALE_FOR_GHOST=espanol npm run develop:ci",
+    "start:containers": "docker compose -f './docker-config/ghost/docker-compose.yml' up -d",
+    "stop:containers": "docker compose -f './docker-config/ghost/docker-compose.yml' down",
     "clean": "npm-run-all -p clean:*",
     "clean:error-logs": "shx rm -f *-errors.log",
     "clean:dist": "shx rm -rf dist/",

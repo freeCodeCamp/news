@@ -5,15 +5,11 @@ const selectors = {
 
 describe('Post', () => {
   before(() => {
-    cy.visit('/announcing-rust-course-replit-web');
+    cy.visit('/javascript-array-length');
   });
 
   it('should render', () => {
-    // This title is in English since the local Ghost JSON for this build
-    // was sourced from English News
-    cy.contains(
-      "We're Building New Courses on Rust and Python + the Replit.web Framework"
-    );
+    cy.contains('JavaScript 数组的长度');
   });
 
   it('should display a comments section', () => {

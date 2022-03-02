@@ -1,7 +1,7 @@
 const fetch = require('node-fetch');
 const xml2js = require('xml2js');
 const { sourceApiUrl } = require('../ghost/api');
-const { siteURL, eleventyEnv } = require('../../config');
+const { siteURL } = require('../../config');
 const { escape } = require('lodash');
 
 const sitemapFetcherShortcode = async page => {
@@ -56,11 +56,7 @@ const sitemapFetcherShortcode = async page => {
 
     return xmlStr;
   } catch (err) {
-    // To do: remove this check once Dockerized Ghost is
-    // set up for testing
-    if (eleventyEnv !== 'ci') {
-      throw new Error(`Sitemap cannot be fetched`);
-    }
+    console.warn(`Sitemap cannot be fetched: ${err}`);
   }
 };
 

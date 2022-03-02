@@ -1,16 +1,6 @@
 const fullEscaper = require('../full-escaper');
 const translate = require('../translate');
 const { siteURL } = require('../../config');
-const { URL } = require('url');
-
-// This counts on all images, including the site logo, being stored like on Ghost with the
-// same directory structure
-const domainReplacer = url => {
-  let { pathname } = new URL(url);
-  pathname = pathname.replace('/news/', '');
-
-  return `${siteURL}/${pathname}`;
-};
 
 async function createJsonLdShortcode(type, site, data) {
   // Main site settings from site object
@@ -71,12 +61,12 @@ async function createJsonLdShortcode(type, site, data) {
       website,
       twitter,
       facebook,
-      url
+      path
     } = primaryAuthor;
     const authorObj = {
       '@type': 'Person',
       name,
-      url: domainReplacer(url), // check again later when using slugs throughout template and leaving URLs untouched
+      url: siteURL + path,
       sameAs: [
         website ? fullEscaper(website) : null,
         facebook ? `https://www.facebook.com/${facebook}` : null,

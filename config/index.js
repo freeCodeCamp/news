@@ -1,16 +1,21 @@
 const path = require('path');
 
-const envPath = path.resolve(__dirname, '../.env');
+const eleventyEnv = process.env.ELEVENTY_ENV;
+const envPath = path.resolve(
+  __dirname,
+  eleventyEnv === 'ci' ? '../.env.ci' : '../.env'
+);
+const envFileName = eleventyEnv === 'ci' ? '.env.ci' : '.env';
 const { error } = require('dotenv').config({ path: envPath });
 
 if (error) {
   console.warn(`
   ----------------------------------------------------
-  Warning: .env file not found.
+  Warning: ${envFileName} file not found.
   ----------------------------------------------------
-  Please copy sample.env to .env
+  Please copy sample.env to ${envFileName}
   You can ignore this warning if using a different way
-  to setup this environment.
+  to set up this environment.
   ----------------------------------------------------
   `);
 }
@@ -58,8 +63,7 @@ const {
   ALGOLIA_API_KEY: algoliaAPIKey,
   ADS_ENABLED: adsEnabled,
   GOOGLE_ADSENSE_DATA_AD_CLIENT: googleAdsenseDataAdClient,
-  GOOGLE_ADSENSE_DATA_AD_SLOT: googleAdsenseDataAdSlot,
-  ELEVENTY_ENV: eleventyEnv
+  GOOGLE_ADSENSE_DATA_AD_SLOT: googleAdsenseDataAdSlot
 } = process.env;
 
 // Validations
