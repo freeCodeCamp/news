@@ -49,12 +49,13 @@ const processGhostResponse = async (ghostRes, context) => {
           .join(' ');
       }
 
+      // Lazy load images and embedded videos -- will also set the width, height,
+      // and add a default alt attribute to images if one doesn't exist
+      if (obj.html) obj.html = await lazyLoadHandler(obj.html, obj.title);
+
       // Handle AMP processing for posts before modifying the original
       // HTML and add flags to dynamically import AMP scripts
       if (context === 'posts' && obj.html) obj.amp = await ampHandler(obj);
-
-      // Lazy load images and embedded videos
-      if (obj.html) obj.html = await lazyLoadHandler(obj.html, obj.title);
 
       return obj;
     })
