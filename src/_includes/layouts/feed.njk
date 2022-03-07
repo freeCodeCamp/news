@@ -10,7 +10,7 @@
         </description>
         <link>{{ site.url + "/" }}</link>
         <image>
-            <url>{{ site.icon }}</url>
+            <url>https://cdn.freecodecamp.org/universal/favicons/favicon.png</url>
             {% set metaTitle %}{% t 'meta-tags:title' %}{% endset %}
             <title>{{ (metaTitle | escape) if feed.path === "/" else (feed.name | safe + " - freeCodeCamp.org") }}</title>
             <link>{{ site.url + "/" }}</link>
