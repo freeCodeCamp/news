@@ -4,6 +4,13 @@ const expectedAuthorTitle = `Quincy Larson - ${commonExpectedMeta.siteName}`;
 const feedPath = '/author/quincylarson/rss.xml';
 
 describe('Author page RSS feed', () => {
+  it('should start with a UTF-8 encoding declaration', () => {
+    cy.request(feedPath).then(async res => {
+      expect(res.body.startsWith('<?xml version="1.0" encoding="UTF-8"?>')).to
+        .be.true;
+    });
+  });
+
   it('should have the channel title <![CDATA[ Quincy Larson - freeCodeCamp.org ]]>', () => {
     cy.request(feedPath).then(async res => {
       const feed = XMLToDOM(res.body);
@@ -48,7 +55,7 @@ describe('Author page RSS feed', () => {
         .querySelector('channel image link')
         .innerHTML.trim();
 
-      expect(channelImageURL).to.equal(commonExpectedMeta.faviconUrl);
+      expect(channelImageURL).to.equal(commonExpectedMeta.favicon.png);
       expect(channelImageTitle).to.equal(expectedAuthorTitle);
       expect(channelImageLink).to.equal(commonExpectedMeta.siteUrl);
     });
