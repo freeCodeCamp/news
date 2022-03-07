@@ -70,21 +70,24 @@ const ampHandler = async obj => {
       const width = img.getAttribute('width');
       // Special handling for small image and gif sizes
       const layoutType = width < 300 ? 'fixed' : 'responsive';
+      const allowedAmpImgAndAnimAttributes = [
+        'src',
+        'srcset',
+        'sizes',
+        'alt',
+        'width',
+        'height'
+      ];
 
       // Create <amp-img> elements
       if (extname(img.src).toLowerCase() !== '.gif') {
-        const allowedAmpImgAttributes = [
-          'src',
-          'srcset',
-          'sizes',
-          'alt',
-          'attribution',
-          'width',
-          'height'
-        ];
         let ampImg = document.createElement('amp-img');
 
-        ampImg = setAllowedAttributes(allowedAmpImgAttributes, img, ampImg);
+        ampImg = setAllowedAttributes(
+          allowedAmpImgAndAnimAttributes,
+          img,
+          ampImg
+        );
         ampImg.setAttribute('layout', layoutType);
 
         // Set element type for dynamically loading scripts in template
@@ -93,17 +96,13 @@ const ampHandler = async obj => {
         img.replaceWith(ampImg);
       } else {
         // Create <amp-anim> elements
-        const allowedAmpAnimAttributes = [
-          'src',
-          'srcset',
-          'alt',
-          'attribution',
-          'width',
-          'height'
-        ];
         let ampAnim = document.createElement('amp-anim');
 
-        ampAnim = setAllowedAttributes(allowedAmpAnimAttributes, img, ampAnim);
+        ampAnim = setAllowedAttributes(
+          allowedAmpImgAndAnimAttributes,
+          img,
+          ampAnim
+        );
         ampAnim.setAttribute('layout', layoutType);
 
         // Set element type for dynamically loading scripts in template
@@ -183,11 +182,7 @@ const ampHandler = async obj => {
         'autoplay',
         'loop',
         'muted',
-        'controlsList',
-        'artwork',
-        'artist',
-        'album',
-        'title'
+        'controlsList'
       ];
       const sourceEls = [...audio.getElementsByTagName('source')];
       let ampAudio = document.createElement('amp-audio');
@@ -217,16 +212,9 @@ const ampHandler = async obj => {
         'poster',
         'autoplay',
         'controlsList',
-        'dock',
         'loop',
         'crossorigin',
         'disableremoteplayback',
-        'noaudio',
-        'rotate-to-fullscreen',
-        'artwork',
-        'artist',
-        'album',
-        'title',
         'width',
         'height'
       ];
