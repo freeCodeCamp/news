@@ -370,5 +370,6 @@ const htmlSanitizer = html => {
 };
 
 module.exports = {
-  htmlSanitizer
+  htmlSanitizer,
+  allowedAMPAttributes
 };

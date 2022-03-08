@@ -2,7 +2,10 @@ const jsdom = require('jsdom');
 const { JSDOM } = jsdom;
 const { extname } = require('path');
 const translate = require('../translate');
-const { htmlSanitizer } = require('../transforms/html-sanitizer');
+const {
+  htmlSanitizer,
+  allowedAMPAttributes
+} = require('../transforms/html-sanitizer');
 
 const ampHandler = async obj => {
   // Create object to hold results
@@ -70,21 +73,13 @@ const ampHandler = async obj => {
       const width = img.getAttribute('width');
       // Special handling for small image and gif sizes
       const layoutType = width < 300 ? 'fixed' : 'responsive';
-      const allowedAmpImgAndAnimAttributes = [
-        'src',
-        'srcset',
-        'sizes',
-        'alt',
-        'width',
-        'height'
-      ];
 
       // Create <amp-img> elements
       if (extname(img.src).toLowerCase() !== '.gif') {
         let ampImg = document.createElement('amp-img');
 
         ampImg = setAllowedAttributes(
-          allowedAmpImgAndAnimAttributes,
+          allowedAMPAttributes['amp-img'],
           img,
           ampImg
         );
@@ -99,7 +94,7 @@ const ampHandler = async obj => {
         let ampAnim = document.createElement('amp-anim');
 
         ampAnim = setAllowedAttributes(
-          allowedAmpImgAndAnimAttributes,
+          allowedAMPAttributes['amp-anim'],
           img,
           ampAnim
         );
@@ -123,11 +118,10 @@ const ampHandler = async obj => {
 
       // Create <amp-youtube> elements
       if (youtubeRe) {
-        const allowedAmpYouTubeAttributes = ['width', 'height'];
         let ampYouTube = document.createElement('amp-youtube');
 
         ampYouTube = setAllowedAttributes(
-          allowedAmpYouTubeAttributes,
+          allowedAMPAttributes['amp-youtube'],
           iframe,
           ampYouTube
         );
@@ -140,21 +134,10 @@ const ampHandler = async obj => {
         iframe.replaceWith(ampYouTube);
       } else {
         // Create <amp-iframe> elements
-        const allowedAmpIframeAttributes = [
-          'src',
-          'srcdoc',
-          'frameborder',
-          'allowfullscreen',
-          'allowtransparency',
-          'referrerpolicy',
-          'sandbox',
-          'width',
-          'height'
-        ];
         let ampIframe = document.createElement('amp-iframe');
 
         ampIframe = setAllowedAttributes(
-          allowedAmpIframeAttributes,
+          allowedAMPAttributes['amp-iframe'],
           iframe,
           ampIframe
         );
@@ -177,18 +160,11 @@ const ampHandler = async obj => {
 
     // Create <amp-audio> elements
     audioEls.map(audio => {
-      const allowedAmpAudioAttributes = [
-        'preload',
-        'autoplay',
-        'loop',
-        'muted',
-        'controlsList'
-      ];
       const sourceEls = [...audio.getElementsByTagName('source')];
       let ampAudio = document.createElement('amp-audio');
 
       ampAudio = setAllowedAttributes(
-        allowedAmpAudioAttributes,
+        [...allowedAMPAttributes['amp-audio'], 'controlsList'],
         audio,
         ampAudio
       );
@@ -207,22 +183,11 @@ const ampHandler = async obj => {
       // Set width and height for all videos, and use defaults if necessary
       video = setWidthAndHeight(video);
 
-      const allowedAmpVideoAttributes = [
-        'src',
-        'poster',
-        'autoplay',
-        'controlsList',
-        'loop',
-        'crossorigin',
-        'disableremoteplayback',
-        'width',
-        'height'
-      ];
       const sourceEls = [...video.getElementsByTagName('source')];
       let ampVideo = document.createElement('amp-video');
 
       ampVideo = setAllowedAttributes(
-        allowedAmpVideoAttributes,
+        [...allowedAMPAttributes['amp-video'], 'controlsList'],
         video,
         ampVideo
       );
