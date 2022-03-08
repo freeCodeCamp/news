@@ -168,8 +168,9 @@ const ampHandler = async obj => {
         audio,
         ampAudio
       );
-      // Try to set the src attribute with the first source child, if one exists
-      ampAudio.setAttribute('src', sourceEls[0] ? sourceEls[0].src : audio.src);
+
+      // Add source elements as children
+      sourceEls.forEach(source => ampAudio.appendChild(source));
       ampAudio = addFallback(ampAudio);
 
       // Set element type for dynamically loading scripts in template
@@ -194,8 +195,9 @@ const ampHandler = async obj => {
       ampVideo.setAttribute('layout', 'responsive');
       // Ensure controls are set
       ampVideo.setAttribute('controls', '');
-      // Try to set the src attribute with the first source child, if one exists
-      ampVideo.setAttribute('src', sourceEls[0] ? sourceEls[0].src : video.src);
+
+      // Add source elements as children
+      sourceEls.forEach(source => ampVideo.appendChild(source));
       ampVideo = addFallback(ampVideo);
 
       // Set element type for dynamically loading scripts in template
