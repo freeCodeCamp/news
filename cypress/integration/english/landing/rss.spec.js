@@ -3,6 +3,13 @@ const commonExpectedMeta = require('../../../fixtures/common-expected-meta.json'
 const feedPath = '/rss.xml';
 
 describe('Landing RSS feed', async () => {
+  it('should start with a UTF-8 encoding declaration', () => {
+    cy.request(feedPath).then(async res => {
+      expect(res.body.startsWith('<?xml version="1.0" encoding="UTF-8"?>')).to
+        .be.true;
+    });
+  });
+
   it('should have the channel title <![CDATA[ freeCodeCamp.org ]]>', () => {
     cy.request(feedPath).then(async res => {
       const feed = XMLToDOM(res.body);
@@ -49,7 +56,7 @@ describe('Landing RSS feed', async () => {
         .querySelector('channel image link')
         .innerHTML.trim();
 
-      expect(channelImageURL).to.equal(commonExpectedMeta.faviconUrl);
+      expect(channelImageURL).to.equal(commonExpectedMeta.favicon.png);
       expect(channelImageTitle).to.equal(commonExpectedMeta.title);
       expect(channelImageLink).to.equal(commonExpectedMeta.siteUrl);
     });
