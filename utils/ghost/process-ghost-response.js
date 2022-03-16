@@ -4,10 +4,46 @@ const lazyLoadHandler = require('./lazy-load-handler');
 const originalPostHandler = require('./original-post-handler');
 const getImageDimensions = require('../../utils/get-image-dimensions');
 
+const removeUnusedProperties = obj => {
+  const propsToRemove = [
+    'uuid',
+    'comment_id',
+    'featured',
+    'custom_excerpt',
+    'custom_template',
+    'canonical_url',
+    'email_recipient_filter',
+    'authors',
+    'access',
+    'send_email_when_published',
+    'og_image',
+    'og_title',
+    'og_description',
+    'twitter_image',
+    'twitter_title',
+    'twitter_description',
+    'meta_title',
+    'meta_description',
+    'email_subject',
+    'accent_color'
+  ];
+
+  for (const prop in obj) {
+    if (propsToRemove.includes(prop)) delete obj[prop];
+  }
+
+  return obj;
+};
+
 const processGhostResponse = async (ghostRes, context) => {
   // Process post / page
   const processedData = await Promise.all(
     ghostRes.map(async obj => {
+      // Clean incoming objects
+      obj = removeUnusedProperties(obj);
+      obj.primary_author = removeUnusedProperties(obj.primary_author);
+      obj.tags.map(tag => removeUnusedProperties(tag));
+
       // Feature image resolutions for structured data
       if (obj.feature_image) {
         obj.image_dimensions = { ...obj.image_dimensions };
