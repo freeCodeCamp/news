@@ -20,10 +20,10 @@ time #}
                         <time class="post-full-meta-date" datetime="{{ post.published_at }}">
                             {% publishedDate post.published_at %}
                         </time>
-                        {% if post.primary_tag %}
+                        {% if post.tags[0] %}
                             <span class="date-divider">/</span>
-                            <a href="{{ post.primary_tag.path | url }}">
-                                #{{ post.primary_tag.name }}
+                            <a href="{{ post.tags[0].path | url }}">
+                                #{{ post.tags[0].name }}
                             </a>
                         {% endif %}
                     </section>

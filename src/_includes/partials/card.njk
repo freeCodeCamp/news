@@ -26,10 +26,10 @@
         <div class="post-card-content">
             <div class="post-card-content-link">
                 <header class="post-card-header">
-                    {% if post.primary_tag %}
+                    {% if post.tags[0] %}
                         <span class="post-card-tags">
-                            <a href="{{ post.primary_tag.path | url }}">
-                                #{{ post.primary_tag.name }}
+                            <a href="{{ post.tags[0].path | url }}">
+                                #{{ post.tags[0].name }}
                             </a>
                         </span>
                     {% endif %}

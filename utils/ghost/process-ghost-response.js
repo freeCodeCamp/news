@@ -14,6 +14,7 @@ const removeUnusedProperties = obj => {
     'canonical_url',
     'email_recipient_filter',
     'authors',
+    'primary_tag',
     'access',
     'send_email_when_published',
     'og_image',

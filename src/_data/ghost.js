@@ -41,8 +41,6 @@ module.exports = async () => {
 
       tag.path = stripDomain(tag.url);
     });
-    if (post.primary_tag)
-      post.primary_tag.path = stripDomain(post.primary_tag.url);
 
     // Log and fix author pages that point to 404 due to a Ghost error
     if (post.primary_author.url.endsWith('/404/')) {
