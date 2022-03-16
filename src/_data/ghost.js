@@ -1,20 +1,14 @@
 const { chunk, cloneDeep } = require('lodash');
 
 const fetchFromGhost = require('../../utils/ghost/fetch-from-ghost');
-const processGhostResponse = require('../../utils/ghost/process-ghost-response');
 const errorLogger = require('../../utils/error-logger');
 
 const { sourceApiUrl } = require('../../utils/ghost/api');
-const { eleventyEnv, siteURL, postsPerPage } = require('../../config');
+const { siteURL, postsPerPage } = require('../../config');
 
 // Strip Ghost domain from urls
 const stripDomain = url => {
-  // To do: figure out a better way to strip out everything
-  // up to and including /news
-  const toReplace =
-    eleventyEnv === 'ci' ? 'https://www.freecodecamp.org/news' : sourceApiUrl;
-
-  return url.replace(toReplace, '');
+  return url.replace(sourceApiUrl, '');
 };
 
 const getUniqueList = (arr, key) => [
@@ -23,26 +17,17 @@ const getUniqueList = (arr, key) => [
 
 module.exports = async () => {
   const limit = 200;
-  let ghostPosts, ghostPages;
+  const ghostPosts = await fetchFromGhost('posts', {
+    include: ['tags', 'authors'],
+    filter: 'status:published',
+    limit
+  });
 
-  if (eleventyEnv === 'ci') {
-    const testPosts = require('../../cypress/seed-data/posts.json');
-    const testPages = require('../../cypress/seed-data/pages.json');
-
-    ghostPosts = await processGhostResponse(testPosts, 'posts');
-    ghostPages = await processGhostResponse(testPages);
-  } else {
-    ghostPosts = await fetchFromGhost('posts', {
-      include: ['tags', 'authors'],
-      filter: 'status:published',
-      limit
-    });
-    ghostPages = await fetchFromGhost('pages', {
-      include: ['tags', 'authors'],
-      filter: 'status:published',
-      limit
-    });
-  }
+  const ghostPages = await fetchFromGhost('pages', {
+    include: ['tags', 'authors'],
+    filter: 'status:published',
+    limit
+  });
 
   const posts = ghostPosts.map(post => {
     post.path = stripDomain(post.url);
@@ -75,6 +60,8 @@ module.exports = async () => {
 
   const pages = ghostPages.map(page => {
     page.path = stripDomain(page.url);
+    page.primary_author.path = stripDomain(page.primary_author.url);
+
     // Convert publish date into a Date object
     page.published_at = new Date(page.published_at);
 

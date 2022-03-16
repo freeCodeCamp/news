@@ -1,10 +1,6 @@
 const { sourceApi } = require('../../utils/ghost/api');
 const getImageDimensions = require('../../utils/get-image-dimensions');
-const {
-  eleventyEnv,
-  currentLocale_i18nISOCode,
-  siteURL
-} = require('../../config');
+const { currentLocale_i18nISOCode, siteURL } = require('../../config');
 const translate = require('../../utils/translate');
 
 // Get Twitter profile based on links in i18n/locales/lang/links.json --
@@ -16,16 +12,13 @@ const twitterProfile =
   twitterURL !== 'twitter' ? getTwitterProfile(twitterURL) : '@freecodecamp';
 
 module.exports = async () => {
-  const site =
-    eleventyEnv === 'ci'
-      ? {}
-      : await sourceApi.settings
-          .browse({
-            include: 'url'
-          })
-          .catch(err => {
-            console.error(err);
-          });
+  const site = await sourceApi.settings
+    .browse({
+      include: 'url'
+    })
+    .catch(err => {
+      console.error(err);
+    });
 
   site.url = siteURL;
   site.lang = currentLocale_i18nISOCode.toLowerCase();

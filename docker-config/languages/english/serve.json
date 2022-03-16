@@ -28,6 +28,11 @@
       "destination": "/news/about"
     },
     {
+      "source": "/fullstack-development-project-create-a-blog-with-html-css",
+      "destination": "/news/frontend-development-project-create-a-blog-with-html-css",
+      "type": 302
+    },
+    {
       "source": "/my-open-source-instagram-bot-got-me-2-500-real-followers-for-5-in-server-costs-e40491358340",
       "destination": "/news/building-bots",
       "type": 302

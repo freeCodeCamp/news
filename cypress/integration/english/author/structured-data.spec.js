@@ -8,7 +8,7 @@ describe('Author page structured data (JSON-LD)', () => {
     url: 'http://localhost:8080/news/author/quincylarson/',
     image: {
       '@type': 'ImageObject',
-      url: 'https://www.freecodecamp.org/news/content/images/2019/07/banner.png',
+      url: 'http://localhost:3010/content/images/2022/02/banner.png',
       width: 1500,
       height: 500
     },

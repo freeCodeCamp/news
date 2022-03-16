@@ -7,7 +7,7 @@ describe('Page structured data (JSON-LD)', () => {
       name: 'freeCodeCamp.org',
       image: {
         '@type': 'ImageObject',
-        url: 'https://www.freecodecamp.org/news/content/images/2021/05/freecodecamp-org-gravatar.jpeg',
+        url: 'http://localhost:3010/content/images/2022/02/freecodecamp-org-gravatar.jpeg',
         width: 250,
         height: 250
       },
