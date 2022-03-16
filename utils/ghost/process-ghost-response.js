@@ -2,35 +2,53 @@ const { setImageDimensionObj } = require('./helpers');
 const generateAMPObj = require('./generate-amp-obj');
 const lazyLoadHandler = require('./lazy-load-handler');
 const originalPostHandler = require('./original-post-handler');
+const getImageDimensions = require('../../utils/get-image-dimensions');
 
 const processGhostResponse = async (ghostRes, context) => {
   // Process post / page
   const processedData = await Promise.all(
     ghostRes.map(async obj => {
-      // Post image resolutions for structured data
-      if (obj.feature_image)
-        await setImageDimensionObj(obj, 'feature_image', obj.feature_image);
+      // Feature image resolutions for structured data
+      if (obj.feature_image) {
+        obj.image_dimensions = { ...obj.image_dimensions };
+        obj.image_dimensions.feature_image = await getImageDimensions(
+          obj.feature_image,
+          obj.title
+        );
+      }
 
       // Author image resolutions for structured data
       if (obj.primary_author.profile_image) {
-        await setImageDimensionObj(
-          obj.primary_author,
-          'profile_image',
-          obj.primary_author.profile_image
-        );
+        obj.primary_author.image_dimensions = {
+          ...obj.primary_author.image_dimensions
+        };
+        obj.primary_author.image_dimensions.profile_image =
+          await getImageDimensions(
+            obj.primary_author.profile_image,
+            obj.primary_author.name
+          );
       }
 
       if (obj.primary_author.cover_image) {
-        await setImageDimensionObj(
-          obj.primary_author,
-          'cover_image',
-          obj.primary_author.cover_image
-        );
+        obj.primary_author.image_dimensions = {
+          ...obj.primary_author.image_dimensions
+        };
+        obj.primary_author.image_dimensions.cover_image =
+          await getImageDimensions(
+            obj.primary_author.cover_image,
+            obj.primary_author.name
+          );
       }
 
+      // Tag image resolutions for structured data
       obj.tags.map(async tag => {
-        if (tag.feature_image)
-          await setImageDimensionObj(tag, 'feature_image', tag.feature_image);
+        if (tag.feature_image) {
+          tag.image_dimensions = { ...tag.image_dimensions };
+          tag.image_dimensions.feature_image = await getImageDimensions(
+            tag.feature_image,
+            tag.name
+          );
+        }
       });
 
       // Original author / translator feature
