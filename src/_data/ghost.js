@@ -73,9 +73,21 @@ module.exports = async () => {
   );
   primaryAuthors.forEach(author => {
     // Attach posts to their respective author
-    const currAuthorPosts = posts.filter(
-      post => post.primary_author.id === author.id
-    );
+    const currAuthorPosts = posts
+      .filter(post => post.primary_author.id === author.id)
+      .map(post => {
+        return {
+          title: post.title,
+          slug: post.slug,
+          path: post.path,
+          url: post.url,
+          feature_image: post.feature_image,
+          published_at: post.published_at,
+          primary_author: post.primary_author,
+          tags: [post.tags[0]],
+          image_dimensions: { ...post.image_dimensions }
+        };
+      });
 
     if (currAuthorPosts.length) author.posts = currAuthorPosts;
 
@@ -102,9 +114,21 @@ module.exports = async () => {
   const allTags = getUniqueList(visibleTags, 'id');
   allTags.forEach(tag => {
     // Attach posts to their respective tag
-    const currTagPosts = posts.filter(post =>
-      post.tags.map(postTag => postTag.slug).includes(tag.slug)
-    );
+    const currTagPosts = posts
+      .filter(post => post.tags.map(postTag => postTag.slug).includes(tag.slug))
+      .map(post => {
+        return {
+          title: post.title,
+          slug: post.slug,
+          path: post.path,
+          url: post.url,
+          feature_image: post.feature_image,
+          published_at: post.published_at,
+          primary_author: post.primary_author,
+          tags: [post.tags[0]],
+          image_dimensions: { ...post.image_dimensions }
+        };
+      });
     // Save post count to tag object to help determine popular tags
     tag.count = {
       posts: currTagPosts.length
