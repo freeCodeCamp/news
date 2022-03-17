@@ -3,7 +3,6 @@ const { locales } = require('../config');
 const linksSchema = require('./locales/english/links.json');
 const metaTagsSchema = require('./locales/english/meta-tags.json');
 const translationsSchema = require('./locales/english/translations.json');
-const trendingSchema = require('./locales/english/trending.json');
 
 /**
  * Flattens a nested object structure into a single
@@ -103,7 +102,6 @@ const noEmptyObjectValues = (obj, namespace = '') => {
 const linksSchemaKeys = Object.keys(flattenAnObject(linksSchema));
 const metaTagsSchemaKeys = Object.keys(flattenAnObject(metaTagsSchema));
 const translationSchemaKeys = Object.keys(flattenAnObject(translationsSchema));
-const trendingSchemaKeys = Object.keys(flattenAnObject(trendingSchema));
 
 /**
  * Function that checks the translations.json file
@@ -137,34 +135,6 @@ const translationSchemaValidation = languages => {
       );
     }
     console.info(`${language} translation.json validation complete.`);
-  });
-};
-
-/**
- * Function that checks the trending.json file
- * for each available client language.
- * @param {String[]} languages List of languages to test
- */
-const trendingSchemaValidation = languages => {
-  languages.forEach(language => {
-    const filePath = path.join(__dirname, `/locales/${language}/trending.json`);
-    const fileJson = require(filePath);
-    const fileKeys = Object.keys(flattenAnObject(fileJson));
-    findMissingKeys(fileKeys, trendingSchemaKeys, `${language}/trending.json`);
-    findExtraneousKeys(
-      fileKeys,
-      trendingSchemaKeys,
-      `${language}/trending.json`
-    );
-    const emptyKeys = noEmptyObjectValues(fileJson);
-    if (emptyKeys.length) {
-      console.warn(
-        `${language}/trending.json has these empty keys: ${emptyKeys.join(
-          ', '
-        )}`
-      );
-    }
-    console.info(`${language} trending.json validation complete`);
   });
 };
 
@@ -216,4 +186,3 @@ const translatedLangs = locales.filter(x => x !== 'english');
 linksSchemaValidation(translatedLangs);
 metaTagsSchemaValidation(translatedLangs);
 translationSchemaValidation(translatedLangs);
-trendingSchemaValidation(translatedLangs);

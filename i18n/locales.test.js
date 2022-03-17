@@ -14,9 +14,6 @@ const filesThatShouldExist = [
   },
   {
     name: 'translations.json'
-  },
-  {
-    name: 'trending.json'
   }
 ];
 
