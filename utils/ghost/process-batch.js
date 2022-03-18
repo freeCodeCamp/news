@@ -1,4 +1,3 @@
-const { setImageDimensionObj } = require('./helpers');
 const generateAMPObj = require('./generate-amp-obj');
 const lazyLoadHandler = require('./lazy-load-handler');
 const originalPostHandler = require('./original-post-handler');
@@ -36,14 +35,11 @@ const removeUnusedProperties = obj => {
   return obj;
 };
 
-const processBatch = async (batch, type, currBatchNo, totalBatches) => {
-  if (batch.length > 0)
-    console.log(
-      `Processing ${type} batch ${currBatchNo} of ${totalBatches}...`
-    );
+const processBatch = async ({ batch, type, currBatchNo, totalBatches }) => {
+  console.log(`Processing ${type} batch ${currBatchNo} of ${totalBatches}...`);
 
-  // Process post / page
-  const processedData = await Promise.all(
+  // Process current batch of posts / pages
+  await Promise.all(
     batch.map(async obj => {
       // Clean incoming objects
       obj = removeUnusedProperties(obj);
@@ -117,20 +113,13 @@ const processBatch = async (batch, type, currBatchNo, totalBatches) => {
 
       // Generate an object that contains AMP HTML and flags to conditionally include
       // AMP scripts in the amp.njk template. Only do this for posts.
-      if (context === 'posts' && obj.html) obj.amp = await generateAMPObj(obj);
+      if (type === 'posts' && obj.html) obj.amp = await generateAMPObj(obj);
 
       return obj;
     })
-  ).then(batch => {
-    if (batch.length > 0)
-      console.log(
-        `Finished processing ${type} batch ${currBatchNo} of ${totalBatches}...`
-      );
+  );
 
-    return batch;
-  });
-
-  return processedData;
+  return batch;
 };
 
 module.exports = processBatch;

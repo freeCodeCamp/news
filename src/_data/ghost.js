@@ -1,7 +1,8 @@
+const Piscina = require('piscina');
 const { chunk, cloneDeep } = require('lodash');
+const { resolve } = require('path');
 
 const fetchFromGhost = require('../../utils/ghost/fetch-from-ghost');
-const processBatches = require('../../utils/ghost/process-batches');
 const errorLogger = require('../../utils/error-logger');
 
 const { sourceApiUrl } = require('../../utils/ghost/api');
@@ -16,25 +17,46 @@ const getUniqueList = (arr, key) => [
   ...new Map(arr.map(item => [item[key], item])).values()
 ];
 
+const piscina = new Piscina({
+  filename: resolve(__dirname, '../../utils/ghost/process-batch')
+});
+
 module.exports = async () => {
-  // Chunk to process in larger batches
-  const batchSize = 50;
+  // Chunk posts and pages and process them in batches with
+  // a pool of workers
+  const batchSize = 200;
   const allPosts = await fetchFromGhost('posts');
   const allPages = await fetchFromGhost('pages');
-  // const processedPosts = await processBatches(
-  //   chunk(allPosts, batchSize),
-  //   'posts'
-  // );
-  // const processedPages = await processBatches(
-  //   chunk(allPages, batchSize),
-  //   'pages'
-  // );
   const processedPosts = await Promise.all(
-    chunk(allPosts, batchSize).map(batch => processBatches(batch, 'posts'))
-  ).then(arr => arr.flat());
+    chunk(allPosts, batchSize).map((batch, i, arr) =>
+      piscina.run({
+        batch,
+        type: 'posts',
+        currBatchNo: Number(i) + 1,
+        totalBatches: arr.length
+      })
+    )
+  )
+    .then(arr => {
+      console.log('Finished processing all posts');
+      return arr.flat();
+    })
+    .catch(err => console.error(err));
   const processedPages = await Promise.all(
-    chunk(allPages, batchSize).map(batch => processBatches(batch, 'pages'))
-  ).then(arr => arr.flat());
+    chunk(allPages, batchSize).map((batch, i, arr) =>
+      piscina.run({
+        batch,
+        type: 'pages',
+        currBatchNo: Number(i) + 1,
+        totalBatches: arr.length
+      })
+    )
+  )
+    .then(arr => {
+      console.log('Finished processing all pages');
+      return arr.flat();
+    })
+    .catch(err => console.error(err));
 
   const posts = processedPosts.map(post => {
     post.path = stripDomain(post.url);
