@@ -1,5 +1,4 @@
 const { sourceApi } = require('./api');
-const processGhostResponse = require('./process-ghost-response');
 
 const wait = seconds => {
   return new Promise(resolve => {
@@ -9,10 +8,15 @@ const wait = seconds => {
   });
 };
 
-const fetchFromGhost = async (endpoint, options) => {
+const fetchFromGhost = async endpoint => {
   let currPage = 1;
   let lastPage = 5;
   let data = [];
+  const options = {
+    include: ['tags', 'authors'],
+    filter: 'status:published',
+    limit: 200
+  };
 
   while (currPage && currPage <= lastPage) {
     const ghostRes = await sourceApi[endpoint]
@@ -28,10 +32,8 @@ const fetchFromGhost = async (endpoint, options) => {
     console.log(`Fetched ${endpoint} page ${currPage} of ${lastPage}...`);
     currPage = ghostRes.meta.pagination.next;
 
-    const resolvedData = await processGhostResponse(ghostRes, endpoint);
-    resolvedData.forEach(post => data.push(post));
-
-    await wait(0.1);
+    ghostRes.forEach(obj => data.push(obj));
+    await wait(0.2);
   }
 
   return data;

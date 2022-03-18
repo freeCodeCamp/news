@@ -36,10 +36,15 @@ const removeUnusedProperties = obj => {
   return obj;
 };
 
-const processGhostResponse = async (ghostRes, context) => {
+const processBatch = async (batch, type, currBatchNo, totalBatches) => {
+  if (batch.length > 0)
+    console.log(
+      `Processing ${type} batch ${currBatchNo} of ${totalBatches}...`
+    );
+
   // Process post / page
   const processedData = await Promise.all(
-    ghostRes.map(async obj => {
+    batch.map(async obj => {
       // Clean incoming objects
       obj = removeUnusedProperties(obj);
       obj.primary_author = removeUnusedProperties(obj.primary_author);
@@ -116,9 +121,16 @@ const processGhostResponse = async (ghostRes, context) => {
 
       return obj;
     })
-  );
+  ).then(batch => {
+    if (batch.length > 0)
+      console.log(
+        `Finished processing ${type} batch ${currBatchNo} of ${totalBatches}...`
+      );
+
+    return batch;
+  });
 
   return processedData;
 };
 
-module.exports = processGhostResponse;
+module.exports = processBatch;

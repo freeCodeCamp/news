@@ -1,6 +1,7 @@
 const { chunk, cloneDeep } = require('lodash');
 
 const fetchFromGhost = require('../../utils/ghost/fetch-from-ghost');
+const processBatch = require('../../utils/ghost/process-batch');
 const errorLogger = require('../../utils/error-logger');
 
 const { sourceApiUrl } = require('../../utils/ghost/api');
@@ -16,20 +17,22 @@ const getUniqueList = (arr, key) => [
 ];
 
 module.exports = async () => {
-  const limit = 200;
-  const ghostPosts = await fetchFromGhost('posts', {
-    include: ['tags', 'authors'],
-    filter: 'status:published',
-    limit
-  });
+  // Chunk to process in larger batches
+  const batchSize = 500;
+  const allPosts = await fetchFromGhost('posts');
+  const allPages = await fetchFromGhost('pages');
+  const processedPosts = await Promise.all(
+    chunk(allPosts, batchSize).map((batch, i, originalArr) =>
+      processBatch(batch, 'posts', i + 1, originalArr.length)
+    )
+  ).then(arr => arr.flat());
+  const processedPages = await Promise.all(
+    chunk(allPages, batchSize).map((batch, i, originalArr) =>
+      processBatch(batch, 'pages', i + 1, originalArr.length)
+    )
+  ).then(arr => arr.flat());
 
-  const ghostPages = await fetchFromGhost('pages', {
-    include: ['tags', 'authors'],
-    filter: 'status:published',
-    limit
-  });
-
-  const posts = ghostPosts.map(post => {
+  const posts = processedPosts.map(post => {
     post.path = stripDomain(post.url);
     post.primary_author.path = stripDomain(post.primary_author.url);
     post.tags.forEach(tag => {
@@ -56,7 +59,7 @@ module.exports = async () => {
     return post;
   });
 
-  const pages = ghostPages.map(page => {
+  const pages = processedPages.map(page => {
     page.path = stripDomain(page.url);
     page.primary_author.path = stripDomain(page.primary_author.url);
 
