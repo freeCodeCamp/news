@@ -18,17 +18,23 @@ const getUniqueList = (arr, key) => [
 
 module.exports = async () => {
   // Chunk to process in larger batches
-  const batchSize = 600;
+  const batchSize = 50;
   const allPosts = await fetchFromGhost('posts');
   const allPages = await fetchFromGhost('pages');
-  const processedPosts = await processBatches(
-    chunk(allPosts, batchSize),
-    'posts'
-  );
-  const processedPages = await processBatches(
-    chunk(allPages, batchSize),
-    'pages'
-  );
+  // const processedPosts = await processBatches(
+  //   chunk(allPosts, batchSize),
+  //   'posts'
+  // );
+  // const processedPages = await processBatches(
+  //   chunk(allPages, batchSize),
+  //   'pages'
+  // );
+  const processedPosts = await Promise.all(
+    chunk(allPosts, batchSize).map(batch => processBatches(batch, 'posts'))
+  ).then(arr => arr.flat());
+  const processedPages = await Promise.all(
+    chunk(allPages, batchSize).map(batch => processBatches(batch, 'pages'))
+  ).then(arr => arr.flat());
 
   const posts = processedPosts.map(post => {
     post.path = stripDomain(post.url);
