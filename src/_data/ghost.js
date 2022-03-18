@@ -1,7 +1,7 @@
 const { chunk, cloneDeep } = require('lodash');
 
 const fetchFromGhost = require('../../utils/ghost/fetch-from-ghost');
-const processBatch = require('../../utils/ghost/process-batch');
+const processBatches = require('../../utils/ghost/process-batches');
 const errorLogger = require('../../utils/error-logger');
 
 const { sourceApiUrl } = require('../../utils/ghost/api');
@@ -18,19 +18,17 @@ const getUniqueList = (arr, key) => [
 
 module.exports = async () => {
   // Chunk to process in larger batches
-  const batchSize = 500;
+  const batchSize = 600;
   const allPosts = await fetchFromGhost('posts');
   const allPages = await fetchFromGhost('pages');
-  const processedPosts = await Promise.all(
-    chunk(allPosts, batchSize).map((batch, i, originalArr) =>
-      processBatch(batch, 'posts', i + 1, originalArr.length)
-    )
-  ).then(arr => arr.flat());
-  const processedPages = await Promise.all(
-    chunk(allPages, batchSize).map((batch, i, originalArr) =>
-      processBatch(batch, 'pages', i + 1, originalArr.length)
-    )
-  ).then(arr => arr.flat());
+  const processedPosts = await processBatches(
+    chunk(allPosts, batchSize),
+    'posts'
+  );
+  const processedPages = await processBatches(
+    chunk(allPages, batchSize),
+    'pages'
+  );
 
   const posts = processedPosts.map(post => {
     post.path = stripDomain(post.url);
