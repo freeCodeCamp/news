@@ -2474,6 +2474,5 @@ a.banner:hover span {
 .rtl-layout .post-full-content p code {
   word-break: normal;
   direction: ltr;
-  white-space: nowrap;
   unicode-bidi: isolate;
 }
