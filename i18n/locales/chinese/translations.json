@@ -7,7 +7,7 @@
   "search": {
     "label": "搜索",
     "accessible-name": "提交您的搜索查询",
-    "placeholder": "搜索 600+ 篇教程",
+    "placeholder": "搜索 700+ 篇教程",
     "see-results": "查看 {{ searchQuery }} 的所有结果",
     "no-tutorials": "未找到教程"
   },
