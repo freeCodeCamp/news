@@ -105,9 +105,6 @@ document.addEventListener('DOMContentLoaded', () => {
               originalPost
                 ? `
               <li class="author-list-item">
-                <div class="author-name-tooltip">
-                  ${originalAuthor.name}
-                </div>
                 ${
                   originalAuthor.profileImage
                     ? `
@@ -141,9 +138,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 : ''
             }
             <li class="author-list-item">
-              <div class="author-name-tooltip">
-                ${authorName}
-              </div>
               ${
                 authorImage
                   ? `

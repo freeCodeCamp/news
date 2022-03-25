@@ -47,9 +47,6 @@
                     <ul class="author-list">
                         {% if post.original_post %}
                             <li class="author-list-item">
-                                <div class="author-name-tooltip">
-                                    {{ originalAuthor.name }}
-                                </div>
                                 {% if originalAuthor.profile_image %}
                                     {# Original author is coming from another Ghost instance, so no need to use the url filter #}
                                     <a href="{{ originalAuthor.url }}" class="static-avatar">
@@ -76,9 +73,6 @@
                             </li>
                         {% endif %}
                         <li class="author-list-item">
-                            <div class="author-name-tooltip">
-                                {{ post.primary_author.name }}
-                            </div>
                             {% if post.primary_author.profile_image %}
                                 <a href="{{ post.primary_author.path | url }}" class="static-avatar">
                                     {% 
