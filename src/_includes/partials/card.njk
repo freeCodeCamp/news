@@ -47,9 +47,9 @@
                     <ul class="author-list">
                         {% if post.original_post %}
                             <li class="author-list-item">
-                                {% if originalAuthor.profile_image %}
-                                    {# Original author is coming from another Ghost instance, so no need to use the url filter #}
-                                    <a href="{{ originalAuthor.url }}" class="static-avatar">
+                                <a href="{{ originalAuthor.url }}" class="static-avatar">
+                                    {% if originalAuthor.profile_image %}
+                                        {# Original author is coming from another Ghost instance, so no need to use the url filter #}
                                         {% 
                                             image
                                             originalAuthor.profile_image,
@@ -60,12 +60,12 @@
                                             originalAuthor.image_dimensions.profile_image,
                                             lazyLoad
                                         %}
-                                    </a>
-                                {% else %}
-                                    <a href="{{ originalAuthor.url }}" class="static-avatar author-profile-image">
-                                        {% include "partials/icons/avatar.njk" %}
-                                    </a>
-                                {% endif %}
+                                    {% else %}
+                                        <span class="author-profile-image">
+                                            {% include "partials/icons/avatar.njk" %}
+                                        </span>
+                                    {% endif %}
+                                </a>
                                 <span class="meta-content">
                                     <a class="meta-item" href="{{ originalAuthor.url }}">{% t 'localization-meta.roles.author', { authorName: originalAuthor.name } %} ({% t 'localization-meta.languages.en' %})</a>
                                     <time class="meta-item" datetime="{{ post.original_post.published_at }}">{% timeAgo post.original_post.published_at %}</time>
@@ -73,8 +73,8 @@
                             </li>
                         {% endif %}
                         <li class="author-list-item">
-                            {% if post.primary_author.profile_image %}
-                                <a href="{{ post.primary_author.path | url }}" class="static-avatar">
+                            <a href="{{ post.primary_author.path | url }}" class="static-avatar">
+                                {% if post.primary_author.profile_image %}
                                     {% 
                                         image
                                         post.primary_author.profile_image,
@@ -85,12 +85,12 @@
                                         post.primary_author.image_dimensions.profile_image,
                                         lazyLoad
                                     %}
-                                </a>
-                            {% else %}
-                                <a href="{{ post.primary_author.path | url }}" class="static-avatar author-profile-image">
-                                    {% include "partials/icons/avatar.njk" %}
-                                </a>
-                            {% endif %}
+                                {% else %}
+                                    <span class="author-profile-image">
+                                        {% include "partials/icons/avatar.njk" %}
+                                    </span>
+                                {% endif %}
+                            </a>
                             <span class="meta-content">
                                 <a class="meta-item" href="{{ post.primary_author.path | url }}">
                                     {% if post.original_post %}
