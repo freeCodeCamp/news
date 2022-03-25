@@ -53,7 +53,8 @@ describe('Redirect and rewrite tests:', () => {
           italian: /^\/italian\/news/,
           portuguese: /^\/portuguese\/news/,
           japanese: /^\/japanese\/news/,
-          arabic: /^\/arabic\/news/
+          arabic: /^\/arabic\/news/,
+          urdu: /^\/urdu\/news/
         };
 
         redirects

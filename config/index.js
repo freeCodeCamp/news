@@ -27,7 +27,8 @@ const locales = [
   'italian',
   'portuguese',
   'japanese',
-  'arabic'
+  'arabic',
+  'urdu'
 ];
 
 /* These strings set the i18next language. It needs to be the two character
@@ -41,7 +42,8 @@ const localeCodes = {
   italian: 'it',
   portuguese: 'pt-BR',
   japanese: 'ja',
-  arabic: 'ar'
+  arabic: 'ar',
+  urdu: 'ur'
 };
 
 const algoliaIndices = {
@@ -51,7 +53,8 @@ const algoliaIndices = {
   italian: 'news-it',
   portuguese: 'news-pt-br',
   japanese: 'news-ja',
-  arabic: 'news-ar'
+  arabic: 'news-ar',
+  urdu: 'news-ur'
 };
 
 const {
