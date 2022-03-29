@@ -70,7 +70,7 @@
     "@tryghost/helpers": "1.1.62",
     "clean-css": "5.2.4",
     "cross-env": "7.0.3",
-    "cypress": "9.5.2",
+    "cypress": "9.5.3",
     "dayjs": "1.11.0",
     "dotenv": "16.0.0",
     "eslint": "8.12.0",
