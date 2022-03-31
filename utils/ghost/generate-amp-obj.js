@@ -7,7 +7,7 @@ const {
   allowedAMPAttributes
 } = require('../transforms/html-sanitizer');
 
-const ampHandler = async obj => {
+const generateAMPObj = async obj => {
   // Create object to hold results
   const ampObj = {
     html: '',
@@ -213,4 +213,4 @@ const ampHandler = async obj => {
   return ampObj;
 };
 
-module.exports = ampHandler;
+module.exports = generateAMPObj;
