@@ -1,3 +1,7 @@
+const {
+  allowedAMPAttributes
+} = require('../../../../utils/transforms/html-sanitizer');
+
 const selectors = {
   siteLogo: '.logo > .i-amphtml-element',
   images: {
@@ -24,6 +28,11 @@ const selectors = {
   }
 };
 
+const stripAutoAMPAttributes = attrArr =>
+  attrArr.filter(
+    attr => !['class', 'style'].includes(attr) && !attr.startsWith('i-amphtml')
+  );
+
 describe('AMP page', () => {
   before(() => {
     cy.visit('/amp-page-tests/amp');
@@ -44,12 +53,23 @@ describe('AMP page', () => {
       });
     });
 
-    it('the first image of cats should have the expected attributes', () => {
+    it('the first image of cats should have the expected attributes and values', () => {
       cy.get(selectors.images.cats).then($el => {
         expect($el.attr('width')).to.equal('400');
         expect($el.attr('height')).to.equal('222');
         expect($el.attr('alt')).to.equal('cats');
         expect($el.attr('layout')).to.equal('responsive');
+      });
+    });
+
+    it('the first image of cats should only contain allowed amp-img attributes', () => {
+      cy.get(selectors.images.cats).then($el => {
+        const attributes = stripAutoAMPAttributes($el[0].getAttributeNames());
+        const diff = attributes.filter(
+          attr => !allowedAMPAttributes['amp-img'].includes(attr)
+        );
+
+        expect(diff).to.have.length(0);
       });
     });
 
@@ -67,7 +87,7 @@ describe('AMP page', () => {
   });
 
   context('<amp-anim>', () => {
-    it('the first gif of the typing cat should have the expected attributes', () => {
+    it('the first typing cat gif should have the expected attributes and values', () => {
       cy.get(selectors.gifs.typingCat).then($el => {
         expect($el.attr('width')).to.equal('340');
         expect($el.attr('height')).to.equal('340');
@@ -76,7 +96,18 @@ describe('AMP page', () => {
       });
     });
 
-    it('the second gif of the typing cat should have a figcaption with the expected text', () => {
+    it('the first typing cat gif should only contain allowed amp-anim attributes', () => {
+      cy.get(selectors.gifs.typingCat).then($el => {
+        const attributes = stripAutoAMPAttributes($el[0].getAttributeNames());
+        const diff = attributes.filter(
+          attr => !allowedAMPAttributes['amp-anim'].includes(attr)
+        );
+
+        expect(diff).to.have.length(0);
+      });
+    });
+
+    it('the second typing cat gif should have a figcaption with the expected text', () => {
       cy.get(selectors.gifs.typingCatWithCaption)
         .get('figcaption')
         .contains('Tap tap tappity tap');
@@ -84,7 +115,7 @@ describe('AMP page', () => {
   });
 
   context('<amp-youtube>', () => {
-    it('should have the expected attributes', () => {
+    it('should have the expected attributes and values', () => {
       cy.get(selectors.youtube).then($el => {
         expect($el.attr('width')).to.equal('200');
         expect($el.attr('height')).to.equal('113');
@@ -92,10 +123,21 @@ describe('AMP page', () => {
         expect($el.attr('data-videoid')).to.equal('8TDsGUFFXSY');
       });
     });
+
+    it('should only contain allowed amp-youtube attributes', () => {
+      cy.get(selectors.youtube).then($el => {
+        const attributes = stripAutoAMPAttributes($el[0].getAttributeNames());
+        const diff = attributes.filter(
+          attr => !allowedAMPAttributes['amp-youtube'].includes(attr)
+        );
+
+        expect(diff).to.have.length(0);
+      });
+    });
   });
 
   context('<amp-iframe>', () => {
-    it('the GIPHY iframe should have the expected attributes', () => {
+    it('the GIPHY iframe should have the expected attributes and values', () => {
       cy.get(selectors.iframes.giphy).then($el => {
         expect($el.attr('width')).to.equal('384');
         expect($el.attr('height')).to.equal('480');
@@ -103,7 +145,18 @@ describe('AMP page', () => {
       });
     });
 
-    it('the CodePen iframe should have the expected attributes', () => {
+    it('the GIPHY iframe should only contain allowed amp-iframe attributes', () => {
+      cy.get(selectors.iframes.giphy).then($el => {
+        const attributes = stripAutoAMPAttributes($el[0].getAttributeNames());
+        const diff = attributes.filter(
+          attr => !allowedAMPAttributes['amp-iframe'].includes(attr)
+        );
+
+        expect(diff).to.have.length(0);
+      });
+    });
+
+    it('the CodePen iframe should have the expected attributes and values', () => {
       cy.get(selectors.iframes.codePen).then($el => {
         expect($el.attr('width')).to.equal('600'); // This is added as a default in amp-handler.js
         expect($el.attr('height')).to.equal('300');
@@ -114,10 +167,21 @@ describe('AMP page', () => {
         expect($el.attr('frameborder')).to.equal('0');
       });
     });
+
+    it('the CodePen iframe should only contain allowed amp-iframe attributes', () => {
+      cy.get(selectors.iframes.codePen).then($el => {
+        const attributes = stripAutoAMPAttributes($el[0].getAttributeNames());
+        const diff = attributes.filter(
+          attr => !allowedAMPAttributes['amp-iframe'].includes(attr)
+        );
+
+        expect(diff).to.have.length(0);
+      });
+    });
   });
 
   context('<amp-video>', () => {
-    it('the first video should have the expected attributes', () => {
+    it('the first video should have the expected attributes and values', () => {
       cy.get(selectors.videos.bigBuckBunny).then($el => {
         expect($el.attr('width')).to.equal('720');
         expect($el.attr('height')).to.equal('405');
@@ -129,6 +193,17 @@ describe('AMP page', () => {
         );
         expect($el.attr('controls')).to.exist;
         expect($el.attr('layout')).to.equal('responsive');
+      });
+    });
+
+    it('the first video should only contain allowed amp-video attributes', () => {
+      cy.get(selectors.videos.bigBuckBunny).then($el => {
+        const attributes = stripAutoAMPAttributes($el[0].getAttributeNames());
+        const diff = attributes.filter(
+          attr => !allowedAMPAttributes['amp-video'].includes(attr)
+        );
+
+        expect(diff).to.have.length(0);
       });
     });
 
@@ -148,12 +223,23 @@ describe('AMP page', () => {
   });
 
   context('<amp-audio>', () => {
-    it('the first audio element should have the expected attributes', () => {
+    it('the first audio element should have the expected attributes and values', () => {
       cy.get(selectors.audio.rideOfTheValkyries).then($el => {
         expect($el.attr('src')).to.equal(
           'https://ia801402.us.archive.org/16/items/EDIS-SRP-0197-06/EDIS-SRP-0197-06.mp3'
         );
         expect($el.attr('controls')).to.exist;
+      });
+    });
+
+    it('the first audio element should only contain allowed amp-audio attributes', () => {
+      cy.get(selectors.audio.rideOfTheValkyries).then($el => {
+        const attributes = stripAutoAMPAttributes($el[0].getAttributeNames());
+        const diff = attributes.filter(
+          attr => !allowedAMPAttributes['amp-audio'].includes(attr)
+        );
+
+        expect(diff).to.have.length(0);
       });
     });
 
