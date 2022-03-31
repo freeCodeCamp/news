@@ -1,5 +1,5 @@
 const { setImageDimensionObj } = require('./helpers');
-const ampHandler = require('./amp-handler');
+const generateAMPObj = require('./generate-amp-obj');
 const lazyLoadHandler = require('./lazy-load-handler');
 const originalPostHandler = require('./original-post-handler');
 
@@ -49,12 +49,13 @@ const processGhostResponse = async (ghostRes, context) => {
           .join(' ');
       }
 
-      // Handle AMP processing for posts before modifying the original
-      // HTML and add flags to dynamically import AMP scripts
-      if (context === 'posts' && obj.html) obj.amp = await ampHandler(obj);
-
-      // Lazy load images and embedded videos
+      // Lazy load images and embedded videos -- will also set the width, height,
+      // and add a default alt attribute to images if one doesn't exist
       if (obj.html) obj.html = await lazyLoadHandler(obj.html, obj.title);
+
+      // Generate an object that contains AMP HTML and flags to conditionally include
+      // AMP scripts in the amp.njk template. Only do this for posts.
+      if (context === 'posts' && obj.html) obj.amp = await generateAMPObj(obj);
 
       return obj;
     })

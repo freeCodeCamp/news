@@ -349,11 +349,9 @@ const allowedAMPAttributes = {
     'referrerpolicy'
   ],
   'amp-youtube': [
-    'src',
     'width',
     'height',
     'layout',
-    'frameborder',
     'autoplay',
     'loop',
     'data-videoid',
@@ -370,5 +368,6 @@ const htmlSanitizer = html => {
 };
 
 module.exports = {
-  htmlSanitizer
+  htmlSanitizer,
+  allowedAMPAttributes
 };
