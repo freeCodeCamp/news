@@ -1,5 +1,7 @@
 describe('Landing', () => {
   before(() => {
+    // Update baseUrl to include current language
+    Cypress.config('baseUrl', 'http://localhost:8080/chinese/news');
     cy.visit('/');
   });
 

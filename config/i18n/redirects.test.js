@@ -49,7 +49,7 @@ describe('Redirect and rewrite tests:', () => {
           .filter(redirect => redirect.destination.startsWith('/'))
           .map(redirect => {
             const expectedBasePath =
-              lang === 'english' || lang === 'chinese'
+              lang === 'english'
                 ? new RegExp(`^/news(/|$)`)
                 : new RegExp(`^/${lang}/news(/|$)`);
 
