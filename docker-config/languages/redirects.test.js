@@ -25,7 +25,7 @@ describe('Redirect and rewrite tests:', () => {
       });
 
       test('redirect sources start with /', () => {
-        redirects.map(redirect => expect(redirect.source[0]).toEqual('/'));
+        redirects.map(redirect => expect(redirect.source).toMatch(/^\//));
       });
 
       test('redirect destinations start with / or https://', () => {
@@ -35,12 +35,12 @@ describe('Redirect and rewrite tests:', () => {
       });
 
       test('redirect sources do not end with /', () => {
-        redirects.map(redirect => expect(redirect.source).not.toMatch(/$\//));
+        redirects.map(redirect => expect(redirect.source).not.toMatch(/\/$/));
       });
 
       test('redirect destinations do not end with /', () => {
         redirects.map(redirect =>
-          expect(redirect.destination).not.toMatch(/$\//)
+          expect(redirect.destination).not.toMatch(/\/$/)
         );
       });
 
@@ -65,15 +65,10 @@ describe('Redirect and rewrite tests:', () => {
       });
 
       test('there are no duplicate redirects', () => {
-        const duplicates = redirects.reduce((acc, curr, i, arr) => {
-          if (arr.indexOf(curr) !== i && acc.indexOf(curr) < 0) {
-            acc.push(curr);
-          }
+        const sources = redirects.map(obj => obj.source);
+        const uniqueSources = [...new Set(sources)];
 
-          return acc;
-        }, []);
-
-        expect(duplicates.length).toEqual(0);
+        expect(sources.length).toEqual(uniqueSources.length);
       });
     });
   });
