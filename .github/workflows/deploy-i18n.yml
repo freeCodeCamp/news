@@ -14,7 +14,16 @@ jobs:
       fail-fast: false
       matrix:
         node-version: [16.x]
-        languages: [chinese, espanol, italian, portuguese, japanese, arabic]
+        languages: [
+            chinese,
+            espanol,
+            italian,
+            portuguese,
+            japanese,
+            arabic,
+            # urdu,
+            bengali
+          ]
         site_tlds: [dev, org]
 
     env:
@@ -51,9 +60,13 @@ jobs:
       ARABIC_GHOST_API_VERSION: ${{ secrets.ARABIC_GHOST_API_VERSION }}
       ARABIC_GHOST_CONTENT_API_KEY: ${{ secrets.ARABIC_GHOST_CONTENT_API_KEY }}
 
-      URDU_GHOST_API_URL: ${{ secrets.ARABIC_GHOST_API_URL }}
-      URDU_GHOST_API_VERSION: ${{ secrets.ARABIC_GHOST_API_VERSION }}
-      URDU_GHOST_CONTENT_API_KEY: ${{ secrets.ARABIC_GHOST_CONTENT_API_KEY }}
+      URDU_GHOST_API_URL: ${{ secrets.URDU_GHOST_API_URL }}
+      URDU_GHOST_API_VERSION: ${{ secrets.URDU_GHOST_API_VERSION }}
+      URDU_GHOST_CONTENT_API_KEY: ${{ secrets.URDU_GHOST_CONTENT_API_KEY }}
+
+      BENGALI_GHOST_API_URL: ${{ secrets.BENGALI_GHOST_API_URL }}
+      BENGALI_GHOST_API_VERSION: ${{ secrets.BENGALI_GHOST_API_VERSION }}
+      BENGALI_GHOST_CONTENT_API_KEY: ${{ secrets.BENGALI_GHOST_CONTENT_API_KEY }}
 
       ADS_ENABLED: ${{ secrets.ADS_ENABLED }}
       GOOGLE_ADSENSE_DATA_AD_CLIENT: ${{ secrets.GOOGLE_ADSENSE_DATA_AD_CLIENT }}
