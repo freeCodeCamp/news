@@ -1,0 +1,10 @@
+{
+  "directoryListing": false,
+  "rewrites": [
+    {
+      "source": "/:authorOrTag?/:name?/rss",
+      "destination": "/:authorOrTag?/:name?/rss.xml"
+    }
+  ],
+  "redirects": []
+}
