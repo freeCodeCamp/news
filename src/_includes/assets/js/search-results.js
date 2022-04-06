@@ -57,10 +57,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const headerEl = `
       <header class="post-card-header">
         ${
-          hit.tags.length > 0
-            ? `<a href="${hit.tags[0].url}">
-            #${hit.tags[0].name}
-          </a>`
+          hit?.tags[0]?.name
+            ? `<span class="post-card-tags"><a href="${hit.tags[0].url}">
+          #${hit.tags[0].name}
+        </a></span>`
             : ''
         }
           <h2 class="post-card-title">
