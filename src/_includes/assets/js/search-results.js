@@ -92,6 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
               `
                 : `
                 <span class="author-profile-image">
+                  {% set avatarTitle = "${hit.originalPost.author.name}" %}
                   {% include "partials/icons/avatar.njk" %}
                 </span>
               `
@@ -125,6 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
             `
                 : `
               <span class="author-profile-image">
+                {% set avatarTitle = "${hit.author.name}" %}
                 {% include "partials/icons/avatar.njk" %}
               </span>
             `

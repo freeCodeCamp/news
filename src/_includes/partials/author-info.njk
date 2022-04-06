@@ -13,6 +13,7 @@
         %}
     {% else %}
         <span class="author-profile-image">
+            {% set avatarTitle = author.name %}
             {% include "partials/icons/avatar.njk" %}
         </span>
     {% endif %}
