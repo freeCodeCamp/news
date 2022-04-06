@@ -61,7 +61,7 @@
                                             lazyLoad
                                         %}
                                     {% else %}
-                                        <span class="author-profile-image">
+                                        <span class="avatar-wrapper">
                                             {% set avatarTitle = originalAuthor.name %}
                                             {% include "partials/icons/avatar.njk" %}
                                         </span>
@@ -87,7 +87,7 @@
                                         lazyLoad
                                     %}
                                 {% else %}
-                                    <span class="author-profile-image">
+                                    <span class="avatar-wrapper">
                                         {% set avatarTitle = post.primary_author.name %}
                                         {% include "partials/icons/avatar.njk" %}
                                     </span>
