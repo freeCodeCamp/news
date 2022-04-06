@@ -1,7 +1,7 @@
 {% macro card(post, index) %}
     {% set lazyLoad = true if (index >= 4) else false %}
     {% set originalAuthor = post.original_post.primary_author %}
-    <article class="post-card {{ post.class }}">
+    <article class="post-card {{ post.class }}" data-test-label="post-card">
         {% if post.feature_image %}
             <a class="post-card-image-link" href="{{ post.path | url }}" aria-label="{{ post.title }}">
                 {% 
