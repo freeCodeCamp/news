@@ -78,7 +78,7 @@
     "eslint-plugin-cypress": "2.12.1",
     "eslint-plugin-ghost": "2.13.0",
     "eslint-utils": "3.0.0",
-    "graceful-fs": "4.2.9",
+    "graceful-fs": "4.2.10",
     "husky": "7.0.4",
     "i18next": "21.6.15",
     "i18next-fs-backend": "1.1.4",
