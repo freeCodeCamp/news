@@ -28,8 +28,10 @@ const generateAMPObj = async obj => {
   const audioEls = [...document.getElementsByTagName('audio')];
   const videoEls = [...document.getElementsByTagName('video')];
 
-  const setAllowedAttributes = (allowedAttributesArr, originalEl, ampEl) => {
-    allowedAttributesArr.forEach(attributeName => {
+  const setAllowedAttributes = (type, originalEl, ampEl) => {
+    const allowedAttributes = allowedAMPAttributes[type];
+
+    allowedAttributes.forEach(attributeName => {
       const booleanAttributes = ['loop', 'autoplay', 'muted'];
 
       if (originalEl.hasAttribute(attributeName)) {
@@ -92,11 +94,7 @@ const generateAMPObj = async obj => {
       if (extname(imgEl.src).toLowerCase() !== '.gif') {
         let ampImgEl = document.createElement('amp-img');
 
-        ampImgEl = setAllowedAttributes(
-          allowedAMPAttributes['amp-img'],
-          imgEl,
-          ampImgEl
-        );
+        ampImgEl = setAllowedAttributes('amp-img', imgEl, ampImgEl);
         ampImgEl.setAttribute('layout', layoutType);
 
         // Set element type for dynamically loading scripts in template
@@ -107,11 +105,7 @@ const generateAMPObj = async obj => {
         // Create <amp-anim> elements
         let ampAnimEl = document.createElement('amp-anim');
 
-        ampAnimEl = setAllowedAttributes(
-          allowedAMPAttributes['amp-anim'],
-          imgEl,
-          ampAnimEl
-        );
+        ampAnimEl = setAllowedAttributes('amp-anim', imgEl, ampAnimEl);
         ampAnimEl.setAttribute('layout', layoutType);
 
         // Set element type for dynamically loading scripts in template
@@ -135,7 +129,7 @@ const generateAMPObj = async obj => {
         let ampYouTubeEl = document.createElement('amp-youtube');
 
         ampYouTubeEl = setAllowedAttributes(
-          allowedAMPAttributes['amp-youtube'],
+          'amp-youtube',
           iframeEl,
           ampYouTubeEl
         );
@@ -150,11 +144,7 @@ const generateAMPObj = async obj => {
         // Create <amp-iframe> elements
         let ampIframeEl = document.createElement('amp-iframe');
 
-        ampIframeEl = setAllowedAttributes(
-          allowedAMPAttributes['amp-iframe'],
-          iframeEl,
-          ampIframeEl
-        );
+        ampIframeEl = setAllowedAttributes('amp-iframe', iframeEl, ampIframeEl);
         ampIframeEl.setAttribute('layout', 'responsive');
 
         // Special handling for the sandbox attribute
@@ -177,11 +167,7 @@ const generateAMPObj = async obj => {
       const sourceEls = [...audioEl.getElementsByTagName('source')];
       let ampAudioEl = document.createElement('amp-audio');
 
-      ampAudioEl = setAllowedAttributes(
-        allowedAMPAttributes['amp-audio'],
-        audioEl,
-        ampAudioEl
-      );
+      ampAudioEl = setAllowedAttributes('amp-audio', audioEl, ampAudioEl);
 
       // Add source elements as children
       sourceEls.forEach(source => ampAudioEl.appendChild(source));
@@ -201,11 +187,7 @@ const generateAMPObj = async obj => {
       const sourceEls = [...videoEl.getElementsByTagName('source')];
       let ampVideoEl = document.createElement('amp-video');
 
-      ampVideoEl = setAllowedAttributes(
-        allowedAMPAttributes['amp-video'],
-        videoEl,
-        ampVideoEl
-      );
+      ampVideoEl = setAllowedAttributes('amp-video', videoEl, ampVideoEl);
       ampVideoEl.setAttribute('layout', 'responsive');
       // Ensure controls are set
       ampVideoEl.setAttribute('controls', '');
