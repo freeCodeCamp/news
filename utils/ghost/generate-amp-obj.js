@@ -29,9 +29,19 @@ const generateAMPObj = async obj => {
   const videoEls = [...document.getElementsByTagName('video')];
 
   const setAllowedAttributes = (allowedAttributesArr, originalEl, ampEl) => {
-    allowedAttributesArr.forEach(attr =>
-      originalEl[attr] ? ampEl.setAttribute(attr, originalEl[attr]) : ''
-    );
+    allowedAttributesArr.forEach(attribute => {
+      const booleanAttributes = ['loop', 'autoplay', 'muted'];
+
+      if (originalEl[attribute]) {
+        // Add boolean attribute to the ampEl so it is present,
+        // but prevent it from being set to "true"
+        if (booleanAttributes.includes(attribute)) {
+          return ampEl.setAttribute(attribute, '');
+        }
+
+        return ampEl.setAttribute(attribute, originalEl[attribute]);
+      }
+    });
 
     return ampEl;
   };
