@@ -20,11 +20,13 @@ const selectors = {
   },
   videos: {
     bigBuckBunny: 'amp-video:nth-child(24)',
-    bigBuckBunnyWithSourceEl: 'amp-video:nth-child(26)'
+    bigBuckBunnyWithSourceEl: 'amp-video:nth-child(26)',
+    bigBuckBunnyWithBooleanAttributes: 'amp-video:nth-child(28)'
   },
   audio: {
-    rideOfTheValkyries: 'amp-audio:nth-child(29)',
-    rideOfTheValkyriesWithSourceEl: 'amp-audio:nth-child(31)'
+    rideOfTheValkyries: 'amp-audio:nth-child(31)',
+    rideOfTheValkyriesWithSourceEl: 'amp-audio:nth-child(33)',
+    rideOfTheValkyriesWithBooleanAttributes: 'amp-audio:nth-child(35)'
   }
 };
 
@@ -220,6 +222,17 @@ describe('AMP page', () => {
         }
       );
     });
+
+    it('the third video should have the `loop` and `autoplay` boolean attributes without any values', () => {
+      cy.get(selectors.videos.bigBuckBunnyWithBooleanAttributes).then($el => {
+        expect($el.attr('loop')).to.exist;
+        expect($el.attr('autoplay')).to.exist;
+        // With jQuery's `.attr()` method, the value for properly set boolean attributes
+        // will be the same as the attribute name itself
+        expect($el.attr('loop')).to.equal('loop');
+        expect($el.attr('autoplay')).to.equal('autoplay');
+      });
+    });
   });
 
   context('<amp-audio>', () => {
@@ -253,6 +266,22 @@ describe('AMP page', () => {
           expect($el.attr('src')).to.equal(
             'https://ia801402.us.archive.org/16/items/EDIS-SRP-0197-06/EDIS-SRP-0197-06.mp3'
           );
+        }
+      );
+    });
+
+    it('the third audio element should have the `loop`, `muted`, and `autoplay` boolean attributes without any values', () => {
+      cy.get(selectors.audio.rideOfTheValkyriesWithBooleanAttributes).then(
+        $el => {
+          expect($el.attr('loop')).to.exist;
+          expect($el.attr('autoplay')).to.exist;
+          expect($el.attr('muted')).to.exist;
+          // With jQuery's `.attr()` method, the value for properly set boolean attributes
+          // will be the same as the attribute name itself, with the exception of `muted`, which
+          // defaults to an empty string
+          expect($el.attr('loop')).to.equal('loop');
+          expect($el.attr('autoplay')).to.equal('autoplay');
+          expect($el.attr('muted')).to.equal('');
         }
       );
     });
