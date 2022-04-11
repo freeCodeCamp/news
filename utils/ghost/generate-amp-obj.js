@@ -32,7 +32,7 @@ const generateAMPObj = async obj => {
     allowedAttributesArr.forEach(attribute => {
       const booleanAttributes = ['loop', 'autoplay', 'muted'];
 
-      if (originalEl[attribute]) {
+      if (originalEl.hasAttribute(attribute)) {
         // Add boolean attribute to the ampEl so it is present,
         // but prevent it from being set to "true"
         if (booleanAttributes.includes(attribute)) {
@@ -174,7 +174,7 @@ const generateAMPObj = async obj => {
       let ampAudio = document.createElement('amp-audio');
 
       ampAudio = setAllowedAttributes(
-        [...allowedAMPAttributes['amp-audio'], 'controlsList'],
+        allowedAMPAttributes['amp-audio'],
         audio,
         ampAudio
       );
@@ -198,7 +198,7 @@ const generateAMPObj = async obj => {
       let ampVideo = document.createElement('amp-video');
 
       ampVideo = setAllowedAttributes(
-        [...allowedAMPAttributes['amp-video'], 'controlsList'],
+        allowedAMPAttributes['amp-video'],
         video,
         ampVideo
       );

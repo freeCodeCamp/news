@@ -289,8 +289,8 @@ const allowedAMPAttributes = {
     'attribution',
     'autoplay',
     'controls',
+    'controlsList',
     'loop',
-    'muted',
     'poster',
     'preload'
   ],
@@ -334,7 +334,8 @@ const allowedAMPAttributes = {
     'autoplay',
     'loop',
     'muted',
-    'controls'
+    'controls',
+    'controlsList'
   ],
   'amp-iframe': [
     'src',
