@@ -1,5 +1,7 @@
 ![freeCodeCamp.org Social Banner](https://s3.amazonaws.com/freecodecamp/wide-social-banner.png)
 
+# For Urdu publication
+
 # Developer News
 
 Welcome to freeCodeCamp's [Developer News](https://www.freecodecamp.org/news)

@@ -11,7 +11,9 @@
     "see-results": "  کے سارے results دیکھیں {{ searchQuery }}",
     "no-tutorials": "کوئی ٹٹوریل نہیں مل سکا "
   },
+
   "banner": "{{ <0> }}کوڈ کرنا سیکھیں  3000 گھنٹوں کا مفت نصاب{{ </0> }}",
+
   "author": {
     "no-posts": "کوئی post نہیں",
     "one-post": "1 post",
@@ -31,6 +33,7 @@
     "author-has-twitter": "اگر آپ نیں آخر تک پڑھ لیا ہے، تو مصنف کو شکریہ کریں.. {{ <0> }} شکریہ کا Tweet کریں {{ </0> }}",
     "author-no-twitter": " {{ <0> }}Tweet  کریں{{ </0> }} اگر یہ آرٹیکل مفید لگا تو ",
     "default-tweet": "آپ کا بہت شکریہ، آپ نیں یہ آرٹیکل لکھا.  {{ twitter }} ."
+
   },
   "learn-to-code-cta": "مفت میں coding کرنا سیکھیں. freecodecamp کے open source نصاب نے 40،000 سے زیادہ لوگوں کو ڈویلپر جاب ملنے میں مدد کی ہے. {{ <0> }} شروع کریں{{ </0> }}",
   "localization-meta": {
@@ -53,6 +56,7 @@
     "mission-statement": "ہمارا مشن: لوگوں کو مفت میں کوڈ سیکھنے میں مدد کرنا۔ ہم اسے ہزاروں ویڈیوز، مضامین، اور انٹرایکٹو کوڈنگ اسباق بنا کر پورا کرتے ہیں - یہ سب عوام کے لیے  publically دستیاب ہیں۔ ہمارے پاس دنیا بھر میں ہزاروں FreeCodeCamp اسٹڈی گروپس بھی ہیں۔",
     "donation-initiatives": "FreeCodeCamp کو عطیات ہمارے تعلیمی اقدامات کی طرف جاتے ہیں، اور سرورز، services اور عملے کی تنخواہ کی ادائیگی میں مدد کرتے ہیں۔",
     "donate-text": "{{ <0> }} آپ یہاں ایک ٹیکس deductible donation دے سکتے ہیں. {{ </0> }}",
+
     "trending-guides": "Trending Guides",
     "our-nonprofit": "Our Nonprofit",
     "links": {
