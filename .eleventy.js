@@ -20,7 +20,7 @@ const {
   fullYearShortcode,
   toISOStringShortcode
 } = require('./utils/shortcodes/dates');
-const { currentLocale_i18n } = require('./config');
+const { currentLocale_i18n, eleventyEnv } = require('./config');
 const sitePath = require('./utils/site-path');
 
 module.exports = function (config) {
@@ -97,6 +97,12 @@ module.exports = function (config) {
 
   // Don't ignore the same files ignored in the git repo
   config.setUseGitIgnore(false);
+
+  if (eleventyEnv === 'ci')
+    config.addPassthroughCopy({
+      './cypress/fixtures/mock-search-hits.json':
+        './assets/mock-search-hits.json'
+    });
 
   // Display 404 and RSS pages in BrowserSync
   config.setBrowserSyncConfig({

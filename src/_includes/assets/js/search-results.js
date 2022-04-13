@@ -4,21 +4,33 @@ document.addEventListener('DOMContentLoaded', () => {
   const postFeed = document.querySelector('.post-feed');
   let currPage = 0;
 
-  const getHits = pageNo => {
-    // eslint-disable-next-line no-undef
-    return index
-      .search({
-        query: queryStr,
-        hitsPerPage: 15,
-        page: pageNo
-      })
-      .then(({ hits } = {}) => {
-        return hits;
-      })
-      .catch(err => {
-        console.log(err);
-        console.log(err.debugData);
-      });
+  const getHits = async pageNo => {
+    const eleventyEnv = '{{ secrets.eleventyEnv }}';
+
+    try {
+      if (eleventyEnv === 'ci') {
+        const response = await fetch(
+          `{{ site.url }}/assets/mock-search-hits.json`
+        );
+        const mockHits = await response.json();
+
+        return mockHits;
+      }
+
+      // eslint-disable-next-line no-undef
+      return index
+        .search({
+          query: queryStr,
+          hitsPerPage: 15,
+          page: pageNo
+        })
+        .then(({ hits } = {}) => {
+          return hits;
+        });
+    } catch (err) {
+      console.log(err);
+      err.debugData ? console.log(err.debugData) : '';
+    }
   };
 
   const getResizedImage = (url, width) =>

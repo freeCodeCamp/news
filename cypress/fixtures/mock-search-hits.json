@@ -1,0 +1,69 @@
+[
+  {
+    "title": "AMP Page Tests",
+    "author": {
+      "name": "Mrugesh Mohapatra",
+      "url": "http://localhost:8080/news/author/mrugesh/",
+      "profileImage": null
+    },
+    "tags": [],
+    "url": "http://localhost:8080/news/amp-page-tests/",
+    "featureImage": "http://localhost:3010/content/images/2022/03/low-rez-publication-cover.png",
+    "publishedAt": "2022-03-08T10:46:10.000Z",
+    "publishedAtTimestamp": 1646736370,
+    "filterTerms": [],
+    "objectID": "6227030004457900010cc05c"
+  },
+  {
+    "title": "freeCodeCamp Just Got a Million Dollar Donation from an Alum to Build a Carbon-Neutral Web3 Curriculum",
+    "author": {
+      "name": "Quincy Larson",
+      "url": "http://localhost:8080/news/author/quincylarson/",
+      "profileImage": "http://localhost:3010/content/images/2022/02/Quincy-Larson-photo.jpg"
+    },
+    "tags": [
+      {
+        "name": "freeCodeCamp Curriculum",
+        "url": "http://localhost:8080/news/tag/freecodecamp-curriculum/"
+      },
+      {
+        "name": "Web3",
+        "url": "http://localhost:8080/news/news/tag/web3/"
+      }
+    ],
+    "url": "http://localhost:8080/news/carbon-neutral-web3-curriculum-plans/",
+    "featureImage": "https://www.freecodecamp.org/news/content/images/2022/01/christian-wiediger-WkfDrhxDMC8-unsplash.jpg",
+    "publishedAt": "2022-01-19T21:23:18.910Z",
+    "publishedAtTimestamp": 1642627398,
+    "filterTerms": [],
+    "objectID": "61e79b46183181284a191680"
+  },
+  {
+    "title": "What Programming Language Should I Learn First in 2022? [Solved]",
+    "author": {
+      "name": "Quincy Larson",
+      "url": "http://localhost:8080/news/author/quincylarson/",
+      "profileImage": "http://localhost:3010/content/images/2022/02/Quincy-Larson-photo.jpg"
+    },
+    "tags": [
+      {
+        "name": "JavaScript",
+        "url": "http://localhost:8080/news/tag/javascript/"
+      },
+      {
+        "name": "Learn To Code",
+        "url": "http://localhost:8080/news/tag/learn-to-code/"
+      },
+      {
+        "name": "Programming Languages",
+        "url": "http://localhost:8080/news/tag/programming-languages/"
+      }
+    ],
+    "url": "http://localhost:8080/news/what-programming-language-should-i-learn-first-19a33b0a467d/",
+    "featureImage": "https://cdn-media-1.freecodecamp.org/images/1*1XEF9NuNQy0rSu4kVdbb6A.jpeg",
+    "publishedAt": "2022-01-14T08:17:00.000Z",
+    "publishedAtTimestamp": 1642148220,
+    "filterTerms": [],
+    "objectID": "5f9c9de4740569d1a4ca3a3d"
+  }
+]
