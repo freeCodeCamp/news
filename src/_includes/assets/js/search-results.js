@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const postFeed = document.querySelector('.post-feed');
   let currPage = 0;
 
-  function getHits(pageNo) {
+  const getHits = pageNo => {
     // eslint-disable-next-line no-undef
     return index
       .search({
@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log(err);
         console.log(err.debugData);
       });
-  }
+  };
 
   const getResizedImage = (url, width) =>
     url.includes('/content/images/')
@@ -177,7 +177,7 @@ document.addEventListener('DOMContentLoaded', () => {
     return articleEl;
   };
 
-  function renderLoadMoreBtn() {
+  const renderLoadMoreBtn = () => {
     const inner = document.querySelector('.inner');
 
     const readMoreRow = document.createElement('div');
@@ -195,15 +195,15 @@ document.addEventListener('DOMContentLoaded', () => {
     // Append row and button to page
     readMoreRow.appendChild(loadMoreBtn);
     inner.appendChild(readMoreRow);
-  }
+  };
 
-  function removeLoadMoreBtn() {
+  const removeLoadMoreBtn = () => {
     const readMoreRow = document.querySelector('.read-more-row');
 
     readMoreRow.remove();
-  }
+  };
 
-  async function populatePage(pageNo) {
+  const populatePage = async pageNo => {
     const hits = await getHits(pageNo);
 
     hits.forEach((hit, i) => {
@@ -223,7 +223,7 @@ document.addEventListener('DOMContentLoaded', () => {
       // Remove readMoreRow if a button exists and there are less than 15 hits
       document.querySelector('#readMoreBtn') ? removeLoadMoreBtn() : '';
     }
-  }
+  };
 
   // Render for search page 0
   populatePage(currPage);
