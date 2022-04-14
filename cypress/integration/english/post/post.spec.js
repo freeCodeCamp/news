@@ -1,8 +1,10 @@
 const selectors = {
   authorProfileImage: "[data-test-label='author-profile-image']",
-  avatar: ".author-card > .avatar-wrapper [data-test-label='avatar']",
-  avatarFullBio:
-    ".post-full-content > .author-card > .avatar-wrapper [data-test-label='avatar']",
+  avatars: {
+    top: ".author-card > .avatar-wrapper [data-test-label='avatar']",
+    bottom:
+      ".post-full-content > .post-full-author-header > .author-card > .avatar-wrapper [data-test-label='avatar']"
+  },
   comments: "[data-test-label='comments']",
   socialRow: "[data-test-label='social-row']",
   tweetButton: "[data-test-label='tweet-button']"
@@ -63,14 +65,22 @@ describe('Post', () => {
       cy.contains('No Author Profile Pic');
     });
 
-    it('should show the avatar SVG', () => {
-      cy.get(selectors.avatar).then($el =>
+    it('should show the avatar SVG in the byline at the top of the article', () => {
+      cy.get(selectors.avatars.top).then($el =>
         expect($el[0].tagName.toLowerCase()).to.equal('svg')
       );
     });
 
-    it("the avatar SVG should contain a `title` element with the author's name", () => {
-      cy.get(selectors.avatar).contains('title', 'Mrugesh Mohapatra');
+    it('should show the avatar SVG in the second byline at the bottom of the article', () => {
+      cy.get(selectors.avatars.bottom).then($el =>
+        expect($el[0].tagName.toLowerCase()).to.equal('svg')
+      );
+    });
+
+    it("all avatar SVGs should contain a `title` element with the author's name", () => {
+      Object.values(selectors.avatars).forEach(selector => {
+        cy.get(selector).contains('title', 'Mrugesh Mohapatra');
+      });
     });
   });
 });
