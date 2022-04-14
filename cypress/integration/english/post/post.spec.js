@@ -1,6 +1,8 @@
 const selectors = {
   authorProfileImage: "[data-test-label='author-profile-image']",
-  avatar: "[data-test-label='avatar']",
+  avatar: ".author-card > .avatar-wrapper [data-test-label='avatar']",
+  avatarFullBio:
+    ".post-full-content > .author-card > .avatar-wrapper [data-test-label='avatar']",
   comments: "[data-test-label='comments']",
   socialRow: "[data-test-label='social-row']",
   tweetButton: "[data-test-label='tweet-button']"
@@ -52,13 +54,13 @@ describe('Post', () => {
     });
   });
 
-  context('Author with no profile image', () => {
+  context('Author with no profile picture', () => {
     before(() => {
-      cy.visit('/amp-page-tests');
+      cy.visit('/no-author-profile-pic');
     });
 
     it('should render', () => {
-      cy.contains('AMP Page Tests');
+      cy.contains('No Author Profile Pic');
     });
 
     it('should show the avatar SVG', () => {

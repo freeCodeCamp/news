@@ -1,18 +1,18 @@
 [
   {
-    "title": "AMP Page Tests",
+    "title": "No Author Profile Pic",
     "author": {
       "name": "Mrugesh Mohapatra",
       "url": "http://localhost:8080/news/author/mrugesh/",
       "profileImage": null
     },
     "tags": [],
-    "url": "http://localhost:8080/news/amp-page-tests/",
-    "featureImage": "http://localhost:3010/content/images/2022/03/low-rez-publication-cover.png",
-    "publishedAt": "2022-03-08T10:46:10.000Z",
-    "publishedAtTimestamp": 1646736370,
+    "url": "http://localhost:8080/news/no-author-profile-pic/",
+    "featureImage": "http://localhost:3010/content/images/2022/04/low-rez-publication-cover.png",
+    "publishedAt": "2022-04-14T07:08:53.000Z",
+    "publishedAtTimestamp": 1649920133,
     "filterTerms": [],
-    "objectID": "6227030004457900010cc05c"
+    "objectID": "6257c8621171f9000141309f"
   },
   {
     "title": "freeCodeCamp Just Got a Million Dollar Donation from an Alum to Build a Carbon-Neutral Web3 Curriculum",
