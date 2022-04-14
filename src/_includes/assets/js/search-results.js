@@ -100,6 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
                   width="30"
                   height="30"
                   ${lazyLoad ? 'loading="lazy"' : ''}
+                  data-test-label="author-profile-image"
                 >
               `
                 : `
@@ -134,6 +135,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 width="30"
                 height="30"
                 ${lazyLoad ? 'loading="lazy"' : ''}
+                data-test-label="author-profile-image"
               >
             `
                 : `
@@ -163,7 +165,8 @@ document.addEventListener('DOMContentLoaded', () => {
     `;
 
     const articleEl = document.createElement('article');
-    articleEl.className = 'post-card post';
+    articleEl.className = 'post-card';
+    articleEl.setAttribute('data-test-label', 'post-card');
     articleEl.innerHTML = `
       ${
         hit.featureImage
