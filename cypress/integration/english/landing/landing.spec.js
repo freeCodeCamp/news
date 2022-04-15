@@ -23,7 +23,8 @@ describe('Landing', () => {
       .contains(
         'Learn Responsive Web Design by Building 20 Projects – a Major freeCodeCamp Curriculum Update'
       )
-      .get(selectors.authorProfileImage)
+      .parentsUntil('article')
+      .find(selectors.authorProfileImage)
       .then($el => expect($el[0].tagName.toLowerCase()).to.equal('img'));
   });
 
@@ -32,21 +33,24 @@ describe('Landing', () => {
       .contains(
         'Learn Responsive Web Design by Building 20 Projects – a Major freeCodeCamp Curriculum Update'
       )
-      .get(selectors.authorProfileImage)
+      .parentsUntil('article')
+      .find(selectors.authorProfileImage)
       .then($el => expect($el[0].alt).to.equal('Quincy Larson'));
   });
 
   it('post cards written by an author with no profile image should show the author SVG', () => {
     cy.get(selectors.postCard)
-      .contains('AMP Page Tests')
-      .get(selectors.avatar)
+      .contains('No Author Profile Pic')
+      .parentsUntil('article')
+      .find(selectors.avatar)
       .then($el => expect($el[0].tagName.toLowerCase()).to.equal('svg'));
   });
 
   it("the avatar SVG should contain a `title` element with the author's name", () => {
     cy.get(selectors.postCard)
-      .contains('AMP Page Tests')
-      .get(selectors.avatar)
+      .contains('No Author Profile Pic')
+      .parentsUntil('article')
+      .find(selectors.avatar)
       .contains('title', 'Mrugesh Mohapatra');
   });
 });
