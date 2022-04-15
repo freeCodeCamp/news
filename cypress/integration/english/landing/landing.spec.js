@@ -1,6 +1,7 @@
 const { loadAllPosts } = require('../../../support/utils/post-cards');
 
 const selectors = {
+  authorList: "[data-test-label='author-list']",
   authorProfileImage: "[data-test-label='author-profile-image']",
   avatar: "[data-test-label='avatar']",
   postCard: "[data-test-label='post-card']"
@@ -52,5 +53,13 @@ describe('Landing', () => {
       .parentsUntil('article')
       .find(selectors.avatar)
       .contains('title', 'Mrugesh Mohapatra');
+  });
+
+  it("posts written by 'freeCodeCamp.org' should not show the `author-list`, which contain's the author's name and profile image", () => {
+    cy.get(selectors.postCard)
+      .contains('Common Technical Support Questions – freeCodeCamp FAQ')
+      .parentsUntil('article')
+      .find(selectors.authorList)
+      .should('not.exist');
   });
 });

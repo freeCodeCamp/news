@@ -65,5 +65,25 @@
     "publishedAtTimestamp": 1642148220,
     "filterTerms": [],
     "objectID": "5f9c9de4740569d1a4ca3a3d"
+  },
+  {
+    "title": "Common Technical Support Questions – freeCodeCamp FAQ",
+    "author": {
+      "name": "freeCodeCamp.org",
+      "url": "https://www.freecodecamp.org/news/author/freecodecamp/",
+      "profileImage": "https://www.freecodecamp.org/news/content/images/2021/05/freecodecamp-org-gravatar.jpeg"
+    },
+    "tags": [
+      {
+        "name": "freeCodeCamp",
+        "url": "https://www.freecodecamp.org/news/tag/freecodecamp/"
+      }
+    ],
+    "url": "https://www.freecodecamp.org/news/support/",
+    "featureImage": "https://cdn-media-2.freecodecamp.org/w1280/5f9c9f56740569d1a4ca4213.jpg",
+    "publishedAt": "2021-06-01T17:15:00.000Z",
+    "publishedAtTimestamp": 1622567700,
+    "filterTerms": [],
+    "objectID": "5f9c9f56740569d1a4ca4213"
   }
 ]

@@ -44,7 +44,7 @@
                 {% if post.primary_author.name === "freeCodeCamp.org" %}
                     <time class="meta-item-single" datetime="{{ post.published_at }}">{% timeAgo post.published_at %}</time>
                 {% else %}
-                    <ul class="author-list">
+                    <ul class="author-list" data-test-label="author-list">
                         {% if post.original_post %}
                             <li class="author-list-item">
                                 <a href="{{ originalAuthor.url }}" class="static-avatar">

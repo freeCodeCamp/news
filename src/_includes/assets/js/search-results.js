@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
     `;
 
     const authorList = `
-      <ul class="author-list">
+      <ul class="author-list" data-test-label="author-list">
         ${
           hit.originalPost
             ? `
@@ -179,7 +179,7 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
         <footer class="post-card-meta">
           ${
-            hit.authorName === 'freeCodeCamp.org'
+            hit.author.name === 'freeCodeCamp.org'
               ? `
           <time class="meta-item-single" datetime="${hit.publishedAt}"></time>
           `
