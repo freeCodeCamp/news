@@ -34,6 +34,4 @@ document.addEventListener('DOMContentLoaded', () => {
   // Observe mutations as the search results page loads and
   // new hits are appended
   if (postFeed) observer.observe(postFeed, config);
-
-  console;
 });
