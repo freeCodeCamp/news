@@ -98,11 +98,12 @@ module.exports = function (config) {
   // Don't ignore the same files ignored in the git repo
   config.setUseGitIgnore(false);
 
-  if (eleventyEnv === 'ci')
+  if (eleventyEnv === 'ci') {
     config.addPassthroughCopy({
       './cypress/fixtures/mock-search-hits.json':
         './assets/mock-search-hits.json'
     });
+  }
 
   // Display 404 and RSS pages in BrowserSync
   config.setBrowserSyncConfig({
