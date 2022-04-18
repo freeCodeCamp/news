@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
   const bannerText = document.getElementById('banner-text');
-  const banner = document.getElementById('banner');
 
   // eslint-disable-next-line no-undef
   if (notAuthenticated) {
@@ -14,5 +13,4 @@ document.addEventListener('DOMContentLoaded', () => {
   } else {
     bannerText.innerText = `{% t 'embed-title' %}`;
   }
-  banner.classList.add('fade-in');
 });
