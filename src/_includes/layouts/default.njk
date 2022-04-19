@@ -61,9 +61,11 @@
         {% block headScripts %}
         {% endblock %}
 
-        {# These metatags only appear in this form on the landing page.
-        The description appears in other contexts. #}
-        {% if not permalink %}
+        {# Both of these meta tags only appear in this form on the landing and 
+        search pages. In other contexts, the description is an excerpt, and
+        and there is no keywords meta tag. Instead, the tag names act as 
+        keywords in structured data. #}
+        {% if not permalink or permalink === "/search/" %}
             <meta name="keywords" content="{% t 'meta-tags:keywords' %}">
             <meta name="description" content="{% t 'meta-tags:description' %}">
         {% endif %}

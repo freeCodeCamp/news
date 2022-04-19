@@ -154,6 +154,7 @@ body {
   .site-title {
     font-size: 3rem;
   }
+
   .site-description {
     font-size: 1.8rem;
   }
@@ -299,7 +300,8 @@ a.nav-forum {
   margin-right: 5px;
   margin-left: auto;
   height: 30px;
-  line-height: 24px; /* centers the text for all browser font sizes */
+  line-height: 24px;
+  /* centers the text for all browser font sizes */
   text-decoration: none;
   background-color: #feac32;
   background-image: linear-gradient(#fecc4c, #ffac33);
@@ -317,6 +319,7 @@ a.nav-forum {
   color: var(--theme-color);
   text-decoration: none;
 }
+
 .toggle-button-nav:active {
   background-image: none;
   box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.3);
@@ -387,9 +390,11 @@ a.nav-forum {
     padding-right: 0;
     padding-left: 0;
   }
+
   .site-nav-middle {
     margin-left: 0;
   }
+
   .nav {
     display: none;
     position: absolute;
@@ -404,15 +409,18 @@ a.nav-forum {
     flex: 1 0 20%;
     margin-right: 0;
   }
+
   .site-nav-left {
     display: flex;
     flex: 1 0 35%;
     margin-left: 0;
   }
+
   .site-nav-logo {
     margin-left: auto;
     margin-right: auto;
   }
+
   .site-nav-right {
     flex: 1 0 35%;
     margin-left: auto;
@@ -536,30 +544,39 @@ a.nav-forum {
 .author-list-item:nth-child(1) {
   z-index: 10;
 }
+
 .author-list-item:nth-child(2) {
   z-index: 9;
 }
+
 .author-list-item:nth-child(3) {
   z-index: 8;
 }
+
 .author-list-item:nth-child(4) {
   z-index: 7;
 }
+
 .author-list-item:nth-child(5) {
   z-index: 6;
 }
+
 .author-list-item:nth-child(6) {
   z-index: 5;
 }
+
 .author-list-item:nth-child(7) {
   z-index: 4;
 }
+
 .author-list-item:nth-child(8) {
   z-index: 3;
 }
+
 .author-list-item:nth-child(9) {
   z-index: 2;
 }
+
 .author-list-item:nth-child(10) {
   z-index: 1;
 }
@@ -587,36 +604,6 @@ a.nav-forum {
   .author-list:hover .moving-avatar {
     margin: 0;
     transition: all 0.3s cubic-bezier(0.4, 0.01, 0.165, 0.99);
-  }
-}
-
-.author-name-tooltip {
-  position: absolute;
-  bottom: 105%;
-  z-index: 999;
-  display: block;
-  padding: 2px 8px;
-  color: white;
-  font-size: 1.2rem;
-  letter-spacing: 0.2px;
-  white-space: nowrap;
-  background: var(--gray85);
-  box-shadow: rgba(39, 44, 49, 0.08) 0 12px 26px,
-    rgba(39, 44, 49, 0.03) 1px 3px 8px;
-  opacity: 0;
-  transition: all 0.3s cubic-bezier(0.4, 0.01, 0.165, 0.99);
-  transform: translateY(6px);
-  pointer-events: none;
-}
-
-.author-list-item:hover .author-name-tooltip {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-@media (max-width: 650px) {
-  .author-name-tooltip {
-    display: none;
   }
 }
 
@@ -676,6 +663,7 @@ make sure this only happens on large viewports / desktop-ish devices.
     max-width: 875px;
     align-self: center;
   }
+
   .post-card {
     flex: 1 1 100%;
     flex-direction: row;
@@ -726,6 +714,7 @@ make sure this only happens on large viewports / desktop-ish devices.
   .post-feed {
     padding-top: 5vw;
   }
+
   .post-card {
     margin: 0 20px 5vw;
   }
@@ -744,12 +733,14 @@ make sure this only happens on large viewports / desktop-ish devices.
   position: relative;
   z-index: 50;
 }
+
 /* ^ Required to make .post-full-content:before/after z-index stacking work */
 
 .post-full-header {
   padding: 0 0 3vw;
   max-width: 1040px;
 }
+
 @media (max-width: 500px) {
   .post-full-header {
     padding: 0 0 8vw;
@@ -764,6 +755,7 @@ make sure this only happens on large viewports / desktop-ish devices.
   text-transform: uppercase;
   flex-wrap: wrap;
 }
+
 .post-full-meta a {
   padding-right: 15px;
 }
@@ -1038,6 +1030,7 @@ Usage (In Ghost editor):
   font-size: 4.6rem;
   font-weight: 700;
 }
+
 @media (max-width: 500px) {
   .post-full-content h1 {
     font-size: 2.8rem;
@@ -1049,6 +1042,7 @@ Usage (In Ghost editor):
   font-size: 3.6rem;
   font-weight: 700;
 }
+
 @media (max-width: 500px) {
   .post-full-content h2 {
     font-size: 2.6rem;
@@ -1060,6 +1054,7 @@ Usage (In Ghost editor):
   font-size: 2.8rem;
   font-weight: 700;
 }
+
 @media (max-width: 500px) {
   .post-full-content h3 {
     font-size: 2.2rem;
@@ -1071,6 +1066,7 @@ Usage (In Ghost editor):
   font-size: 2.8rem;
   font-weight: 700;
 }
+
 @media (max-width: 500px) {
   .post-full-content h4 {
     font-size: 2.2rem;
@@ -1089,12 +1085,14 @@ Usage (In Ghost editor):
   line-height: 1.35em;
   text-align: center;
 }
+
 @media (min-width: 1180px) {
   .post-full-content h5 {
     max-width: 1060px;
     width: 100vw;
   }
 }
+
 @media (max-width: 500px) {
   .post-full-content h5 {
     padding: 0 0 0.5em;
@@ -1107,6 +1105,7 @@ Usage (In Ghost editor):
   font-size: 2.3rem;
   font-weight: 700;
 }
+
 @media (max-width: 500px) {
   .post-full-content h6 {
     font-size: 2rem;
@@ -1139,12 +1138,15 @@ Usage (In Ghost editor):
     font-size: 1.2rem;
     line-height: 1.3em;
   }
+
   .post-full-title {
     font-size: 2.9rem;
   }
+
   .post-full-image {
     margin-bottom: 4vw;
   }
+
   .post-full-content:before,
   .post-full-content:after {
     display: none;
@@ -1852,7 +1854,8 @@ pre.runkit-element {
 /* 8. Author Template
 /* ---------------------------------------------------------- */
 
-.under-header-content .author-profile-image {
+.under-header-content .author-profile-image,
+.under-header-content .avatar-wrapper {
   z-index: 10;
   flex-shrink: 0;
   margin: 0 0 20px;
@@ -1906,6 +1909,7 @@ pre.runkit-element {
     line-height: 1.15em;
     letter-spacing: 0;
   }
+
   .author-location,
   .author-stats {
     display: none;
@@ -2080,13 +2084,16 @@ p.footer-donation a:hover {
     flex-direction: row;
     flex-wrap: wrap;
   }
+
   .footer-col-3 {
     flex: 1 0 100%;
     flex-direction: row;
   }
+
   .footer-right {
     padding-left: 15px;
   }
+
   .footer-col-1,
   .footer-col-2,
   .footer-right,
@@ -2101,6 +2108,7 @@ p.footer-donation a:hover {
   .footer-container {
     width: 750px;
   }
+
   .footer-col-1,
   .footer-col-2,
   .footer-col-3 {
@@ -2108,15 +2116,19 @@ p.footer-donation a:hover {
     height: auto;
     font-size: 16.5;
   }
+
   .footer-col-3 {
     flex-direction: column;
   }
+
   .footer-right {
     padding-left: 0;
   }
+
   .footer-container .col-spacer {
     margin-top: 40px;
   }
+
   .footer-bottom .our-nonprofit a {
     padding: 5px;
   }
@@ -2132,13 +2144,16 @@ p.footer-donation a:hover {
   .footer-container {
     width: 1170px;
   }
+
   .footer-top {
     display: flex;
     flex-direction: row;
   }
+
   .footer-desc-col {
     flex: 1 0 45%;
   }
+
   .trending-guides {
     flex: 1 0 58%;
   }
@@ -2146,9 +2161,11 @@ p.footer-donation a:hover {
   .footer-col-1 {
     flex: 1 0 25%;
   }
+
   .footer-col-3 {
     flex: 1 0 30%;
   }
+
   .footer-col-2 {
     flex: 1 0 20%;
   }
@@ -2165,9 +2182,11 @@ p.footer-donation a:hover {
   .footer-bottom .col-header {
     display: none;
   }
+
   .our-nonprofit {
     margin-top: 20px;
   }
+
   .footer-divider {
     height: 1px;
     margin: 0 15px;
@@ -2317,6 +2336,7 @@ a.cta-button {
   a.donation-cta {
     flex-direction: row;
   }
+
   .donation-button {
     margin: 0 10px 0 0;
   }

@@ -11,6 +11,11 @@
             [150],
             author.image_dimensions.profile_image
         %}
+    {% else %}
+        <span class="avatar-wrapper">
+            {% set avatarTitle = author.name %}
+            {% include "partials/icons/avatar.njk" %}
+        </span>
     {% endif %}
     <h1 data-test-label="author-name" class="site-title">{{ author.name }}</h1>
     {% if author.bio %}

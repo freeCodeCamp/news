@@ -4,193 +4,195 @@ document.addEventListener('DOMContentLoaded', () => {
   const postFeed = document.querySelector('.post-feed');
   let currPage = 0;
 
-  function getHits(pageNo) {
-    // eslint-disable-next-line no-undef
-    return index
-      .search({
-        query: queryStr,
-        hitsPerPage: 15,
-        page: pageNo
-      })
-      .then(({ hits } = {}) => {
-        return hits;
-      })
-      .catch(err => {
-        console.log(err);
-        console.log(err.debugData);
-      });
-  }
+  const getHits = async pageNo => {
+    const eleventyEnv = '{{ secrets.eleventyEnv }}';
 
-  const getSmallProfileImage = url =>
+    try {
+      if (eleventyEnv === 'ci') {
+        const response = await fetch(
+          `{{ site.url }}/assets/mock-search-hits.json`
+        );
+        const mockHits = await response.json();
+
+        return mockHits;
+      }
+
+      // eslint-disable-next-line no-undef
+      return index
+        .search({
+          query: queryStr,
+          hitsPerPage: 15,
+          page: pageNo
+        })
+        .then(({ hits } = {}) => {
+          return hits;
+        });
+    } catch (err) {
+      console.log(err);
+      err.debugData ? console.log(err.debugData) : '';
+    }
+  };
+
+  const getResizedImage = (url, width) =>
     url.includes('/content/images/')
-      ? url.replace('/content/images/', '/content/images/size/w30/')
+      ? url.replace('/content/images/', `/content/images/size/w${width}/`)
       : url;
 
-  async function renderSearchResults(arr) {
-    arr.forEach(hit => {
-      const featureImage = hit.featureImage || null;
-      const url = hit.url || '#';
-      const title = hit.title || '#';
-      const authorName = hit.author.name;
-      // Get smaller author image if one exists
-      const authorImage = getSmallProfileImage(hit.author.profileImage);
-      const authorUrl = hit.author.url;
-      const primaryTagCodeBlock =
-        hit.tags.length === 0
-          ? ''
-          : `
-          <a href="${hit.tags[0].url}">
-            #${hit.tags[0].name}
-          </a>
-        `;
-      const publishedAt = hit.publishedAt;
-      const originalPost = hit.originalPost || null;
-      const originalAuthor = originalPost ? originalPost.primaryAuthor : null;
-      const originalAuthorImage = originalPost
-        ? getSmallProfileImage(originalAuthor.profileImage)
-        : null;
-      const articleItem = document.createElement('article');
-      articleItem.className = 'post-card post';
-      const articleHTML = `
+  const generateCardNode = (hit, lazyLoad) => {
+    const featureImageEl = `
+      <a class="post-card-image-link" href="${hit.url}" aria-label="${
+      hit.title
+    }">
+        <img
+          class="post-card-image"
+          srcset="
+            ${getResizedImage(hit.featureImage, 300)}  300w,
+            ${getResizedImage(hit.featureImage, 600)}  600w,
+            ${getResizedImage(hit.featureImage, 1000)} 1000w,
+            ${getResizedImage(hit.featureImage, 2000)} 2000w
+          "
+          sizes="
+            (max-width: 360px) 300px,
+            (max-width: 655px) 600px,
+            (max-width: 767px) 1000px,
+            (min-width: 768px) 300px,
+            92vw
+          "
+          onerror="this.style.display='none'"
+          src="${hit.featureImage}"
+          alt="${hit.title}"
+          ${lazyLoad ? 'loading="lazy"' : ''}
+        />
+      </a>
+    `;
+
+    const headerEl = `
+      <header class="post-card-header">
         ${
-          featureImage
-            ? `
-          <a class="post-card-image-link" href="${url}" aria-label="${title}">
-            <img
-              class="post-card-image"
-              srcset="
-                ${featureImage}  300w,
-                ${featureImage}  600w,
-                ${featureImage} 1000w,
-                ${featureImage} 2000w
-              "
-              sizes="
-                (max-width: 360px) 300px,
-                (max-width: 655px) 600px,
-                (max-width: 767px) 1000px,
-                (min-width: 768px) 300px,
-                92vw
-              "
-              onerror="this.style.display='none'"
-              src="${featureImage}"
-              alt="${title}"
-              loading="lazy"
-            />
-          </a>
-        `
-            : `
-          <div class="no-feature-image-offsetter"></div>
-        `
+          hit?.tags[0]?.name
+            ? `<span class="post-card-tags"><a href="${hit.tags[0].url}">
+          #${hit.tags[0].name}
+        </a></span>`
+            : ''
         }
+          <h2 class="post-card-title">
+            <a href="${hit.url}">
+              ${hit.title}
+            </a>
+          </h2>
+      </header>
+    `;
+
+    const authorList = `
+      <ul class="author-list" data-test-label="author-list">
+        ${
+          hit.originalPost
+            ? `
+          <li class="author-list-item">
+            <a href="${hit.originalPost.url}" class="static-avatar">
+            ${
+              hit.originalPost.profileImage
+                ? `
+              <img
+                  class="author-profile-image"
+                  src="${getResizedImage(hit.originalPost.profileImage, 30)}"
+                  alt="${hit.originalPost.author.name}"
+                  width="30"
+                  height="30"
+                  ${lazyLoad ? 'loading="lazy"' : ''}
+                  data-test-label="author-profile-image"
+                >
+              `
+                : `
+                <span class="avatar-wrapper">
+                  {% set avatarTitle = "${hit.originalPost.author.name}" %}
+                  {% include "partials/icons/avatar.njk" %}
+                </span>
+              `
+            }
+            </a>
+            <span class="meta-content">
+              <a class="meta-item" href="{{ hit.originalPost.primaryAuthor.url }}">{% t 'localization-meta.roles.author', { authorName: '${
+                hit.originalPost.author.name
+              }' } %} ({% t 'localization-meta.languages.en' %})</a>
+              <time class="meta-item" datetime="${
+                hit.originalPost.publishedAt
+              }"></time>
+            </span>
+          </li>
+        `
+            : ''
+        }
+        <li class="author-list-item">
+          <a href="${hit.author.url}" class="static-avatar">
+            ${
+              hit.author.profileImage
+                ? `
+              <img
+                class="author-profile-image"
+                src="${getResizedImage(hit.author.profileImage, 30)}"
+                alt="${hit.author.name}"
+                width="30"
+                height="30"
+                ${lazyLoad ? 'loading="lazy"' : ''}
+                data-test-label="author-profile-image"
+              >
+            `
+                : `
+              <span class="avatar-wrapper">
+                {% set avatarTitle = "${hit.author.name}" %}
+                {% include "partials/icons/avatar.njk" %}
+              </span>
+            `
+            }
+          </a>
+          <span class="meta-content">
+            <a class="meta-item" href="${hit.author.url}">
+              ${
+                hit.originalPost
+                  ? `
+                {% t 'localization-meta.roles.translator', { translatorName: '${hit.author.name}' } %}
+              `
+                  : `
+                ${hit.author.name}
+              `
+              }
+            </a>
+            <time class="meta-item" datetime="${hit.publishedAt}"></time>
+          </span>
+        </li>
+      </ul>
+    `;
+
+    const articleEl = document.createElement('article');
+    articleEl.className = 'post-card';
+    articleEl.setAttribute('data-test-label', 'post-card');
+    articleEl.innerHTML = `
+      ${
+        hit.featureImage
+          ? featureImageEl
+          : '<div class="no-feature-image-offsetter"></div>'
+      }
       <div class="post-card-content">
         <div class="post-card-content-link">
-          <header class="post-card-header">
-            <span class="post-card-tags">
-              ${primaryTagCodeBlock}
-            </span>
-            <h2 class="post-card-title">
-              <a href="${url}">
-                ${title}
-              </a>
-            </h2>
-          </header>
+          ${headerEl}
         </div>
         <footer class="post-card-meta">
           ${
-            authorName === 'freeCodeCamp.org'
-              ? `<time class="meta-item-single" datetime="${publishedAt}"></time>`
-              : `
-          <ul class="author-list">
-            ${
-              originalPost
-                ? `
-              <li class="author-list-item">
-                <div class="author-name-tooltip">
-                  ${originalAuthor.name}
-                </div>
-                ${
-                  originalAuthor.profileImage
-                    ? `
-                  <a href="${originalAuthor.url}" class="static-avatar">
-                    <img
-                      class="author-profile-image"
-                      srcset="${originalAuthorImage} 30w"
-                      src="${originalAuthorImage}"
-                      alt="${originalAuthor.name}"
-                      loading="lazy"
-                    >
-                  </a>
-                `
-                    : `
-                <a href="${originalAuthor.url}" class="static-avatar author-profile-image">
-                  {% include "partials/icons/avatar.njk" %}
-                </a>
-                `
-                }
-                <span class="meta-content">
-                  <a class="meta-item" href="${
-                    originalAuthor.url
-                  }">{% t 'localization-meta.author', { authorName: '${
-                    originalAuthor.name
-                  }' } %} ({% t 'localization-meta.languages.en' %})</a>
-                  <time class="meta-item" datetime="${
-                    originalPost.publishedAt
-                  }"></time>
-                </span>
-            `
-                : ''
-            }
-            <li class="author-list-item">
-              <div class="author-name-tooltip">
-                ${authorName}
-              </div>
-              ${
-                authorImage
-                  ? `
-                <a href="${authorUrl}" class="static-avatar">
-                  <img
-                    class="author-profile-image"
-                    srcset="${authorImage} 30w"
-                    src="${authorImage}"
-                    alt="${authorName}"
-                    loading="lazy"
-                  >
-                </a>
-              `
-                  : `
-                <a href="${authorUrl}" class="static-avatar author-profile-image">
-                  {% include "partials/icons/avatar.njk" %}
-                </a>
-              `
-              }
-              <span class="meta-content">
-                <a class="meta-item" href="${authorUrl}">
-                  ${
-                    originalPost
-                      ? `
-                    {% t 'localization-meta.translator', { translatorName: '${authorName}' } %}
-                  `
-                      : `
-                    ${authorName}
-                  `
-                  }
-                </a>
-                <time class="meta-item" datetime="${publishedAt}"></time>
-              </span>
-            </li>
-          </ul>
-        `
+            hit.author.name === 'freeCodeCamp.org'
+              ? `
+          <time class="meta-item-single" datetime="${hit.publishedAt}"></time>
+          `
+              : authorList
           }
         </footer>
       </div>
     `;
 
-      articleItem.innerHTML = articleHTML;
-      postFeed.appendChild(articleItem);
-    });
-  }
+    return articleEl;
+  };
 
-  function renderLoadMoreBtn() {
+  const renderLoadMoreBtn = () => {
     const inner = document.querySelector('.inner');
 
     const readMoreRow = document.createElement('div');
@@ -208,31 +210,35 @@ document.addEventListener('DOMContentLoaded', () => {
     // Append row and button to page
     readMoreRow.appendChild(loadMoreBtn);
     inner.appendChild(readMoreRow);
-  }
+  };
 
-  function removeLoadMoreBtn() {
+  const removeLoadMoreBtn = () => {
     const readMoreRow = document.querySelector('.read-more-row');
 
     readMoreRow.remove();
-  }
+  };
 
-  async function populatePage(pageNo) {
-    const hitsArr = await getHits(pageNo);
+  const populatePage = async pageNo => {
+    const hits = await getHits(pageNo);
 
-    await renderSearchResults(hitsArr);
+    hits.forEach((hit, i) => {
+      const lazyLoad = i >= 2;
+
+      postFeed.appendChild(generateCardNode(hit, lazyLoad));
+    });
 
     // Only render "Load More Articles" button
     // if there are more than 15 hits, meaning
     // that there are up to 15 more hits in the
     // next API call
-    if (hitsArr.length === 15) {
+    if (hits.length === 15) {
       // Check for existing button and render if none exists
       document.querySelector('#readMoreBtn') ? '' : renderLoadMoreBtn();
     } else {
       // Remove readMoreRow if a button exists and there are less than 15 hits
       document.querySelector('#readMoreBtn') ? removeLoadMoreBtn() : '';
     }
-  }
+  };
 
   // Render for search page 0
   populatePage(currPage);

@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
   const postFeed = document.querySelector('.post-feed');
-  const postDates = [...document.getElementsByClassName('post-full-meta-date')];
   const localizeDates = datesList => {
     datesList.forEach(date => {
       const dateStr = date.getAttribute('datetime');
@@ -11,9 +10,6 @@ document.addEventListener('DOMContentLoaded', () => {
       date.innerHTML = dateObj.format('LL');
     });
   };
-
-  // Localize dates on initial page load
-  localizeDates(postDates);
 
   // Localize dates when loading more articles to the page
   const config = {
@@ -35,6 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
     observer.observe(postFeed, config);
   });
 
-  // Only observe mutations on front page and search results page
+  // Observe mutations as the search results page loads and
+  // new hits are appended
   if (postFeed) observer.observe(postFeed, config);
 });
