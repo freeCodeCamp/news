@@ -12,6 +12,8 @@
     "no-tutorials": "No tutorials found"
   },
   "banner": "Learn to code — {{ <0> }}free 3,000-hour curriculum{{ </0> }}",
+  "banner-authenticated": "Support our nonprofit and our mission. {{ <0> }}Donate to freeCodeCamp.org{{ </0> }}.",
+  "banner-authenticated-donor": "Thank you for supporting freeCodeCamp through {{ <0> }}your donations{{ </0> }}.",
   "author": {
     "no-posts": "No posts",
     "one-post": "1 post",

@@ -12,6 +12,8 @@
     "no-tutorials": "لم يتم العثور على دروس"
   },
   "banner": "{{ <0> }}الدردشة مع المطورين الآخرين باللغة العربية{{ </0> }}",
+  "banner-authenticated": "قم بدعم مهمتنا و منظمتنا الغير ربحية. {{ <0> }}تبرع إلى freeCodeCamp.org{{ </0> }}.",
+  "banner-authenticated-donor": "شكرًا لك على دعم freeCodeCamp {{ <0> }}من خلال {{ <0/> }}تبرعاتك.",
   "author": {
     "no-posts": "لا يوجد مقالات",
     "one-post": "مقال ١",

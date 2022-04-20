@@ -1,7 +1,13 @@
 document.addEventListener('DOMContentLoaded', () => {
   const bannerText = document.getElementById('banner-text');
-
   const banner = `{% t 'banner', {
+      '<0>': '<span>',
+      '</0>': '</span>',
+      interpolation: {
+          escapeValue: false
+      }
+    } %}`;
+  const banner_auth = `{% t 'banner-authenticated-donor', {
       '<0>': '<span>',
       '</0>': '</span>',
       interpolation: {
@@ -13,6 +19,6 @@ document.addEventListener('DOMContentLoaded', () => {
   if (notAuthenticated) {
     bannerText.innerHTML = banner;
   } else {
-    bannerText.innerText = `{% t 'embed-title' %}`;
+    bannerText.innerText = banner_auth;
   }
 });
