@@ -15,7 +15,10 @@
                 lazyLoad
             %}
         {% else %}
-            <span class="avatar-wrapper">{% include "partials/icons/avatar.njk" %}</span>
+            <span class="avatar-wrapper">
+                {% set avatarTitle = author.name %}
+                {% include "partials/icons/avatar.njk" %}
+            </span>
         {% endif %}
 
         <section class="author-card-content {{ "author-card-content-no-bio" if not showBio }}">

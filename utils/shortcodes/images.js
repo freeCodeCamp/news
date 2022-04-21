@@ -10,6 +10,7 @@ function imageShortcode(src, cls, alt, sizes, widths, dimensions, lazyLoad) {
       )
     : [src];
 
+  // data-test-label is set dynamically to post-card-image or author-profile-image
   return `
     <img
       srcset="${
@@ -25,6 +26,7 @@ function imageShortcode(src, cls, alt, sizes, widths, dimensions, lazyLoad) {
       height="${dimensions.height}"
       onerror="this.style.display='none'"
       ${lazyLoad ? 'loading="lazy"' : ''}
+      data-test-label="${cls}"
     />
   `;
 }
