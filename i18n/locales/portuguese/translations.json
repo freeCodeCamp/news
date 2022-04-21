@@ -11,9 +11,11 @@
     "see-results": "Ver todos os resultados para {{ searchQuery }}",
     "no-tutorials": "Não foram encontrados tutoriais"
   },
-  "banner": "<span>Converse com outros desenvolvedores em português</span>",
-  "banner-authenticated": "Apoie nossa organização sem fins lucrativos e nossa missão. {{ <0> }}Faça sua doação para o freeCodeCamp.org{{ </0> }}.",
-  "banner-authenticated-donor": "Obrigado por apoiar o freeCodeCamp com {{ <0> }}suas doações{{ </0> }}.",
+  "banner": {
+    "default": "<span>Converse com outros desenvolvedores em português</span>",
+    "authenticated": "Apoie nossa organização sem fins lucrativos e nossa missão. {{ <0> }}Faça sua doação para o freeCodeCamp.org{{ </0> }}.",
+    "authenticated-donor": "Obrigado por apoiar o freeCodeCamp com {{ <0> }}suas doações{{ </0> }}."
+  },
   "author": {
     "no-posts": "Não há artigos",
     "one-post": "1 artigo",

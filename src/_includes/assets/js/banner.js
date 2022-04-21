@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
           escapeValue: false
       }
     } %}`;
-  const bannerDefaultLink = `{% t 'links:banner.default' %}`
+  const bannerDefaultLink = `{% t 'links:banner.default' %}`;
   const bannerAuthText = `{% t 'banner.authenticated', {
       '<0>': '<span>',
       '</0>': '</span>',
@@ -20,8 +20,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // eslint-disable-next-line no-undef
   if (notAuthenticated) {
-    bannerText.innerHTML = banner;
+    bannerTextNode.innerHTML = bannerDefaultText;
+    bannerAnchor.href = bannerDefaultLink;
+    bannerAnchor.setAttribute('text-variation', 'default');
   } else {
-    bannerText.innerText = banner_auth;
+    bannerTextNode.innerHTML = bannerAuthText;
+    bannerAnchor.href = bannerAuthLink;
+    bannerAnchor.setAttribute('text-variation', 'authenticated');
   }
 });
