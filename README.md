@@ -12,7 +12,7 @@ The scaffolding is based on a
 [template](https://github.com/TryGhost/eleventy-starter-ghost) developed by
 [David Darnes](https://darn.es/), and is customized to the design language
 recommended by freeCodeCamp. We use this project to build and deploy several
-instances of the developer news applications powering all our global and
+instances of of the developer news applications powering all our global and
 localized publication content.
 
 ## Contributing
