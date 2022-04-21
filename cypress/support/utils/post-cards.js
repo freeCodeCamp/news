@@ -28,7 +28,24 @@ const loadAndCountAllPostCards = selector => {
     });
 };
 
+const loadAllPosts = () => {
+  cy.get('body').then($el => {
+    const loadMoreArticlesButtonIsVisible = $el
+      .find("[data-test-label='load-more-articles-button']")
+      .is(':visible');
+
+    if (loadMoreArticlesButtonIsVisible) {
+      cy.get("[data-test-label='load-more-articles-button']").click({
+        force: true
+      });
+
+      loadAllPosts();
+    }
+  });
+};
+
 module.exports = {
   getPostCards,
-  loadAndCountAllPostCards
+  loadAndCountAllPostCards,
+  loadAllPosts
 };
