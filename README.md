@@ -36,5 +36,5 @@ Happy Contributing!
 
 ## Copyright & License
 
-Copyright (c) 2021 freeCodeCamp.org - Released under the
+Copyright (c) 2022 freeCodeCamp.org - Released under the
 [BSD 3 license](LICENSE.md).
