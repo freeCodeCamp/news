@@ -1,19 +1,22 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const bannerText = document.getElementById('banner-text');
-  const banner = `{% t 'banner', {
+  const bannerAnchor = document.getElementById('banner');
+  const bannerTextNode = document.getElementById('banner-text');
+  const bannerDefaultText = `{% t 'banner.default', {
       '<0>': '<span>',
       '</0>': '</span>',
       interpolation: {
           escapeValue: false
       }
     } %}`;
-  const banner_auth = `{% t 'banner-authenticated-donor', {
+  const bannerDefaultLink = `{% t 'links:banner.default' %}`
+  const bannerAuthText = `{% t 'banner.authenticated', {
       '<0>': '<span>',
       '</0>': '</span>',
       interpolation: {
           escapeValue: false
       }
     } %}`;
+  const bannerAuthLink = `{% t 'links:banner.authenticated' %}`;
 
   // eslint-disable-next-line no-undef
   if (notAuthenticated) {

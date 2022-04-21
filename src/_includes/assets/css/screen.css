@@ -2346,7 +2346,7 @@ a.banner {
 @keyframes fadein {
   from {
     opacity: 0;
-    height: 0px;
+    height: 0;
   }
   to {
     opacity: 1;
