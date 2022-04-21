@@ -24,29 +24,22 @@ i18next.use(Backend).init({
 
 (async () => {
   const url = `https://cdn.freecodecamp.org/universal/trending/${currentLocale_i18n}.yaml`;
-  /*const trendingYAML = await fetch(url)
+  const trendingYAML = await fetch(url)
     .then(res => {
       if (!res.ok) {
-	      // throw new Error(
-            console.error(
-	 
-           `
-
+        throw new Error(
+          `
           ----------------------------------------------------
           Error: The CDN is missing the trending YAML file.
           ----------------------------------------------------
           Unable to fetch the ${currentLocale_i18n} footer: ${res.statusText}
-
-
-       `
+          `
         );
       }
       return res;
     })
     .then(res => res.text());
   const trendingJSON = yaml.load(trendingYAML);
-*/
-let trendingJSON
 
   i18next.addResources(currentLocale_i18nISOCode, 'trending', trendingJSON);
 })().catch(err => {
