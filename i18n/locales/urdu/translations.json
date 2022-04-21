@@ -1,76 +1,80 @@
 {
   "buttons": {
-    "forum": "Forum",
-    "donate": "Donate",
-    "load-more-articles": "Load More Articles"
+    "forum": "فورم",
+    "donate": "عطیہ کریں",
+    "load-more-articles": "مزید آرٹیکلز لوڈ کریں"
   },
   "search": {
     "label": "Search",
-    "accessible-name": "Submit your search query",
-    "placeholder": "Search 8,000+ tutorials",
-    "see-results": "See all results for {{ searchQuery }}",
-    "no-tutorials": "No tutorials found"
+    "accessible-name": "اپنی search query لکھیں ",
+    "placeholder": " 8,000+ tutorials",
+    "see-results": "  کے سارے results دیکھیں {{ searchQuery }}",
+    "no-tutorials": "کوئی ٹٹوریل نہیں مل سکا "
   },
-  "banner": "Learn to code — {{ <0> }}free 3,000-hour curriculum{{ </0> }}",
+
+  "banner": "{{ <0> }}کوڈ کرنا سیکھیں  3000 گھنٹوں کا مفت نصاب{{ </0> }}",
+
   "author": {
-    "no-posts": "No posts",
+    "no-posts": "کوئی post نہیں",
     "one-post": "1 post",
     "multiple-posts": "{{ postCount }} posts",
-    "read-more": "Read {{ <0> }}more posts{{ </0> }} by this {{ role }}."
+    "read-more": "اس  {{ role }} کی    {{ <0> }} مزید پوسٹس  {{ </0> }}  پڑھیں."
   },
   "tag": {
-    "no-posts": "A collection of posts",
-    "one-post": "A collection of 1 post",
-    "multiple-posts": "A collection of {{ postCount }} posts"
+    "no-posts": "کچھ پوسٹس کی کلیکشن ",
+    "one-post": "ایک post کی کلیکشن" ,
+    "multiple-posts": "کی کلیکشن {{ postCount }} "
   },
   "404": {
-    "page-not-found": "Page not found",
-    "go-to-front-page": "Go to the front page"
+    "page-not-found":"page نہیں مل سکا",
+    "go-to-front-page": "فرنٹ page پہ جائیں"
   },
   "social-row": {
-    "author-has-twitter": "If you read this far, tweet to the author to show them you care. {{ <0> }}Tweet a thanks{{ </0> }}",
-    "author-no-twitter": "If this article was helpful, {{ <0> }}tweet it{{ </0> }}.",
-    "default-tweet": "Thank you {{ twitter }} for writing this helpful article."
+    "author-has-twitter": "اگر آپ نیں آخر تک پڑھ لیا ہے، تو مصنف کو شکریہ کریں. {{ <0> }} شکریہ کا Tweet کریں {{ </0> }}",
+    "author-no-twitter": " {{ <0> }}Tweet  کریں{{ </0> }} اگر یہ آرٹیکل مفید لگا تو ",
+    "default-tweet": "آپ کا بہت شکریہ، آپ نیں یہ آرٹیکل لکھا.  {{ twitter }} ."
+
   },
-  "learn-to-code-cta": "Learn to code for free. freeCodeCamp's open source curriculum has helped more than 40,000 people get jobs as developers. {{ <0> }}Get started{{ </0> }}",
+  "learn-to-code-cta": "مفت میں coding کرنا سیکھیں. freecodecamp کے open source نصاب نے 40،000 سے زیادہ لوگوں کو ڈویلپر جاب ملنے میں مدد کی ہے. {{ <0> }} شروع کریں{{ </0> }}",
   "localization-meta": {
     "roles": {
-      "author": "author",
-      "translator": "translator"
+      "author": "مصنف",
+      "translator": "مترجم"
     },
     "card-name": "{{ role }}: {{ name }}",
     "languages": {
-      "en": "English",
-      "es": "Spanish",
-      "zh": "Chinese",
-      "pt-br": "Portuguese",
-      "it": "Italian"
+      "en": "انگریزی",
+      "es": "ہسپانوی",
+      "zh": "چینی",
+      "pt-br": "پرتگالی",
+      "it": "اطالوی"
     }
   },
   "embed-title": "Embedded content",
   "footer": {
-    "tax-exempt-status": "freeCodeCamp is a donor-supported tax-exempt 501(c)(3) nonprofit organization (United States Federal Tax Identification Number: 82-0779546)",
-    "mission-statement": "Our mission: to help people learn to code for free. We accomplish this by creating thousands of videos, articles, and interactive coding lessons - all freely available to the public. We also have thousands of freeCodeCamp study groups around the world.",
-    "donation-initiatives": "Donations to freeCodeCamp go toward our education initiatives, and help pay for servers, services, and staff.",
-    "donate-text": "You can {{ <0> }}make a tax-deductible donation here{{ </0> }}.",
+    "tax-exempt-status": "freeCodeCamp ایک ڈونر سپورٹڈ ٹیکس سے مستثنیٰ 501(c)(3) غیر منفعتی تنظیم ہے (امریکہ کا وفاقی ٹیکس شناختی نمبر: 82-0779546)",
+    "mission-statement": "ہمارا مشن: لوگوں کو مفت میں کوڈ سیکھنے میں مدد کرنا۔ ہم اسے ہزاروں ویڈیوز، مضامین، اور انٹرایکٹو کوڈنگ اسباق بنا کر پورا کرتے ہیں - یہ سب عوام کے لیے  publically دستیاب ہیں۔ ہمارے پاس دنیا بھر میں ہزاروں FreeCodeCamp اسٹڈی گروپس بھی ہیں۔",
+    "donation-initiatives": "FreeCodeCamp کو عطیات ہمارے تعلیمی اقدامات کی طرف جاتے ہیں، اور سرورز، services اور عملے کی تنخواہ کی ادائیگی میں مدد کرتے ہیں۔",
+    "donate-text": "{{ <0> }} آپ یہاں ایک ٹیکس deductible donation دے سکتے ہیں. {{ </0> }}",
+
     "trending-guides": "Trending Guides",
     "our-nonprofit": "Our Nonprofit",
     "links": {
       "about": "About",
       "alumni": "Alumni Network",
       "open-source": "Open Source",
-      "shop": "Shop",
-      "support": "Support",
-      "sponsors": "Sponsors",
-      "honesty": "Academic Honesty",
-      "coc": "Code of Conduct",
-      "privacy": "Privacy Policy",
-      "tos": "Terms of Service",
-      "copyright": "Copyright Policy"
+      "shop": "دکان",
+      "support": "مدد",
+      "sponsors": "سپانسرز",
+      "honesty": "تعلیمی ایمانداری",
+      "coc": "ضابطہ اخلاق",
+      "privacy": "privacy کی پالیسی",
+      "tos": "سروس کی شرائط",
+      "copyright": "کاپی رائٹ کی پالیسی"
     }
   },
   "fallback": {
-    "message": "Your browser doesn't support HTML5 {{ element }}.",
+    "message": "اپکا browser HTML 5 سپورٹ نہیں کرتا {{ element }}.",
     "audio": "audio",
     "video": "video"
   }
