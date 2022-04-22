@@ -24,18 +24,17 @@
   },
   "tag": {
     "no-posts": "کچھ پوسٹس کی کلیکشن ",
-    "one-post": "ایک post کی کلیکشن" ,
+    "one-post": "ایک post کی کلیکشن",
     "multiple-posts": "کی کلیکشن {{ postCount }} "
   },
   "404": {
-    "page-not-found":"page نہیں مل سکا",
+    "page-not-found": "page نہیں مل سکا",
     "go-to-front-page": "فرنٹ page پہ جائیں"
   },
   "social-row": {
     "author-has-twitter": "اگر آپ نیں آخر تک پڑھ لیا ہے، تو مصنف کو شکریہ کریں. {{ <0> }} شکریہ کا Tweet کریں {{ </0> }}",
     "author-no-twitter": " {{ <0> }}Tweet  کریں{{ </0> }} اگر یہ آرٹیکل مفید لگا تو ",
     "default-tweet": "آپ کا بہت شکریہ، آپ نیں یہ آرٹیکل لکھا.  {{ twitter }} ."
-
   },
   "learn-to-code-cta": "مفت میں coding کرنا سیکھیں. freecodecamp کے open source نصاب نے 40،000 سے زیادہ لوگوں کو ڈویلپر جاب ملنے میں مدد کی ہے. {{ <0> }} شروع کریں{{ </0> }}",
   "localization-meta": {
