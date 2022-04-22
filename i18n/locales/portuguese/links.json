@@ -1,7 +1,6 @@
 {
   "forum": "https://forum.freecodecamp.org/c/portugues/534",
   "donate": "https://www.freecodecamp.org/portuguese/donate/",
-
   "banner": {
     "default": "https://chat.freecodecamp.org/home",
     "authenticated": "https://www.freecodecamp.org/portuguese/donate",

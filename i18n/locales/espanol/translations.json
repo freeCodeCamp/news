@@ -11,7 +11,6 @@
     "see-results": "Ver todos los resultados de {{ searchQuery }}",
     "no-tutorials": "No se encontraron tutoriales"
   },
-
   "banner": {
     "default": "{{ <0> }}Charla con otros desarrolladores en español{{ </0> }}",
     "authenticated": "Authenticated: Apoya a nuestra organización sin fines de lucro y nuestra misión. {{ <0> }}Dona a freeCodeCamp.org{{ </0> }}.",

@@ -12,7 +12,7 @@
     "no-tutorials": "No tutorials found"
   },
   "banner": {
-    "default": "Learn to code — {{ <0> }}free 3,000-hour curriculum{{ </0> }}",
+    "default": "{{ <0> }}کوڈ کرنا سیکھیں 3000 گھنٹوں کا مفت نصاب{{ </0> }}",
     "authenticated": "ہمارے non profit mission کی حمایت کریں. {{ <0> }}freecodecamp کو عطیہ دیں{{ </0> }}",
     "authenticated-donor": "اپنے {{ </0> }}عطیات{{ <0> }} کے ذریعے freecodecamp کی حمایت کرنے کا شکریہ."
   },
