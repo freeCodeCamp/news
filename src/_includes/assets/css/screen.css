@@ -2349,9 +2349,7 @@ a.banner {
   position: fixed;
   top: var(--header-height);
   background-color: var(--blue-dark);
-  display: flex;
   align-items: center;
-  display: flex;
   justify-content: center;
   font-size: 14px;
   padding: 8px;
@@ -2360,6 +2358,20 @@ a.banner {
   z-index: 999;
   color: var(--gray00);
   text-decoration: none;
+  display: flex;
+  animation: fadein 1s;
+  min-height: 44px;
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+    height: 0;
+  }
+  to {
+    opacity: 1;
+    height: auto;
+  }
 }
 
 a.banner * {
