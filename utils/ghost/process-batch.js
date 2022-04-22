@@ -3,7 +3,7 @@ const lazyLoadHandler = require('./lazy-load-handler');
 const originalPostHandler = require('./original-post-handler');
 const getImageDimensions = require('../../utils/get-image-dimensions');
 const errorLogger = require('../../utils/error-logger');
-const { sourceApiUrl } = require('../../utils/ghost/api');
+const { sourceAPIURL } = require('../../utils/ghost/api');
 const { siteURL } = require('../../config');
 
 const removeUnusedKeys = obj => {
@@ -40,7 +40,7 @@ const removeUnusedKeys = obj => {
 
 // Strip Ghost domain from urls
 const stripDomain = url => {
-  return url.replace(sourceApiUrl, '');
+  return url.replace(sourceAPIURL, '');
 };
 
 const processBatch = async ({ batch, type, currBatchNo, totalBatches }) => {

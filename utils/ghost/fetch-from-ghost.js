@@ -1,4 +1,4 @@
-const { sourceApi } = require('./api');
+const { sourceAPI } = require('./api');
 
 const wait = seconds => {
   return new Promise(resolve => {
@@ -19,7 +19,7 @@ const fetchFromGhost = async endpoint => {
   };
 
   while (currPage && currPage <= lastPage) {
-    const ghostRes = await sourceApi[endpoint]
+    const ghostRes = await sourceAPI[endpoint]
       .browse({
         ...options,
         page: currPage

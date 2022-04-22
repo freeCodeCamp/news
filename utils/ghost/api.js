@@ -13,12 +13,12 @@ const fetchKeys = locale => {
 
 const { url, key, version } = fetchKeys(currentLocale_ghost);
 
-const sourceApi = new ghostContentAPI({ url, key, version });
+const sourceAPI = new ghostContentAPI({ url, key, version });
 
 // Export source API instance and target API URL for link swapping,
 // fetching sitemaps, etc.
 module.exports = {
-  sourceApi,
-  sourceApiUrl: url,
+  sourceAPI,
+  sourceAPIURL: url,
   fetchKeys
 };

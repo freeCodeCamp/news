@@ -1,6 +1,6 @@
 const fetch = require('node-fetch');
 const xml2js = require('xml2js');
-const { sourceApiUrl } = require('../ghost/api');
+const { sourceAPIURL } = require('../ghost/api');
 const { siteURL } = require('../../config');
 const { escape } = require('lodash');
 
@@ -8,8 +8,8 @@ const sitemapFetcherShortcode = async page => {
   try {
     const url =
       page === 'index'
-        ? `${sourceApiUrl}/sitemap.xml`
-        : `${sourceApiUrl}/sitemap-${page}.xml`;
+        ? `${sourceAPIURL}/sitemap.xml`
+        : `${sourceAPIURL}/sitemap-${page}.xml`;
 
     const ghostXml = await fetch(url)
       .then(res => res.text())
@@ -27,7 +27,7 @@ const sitemapFetcherShortcode = async page => {
         ? ghostXmlObj.sitemapindex.sitemap
         : ghostXmlObj.urlset.url;
 
-    const urlSwapper = url => url.replace(sourceApiUrl, siteURL);
+    const urlSwapper = url => url.replace(sourceAPIURL, siteURL);
 
     let xmlStr = target.reduce((acc, curr) => {
       const wrapper = page === 'index' ? 'sitemap' : 'url';

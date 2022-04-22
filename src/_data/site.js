@@ -1,4 +1,4 @@
-const { sourceApi } = require('../../utils/ghost/api');
+const { sourceAPI } = require('../../utils/ghost/api');
 const getImageDimensions = require('../../utils/get-image-dimensions');
 const { currentLocale_i18nISOCode, siteURL } = require('../../config');
 const translate = require('../../utils/translate');
@@ -12,7 +12,7 @@ const twitterProfile =
   twitterURL !== 'twitter' ? getTwitterProfile(twitterURL) : '@freecodecamp';
 
 module.exports = async () => {
-  const site = await sourceApi.settings
+  const site = await sourceAPI.settings
     .browse({
       include: 'url'
     })
