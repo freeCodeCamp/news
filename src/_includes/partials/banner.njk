@@ -1,11 +1,10 @@
-<a class="banner" id="banner" data-test-label="banner" rel="noopener noreferrer" href="{% t 'links:banner' %}" target="_blank">
-    <p>
-        {% t 'banner', {
-            '<0>': '<span>',
-            '</0>': '</span>',
-            interpolation: {
-                escapeValue: false
-            }
-        } %}
-    </p>
+<a class="banner" id="banner" data-test-label="banner" rel="noopener noreferrer" target="_blank">
+    <p id="banner-text"></p>
 </a>
+
+{% block headScripts %}
+    {% set js %}
+        {% include "assets/js/banner.js" %}
+    {% endset %}
+    <script>{{ js | jsMin | safe }}</script>
+{% endblock %}

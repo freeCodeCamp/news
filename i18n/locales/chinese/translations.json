@@ -15,7 +15,11 @@
     "show-comments": "显示评论",
     "error": "抱歉，暂时无法加载评论，请稍后再试。"
   },
-  "banner": "学习编程 — {{ <0> }}3,000 小时免费课程{{ </0> }}",
+  "banner": {
+    "default": "学习编程 — {{ <0> }}3,000 小时免费课程{{ </0> }}",
+    "authenticated": "支持我们的非营利组织和我们的使命，{{ <0> }}给 freeCodeCamp.org 捐款{{ </0> }}。",
+    "authenticated-donor": "谢谢你{{ <0> }}捐款{{ </0> }}支持 freeCodeCamp。"
+  },
   "author": {
     "no-posts": "没有文章",
     "one-post": "1 篇文章",

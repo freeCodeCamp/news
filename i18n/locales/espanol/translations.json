@@ -11,7 +11,11 @@
     "see-results": "Ver todos los resultados de {{ searchQuery }}",
     "no-tutorials": "No se encontraron tutoriales"
   },
-  "banner": "{{ <0> }}Charla con otros desarrolladores en español{{ </0> }}",
+  "banner": {
+    "default": "{{ <0> }}Charla con otros desarrolladores en español{{ </0> }}",
+    "authenticated": "Authenticated: Apoya a nuestra organización sin fines de lucro y nuestra misión. {{ <0> }}Dona a freeCodeCamp.org{{ </0> }}.",
+    "authenticated-donor": "Gracias por apoyar a freeCodeCamp a través de {{ <0> }}tus donaciones{{ </0> }}."
+  },
   "author": {
     "no-posts": "No hay artículos",
     "one-post": "1 artículo",

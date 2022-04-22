@@ -1,7 +1,11 @@
 {
   "forum": "https://forum.freecodecamp.org/c/espanol/522",
   "donate": "https://www.freecodecamp.org/espanol/donate/",
-  "banner": "https://chat.freecodecamp.org/home",
+  "banner": {
+    "default": "https://www.freecodecamp.org/espanol",
+    "authenticated": "https://www.freecodecamp.org/espanol/donate",
+    "authenticated-donor": "https://www.freecodecamp.org/espanol/news/how-to-donate-to-free-code-camp/"
+  },
   "learn-to-code-cta": "https://www.freecodecamp.org/espanol/learn/",
   "twitter": "https://twitter.com/freecodecampes",
   "footer": {

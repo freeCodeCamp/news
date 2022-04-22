@@ -1,7 +1,11 @@
 {
   "forum": "https://forum.freecodecamp.org/c/japanese/552",
   "donate": "https://www.freecodecamp.org/japanese/donate/",
-  "banner": "https://www.freecodecamp.org/japanese/",
+  "banner": {
+    "default": "https://www.freecodecamp.org/japanese/",
+    "authenticated": "https://www.freecodecamp.org/japanese/donate",
+    "authenticated-donor": "https://www.freecodecamp.org/news/how-to-donate-to-free-code-camp/"
+  },
   "learn-to-code-cta": "https://www.freecodecamp.org/japanese/learn/",
   "twitter": "https://twitter.com/freecodecampJA",
   "footer": {
