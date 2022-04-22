@@ -5,9 +5,9 @@
     "load-more-articles": "مزید آرٹیکلز لوڈ کریں"
   },
   "search": {
-    "label": "Search",
+    "label": "سرچ کریں",
     "accessible-name": "اپنی search query لکھیں ",
-    "placeholder": " 8,000+ tutorials",
+    "placeholder": "متعدد tutorials میں سے search کریں ",
     "see-results": "  کے سارے results دیکھیں {{ searchQuery }}",
     "no-tutorials": "کوئی ٹٹوریل نہیں مل سکا "
   },
