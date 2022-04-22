@@ -2,9 +2,12 @@ const generateAMPObj = require('./generate-amp-obj');
 const lazyLoadHandler = require('./lazy-load-handler');
 const originalPostHandler = require('./original-post-handler');
 const getImageDimensions = require('../../utils/get-image-dimensions');
+const errorLogger = require('../../utils/error-logger');
+const { sourceApiUrl } = require('../../utils/ghost/api');
+const { siteURL } = require('../../config');
 
-const removeUnusedProperties = obj => {
-  const propsToRemove = [
+const removeUnusedKeys = obj => {
+  const keysToRemove = [
     'uuid',
     'comment_id',
     'featured',
@@ -28,11 +31,16 @@ const removeUnusedProperties = obj => {
     'accent_color'
   ];
 
-  for (const prop in obj) {
-    if (propsToRemove.includes(prop)) delete obj[prop];
+  for (const key in obj) {
+    if (keysToRemove.includes(key)) delete obj[key];
   }
 
   return obj;
+};
+
+// Strip Ghost domain from urls
+const stripDomain = url => {
+  return url.replace(sourceApiUrl, '');
 };
 
 const processBatch = async ({ batch, type, currBatchNo, totalBatches }) => {
@@ -42,9 +50,9 @@ const processBatch = async ({ batch, type, currBatchNo, totalBatches }) => {
   await Promise.all(
     batch.map(async obj => {
       // Clean incoming objects
-      obj = removeUnusedProperties(obj);
-      obj.primary_author = removeUnusedProperties(obj.primary_author);
-      obj.tags.map(tag => removeUnusedProperties(tag));
+      obj = removeUnusedKeys(obj);
+      obj.primary_author = removeUnusedKeys(obj.primary_author);
+      obj.tags.map(tag => removeUnusedKeys(tag));
 
       // Feature image resolutions for structured data
       if (obj.feature_image) {
@@ -90,6 +98,31 @@ const processBatch = async ({ batch, type, currBatchNo, totalBatches }) => {
           );
         }
       });
+
+      // General cleanup and prep -- attach path to post / page
+      // objects, convert dates, and fix pages that should exist
+      obj.path = stripDomain(obj.url);
+      obj.primary_author.path = stripDomain(obj.primary_author.url);
+      obj.tags.forEach(tag => {
+        // Log and fix tag pages that point to 404 due to a Ghost error
+        if (tag.url.endsWith('/404/') && tag.visibility === 'public') {
+          errorLogger({ type: 'tag', name: tag.name });
+          tag.url = `${siteURL}/tag/${tag.slug}/`;
+        }
+
+        tag.path = stripDomain(tag.url);
+      });
+
+      // Log and fix author pages that point to 404 due to a Ghost error
+      if (obj.primary_author.url.endsWith('/404/')) {
+        errorLogger({ type: 'author', name: obj.primary_author.name });
+        obj.primary_author.url = `${siteURL}/author/${obj.primary_author.slug}/`;
+      }
+
+      obj.primary_author.path = stripDomain(obj.primary_author.url);
+
+      // Convert publish date into a Date object
+      obj.published_at = new Date(obj.published_at);
 
       // Original author / translator feature
       if (obj.codeinjection_head) obj = await originalPostHandler(obj);
