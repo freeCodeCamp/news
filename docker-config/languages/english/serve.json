@@ -28,6 +28,11 @@
       "destination": "/news/about"
     },
     {
+      "source": "/train-an-ia-to-play-a-snake-game-using-python",
+      "destination": "/news/train-an-ai-to-play-a-snake-game-using-python",
+      "type": 302
+    },
+    {
       "source": "/fullstack-development-project-create-a-blog-with-html-css",
       "destination": "/news/frontend-development-project-create-a-blog-with-html-css",
       "type": 302
