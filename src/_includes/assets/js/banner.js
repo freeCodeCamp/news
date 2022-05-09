@@ -18,14 +18,28 @@ document.addEventListener('DOMContentLoaded', () => {
     } %}`;
   const bannerAuthLink = `{% t 'links:banner.authenticated' %}`;
 
+  const bannerDonorText = `{% t 'banner.authenticated-donor', {
+    '<0>': '<span>',
+    '</0>': '</span>',
+    interpolation: {
+        escapeValue: false
+    }
+  } %}`;
+  const bannerDonorLink = `{% t 'links:banner.authenticated-donor' %}`;
+
   // eslint-disable-next-line no-undef
   if (notAuthenticated) {
     bannerTextNode.innerHTML = bannerDefaultText;
     bannerAnchor.href = bannerDefaultLink;
     bannerAnchor.setAttribute('text-variation', 'default');
-  } else {
+    // eslint-disable-next-line no-undef
+  } else if (notDonor) {
     bannerTextNode.innerHTML = bannerAuthText;
     bannerAnchor.href = bannerAuthLink;
     bannerAnchor.setAttribute('text-variation', 'authenticated');
+  } else {
+    bannerTextNode.innerHTML = bannerDonorText;
+    bannerAnchor.href = bannerDonorLink;
+    bannerAnchor.setAttribute('text-variation', 'donor');
   }
 });
