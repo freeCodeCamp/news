@@ -28,6 +28,11 @@
       "destination": "/news/about"
     },
     {
+      "source": "/learn-blazor-webassembly-and",
+      "destination": "/news/learn-blazor-webassembly-and-web-api-on-net-6-by-building-a-shopping-cart-app",
+      "type": 302
+    },
+    {
       "source": "/train-an-ia-to-play-a-snake-game-using-python",
       "destination": "/news/train-an-ai-to-play-a-snake-game-using-python",
       "type": 302
