@@ -1,6 +1,7 @@
 {% macro card(post, index) %}
     {% set lazyLoad = true if (index >= 4) else false %}
     {% set originalAuthor = post.original_post.primary_author %}
+    {% set primaryTag = post.tags[0] %}
     <article class="post-card" data-test-label="post-card">
         {% if post.feature_image %}
             <a class="post-card-image-link" href="{{ post.path | url }}" aria-label="{{ post.title }}">
@@ -26,10 +27,10 @@
         <div class="post-card-content">
             <div class="post-card-content-link">
                 <header class="post-card-header">
-                    {% if post.tags[0] %}
+                    {% if primaryTag %}
                         <span class="post-card-tags">
-                            <a href="{{ post.tags[0].path | url }}">
-                                #{{ post.tags[0].name }}
+                            <a href="{{ primaryTag.path | url }}">
+                                #{{ primaryTag.name }}
                             </a>
                         </span>
                     {% endif %}
