@@ -5,6 +5,7 @@
 {% set canonicalUrl = site.url + post.path %}
 {% set codeinjection_head = post.codeinjection_head %}
 {% set codeinjection_foot = post.codeinjection_foot %}
+{% set primaryTag = post.tags[0] %}
 {% set adsEnabled = (secrets.adsEnabled === 'true') and (site.lang !== 'zh') %}
 {# Include 2 ads by default for all articles. Then add 1 ad for every 2 mins of
 reading time if reading time <= 4 mins. Else, add 1 ad for every 1 min of reading
@@ -20,10 +21,10 @@ time #}
                         <time class="post-full-meta-date" datetime="{{ post.published_at }}">
                             {% publishedDate post.published_at %}
                         </time>
-                        {% if post.primary_tag %}
+                        {% if primaryTag %}
                             <span class="date-divider">/</span>
-                            <a href="{{ post.primary_tag.path | url }}">
-                                #{{ post.primary_tag.name }}
+                            <a href="{{ primaryTag.path | url }}">
+                                #{{ primaryTag.name }}
                             </a>
                         {% endif %}
                     </section>

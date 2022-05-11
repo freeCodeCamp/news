@@ -2,7 +2,7 @@ const ghostContentAPI = require('@tryghost/content-api');
 const { URL } = require('url');
 const { fetchKeys } = require('./api');
 const { locales } = require('../../config');
-const { setImageDimensionObj } = require('./helpers');
+const getImageDimensions = require('../get-image-dimensions');
 
 const ghostURLToAPIMap = locales.reduce((obj, currLocale) => {
   const { url, key, version } = fetchKeys(currLocale);
@@ -49,11 +49,13 @@ const originalPostHandler = async post => {
       const { title, published_at, primary_author, url } = originalPostRes;
 
       if (originalPostRes.primary_author.profile_image) {
-        await setImageDimensionObj(
-          originalPostRes.primary_author,
-          'profile_image',
-          originalPostRes.primary_author.profile_image
-        );
+        originalPostRes.primary_author.image_dimensions = {
+          ...originalPostRes.primary_author.image_dimensions
+        };
+        originalPostRes.primary_author.image_dimensions.profile_image =
+          await getImageDimensions(
+            originalPostRes.primary_author.profile_image
+          );
       }
 
       post.original_post = {

@@ -30,7 +30,8 @@
                 <link>{{ site.url + post.path }}</link>
                 <guid isPermaLink="false">{{ post.comment_id }}</guid>
                 <category>
-                    <![CDATA[ {{ post.primary_tag.name }} ]]>
+                    {% set primaryTag = post.tags[0] %}
+                    <![CDATA[ {{ primaryTag.name }} ]]>
                 </category>
                 <dc:creator>
                     <![CDATA[ {{ post.primary_author.name }} ]]>
