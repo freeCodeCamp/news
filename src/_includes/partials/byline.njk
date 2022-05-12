@@ -1,17 +1,19 @@
-{% macro byline(author, siteLang, lazyLoad, showBio, role) %}
-    {% set authorUrl %}{{ author.url if role === 'author' else (author.path | url) }}{% endset %}
-    {% set localizedRole %}{% t "localization-meta.roles." + (role if role else "author") %}{% endset %}
+{% macro byline(authorOrTranslator, lazyLoad, showBio, role, locale) %}
+    {# Use the full URL for original authors, and a relative path for
+    translators and regular authors #}
+    {% set authorOrTranslatorURL = authorOrTranslator.url if role === "author" else (authorOrTranslator.path | url) %}
+    {% set translatedLocale %}{% t "original-author-translator.locales." + locale %}{% endset %}
 
     <section class="author-card">
-        {% if author.profile_image %}
+        {% if authorOrTranslator.profile_image %}
             {% 
                 image
-                author.profile_image,
+                authorOrTranslator.profile_image,
                 "author-profile-image",
-                author.name,
+                authorOrTranslator.name,
                 "60px",
                 [60],
-                author.image_dimensions.profile_image,
+                authorOrTranslator.image_dimensions.profile_image,
                 lazyLoad
             %}
         {% else %}
@@ -23,26 +25,29 @@
 
         <section class="author-card-content {{ "author-card-content-no-bio" if not showBio }}">
             <span class="author-card-name">
-                <a href="{{ authorUrl }}">
-                    {% if role %}
-                        {% t 'localization-meta.card-name', { role: (localizedRole | capitalize), name: author.name } %}
-                        {% if role === "author" %}
-                            ({% t "localization-meta.languages." + siteLang %})
-                        {% endif %}
+                <a href="{{ authorOrTranslatorURL }}">
+                    {% if role === 'author' %}
+                        {% t 'original-author-translator.roles.author', {
+                            name: authorOrTranslator.name,
+                            locale: translatedLocale
+                        } %}
+                    {% elif role === 'translator' %}
+                        {% t 'original-author-translator.roles.translator', {
+                            name: authorOrTranslator.name
+                        } %}
                     {% else %}
-                        {{ author.name }}
+                        {{ authorOrTranslator.name }}
                     {% endif %}
                 </a>
             </span>
             {% if showBio %}
-                {% if author.bio %}
-                    <p>{{ author.bio }}</p>
+                {% if authorOrTranslator.bio %}
+                    <p>{{ authorOrTranslator.bio }}</p>
                 {% else %}
                     <p>
                         {% t 'author.read-more', {
-                            '<0>': '<a href="' + ( authorUrl ) + '">',
+                            '<0>': '<a href="' + ( authorOrTranslatorURL ) + '">',
                             '</0>': '</a>',
-                            role: localizedRole,
                             interpolation: {
                                 escapeValue: false
                             }

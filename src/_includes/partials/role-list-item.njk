@@ -1,0 +1,45 @@
+{% macro roleListItem(authorOrTranslator, publishedAt, role, locale) %}
+    {# Use the full URL for original authors, and a relative path for
+    translators and regular authors #}
+    {% set authorOrTranslatorURL = authorOrTranslator.url if role === "author" else (authorOrTranslator.path | url) %}
+    {% set translatedLocale %}{% t "original-author-translator.locales." + locale %}{% endset %}
+    
+    <li class="author-list-item">
+        <a href="{{ authorOrTranslatorURL }}" class="static-avatar">
+            {% if authorOrTranslator.profile_image %}
+                {% 
+                    image
+                    authorOrTranslator.profile_image,
+                    "author-profile-image",
+                    authorOrTranslator.name,
+                    "30px",
+                    [30],
+                    authorOrTranslator.image_dimensions.profile_image,
+                    lazyLoad
+                %}
+            {% else %}
+                <span class="avatar-wrapper">
+                    {% set avatarTitle = authorOrTranslator.name %}
+                    {% include "partials/icons/avatar.njk" %}
+                </span>
+            {% endif %}
+        </a>
+        <span class="meta-content">
+            <a class="meta-item" href="{{ authorOrTranslatorURL }}">
+                {% if role === 'author' %}
+                    {% t 'original-author-translator.roles.author', {
+                        name: authorOrTranslator.name,
+                        locale: translatedLocale
+                    } %}
+                {% elif role === 'translator' %}
+                    {% t 'original-author-translator.roles.translator', {
+                          name: authorOrTranslator.name
+                    } %}
+                {% else %}
+                    {{ authorOrTranslator.name }}
+                {% endif %}
+            </a>
+            <time class="meta-item" datetime="{{ publishedAt }}">{% timeAgo publishedAt %}</time>
+        </span>
+    </li>
+{% endmacro %}

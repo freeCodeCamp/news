@@ -83,6 +83,8 @@ document.addEventListener('DOMContentLoaded', () => {
       </header>
     `;
 
+    const authorRole = '{% t "localization-meta.roles.author" %}';
+    const translatorRole = '{% t "localization-meta.roles.translator" %}';
     const authorList = `
       <ul class="author-list" data-test-label="author-list">
         ${
@@ -112,9 +114,13 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             </a>
             <span class="meta-content">
-              <a class="meta-item" href="{{ hit.originalPost.primaryAuthor.url }}">{% t 'localization-meta.roles.author', { authorName: '${
+              <a class="meta-item" href="{{ hit.originalPost.primaryAuthor.url }}">
+                {% t 'localization-meta.card-name', { role: '${authorRole}', name: '${
                 hit.originalPost.author.name
-              }' } %} ({% t 'localization-meta.languages.en' %})</a>
+              }' } %} ({% t 'localization-meta.locales.' + '${
+                hit.originalPost.locale_i18n
+              }' %})
+              </a>
               <time class="meta-item" datetime="${
                 hit.originalPost.publishedAt
               }"></time>
@@ -151,7 +157,7 @@ document.addEventListener('DOMContentLoaded', () => {
               ${
                 hit.originalPost
                   ? `
-                {% t 'localization-meta.roles.translator', { translatorName: '${hit.author.name}' } %}
+                {% t 'localization-meta.card-name', { role: '${translatorRole}', name: '${hit.author.name}' } %}
               `
                   : `
                 ${hit.author.name}

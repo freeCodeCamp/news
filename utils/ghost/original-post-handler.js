@@ -1,8 +1,10 @@
 const ghostContentAPI = require('@tryghost/content-api');
 const { URL } = require('url');
 const { fetchKeys } = require('./api');
-const { locales } = require('../../config');
+const { locales, siteURL } = require('../../config');
 const getImageDimensions = require('../get-image-dimensions');
+const translate = require('../translate');
+const stripDomain = require('../strip-domain');
 
 const ghostURLToAPIMap = locales.reduce((obj, currLocale) => {
   const { url, key, version } = fetchKeys(currLocale);
@@ -30,9 +32,12 @@ const ghostURLToAPIMap = locales.reduce((obj, currLocale) => {
 }, {});
 
 const originalPostHandler = async post => {
+  const headAndFootCode = [post.codeinjection_head, post.codeinjection_foot]
+    .filter(Boolean)
+    .join();
   const originalPostRegex =
     /const\s+fccOriginalPost\s+=\s+("|')(?<url>.*)\1;?/g;
-  const match = originalPostRegex.exec(post.codeinjection_head);
+  const match = originalPostRegex.exec(headAndFootCode);
 
   if (match) {
     try {
@@ -41,30 +46,57 @@ const originalPostHandler = async post => {
       const originalPostSlug = pathSegments.pop();
       const originalPostGhostURL = `${origin}/${pathSegments.join('/')}`;
       const { api, locale_i18n } = ghostURLToAPIMap[originalPostGhostURL];
-      const originalPostRes = await api.posts.read({
+      const originalPost = await api.posts.read({
         include: 'authors',
         slug: originalPostSlug
       });
 
-      const { title, published_at, primary_author, url } = originalPostRes;
-
-      if (originalPostRes.primary_author.profile_image) {
-        originalPostRes.primary_author.image_dimensions = {
-          ...originalPostRes.primary_author.image_dimensions
+      if (originalPost.primary_author.profile_image) {
+        originalPost.primary_author.image_dimensions = {
+          ...originalPost.primary_author.image_dimensions
         };
-        originalPostRes.primary_author.image_dimensions.profile_image =
-          await getImageDimensions(
-            originalPostRes.primary_author.profile_image
-          );
+        originalPost.primary_author.image_dimensions.profile_image =
+          await getImageDimensions(originalPost.primary_author.profile_image);
       }
 
       post.original_post = {
-        title,
-        url,
-        published_at,
-        primary_author,
+        title: originalPost.title,
+        url: originalPost.url,
+        published_at: originalPost.published_at,
+        primary_author: originalPost.primary_author,
         locale_i18n
       };
+
+      const authorEl = translate('localization-meta.info.original-article', {
+        '<0>': '<strong>',
+        '</0>': '</strong>',
+        title: `<a href="${originalPost.url}" target="_blank" rel="noopener noreferrer">${originalPost.title}</a>`,
+        author: `<a href="${originalPost.primary_author.url}" target="_blank" rel="noopener noreferrer">${originalPost.primary_author.name}</a>`,
+        interpolation: {
+          escapeValue: false
+        }
+      });
+
+      const translatorPath = stripDomain(post.primary_author.url);
+      const translatorEl = translate('localization-meta.info.translated-by', {
+        '<0>': '<strong>',
+        '</0>': '</strong>',
+        translator: `<a href="${siteURL + translatorPath}">${
+          post.primary_author.name
+        }</a>`,
+        interpolation: {
+          escapeValue: false
+        }
+      });
+
+      const introEl = `
+        <p>
+          ${authorEl}
+          <br><br>
+          ${translatorEl}
+        </p>`;
+
+      post.html = introEl + post.html;
     } catch (err) {
       console.warn(err);
     }
