@@ -42,13 +42,24 @@
       "author": "المؤلف",
       "translator": "المترجم"
     },
-    "card-name": "{{ role }}: {{ name }}",
-    "languages": {
-      "en": "الانجليزية",
-      "es": "الاسبانية",
-      "zh": "الصينية",
-      "pt-br": "البرتغالية",
-      "it": "الايطالية"
+    "bylines": {
+      "author": "{{ role }}: {{ name }} ({{ locale }})",
+      "translator": "{{ role }}: {{ name }}"
+    },
+    "info": {
+      "original-article": "{{ <0> }}Original article:{{ </0> }} {{ title }} by {{ author }}",
+      "translated-by": "{{ <0> }}Translated by:{{ </0> }} {{ translator }}"
+    },
+    "locales": {
+      "english": "الانجليزية",
+      "espanol": "الاسبانية",
+      "chinese": "الصينية",
+      "portuguese": "البرتغالية",
+      "italian": "الايطالية",
+      "japanese": "اليابانية",
+      "arabic": "عربى",
+      "urdu": "الأردية",
+      "bengali": "البنغالية"
     }
   },
   "embed-title": "محتوى مضمن",

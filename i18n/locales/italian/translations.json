@@ -42,13 +42,24 @@
       "author": "autore",
       "translator": "traduttore"
     },
-    "card-name": "{{ role }}: {{ name }}",
-    "languages": {
-      "en": "Inglese",
-      "es": "Spagnolo",
-      "zh": "Cinese",
-      "pt-br": "Portoghese",
-      "it": "Italiano"
+    "bylines": {
+      "author": "{{ role }}: {{ name }} ({{ locale }})",
+      "translator": "{{ role }}: {{ name }}"
+    },
+    "info": {
+      "original-article": "{{ <0> }}Articolo originale:{{ </0> }} {{ title }} di {{ author }}",
+      "translated-by": "{{ <0> }}Tradotto e adattato da:{{ </0> }} {{ translator }}"
+    },
+    "locales": {
+      "english": "inglese",
+      "espanol": "spagnolo",
+      "chinese": "cinese",
+      "portuguese": "portoghese",
+      "italian": "italiano",
+      "japanese": "giapponese",
+      "arabic": "araba",
+      "urdu": "urdu",
+      "bengali": "bengalese"
     }
   },
   "embed-title": "Contenuto incorporato",

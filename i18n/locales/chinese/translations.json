@@ -41,13 +41,24 @@
       "author": "作者",
       "translator": "译者"
     },
-    "card-name": "{{ role }}: {{ name }}",
-    "languages": {
-      "en": "英语",
-      "es": "西班牙语",
-      "zh": "中文",
-      "pt-br": "葡萄牙语",
-      "it": "意大利语"
+    "bylines": {
+      "author": "{{ role }}： {{ name }}",
+      "translator": "{{ role }}： {{ name }}"
+    },
+    "info": {
+      "original-article": "{{ <0> }}原文：{{ </0> }} {{ title }}，作者：{{ author }}",
+      "translated-by": "{{ <0> }}译者：{{ </0> }} {{ translator }}"
+    },
+    "locales": {
+      "english": "英语",
+      "espanol": "西班牙语",
+      "chinese": "中文",
+      "portuguese": "葡萄牙语",
+      "italian": "意大利语",
+      "japanese": "日语",
+      "arabic": "阿拉伯",
+      "urdu": "乌尔都语",
+      "bengali": "孟加拉"
     }
   },
   "embed-title": "嵌入内容",
