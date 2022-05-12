@@ -1,10 +1,9 @@
 const ghostContentAPI = require('@tryghost/content-api');
 const { URL } = require('url');
 const { fetchKeys } = require('./api');
-const { locales, siteURL } = require('../../config');
+const { locales, computedPath } = require('../../config');
 const getImageDimensions = require('../get-image-dimensions');
 const translate = require('../translate');
-const stripDomain = require('../strip-domain');
 
 const ghostURLToAPIMap = locales.reduce((obj, currLocale) => {
   const { url, key, version } = fetchKeys(currLocale);
@@ -67,27 +66,32 @@ const originalPostHandler = async post => {
         locale_i18n
       };
 
-      const authorEl = translate('localization-meta.info.original-article', {
-        '<0>': '<strong>',
-        '</0>': '</strong>',
-        title: `<a href="${originalPost.url}" target="_blank" rel="noopener noreferrer">${originalPost.title}</a>`,
-        author: `<a href="${originalPost.primary_author.url}" target="_blank" rel="noopener noreferrer">${originalPost.primary_author.name}</a>`,
-        interpolation: {
-          escapeValue: false
+      const authorEl = translate(
+        'original-author-translator.details.original-article',
+        {
+          '<0>': '<strong>',
+          '</0>': '</strong>',
+          title: `<a href="${originalPost.url}" target="_blank" rel="noopener noreferrer">${originalPost.title}</a>`,
+          author: `<a href="${originalPost.primary_author.url}" target="_blank" rel="noopener noreferrer">${originalPost.primary_author.name}</a>`,
+          interpolation: {
+            escapeValue: false
+          }
         }
-      });
+      );
 
-      const translatorPath = stripDomain(post.primary_author.url);
-      const translatorEl = translate('localization-meta.info.translated-by', {
-        '<0>': '<strong>',
-        '</0>': '</strong>',
-        translator: `<a href="${siteURL + translatorPath}">${
-          post.primary_author.name
-        }</a>`,
-        interpolation: {
-          escapeValue: false
+      const translatorEl = translate(
+        'original-author-translator.details.translated-by',
+        {
+          '<0>': '<strong>',
+          '</0>': '</strong>',
+          translator: `<a href="/${computedPath + post.primary_author.path}">${
+            post.primary_author.name
+          }</a>`,
+          interpolation: {
+            escapeValue: false
+          }
         }
-      });
+      );
 
       const introEl = `
         <p>
@@ -98,7 +102,15 @@ const originalPostHandler = async post => {
 
       post.html = introEl + post.html;
     } catch (err) {
-      console.warn(err);
+      console.warn(`
+        ---------------------------------------------------------------
+        Warning: Unable to fetch the post at
+        ${match.groups.url}
+        ---------------------------------------------------------------
+        Please ensure that the Ghost instance is live and that the
+        post has not been deleted.
+        ---------------------------------------------------------------
+      `);
     }
   }
 

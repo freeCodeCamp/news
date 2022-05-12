@@ -10,13 +10,13 @@ const { error } = require('dotenv').config({ path: envPath });
 
 if (error) {
   console.warn(`
-  ----------------------------------------------------
-  Warning: ${envFileName} file not found.
-  ----------------------------------------------------
-  Please copy sample.env to ${envFileName}
-  You can ignore this warning if using a different way
-  to set up this environment.
-  ----------------------------------------------------
+    ----------------------------------------------------
+    Warning: ${envFileName} file not found.
+    ----------------------------------------------------
+    Please copy sample.env to ${envFileName}
+    You can ignore this warning if using a different way
+    to set up this environment.
+    ----------------------------------------------------
   `);
 }
 
@@ -114,6 +114,7 @@ module.exports = Object.assign(
       : localeCodes[localeForUI],
     currentLocale_ghost: localeForGhost || 'italian',
     siteURL,
+    computedPath,
     postsPerPage: postsPerPage || 25,
     algoliaAppId:
       !algoliaAppId || algoliaAppId === 'app_id_from_algolia_dashboard'
