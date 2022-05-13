@@ -14,7 +14,7 @@
   "banner": {
     "default": "コーディングを学ぶ — {{ <0> }}約 3,000 時間のカリキュラムが無料{{ </0> }}",
     "authenticated": "当非営利団体とその使命をご支援ください。{{ <0> }}freeCodeCamp.org へのご寄付をお願いします{{ </0> }}。",
-    "authenticated-donor": "への{{ <0> }}ご寄付{{ </0> }}によるご支援、誠にありがとうございます。"
+    "authenticated-donor": "freeCodeCamp への{{ <0> }}ご寄付{{ </0> }}によるご支援、誠にありがとうございます。"
   },
   "author": {
     "no-posts": "投稿なし",
