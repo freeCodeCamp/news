@@ -58,6 +58,7 @@ const originalPostHandler = async post => {
           await getImageDimensions(originalPost.primary_author.profile_image);
       }
 
+      // Add an `original_post` object to the current post
       post.original_post = {
         title: originalPost.title,
         url: originalPost.url,
@@ -100,6 +101,8 @@ const originalPostHandler = async post => {
           ${translatorEl}
         </p>`;
 
+      // Append details about the original article / author and translator
+      // to the beginning of the article
       post.html = introEl + post.html;
     } catch (err) {
       console.warn(`

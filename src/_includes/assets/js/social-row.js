@@ -4,24 +4,24 @@ document.addEventListener('DOMContentLoaded', () => {
   // Use Nunjucks URL encoding here in case titles have any special characters like backticks
   const title = '{{ post.title | urlencode }}'.replace(/&#39;/g, '%27');
   const twitterHandleOrName = {
-    author: '{{ post.primary_author.twitter }}'
-      ? '{{ post.primary_author.twitter }}'
-      : '{{ post.primary_author.name }}',
-    translator: '{{ post.original_post.primary_author.twitter }}'
+    originalPostAuthor: '{{ post.original_post.primary_author.twitter }}'
       ? '{{ post.original_post.primary_author.twitter }}'
-      : '{{ post.original_post.primary_author.name }}'
+      : '{{ post.original_post.primary_author.name }}',
+    currentPostAuthor: '{{ post.primary_author.twitter }}' // Author or translator depending on context
+      ? '{{ post.primary_author.twitter }}'
+      : '{{ post.primary_author.name }}'
   };
   const isTranslation = Boolean('{{ post.original_post }}');
   let thanks;
 
   if (isTranslation) {
     thanks = encodeURIComponent(`{% t 'social-row.tweets.translation', {
-      author: '${twitterHandleOrName.author}',
-      translator: '${twitterHandleOrName.translator}'
+      author: '${twitterHandleOrName.originalPostAuthor}',
+      translator: '${twitterHandleOrName.currentPostAuthor}'
     } %}`);
   } else {
     thanks = encodeURIComponent(`{% t 'social-row.tweets.default', {
-      author: '${twitterHandleOrName.author}'
+      author: '${twitterHandleOrName.currentPostAuthor}'
     } %}`);
   }
 
