@@ -3,29 +3,49 @@ document.addEventListener('DOMContentLoaded', () => {
   const url = window.location;
   // Use Nunjucks URL encoding here in case titles have any special characters like backticks
   const title = '{{ post.title | urlencode }}'.replace(/&#39;/g, '%27');
-  const twitterHandleOrName = {
-    originalPostAuthor: '{{ post.original_post.primary_author.twitter }}'
-      ? '{{ post.original_post.primary_author.twitter }}'
-      : '{{ post.original_post.primary_author.name }}',
+  const twitterHandles = {
+    originalPostAuthor: '{{ post.original_post.primary_author.twitter }}',
     currentPostAuthor: '{{ post.primary_author.twitter }}' // Author or translator depending on context
-      ? '{{ post.primary_author.twitter }}'
-      : '{{ post.primary_author.name }}'
   };
   const isTranslation = Boolean('{{ post.original_post }}');
   let thanks;
 
-  if (isTranslation) {
+  // Customize the tweet message only in cases where the (original post) author
+  // or translator has a Twitter handle
+  if (
+    isTranslation &&
+    (twitterHandles.originalPostAuthor || twitterHandles.currentPostAuthor)
+  ) {
+    const names = {
+      originalPostAuthor: '{{ post.original_post.primary_author.name }}',
+      currentPostAuthor: '{{ post.primary_author.name }}'
+    };
+
+    // Use either a Twitter handle or name in the tweet message
     thanks = encodeURIComponent(`{% t 'social-row.tweets.translation', {
-      author: '${twitterHandleOrName.originalPostAuthor}',
-      translator: '${twitterHandleOrName.currentPostAuthor}'
+      author: '${
+        twitterHandles.originalPostAuthor
+          ? twitterHandles.originalPostAuthor
+          : names.originalPostAuthor
+      }',
+      translator: '${
+        twitterHandles.currentPostAuthor
+          ? twitterHandles.currentPostAuthor
+          : names.currentPostAuthor
+      }'
     } %}`);
-  } else {
+  } else if (!isTranslation && twitterHandles.currentPostAuthor) {
+    // An original post on a source Ghost instance
+    // Only customize the tweet message if the author has a Twitter handle
     thanks = encodeURIComponent(`{% t 'social-row.tweets.default', {
-      author: '${twitterHandleOrName.currentPostAuthor}'
+      author: '${twitterHandles.currentPostAuthor}'
     } %}`);
   }
 
-  const twitterIntentStr = `https://twitter.com/intent/tweet?text=${thanks}%0A%0A${title}%0A%0A${url}`;
+  const twitterIntentStr = thanks
+    ? `https://twitter.com/intent/tweet?text=${thanks}%0A%0A${title}%0A%0A${url}`
+    : `https://twitter.com/intent/tweet?text=${title}%0A%0A${url}`;
+
   const windowOpenStr = `window.open(
     '${twitterIntentStr}',
     'share-twitter',

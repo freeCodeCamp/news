@@ -32,7 +32,10 @@
     "go-to-front-page": "Go to the front page"
   },
   "social-row": {
-    "tweet-a-thanks": "If this article was helpful, {{ <0> }}tweet a thanks{{ </0> }}.",
+    "cta": {
+      "tweet-a-thanks": "If you read this far, tweet to the author to show them you care. {{ <0> }}Tweet a thanks{{ </0> }}",
+      "tweet-it": "If this article was helpful, {{ <0> }}tweet it{{ </0> }}."
+    },
     "tweets": {
       "default": "Thank you {{ author }} for writing this helpful article.",
       "translation": "Thank you {{ author }} for writing this helpful article, and {{ translator }} for translating it."

@@ -1,5 +1,11 @@
+{% if post.primary_author.twitter or post.original_post.primary_author.twitter %}
+    {% set tweetCTAKey = 'social-row.cta.tweet-a-thanks' %}
+{% else %}
+    {% set tweetCTAKey = 'social-row.cta.tweet-it' %}
+{% endif %}
+
 <p data-test-label="social-row" class="social-row">
-    {% t 'social-row.tweet-a-thanks', {
+    {% t tweetCTAKey, {
         '<0>': '<button id="tweet-btn" class="cta-button" data-test-label="tweet-button">',
         '</0>': '</button>',
         interpolation: {
