@@ -24,7 +24,7 @@
     "no-posts": "没有文章",
     "one-post": "1 篇文章",
     "multiple-posts": "{{ postCount }} 篇文章",
-    "read-more": "阅读该{{ role }}的{{ <0> }}更多文章{{ </0> }}。"
+    "read-more": "阅读的{{ <0> }}更多文章{{ </0> }}。"
   },
   "tag": {
     "no-posts": "文章汇总",
@@ -36,16 +36,12 @@
     "go-to-front-page": "返回上一页"
   },
   "learn-to-code-cta": "在 freeCodeCamp 免费学习编程。 freeCodeCamp 的开源课程已帮助 40,000 多人获得开发者工作。{{ <0> }}开始学习{{ </0> }}",
-  "localization-meta": {
+  "original-author-translator": {
     "roles": {
-      "author": "作者",
-      "translator": "译者"
+      "author": "作者: {{ name }} ({{ locale }})",
+      "translator": "译者: {{ name }}"
     },
-    "bylines": {
-      "author": "{{ role }}： {{ name }}",
-      "translator": "{{ role }}： {{ name }}"
-    },
-    "info": {
+    "details": {
       "original-article": "{{ <0> }}原文：{{ </0> }} {{ title }}，作者：{{ author }}",
       "translated-by": "{{ <0> }}译者：{{ </0> }} {{ translator }}"
     },

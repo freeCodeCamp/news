@@ -20,7 +20,7 @@
     "no-posts": "لا يوجد مقالات",
     "one-post": "مقال ١",
     "multiple-posts": "{{ postCount }} مقالات",
-    "read-more": "اقرأ {{ <0> }}مقالات اكثر{{ </0> }} من تأليف {{ role }}."
+    "read-more": "اقرأ {{ <0> }}مقالات اكثر{{ </0> }}."
   },
   "tag": {
     "no-posts": "مجموعة من المقالات",
@@ -32,23 +32,24 @@
     "go-to-front-page": "اذهب للصفحة الامامية"
   },
   "social-row": {
-    "author-has-twitter": "إذا قرأت لهذا الحد ، فغرد للمؤلف لتظهر له أنك تهتم. {{ <0> }}اشكره علي تويتر{{ </0> }}",
-    "author-no-twitter": "إذا كانت هذه المقالة مفيدة, {{ <0> }}شاركها علي تويتر{{ </0> }}.",
-    "default-tweet": "شكرا لك {{ twitter }} لكتابة هذا المقال المفيد."
+    "cta": {
+      "tweet-a-thanks": "إذا قرأت لهذا الحد ، فغرد للمؤلف لتظهر له أنك تهتم. {{ <0> }}اشكره علي تويتر{{ </0> }}",
+      "tweet-it": "إذا كانت هذه المقالة مفيدة, {{ <0> }}شاركها علي تويتر{{ </0> }}."
+    },
+    "tweets": {
+      "default": "شكرا لك {{ author }} لكتابة هذا المقال المفيد.",
+      "translation": "شكرًا لك {{ author }} على كتابة هذه المقالة المفيدة ، وشكرًا {{ translator }} على ترجمتها."
+    }
   },
   "learn-to-code-cta": "تعلم البرمجة مجانا. ساعد منهج freeCodeCamp مفتوح المصدر أكثر من ٤٠ ألف شخص في الحصول على وظائف كمطورين. {{ <0> }}ابدأ الان{{ </0> }}",
-  "localization-meta": {
+  "original-author-translator": {
     "roles": {
-      "author": "المؤلف",
-      "translator": "المترجم"
+      "author": "المؤلف: {{ name }} ({{ locale }})",
+      "translator": "المترجم: {{ name }}"
     },
-    "bylines": {
-      "author": "{{ role }}: {{ name }} ({{ locale }})",
-      "translator": "{{ role }}: {{ name }}"
-    },
-    "info": {
-      "original-article": "{{ <0> }}Original article:{{ </0> }} {{ title }} by {{ author }}",
-      "translated-by": "{{ <0> }}Translated by:{{ </0> }} {{ translator }}"
+    "details": {
+      "original-article": "{{ <0> }} المقالة الأصلية: {{ </0> }} {{ title }} بقلم {{ author }}",
+      "translated-by": "{{ <0> }} ترجم بواسطة: {{ </0> }} {{ translator }}"
     },
     "locales": {
       "english": "الانجليزية",

@@ -20,7 +20,7 @@
     "no-posts": "Non ci sono articoli",
     "one-post": "1 articolo",
     "multiple-posts": "{{ postCount }} articoli",
-    "read-more": "Leggi {{ <0> }}altri articoli{{ </0> }} di questo {{ role }}."
+    "read-more": "Leggi {{ <0> }}altri articoli{{ </0> }}."
   },
   "tag": {
     "no-posts": "Una collezione di articoli",
@@ -32,21 +32,22 @@
     "go-to-front-page": "Vai alla Home"
   },
   "social-row": {
-    "author-has-twitter": "Se hai letto fino a qui, twitta al traduttore per ringraziarlo. {{ <0> }}Twitta un ringraziamento{{ </0> }}",
-    "author-no-twitter": "Se questo articolo ti è stato utile, {{ <0> }}twittalo{{ </0> }}.",
-    "default-tweet": "Grazie {{ twitter }} per avere tradotto questo utile articolo."
+    "cta": {
+      "tweet-a-thanks": "Se hai letto fino a qui, twitta al traduttore per ringraziarlo. {{ <0> }}Twitta un ringraziamento{{ </0> }}",
+      "tweet-it": "Se questo articolo ti è stato utile, {{ <0> }}twittalo{{ </0> }}."
+    },
+    "tweets": {
+      "default": "Grazie {{ author }} per avere tradotto questo utile articolo.",
+      "translation": "Grazie {{ author }} per avere tradotto questo utile articolo e {{ translator }} per averlo tradotto."
+    }
   },
   "learn-to-code-cta": "Impara a programmare gratuitamente. Il curriculum open source di freeCodeCamp ha aiutato più di 40.ooo persone ad ottenere un lavoro come programmatori. {{ <0> }}Inizia{{ </0> }}",
-  "localization-meta": {
+  "original-author-translator": {
     "roles": {
-      "author": "autore",
-      "translator": "traduttore"
+      "author": "Autore: {{ name }} ({{ locale }})",
+      "translator": "Traduttore: {{ name }}"
     },
-    "bylines": {
-      "author": "{{ role }}: {{ name }} ({{ locale }})",
-      "translator": "{{ role }}: {{ name }}"
-    },
-    "info": {
+    "details": {
       "original-article": "{{ <0> }}Articolo originale:{{ </0> }} {{ title }} di {{ author }}",
       "translated-by": "{{ <0> }}Tradotto e adattato da:{{ </0> }} {{ translator }}"
     },

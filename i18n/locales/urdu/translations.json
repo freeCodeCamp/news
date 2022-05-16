@@ -20,7 +20,7 @@
     "no-posts": "کوئی post نہیں",
     "one-post": "1 post",
     "multiple-posts": "{{ postCount }} posts",
-    "read-more": "اس  {{ role }} کی    {{ <0> }} مزید پوسٹس  {{ </0> }}  پڑھیں."
+    "read-more": "{{ <0> }} مزید پوسٹس  {{ </0> }}  پڑھیں."
   },
   "tag": {
     "no-posts": "کچھ پوسٹس کی کلیکشن ",
@@ -32,23 +32,24 @@
     "go-to-front-page": "فرنٹ page پہ جائیں"
   },
   "social-row": {
-    "author-has-twitter": "اگر آپ نیں آخر تک پڑھ لیا ہے، تو مصنف کو شکریہ کریں. {{ <0> }} شکریہ کا Tweet کریں {{ </0> }}",
-    "author-no-twitter": " {{ <0> }}Tweet  کریں{{ </0> }} اگر یہ آرٹیکل مفید لگا تو ",
-    "default-tweet": "آپ کا بہت شکریہ، آپ نیں یہ آرٹیکل لکھا.  {{ twitter }} ."
+    "cta": {
+      "tweet-a-thanks": "اگر آپ نیں آخر تک پڑھ لیا ہے، تو مصنف کو شکریہ کریں. {{ <0> }} شکریہ کا Tweet کریں {{ </0> }}",
+      "tweet-it": " {{ <0> }}Tweet  کریں{{ </0> }} اگر یہ آرٹیکل مفید لگا تو "
+    },
+    "tweets": {
+      "default": "آپ کا بہت شکریہ، آپ نیں یہ آرٹیکل لکھا.  {{ author }} .",
+      "translation": "یہ مفید مضمون لکھنے کے لیے {{ author }}، اور {{ translator }} کا ترجمہ کرنے کا شکریہ۔"
+    }
   },
   "learn-to-code-cta": "مفت میں coding کرنا سیکھیں. freeCodeCamp کے open source نصاب نے 40،000 سے زیادہ لوگوں کو ڈویلپر جاب ملنے میں مدد کی ہے. {{ <0> }} شروع کریں{{ </0> }}",
-  "localization-meta": {
+  "original-author-translator": {
     "roles": {
-      "author": "مصنف",
-      "translator": "مترجم"
+      "author": "مصنف: {{ name }} ({{ locale }})",
+      "translator": "مترجم: {{ name }}"
     },
-    "bylines": {
-      "author": "{{ role }}: {{ name }} ({{ locale }})",
-      "translator": "{{ role }}: {{ name }}"
-    },
-    "info": {
-      "original-article": "{{ <0> }}Original article:{{ </0> }} {{ title }} by {{ author }}",
-      "translated-by": "{{ <0> }}Translated by:{{ </0> }} {{ translator }}"
+    "details": {
+      "original-article": "{{ <0> }}اصل مضمون:{{ </0> }} {{ title }} از {{ author }}",
+      "translated-by": "{{ <0> }}ترجمہ از:{{ </0> }} {{ translator }}"
     },
     "locales": {
       "english": "انگریزی",

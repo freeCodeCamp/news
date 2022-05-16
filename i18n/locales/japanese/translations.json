@@ -20,7 +20,7 @@
     "no-posts": "投稿なし",
     "one-post": "1 件の投稿",
     "multiple-posts": "{{ postCount }} 件の投稿",
-    "read-more": "この{{ role }}の{{ <0> }}他の投稿{{ </0> }}を読む。"
+    "read-more": "{{ <0> }}他の投稿{{ </0> }}を読む。"
   },
   "tag": {
     "no-posts": "投稿の一覧",
@@ -32,21 +32,22 @@
     "go-to-front-page": "フロントページに移動"
   },
   "social-row": {
-    "author-has-twitter": "お読みいただきありがとうございます。ぜひ著者にツイートしてお知らせください。{{ <0> }}著者宛てにツイート{{ </0> }}",
-    "author-no-twitter": "この記事が参考になりましたらぜひシェアしてください。{{ <0> }}ツイート{{ </0> }}",
-    "default-tweet": "この記事が参考になりました。{{ twitter }} さんありがとうございます。"
+    "cta": {
+      "tweet-a-thanks": "お読みいただきありがとうございます。ぜひ著者にツイートしてお知らせください。{{ <0> }}著者宛てにツイート{{ </0> }}",
+      "tweet-it": "この記事が参考になりましたらぜひシェアしてください。{{ <0> }}ツイート{{ </0> }}"
+    },
+    "tweets": {
+      "default": "この記事が参考になりました。{{ author }} さんありがとうございます。",
+      "translation": "この役立つ記事を書いてくれた{{ author }}と、翻訳してくれた{{ translator }}に感謝します。"
+    }
   },
   "learn-to-code-cta": "コーディングを無料で学びましょう。freeCodeCamp のオープンソースカリキュラムによって、40,000 人以上の人々が開発者としての仕事を得ています。{{ <0> }}始める{{ </0> }}",
-  "localization-meta": {
+  "original-author-translator": {
     "roles": {
-      "author": "著者",
-      "translator": "翻訳"
+      "author": "著者: {{ name }} ({{ locale }})",
+      "translator": "翻訳: {{ name }}"
     },
-    "bylines": {
-      "author": "{{ role }}: {{ name }} ({{ locale }})",
-      "translator": "{{ role }}: {{ name }}"
-    },
-    "info": {
+    "details": {
       "original-article": "{{ <0> }}原文:{{ </0> }} {{ title }} ({{ author }})",
       "translated-by": "{{ <0> }}翻訳・翻案:{{ </0> }} {{ translator }}"
     },

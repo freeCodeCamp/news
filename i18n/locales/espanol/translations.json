@@ -20,7 +20,7 @@
     "no-posts": "No hay artículos",
     "one-post": "1 artículo",
     "multiple-posts": "{{ postCount }} artículos",
-    "read-more": "Leer {{ <0> }}más publicaciones{{ </0> }} de este {{ role }}."
+    "read-more": "Leer {{ <0> }}más publicaciones{{ </0> }}."
   },
   "tag": {
     "no-posts": "Una colección de artículos",
@@ -32,21 +32,22 @@
     "go-to-front-page": "Ir a la página de inicio"
   },
   "social-row": {
-    "author-has-twitter": "Si leíste hasta aquí, haz un tweet al autor para mostrarle que te importa su trabajo. {{ <0> }}Realiza un Tweet de agradecimiento{{ </0> }}",
-    "author-no-twitter": "Si este artículo te fue útil, {{ <0> }}haz un tweet{{ </0> }}.",
-    "default-tweet": "Gracias {{ twitter }} por escribir este útil artículo."
+    "cta": {
+      "tweet-a-thanks": "Si leíste hasta aquí, haz un tweet al autor para mostrarle que te importa su trabajo. {{ <0> }}Realiza un Tweet de agradecimiento{{ </0> }}",
+      "tweet-it": "Si este artículo te fue útil, {{ <0> }}haz un tweet{{ </0> }}."
+    },
+    "tweets": {
+      "default": "Gracias {{ author }} por escribir este útil artículo.",
+      "translation": "Gracias {{ author }} por escribir este útil artículo y {{ translator }} por traducirlo y adaptado."
+    }
   },
   "learn-to-code-cta": "Aprende a codificar de forma gratuita. El plan de estudios de código abierto de freeCodeCamp ha ayudado a más de 40,000 personas a obtener trabajos como desarrolladores. {{ <0> }}Empieza{{ </0> }}",
-  "localization-meta": {
+  "original-author-translator": {
     "roles": {
-      "author": "autor",
-      "translator": "traducido por"
+      "author": "Autor: {{ name }} ({{ locale }})",
+      "translator": "Traducido y adaptado por: {{ name }}"
     },
-    "bylines": {
-      "author": "{{ role }}: {{ name }} ({{ locale }})",
-      "translator": "{{ role }}: {{ name }}"
-    },
-    "info": {
+    "details": {
       "original-article": "{{ <0> }}Artículo original:{{ </0> }} {{ title }} por {{ author }}",
       "translated-by": "{{ <0> }}Traducido y adaptado por:{{ </0> }} {{ translator }}"
     },
