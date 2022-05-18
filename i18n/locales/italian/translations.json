@@ -37,7 +37,7 @@
       "tweet-it": "Se questo articolo ti è stato utile, {{ <0> }}twittalo{{ </0> }}."
     },
     "tweets": {
-      "default": "Grazie {{ author }} per avere tradotto questo utile articolo.",
+      "default": "Grazie {{ author }} per avere scritto questo utile articolo.",
       "translation": "Grazie {{ author }} per avere scritto questo utile articolo e {{ translator }} per averlo tradotto."
     }
   },
