@@ -27,7 +27,7 @@
     "read-more": "阅读的{{ <0> }}更多文章{{ </0> }}。"
   },
   "tag": {
-    "no-posts": "文章汇总",
+    "no-posts": "没有文章",
     "one-post": "共 1 篇文章",
     "multiple-posts": "共 {{ postCount }} 篇文章"
   },
@@ -52,9 +52,9 @@
       "portuguese": "葡萄牙语",
       "italian": "意大利语",
       "japanese": "日语",
-      "arabic": "阿拉伯",
+      "arabic": "阿拉伯语",
       "urdu": "乌尔都语",
-      "bengali": "孟加拉"
+      "bengali": "孟加拉语"
     }
   },
   "embed-title": "嵌入内容",
