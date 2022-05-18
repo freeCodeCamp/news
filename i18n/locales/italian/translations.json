@@ -33,7 +33,7 @@
   },
   "social-row": {
     "cta": {
-      "tweet-a-thanks": "Se hai letto fino a qui, twitta al traduttore per ringraziarlo. {{ <0> }}Twitta un ringraziamento{{ </0> }}",
+      "tweet-a-thanks": "Se hai letto fino a qui, {{ <0> }}scrivi un tweet di ringraziamento!{{ </0> }}",
       "tweet-it": "Se questo articolo ti è stato utile, {{ <0> }}twittalo{{ </0> }}."
     },
     "tweets": {
