@@ -49,7 +49,7 @@
     },
     "details": {
       "original-article": "{{ <0> }} المقالة الأصلية: {{ </0> }} {{ title }} بقلم {{ author }}",
-      "translated-by": "{{ <0> }} ترجم بواسطة: {{ </0> }} {{ translator }}"
+      "translated-by": "{{ <0> }} تُرجِمت بواسطة: {{ </0> }} {{ translator }}"
     },
     "locales": {
       "english": "الانجليزية",
