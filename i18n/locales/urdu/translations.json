@@ -48,7 +48,7 @@
       "translator": "مترجم: {{ name }}"
     },
     "details": {
-      "original-article": "{{ <0> }}اصل مضمون:{{ </0> }} {{ title }} از {{ author }}",
+      "original-article": "{{ <0> }}اصل مضمون:{{ </0> }} {{ title }} مضمون نگار {{ author }}",
       "translated-by": "{{ <0> }}مترجم :{{ </0> }} {{ translator }}"
     },
     "locales": {
