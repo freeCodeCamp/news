@@ -24,7 +24,7 @@
     "no-posts": "没有文章",
     "one-post": "1 篇文章",
     "multiple-posts": "{{ postCount }} 篇文章",
-    "read-more": "阅读的{{ <0> }}更多文章{{ </0> }}。"
+    "read-more": "阅读 {{ <0> }}更多文章{{ </0> }}。"
   },
   "tag": {
     "no-posts": "没有文章",
