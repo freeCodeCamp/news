@@ -20,11 +20,11 @@
     "authenticated": "支持我们的非营利组织和我们的使命，{{ <0> }}给 freeCodeCamp.org 捐款{{ </0> }}。",
     "authenticated-donor": "谢谢你{{ <0> }}捐款{{ </0> }}支持 freeCodeCamp。"
   },
+  "default-bio": "阅读 {{ <0> }}更多文章{{ </0> }}。",
   "author": {
     "no-posts": "没有文章",
     "one-post": "1 篇文章",
-    "multiple-posts": "{{ postCount }} 篇文章",
-    "read-more": "阅读 {{ <0> }}更多文章{{ </0> }}。"
+    "multiple-posts": "{{ postCount }} 篇文章"
   },
   "tag": {
     "no-posts": "没有文章",

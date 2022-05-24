@@ -16,11 +16,11 @@
     "authenticated": "Support our nonprofit and our mission. {{ <0> }}Donate to freeCodeCamp.org{{ </0> }}.",
     "authenticated-donor": "Thank you for supporting freeCodeCamp through {{ <0> }}your donations{{ </0> }}."
   },
+  "default-bio": "Read {{ <0> }}more posts{{ </0> }}.",
   "author": {
     "no-posts": "No posts",
     "one-post": "1 post",
-    "multiple-posts": "{{ postCount }} posts",
-    "read-more": "Read {{ <0> }}more posts{{ </0> }}."
+    "multiple-posts": "{{ postCount }} posts"
   },
   "tag": {
     "no-posts": "A collection of posts",

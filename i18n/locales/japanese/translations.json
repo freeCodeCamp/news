@@ -16,11 +16,11 @@
     "authenticated": "当非営利団体とその使命をご支援ください。{{ <0> }}freeCodeCamp.org へのご寄付をお願いします{{ </0> }}。",
     "authenticated-donor": "freeCodeCamp への{{ <0> }}ご寄付{{ </0> }}によるご支援、誠にありがとうございます。"
   },
+  "default-bio": "{{ <0> }}他の投稿{{ </0> }}を読む。",
   "author": {
     "no-posts": "投稿なし",
     "one-post": "1 件の投稿",
-    "multiple-posts": "{{ postCount }} 件の投稿",
-    "read-more": "{{ <0> }}他の投稿{{ </0> }}を読む。"
+    "multiple-posts": "{{ postCount }} 件の投稿"
   },
   "tag": {
     "no-posts": "投稿の一覧",

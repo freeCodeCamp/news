@@ -44,8 +44,8 @@
                 {% if authorOrTranslator.bio %}
                     <p>{{ authorOrTranslator.bio }}</p>
                 {% else %}
-                    <p>
-                        {% t 'author.read-more', {
+                    <p data-test-label="default-bio">
+                        {% t 'default-bio', {
                             '<0>': '<a href="' + ( authorOrTranslatorURL ) + '">',
                             '</0>': '</a>',
                             interpolation: {

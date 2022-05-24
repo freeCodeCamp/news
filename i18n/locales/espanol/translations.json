@@ -16,11 +16,11 @@
     "authenticated": "Authenticated: Apoya a nuestra organización sin fines de lucro y nuestra misión. {{ <0> }}Dona a freeCodeCamp.org{{ </0> }}.",
     "authenticated-donor": "Gracias por apoyar a freeCodeCamp a través de {{ <0> }}tus donaciones{{ </0> }}."
   },
+  "default-bio": "Leer {{ <0> }}más publicaciones{{ </0> }}.",
   "author": {
     "no-posts": "No hay artículos",
     "one-post": "1 artículo",
-    "multiple-posts": "{{ postCount }} artículos",
-    "read-more": "Leer {{ <0> }}más publicaciones{{ </0> }}."
+    "multiple-posts": "{{ postCount }} artículos"
   },
   "tag": {
     "no-posts": "Una colección de artículos",

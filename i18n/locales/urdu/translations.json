@@ -16,11 +16,11 @@
     "authenticated": "ہمارے non profit mission کی حمایت کریں. {{ <0> }}freeCodeCamp کو عطیہ دیں{{ </0> }}",
     "authenticated-donor": "اپنے {{ </0> }}عطیات{{ <0> }} کے ذریعے freeCodeCamp کی حمایت کرنے کا شکریہ."
   },
+  "default-bio": "{{ <0> }} مزید پوسٹس  {{ </0> }}  پڑھیں.",
   "author": {
     "no-posts": "کوئی post نہیں",
     "one-post": "1 post",
-    "multiple-posts": "{{ postCount }} posts",
-    "read-more": "{{ <0> }} مزید پوسٹس  {{ </0> }}  پڑھیں."
+    "multiple-posts": "{{ postCount }} posts"
   },
   "tag": {
     "no-posts": "کچھ پوسٹس کی کلیکشن ",
