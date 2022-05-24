@@ -18,7 +18,7 @@
             %}
         {% else %}
             <span class="avatar-wrapper">
-                {% set avatarTitle = author.name %}
+                {% set avatarTitle = authorOrTranslator.name %}
                 {% include "partials/icons/avatar.njk" %}
             </span>
         {% endif %}
