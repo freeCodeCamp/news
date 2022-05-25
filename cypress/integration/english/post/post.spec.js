@@ -6,7 +6,7 @@ const selectors = {
       ".post-full-content > .post-full-author-header > .author-card > .avatar-wrapper [data-test-label='avatar']"
   },
   comments: "[data-test-label='comments']",
-  socialRow: "[data-test-label='social-row']",
+  socialRowCTA: "[data-test-label='social-row-cta']",
   tweetButton: "[data-test-label='tweet-button']"
 };
 
@@ -39,7 +39,7 @@ describe('Post', () => {
     });
 
     it('should display the social row', () => {
-      cy.get(selectors.socialRow).should('be.visible');
+      cy.get(selectors.socialRowCTA).should('be.visible');
     });
 
     it('the tweet button should open a Twitter window with the correct message and dimensions', () => {
