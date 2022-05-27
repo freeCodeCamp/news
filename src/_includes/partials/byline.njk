@@ -4,7 +4,7 @@
     {% set authorOrTranslatorURL = authorOrTranslator.url if role === "author" else (authorOrTranslator.path | url) %}
     {% set translatedLocale %}{% t "original-author-translator.locales." + locale %}{% endset %}
 
-    <section class="author-card">
+    <section class="author-card" data-test-label="{{ 'translator-card' if role === 'translator' else 'author-card' }}">
         {% if authorOrTranslator.profile_image %}
             {% 
                 image
@@ -26,7 +26,7 @@
 
         <section class="author-card-content {{ "author-card-content-no-bio" if not showBio }}">
             <span class="author-card-name">
-                <a href="{{ authorOrTranslatorURL }}">
+                <a href="{{ authorOrTranslatorURL }}" data-test-label="profile-link">
                     {% if role === 'author' %}
                         {% t 'original-author-translator.roles.author', {
                             name: authorOrTranslator.name,
@@ -43,7 +43,7 @@
             </span>
             {% if showBio %}
                 {% if authorOrTranslator.bio %}
-                    <p>{{ authorOrTranslator.bio }}</p>
+                    <p data-test-label="{{ 'translator-bio' if role === 'translator' else 'author-bio' }}">{{ authorOrTranslator.bio }}</p>
                 {% else %}
                     <p data-test-label="default-bio">
                         {% t 'default-bio', {

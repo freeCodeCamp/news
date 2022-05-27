@@ -57,8 +57,8 @@ const originalPostHandler = async post => {
         {
           '<0>': '<strong>',
           '</0>': '</strong>',
-          title: `<a href="${originalPost.url}" target="_blank" rel="noopener noreferrer">${originalPost.title}</a>`,
-          author: `<a href="${originalPost.primary_author.url}" target="_blank" rel="noopener noreferrer">${originalPost.primary_author.name}</a>`,
+          title: `<a href="${originalPost.url}" target="_blank" rel="noopener noreferrer" data-test-label="original-article">${originalPost.title}</a>`,
+          author: `<a href="${originalPost.primary_author.url}" target="_blank" rel="noopener noreferrer" data-test-label="profile-link">${originalPost.primary_author.name}</a>`,
           interpolation: {
             escapeValue: false
           }
@@ -70,9 +70,9 @@ const originalPostHandler = async post => {
         {
           '<0>': '<strong>',
           '</0>': '</strong>',
-          translator: `<a href="/${computedPath + post.primary_author.path}">${
-            post.primary_author.name
-          }</a>`,
+          translator: `<a href="/${
+            computedPath + post.primary_author.path
+          }" data-test-label="profile-link">${post.primary_author.name}</a>`,
           interpolation: {
             escapeValue: false
           }
@@ -81,9 +81,13 @@ const originalPostHandler = async post => {
 
       const introEl = `
         <p>
-          ${authorEl}
+          <span data-test-label="author-intro">
+            ${authorEl}
+          </span>
           <br><br>
-          ${translatorEl}
+          <span data-test-label="translator-intro">
+            ${translatorEl}
+          </span>
         </p>`;
 
       // Append details about the original article / author and translator
