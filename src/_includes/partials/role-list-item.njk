@@ -4,7 +4,7 @@
     {% set authorOrTranslatorURL = authorOrTranslator.url if role === "author" else (authorOrTranslator.path | url) %}
     {% set translatedLocale %}{% t "original-author-translator.locales." + locale %}{% endset %}
     
-    <li class="author-list-item">
+    <li class="author-list-item" data-test-label="{{ 'translator-list-item' if role === 'translator' else 'author-list-item' }}">
         <a href="{{ authorOrTranslatorURL }}" class="static-avatar">
             {% if authorOrTranslator.profile_image %}
                 {% 
@@ -15,6 +15,7 @@
                     "30px",
                     [30],
                     authorOrTranslator.image_dimensions.profile_image,
+                    "profile-image",
                     lazyLoad
                 %}
             {% else %}
@@ -25,7 +26,7 @@
             {% endif %}
         </a>
         <span class="meta-content">
-            <a class="meta-item" href="{{ authorOrTranslatorURL }}">
+            <a class="meta-item" href="{{ authorOrTranslatorURL }}" data-test-label="{{ 'profile-link' }}">
                 {% if role === 'author' %}
                     {% t 'original-author-translator.roles.author', {
                         name: authorOrTranslator.name,
@@ -39,7 +40,9 @@
                     {{ authorOrTranslator.name }}
                 {% endif %}
             </a>
-            <time class="meta-item" datetime="{{ publishedAt }}">{% timeAgo publishedAt %}</time>
+            <time class="meta-item" datetime="{{ publishedAt }}" data-test-label="{{ 'post-published-time' }}">
+                {% timeAgo publishedAt %}
+            </time>
         </span>
     </li>
 {% endmacro %}
