@@ -1,7 +1,8 @@
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
+  schedule:
+    - cron: '25 0/12 * * 1-5' # Build once every 12 hours, starting at 25 minutes past the hour (UTC)
+
   pull_request_target:
     types: [opened, synchronize, reopened]
 
@@ -9,13 +10,14 @@ name: CodeSee Map
 
 jobs:
   test_map_action:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
+    if: ${{ github.actor != 'renovate[bot]' && github.actor != 'camperbot' }}
     continue-on-error: true
     name: Run CodeSee Map Analysis
     steps:
       - name: checkout
         id: checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b # tag=v3
         with:
           repository: ${{ github.event.pull_request.head.repo.full_name }}
           ref: ${{ github.event.pull_request.head.ref }}
@@ -27,7 +29,7 @@ jobs:
         uses: Codesee-io/codesee-detect-languages-action@latest
 
       - name: Configure JDK 16
-        uses: actions/setup-java@v2
+        uses: actions/setup-java@860f60056505705214d223b91ed7a30f173f6142 # tag=v3
         if: ${{ fromJSON(steps.detect-languages.outputs.languages).java }}
         with:
           java-version: '16'
@@ -35,17 +37,18 @@ jobs:
 
       # CodeSee Maps Go support uses a static binary so there's no setup step required.
 
-      - name: Configure Node.js 14
-        uses: actions/setup-node@v2
+      - name: Configure Node.js 16
+        uses: actions/setup-node@17f8bd926464a1afa4c6a11669539e9c1ba77048 # tag=v3
         if: ${{ fromJSON(steps.detect-languages.outputs.languages).javascript }}
         with:
-          node-version: '14'
+          node-version: '16'
+          cache: npm
 
       - name: Configure Python 3.x
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@98f2ad02fd48d057ee3b4d4f66525b231c3e52b6 # tag=v3
         if: ${{ fromJSON(steps.detect-languages.outputs.languages).python }}
         with:
-          python-version: '3.10'
+          python-version: '3.x'
           architecture: 'x64'
 
       - name: Configure Ruby '3.x'
@@ -54,19 +57,13 @@ jobs:
         with:
           ruby-version: '3.0'
 
-      # We need the rust toolchain because it uses rustc and cargo to inspect the package
-      - name: Configure Rust 1.x stable
-        uses: actions-rs/toolchain@v1
-        if: ${{ fromJSON(steps.detect-languages.outputs.languages).rust }} 
-        with:
-          toolchain: stable
+      # CodeSee Maps Rust support uses a static binary so there's no setup step required.
 
       - name: Generate Map
         id: generate-map
         uses: Codesee-io/codesee-map-action@latest
         with:
           step: map
-          api_token: ${{ secrets.CODESEE_ARCH_DIAG_API_TOKEN }}
           github_ref: ${{ github.ref }}
           languages: ${{ steps.detect-languages.outputs.languages }}
 
