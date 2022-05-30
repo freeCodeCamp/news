@@ -9,7 +9,9 @@ const selectors = {
   translatorBio: "[data-test-label='translator-bio']",
   authorIntro: "[data-test-label='author-intro']",
   originalArticle: "[data-test-label='original-article']",
-  translatorIntro: "[data-test-label='translator-intro']"
+  translatorIntro: "[data-test-label='translator-intro']",
+  authorName: 'Quincy Larson',
+  translatorName: 'Rafael D. Hernandez'
 };
 
 describe('Post', () => {
@@ -23,11 +25,14 @@ describe('Post', () => {
 
   context('Original author / translator feature', () => {
     context('Author header without bios', () => {
-      it('should contain two children', () => {
-        cy.get(selectors.authorHeaderNoBio).children().should('have.length', 2);
+      it('should contain an author card and a translator card', () => {
+        cy.get(selectors.authorHeaderNoBio).then($el => {
+          cy.wrap($el).find(selectors.authorCard);
+          cy.wrap($el).find(selectors.translatorCard);
+        });
       });
 
-      it('the author card should contain profile image and profile link elements', () => {
+      it('the author card should contain a profile image and a profile link', () => {
         cy.get(selectors.authorHeaderNoBio)
           .find(selectors.authorCard)
           .then($el => {
@@ -36,7 +41,24 @@ describe('Post', () => {
           });
       });
 
-      it('the translator card should contain profile image and profile link elements', () => {
+      it("the author card's profile link should contain the author's name and the locale of the original article", () => {
+        cy.get(selectors.authorHeaderNoBio)
+          .find(selectors.authorCard)
+          .contains(`${selectors.authorName} (inglés)`);
+      });
+
+      it("the author card's profile link should be a full URL that points to the original author's page", () => {
+        cy.get(selectors.authorHeaderNoBio)
+          .find(selectors.authorCard)
+          .find(selectors.profileLink)
+          .then($el => {
+            expect($el.attr('href')).to.deep.equal(
+              'https://www.freecodecamp.org/news/author/quincylarson/'
+            );
+          });
+      });
+
+      it('the translator card should contain a profile image and a profile link', () => {
         cy.get(selectors.authorHeaderNoBio)
           .find(selectors.translatorCard)
           .then($el => {
@@ -44,16 +66,34 @@ describe('Post', () => {
             cy.wrap($el).find(selectors.profileLink);
           });
       });
+
+      it("the translator card's profile link should contain the translator's name", () => {
+        cy.get(selectors.authorHeaderNoBio)
+          .find(selectors.translatorCard)
+          .contains(selectors.translatorName);
+      });
+
+      it("the translator card's profile link should be a relative URL that points to the translator's page on the current instance of News", () => {
+        cy.get(selectors.authorHeaderNoBio)
+          .find(selectors.translatorCard)
+          .find(selectors.profileLink)
+          .then($el => {
+            expect($el.attr('href')).to.deep.equal(
+              '/espanol/news/author/rafael/'
+            );
+          });
+      });
     });
 
     context('Author header with bios', () => {
-      it('should contain two children', () => {
-        cy.get(selectors.authorHeaderWithBio)
-          .children()
-          .should('have.length', 2);
+      it('should contain an author card and a translator card', () => {
+        cy.get(selectors.authorHeaderWithBio).then($el => {
+          cy.wrap($el).find(selectors.authorCard);
+          cy.wrap($el).find(selectors.translatorCard);
+        });
       });
 
-      it('the author card should contain profile image and profile link elements', () => {
+      it('the author card should contain a profile image, a profile link, and a bio', () => {
         cy.get(selectors.authorHeaderWithBio)
           .find(selectors.authorCard)
           .then($el => {
@@ -63,7 +103,31 @@ describe('Post', () => {
           });
       });
 
-      it('the translator card should contain profile image and profile link elements', () => {
+      it("the author card should contain the author's name and the locale of the original article", () => {
+        cy.get(selectors.authorHeaderWithBio)
+          .find(selectors.authorCard)
+          .contains(`${selectors.authorName} (inglés)`);
+      });
+
+      it("the author card's profile link should be a full URL that points to the original author's page", () => {
+        cy.get(selectors.authorHeaderWithBio)
+          .find(selectors.authorCard)
+          .find(selectors.profileLink)
+          .then($el => {
+            expect($el.attr('href')).to.deep.equal(
+              'https://www.freecodecamp.org/news/author/quincylarson/'
+            );
+          });
+      });
+
+      it("the author card's bio should contain the expected text", () => {
+        cy.get(selectors.authorHeaderWithBio)
+          .find(selectors.authorCard)
+          .find(selectors.authorBio)
+          .contains('The teacher who founded freeCodeCamp.org.');
+      });
+
+      it('the translator card should contain a profile image, a profile link, and a bio', () => {
         cy.get(selectors.authorHeaderWithBio)
           .find(selectors.translatorCard)
           .then($el => {
@@ -73,21 +137,87 @@ describe('Post', () => {
           });
       });
 
+      it("the translator card should contain the translator's name", () => {
+        cy.get(selectors.authorHeaderWithBio)
+          .find(selectors.translatorCard)
+          .contains(selectors.translatorName);
+      });
+
+      it("the translator card's profile link should be a relative URL that points to the translator's page on the current instance of News", () => {
+        cy.get(selectors.authorHeaderWithBio)
+          .find(selectors.translatorCard)
+          .find(selectors.profileLink)
+          .then($el => {
+            expect($el.attr('href')).to.deep.equal(
+              '/espanol/news/author/rafael/'
+            );
+          });
+      });
+
+      it("the translator card's bio should contain the expected text", () => {
+        cy.get(selectors.authorHeaderWithBio)
+          .find(selectors.translatorCard)
+          .find(selectors.translatorBio)
+          .contains(
+            'Web Developer | Global Language Translations Lead at @freeCodeCamp'
+          );
+      });
+
       // To do: write tests for cases where the author and / or translator don't have bios
     });
 
     context('Translated article intro', () => {
-      it("the author intro should contain links to the original article and author's profile", () => {
+      it("the author intro should contain links to the original article and author's page", () => {
         cy.get(selectors.authorIntro).then($el => {
           cy.wrap($el).find(selectors.originalArticle);
           cy.wrap($el).find(selectors.profileLink);
         });
       });
 
-      it("the translator intro should contain a link to the translator's profile", () => {
+      it('the link to the original article should contain the expected text and `href` attribute', () => {
+        cy.get(selectors.authorIntro)
+          .find(selectors.originalArticle)
+          .then($el => {
+            cy.wrap($el).contains(
+              'The #100DaysOfCode Challenge, its history, and why you should try it for 2021'
+            );
+            expect($el.attr('href')).to.deep.equal(
+              'https://www.freecodecamp.org/news/the-crazy-history-of-the-100daysofcode-challenge-and-why-you-should-try-it-for-2018-6c89a76e298d/'
+            );
+          });
+      });
+
+      it("the author intro's profile link should contain the author's name", () => {
+        cy.get(selectors.authorIntro)
+          .find(selectors.profileLink)
+          .contains(selectors.authorName);
+      });
+
+      it("the author intro's profile link should be a full URL that points to the original author's page", () => {
+        cy.get(selectors.authorIntro)
+          .find(selectors.profileLink)
+          .then($el => {
+            expect($el.attr('href')).to.deep.equal(
+              'https://www.freecodecamp.org/news/author/quincylarson/'
+            );
+          });
+      });
+
+      it("the translator intro should contain a link to the translator's page", () => {
         cy.get(selectors.translatorIntro).then($el => {
           cy.wrap($el).find(selectors.profileLink);
         });
+      });
+
+      it("the translator's intro should  should be a relative URL that points to the translator's page on the current instance of News", () => {
+        cy.get(selectors.authorHeaderWithBio)
+          .find(selectors.translatorCard)
+          .find(selectors.profileLink)
+          .then($el => {
+            expect($el.attr('href')).to.deep.equal(
+              '/espanol/news/author/rafael/'
+            );
+          });
       });
     });
   });
