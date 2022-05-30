@@ -29,6 +29,7 @@
     "develop:ci": "cross-env ELEVENTY_ENV=ci NODE_OPTIONS=--max-old-space-size=8192 eleventy --serve",
     "prebuild": "npm run clean",
     "build": "cross-env ELEVENTY_ENV=prod NODE_OPTIONS=--max-old-space-size=8192 eleventy",
+    "postbuild": "node ./config/i18n/generate-serve-config.js",
     "test": "jest",
     "lint": "npm-run-all lint:*",
     "lint:code": "eslint . --ext .js --cache",
