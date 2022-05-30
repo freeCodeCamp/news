@@ -1,5 +1,37 @@
 [
   {
+    "title": "El Desafío #100DaysOfCode, su historia y por qué debes hacerlo para el 2021",
+    "author": {
+      "name": "Rafael D. Hernandez",
+      "url": "http://localhost:8080/espanol/news/author/rafael/",
+      "profileImage": "http://localhost:3030/content/images/size/w30/2022/02/rafael-photo.jpeg"
+    },
+    "tags": [
+      {
+        "name": "100daysofcode",
+        "url": "http://localhost:8080/espanol/news/404/"
+      }
+    ],
+    "url": "http://localhost:8080/espanol/news/el-desafio-100daysofcode-su-historia-y-por-que-debes-probarlo-para-2022/",
+    "featureImage": "https://www.freecodecamp.org/espanol/news/content/images/2022/01/5f9c9afc740569d1a4ca2907.jpeg",
+    "publishedAt": "2022-01-16T22:46:14.993Z",
+    "publishedAtTimestamp": 1642373174,
+    "filterTerms": [],
+    "objectID": "61e337e117a453092f6956ca",
+    "originalPost": {
+      "title": "The #100DaysOfCode Challenge, its history, and why you should try it for 2021",
+      "url": "https://www.freecodecamp.org/news/the-crazy-history-of-the-100daysofcode-challenge-and-why-you-should-try-it-for-2018-6c89a76e298d/",
+      "publishedAt": "2020-12-09T16:20:00.000Z",
+      "publishedAtTimestamp": 1607530800,
+      "author": {
+        "name": "Quincy Larson",
+        "url": "https://www.freecodecamp.org/news/author/quincylarson/",
+        "profileImage": "http://localhost:3010/content/images/size/w30/2022/02/Quincy-Larson-photo.jpg"
+      },
+      "translatedLocale": "inglés"
+    }
+  },
+  {
     "title": "No Author Profile Pic",
     "author": {
       "name": "Mrugesh Mohapatra",

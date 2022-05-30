@@ -64,4 +64,6 @@ describe('Search results', () => {
       .find(selectors.authorList)
       .should('not.exist');
   });
+
+  // To do: Finalize search schema and add tests for the original post / translator feature
 });

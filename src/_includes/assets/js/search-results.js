@@ -83,21 +83,22 @@ document.addEventListener('DOMContentLoaded', () => {
       </header>
     `;
 
-    const authorRole = '{% t "localization-meta.roles.author" %}';
-    const translatorRole = '{% t "localization-meta.roles.translator" %}';
     const authorList = `
       <ul class="author-list" data-test-label="author-list">
         ${
           hit.originalPost
             ? `
           <li class="author-list-item">
-            <a href="${hit.originalPost.url}" class="static-avatar">
+            <a href="${hit.originalPost.author.url}" class="static-avatar">
             ${
-              hit.originalPost.profileImage
+              hit.originalPost.author.profileImage
                 ? `
               <img
                   class="author-profile-image"
-                  src="${getResizedImage(hit.originalPost.profileImage, 30)}"
+                  src="${getResizedImage(
+                    hit.originalPost.author.profileImage,
+                    30
+                  )}"
                   alt="${hit.originalPost.author.name}"
                   width="30"
                   height="30"
@@ -114,12 +115,10 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             </a>
             <span class="meta-content">
-              <a class="meta-item" href="{{ hit.originalPost.primaryAuthor.url }}">
-                {% t 'localization-meta.card-name', { role: '${authorRole}', name: '${
-                hit.originalPost.author.name
-              }' } %} ({% t 'localization-meta.locales.' + '${
-                hit.originalPost.locale_i18n
-              }' %})
+              <a class="meta-item" href="${hit.originalPost.author.url}">
+                {% t 'original-author-translator.roles.author', { name: '${
+                  hit.originalPost.author.name
+                }', locale: '${hit.originalPost.translatedLocale}' } %}
               </a>
               <time class="meta-item" datetime="${
                 hit.originalPost.publishedAt
@@ -157,7 +156,7 @@ document.addEventListener('DOMContentLoaded', () => {
               ${
                 hit.originalPost
                   ? `
-                {% t 'localization-meta.card-name', { role: '${translatorRole}', name: '${hit.author.name}' } %}
+                {% t 'original-author-translator.roles.translator', { name: '${hit.author.name}' } %}
               `
                   : `
                 ${hit.author.name}
