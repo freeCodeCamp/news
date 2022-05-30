@@ -1,0 +1,24 @@
+{
+  "redirects": [
+    {
+      "source": "/@:authorName",
+      "destination": "/dothraki/news/author/:authorName"
+    },
+    {
+      "source": "/tagged/:tagName",
+      "destination": "/dothraki/news/tag/:tagName"
+    },
+    {
+      "source": "/archive/:archiveSlug?",
+      "destination": "/dothraki/news"
+    },
+    {
+      "source": "/our-sponsors",
+      "destination": "/dothraki/news/sponsors"
+    },
+    {
+      "source": "/about-freecodecamp",
+      "destination": "/dothraki/news/about"
+    }
+  ]
+}

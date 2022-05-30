@@ -3,7 +3,7 @@ const getImageDimensions = require('../../utils/get-image-dimensions');
 const { currentLocale_i18nISOCode, siteURL } = require('../../config');
 const translate = require('../../utils/translate');
 
-// Get Twitter profile based on links in i18n/locales/lang/links.json --
+// Get Twitter profile based on links in config/i18n/locales/lang/links.json --
 // falls back to English Twitter profile if one for the current UI locale
 // isn't found
 const getTwitterProfile = url => url.replace('https://twitter.com/', '@');
