@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
   const urlParams = new URLSearchParams(window.location.search);
   const queryStr = urlParams.get('query');
   const postFeed = document.querySelector('.post-feed');
@@ -32,6 +32,19 @@ document.addEventListener('DOMContentLoaded', () => {
       err.debugData ? console.log(err.debugData) : '';
     }
   };
+
+  const translatedLocales = await (async () => {
+    try {
+      const response = await fetch(
+        `{{ site.url }}/assets/translated-locales.json`
+      );
+      const JSON = await response.json();
+
+      return JSON;
+    } catch (err) {
+      console.log(err);
+    }
+  })();
 
   const getResizedImage = (url, width) =>
     url.includes('/content/images/')
@@ -118,7 +131,9 @@ document.addEventListener('DOMContentLoaded', () => {
               <a class="meta-item" href="${hit.originalPost.author.url}">
                 {% t 'original-author-translator.roles.author', { name: '${
                   hit.originalPost.author.name
-                }', locale: '${hit.originalPost.translatedLocale}' } %}
+                }', locale: '${
+                translatedLocales[hit.originalPost.localeI18n]
+              }' } %}
               </a>
               <time class="meta-item" datetime="${
                 hit.originalPost.publishedAt
