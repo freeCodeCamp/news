@@ -4,8 +4,7 @@ const {
 } = require('../../../support/utils/post-cards');
 
 const selectors = {
-  authorProfileImage:
-    ".under-header-content [data-test-label='author-profile-image']",
+  authorProfileImage: ".under-header-content [data-test-label='profile-image']",
   avatar: ".under-header-content [data-test-label='avatar']",
   authorName: "[data-test-label='author-name']",
   authorLocation: "[data-test-label='author-location']",

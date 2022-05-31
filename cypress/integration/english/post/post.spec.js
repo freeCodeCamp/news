@@ -1,9 +1,9 @@
 const selectors = {
-  authorProfileImage: "[data-test-label='author-profile-image']",
+  authorProfileImage: "[data-test-label='profile-image']",
   avatars: {
-    top: ".author-card > .avatar-wrapper [data-test-label='avatar']",
+    top: "[data-test-label='author-header-no-bio'] [data-test-label='avatar']",
     bottom:
-      ".post-full-content > .post-full-author-header > .author-card > .avatar-wrapper [data-test-label='avatar']"
+      "[data-test-label='author-header-with-bio'] [data-test-label='avatar']"
   },
   comments: "[data-test-label='comments']",
   socialRowCTA: "[data-test-label='social-row-cta']",
