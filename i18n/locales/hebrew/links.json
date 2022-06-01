@@ -1,0 +1,18 @@
+{
+  "forum": "https://hebrew.freecodecamp.org/forum/",
+  "donate": "https://hebrew.freecodecamp.org/donate/",
+  "banner": {
+      
+    "default": "https://hebrew.freecodecamp.org/",
+    "authenticated": "https://hebrew.freecodecamp.org/donate",
+    "authenticated-donor": "https://hebrew.freecodecamp.org/news/how-to-donate-to-free-code-camp/"
+  },
+  "learn-to-code-cta": "https://hebrew.freecodecamp.org/learn/",
+  "twitter": "https://twitter.com/freeCodeCampHE",
+  "footer": {
+    "about": "https://hebrew.freecodecamp.org/news/about/",
+    "support": "https://hebrew.freecodecamp.org/news/support/",
+    "honesty": "https://hebrew.freecodecamp.org/news/academic-honesty-policy/",
+    "coc": "https://hebrew.freecodecamp.org/news/code-of-conduct/"
+  }
+}
