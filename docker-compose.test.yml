@@ -12,6 +12,6 @@ services:
   news:
     build:
       context: .
-      dockerfile: ./docker-config/Dockerfile
+      dockerfile: ./docker/Dockerfile
     ports:
       - '3000:3000'

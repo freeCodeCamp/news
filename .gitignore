@@ -79,4 +79,4 @@ dist/
 cypress/videos
 cypress/screenshots
 
-docker-config/languages/
+docker/languages/

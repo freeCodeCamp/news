@@ -7,7 +7,7 @@ WORKDIR /var/www/html/
 COPY dist .
 
 WORKDIR /app
-COPY docker-config/languages/$BUILD_LANGUAGE/serve.json .
+COPY docker/languages/$BUILD_LANGUAGE/serve.json .
 
 EXPOSE 3000
 CMD serve --config /app/serve.json --cors --no-clipboard --no-port-switching -p 3000 /var/www/html

@@ -2,28 +2,21 @@
 
 # Developer News
 
-Welcome to freeCodeCamp's [Developer News](https://www.freecodecamp.org/news)
-codebase — A JAMStack app built with [Ghost](https://ghost.org) &
-[11ty](https://www.11ty.io) & lots of love from the community.
+Welcome to freeCodeCamp's [Developer News][1] codebase — A JAMStack app built with [Ghost][2] & [11ty][3] & lots of love from the community.
 
-The scaffolding is based on a
-[template](https://github.com/TryGhost/eleventy-starter-ghost) developed by
-[David Darnes](https://darn.es/), and is customized to the design language
-recommended by freeCodeCamp. We use this project to build and deploy several
-instances of the developer news applications powering all our global and
-localized publication content.
+The code is based on this [template][4]. We use this project to build and deploy multiple instances of our publications in several world languages.
+
+Content is fetched from Ghost, packaged into docker images, and deployed to Azure WebApp for Containers on Azure App Service.
+
+All of the services are then distributed globally by our CDN provider.
 
 ## Contributing
 
-While this repository and all of its code is open-source, we limit direct
-contributions (in form of pull requests) to this particular project due to
-limitations with our QA & deployment workflows.
+**Note:** We limit direct contributions (in the form of pull requests) to this project due to limitations with our QA & deployment workflows.
 
-If you found an issue or a bug, we recommend you please connect with us in the
-[contributors chat](https://chat.freecodecamp.org/channel/contributors) room
-first. That said, we welcome you to work on any of our other available
-open-source projects, by following the
-[contributing guidelines here](https://contribute.freecodecamp.org).
+We welcome you to work on any of our other available open-source projects instead. You can find our contributing guidelines [here][5].
+
+If you found an issue or a bug on this repository, please connect with us in the contributor's chat room first.
 
 Happy Contributing!
 
@@ -38,3 +31,9 @@ Happy Contributing!
 
 Copyright (c) 2021 freeCodeCamp.org - Released under the
 [BSD 3 license](LICENSE.md).
+
+[1]: https://www.freecodecamp.org/news
+[2]: https://ghost.org/
+[3]: https://www.11ty.io/
+[4]: https://github.com/TryGhost/eleventy-starter-ghost
+[5]: https://contribute.freecodecamp.org/#/

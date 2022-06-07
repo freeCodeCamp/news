@@ -113,7 +113,7 @@ jobs:
           --tag ${{ secrets.ACR_NAME }}.azurecr.io/${{ matrix.site_tlds }}/news-${{ matrix.languages }}:$tagname \
           --tag ${{ secrets.ACR_NAME }}.azurecr.io/${{ matrix.site_tlds }}/news-${{ matrix.languages }}:latest \
           --build-arg BUILD_LANGUAGE=${{ matrix.languages }} \
-          --file docker-config/Dockerfile
+          --file docker/Dockerfile
           docker push --all-tags ${{ secrets.ACR_NAME }}.azurecr.io/${{ matrix.site_tlds }}/news-${{ matrix.languages }}
 
       - name: Clean up Self-hosted setup
