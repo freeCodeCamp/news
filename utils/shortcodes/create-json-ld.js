@@ -2,9 +2,8 @@ const fullEscaper = require('../full-escaper');
 const translate = require('../translate');
 const { siteURL } = require('../../config');
 
-const createImageObj = (url, obj) => {
-  const width = obj.width ? obj.width : 600;
-  const height = obj.height ? obj.height : 400;
+const createImageObj = (url, imageDimensions) => {
+  const { width, height } = imageDimensions;
 
   return {
     '@type': 'ImageObject',
