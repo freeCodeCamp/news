@@ -2,10 +2,53 @@ const fullEscaper = require('../full-escaper');
 const translate = require('../translate');
 const { siteURL } = require('../../config');
 
+const createImageObj = (url, obj) => {
+  const width = obj.width ? obj.width : 600;
+  const height = obj.height ? obj.height : 400;
+
+  return {
+    '@type': 'ImageObject',
+    url,
+    width,
+    height
+  };
+};
+
+const createAuthorObj = primaryAuthor => {
+  const {
+    name,
+    profile_image,
+    image_dimensions,
+    website,
+    twitter,
+    facebook,
+    path
+  } = primaryAuthor;
+  const authorObj = {
+    '@type': 'Person',
+    name,
+    url: siteURL + path,
+    sameAs: [
+      website ? fullEscaper(website) : null,
+      facebook ? `https://www.facebook.com/${facebook}` : null,
+      twitter ? twitter.replace('@', 'https://twitter.com/') : null
+    ].filter(url => url)
+  };
+
+  if (profile_image) {
+    authorObj.image = createImageObj(
+      profile_image,
+      image_dimensions.profile_image
+    );
+  }
+
+  return authorObj;
+};
+
 async function createJsonLdShortcode(type, site, data) {
   // Main site settings from site object
   const { logo, cover_image, image_dimensions } = site;
-  const url = `${site.url}/`;
+  const url = `${siteURL}/`;
   const typeMap = {
     index: 'WebSite',
     article: 'Article',
@@ -30,51 +73,8 @@ async function createJsonLdShortcode(type, site, data) {
   };
   const returnData = { ...baseData };
 
-  const createImageObj = (url, obj) => {
-    const width = obj.width ? obj.width : 600;
-    const height = obj.height ? obj.height : 400;
-
-    return {
-      '@type': 'ImageObject',
-      url,
-      width,
-      height
-    };
-  };
-
   // Conditionally set other properties based on
   // objects passed to shortcodes
-  const createAuthorObj = primaryAuthor => {
-    const {
-      name,
-      profile_image,
-      image_dimensions,
-      website,
-      twitter,
-      facebook,
-      path
-    } = primaryAuthor;
-    const authorObj = {
-      '@type': 'Person',
-      name,
-      url: siteURL + path,
-      sameAs: [
-        website ? fullEscaper(website) : null,
-        facebook ? `https://www.facebook.com/${facebook}` : null,
-        twitter ? twitter.replace('@', 'https://twitter.com/') : null
-      ].filter(url => url)
-    };
-
-    if (profile_image) {
-      authorObj.image = createImageObj(
-        profile_image,
-        image_dimensions.profile_image
-      );
-    }
-
-    return authorObj;
-  };
-
   if (type === 'index')
     returnData.description = translate('meta-tags:description');
 
