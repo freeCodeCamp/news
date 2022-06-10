@@ -19,19 +19,9 @@ async function createJsonLdShortcode(type, site, data) {
       '@type': 'Organization',
       name: 'freeCodeCamp.org',
       url: url,
-      logo: {
-        '@type': 'ImageObject',
-        url: logo,
-        width: image_dimensions.logo.width,
-        height: image_dimensions.logo.height
-      }
+      logo: createImageObj(logo, image_dimensions.logo)
     },
-    image: {
-      '@type': 'ImageObject',
-      url: cover_image,
-      width: image_dimensions.cover_image.width,
-      height: image_dimensions.cover_image.height
-    },
+    image: createImageObj(cover_image, image_dimensions.cover_image),
     url: url,
     mainEntityOfPage: {
       '@type': 'WebPage',
@@ -41,7 +31,8 @@ async function createJsonLdShortcode(type, site, data) {
   const returnData = { ...baseData };
 
   const createImageObj = (url, obj) => {
-    let { width, height } = obj;
+    const width = obj.width ? obj.width : 600;
+    const height = obj.height ? obj.height : 400;
 
     return {
       '@type': 'ImageObject',
