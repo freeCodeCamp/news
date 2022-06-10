@@ -45,7 +45,7 @@ const createAuthorObj = primaryAuthor => {
   return authorObj;
 };
 
-async function createJsonLdShortcode(type, site, data) {
+async function createJSONLDShortcode(type, site, data) {
   // Main site settings from site object
   const { logo, cover_image, image_dimensions } = site;
   const url = `${siteURL}/`;
@@ -154,4 +154,4 @@ async function createJsonLdShortcode(type, site, data) {
   // return JSON.stringify(returnData);
 }
 
-module.exports = createJsonLdShortcode;
+module.exports = createJSONLDShortcode;
