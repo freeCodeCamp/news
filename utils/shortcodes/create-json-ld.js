@@ -2,10 +2,52 @@ const fullEscaper = require('../full-escaper');
 const translate = require('../translate');
 const { siteURL } = require('../../config');
 
-async function createJsonLdShortcode(type, site, data) {
+const createImageObj = (url, imageDimensions) => {
+  const { width, height } = imageDimensions;
+
+  return {
+    '@type': 'ImageObject',
+    url,
+    width,
+    height
+  };
+};
+
+const createAuthorObj = primaryAuthor => {
+  const {
+    name,
+    profile_image,
+    image_dimensions,
+    website,
+    twitter,
+    facebook,
+    path
+  } = primaryAuthor;
+  const authorObj = {
+    '@type': 'Person',
+    name,
+    url: siteURL + path,
+    sameAs: [
+      website ? fullEscaper(website) : null,
+      facebook ? `https://www.facebook.com/${facebook}` : null,
+      twitter ? twitter.replace('@', 'https://twitter.com/') : null
+    ].filter(url => url)
+  };
+
+  if (profile_image) {
+    authorObj.image = createImageObj(
+      profile_image,
+      image_dimensions.profile_image
+    );
+  }
+
+  return authorObj;
+};
+
+async function createJSONLDShortcode(type, site, data) {
   // Main site settings from site object
   const { logo, cover_image, image_dimensions } = site;
-  const url = `${site.url}/`;
+  const url = `${siteURL}/`;
   const typeMap = {
     index: 'WebSite',
     article: 'Article',
@@ -19,19 +61,9 @@ async function createJsonLdShortcode(type, site, data) {
       '@type': 'Organization',
       name: 'freeCodeCamp.org',
       url: url,
-      logo: {
-        '@type': 'ImageObject',
-        url: logo,
-        width: image_dimensions.logo.width,
-        height: image_dimensions.logo.height
-      }
+      logo: createImageObj(logo, image_dimensions.logo)
     },
-    image: {
-      '@type': 'ImageObject',
-      url: cover_image,
-      width: image_dimensions.cover_image.width,
-      height: image_dimensions.cover_image.height
-    },
+    image: createImageObj(cover_image, image_dimensions.cover_image),
     url: url,
     mainEntityOfPage: {
       '@type': 'WebPage',
@@ -40,50 +72,8 @@ async function createJsonLdShortcode(type, site, data) {
   };
   const returnData = { ...baseData };
 
-  const createImageObj = (url, obj) => {
-    let { width, height } = obj;
-
-    return {
-      '@type': 'ImageObject',
-      url,
-      width,
-      height
-    };
-  };
-
   // Conditionally set other properties based on
   // objects passed to shortcodes
-  const createAuthorObj = primaryAuthor => {
-    const {
-      name,
-      profile_image,
-      image_dimensions,
-      website,
-      twitter,
-      facebook,
-      path
-    } = primaryAuthor;
-    const authorObj = {
-      '@type': 'Person',
-      name,
-      url: siteURL + path,
-      sameAs: [
-        website ? fullEscaper(website) : null,
-        facebook ? `https://www.facebook.com/${facebook}` : null,
-        twitter ? twitter.replace('@', 'https://twitter.com/') : null
-      ].filter(url => url)
-    };
-
-    if (profile_image) {
-      authorObj.image = createImageObj(
-        profile_image,
-        image_dimensions.profile_image
-      );
-    }
-
-    return authorObj;
-  };
-
   if (type === 'index')
     returnData.description = translate('meta-tags:description');
 
@@ -163,4 +153,4 @@ async function createJsonLdShortcode(type, site, data) {
   // return JSON.stringify(returnData);
 }
 
-module.exports = createJsonLdShortcode;
+module.exports = createJSONLDShortcode;

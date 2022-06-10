@@ -12,7 +12,7 @@ const {
 } = require('./utils/shortcodes/images');
 const cacheBusterShortcode = require('./utils/shortcodes/cache-buster');
 const sitemapFetcherShortcode = require('./utils/shortcodes/sitemap-fetcher');
-const createJsonLdShortcode = require('./utils/shortcodes/create-json-ld');
+const createJSONLDShortcode = require('./utils/shortcodes/create-json-ld');
 const {
   publishedDateShortcode,
   timeAgoShortcode,
@@ -66,7 +66,7 @@ module.exports = function (config) {
 
   config.addNunjucksShortcode('fullEscaper', fullEscaper);
 
-  config.addNunjucksAsyncShortcode('createJsonLd', createJsonLdShortcode);
+  config.addNunjucksAsyncShortcode('createJSONLD', createJSONLDShortcode);
 
   config.addNunjucksAsyncShortcode('sitemapFetcher', sitemapFetcherShortcode);
 
