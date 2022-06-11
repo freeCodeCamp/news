@@ -98,7 +98,7 @@
     "probe-image-size": "7.2.3",
     "sanitize-html": "2.7.0",
     "shx": "0.3.4",
-    "terser": "5.14.0",
+    "terser": "5.14.1",
     "xml2js": "0.4.23"
   },
   "lint-staged": {
