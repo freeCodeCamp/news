@@ -78,3 +78,5 @@ dist/
 # Cypress.io
 cypress/videos
 cypress/screenshots
+
+docker/languages/
