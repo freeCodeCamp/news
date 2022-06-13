@@ -61,7 +61,7 @@ module.exports = function (config) {
     // Write translated locales for the current build language to the assets directory
     // as a workaround to display those strings in search-results.js instead of with the
     // translation shortcode
-    const currLocaleTranslationsPath = `./i18n/locales/${currentLocale_i18n}/translations.json`;
+    const currLocaleTranslationsPath = `./config/i18n/locales/${currentLocale_i18n}/translations.json`;
     const translationsObj = JSON.parse(
       readFileSync(currLocaleTranslationsPath, { encoding: 'utf-8' })
     );
