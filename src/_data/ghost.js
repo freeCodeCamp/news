@@ -70,7 +70,8 @@ module.exports = async () => {
           published_at: post.published_at,
           primary_author: post.primary_author,
           tags: [post.tags[0]], // Only include the first / primary tag
-          image_dimensions: { ...post.image_dimensions }
+          image_dimensions: { ...post.image_dimensions },
+          original_post: post?.original_post
         };
       });
 
@@ -112,7 +113,8 @@ module.exports = async () => {
           published_at: post.published_at,
           primary_author: post.primary_author,
           tags: [post.tags[0]], // Only include the first / primary tag
-          image_dimensions: { ...post.image_dimensions }
+          image_dimensions: { ...post.image_dimensions },
+          original_post: post?.original_post
         };
       });
     // Save post count to tag object to help determine popular tags

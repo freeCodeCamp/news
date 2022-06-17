@@ -16,11 +16,11 @@
     "authenticated": "ہمارے non profit mission کی حمایت کریں. {{ <0> }}freeCodeCamp کو عطیہ دیں{{ </0> }}",
     "authenticated-donor": "اپنے {{ </0> }}عطیات{{ <0> }} کے ذریعے freeCodeCamp کی حمایت کرنے کا شکریہ."
   },
+  "default-bio": "{{ <0> }} مزید پوسٹس  {{ </0> }}  پڑھیں.",
   "author": {
     "no-posts": "کوئی post نہیں",
     "one-post": "1 post",
-    "multiple-posts": "{{ postCount }} posts",
-    "read-more": "اس  {{ role }} کی    {{ <0> }} مزید پوسٹس  {{ </0> }}  پڑھیں."
+    "multiple-posts": "{{ postCount }} posts"
   },
   "tag": {
     "no-posts": "کچھ پوسٹس کی کلیکشن ",
@@ -32,23 +32,35 @@
     "go-to-front-page": "فرنٹ page پہ جائیں"
   },
   "social-row": {
-    "author-has-twitter": "اگر آپ نیں آخر تک پڑھ لیا ہے، تو مصنف کو شکریہ کریں. {{ <0> }} شکریہ کا Tweet کریں {{ </0> }}",
-    "author-no-twitter": " {{ <0> }}Tweet  کریں{{ </0> }} اگر یہ آرٹیکل مفید لگا تو ",
-    "default-tweet": "آپ کا بہت شکریہ، آپ نیں یہ آرٹیکل لکھا.  {{ twitter }} ."
+    "cta": {
+      "tweet-a-thanks": "اگر آپ نیں آخر تک پڑھ لیا ہے، تو مصنف کو شکریہ کریں. {{ <0> }} شکریہ کا Tweet کریں {{ </0> }}",
+      "tweet-it": " {{ <0> }}Tweet  کریں{{ </0> }} اگر یہ آرٹیکل مفید لگا تو "
+    },
+    "tweets": {
+      "default": "آپ کا بہت شکریہ، آپ نیں یہ آرٹیکل لکھا.  {{ author }} .",
+      "translation": "مصنف: {{ author }} کا یہ مفید مضمون لکھنے کے لیے، اور مترجم: {{ translator }} کا ترجمہ کرنے کا شکریہ۔"
+    }
   },
   "learn-to-code-cta": "مفت میں coding کرنا سیکھیں. freeCodeCamp کے open source نصاب نے 40،000 سے زیادہ لوگوں کو ڈویلپر جاب ملنے میں مدد کی ہے. {{ <0> }} شروع کریں{{ </0> }}",
-  "localization-meta": {
+  "original-author-translator": {
     "roles": {
-      "author": "مصنف",
-      "translator": "مترجم"
+      "author": "مصنف: {{ name }} ({{ locale }})",
+      "translator": "مترجم: {{ name }}"
     },
-    "card-name": "{{ role }}: {{ name }}",
-    "languages": {
-      "en": "انگریزی",
-      "es": "ہسپانوی",
-      "zh": "چینی",
-      "pt-br": "پرتگالی",
-      "it": "اطالوی"
+    "details": {
+      "original-article": "{{ <0> }}اصل مضمون:{{ </0> }} {{ title }} مضمون نگار {{ author }}",
+      "translated-by": "{{ <0> }}مترجم :{{ </0> }} {{ translator }}"
+    },
+    "locales": {
+      "english": "انگریزی",
+      "espanol": "ہسپانوی",
+      "chinese": "چینی",
+      "portuguese": "پرتگالی",
+      "italian": "اطالوی",
+      "japanese": "جاپانی",
+      "arabic": "عربی",
+      "urdu": "اردو",
+      "bengali": "بنگالی"
     }
   },
   "embed-title": "Embedded content",

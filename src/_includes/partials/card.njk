@@ -1,7 +1,9 @@
+{% from "partials/role-list-item.njk" import roleListItem %}
+
 {% macro card(post, index) %}
     {% set lazyLoad = true if (index >= 4) else false %}
-    {% set originalAuthor = post.original_post.primary_author %}
     {% set primaryTag = post.tags[0] %}
+
     <article class="post-card" data-test-label="post-card">
         {% if post.feature_image %}
             <a class="post-card-image-link" href="{{ post.path | url }}" aria-label="{{ post.title }}">
@@ -17,13 +19,13 @@
                      92vw",
                     [300, 600, 1000, 2000],
                     post.image_dimensions.feature_image,
+                    "feature-image",
                     lazyLoad
                 %}
             </a>
         {% else %}
             <div class="no-feature-image-offsetter"></div>
         {% endif %}
-
         <div class="post-card-content">
             <div class="post-card-content-link">
                 <header class="post-card-header">
@@ -47,64 +49,11 @@
                 {% else %}
                     <ul class="author-list" data-test-label="author-list">
                         {% if post.original_post %}
-                            <li class="author-list-item">
-                                <a href="{{ originalAuthor.url }}" class="static-avatar">
-                                    {% if originalAuthor.profile_image %}
-                                        {# Original author is coming from another Ghost instance, so no need to use the url filter #}
-                                        {% 
-                                            image
-                                            originalAuthor.profile_image,
-                                            "author-profile-image",
-                                            originalAuthor.name,
-                                            "30px",
-                                            [30],
-                                            originalAuthor.image_dimensions.profile_image,
-                                            lazyLoad
-                                        %}
-                                    {% else %}
-                                        <span class="avatar-wrapper">
-                                            {% set avatarTitle = originalAuthor.name %}
-                                            {% include "partials/icons/avatar.njk" %}
-                                        </span>
-                                    {% endif %}
-                                </a>
-                                <span class="meta-content">
-                                    <a class="meta-item" href="{{ originalAuthor.url }}">{% t 'localization-meta.roles.author', { authorName: originalAuthor.name } %} ({% t 'localization-meta.languages.en' %})</a>
-                                    <time class="meta-item" datetime="{{ post.original_post.published_at }}">{% timeAgo post.original_post.published_at %}</time>
-                                </span>
-                            </li>
+                            {{ roleListItem(post.original_post.primary_author, post.original_post.published_at, 'author', post.original_post.locale_i18n) }}
+                            {{ roleListItem(post.primary_author, post.published_at, 'translator') }}
+                        {% else %}
+                            {{ roleListItem(post.primary_author, post.published_at) }}
                         {% endif %}
-                        <li class="author-list-item">
-                            <a href="{{ post.primary_author.path | url }}" class="static-avatar">
-                                {% if post.primary_author.profile_image %}
-                                    {% 
-                                        image
-                                        post.primary_author.profile_image,
-                                        "author-profile-image",
-                                        post.primary_author.name,
-                                        "30px",
-                                        [30],
-                                        post.primary_author.image_dimensions.profile_image,
-                                        lazyLoad
-                                    %}
-                                {% else %}
-                                    <span class="avatar-wrapper">
-                                        {% set avatarTitle = post.primary_author.name %}
-                                        {% include "partials/icons/avatar.njk" %}
-                                    </span>
-                                {% endif %}
-                            </a>
-                            <span class="meta-content">
-                                <a class="meta-item" href="{{ post.primary_author.path | url }}">
-                                    {% if post.original_post %}
-                                        {% t 'localization-meta.roles.translator', { translatorName: post.primary_author.name } %}
-                                    {% else %}
-                                        {{ post.primary_author.name }}
-                                    {% endif %}
-                                </a>
-                                <time class="meta-item" datetime="{{ post.published_at }}">{% timeAgo post.published_at %}</time>
-                            </span>
-                        </li>
                     </ul>
                 {% endif %}
             </footer>

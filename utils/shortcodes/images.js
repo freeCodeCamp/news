@@ -3,7 +3,16 @@
 const ghostImageRe = /\/content\/images\/\d+\/\d+\//g;
 
 // Handle images from Ghost and from third-parties
-function imageShortcode(src, cls, alt, sizes, widths, dimensions, lazyLoad) {
+function imageShortcode(
+  src,
+  classes,
+  alt,
+  sizes,
+  widths,
+  dimensions,
+  testLabel,
+  lazyLoad
+) {
   const imageUrls = src.match(ghostImageRe)
     ? widths.map(width =>
         src.replace('/content/images/', `/content/images/size/w${width}/`)
@@ -20,13 +29,13 @@ function imageShortcode(src, cls, alt, sizes, widths, dimensions, lazyLoad) {
       }"
       sizes="${sizes.replace(/\s+/g, ' ').trim()}"
       src="${imageUrls[imageUrls.length - 1]}"
-      class="${cls}"
+      class="${classes}"
       alt="${alt}"
       width="${dimensions.width}"
       height="${dimensions.height}"
       onerror="this.style.display='none'"
       ${lazyLoad ? 'loading="lazy"' : ''}
-      data-test-label="${cls}"
+      data-test-label="${testLabel}"
     />
   `;
 }

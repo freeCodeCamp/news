@@ -1,10 +1,10 @@
 const { loadAllPosts } = require('../../../support/utils/post-cards');
 
 const selectors = {
+  postCard: "[data-test-label='post-card']",
   authorList: "[data-test-label='author-list']",
-  authorProfileImage: "[data-test-label='author-profile-image']",
-  avatar: "[data-test-label='avatar']",
-  postCard: "[data-test-label='post-card']"
+  authorProfileImage: "[data-test-label='profile-image']",
+  avatar: "[data-test-label='avatar']"
 };
 
 describe('Landing', () => {

@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
   const urlParams = new URLSearchParams(window.location.search);
   const queryStr = urlParams.get('query');
   const postFeed = document.querySelector('.post-feed');
@@ -32,6 +32,19 @@ document.addEventListener('DOMContentLoaded', () => {
       err.debugData ? console.log(err.debugData) : '';
     }
   };
+
+  const translatedLocales = await (async () => {
+    try {
+      const response = await fetch(
+        `{{ site.url }}/assets/translated-locales.json`
+      );
+      const JSON = await response.json();
+
+      return JSON;
+    } catch (err) {
+      console.log(err);
+    }
+  })();
 
   const getResizedImage = (url, width) =>
     url.includes('/content/images/')
@@ -89,13 +102,16 @@ document.addEventListener('DOMContentLoaded', () => {
           hit.originalPost
             ? `
           <li class="author-list-item">
-            <a href="${hit.originalPost.url}" class="static-avatar">
+            <a href="${hit.originalPost.author.url}" class="static-avatar">
             ${
-              hit.originalPost.profileImage
+              hit.originalPost.author.profileImage
                 ? `
               <img
                   class="author-profile-image"
-                  src="${getResizedImage(hit.originalPost.profileImage, 30)}"
+                  src="${getResizedImage(
+                    hit.originalPost.author.profileImage,
+                    30
+                  )}"
                   alt="${hit.originalPost.author.name}"
                   width="30"
                   height="30"
@@ -112,9 +128,13 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             </a>
             <span class="meta-content">
-              <a class="meta-item" href="{{ hit.originalPost.primaryAuthor.url }}">{% t 'localization-meta.roles.author', { authorName: '${
-                hit.originalPost.author.name
-              }' } %} ({% t 'localization-meta.languages.en' %})</a>
+              <a class="meta-item" href="${hit.originalPost.author.url}">
+                {% t 'original-author-translator.roles.author', { name: '${
+                  hit.originalPost.author.name
+                }', locale: '${
+                translatedLocales[hit.originalPost.localeI18n]
+              }' } %}
+              </a>
               <time class="meta-item" datetime="${
                 hit.originalPost.publishedAt
               }"></time>
@@ -151,7 +171,7 @@ document.addEventListener('DOMContentLoaded', () => {
               ${
                 hit.originalPost
                   ? `
-                {% t 'localization-meta.roles.translator', { translatorName: '${hit.author.name}' } %}
+                {% t 'original-author-translator.roles.translator', { name: '${hit.author.name}' } %}
               `
                   : `
                 ${hit.author.name}

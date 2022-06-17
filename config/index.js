@@ -10,13 +10,13 @@ const { error } = require('dotenv').config({ path: envPath });
 
 if (error) {
   console.warn(`
-  ----------------------------------------------------
-  Warning: ${envFileName} file not found.
-  ----------------------------------------------------
-  Please copy sample.env to ${envFileName}
-  You can ignore this warning if using a different way
-  to set up this environment.
-  ----------------------------------------------------
+    ----------------------------------------------------
+    Warning: ${envFileName} file not found.
+    ----------------------------------------------------
+    Please copy sample.env to ${envFileName}
+    You can ignore this warning if using a different way
+    to set up this environment.
+    ----------------------------------------------------
   `);
 }
 
@@ -88,19 +88,26 @@ if (lang !== localeForGhost && localeForGhost !== 'local') {
   `);
 }
 
-// Config Computations
-const computedDomain = siteDomain || 'freecodecamp.org';
-const computedPath =
-  lang === 'english' || lang === 'chinese' ? 'news' : `${lang}/news`;
-let siteURL;
+let computedPath;
 
-if (computedDomain.startsWith('localhost')) {
-  siteURL = `http://${computedDomain}/${computedPath}`;
-} else if (lang === 'chinese') {
-  siteURL = `https://chinese.${computedDomain}/${computedPath}`;
-} else {
-  siteURL = `https://www.${computedDomain}/${computedPath}`;
-}
+// Config Computations
+const getSiteURL = (lang, forOriginalArticle) => {
+  // Special handling for original article feature, where we always want the final siteURL
+  const computedDomain =
+    !siteDomain || forOriginalArticle ? 'freecodecamp.org' : siteDomain;
+  computedPath =
+    lang === 'english' || lang === 'chinese' ? 'news' : `${lang}/news`;
+
+  if (computedDomain.startsWith('localhost')) {
+    return `http://${computedDomain}/${computedPath}`;
+  } else if (lang === 'chinese') {
+    return `https://chinese.${computedDomain}/${computedPath}`;
+  } else {
+    return `https://www.${computedDomain}/${computedPath}`;
+  }
+};
+
+const siteURL = getSiteURL(lang);
 
 module.exports = Object.assign(
   {},
@@ -108,6 +115,8 @@ module.exports = Object.assign(
     locales,
     localeCodes,
     algoliaIndices,
+    computedPath,
+    getSiteURL,
     currentLocale_i18n: localeForUI || 'italian',
     currentLocale_i18nISOCode: !localeCodes[localeForUI]
       ? localeCodes['italian']

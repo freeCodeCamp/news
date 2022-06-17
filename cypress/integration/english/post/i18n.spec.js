@@ -1,38 +1,63 @@
 const selectors = {
-  socialRow: "[data-test-label='social-row']",
-  learnCtaRow: "[data-test-label='learn-cta-row']",
-  tweetButton: "[data-test-label='tweet-button']"
+  socialRowCTA: "[data-test-label='social-row-cta']",
+  learnCTARow: "[data-test-label='learn-cta-row']",
+  tweetButton: "[data-test-label='tweet-button']",
+  defaultBio: "[data-test-label='default-bio']"
 };
 
 describe('Post i18n', () => {
-  it('the social row section for an author with Twitter does not render its i18n keys', () => {
-    cy.visit('/announcing-rust-course-replit-web');
+  context('Common', () => {
+    before(() => {
+      cy.visit('/announcing-rust-course-replit-web');
+    });
 
-    cy.get(selectors.socialRow)
-      .invoke('text')
-      .then(text => text.trim())
-      .should('not.equal', 'social-row.author-no-twitter') // To do: break this up into separate tests once there is an author with no Twitter account
-      .should('not.equal', 'social-row.author-has-twitter');
+    it('the learn CTA section should not render its i18n keys', () => {
+      cy.get(`${selectors.learnCTARow} p`)
+        .invoke('text')
+        .then(text => text.trim())
+        .should('not.contain', 'learn-to-code-cta');
+    });
   });
 
-  it('the social row tweet button does not render its i18n keys', () => {
-    cy.visit('/announcing-rust-course-replit-web');
+  context('Author with Twitter', () => {
+    before(() => {
+      cy.visit('/announcing-rust-course-replit-web');
+    });
 
-    cy.get(selectors.tweetButton)
-      .should('have.attr', 'onclick')
-      .should('not.contain', 'social-row.default-tweet');
+    it('the social row CTA should not render its i18n keys', () => {
+      cy.get(selectors.socialRowCTA)
+        .invoke('text')
+        .then(text => text.trim())
+        .should('not.equal', 'social-row.cta.tweet-a-thanks');
+    });
+
+    it('the social row CTA tweet button should not render its i18n keys', () => {
+      cy.get(selectors.tweetButton)
+        .should('have.attr', 'onclick')
+        .should('not.contain', 'social-row.tweets.default');
+    });
   });
 
-  it('the learn CTA section does not render its i18n keys', () => {
-    cy.visit('/announcing-rust-course-replit-web');
+  context('Author with no Twitter or bio', () => {
+    before(() => {
+      cy.visit('/no-author-profile-pic');
+    });
 
-    cy.get(`${selectors.learnCtaRow} p`)
-      .invoke('text')
-      .then(text => text.trim())
-      .should('not.contain', 'learn-to-code-cta');
+    it('the social row CTA should not render its i18n keys', () => {
+      cy.get(selectors.socialRowCTA)
+        .invoke('text')
+        .then(text => text.trim())
+        .should('not.equal', 'social-row.cta.tweet-it');
+    });
 
-    cy.get(`${selectors.learnCtaRow} a`)
-      .should('have.attr', 'href')
-      .should('not.equal', 'learn-to-code-cta');
+    it('the social row CTA tweet button should not render its i18n keys', () => {
+      cy.get(selectors.tweetButton)
+        .should('have.attr', 'onclick')
+        .should('not.contain', 'social-row.tweets.default');
+    });
+
+    it('the default author bio should not render its i18n key', () => {
+      cy.get(selectors.defaultBio).should('not.contain', 'default-bio');
+    });
   });
 });

@@ -30,15 +30,13 @@ time #}
                     </section>
                     <h1 class="post-full-title">{{ title }}</h1>
                 </header>
-                <div class="post-full-author-header">
+                <div class="post-full-author-header" data-test-label="author-header-no-bio">
                     {% if post.primary_author.name != "freeCodeCamp.org" %}
                         {% if post.original_post %}
-                            {# To do: Figure out original article source and add to post.original_post.primary_author
-                                as language code (en, zh, etc.) and use that to show original article source [ex: (English)]  #}
-                            {{ byline(post.original_post.primary_author, site.lang, false, false, 'author') }}
-                            {{ byline(post.primary_author, site.lang, false, false, 'translator') }}
+                            {{ byline(post.original_post.primary_author, false, false, 'author', post.original_post.locale_i18n) }}
+                            {{ byline(post.primary_author, false, false, 'translator') }}
                         {% else %}
-                            {{ byline(post.primary_author, site.lang, false, false) }}
+                            {{ byline(post.primary_author, false, false) }}
                         {% endif %}
                     {% endif %}
                 </div>
@@ -71,14 +69,12 @@ time #}
                     </div>
                     <hr />
                     {% if post.primary_author.name != "freeCodeCamp.org" %}
-                        <div class="post-full-author-header">
+                        <div class="post-full-author-header" data-test-label="author-header-with-bio">
                             {% if post.original_post %}
-                                {# To do: Figure out original article source and add to post.original_post.primary_author
-                                as language code (en, zh, etc.) and use that to show original article source [ex: (English)]  #}
-                                {{ byline(post.original_post.primary_author, site.lang, true, true, 'author') }}
-                                {{ byline(post.primary_author, site.lang, true, true, 'translator') }}
+                                {{ byline(post.original_post.primary_author, true, true, 'author', post.original_post.locale_i18n) }}
+                                {{ byline(post.primary_author, true, true, 'translator') }}
                             {% else %}
-                                {{ byline(post.primary_author, site.lang, true, true) }}
+                                {{ byline(post.primary_author, true, true) }}
                             {% endif %}
                         </div>
                         <hr />

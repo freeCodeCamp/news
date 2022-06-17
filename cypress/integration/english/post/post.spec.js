@@ -1,12 +1,12 @@
 const selectors = {
-  authorProfileImage: "[data-test-label='author-profile-image']",
+  authorProfileImage: "[data-test-label='profile-image']",
   avatars: {
-    top: ".author-card > .avatar-wrapper [data-test-label='avatar']",
+    top: "[data-test-label='author-header-no-bio'] [data-test-label='avatar']",
     bottom:
-      ".post-full-content > .post-full-author-header > .author-card > .avatar-wrapper [data-test-label='avatar']"
+      "[data-test-label='author-header-with-bio'] [data-test-label='avatar']"
   },
   comments: "[data-test-label='comments']",
-  socialRow: "[data-test-label='social-row']",
+  socialRowCTA: "[data-test-label='social-row-cta']",
   tweetButton: "[data-test-label='tweet-button']"
 };
 
@@ -39,7 +39,7 @@ describe('Post', () => {
     });
 
     it('should display the social row', () => {
-      cy.get(selectors.socialRow).should('be.visible');
+      cy.get(selectors.socialRowCTA).should('be.visible');
     });
 
     it('the tweet button should open a Twitter window with the correct message and dimensions', () => {

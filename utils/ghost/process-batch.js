@@ -3,8 +3,8 @@ const lazyLoadHandler = require('./lazy-load-handler');
 const originalPostHandler = require('./original-post-handler');
 const getImageDimensions = require('../../utils/get-image-dimensions');
 const errorLogger = require('../../utils/error-logger');
-const { sourceAPIURL } = require('../../utils/ghost/api');
 const { siteURL } = require('../../config');
+const stripDomain = require('../../utils/strip-domain');
 
 const removeUnusedKeys = obj => {
   const keysToRemove = [
@@ -36,11 +36,6 @@ const removeUnusedKeys = obj => {
   }
 
   return obj;
-};
-
-// Strip Ghost domain from urls
-const stripDomain = url => {
-  return url.replace(sourceAPIURL, '');
 };
 
 const processBatch = async ({ batch, type, currBatchNo, totalBatches }) => {
@@ -125,7 +120,8 @@ const processBatch = async ({ batch, type, currBatchNo, totalBatches }) => {
       obj.published_at = new Date(obj.published_at);
 
       // Original author / translator feature
-      if (obj.codeinjection_head) obj = await originalPostHandler(obj);
+      if (obj.codeinjection_head || obj.codeinjection_foot)
+        obj = await originalPostHandler(obj);
 
       // Stash original excerpt and escape for structured data.
       // Shorten the default excerpt and replace newlines -- the

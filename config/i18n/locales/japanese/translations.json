@@ -16,11 +16,11 @@
     "authenticated": "当非営利団体とその使命をご支援ください。{{ <0> }}freeCodeCamp.org へのご寄付をお願いします{{ </0> }}。",
     "authenticated-donor": "freeCodeCamp への{{ <0> }}ご寄付{{ </0> }}によるご支援、誠にありがとうございます。"
   },
+  "default-bio": "{{ <0> }}他の投稿{{ </0> }}を読む。",
   "author": {
     "no-posts": "投稿なし",
     "one-post": "1 件の投稿",
-    "multiple-posts": "{{ postCount }} 件の投稿",
-    "read-more": "この{{ role }}の{{ <0> }}他の投稿{{ </0> }}を読む。"
+    "multiple-posts": "{{ postCount }} 件の投稿"
   },
   "tag": {
     "no-posts": "投稿の一覧",
@@ -32,23 +32,35 @@
     "go-to-front-page": "フロントページに移動"
   },
   "social-row": {
-    "author-has-twitter": "お読みいただきありがとうございます。ぜひ著者にツイートしてお知らせください。{{ <0> }}著者宛てにツイート{{ </0> }}",
-    "author-no-twitter": "この記事が参考になりましたらぜひシェアしてください。{{ <0> }}ツイート{{ </0> }}",
-    "default-tweet": "この記事が参考になりました。{{ twitter }} さんありがとうございます。"
+    "cta": {
+      "tweet-a-thanks": "お読みいただきありがとうございます。ぜひ著者にツイートしてお知らせください。{{ <0> }}著者宛てにツイート{{ </0> }}",
+      "tweet-it": "この記事が参考になりましたらぜひシェアしてください。{{ <0> }}ツイート{{ </0> }}"
+    },
+    "tweets": {
+      "default": "この記事が参考になりました。{{ author }} さんありがとうございます。",
+      "translation": "この役に立つ記事を書いてくれた {{ author }} さんと、翻訳してくれた {{ translator }} さんに感謝します。"
+    }
   },
   "learn-to-code-cta": "コーディングを無料で学びましょう。freeCodeCamp のオープンソースカリキュラムによって、40,000 人以上の人々が開発者としての仕事を得ています。{{ <0> }}始める{{ </0> }}",
-  "localization-meta": {
+  "original-author-translator": {
     "roles": {
-      "author": "著者",
-      "translator": "翻訳"
+      "author": "著者: {{ name }} ({{ locale }})",
+      "translator": "翻訳: {{ name }}"
     },
-    "card-name": "{{ role }}: {{ name }}",
-    "languages": {
-      "en": "英語",
-      "es": "スペイン語",
-      "zh": "中国語",
-      "pt-br": "ポルトガル語",
-      "it": "イタリア語"
+    "details": {
+      "original-article": "{{ <0> }}原文:{{ </0> }} {{ title }} ({{ author }})",
+      "translated-by": "{{ <0> }}翻訳・翻案:{{ </0> }} {{ translator }}"
+    },
+    "locales": {
+      "english": "英語",
+      "espanol": "スペイン語",
+      "chinese": "中国語",
+      "portuguese": "ポルトガル語",
+      "italian": "イタリア語",
+      "japanese": "日本語",
+      "arabic": "アラビア語",
+      "urdu": "ウルドゥー語",
+      "bengali": "ベンガル語"
     }
   },
   "embed-title": "埋め込まれたコンテンツ",

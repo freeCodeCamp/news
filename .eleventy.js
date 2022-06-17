@@ -1,4 +1,9 @@
-const { readFileSync, readdirSync, writeFileSync, unlinkSync } = require('fs');
+const {
+  readFileSync,
+  readdirSync,
+  writeFileSync,
+  unlinkSync
+} = require('graceful-fs');
 const pluginRSS = require('@11ty/eleventy-plugin-rss');
 const UpgradeHelper = require('@11ty/eleventy-upgrade-help');
 
@@ -38,19 +43,35 @@ module.exports = function (config) {
     manifest = {};
   });
 
-  // Minify CSS and remove ads.txt from Chinese build
   config.on('afterBuild', () => {
-    const path = './dist/assets/css';
-    const cssFiles = readdirSync(path);
+    // Minify CSS
+    const cssDir = './dist/assets/css';
+    const cssFiles = readdirSync(cssDir);
 
     cssFiles.forEach(filename => {
-      const fullPath = `${path}/${filename}`;
+      const fullPath = `${cssDir}/${filename}`;
       const content = readFileSync(fullPath);
 
       writeFileSync(fullPath, cssMin(content));
     });
 
+    // Remove ads.txt from Chinese build
     if (currentLocale_i18n === 'chinese') unlinkSync('./dist/ads.txt');
+
+    // Write translated locales for the current build language to the assets directory
+    // as a workaround to display those strings in search-results.js instead of with the
+    // translation shortcode
+    const currLocaleTranslationsPath = `./config/i18n/locales/${currentLocale_i18n}/translations.json`;
+    const translationsObj = JSON.parse(
+      readFileSync(currLocaleTranslationsPath, { encoding: 'utf-8' })
+    );
+    const translatedLocales =
+      translationsObj['original-author-translator'].locales;
+
+    writeFileSync(
+      './dist/assets/translated-locales.json',
+      JSON.stringify(translatedLocales)
+    );
   });
 
   // RSS and AMP plugins

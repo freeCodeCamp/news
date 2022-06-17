@@ -20,14 +20,14 @@
     "authenticated": "支持我们的非营利组织和我们的使命，{{ <0> }}给 freeCodeCamp.org 捐款{{ </0> }}。",
     "authenticated-donor": "谢谢你{{ <0> }}捐款{{ </0> }}支持 freeCodeCamp。"
   },
+  "default-bio": "阅读 {{ <0> }}更多文章{{ </0> }}。",
   "author": {
     "no-posts": "没有文章",
     "one-post": "1 篇文章",
-    "multiple-posts": "{{ postCount }} 篇文章",
-    "read-more": "阅读该{{ role }}的{{ <0> }}更多文章{{ </0> }}。"
+    "multiple-posts": "{{ postCount }} 篇文章"
   },
   "tag": {
-    "no-posts": "文章汇总",
+    "no-posts": "没有文章",
     "one-post": "共 1 篇文章",
     "multiple-posts": "共 {{ postCount }} 篇文章"
   },
@@ -36,18 +36,25 @@
     "go-to-front-page": "返回上一页"
   },
   "learn-to-code-cta": "在 freeCodeCamp 免费学习编程。 freeCodeCamp 的开源课程已帮助 40,000 多人获得开发者工作。{{ <0> }}开始学习{{ </0> }}",
-  "localization-meta": {
+  "original-author-translator": {
     "roles": {
-      "author": "作者",
-      "translator": "译者"
+      "author": "作者: {{ name }} ({{ locale }})",
+      "translator": "译者: {{ name }}"
     },
-    "card-name": "{{ role }}: {{ name }}",
-    "languages": {
-      "en": "英语",
-      "es": "西班牙语",
-      "zh": "中文",
-      "pt-br": "葡萄牙语",
-      "it": "意大利语"
+    "details": {
+      "original-article": "{{ <0> }}原文：{{ </0> }} {{ title }}，作者：{{ author }}",
+      "translated-by": "{{ <0> }}译者：{{ </0> }} {{ translator }}"
+    },
+    "locales": {
+      "english": "英语",
+      "espanol": "西班牙语",
+      "chinese": "中文",
+      "portuguese": "葡萄牙语",
+      "italian": "意大利语",
+      "japanese": "日语",
+      "arabic": "阿拉伯语",
+      "urdu": "乌尔都语",
+      "bengali": "孟加拉语"
     }
   },
   "embed-title": "嵌入内容",
