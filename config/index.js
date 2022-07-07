@@ -21,15 +21,16 @@ if (error) {
 }
 
 const locales = [
+  'arabic',
+  'bengali',
+  'chinese',
   'english',
   'espanol',
-  'chinese',
   'italian',
-  'portuguese',
   'japanese',
-  'arabic',
-  'urdu',
-  'bengali'
+  'portuguese',
+  'swahili',
+  'urdu'
 ];
 
 /* These strings set the i18next language. It needs to be the two character
@@ -37,27 +38,29 @@ const locales = [
  * Use a 639-1 code here https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
  */
 const localeCodes = {
+  arabic: 'ar',
+  bengali: 'bn',
+  chinese: 'zh',
   english: 'en',
   espanol: 'es',
-  chinese: 'zh',
   italian: 'it',
-  portuguese: 'pt-BR',
   japanese: 'ja',
-  arabic: 'ar',
-  urdu: 'ur',
-  bengali: 'bn'
+  portuguese: 'pt-BR',
+  swahili: 'sw',
+  urdu: 'ur'
 };
 
 const algoliaIndices = {
+  arabic: 'news-ar',
+  bengali: 'news-bn',
+  chinese: 'news-zh',
   english: 'news',
   espanol: 'news-es',
-  chinese: 'news-zh',
   italian: 'news-it',
-  portuguese: 'news-pt-br',
   japanese: 'news-ja',
-  arabic: 'news-ar',
-  urdu: 'news-ur',
-  bengali: 'news-bn'
+  portuguese: 'news-pt-br',
+  swahili: 'news-sw',
+  urdu: 'news-ur'
 };
 
 const {

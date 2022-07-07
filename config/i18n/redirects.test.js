@@ -46,16 +46,17 @@ describe('Redirect and rewrite tests:', () => {
 
       test('internal redirects point to the correct base path', () => {
         const expectedBasePath = {
+          arabic: /^\/arabic\/news/,
+          bengali: /^\/bengali\/news/,
           chinese: /^\/news/,
           dothraki: /^\/dothraki\/news/,
           english: /^\/news/,
           espanol: /^\/espanol\/news/,
           italian: /^\/italian\/news/,
-          portuguese: /^\/portuguese\/news/,
           japanese: /^\/japanese\/news/,
-          arabic: /^\/arabic\/news/,
-          urdu: /^\/urdu\/news/,
-          bengali: /^\/bengali\/news/
+          portuguese: /^\/portuguese\/news/,
+          swahili: /^\/swahili\/news/,
+          urdu: /^\/urdu\/news/
         };
 
         redirects
