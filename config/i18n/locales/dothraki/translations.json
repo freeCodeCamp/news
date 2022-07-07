@@ -52,15 +52,16 @@
       "translated-by": "{{ <0> }}Translated by:{{ </0> }} {{ translator }}"
     },
     "locales": {
+      "arabic": "Arabic",
+      "bengali": "Bengali",
+      "chinese": "Chinese",
       "english": "English",
       "espanol": "Spanish",
-      "chinese": "Chinese",
-      "portuguese": "Portuguese",
       "italian": "Italian",
       "japanese": "Japanese",
-      "arabic": "Arabic",
-      "urdu": "Urdu",
-      "bengali": "Bengali"
+      "portuguese": "Portuguese",
+      "swahili": "Swahili",
+      "urdu": "Urdu"
     }
   },
   "embed-title": "Embedded content",
