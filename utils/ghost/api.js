@@ -17,6 +17,17 @@ const allGhostAPIInstances = ['local', ...locales].reduce((obj, currLocale) => {
         ghostAPIURL: url,
         siteURL: getSiteURL(currLocale, true)
       };
+    } else {
+      console.warn(`
+      ---------------------------------------------------------------
+      Warning: Unable to initialize the Content API for ${currLocale}
+      ---------------------------------------------------------------
+      These keys are missing:
+
+      ${upperLocale}_GHOST_API_URL = ${url}
+      ${upperLocale}_GHOST_CONTENT_API_KEY = ${key}
+      ${upperLocale}_GHOST_API_VERSION = ${version}
+      `);
     }
   } catch (err) {
     console.warn(`
@@ -25,7 +36,8 @@ const allGhostAPIInstances = ['local', ...locales].reduce((obj, currLocale) => {
       ---------------------------------------------------------------
       Please double check that the correct keys are included in the
       .env file.
-      You can ignore this warning if this instance of Ghost is set 
+
+      You can ignore this warning if this instance of Ghost is set
       to private, if you don't need the original / author translator
       feature for this locale, or if a test suite is running.
       ---------------------------------------------------------------
