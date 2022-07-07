@@ -2,7 +2,7 @@
   "forum": "https://forum.freecodecamp.org/",
   "donate": "https://www.freecodecamp.org/donate/",
   "banner": {
-    "default": "https://chat.freecodecamp.org/home",
+    "default": "discord.gg/PRyKn3Vbay",
     "authenticated": "https://www.freecodecamp.org/donate",
     "authenticated-donor": "https://www.freecodecamp.org/news/how-to-donate-to-free-code-camp/"
   },
