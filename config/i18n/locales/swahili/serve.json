@@ -1,24 +1,3 @@
 {
-  "redirects": [
-    {
-      "source": "/@:authorName",
-      "destination": "/swahili/news/author/:authorName"
-    },
-    {
-      "source": "/tagged/:tagName",
-      "destination": "/swahili/news/tag/:tagName"
-    },
-    {
-      "source": "/archive/:archiveSlug?",
-      "destination": "/swahili/news"
-    },
-    {
-      "source": "/our-sponsors",
-      "destination": "/swahili/news/sponsors"
-    },
-    {
-      "source": "/about-freecodecamp",
-      "destination": "/swahili/news/about"
-    }
-  ]
+  "redirects": []
 }
