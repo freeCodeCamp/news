@@ -14,15 +14,17 @@ jobs:
       fail-fast: false
       matrix:
         node-version: [16.x]
-        languages: [
+        languages:
+          [
+            arabic,
+            bengali,
             chinese,
             espanol,
             italian,
-            portuguese,
             japanese,
-            arabic,
-            # urdu,
-            bengali
+            portuguese,
+            swahili,
+            urdu
           ]
         site_tlds: [dev, org]
 
@@ -32,13 +34,21 @@ jobs:
       ALGOLIA_API_KEY: ${{ secrets.ALGOLIA_API_KEY }}
       ALGOLIA_APP_ID: ${{ secrets.ALGOLIA_APP_ID }}
 
-      ENGLISH_GHOST_API_URL: ${{ secrets.ENGLISH_GHOST_API_URL }}
-      ENGLISH_GHOST_API_VERSION: ${{ secrets.ENGLISH_GHOST_API_VERSION }}
-      ENGLISH_GHOST_CONTENT_API_KEY: ${{ secrets.ENGLISH_GHOST_CONTENT_API_KEY }}
+      ARABIC_GHOST_API_URL: ${{ secrets.ARABIC_GHOST_API_URL }}
+      ARABIC_GHOST_API_VERSION: ${{ secrets.ARABIC_GHOST_API_VERSION }}
+      ARABIC_GHOST_CONTENT_API_KEY: ${{ secrets.ARABIC_GHOST_CONTENT_API_KEY }}
+
+      BENGALI_GHOST_API_URL: ${{ secrets.BENGALI_GHOST_API_URL }}
+      BENGALI_GHOST_API_VERSION: ${{ secrets.BENGALI_GHOST_API_VERSION }}
+      BENGALI_GHOST_CONTENT_API_KEY: ${{ secrets.BENGALI_GHOST_CONTENT_API_KEY }}
 
       CHINESE_GHOST_API_URL: ${{ secrets.CHINESE_GHOST_API_URL }}
       CHINESE_GHOST_API_VERSION: ${{ secrets.CHINESE_GHOST_API_VERSION }}
       CHINESE_GHOST_CONTENT_API_KEY: ${{ secrets.CHINESE_GHOST_CONTENT_API_KEY }}
+
+      ENGLISH_GHOST_API_URL: ${{ secrets.ENGLISH_GHOST_API_URL }}
+      ENGLISH_GHOST_API_VERSION: ${{ secrets.ENGLISH_GHOST_API_VERSION }}
+      ENGLISH_GHOST_CONTENT_API_KEY: ${{ secrets.ENGLISH_GHOST_CONTENT_API_KEY }}
 
       ESPANOL_GHOST_API_URL: ${{ secrets.ESPANOL_GHOST_API_URL }}
       ESPANOL_GHOST_API_VERSION: ${{ secrets.ESPANOL_GHOST_API_VERSION }}
@@ -48,25 +58,21 @@ jobs:
       ITALIAN_GHOST_API_VERSION: ${{ secrets.ITALIAN_GHOST_API_VERSION }}
       ITALIAN_GHOST_CONTENT_API_KEY: ${{ secrets.ITALIAN_GHOST_CONTENT_API_KEY }}
 
-      PORTUGUESE_GHOST_API_URL: ${{ secrets.PORTUGUESE_GHOST_API_URL }}
-      PORTUGUESE_GHOST_API_VERSION: ${{ secrets.PORTUGUESE_GHOST_API_VERSION }}
-      PORTUGUESE_GHOST_CONTENT_API_KEY: ${{ secrets.PORTUGUESE_GHOST_CONTENT_API_KEY }}
-
       JAPANESE_GHOST_API_URL: ${{ secrets.JAPANESE_GHOST_API_URL }}
       JAPANESE_GHOST_API_VERSION: ${{ secrets.JAPANESE_GHOST_API_VERSION }}
       JAPANESE_GHOST_CONTENT_API_KEY: ${{ secrets.JAPANESE_GHOST_CONTENT_API_KEY }}
 
-      ARABIC_GHOST_API_URL: ${{ secrets.ARABIC_GHOST_API_URL }}
-      ARABIC_GHOST_API_VERSION: ${{ secrets.ARABIC_GHOST_API_VERSION }}
-      ARABIC_GHOST_CONTENT_API_KEY: ${{ secrets.ARABIC_GHOST_CONTENT_API_KEY }}
+      PORTUGUESE_GHOST_API_URL: ${{ secrets.PORTUGUESE_GHOST_API_URL }}
+      PORTUGUESE_GHOST_API_VERSION: ${{ secrets.PORTUGUESE_GHOST_API_VERSION }}
+      PORTUGUESE_GHOST_CONTENT_API_KEY: ${{ secrets.PORTUGUESE_GHOST_CONTENT_API_KEY }}
+
+      SWAHILI_GHOST_API_URL: ${{ secrets.SWAHILI_GHOST_API_URL }}
+      SWAHILI_GHOST_API_VERSION: ${{ secrets.SWAHILI_GHOST_API_VERSION }}
+      SWAHILI_GHOST_CONTENT_API_KEY: ${{ secrets.SWAHILI_GHOST_CONTENT_API_KEY }}
 
       URDU_GHOST_API_URL: ${{ secrets.URDU_GHOST_API_URL }}
       URDU_GHOST_API_VERSION: ${{ secrets.URDU_GHOST_API_VERSION }}
       URDU_GHOST_CONTENT_API_KEY: ${{ secrets.URDU_GHOST_CONTENT_API_KEY }}
-
-      BENGALI_GHOST_API_URL: ${{ secrets.BENGALI_GHOST_API_URL }}
-      BENGALI_GHOST_API_VERSION: ${{ secrets.BENGALI_GHOST_API_VERSION }}
-      BENGALI_GHOST_CONTENT_API_KEY: ${{ secrets.BENGALI_GHOST_CONTENT_API_KEY }}
 
       ADS_ENABLED: ${{ secrets.ADS_ENABLED }}
       GOOGLE_ADSENSE_DATA_AD_CLIENT: ${{ secrets.GOOGLE_ADSENSE_DATA_AD_CLIENT }}
