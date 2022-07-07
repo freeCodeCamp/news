@@ -135,15 +135,17 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        languages: [
+        languages:
+          [
+            arabic,
+            bengali,
             chinese,
             espanol,
             italian,
-            portuguese,
             japanese,
-            arabic,
-            # urdu,
-            bengali
+            portuguese,
+            swahili,
+            urdu
           ]
         site_tlds: [dev, org]
 
