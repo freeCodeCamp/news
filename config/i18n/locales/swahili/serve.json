@@ -2,23 +2,23 @@
   "redirects": [
     {
       "source": "/@:authorName",
-      "destination": "/dothraki/news/author/:authorName"
+      "destination": "/swahili/news/author/:authorName"
     },
     {
       "source": "/tagged/:tagName",
-      "destination": "/dothraki/news/tag/:tagName"
+      "destination": "/swahili/news/tag/:tagName"
     },
     {
       "source": "/archive/:archiveSlug?",
-      "destination": "/dothraki/news"
+      "destination": "/swahili/news"
     },
     {
       "source": "/our-sponsors",
-      "destination": "/dothraki/news/sponsors"
+      "destination": "/swahili/news/sponsors"
     },
     {
       "source": "/about-freecodecamp",
-      "destination": "/dothraki/news/about"
+      "destination": "/swahili/news/about"
     }
   ]
 }
