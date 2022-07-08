@@ -4,14 +4,14 @@
   "banner": {
     "default": "https://www.freecodecamp.org/",
     "authenticated": "https://www.freecodecamp.org/donate",
-    "authenticated-donor": "https://www.freecodecamp.org/news/how-to-donate-to-free-code-camp/"
+    "authenticated-donor": "https://www.freecodecamp.org/urdu/news/how-to-donate-to-free-code-camp-ur/"
   },
   "learn-to-code-cta": "https://www.freecodecamp.org/learn/",
   "twitter": "https://twitter.com/freeCodeCampUR",
   "footer": {
-    "about": "https://www.freecodecamp.org/news/about/",
-    "support": "https://www.freecodecamp.org/news/support/",
-    "honesty": "https://www.freecodecamp.org/news/academic-honesty-policy/",
-    "coc": "https://www.freecodecamp.org/news/code-of-conduct/"
+    "about": "https://www.freecodecamp.org/urdu/news/about-ur/",
+    "support": "https://www.freecodecamp.org/urdu/news/support-ur/",
+    "honesty": "https://www.freecodecamp.org/urdu/news/academic-honesty-policy-ur/",
+    "coc": "https://www.freecodecamp.org/urdu/news/freecodecamp-kh-code-of-conduct/"
   }
 }
