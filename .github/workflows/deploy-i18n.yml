@@ -26,7 +26,7 @@ jobs:
             swahili,
             urdu
           ]
-        site_tlds: [dev, org]
+        site_tlds: [org]
 
     env:
       BUILD_LANG: ${{ matrix.languages }}
@@ -147,7 +147,7 @@ jobs:
             swahili,
             urdu
           ]
-        site_tlds: [dev, org]
+        site_tlds: [org]
 
     # GitHub's deployment environment configuration.
     # environment:
