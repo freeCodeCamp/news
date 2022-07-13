@@ -5,8 +5,8 @@
     "load-more-articles": "もっと見る"
   },
   "search": {
-    "label": "探す",
-    "accessible-name": "検索クエリを送信する",
+    "label": "検索",
+    "accessible-name": "検索クエリを送信",
     "placeholder": "投稿を検索",
     "see-results": "すべての結果を表示: {{ searchQuery }}",
     "no-tutorials": "投稿が見つかりませんでした"
@@ -63,11 +63,11 @@
       "bengali": "ベンガル語"
     }
   },
-  "embed-title": "埋め込まれたコンテンツ",
+  "embed-title": "埋め込みコンテンツ",
   "footer": {
     "tax-exempt-status": "freeCodeCamp は皆様のご寄付により支えられている非課税の 501(c)(3) 非営利団体です。(United States Federal Tax Identification Number: 82-0779546)",
     "mission-statement": "私たちのミッション: 人々が無料でコーディングを学べるよう支援することです。その実現のため、何千もの動画、記事、インタラクティブなコーディングレッスンを作成し、すべて無料で公開しています。さらに、数千の freeCodeCamp スタディグループが世界中に存在します。",
-    "donation-initiatives": "freeCodeCamp へのご寄付は教育活動のために用いられ、サーバー、サービス、スタッフなどの費用に充てられます。",
+    "donation-initiatives": "freeCodeCamp への寄付は教育活動のために用いられ、サーバー、サービス、スタッフなどの費用に充てられます。",
     "donate-text": "{{ <0> }}こちらからご寄付をお願いいたします{{ </0> }}。(場合により税控除可能)",
     "trending-guides": "人気の記事",
     "our-nonprofit": "組織情報",
