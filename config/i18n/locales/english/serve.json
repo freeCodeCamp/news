@@ -21,6 +21,11 @@
       "destination": "/news/about"
     },
     {
+      "source": "/intoduction-to-nodejs",
+      "destination": "/news/introduction-to-nodejs",
+      "type": 302
+    },
+    {
       "source": "/learn-blazor-webassembly-and",
       "destination": "/news/learn-blazor-webassembly-and-web-api-on-net-6-by-building-a-shopping-cart-app",
       "type": 302
