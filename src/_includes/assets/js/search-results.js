@@ -33,19 +33,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   };
 
-  const translatedLocales = await (async () => {
-    try {
-      const response = await fetch(
-        `{{ site.url }}/assets/translated-locales.json`
-      );
-      const JSON = await response.json();
-
-      return JSON;
-    } catch (err) {
-      console.log(err);
-    }
-  })();
-
   const getResizedImage = (url, width) =>
     url.includes('/content/images/')
       ? url.replace('/content/images/', `/content/images/size/w${width}/`)
@@ -131,9 +118,7 @@ document.addEventListener('DOMContentLoaded', async () => {
               <a class="meta-item" href="${hit.originalPost.author.url}">
                 {% t 'original-author-translator.roles.author', { name: '${
                   hit.originalPost.author.name
-                }', locale: '${
-                translatedLocales[hit.originalPost.localeI18n]
-              }' } %}
+                }', locale: '${hit.originalPost.localeI18n}' } %}
               </a>
               <time class="meta-item" datetime="${
                 hit.originalPost.publishedAt
