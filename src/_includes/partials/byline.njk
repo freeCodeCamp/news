@@ -2,7 +2,6 @@
     {# Use the full URL for original authors, and a relative path for
     translators and regular authors #}
     {% set authorOrTranslatorURL = authorOrTranslator.url if role === "author" else (authorOrTranslator.path | url) %}
-    {% set translatedLocale %}{% t "original-author-translator.locales." + locale %}{% endset %}
 
     <section class="author-card" data-test-label="{{ 'translator-card' if role === 'translator' else 'author-card' }}">
         {% if authorOrTranslator.profile_image %}
@@ -30,7 +29,7 @@
                     {% if role === 'author' %}
                         {% t 'original-author-translator.roles.author', {
                             name: authorOrTranslator.name,
-                            locale: translatedLocale
+                            locale: (locale | title)
                         } %}
                     {% elif role === 'translator' %}
                         {% t 'original-author-translator.roles.translator', {

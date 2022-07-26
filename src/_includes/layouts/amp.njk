@@ -111,11 +111,10 @@
                     {% if post.primary_author.name != "freeCodeCamp.org" %}
                         <div data-test-label="amp-author-header">
                             {% if post.original_post %}
-                                {% set translatedLocale %}{% t "original-author-translator.locales." + post.original_post.locale_i18n %}{% endset %}
                                 <p class="author" data-test-label="amp-author">
                                     {% t 'original-author-translator.roles.author', {
                                         name: post.original_post.primary_author.name,
-                                        locale: translatedLocale
+                                        locale: (post.original_post.locale_i18n | title)
                                     } %}
                                 </p>
                                 <p class="translator" data-test-label="amp-translator">

@@ -22,7 +22,7 @@ const originalPostHandler = async post => {
       // Assume the original post is in English until the Chinese subdomain-to-subpath
       // transfer is complete. Note: This means that Chinese original posts that are
       // translated into English will not work until Chinese is moved to a subpath
-      const originalPostLocale =
+      let originalPostLocale =
         pathSegments.length === 2 ? 'english' : pathSegments[0];
       const originalPostSlug = pathSegments[pathSegments.length - 1];
       const { api, siteURL } = allGhostAPIInstances[originalPostLocale];
@@ -42,6 +42,9 @@ const originalPostHandler = async post => {
         originalPost.primary_author.image_dimensions.profile_image =
           await getImageDimensions(originalPost.primary_author.profile_image);
       }
+
+      // Now that the original post has been found, change espanol to spanish for display
+      if (originalPostLocale === 'espanol') originalPostLocale = 'spanish';
 
       // Add an `original_post` object to the current post
       post.original_post = {
