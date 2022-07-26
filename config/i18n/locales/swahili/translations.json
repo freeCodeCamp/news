@@ -7,7 +7,7 @@
   "search": {
     "label": "Tafuta",
     "accessible-name": "Wasilisha swali lako la utafutaji",
-    "placeholder": "Tafuta zaidi ya mafunzo 8,000+",
+    "placeholder": "Tafuta kati ya mafunzo zaidi ya 8,000+",
     "see-results": "Tazama matokeo yote ya {{ searchQuery }}",
     "no-tutorials": "Hakuna mafunzo yaliyopatikana"
   },
