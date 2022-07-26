@@ -50,17 +50,6 @@
     "details": {
       "original-article": "{{ <0> }}Artículo original:{{ </0> }} {{ title }} por {{ author }}",
       "translated-by": "{{ <0> }}Traducido y adaptado por:{{ </0> }} {{ translator }}"
-    },
-    "locales": {
-      "english": "inglés",
-      "espanol": "español",
-      "chinese": "chino",
-      "portuguese": "portugués",
-      "italian": "italiano",
-      "japanese": "japonés",
-      "arabic": "árabe",
-      "urdu": "urdu",
-      "bengali": "bengalí"
     }
   },
   "embed-title": "Contenido incrustado",

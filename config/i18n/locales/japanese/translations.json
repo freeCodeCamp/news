@@ -50,17 +50,6 @@
     "details": {
       "original-article": "{{ <0> }}原文:{{ </0> }} {{ title }} ({{ author }})",
       "translated-by": "{{ <0> }}翻訳・翻案:{{ </0> }} {{ translator }}"
-    },
-    "locales": {
-      "english": "英語",
-      "espanol": "スペイン語",
-      "chinese": "中国語",
-      "portuguese": "ポルトガル語",
-      "italian": "イタリア語",
-      "japanese": "日本語",
-      "arabic": "アラビア語",
-      "urdu": "ウルドゥー語",
-      "bengali": "ベンガル語"
     }
   },
   "embed-title": "埋め込みコンテンツ",

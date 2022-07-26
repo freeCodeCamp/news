@@ -48,20 +48,8 @@
       "translator": "Mfasiri: {{ name }}"
     },
     "details": {
-      "original-article": "{{ <0> }}Makala asilia:{{ </0> }} {{ title }} na {{ author }}",
-      "translated-by": "{{ <0> }}Imetafsiriwa na:{{ </0> }} {{ translator }}"
-    },
-    "locales": {
-      "arabic": "Kiarabu",
-      "bengali": "Kibengali",
-      "chinese": "Kichina",
-      "english": "Kiingereza",
-      "espanol": "Kihispania",
-      "italian": "Kiitaliano",
-      "japanese": "Kijapani",
-      "portuguese": "Kireno",
-      "swahili": "Kiswahili",
-      "urdu": "Kiurdu"
+      "original-article": "{{ <0> }}Original article:{{ </0> }} {{ title }} by {{ author }}",
+      "translated-by": "{{ <0> }}Translated by:{{ </0> }} {{ translator }}"
     }
   },
   "embed-title": "Embedded content",

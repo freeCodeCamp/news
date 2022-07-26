@@ -50,17 +50,6 @@
     "details": {
       "original-article": "{{ <0> }} المقالة الأصلية: {{ </0> }} {{ title }} بقلم {{ author }}",
       "translated-by": "{{ <0> }} تُرجِمت بواسطة: {{ </0> }} {{ translator }}"
-    },
-    "locales": {
-      "english": "الانجليزية",
-      "espanol": "الاسبانية",
-      "chinese": "الصينية",
-      "portuguese": "البرتغالية",
-      "italian": "الايطالية",
-      "japanese": "اليابانية",
-      "arabic": "العربية",
-      "urdu": "الأردية",
-      "bengali": "البنغالية"
     }
   },
   "embed-title": "محتوى مضمن",

@@ -50,17 +50,6 @@
     "details": {
       "original-article": "{{ <0> }}Articolo originale:{{ </0> }} {{ title }} di {{ author }}",
       "translated-by": "{{ <0> }}Tradotto e adattato da:{{ </0> }} {{ translator }}"
-    },
-    "locales": {
-      "english": "inglese",
-      "espanol": "spagnolo",
-      "chinese": "cinese",
-      "portuguese": "portoghese",
-      "italian": "italiano",
-      "japanese": "giapponese",
-      "arabic": "arabo",
-      "urdu": "urdu",
-      "bengali": "bengalese"
     }
   },
   "embed-title": "Contenuto incorporato",
