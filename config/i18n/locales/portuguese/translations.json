@@ -33,7 +33,7 @@
   },
   "social-row": {
     "cta": {
-      "tweet-a-thanks": "Se você leu até aqui, envie uma mensagem no Twitter para o autor para mostrar que você se importa com o trabalho. {{ <0> }}Agradeça no Twitter{{ </0> }}",
+      "tweet-a-thanks": "Se você leu até aqui, envie uma mensagem no Twitter para mostrar que você se importa com o trabalho. {{ <0> }}Agradeça no Twitter{{ </0> }}",
       "tweet-it": "Se este artigo foi útil, compartilhe-o no {{ <0> }}Twitter{{ </0> }}."
     },
     "tweets": {
