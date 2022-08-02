@@ -7,12 +7,12 @@
   "search": {
     "label": "Tafuta",
     "accessible-name": "Wasilisha swali lako la utafutaji",
-    "placeholder": "Tafuta zaidi ya mafunzo 8,000+",
+    "placeholder": "Tafuta kati ya mafunzo yetu",
     "see-results": "Tazama matokeo yote ya {{ searchQuery }}",
     "no-tutorials": "Hakuna mafunzo yaliyopatikana"
   },
   "banner": {
-    "default": "Learn to code — {{ <0> }}free 3,000-hour curriculum{{ </0> }}",
+    "default": "Piga gumzo na — {{ <0> }}wasanidi wengine kwa Kiswahili{{ </0> }}",
     "authenticated": "Saidia shirika letu lisilo la faida na dhamira yetu. {{ <0> }}Changia kwa freeCodeCamp.org{{ </0> }}.",
     "authenticated-donor": "Asante kwa kusaidia freeCodeCamp kupitia {{ <0> }}michango yako{{ </0> }}."
   },
@@ -33,12 +33,12 @@
   },
   "social-row": {
     "cta": {
-      "tweet-a-thanks": "Ukisoma hadi hapa, tweet kwa mwandishi ili kumwonyesha kuwa unajali. {{ <0> }}Tweet shukrani{{ </0> }}",
-      "tweet-it": "Ikiwa makala hii ilikuwa na manufaa, {{ <0> }}ishiriki kwa tweet{{ </0> }}."
+      "tweet-a-thanks": "Ukisoma hadi hapa, toa tweet kwa mwandishi ili kumwonyesha kuwa umenufaika. {{ <0> }}Tweet shukrani{{ </0> }}",
+      "tweet-it": "Ikiwa nakala hii ilikuwa na manufaa, {{ <0> }}ishiriki kwa tweet{{ </0> }}."
     },
     "tweets": {
-      "default": "Asante {{ author }} kwa kuandika makala hii muhimu.",
-      "translation": "Asante {{ author }} kwa kuandika makala hii muhimu, na {{ translator }} kwa kutafsiri."
+      "default": "Asante {{ author }} kwa kuandika nakala hii muhimu.",
+      "translation": "Asante {{ author }} kwa kuandika nakala hii muhimu, na {{ translator }} kwa kutafsiri."
     }
   },
   "learn-to-code-cta": "Jifunze kuweka msimbo bila malipo. Mtaala wa chanzo wazi wa freeCodeCamp umesaidia zaidi ya watu 40,000 kupata kazi kama wasanidi. {{ <0> }}Anza{{ </0> }}",
@@ -66,28 +66,28 @@
   },
   "embed-title": "Embedded content",
   "footer": {
-    "tax-exempt-status": "freeCodeCamp is a donor-supported tax-exempt 501(c)(3) nonprofit organization (United States Federal Tax Identification Number: 82-0779546)",
-    "mission-statement": "Our mission: to help people learn to code for free. We accomplish this by creating thousands of videos, articles, and interactive coding lessons - all freely available to the public. We also have thousands of freeCodeCamp study groups around the world.",
-    "donation-initiatives": "Donations to freeCodeCamp go toward our education initiatives, and help pay for servers, services, and staff.",
-    "donate-text": "You can {{ <0> }}make a tax-deductible donation here{{ </0> }}.",
+    "tax-exempt-status": "freeCodeCamp ni shirika lisilo la faida 501(c)(3) wala lisilo na faida la ushuru (Nambari ya Utambulisho ya Ushuru ya Shirikisho la Marekani: 82-0779546)",
+    "mission-statement": "Dhamira yet: kuwasaidia watu kujifunza kuweka msimbo bila malipo. Tunatimiza hili kwa kuunda maelfu ya video, makala, na masomo shirikishi ya usimbaji - yote yanapatikana bila malipo kwa umma. Pia tuna maelfu ya vikundi vya masomo vya freeCodeCamp kote ulimwenguni.",
+    "donation-initiatives": "Michango kwa freeCodeCamp huenda kwenye mipango yetu ya elimu na kusaidia kulipia seva, huduma na wafanyakazi.",
+    "donate-text": "Unaweza {{ <0> }}kutoa mchango unaokatwa kodi hapa{{ </0> }}.",
     "trending-guides": "Trending Guides",
     "our-nonprofit": "Our Nonprofit",
     "links": {
       "about": "About",
       "alumni": "Alumni Network",
       "open-source": "Open Source",
-      "shop": "Shop",
-      "support": "Support",
-      "sponsors": "Sponsors",
-      "honesty": "Academic Honesty",
-      "coc": "Code of Conduct",
-      "privacy": "Privacy Policy",
-      "tos": "Terms of Service",
-      "copyright": "Copyright Policy"
+      "shop": "Duka",
+      "support": "Msaada",
+      "sponsors": "Wafadhili",
+      "honesty": "Uaminifu wa Kiakademiaty",
+      "coc": "Kanuni ya Maadili",
+      "privacy": "Sera ya Faragha",
+      "tos": "Masharti ya Huduma",
+      "copyright": "Sera ya Hakimiliki"
     }
   },
   "fallback": {
-    "message": "Your browser doesn't support HTML5 {{ element }}.",
+    "message": "Kivinjari chako hakitumii HTML5 {{ element }}.",
     "audio": "audio",
     "video": "video"
   }
