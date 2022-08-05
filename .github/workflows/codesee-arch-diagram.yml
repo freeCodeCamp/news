@@ -42,7 +42,7 @@ jobs:
           cache: npm
 
       - name: Configure Python 3.x
-        uses: actions/setup-python@d09bd5e6005b175076f227b13d9730d56e9dcfcb # tag=v4
+        uses: actions/setup-python@b55428b1882923874294fa556849718a1d7f2ca5 # tag=v4
         if: ${{ fromJSON(steps.detect-languages.outputs.languages).python }}
         with:
           python-version: '3.x'
