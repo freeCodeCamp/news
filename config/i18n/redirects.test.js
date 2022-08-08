@@ -45,25 +45,16 @@ describe('Redirect and rewrite tests:', () => {
       });
 
       test('internal redirects point to the correct base path', () => {
-        const expectedBasePath = {
-          arabic: /^\/arabic\/news/,
-          bengali: /^\/bengali\/news/,
-          chinese: /^\/news/,
-          dothraki: /^\/dothraki\/news/,
-          english: /^\/news/,
-          espanol: /^\/espanol\/news/,
-          italian: /^\/italian\/news/,
-          japanese: /^\/japanese\/news/,
-          portuguese: /^\/portuguese\/news/,
-          swahili: /^\/swahili\/news/,
-          urdu: /^\/urdu\/news/
-        };
-
         redirects
           .filter(redirect => redirect.destination.startsWith('/'))
-          .map(redirect =>
-            expect(redirect.destination).toMatch(expectedBasePath[lang])
-          );
+          .map(redirect => {
+            const expectedBasePath =
+              lang === 'english' || lang === 'chinese'
+                ? new RegExp(`^/news(/|$)`)
+                : new RegExp(`^/${lang}/news(/|$)`);
+
+            expect(redirect.destination).toMatch(expectedBasePath);
+          });
       });
 
       test('there are no duplicate redirects', () => {
