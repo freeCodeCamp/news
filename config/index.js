@@ -26,8 +26,10 @@ const locales = [
   'chinese',
   'english',
   'espanol',
+  'french',
   'italian',
   'japanese',
+  'korean',
   'portuguese',
   'swahili',
   'urdu'
@@ -43,8 +45,10 @@ const localeCodes = {
   chinese: 'zh',
   english: 'en',
   espanol: 'es',
+  french: 'fr',
   italian: 'it',
   japanese: 'ja',
+  korean: 'ko',
   portuguese: 'pt-BR',
   swahili: 'sw',
   urdu: 'ur'
@@ -56,8 +60,10 @@ const algoliaIndices = {
   chinese: 'news-zh',
   english: 'news',
   espanol: 'news-es',
+  french: 'news-fr',
   italian: 'news-it',
   japanese: 'news-ja',
+  korean: 'news-ko',
   portuguese: 'news-pt-br',
   swahili: 'news-sw',
   urdu: 'news-ur'

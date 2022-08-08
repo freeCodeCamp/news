@@ -1,0 +1,24 @@
+{
+  "redirects": [
+    {
+      "source": "/@:authorName",
+      "destination": "/french/news/author/:authorName"
+    },
+    {
+      "source": "/tagged/:tagName",
+      "destination": "/french/news/tag/:tagName"
+    },
+    {
+      "source": "/archive/:archiveSlug?",
+      "destination": "/french/news"
+    },
+    {
+      "source": "/our-sponsors",
+      "destination": "/french/news/sponsors"
+    },
+    {
+      "source": "/about-freecodecamp",
+      "destination": "/french/news/about"
+    }
+  ]
+}
