@@ -84,7 +84,18 @@ const {
 // Validations
 const lang = locales.find(e => e === localeForUI);
 if (!lang) {
-  throw new Error(`Unsupported locale: ${localeForUI}`);
+  throw new Error(`
+    ----------------------------------------------------
+    Error: Unsupported locale: ${localeForUI}
+    ----------------------------------------------------
+    Looks like you requested build for the ${localeForUI}
+    locale, but that locale is not configured somewhere.
+
+    You should check all the configs, pipelines or rebase
+    with the latest version of the code.
+    ----------------------------------------------------
+
+  `);
 }
 if (lang !== localeForGhost && localeForGhost !== 'local') {
   console.warn(`
