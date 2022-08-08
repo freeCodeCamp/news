@@ -1,0 +1,17 @@
+{
+  "forum": "https://forum.freecodecamp.org/",
+  "donate": "https://www.freecodecamp.org/donate/",
+  "banner": {
+    "default": "https://www.freecodecamp.org/",
+    "authenticated": "https://www.freecodecamp.org/donate",
+    "authenticated-donor": "https://www.freecodecamp.org/news/how-to-donate-to-free-code-camp/"
+  },
+  "learn-to-code-cta": "https://www.freecodecamp.org/learn/",
+  "twitter": "https://twitter.com/freecodecamp",
+  "footer": {
+    "about": "https://www.freecodecamp.org/news/about/",
+    "support": "https://www.freecodecamp.org/news/support/",
+    "honesty": "https://www.freecodecamp.org/news/academic-honesty-policy/",
+    "coc": "https://www.freecodecamp.org/news/code-of-conduct/"
+  }
+}
