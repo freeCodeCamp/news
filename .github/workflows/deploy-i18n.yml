@@ -20,8 +20,10 @@ jobs:
             bengali,
             chinese,
             espanol,
+            french,
             italian,
             japanese,
+            korean,
             portuguese,
             swahili,
             urdu
@@ -54,6 +56,10 @@ jobs:
       ESPANOL_GHOST_API_VERSION: ${{ secrets.ESPANOL_GHOST_API_VERSION }}
       ESPANOL_GHOST_CONTENT_API_KEY: ${{ secrets.ESPANOL_GHOST_CONTENT_API_KEY }}
 
+      FRENCH_GHOST_API_URL: ${{ secrets.JAPANESE_GHOST_API_URL }}
+      FRENCH_GHOST_API_VERSION: ${{ secrets.JAPANESE_GHOST_API_VERSION }}
+      FRENCH_GHOST_CONTENT_API_KEY: ${{ secrets.JAPANESE_GHOST_CONTENT_API_KEY }}
+
       ITALIAN_GHOST_API_URL: ${{ secrets.ITALIAN_GHOST_API_URL }}
       ITALIAN_GHOST_API_VERSION: ${{ secrets.ITALIAN_GHOST_API_VERSION }}
       ITALIAN_GHOST_CONTENT_API_KEY: ${{ secrets.ITALIAN_GHOST_CONTENT_API_KEY }}
@@ -61,6 +67,10 @@ jobs:
       JAPANESE_GHOST_API_URL: ${{ secrets.JAPANESE_GHOST_API_URL }}
       JAPANESE_GHOST_API_VERSION: ${{ secrets.JAPANESE_GHOST_API_VERSION }}
       JAPANESE_GHOST_CONTENT_API_KEY: ${{ secrets.JAPANESE_GHOST_CONTENT_API_KEY }}
+
+      KOREAN_GHOST_API_URL: ${{ secrets.JAPANESE_GHOST_API_URL }}
+      KOREAN_GHOST_API_VERSION: ${{ secrets.JAPANESE_GHOST_API_VERSION }}
+      KOREAN_GHOST_CONTENT_API_KEY: ${{ secrets.JAPANESE_GHOST_CONTENT_API_KEY }}
 
       PORTUGUESE_GHOST_API_URL: ${{ secrets.PORTUGUESE_GHOST_API_URL }}
       PORTUGUESE_GHOST_API_VERSION: ${{ secrets.PORTUGUESE_GHOST_API_VERSION }}
@@ -141,8 +151,10 @@ jobs:
             bengali,
             chinese,
             espanol,
+            french,
             italian,
             japanese,
+            korean,
             portuguese,
             swahili,
             urdu
