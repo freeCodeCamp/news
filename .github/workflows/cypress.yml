@@ -61,7 +61,7 @@ jobs:
           wait-on-timeout: 1200
           browser: ${{ matrix.browsers }}
           headless: true
-          spec: cypress/integration/${{ matrix.languages }}/**/*
+          spec: cypress/e2e/${{ matrix.languages }}/**/*
 
       - name: Stop Ghost containers
         run: npm run stop:containers
