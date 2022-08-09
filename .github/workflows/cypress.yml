@@ -54,7 +54,7 @@ jobs:
         run: npm run start:containers
 
       - name: Start CI server and run Cypress
-        uses: cypress-io/github-action@v2
+        uses: cypress-io/github-action@v4
         with:
           start: npm run start:ci:${{ matrix.languages }}
           wait-on: http://localhost:8080
