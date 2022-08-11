@@ -82,7 +82,7 @@
     "graceful-fs": "4.2.10",
     "husky": "8.0.1",
     "i18next": "21.8.16",
-    "i18next-fs-backend": "1.1.4",
+    "i18next-fs-backend": "1.1.5",
     "jest": "27.5.1",
     "jest-json-schema-extended": "1.0.1",
     "js-yaml": "4.1.0",
