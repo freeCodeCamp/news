@@ -3,9 +3,7 @@ const {
   algoliaAPIKey,
   algoliaIndex,
   adsEnabled,
-  eleventyEnv,
-  googleAdsenseDataAdClient,
-  googleAdsenseDataAdSlot
+  eleventyEnv
 } = require('../../config');
 
 module.exports = {
@@ -13,7 +11,5 @@ module.exports = {
   algoliaAPIKey,
   algoliaIndex,
   adsEnabled,
-  eleventyEnv,
-  googleAdsenseDataAdClient,
-  googleAdsenseDataAdSlot
+  eleventyEnv
 };

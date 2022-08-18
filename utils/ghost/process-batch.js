@@ -1,9 +1,10 @@
 const generateAMPObj = require('./generate-amp-obj');
+const googleAdsHandler = require('./google-ads-handler');
 const lazyLoadHandler = require('./lazy-load-handler');
 const originalPostHandler = require('./original-post-handler');
 const getImageDimensions = require('../../utils/get-image-dimensions');
 const errorLogger = require('../../utils/error-logger');
-const { siteURL } = require('../../config');
+const { siteURL, adsEnabled } = require('../../config');
 const stripDomain = require('../../utils/strip-domain');
 
 const removeUnusedKeys = obj => {
@@ -143,6 +144,10 @@ const processBatch = async ({ batch, type, currBatchNo, totalBatches }) => {
       // Generate an object that contains AMP HTML and flags to conditionally include
       // AMP scripts in the amp.njk template. Only do this for posts.
       if (type === 'posts' && obj.html) obj.amp = await generateAMPObj(obj);
+
+      // Append Google ads to post body and generate bottom banner ad if
+      // ads are enabled
+      if (adsEnabled && obj.html) obj = await googleAdsHandler(obj);
 
       return obj;
     })

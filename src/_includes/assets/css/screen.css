@@ -80,7 +80,7 @@ body {
 /* Centered content container blocks */
 .inner {
   margin: 0 auto;
-  max-width: 1060px;
+  max-width: 1040px;
   width: 100%;
 }
 
@@ -913,10 +913,10 @@ make sure this only happens on large viewports / desktop-ish devices.
 
 /* Adjust image body and video widths when ads are enabled */
 
-.ad-layout .post-full-content img,
+/* .ad-layout .post-full-content img,
 .ad-layout .post-full-content video {
   width: 100%;
-}
+} */
 
 /* Image captions
 
@@ -2401,39 +2401,29 @@ a.banner:hover span {
 /* ---------------------------------------------------------- */
 
 /* Hide ads by default for authenticated readers */
-.sidebar,
-.banner-ad {
+.ad-container {
   display: none;
 }
 
 /* Apply the following styles for unauthenticated readers */
-.ad-layout .banner-ad {
+.ad-layout .ad-container {
   display: block;
 }
 
 .ad-container {
   background-color: var(--gray05);
+  text-align: center;
+  min-width: 300px;
+  min-height: 250px;
+  padding: 10px;
 }
 
-/* Display sidebar for desktop readers */
-@media (min-width: 900px) {
-  .ad-layout .post-full-content {
-    padding: 70px 0 0;
-  }
+.ad-container:not(.ad-container.banner) {
+  margin: 0 0 1.5em;
+}
 
-  .ad-layout .post-and-sidebar {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) 300px;
-    gap: 40px;
-    margin: 0 auto;
-  }
-
-  .ad-layout .sidebar {
-    display: flex;
-    max-width: 300px;
-    flex-direction: column;
-    justify-content: space-between;
-  }
+.ad-container .text {
+  font-size: 16px;
 }
 
 /* 17. RTL layout
