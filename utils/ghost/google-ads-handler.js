@@ -25,25 +25,46 @@ const createAdContainer = type => {
 const googleAdsHandler = async obj => {
   const dom = new JSDOM(obj.html);
   const document = dom.window.document;
-  // Don't include h1 as it's the title of the post
-  const headingEls = [...document.querySelectorAll('h2, h3, h4, h5, h6')];
-  // Remove the first heading element to prevent ad placement early in the post
-  headingEls.shift();
+  // Include 2 ads by default, then add 1 ad for every 2 mins of reading time
+  // if reading time <= 4 mins. Else, add 1 ad for every 1 min of reading time
+  const maxBodyAds = Math.floor(Math.round(obj.reading_time / 2) + 2);
+  const allHeadingEls = [
+    ...document.querySelectorAll('h1, h2, h3, h4, h5, h6')
+  ];
+  // Filter out the post title, but leave other possible h1 elements that authors may have added.
+  // Also attempt to filter out any heading elements that immediately follow another heading element.
+  const targetHeadingEls = allHeadingEls.filter(
+    headingEl =>
+      !headingEl.classList.contains('post-full-title') &&
+      !headingEl?.previousElementSibling?.nodeName?.match(/H\d/)
+  );
+  // Remove the first heading element, which can often be too early in an article for an ad to appear
+  targetHeadingEls.shift();
 
-  // {# {% set numOfSidebarAds = (((post.reading_time / 2) if post.reading_time <= 4 else (post.reading_time)) + 2) | round(0, 'floor') %} #}
-  // const numberOfAds = Math.floor(Math.round(readingTime / 2) + 2);
+  // Append rectangle style ads to target heading elements
+  if (targetHeadingEls.length <= maxBodyAds) {
+    targetHeadingEls.forEach(headingEl =>
+      headingEl.insertAdjacentHTML(
+        'beforebegin',
+        createAdContainer('rectangle')
+      )
+    );
+  } else {
+    // Attempt to evenly distribute ads if there are more target heading elements than possible ads,
+    // but lean towards showing fewer ads by rounding up
+    const nth = Math.ceil(targetHeadingEls.length / maxBodyAds);
 
-  // Rectangle style ads for ones in the post body
-  headingEls.map(heading => {
-    const ad = createAdContainer('rectangle');
-
-    heading.insertAdjacentHTML('beforebegin', ad);
-  });
+    for (let i = 0; i <= targetHeadingEls.length - 1; i += nth) {
+      // Optional chaining to prevent out of bounds errors
+      targetHeadingEls[i]?.insertAdjacentHTML(
+        'beforebegin',
+        createAdContainer('rectangle')
+      );
+    }
+  }
 
   // Append HTML for banner ad to the post object
-  const bannerAd = createAdContainer('banner');
-
-  obj.banner_ad = bannerAd;
+  obj.banner_ad = createAdContainer('banner');
 
   // The jsdom parser wraps the incomplete HTML from the Ghost
   // API with HTML, head, and body elements, so return whatever
