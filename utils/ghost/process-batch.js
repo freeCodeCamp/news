@@ -1,10 +1,9 @@
 const generateAMPObj = require('./generate-amp-obj');
-const googleAdsHandler = require('./google-ads-handler');
-const lazyLoadHandler = require('./lazy-load-handler');
+const modifyGhostHTML = require('./modify-ghost-html');
 const originalPostHandler = require('./original-post-handler');
 const getImageDimensions = require('../../utils/get-image-dimensions');
 const errorLogger = require('../../utils/error-logger');
-const { siteURL, adsEnabled } = require('../../config');
+const { siteURL } = require('../../config');
 const stripDomain = require('../../utils/strip-domain');
 
 const removeUnusedKeys = obj => {
@@ -137,13 +136,10 @@ const processBatch = async ({ batch, type, currBatchNo, totalBatches }) => {
           .join(' ');
       }
 
-      // Lazy load images and embedded videos -- will also set the width, height,
-      // and add a default alt attribute to images if one doesn't exist
-      if (obj.html) obj.html = await lazyLoadHandler(obj.html, obj.title);
-
-      // Append Google ads to post body and generate bottom banner ad if
-      // ads are enabled
-      if (adsEnabled && obj.html) obj = await googleAdsHandler(obj);
+      // Enable lazy loading of images and embedded videos, set width, height, and add a default
+      // alt attribute to images if one doesn't exist.
+      // Also, append Google ads to post body and generate bottom banner ad if ads are enabled.
+      if (obj.html) obj = await modifyGhostHTML(obj);
 
       // Generate an object that contains AMP HTML and flags to conditionally include
       // AMP scripts in the amp.njk template. Only do this for posts.
