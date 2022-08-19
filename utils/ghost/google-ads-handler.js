@@ -5,7 +5,7 @@ const {
   googleAdsenseDataAdSlot
 } = require('../../config');
 
-const createAdContainer = type => {
+const generateAdHTML = type => {
   return `<div class="ad-container ${type === 'banner' ? 'banner' : ''}">
     <span class="text">ADVERTISEMENT</span>
     <ins
@@ -44,10 +44,7 @@ const googleAdsHandler = async obj => {
   // Append rectangle style ads to target heading elements
   if (targetHeadingEls.length <= maxBodyAds) {
     targetHeadingEls.forEach(headingEl =>
-      headingEl.insertAdjacentHTML(
-        'beforebegin',
-        createAdContainer('rectangle')
-      )
+      headingEl.insertAdjacentHTML('beforebegin', generateAdHTML('rectangle'))
     );
   } else {
     // Attempt to evenly distribute ads if there are more target heading elements than possible ads,
@@ -58,13 +55,13 @@ const googleAdsHandler = async obj => {
       // Optional chaining to prevent out of bounds errors
       targetHeadingEls[i]?.insertAdjacentHTML(
         'beforebegin',
-        createAdContainer('rectangle')
+        generateAdHTML('rectangle')
       );
     }
   }
 
   // Append HTML for banner ad to the post object
-  obj.banner_ad = createAdContainer('banner');
+  obj.banner_ad_html = generateAdHTML('banner');
 
   // The jsdom parser wraps the incomplete HTML from the Ghost
   // API with HTML, head, and body elements, so return whatever
