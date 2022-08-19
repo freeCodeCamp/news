@@ -2400,22 +2400,18 @@ a.banner:hover span {
 /* 16. Ads
 /* ---------------------------------------------------------- */
 
-/* Hide ads by default for authenticated readers */
 .ad-container {
-  display: none;
-}
-
-/* Apply the following styles for unauthenticated readers */
-.ad-layout .ad-container {
-  display: block;
-}
-
-.ad-container {
+  display: none; /* Hide ads by default for authenticated readers */
   background-color: var(--gray05);
   text-align: center;
   min-width: 300px;
   min-height: 250px;
   padding: 10px;
+}
+
+/* Apply the following styles for unauthenticated readers */
+.ad-layout .ad-container {
+  display: block;
 }
 
 .ad-container:not(.ad-container.banner) {
