@@ -141,13 +141,13 @@ const processBatch = async ({ batch, type, currBatchNo, totalBatches }) => {
       // and add a default alt attribute to images if one doesn't exist
       if (obj.html) obj.html = await lazyLoadHandler(obj.html, obj.title);
 
-      // Generate an object that contains AMP HTML and flags to conditionally include
-      // AMP scripts in the amp.njk template. Only do this for posts.
-      if (type === 'posts' && obj.html) obj.amp = await generateAMPObj(obj);
-
       // Append Google ads to post body and generate bottom banner ad if
       // ads are enabled
       if (adsEnabled && obj.html) obj = await googleAdsHandler(obj);
+
+      // Generate an object that contains AMP HTML and flags to conditionally include
+      // AMP scripts in the amp.njk template. Only do this for posts.
+      if (type === 'posts' && obj.html) obj.amp = await generateAMPObj(obj);
 
       return obj;
     })
