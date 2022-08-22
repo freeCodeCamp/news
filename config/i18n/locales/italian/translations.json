@@ -7,7 +7,7 @@
   "search": {
     "label": "Cerca",
     "accessible-name": "Invia la tua query di cerca",
-    "placeholder": "Cerca tra gli articoli",
+    "placeholder": "Cerca tra più di 200 articoli",
     "see-results": "Vedi tutti i risultati per {{ searchQuery }}",
     "no-tutorials": "Nessun articolo trovato"
   },
