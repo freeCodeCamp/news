@@ -20,12 +20,12 @@ const generateAdHTML = type => {
         data-ad-slot="${googleAdsenseDataAdSlot}"
         data-ad-format="${type === 'banner' ? 'auto' : 'rectangle'}"
     ></ins>
-  </div>
-  <script>
-    window.addEventListener('load', () => {
-        if (notAuthenticated) (adsbygoogle = window.adsbygoogle || []).push({});
-    });
-  </script>`;
+    <script>
+      window.addEventListener('load', () => {
+          if (notAuthenticated) (adsbygoogle = window.adsbygoogle || []).push({});
+      });
+    </script>
+  </div>`;
 };
 
 const modifyGhostHTML = async obj => {

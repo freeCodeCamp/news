@@ -105,9 +105,10 @@
             data-ad-client="{{ secrets.googleAdsenseDataAdClient }}"
             src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
             crossorigin="anonymous"
+            data-test-label="adsense"
             async
         ></script>
-        <script defer src="{% cacheBuster '/assets/js/toggle-ad-layout.js' %}"></script>
+        <script data-test-label="toggle-ad-layout" defer src="{% cacheBuster '/assets/js/toggle-ad-layout.js' %}"></script>
     {% endif %}
 {% endblock %}
 
