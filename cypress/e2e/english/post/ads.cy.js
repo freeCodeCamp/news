@@ -89,7 +89,7 @@ describe('Ads', () => {
       cy.reload(); // Reload the page to ensure the cookie is set and the styles to hide ad containers are applied
     });
 
-    it('all ad containers in the pose should not be visible', () => {
+    it('all ad containers in the post should not be visible', () => {
       cy.get(selectors.ads.container).should('not.be.visible');
     });
   });
