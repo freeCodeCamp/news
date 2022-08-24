@@ -28,7 +28,11 @@ describe('Ads', () => {
   });
 
   context('Not authenticated', () => {
-    it('the post should include at least one ad container', () => {
+    it('the post should contain at least one ad', () => {
+      cy.get(selectors.ads.container).should('have.length.gte', 1);
+    });
+
+    it('all ad containers in the post should be visible', () => {
       cy.get(selectors.ads.container).should('be.visible');
     });
 
@@ -79,5 +83,14 @@ describe('Ads', () => {
   });
 
   // To do: Add another context for authenticated donors once we start setting that cookie on Learn
-  context('Authenticated', () => {});
+  context('Authenticated', () => {
+    before(() => {
+      cy.setCookie('jwt_access_token', '0123456789');
+      cy.reload(); // Reload the page to ensure the cookie is set and the styles to hide ad containers are applied
+    });
+
+    it('all ad containers in the pose should not be visible', () => {
+      cy.get(selectors.ads.container).should('not.be.visible');
+    });
+  });
 });
