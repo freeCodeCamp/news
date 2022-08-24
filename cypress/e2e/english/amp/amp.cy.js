@@ -243,11 +243,9 @@ describe('AMP page', () => {
         })
         .find('source')
         .then($el => {
-          $el => {
-            expect($el.attr('src')).to.equal(
-              'https://ia801402.us.archive.org/16/items/EDIS-SRP-0197-06/EDIS-SRP-0197-06.mp3'
-            );
-          };
+          expect($el.attr('src')).to.equal(
+            'https://ia801402.us.archive.org/16/items/EDIS-SRP-0197-06/EDIS-SRP-0197-06.mp3'
+          );
         });
     });
 
