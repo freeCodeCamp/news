@@ -89,5 +89,6 @@
     "message": "متصفحك لا يدعم HTML5 {{ element }}.",
     "audio": "الصوت",
     "video": "الفيديو"
-  }
+  },
+  "ad-text": "Advertisement"
 }

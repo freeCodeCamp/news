@@ -13,7 +13,9 @@ const generateAdHTML = type => {
   return `<div class="ad-container ${
     type === 'banner' ? 'banner' : ''
   }" data-test-label="ad-container">
-    <span class="ad-text" data-test-label="ad-text">ADVERTISEMENT</span>
+    <span class="ad-text" data-test-label="ad-text">${translate(
+      'ad-text'
+    ).toUpperCase()}</span>
     <ins
         class="adsbygoogle"
         data-ad-client="${googleAdsenseDataAdClient}"

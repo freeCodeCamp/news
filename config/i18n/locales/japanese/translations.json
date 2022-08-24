@@ -89,5 +89,6 @@
     "message": "お使いのブラウザはHTML5{{ element }}をサポートしていません。",
     "audio": "オーディオ",
     "video": "ビデオ"
-  }
+  },
+  "ad-text": "Advertisement"
 }
