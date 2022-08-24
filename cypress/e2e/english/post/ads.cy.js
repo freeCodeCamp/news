@@ -73,10 +73,8 @@ describe('Ads', () => {
 
     it('ads within `section.post-full-content` should not be placed between two adjacent heading elements', () => {
       cy.get('section.post-full-content h1, h2, h3, h4, h5, h6').each(
-        ($el, index, list) => {
-          [...list].forEach($heading => {
-            cy.wrap($heading).next().should('not.have.class', 'ad-container');
-          });
+        $heading => {
+          cy.wrap($heading).next().should('not.have.class', 'ad-container');
         }
       );
     });
