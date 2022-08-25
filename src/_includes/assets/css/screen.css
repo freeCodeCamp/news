@@ -2404,6 +2404,10 @@ a.banner:hover span {
   padding: 10px;
 }
 
+.ad-container.banner {
+  min-width: 100%;
+}
+
 /* Apply the following styles for unauthenticated readers */
 .ad-layout .ad-container {
   display: block;
