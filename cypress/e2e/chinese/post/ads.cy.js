@@ -1,6 +1,6 @@
 const selectors = {
   scripts: {
-    adsense: '[data-test-label="adsense"]',
+    adsense: 'script[src*="adsbygoogle.js"]',
     toggleAdLayout: '[data-test-label="toggle-ad-layout"]'
   },
   adContainer: "[data-test-label='ad-container']"

@@ -1,6 +1,6 @@
 const selectors = {
   scripts: {
-    adsense: '[data-test-label="adsense"]',
+    adsense: 'script[src*="adsbygoogle.js"]',
     toggleAdLayout: '[data-test-label="toggle-ad-layout"]'
   },
   ads: {
@@ -52,23 +52,6 @@ describe('Ads', () => {
       cy.get(selectors.ads.container).each($el => {
         cy.wrap($el).find('script').should('have.length', 1);
       });
-    });
-
-    it('for ads within `section.post-full-content`, each `ins` element should have a `data-ad-format` attribute with the value `rectangle`', () => {
-      cy.get(`section.post-full-content ${selectors.ads.container}`).each(
-        $el => {
-          cy.wrap($el)
-            .find('ins')
-            .should('have.attr', 'data-ad-format', 'rectangle');
-        }
-      );
-    });
-
-    it('for the banner ad at the bottom of the post, the `ins` element should have a `data-ad-format` attribute with the value `auto`', () => {
-      cy.get(selectors.ads.container)
-        .last()
-        .find('ins')
-        .should('have.attr', 'data-ad-format', 'auto');
     });
 
     it('ads within `section.post-full-content` should not be placed between two adjacent heading elements', () => {

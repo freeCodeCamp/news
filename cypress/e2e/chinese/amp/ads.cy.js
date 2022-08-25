@@ -1,5 +1,5 @@
 const selectors = {
-  AMPAdScript: '[data-test-label="amp-ad-script"]',
+  AMPAdScript: 'script[src*="amp-ad-0.1.js"]',
   adContainer: "[data-test-label='ad-container']"
 };
 
