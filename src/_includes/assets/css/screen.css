@@ -911,13 +911,6 @@ make sure this only happens on large viewports / desktop-ish devices.
   }
 }
 
-/* Adjust image body and video widths when ads are enabled */
-
-/* .ad-layout .post-full-content img,
-.ad-layout .post-full-content video {
-  width: 100%;
-} */
-
 /* Image captions
 
 Usage (In Ghost editor):
