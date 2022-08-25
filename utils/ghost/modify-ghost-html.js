@@ -20,7 +20,6 @@ const generateAdHTML = type => {
         class="adsbygoogle"
         data-ad-client="${googleAdsenseDataAdClient}"
         data-ad-slot="${googleAdsenseDataAdSlot}"
-        data-ad-format="${type === 'banner' ? 'auto' : 'rectangle'}"
     ></ins>
     <script>
       window.addEventListener('load', () => {

@@ -2399,6 +2399,8 @@ a.banner:hover span {
   text-align: center;
   min-width: 300px;
   min-height: 250px;
+  max-width: 336px;
+  max-height: 280px;
   padding: 10px;
 }
 
