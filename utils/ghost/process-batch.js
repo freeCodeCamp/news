@@ -84,15 +84,18 @@ const processBatch = async ({ batch, type, currBatchNo, totalBatches }) => {
       }
 
       // Tag image resolutions for structured data
-      obj.tags.map(async tag => {
-        if (tag.feature_image) {
-          tag.image_dimensions = { ...tag.image_dimensions };
-          tag.image_dimensions.feature_image = await getImageDimensions(
-            tag.feature_image,
-            tag.name
-          );
-        }
-      });
+      await Promise.all(
+        obj.tags.map(async tag => {
+          if (tag.feature_image) {
+            tag.image_dimensions = { ...tag.image_dimensions };
+            tag.image_dimensions.feature_image = await getImageDimensions(
+              tag.feature_image,
+              tag.name,
+              true
+            );
+          }
+        })
+      );
 
       // General cleanup and prep -- attach path to post / page
       // objects, convert dates, and fix pages that should exist
