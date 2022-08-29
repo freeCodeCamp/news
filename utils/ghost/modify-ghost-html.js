@@ -18,6 +18,7 @@ const generateAdHTML = type => {
     ).toUpperCase()}</span>
     <ins
         class="adsbygoogle"
+        style="display: block;"
         data-ad-client="${googleAdsenseDataAdClient}"
         data-ad-slot="${googleAdsenseDataAdSlot}"
     ></ins>

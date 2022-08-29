@@ -2372,14 +2372,17 @@ a.banner:hover span {
   display: none; /* Hide ads by default for authenticated readers */
   background-color: var(--gray05);
   text-align: center;
+  padding: 10px;
+}
+
+.ad-container ins {
   min-width: 300px;
   min-height: 250px;
   max-width: 336px;
   max-height: 280px;
-  padding: 10px;
 }
 
-.ad-container.banner {
+.ad-container.banner ins {
   min-width: 100%;
 }
 
