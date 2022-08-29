@@ -2,7 +2,8 @@ const selectors = {
   socialRowCTA: "[data-test-label='social-row-cta']",
   learnCTARow: "[data-test-label='learn-cta-row']",
   tweetButton: "[data-test-label='tweet-button']",
-  defaultBio: "[data-test-label='default-bio']"
+  defaultBio: "[data-test-label='default-bio']",
+  adText: "[data-test-label='ad-text']"
 };
 
 describe('Post i18n', () => {
@@ -58,6 +59,15 @@ describe('Post i18n', () => {
 
     it('the default author bio should not render its i18n key', () => {
       cy.get(selectors.defaultBio).should('not.contain', 'default-bio');
+    });
+  });
+
+  context('Ads', () => {
+    it('the advertisement disclaimer text should not render its i18n key', () => {
+      cy.get(selectors.adText)
+        .invoke('text')
+        .then(text => text.trim().toLowerCase())
+        .should('not.equal', 'ad-text');
     });
   });
 });

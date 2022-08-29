@@ -89,5 +89,6 @@
     "message": "Su navegador no es compatible con HTML5 {{ element }}.",
     "audio": "audio",
     "video": "video"
-  }
+  },
+  "ad-text": "Advertisement"
 }

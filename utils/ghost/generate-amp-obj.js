@@ -7,6 +7,8 @@ const {
   allowedAMPAttributes
 } = require('../transforms/html-sanitizer');
 
+// To do: refactor and simplify -- this doesn't need to be an async function
+// because all necessary data should be available within the HTML by this point
 const generateAMPObj = async obj => {
   // Create object to hold results
   const ampObj = {
@@ -27,6 +29,7 @@ const generateAMPObj = async obj => {
   const iframeEls = [...document.getElementsByTagName('iframe')];
   const audioEls = [...document.getElementsByTagName('audio')];
   const videoEls = [...document.getElementsByTagName('video')];
+  const adContainers = [...document.getElementsByClassName('ad-container')];
 
   const setAllowedAttributes = (type, originalEl, ampEl) => {
     const allowedAttributes = allowedAMPAttributes[type];
@@ -200,6 +203,24 @@ const generateAMPObj = async obj => {
       ampObj.elements['amp-video'] = true;
 
       videoEl.replaceWith(ampVideoEl);
+    }),
+
+    // Create <amp-ad> elements from ads within the post body
+    // and ignore the banner ad for now
+    adContainers.map(adContainer => {
+      const adEl = adContainer.querySelector('ins');
+      let ampAdEl = document.createElement('amp-ad');
+
+      ampAdEl = setAllowedAttributes('amp-ad', adEl, ampAdEl);
+
+      // Set required amp-ad attributes
+      ampAdEl.setAttribute('width', '100vw');
+      ampAdEl.setAttribute('height', '250');
+      ampAdEl.setAttribute('type', 'adsense');
+      ampAdEl.setAttribute('data-auto-format', 'rspv');
+      ampAdEl.setAttribute('data-full-width', '');
+
+      adEl.replaceWith(ampAdEl);
     })
   );
 

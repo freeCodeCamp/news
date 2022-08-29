@@ -153,7 +153,7 @@ module.exports = Object.assign(
         ? ''
         : algoliaAPIKey,
     algoliaIndex: algoliaIndices[localeForUI] || 'news',
-    adsEnabled: adsEnabled || 'false',
+    adsEnabled: (adsEnabled === 'true' && localeForUI !== 'chinese') || false, // Convert to boolean and exclude Chinese until move to subpath, otherwise default to false
     googleAdsenseDataAdClient:
       !googleAdsenseDataAdClient ||
       googleAdsenseDataAdClient === 'pub-1234567890'
