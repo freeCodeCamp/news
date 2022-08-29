@@ -20,12 +20,23 @@ If you found an issue or a bug on this repository, please connect with us in the
 
 Happy Contributing!
 
-## Build Status
+## Build
+
+### Build Status
 
 | Language | Status                                                                                                                                                                                                  |
 | :------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | English  | [![Build status](https://dev.azure.com/freeCodeCamp-org/news/_apis/build/status/build-deploy-eng)](https://dev.azure.com/freeCodeCamp-org/news/_build/latest?definitionId=31)                           |
 |  Others  | [![Build and Deploy Localized News to Azure](https://github.com/freeCodeCamp/news/actions/workflows/deploy-i18n.yml/badge.svg)](https://github.com/freeCodeCamp/news/actions/workflows/deploy-i18n.yml) |
+
+### Build Schedules
+
+i18n Publication: New builds are triggred once every six hours (UTC).
+English Publication: Builds are triggred once every two hours (UTC).
+
+Please note there can be delays and issues in builds sometimes. We also have mutliple layers of caching. Your published article and changes may take longer than normal to appear. You can check the status of the latest builds by clicking the Build Status badge in the previous section.
+
+If changes have been published in Ghost, it will eventually appear on the public facing site. We recommend giving changes at least a day, before reaching out to someone for taking a look. The team get's alerts for all build failures, etc. You need not alert them again.
 
 ## Copyright & License
 
