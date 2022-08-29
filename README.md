@@ -31,12 +31,13 @@ Happy Contributing!
 
 ### Build Schedules
 
-i18n Publication: New builds are triggred once every six hours (UTC).
-English Publication: Builds are triggred once every two hours (UTC).
+i18n Publication: New builds are triggered every six hours (UTC).
 
-Please note there can be delays and issues in builds sometimes. We also have mutliple layers of caching. Your published article and changes may take longer than normal to appear. You can check the status of the latest builds by clicking the Build Status badge in the previous section.
+English Publication: New builds are triggered every two hours (UTC).
 
-If changes have been published in Ghost, it will eventually appear on the public facing site. We recommend giving changes at least a day, before reaching out to someone for taking a look. The team get's alerts for all build failures, etc. You need not alert them again.
+Please note there can be delays and issues in builds sometimes. Your published article and changes may take longer than usual to appear. You can check the status of the latest builds by clicking the Build Status badge in the previous section. We also have multiple layers of caching.
+
+When you publish a change, like updating scripts, a new article, updating old articles, adding or updating pages, etc., in Ghost CMS, it will eventually appear on the public-facing site. We recommend giving changes at least a day before reaching out to someone to take a look. The team gets alerts for all build failures, etc. You need not alert them again.
 
 ## Copyright & License
 
