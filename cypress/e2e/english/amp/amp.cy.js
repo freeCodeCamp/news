@@ -1,20 +1,6 @@
 const {
-  allowedAMPAttributes
-} = require('../../../../utils/transforms/html-sanitizer');
-
-const stripAutoAMPAttributes = attrArr =>
-  attrArr.filter(
-    attr => !['class', 'style'].includes(attr) && !attr.startsWith('i-amphtml')
-  );
-
-const testAllowedAttributes = (type, el) => {
-  const attributes = stripAutoAMPAttributes(el.getAttributeNames());
-  const diff = attributes.filter(
-    attr => !allowedAMPAttributes[type].includes(attr)
-  );
-
-  expect(diff).to.have.length(0);
-};
+  testAllowedAMPAttributes
+} = require('../../../support/utils/amp-helpers');
 
 describe('AMP page', () => {
   before(() => {
@@ -70,7 +56,7 @@ describe('AMP page', () => {
       cy.document().then(doc => {
         const AMPImgElements = [...doc.querySelectorAll('amp-img')];
 
-        AMPImgElements.forEach(el => testAllowedAttributes('amp-img', el));
+        AMPImgElements.forEach(el => testAllowedAMPAttributes('amp-img', el));
       });
     });
   });
@@ -99,7 +85,7 @@ describe('AMP page', () => {
       cy.document().then(doc => {
         const AMPAnimElements = [...doc.querySelectorAll('amp-anim')];
 
-        AMPAnimElements.forEach(el => testAllowedAttributes('amp-anim', el));
+        AMPAnimElements.forEach(el => testAllowedAMPAttributes('amp-anim', el));
       });
     });
   });
@@ -122,7 +108,7 @@ describe('AMP page', () => {
         const AMPYouTubeElements = [...doc.querySelectorAll('amp-youtube')];
 
         AMPYouTubeElements.forEach(el =>
-          testAllowedAttributes('amp-youtube', el)
+          testAllowedAMPAttributes('amp-youtube', el)
         );
       });
     });
@@ -161,7 +147,7 @@ describe('AMP page', () => {
         const AMPIframeElements = [...doc.querySelectorAll('amp-iframe')];
 
         AMPIframeElements.forEach(el =>
-          testAllowedAttributes('amp-iframe', el)
+          testAllowedAMPAttributes('amp-iframe', el)
         );
       });
     });
@@ -217,7 +203,9 @@ describe('AMP page', () => {
       cy.document().then(doc => {
         const AMPVideoElements = [...doc.querySelectorAll('amp-video')];
 
-        AMPVideoElements.forEach(el => testAllowedAttributes('amp-video', el));
+        AMPVideoElements.forEach(el =>
+          testAllowedAMPAttributes('amp-video', el)
+        );
       });
     });
   });
@@ -269,7 +257,9 @@ describe('AMP page', () => {
       cy.document().then(doc => {
         const AMPAudioElements = [...doc.querySelectorAll('amp-audio')];
 
-        AMPAudioElements.forEach(el => testAllowedAttributes('amp-audio', el));
+        AMPAudioElements.forEach(el =>
+          testAllowedAMPAttributes('amp-audio', el)
+        );
       });
     });
   });
