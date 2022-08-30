@@ -33,23 +33,26 @@ const generateAMPObj = async obj => {
 
   const setAllowedAttributes = (type, originalEl, ampEl) => {
     const allowedAttributes = allowedAMPAttributes[type];
+    const originalElAllowedAttributes = originalEl
+      .getAttributeNames()
+      .filter(attribute =>
+        allowedAttributes.some(allowedAttribute =>
+          attribute.startsWith(
+            allowedAttribute === 'data-*' ? 'data-' : allowedAttribute
+          )
+        )
+      );
 
-    allowedAttributes.forEach(attributeName => {
+    originalElAllowedAttributes.forEach(attribute => {
       const booleanAttributes = ['loop', 'autoplay', 'muted'];
-
-      if (originalEl.hasAttribute(attributeName)) {
-        // Add boolean attribute to the ampEl so it is present,
-        // but prevent it from being set to "true"
-        if (booleanAttributes.includes(attributeName)) {
-          return ampEl.setAttribute(attributeName, '');
-        }
-
-        // Set allowed attribute to the value from the original element
-        return ampEl.setAttribute(
-          attributeName,
-          originalEl.getAttribute(attributeName)
-        );
+      // Add boolean attribute to the ampEl so it is present,
+      // but prevent it from being set to "true"
+      if (booleanAttributes.includes(attribute)) {
+        return ampEl.setAttribute(attribute, '');
       }
+
+      // Set allowed attribute to the value from the original element
+      return ampEl.setAttribute(attribute, originalEl.getAttribute(attribute));
     });
 
     return ampEl;
