@@ -8,12 +8,16 @@ const stripAutoAMPAttributes = attrArr =>
   );
 
 const testAllowedAMPAttributes = (type, el) => {
-  const attributes = stripAutoAMPAttributes(el.getAttributeNames());
-  const diff = attributes.filter(
-    attr => !allowedAMPAttributes[type].includes(attr)
+  const allowedAttributes = allowedAMPAttributes[type];
+  const AMPElAttributes = stripAutoAMPAttributes(el.getAttributeNames());
+  const diff = AMPElAttributes.filter(
+    attributes =>
+      !allowedAttributes.some(allowedAttribute =>
+        attributes.startsWith(
+          allowedAttribute === 'data-*' ? 'data-' : allowedAttribute
+        )
+      )
   );
-
-  if (type === 'amp-ad') console.log(diff);
 
   expect(diff).to.have.length(0);
 };
