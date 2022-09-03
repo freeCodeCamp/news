@@ -73,7 +73,7 @@
     "cross-env": "7.0.3",
     "cypress": "10.6.0",
     "dayjs": "1.11.5",
-    "dotenv": "16.0.1",
+    "dotenv": "16.0.2",
     "eslint": "8.23.0",
     "eslint-config-prettier": "8.5.0",
     "eslint-plugin-cypress": "2.12.1",
