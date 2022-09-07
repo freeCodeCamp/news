@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   const getHits = async pageNo => {
     const eleventyEnv = '{{ secrets.eleventyEnv }}';
+    const currentLocale_i18n = '{{ secrets.currentLocale_i18n }}';
 
     try {
       if (eleventyEnv === 'ci') {
@@ -14,7 +15,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         );
         const mockHits = await response.json();
 
-        return mockHits;
+        return mockHits[currentLocale_i18n];
       }
 
       // eslint-disable-next-line no-undef
