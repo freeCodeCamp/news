@@ -3,12 +3,11 @@ const selectors = {
   translatedArticleTitle:
     'El Desafío #100DaysOfCode, su historia y por qué debes hacerlo para el 2021',
   authorList: "[data-test-label='author-list']",
-  authorProfileImage: "[data-test-label='profile-image']",
-  avatar: "[data-test-label='avatar']",
   authorListItem: "[data-test-label='author-list-item']",
   translatorListItem: "[data-test-label='translator-list-item']",
   profileImage: "[data-test-label='profile-image']",
   profileLink: "[data-test-label='profile-link']",
+  avatar: "[data-test-label='avatar']", // To do: Add tests for a translated article where the original author doesn't have a profile image
   postPublishedTime: "[data-test-label='post-published-time']",
   authorName: 'Quincy Larson',
   translatorName: 'Rafael D. Hernandez'
@@ -26,16 +25,8 @@ describe('Search results', () => {
     cy.visit('/search?query=mock%20search%20results');
   });
 
-  context('General tests', () => {
-    it('should render basic components', () => {
-      cy.get('nav').should('be.visible');
-      cy.get('.banner').should('be.visible');
-      cy.get('footer').should('be.visible');
-    });
-  });
-
   context('Original author / translator feature', () => {
-    it('the author list should contain an author list item and a translator list item', () => {
+    it('the post card should contain an author list with inner author and translator list items', () => {
       cy.get(selectors.postCard)
         .contains(selectors.translatedArticleTitle)
         .parentsUntil('article')
@@ -58,7 +49,7 @@ describe('Search results', () => {
         });
     });
 
-    it("the author list item's profile image should be wrapped in an anchor that points to the author's page", () => {
+    it("the author's profile image should be wrapped in an anchor with the full URL to the author's page", () => {
       cy.get(selectors.postCard)
         .contains(selectors.translatedArticleTitle)
         .parentsUntil('article')
@@ -72,7 +63,7 @@ describe('Search results', () => {
         });
     });
 
-    it("the author list item's profile link should contain the author's name", () => {
+    it("the author's profile link should contain the author's localized title and name", () => {
       cy.get(selectors.postCard)
         .contains(selectors.translatedArticleTitle)
         .parentsUntil('article')
@@ -85,7 +76,7 @@ describe('Search results', () => {
         });
     });
 
-    it("the author list item's profile link should be a full URL that points to the original author's page", () => {
+    it("the author's profile link should be a full URL that points to the author's page", () => {
       cy.get(selectors.postCard)
         .contains(selectors.translatedArticleTitle)
         .parentsUntil('article')
@@ -98,7 +89,7 @@ describe('Search results', () => {
         });
     });
 
-    it("the author list item's post published time should convert to the expected UTC string", () => {
+    it("the author's'post published time should convert to the expected UTC string", () => {
       cy.get(selectors.postCard)
         .contains(selectors.translatedArticleTitle)
         .parentsUntil('article')
@@ -113,7 +104,7 @@ describe('Search results', () => {
         });
     });
 
-    it('the translator list item should have profile image, profile link, and post published time elements', () => {
+    it('the translator should have profile image, profile link, and post published time elements', () => {
       cy.get(selectors.postCard)
         .contains(selectors.translatedArticleTitle)
         .parentsUntil('article')
@@ -125,7 +116,7 @@ describe('Search results', () => {
         });
     });
 
-    it("the translator list item's profile image should be wrapped in an anchor that points to the full URL of the translator's page", () => {
+    it("the translator's profile image should be wrapped in an anchor with the full URL to the translator's page", () => {
       cy.get(selectors.postCard)
         .contains(selectors.translatedArticleTitle)
         .parentsUntil('article')
@@ -134,12 +125,12 @@ describe('Search results', () => {
         .parent()
         .then($el => {
           expect($el.attr('href')).to.deep.equal(
-            'http://localhost:8080/espanol/news/author/rafael/'
+            'https://www.freecodecamp.org/espanol/news/author/rafael/'
           );
         });
     });
 
-    it("the translator list item's profile link should contain the author's name", () => {
+    it("the translator's profile link should contain the translator's localized title and name", () => {
       cy.get(selectors.postCard)
         .contains(selectors.translatedArticleTitle)
         .parentsUntil('article')
@@ -152,7 +143,7 @@ describe('Search results', () => {
         });
     });
 
-    it("the translator list item's profile link should be a full URL of the translator's page", () => {
+    it("the translator's profile link should be a full URL of the translator's page", () => {
       cy.get(selectors.postCard)
         .contains(selectors.translatedArticleTitle)
         .parentsUntil('article')
@@ -160,12 +151,12 @@ describe('Search results', () => {
         .find(selectors.profileLink)
         .then($el => {
           expect($el.attr('href')).to.deep.equal(
-            'http://localhost:8080/espanol/news/author/rafael/'
+            'https://www.freecodecamp.org/espanol/news/author/rafael/'
           );
         });
     });
 
-    it("the translator list item's post published time should convert to the expected UTC string", () => {
+    it("the translator's post published time should convert to the expected UTC string", () => {
       cy.get(selectors.postCard)
         .contains(selectors.translatedArticleTitle)
         .parentsUntil('article')
