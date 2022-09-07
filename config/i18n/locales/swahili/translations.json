@@ -90,5 +90,6 @@
     "message": "Kivinjari chako hakitumii HTML5 {{ element }}.",
     "audio": "audio",
     "video": "video"
-  }
+  },
+  "ad-text": "Advertisement"
 }

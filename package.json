@@ -71,10 +71,10 @@
     "@tryghost/helpers": "1.1.72",
     "clean-css": "5.3.1",
     "cross-env": "7.0.3",
-    "cypress": "10.6.0",
+    "cypress": "10.7.0",
     "dayjs": "1.11.5",
-    "dotenv": "16.0.1",
-    "eslint": "8.22.0",
+    "dotenv": "16.0.2",
+    "eslint": "8.23.0",
     "eslint-config-prettier": "8.5.0",
     "eslint-plugin-cypress": "2.12.1",
     "eslint-plugin-ghost": "2.15.1",
@@ -98,7 +98,7 @@
     "probe-image-size": "7.2.3",
     "sanitize-html": "2.7.1",
     "shx": "0.3.4",
-    "terser": "5.14.2",
+    "terser": "5.15.0",
     "xml2js": "0.4.23"
   },
   "lint-staged": {

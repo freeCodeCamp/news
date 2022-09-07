@@ -90,5 +90,6 @@
     "message": "اپکا browser HTML 5 سپورٹ نہیں کرتا {{ element }}.",
     "audio": "audio",
     "video": "video"
-  }
+  },
+  "ad-text": "Advertisement"
 }
