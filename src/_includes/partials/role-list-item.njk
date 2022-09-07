@@ -28,8 +28,7 @@
             <a class="meta-item" href="{{ authorOrTranslatorURL }}" data-test-label="profile-link">
                 {% if role === 'author' %}
                     {% t 'original-author-translator.roles.author', {
-                        name: authorOrTranslator.name,
-                        locale: (locale | title)
+                        name: authorOrTranslator.name
                     } %}
                 {% elif role === 'translator' %}
                     {% t 'original-author-translator.roles.translator', {

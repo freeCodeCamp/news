@@ -44,7 +44,7 @@
   "learn-to-code-cta": "مفت میں coding کرنا سیکھیں. freeCodeCamp کے open source نصاب نے 40،000 سے زیادہ لوگوں کو ڈویلپر جاب ملنے میں مدد کی ہے. {{ <0> }} شروع کریں{{ </0> }}",
   "original-author-translator": {
     "roles": {
-      "author": "مصنف: {{ name }} ({{ locale }})",
+      "author": "مصنف: {{ name }}",
       "translator": "مترجم: {{ name }}"
     },
     "details": {

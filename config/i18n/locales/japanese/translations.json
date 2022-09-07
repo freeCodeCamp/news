@@ -44,7 +44,7 @@
   "learn-to-code-cta": "コーディングを無料で学びましょう。freeCodeCamp のオープンソースカリキュラムによって、40,000 人以上の人々が開発者としての仕事を得ています。{{ <0> }}始める{{ </0> }}",
   "original-author-translator": {
     "roles": {
-      "author": "著者: {{ name }} ({{ locale }})",
+      "author": "著者: {{ name }}",
       "translator": "翻訳: {{ name }}"
     },
     "details": {

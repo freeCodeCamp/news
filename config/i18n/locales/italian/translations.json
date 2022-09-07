@@ -44,7 +44,7 @@
   "learn-to-code-cta": "Impara a programmare gratuitamente. Il curriculum open source di freeCodeCamp ha aiutato più di 40.ooo persone ad ottenere un lavoro come programmatori. {{ <0> }}Inizia{{ </0> }}",
   "original-author-translator": {
     "roles": {
-      "author": "Autore: {{ name }} ({{ locale }})",
+      "author": "Autore: {{ name }}",
       "translator": "Traduttore: {{ name }}"
     },
     "details": {

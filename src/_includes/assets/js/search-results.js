@@ -118,7 +118,7 @@ document.addEventListener('DOMContentLoaded', async () => {
               <a class="meta-item" href="${hit.originalPost.author.url}">
                 {% t 'original-author-translator.roles.author', { name: '${
                   hit.originalPost.author.name
-                }', locale: '${hit.originalPost.localeI18n}' } %}
+                }' } %}
               </a>
               <time class="meta-item" datetime="${
                 hit.originalPost.publishedAt

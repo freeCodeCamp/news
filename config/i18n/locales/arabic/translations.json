@@ -44,7 +44,7 @@
   "learn-to-code-cta": "تعلم البرمجة مجانا. ساعد منهج freeCodeCamp مفتوح المصدر أكثر من ٤٠ ألف شخص في الحصول على وظائف كمطورين. {{ <0> }}ابدأ الان{{ </0> }}",
   "original-author-translator": {
     "roles": {
-      "author": "المؤلف: {{ name }} ({{ locale }})",
+      "author": "المؤلف: {{ name }}",
       "translator": "المترجم: {{ name }}"
     },
     "details": {

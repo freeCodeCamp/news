@@ -44,7 +44,7 @@
   "learn-to-code-cta": "Aprenda a programar gratuitamente. O plano de estudos em código aberto do freeCodeCamp já ajudou mais de 40.000 pessoas a obter empregos como desenvolvedores. {{ <0> }}Comece agora{{ </0> }}",
   "original-author-translator": {
     "roles": {
-      "author": "Autor: {{ name }} (em {{ locale }})",
+      "author": "Autor: {{ name }}",
       "translator": "Tradutor: {{ name }}"
     },
     "details": {

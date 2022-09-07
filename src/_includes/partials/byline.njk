@@ -1,4 +1,4 @@
-{% macro byline(authorOrTranslator, lazyLoad, showBio, role, locale) %}
+{% macro byline(authorOrTranslator, lazyLoad, showBio, role) %}
     {# Use the full URL for original authors, and a relative path for
     translators and regular authors #}
     {% set authorOrTranslatorURL = authorOrTranslator.url if role === "author" else (authorOrTranslator.path | url) %}
@@ -28,8 +28,7 @@
                 <a href="{{ authorOrTranslatorURL }}" data-test-label="profile-link">
                     {% if role === 'author' %}
                         {% t 'original-author-translator.roles.author', {
-                            name: authorOrTranslator.name,
-                            locale: (locale | title)
+                            name: authorOrTranslator.name
                         } %}
                     {% elif role === 'translator' %}
                         {% t 'original-author-translator.roles.translator', {

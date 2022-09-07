@@ -44,7 +44,7 @@
   "learn-to-code-cta": "Jifunze kuweka msimbo bila malipo. Mtaala wa chanzo wazi wa freeCodeCamp umesaidia zaidi ya watu 40,000 kupata kazi kama wasanidi. {{ <0> }}Anza{{ </0> }}",
   "original-author-translator": {
     "roles": {
-      "author": "Mwandishi: {{ name }} ({{ locale }})",
+      "author": "Mwandishi: {{ name }}",
       "translator": "Mfasiri: {{ name }}"
     },
     "details": {

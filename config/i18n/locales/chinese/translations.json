@@ -38,7 +38,7 @@
   "learn-to-code-cta": "在 freeCodeCamp 免费学习编程。 freeCodeCamp 的开源课程已帮助 40,000 多人获得开发者工作。{{ <0> }}开始学习{{ </0> }}",
   "original-author-translator": {
     "roles": {
-      "author": "作者: {{ name }} ({{ locale }})",
+      "author": "作者: {{ name }}",
       "translator": "译者: {{ name }}"
     },
     "details": {
