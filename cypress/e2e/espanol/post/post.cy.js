@@ -8,8 +8,10 @@ const selectors = {
   authorBio: "[data-test-label='author-bio']",
   translatorBio: "[data-test-label='translator-bio']",
   authorIntro: "[data-test-label='author-intro']",
-  originalArticle: "[data-test-label='original-article']",
+  originalArticleLink: "[data-test-label='original-article-link']",
   translatorIntro: "[data-test-label='translator-intro']",
+  originalArticleTitle:
+    'The #100DaysOfCode Challenge, its history, and why you should try it for 2021',
   authorName: 'Quincy Larson',
   translatorName: 'Rafael D. Hernandez'
 };
@@ -111,9 +113,10 @@ describe('Post', () => {
           });
       });
 
-      it("the author card should contain the author's localized title and name", () => {
+      it("the author's profile link should contain the author's localized title and name", () => {
         cy.get(selectors.authorHeaderWithBio)
           .find(selectors.authorCard)
+          .find(selectors.profileLink)
           .then($el => {
             expect($el.text().trim()).to.deep.equal(
               `Autor: ${selectors.authorName}`
@@ -121,7 +124,7 @@ describe('Post', () => {
           });
       });
 
-      it("the author card's profile link should be a full URL that points to the original author's page", () => {
+      it("the author's profile link should be a full URL that points to the original author's page", () => {
         cy.get(selectors.authorHeaderWithBio)
           .find(selectors.authorCard)
           .find(selectors.profileLink)
@@ -132,7 +135,7 @@ describe('Post', () => {
           });
       });
 
-      it("the author card's bio should contain the expected text", () => {
+      it("the author's bio should contain the expected text", () => {
         cy.get(selectors.authorHeaderWithBio)
           .find(selectors.authorCard)
           .find(selectors.authorBio)
@@ -149,9 +152,10 @@ describe('Post', () => {
           });
       });
 
-      it("the translator card should contain the translator's localized title name", () => {
+      it("the translator's profile link should contain the translator's localized title name", () => {
         cy.get(selectors.authorHeaderWithBio)
           .find(selectors.translatorCard)
+          .find(selectors.profileLink)
           .then($el => {
             expect($el.text().trim()).to.deep.equal(
               `Traducido y adaptado por: ${selectors.translatorName}`
@@ -159,7 +163,7 @@ describe('Post', () => {
           });
       });
 
-      it("the translator card's profile link should be a relative URL that points to the translator's page on the current instance of News", () => {
+      it("the translator's profile link should be a relative URL that points to the translator's page on the current instance of News", () => {
         cy.get(selectors.authorHeaderWithBio)
           .find(selectors.translatorCard)
           .find(selectors.profileLink)
@@ -170,7 +174,7 @@ describe('Post', () => {
           });
       });
 
-      it("the translator card's bio should contain the expected text", () => {
+      it("the translator's bio should contain the expected text", () => {
         cy.get(selectors.authorHeaderWithBio)
           .find(selectors.translatorCard)
           .find(selectors.translatorBio)
@@ -185,31 +189,34 @@ describe('Post', () => {
     context('Translated article intro', () => {
       it("the author intro should contain links to the original article and author's page", () => {
         cy.get(selectors.authorIntro).then($el => {
-          cy.wrap($el).find(selectors.originalArticle);
+          cy.wrap($el).find(selectors.originalArticleLink);
           cy.wrap($el).find(selectors.profileLink);
         });
       });
 
-      it('the link to the original article should contain the expected text and `href` attribute', () => {
+      it('the original article intro should contain the expected text', () => {
+        cy.get(selectors.authorIntro).then($el => {
+          expect($el.text().trim()).to.deep.equal(
+            `Artículo original: ${selectors.originalArticleTitle} por ${selectors.authorName}`
+          );
+        });
+      });
+
+      it('the link to the original article should point to the expected full URL', () => {
         cy.get(selectors.authorIntro)
-          .find(selectors.originalArticle)
+          .find(selectors.originalArticleLink)
           .then($el => {
-            cy.wrap($el).contains(
-              'The #100DaysOfCode Challenge, its history, and why you should try it for 2021'
-            );
             expect($el.attr('href')).to.deep.equal(
               'https://www.freecodecamp.org/news/the-crazy-history-of-the-100daysofcode-challenge-and-why-you-should-try-it-for-2018-6c89a76e298d/'
             );
           });
       });
 
-      it("the author intro's profile link should contain the author's localized title and name", () => {
+      it("the author intro's profile link should contain the author's and name", () => {
         cy.get(selectors.authorIntro)
           .find(selectors.profileLink)
           .then($el => {
-            expect($el.text().trim()).to.deep.equal(
-              `Autor: ${selectors.authorName}`
-            );
+            expect($el.text().trim()).to.deep.equal(selectors.authorName);
           });
       });
 
@@ -229,9 +236,16 @@ describe('Post', () => {
         });
       });
 
-      it("the translator's intro should  should be a relative URL that points to the translator's page on the current instance of News", () => {
-        cy.get(selectors.authorHeaderWithBio)
-          .find(selectors.translatorCard)
+      it('the translator intro should contain the expected text', () => {
+        cy.get(selectors.translatorIntro).then($el => {
+          expect($el.text().trim()).to.deep.equal(
+            `Traducido y adaptado por: ${selectors.translatorName}`
+          );
+        });
+      });
+
+      it("the translator intro's profile link should be a relative URL that points to the translator's page on the current instance of News", () => {
+        cy.get(selectors.translatorIntro)
           .find(selectors.profileLink)
           .then($el => {
             expect($el.attr('href')).to.deep.equal(

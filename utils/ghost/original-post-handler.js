@@ -58,7 +58,7 @@ const originalPostHandler = async post => {
         {
           '<0>': '<strong>',
           '</0>': '</strong>',
-          title: `<a href="${originalPost.url}" target="_blank" rel="noopener noreferrer" data-test-label="original-article">${originalPost.title}</a>`,
+          title: `<a href="${originalPost.url}" target="_blank" rel="noopener noreferrer" data-test-label="original-article-link">${originalPost.title}</a>`,
           author: `<a href="${originalPost.primary_author.url}" target="_blank" rel="noopener noreferrer" data-test-label="profile-link">${originalPost.primary_author.name}</a>`,
           interpolation: {
             escapeValue: false
