@@ -41,10 +41,14 @@ describe('Post', () => {
           });
       });
 
-      it("the author card's profile link should contain the author's name and the locale of the original article", () => {
+      it("the author card's profile link should contain the author's localized title and name", () => {
         cy.get(selectors.authorHeaderNoBio)
           .find(selectors.authorCard)
-          .contains(`${selectors.authorName}`);
+          .then($el => {
+            expect($el.text().trim()).to.deep.equal(
+              `Autor: ${selectors.authorName}`
+            );
+          });
       });
 
       it("the author card's profile link should be a full URL that points to the original author's page", () => {
@@ -67,10 +71,14 @@ describe('Post', () => {
           });
       });
 
-      it("the translator card's profile link should contain the translator's name", () => {
+      it("the translator card's profile link should contain the translator's localized title and name", () => {
         cy.get(selectors.authorHeaderNoBio)
           .find(selectors.translatorCard)
-          .contains(selectors.translatorName);
+          .then($el => {
+            expect($el.text().trim()).to.deep.equal(
+              `Traducido y adaptado por: ${selectors.translatorName}`
+            );
+          });
       });
 
       it("the translator card's profile link should be a relative URL that points to the translator's page on the current instance of News", () => {
@@ -103,10 +111,14 @@ describe('Post', () => {
           });
       });
 
-      it("the author card should contain the author's name and the locale of the original article", () => {
+      it("the author card should contain the author's localized title and name", () => {
         cy.get(selectors.authorHeaderWithBio)
           .find(selectors.authorCard)
-          .contains(`${selectors.authorName}`);
+          .then($el => {
+            expect($el.text().trim()).to.deep.equal(
+              `Autor: ${selectors.authorName}`
+            );
+          });
       });
 
       it("the author card's profile link should be a full URL that points to the original author's page", () => {
@@ -137,10 +149,14 @@ describe('Post', () => {
           });
       });
 
-      it("the translator card should contain the translator's name", () => {
+      it("the translator card should contain the translator's localized title name", () => {
         cy.get(selectors.authorHeaderWithBio)
           .find(selectors.translatorCard)
-          .contains(selectors.translatorName);
+          .then($el => {
+            expect($el.text().trim()).to.deep.equal(
+              `Traducido y adaptado por: ${selectors.translatorName}`
+            );
+          });
       });
 
       it("the translator card's profile link should be a relative URL that points to the translator's page on the current instance of News", () => {
@@ -187,10 +203,14 @@ describe('Post', () => {
           });
       });
 
-      it("the author intro's profile link should contain the author's name", () => {
+      it("the author intro's profile link should contain the author's localized title and name", () => {
         cy.get(selectors.authorIntro)
           .find(selectors.profileLink)
-          .contains(selectors.authorName);
+          .then($el => {
+            expect($el.text().trim()).to.deep.equal(
+              `Autor: ${selectors.authorName}`
+            );
+          });
       });
 
       it("the author intro's profile link should be a full URL that points to the original author's page", () => {

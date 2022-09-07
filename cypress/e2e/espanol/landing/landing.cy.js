@@ -65,13 +65,17 @@ describe('Landing', () => {
         });
     });
 
-    it("the author list item's profile link should contain the author's name and the locale of the original article", () => {
+    it("the author list item's profile link should contain the author's localized title and name", () => {
       cy.get(selectors.postCard)
         .contains(selectors.translatedArticleTitle)
         .parentsUntil('article')
         .find(selectors.authorListItem)
         .find(selectors.profileLink)
-        .contains(`${selectors.authorName}`);
+        .then($el => {
+          expect($el.text().trim()).to.deep.equal(
+            `Autor: ${selectors.authorName}`
+          );
+        });
     });
 
     it("the author list item's profile link should be a full URL that points to the original author's page", () => {
@@ -128,13 +132,17 @@ describe('Landing', () => {
         });
     });
 
-    it("the translator list item's profile link should contain the author's name and the locale of the original article", () => {
+    it("the translator list item's profile link should contain the translators's localized title and name", () => {
       cy.get(selectors.postCard)
         .contains(selectors.translatedArticleTitle)
         .parentsUntil('article')
         .find(selectors.translatorListItem)
         .find(selectors.profileLink)
-        .contains(selectors.translatorName);
+        .then($el => {
+          expect($el.text().trim()).to.deep.equal(
+            `Traducido y adaptado por: ${selectors.translatorName}`
+          );
+        });
     });
 
     it("the translator list item's profile link should be a relative URL of the translator's page on the current News instance", () => {
