@@ -3,8 +3,7 @@ const selectors = {
   AMPAuthor: "[data-test-label='amp-author']",
   AMPTranslator: "[data-test-label='amp-translator']",
   authorName: 'Quincy Larson',
-  translatorName: 'Rafael D. Hernandez',
-  originalLocale: 'English'
+  translatorName: 'Rafael D. Hernandez'
 };
 
 describe('AMP page', () => {
@@ -22,9 +21,7 @@ describe('AMP page', () => {
     });
 
     it("the AMP Author element should contain the author's name and the locale of the original article", () => {
-      cy.get(selectors.AMPAuthor).contains(
-        `${selectors.authorName} (${selectors.originalLocale})`
-      );
+      cy.get(selectors.AMPAuthor).contains(`${selectors.authorName}`);
     });
 
     it("the AMP Translator element should contain the translator's name", () => {

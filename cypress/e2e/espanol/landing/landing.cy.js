@@ -9,8 +9,7 @@ const selectors = {
   profileLink: "[data-test-label='profile-link']",
   postPublishedTime: "[data-test-label='post-published-time']",
   authorName: 'Quincy Larson',
-  translatorName: 'Rafael D. Hernandez',
-  originalLocale: 'English'
+  translatorName: 'Rafael D. Hernandez'
 };
 
 describe('Landing', () => {
@@ -72,7 +71,7 @@ describe('Landing', () => {
         .parentsUntil('article')
         .find(selectors.authorListItem)
         .find(selectors.profileLink)
-        .contains(`${selectors.authorName} (${selectors.originalLocale})`);
+        .contains(`${selectors.authorName}`);
     });
 
     it("the author list item's profile link should be a full URL that points to the original author's page", () => {
