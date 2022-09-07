@@ -66,6 +66,58 @@ document.addEventListener('DOMContentLoaded', async () => {
       </a>
     `;
 
+    const generateRoleListItem = (authorOrTranslator, publishedAt, role) => {
+      return `
+        <li class="author-list-item" data-test-label="${
+          role === 'translator' ? 'translator-list-item' : 'author-list-item'
+        }">
+          <a href="${authorOrTranslator.url}" class="static-avatar">
+            ${
+              authorOrTranslator.profileImage
+                ? `<img
+                  class="author-profile-image"
+                  src="${getResizedImage(authorOrTranslator.profileImage, 30)}"
+                  alt="${authorOrTranslator.name}"
+                  width="30"
+                  height="30"
+                  ${lazyLoad ? 'loading="lazy"' : ''}
+                  data-test-label="profile-image"
+                >`
+                : `<span class="avatar-wrapper">
+                  {% set avatarTitle = "${authorOrTranslator.name}" %}
+                  {% include "partials/icons/avatar.njk" %}
+                </span>`
+            }
+          </a>
+          <span class="meta-content">
+            <a class="meta-item" href="${
+              authorOrTranslator.url
+            }" data-test-label="profile-link">
+              ${
+                role === 'translator'
+                  ? `
+                {% t 'original-author-translator.roles.translator', {
+                  name: '${authorOrTranslator.name}'
+                } %}
+              `
+                  : role === 'author'
+                  ? `
+                  {% t 'original-author-translator.roles.author', {
+                    name: '${authorOrTranslator.name}'
+                  } %}`
+                  : `
+                ${authorOrTranslator.name}
+              `
+              }
+            </a>
+            <time class="meta-item" datetime="${publishedAt}" data-test-label="post-published-time">
+              {% timeAgo publishedAt %}
+            </time>
+          </span>
+        </li>
+      `;
+    };
+
     const headerEl = `
       <header class="post-card-header">
         ${
@@ -81,92 +133,6 @@ document.addEventListener('DOMContentLoaded', async () => {
             </a>
           </h2>
       </header>
-    `;
-
-    const authorList = `
-      <ul class="author-list" data-test-label="author-list">
-        ${
-          hit.originalPost
-            ? `
-          <li class="author-list-item">
-            <a href="${hit.originalPost.author.url}" class="static-avatar">
-            ${
-              hit.originalPost.author.profileImage
-                ? `
-              <img
-                  class="author-profile-image"
-                  src="${getResizedImage(
-                    hit.originalPost.author.profileImage,
-                    30
-                  )}"
-                  alt="${hit.originalPost.author.name}"
-                  width="30"
-                  height="30"
-                  ${lazyLoad ? 'loading="lazy"' : ''}
-                  data-test-label="author-profile-image"
-                >
-              `
-                : `
-                <span class="avatar-wrapper">
-                  {% set avatarTitle = "${hit.originalPost.author.name}" %}
-                  {% include "partials/icons/avatar.njk" %}
-                </span>
-              `
-            }
-            </a>
-            <span class="meta-content">
-              <a class="meta-item" href="${hit.originalPost.author.url}">
-                {% t 'original-author-translator.roles.author', { name: '${
-                  hit.originalPost.author.name
-                }' } %}
-              </a>
-              <time class="meta-item" datetime="${
-                hit.originalPost.publishedAt
-              }"></time>
-            </span>
-          </li>
-        `
-            : ''
-        }
-        <li class="author-list-item">
-          <a href="${hit.author.url}" class="static-avatar">
-            ${
-              hit.author.profileImage
-                ? `
-              <img
-                class="author-profile-image"
-                src="${getResizedImage(hit.author.profileImage, 30)}"
-                alt="${hit.author.name}"
-                width="30"
-                height="30"
-                ${lazyLoad ? 'loading="lazy"' : ''}
-                data-test-label="author-profile-image"
-              >
-            `
-                : `
-              <span class="avatar-wrapper">
-                {% set avatarTitle = "${hit.author.name}" %}
-                {% include "partials/icons/avatar.njk" %}
-              </span>
-            `
-            }
-          </a>
-          <span class="meta-content">
-            <a class="meta-item" href="${hit.author.url}">
-              ${
-                hit.originalPost
-                  ? `
-                {% t 'original-author-translator.roles.translator', { name: '${hit.author.name}' } %}
-              `
-                  : `
-                ${hit.author.name}
-              `
-              }
-            </a>
-            <time class="meta-item" datetime="${hit.publishedAt}"></time>
-          </span>
-        </li>
-      </ul>
     `;
 
     const articleEl = document.createElement('article');
@@ -188,7 +154,28 @@ document.addEventListener('DOMContentLoaded', async () => {
               ? `
           <time class="meta-item-single" datetime="${hit.publishedAt}"></time>
           `
-              : authorList
+              : `
+            <ul class="author-list" data-test-label="author-list">
+              ${
+                hit.originalPost
+                  ? `
+                ${generateRoleListItem(
+                  hit.originalPost.author,
+                  hit.originalPost.publishedAt,
+                  'author'
+                )}
+                ${generateRoleListItem(
+                  hit.author,
+                  hit.publishedAt,
+                  'translator'
+                )}  
+              `
+                  : `
+                ${generateRoleListItem(hit.author, hit.publishedAt)}
+              `
+              }
+            </ul>  
+            `
           }
         </footer>
       </div>
