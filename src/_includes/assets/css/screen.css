@@ -2377,13 +2377,15 @@ a.banner:hover span {
 
 .ad-container ins {
   min-width: 300px;
+  max-width: 740px; /* Max width of main content area */
+  width: 100%;
   min-height: 250px;
-  max-width: 336px;
-  max-height: 280px;
+  max-height: 480px; /* Consider increasing to 600px to allow half page unit ads */
+  height: 100%;
 }
 
 .ad-container.banner ins {
-  min-width: 100%;
+  min-width: 100%; /* Enables larger banner size of ~1020 x 250 */
 }
 
 /* Apply the following styles for unauthenticated readers */
