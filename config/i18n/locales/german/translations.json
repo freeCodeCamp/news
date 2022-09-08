@@ -1,0 +1,97 @@
+{
+  "buttons": {
+    "forum": "Forum",
+    "donate": "Spende",
+    "load-more-articles": "Weitere Artikel laden"
+  },
+  "search": {
+    "label": "Suche",
+    "accessible-name": "Sende deine Suchanfrage ab",
+    "placeholder": "Mehr als 8.000 Tutorials durchsuchen",
+    "see-results": "Zeige alle Ergebnisse für {{ searchQuery }}",
+    "no-tutorials": "Keine Tutorials gefunden"
+  },
+  "banner": {
+    "default": "Programmieren lernen - {{ <0> }}kostenloser 3.000-Stunden-Lehrplan{{ </0> }}",
+    "authenticated": "Unterstütze unsere gemeinnützige Organisation und unsere Mission. {{ <0> }}Spende an freeCodeCamp.org{{ </0> }}.",
+    "authenticated-donor": "Vielen Dank, dass du das freeCodeCamp durch deine Spenden unterstützt{{ <0> }}."
+  },
+  "default-bio": "Lies {{ <0> }}mehr Beiträge{{ </0> }}.",
+  "author": {
+    "no-posts": "Keine Beiträge",
+    "one-post": "1 Beitrag",
+    "multiple-posts": "{{ postCount }} Beiträge"
+  },
+  "tag": {
+    "no-posts": "Eine Sammlung von Beiträgen",
+    "one-post": "Eine Sammlung von 1 Beitrag",
+    "multiple-posts": "Eine Sammlung von {{ postCount }} Beiträgen"
+  },
+  "404": {
+    "page-not-found": "Seite nicht gefunden",
+    "go-to-front-page": "Zur Startseite gehen"
+  },
+  "social-row": {
+    "cta": {
+      "tweet-a-thanks": "Wenn du bis hierher gelesen hast, tweete dem Autor, um ihm zu zeigen, dass du ihn schätzt. {Tweete ein Dankeschön{{ </0> }}",
+      "tweet-it": "Wenn dieser Artikel hilfreich war, {{ <0> }} tweete ihn{{ </0> }}."
+    },
+    "tweets": {
+      "default": "Vielen Dank {{ author }}, dass du diesen hilfreichen Artikel geschrieben hast.",
+      "translation": "Vielen Dank {{ Autor }} für diesen hilfreichen Artikel und {{ translator }} für die Übersetzung."
+    }
+  },
+  "learn-to-code-cta": "Lerne kostenlos programmieren. Der Open-Source-Lehrplan von freeCodeCamp hat schon mehr als 40.000 Menschen geholfen, einen Job als Entwickler zu finden. Los geht's{{ <0> }}Beginnen{{ </0> }}",
+  "original-author-translator": {
+    "roles": {
+      "author": "Autor: {{ Name }} ({{ locale }})",
+      "translator": "Übersetzer: {{ Name }}"
+    },
+    "details": {
+      "original-article": "{{ <0> }}Originalartikel:{{ </0> }} {{ title }} von {{ author }}",
+      "translated-by": "{{ <0> }}Übersetzt von:{{ </0> }} {{ Übersetzer }}"
+    },
+    "locales": {
+      "arabic": "Arabisch",
+      "bengali": "Bengali",
+      "chinese": "Chinesisch",
+      "english": "Englisch",
+      "espanol": "Spanisch",
+      "french": "Französisch",
+      "italian": "Italienisch",
+      "japanese": "Japanisch",
+      "korean": "Koreanisch",
+      "portuguese": "Portugiesisch",
+      "swahili": "Swahili",
+      "urdu": "Urdu"
+    }
+  },
+  "embed-title": "Eingebetteter Inhalt",
+  "footer": {
+    "tax-exempt-status": "freeCodeCamp ist eine von Spenden unterstützte, steuerbefreite 501(c)(3) gemeinnützige Organisation (United States Federal Tax Identification Number: 82-0779546)",
+    "mission-statement": "Unsere Mission: Menschen dabei zu helfen, kostenlos programmieren zu lernen. Das erreichen wir, indem wir Tausende von Videos, Artikeln und interaktiven Programmierkursen erstellen, die der Öffentlichkeit frei zugänglich sind. Außerdem haben wir Tausende von freeCodeCamp Lerngruppen auf der ganzen Welt.",
+    "donation-initiatives": "Spenden für das freeCodeCamp kommen unseren Bildungsinitiativen zugute und helfen, Server, Dienstleistungen und Mitarbeiter zu bezahlen.",
+    "donate-text": "Du kannst {{ <0> }}hier eine steuerlich absetzbare Spende leisten{{ </0> }}.",
+    "trending-guides": "Aktuelle Ratgeber",
+    "our-nonprofit": "Unsere Nonprofit-Organisation",
+    "links": {
+      "about": "Über",
+      "alumni": "Absolventen-Netzwerk",
+      "open-source": "Open Source",
+      "shop": "Shop",
+      "support": "Hilfe",
+      "sponsors": "Sponsoren",
+      "honesty": "Akademische Ehrlichkeit",
+      "coc": "Verhaltenskodex",
+      "privacy": "Datenschutzrichtlinie",
+      "tos": "Allgemeine Geschäftsbedingungen",
+      "copyright": "Urheberrechtsrichtlinie"
+    }
+  },
+  "fallback": {
+    "message": "Dein Browser unterstützt kein HTML5 {{ Element }}.",
+    "audio": "Audio",
+    "video": "Video"
+  },
+  "ad-text": "Werbung"
+}
