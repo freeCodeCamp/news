@@ -64,7 +64,6 @@ jobs:
           wait-on: http://localhost:8080
           wait-on-timeout: 1200
           browser: ${{ matrix.browsers }}
-          headless: true
           spec: cypress/e2e/${{ matrix.languages }}/**/*
 
       - name: Stop Ghost containers
