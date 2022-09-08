@@ -51,26 +51,23 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
 
-      # - name: Install dependencies
-      #   run: npm ci
+      - name: Install dependencies
+        run: npm ci
 
-      - name: Test if Ghost API version secret is passed
-        run: echo "English Ghost API version - ${{ secrets.CI_ENGLISH_GHOST_API_VERSION }}"
+      - name: Start Ghost containers
+        run: npm run start:containers
 
-      # - name: Start Ghost containers
-      #   run: npm run start:containers
+      - name: Start CI server
+        run: npm run start:ci:${{ matrix.languages }}
 
-      # - name: Start CI server
-      #   run: npm run start:ci:${{ matrix.languages }}
+      - name: Run Cypress
+        uses: cypress-io/github-action@v4
+        with:
+          start: npm run cypress:run:${{ matrix.languages }}
+          wait-on: http://localhost:8080
+          wait-on-timeout: 1200
+          browser: ${{ matrix.browsers }}
+          spec: cypress/e2e/${{ matrix.languages }}/**/*
 
-      # - name: Run Cypress
-      #   uses: cypress-io/github-action@v4
-      #   with:
-      #     start: npm run cypress:run:${{ matrix.languages }}
-      #     wait-on: http://localhost:8080
-      #     wait-on-timeout: 1200
-      #     browser: ${{ matrix.browsers }}
-      #     spec: cypress/e2e/${{ matrix.languages }}/**/*
-
-      # - name: Stop Ghost containers
-      #   run: npm run stop:containers
+      - name: Stop Ghost containers
+        run: npm run stop:containers
