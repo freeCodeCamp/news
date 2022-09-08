@@ -57,10 +57,13 @@ jobs:
       - name: Start Ghost containers
         run: npm run start:containers
 
-      - name: Start CI server and run Cypress
+      - name: Start CI server
+        run: npm run start:ci:${{ matrix.languages }}
+
+      - name: Run Cypress
         uses: cypress-io/github-action@v4
         with:
-          start: npm run start:ci:${{ matrix.languages }}
+          start: npm run cypress:run:${{ matrix.languages }}
           wait-on: http://localhost:8080
           wait-on-timeout: 1200
           browser: ${{ matrix.browsers }}
