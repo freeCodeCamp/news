@@ -61,6 +61,18 @@ describe('Ads', () => {
         }
       );
     });
+
+    it('ad elements should have the expected attributes and values', () => {
+      cy.get('.ad-container ins').each($el => {
+        // Test for the bare essential attributes since data-ad-format can cause other attributes to change dynamically
+        // To do: Refactor npm scripts and config to use Cypress env vars for data-ad-client and data-ad-slot. Might also
+        // be able to get rid of the .env.ci file altogether
+        expect($el.attr('data-ad-client')).to.equal('ca-pub-1234567890');
+        expect($el.attr('data-ad-slot')).to.equal('1234567890');
+        expect($el.attr('data-ad-format')).to.equal('rectangle');
+        expect($el.attr('data-full-width-responsive')).to.equal('false');
+      });
+    });
   });
 
   // To do: Add another context for authenticated donors once we start setting that cookie on Learn

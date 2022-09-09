@@ -24,7 +24,7 @@ const generateAdHTML = type => {
         style="display: block;"
         data-ad-client="${googleAdsenseDataAdClient}"
         data-ad-slot="${googleAdsenseDataAdSlot}"
-        data-ad-format="auto"
+        data-ad-format="rectangle"
         data-full-width-responsive="false"
     ></ins>
     <script>
