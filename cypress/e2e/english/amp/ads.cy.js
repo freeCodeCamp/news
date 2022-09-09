@@ -55,8 +55,8 @@ describe('Ads', () => {
       // be able to get rid of the .env.ci file altogether
       expect($el.attr('data-ad-client')).to.equal('ca-pub-1234567890');
       expect($el.attr('data-ad-slot')).to.equal('1234567890');
-      expect($el.attr('width')).to.exist;
-      expect($el.attr('height')).to.exist;
+      expect($el.attr('width')).to.exist; // This attribute is set to 100vw and is set dynamically, so we can't test for a specific value
+      expect($el.attr('height')).to.equal('320');
       expect($el.attr('type')).to.equal('adsense');
     });
   });
