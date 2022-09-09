@@ -221,7 +221,7 @@ const generateAMPObj = async obj => {
       ampAdEl.setAttribute('height', '250');
       ampAdEl.setAttribute('type', 'adsense');
       ampAdEl.setAttribute('layout', 'responsive');
-      ampAdEl.setAttribute('data-full-width', '');
+      ampAdEl.setAttribute('data-full-width', 'false');
 
       adEl.replaceWith(ampAdEl);
     })
