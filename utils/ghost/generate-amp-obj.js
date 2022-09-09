@@ -223,6 +223,9 @@ const generateAMPObj = async obj => {
       ampAdEl.setAttribute('data-auto-format', 'rspv');
       ampAdEl.setAttribute('data-full-width', 'false');
 
+      // Remove attribute that only works on <ins> elements for regular pages
+      ampAdEl.removeAttribute('data-ad-format');
+
       adEl.replaceWith(ampAdEl);
     })
   );
