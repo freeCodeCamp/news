@@ -56,7 +56,7 @@ describe('Ads', () => {
       expect($el.attr('data-ad-client')).to.equal('ca-pub-1234567890');
       expect($el.attr('data-ad-slot')).to.equal('1234567890');
       expect($el.attr('width')).to.exist;
-      expect($el.attr('height')).to.exist;
+      expect(Number($el.attr('height'))).to.be.at.least(320); // Responsive amp-ads must have a height of at least 320
       expect($el.attr('type')).to.equal('adsense');
     });
   });
