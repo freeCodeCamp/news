@@ -14,7 +14,7 @@
   "banner": {
     "default": "Programmieren lernen - {{ <0> }}kostenloser 3.000-Stunden-Lehrplan{{ </0> }}",
     "authenticated": "Unterstütze unsere gemeinnützige Organisation und unsere Mission. {{ <0> }}Spende an freeCodeCamp.org{{ </0> }}.",
-    "authenticated-donor": "Vielen Dank, dass du das freeCodeCamp durch deine Spenden unterstützt{{ <0> }}."
+    "authenticated-donor": "Vielen Dank dafür, dass du freeCodeCamp durch {{ <0> }}deine Spenden{{ </0> }} unterstützt."
   },
   "default-bio": "Lies {{ <0> }}mehr Beiträge{{ </0> }}.",
   "author": {
