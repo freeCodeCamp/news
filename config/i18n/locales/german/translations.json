@@ -7,7 +7,7 @@
   "search": {
     "label": "Suche",
     "accessible-name": "Sende deine Suchanfrage ab",
-    "placeholder": "Mehr als 8.000 Tutorials durchsuchen",
+    "placeholder": "Suche in unseren Tutorials",
     "see-results": "Zeige alle Ergebnisse für {{ searchQuery }}",
     "no-tutorials": "Keine Tutorials gefunden"
   },
