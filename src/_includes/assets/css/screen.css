@@ -2373,16 +2373,14 @@ a.banner:hover span {
   background-color: var(--gray05);
   text-align: center;
   padding: 10px;
+  min-width: 336px;
+  max-width: 740px; /* Max width of inner main content area */
+  width: 100%;
+  min-height: 280px;
+  max-height: 480px; /* Consider increasing to 600px to allow half page unit ads */
 }
 
-.ad-container ins {
-  min-width: 300px;
-  min-height: 250px;
-  max-width: 336px;
-  max-height: 280px;
-}
-
-.ad-container.banner ins {
+.ad-container.banner {
   min-width: 100%;
 }
 
