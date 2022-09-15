@@ -2374,10 +2374,9 @@ a.banner:hover span {
   text-align: center;
   padding: 10px;
   min-width: 336px;
-  max-width: 740px; /* Max width of inner main content area */
+  max-width: 100%;
   width: 100%;
   min-height: 280px;
-  max-height: 480px; /* Consider increasing to 600px to allow half page unit ads */
 }
 
 .ad-container.banner {
@@ -2395,6 +2394,7 @@ a.banner:hover span {
 
 .ad-container .ad-text {
   font-size: 16px;
+  margin-bottom: 10px;
 }
 
 /* 17. RTL layout
