@@ -32,7 +32,8 @@ const locales = [
   'korean',
   'portuguese',
   'swahili',
-  'urdu'
+  'urdu',
+  'german'
 ];
 
 /* These strings set the i18next language. It needs to be the two character
@@ -51,7 +52,8 @@ const localeCodes = {
   korean: 'ko',
   portuguese: 'pt-BR',
   swahili: 'sw',
-  urdu: 'ur'
+  urdu: 'ur',
+  german: 'de'
 };
 
 const algoliaIndices = {
@@ -66,7 +68,8 @@ const algoliaIndices = {
   korean: 'news-ko',
   portuguese: 'news-pt-br',
   swahili: 'news-sw',
-  urdu: 'news-ur'
+  urdu: 'news-ur',
+  german: 'news-de'
 };
 
 const {
