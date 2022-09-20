@@ -2368,7 +2368,7 @@ a.banner:hover span {
 /* 16. Ads
 /* ---------------------------------------------------------- */
 
-.ad-container {
+.ad-wrapper {
   text-align: center;
   padding: 10px 0;
   min-width: 336px;
@@ -2377,22 +2377,22 @@ a.banner:hover span {
   min-height: 280px;
 }
 
-.ad-container.banner {
+.ad-wrapper.banner {
   min-width: 100%;
 }
 
-.ad-container:not(.ad-container.banner) {
+.ad-wrapper:not(.ad-wrapper.banner) {
   margin: 0 0 1.5em;
 }
 
-.ad-container .ad-text {
+.ad-wrapper .ad-text {
   color: var(--gray75);
   font-size: 1.4rem;
   margin-bottom: 10px;
 }
 
 /* Hide ads for authenticated readers */
-.hide-ads .ad-container {
+.hide-ads .ad-wrapper {
   display: none;
 }
 

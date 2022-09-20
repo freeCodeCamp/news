@@ -1,6 +1,6 @@
 const selectors = {
   AMPAdScript: 'script[src*="amp-ad-0.1.js"]',
-  adContainer: "[data-test-label='ad-container']"
+  adContainer: "[data-test-label='ad-wrapper']"
 };
 
 describe('Ads', () => {

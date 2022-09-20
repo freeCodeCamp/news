@@ -4,7 +4,7 @@ const selectors = {
     toggleAdLayout: '[data-test-label="toggle-ad-layout"]'
   },
   ads: {
-    container: "[data-test-label='ad-container']",
+    container: "[data-test-label='ad-wrapper']",
     text: "[data-test-label='ad-text']"
   }
 };
@@ -57,13 +57,13 @@ describe('Ads', () => {
     it('ads within `section.post-full-content` should not be placed between two adjacent heading elements', () => {
       cy.get('section.post-full-content h1, h2, h3, h4, h5, h6').each(
         $heading => {
-          cy.wrap($heading).next().should('not.have.class', 'ad-container');
+          cy.wrap($heading).next().should('not.have.class', 'ad-wrapper');
         }
       );
     });
 
     it('ad elements should have the expected attributes and values', () => {
-      cy.get('.ad-container ins').each($el => {
+      cy.get('.ad-wrapper ins').each($el => {
         // Test for the bare essential attributes since data-ad-format can cause other attributes to change dynamically
         // To do: Refactor npm scripts and config to use Cypress env vars for data-ad-client and data-ad-slot. Might also
         // be able to get rid of the .env.ci file altogether

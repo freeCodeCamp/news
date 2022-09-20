@@ -29,7 +29,7 @@ const generateAMPObj = async obj => {
   const iframeEls = [...document.getElementsByTagName('iframe')];
   const audioEls = [...document.getElementsByTagName('audio')];
   const videoEls = [...document.getElementsByTagName('video')];
-  const adContainers = [...document.getElementsByClassName('ad-container')];
+  const adContainers = [...document.getElementsByClassName('ad-wrapper')];
 
   const setAllowedAttributes = (type, originalEl, ampEl) => {
     const allowedAttributes = allowedAMPAttributes[type];

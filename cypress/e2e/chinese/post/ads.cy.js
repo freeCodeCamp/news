@@ -3,7 +3,7 @@ const selectors = {
     adsense: 'script[src*="adsbygoogle.js"]',
     toggleAdLayout: '[data-test-label="toggle-ad-layout"]'
   },
-  adContainer: "[data-test-label='ad-container']"
+  adContainer: "[data-test-label='ad-wrapper']"
 };
 
 describe('Ads', () => {
