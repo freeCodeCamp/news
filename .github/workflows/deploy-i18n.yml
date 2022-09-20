@@ -1,4 +1,4 @@
-name: Build and Deploy Localized News to Azure
+name: i18n - Build and Deploy
 
 on:
   workflow_dispatch:
@@ -157,6 +157,7 @@ jobs:
             chinese,
             espanol,
             french,
+            german,
             italian,
             japanese,
             korean,
