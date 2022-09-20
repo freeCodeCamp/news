@@ -69,8 +69,8 @@ describe('Ads', () => {
         // be able to get rid of the .env.ci file altogether
         expect($el.attr('data-ad-client')).to.equal('ca-pub-1234567890');
         expect($el.attr('data-ad-slot')).to.equal('1234567890');
-        expect($el.attr('data-ad-format')).to.equal('rectangle');
-        expect($el.attr('data-full-width-responsive')).to.equal('false');
+        expect($el.attr('data-ad-format')).to.equal('auto');
+        expect($el.attr('data-full-width-responsive')).to.equal('true');
       });
     });
   });

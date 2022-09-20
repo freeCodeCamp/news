@@ -24,8 +24,8 @@ const generateAdHTML = type => {
         style="display: block;"
         data-ad-client="${googleAdsenseDataAdClient}"
         data-ad-slot="${googleAdsenseDataAdSlot}"
-        data-ad-format="rectangle"
-        data-full-width-responsive="false"
+        data-ad-format="auto"
+        data-full-width-responsive="true"
     ></ins>
     <script>
         if (!isAuthenticated) (adsbygoogle = window.adsbygoogle || []).push({});
