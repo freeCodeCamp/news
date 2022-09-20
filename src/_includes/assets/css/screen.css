@@ -2370,9 +2370,8 @@ a.banner:hover span {
 
 .ad-container {
   display: none; /* Hide ads by default for authenticated readers */
-  background-color: var(--gray05);
   text-align: center;
-  padding: 10px;
+  padding: 10px 0;
   min-width: 336px;
   max-width: 100%;
   width: 100%;
@@ -2383,18 +2382,19 @@ a.banner:hover span {
   min-width: 100%;
 }
 
-/* Apply the following styles for unauthenticated readers */
-.ad-layout .ad-container {
-  display: block;
-}
-
 .ad-container:not(.ad-container.banner) {
   margin: 0 0 1.5em;
 }
 
 .ad-container .ad-text {
-  font-size: 16px;
+  color: var(--gray75);
+  font-size: 1.4rem;
   margin-bottom: 10px;
+}
+
+/* Apply the following styles for unauthenticated readers */
+.ad-layout .ad-container {
+  display: block;
 }
 
 /* 17. RTL layout
