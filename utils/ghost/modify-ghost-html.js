@@ -29,7 +29,7 @@ const generateAdHTML = type => {
     ></ins>
     <script>
       window.addEventListener('load', () => {
-          if (notAuthenticated) (adsbygoogle = window.adsbygoogle || []).push({});
+          if (!isAuthenticated) (adsbygoogle = window.adsbygoogle || []).push({});
       });
     </script>
   </div>`;

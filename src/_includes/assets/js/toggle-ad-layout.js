@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const inner = document.querySelector('.inner');
 
   // eslint-disable-next-line no-undef
-  if (notAuthenticated) {
-    inner.classList.add('ad-layout');
+  if (isAuthenticated) {
+    inner.classList.add('hide-ads');
   }
 });

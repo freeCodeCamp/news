@@ -2369,7 +2369,6 @@ a.banner:hover span {
 /* ---------------------------------------------------------- */
 
 .ad-container {
-  display: none; /* Hide ads by default for authenticated readers */
   text-align: center;
   padding: 10px 0;
   min-width: 336px;
@@ -2392,9 +2391,9 @@ a.banner:hover span {
   margin-bottom: 10px;
 }
 
-/* Apply the following styles for unauthenticated readers */
-.ad-layout .ad-container {
-  display: block;
+/* Hide ads for authenticated readers */
+.hide-ads .ad-container {
+  display: none;
 }
 
 /* 17. RTL layout
