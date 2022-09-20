@@ -28,9 +28,7 @@ const generateAdHTML = type => {
         data-full-width-responsive="false"
     ></ins>
     <script>
-      window.addEventListener('load', () => {
-          if (!isAuthenticated) (adsbygoogle = window.adsbygoogle || []).push({});
-      });
+        if (!isAuthenticated) (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
   </div>`;
 };
