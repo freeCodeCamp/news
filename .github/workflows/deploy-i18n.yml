@@ -27,6 +27,7 @@ jobs:
             korean,
             portuguese,
             swahili,
+            ukrainian,
             urdu
           ]
         site_tlds: [org]
@@ -84,6 +85,10 @@ jobs:
       SWAHILI_GHOST_API_URL: ${{ secrets.SWAHILI_GHOST_API_URL }}
       SWAHILI_GHOST_API_VERSION: ${{ secrets.SWAHILI_GHOST_API_VERSION }}
       SWAHILI_GHOST_CONTENT_API_KEY: ${{ secrets.SWAHILI_GHOST_CONTENT_API_KEY }}
+
+      UKRAINIAN_GHOST_API_URL: ${{ secrets.UKRAINIAN_GHOST_API_URL }}
+      UKRAINIAN_GHOST_API_VERSION: ${{ secrets.UKRAINIAN_GHOST_API_VERSION }}
+      UKRAINIAN_GHOST_CONTENT_API_KEY: ${{ secrets.UKRAINIAN_GHOST_CONTENT_API_KEY }}
 
       URDU_GHOST_API_URL: ${{ secrets.URDU_GHOST_API_URL }}
       URDU_GHOST_API_VERSION: ${{ secrets.URDU_GHOST_API_VERSION }}
@@ -163,6 +168,7 @@ jobs:
             korean,
             portuguese,
             swahili,
+            ukrainian,
             urdu
           ]
         site_tlds: [org]
