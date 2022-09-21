@@ -1,9 +1,9 @@
 name: i18n - Download News
 on:
   workflow_dispatch:
-  # schedule:
-  #   # runs every weekday at 1:00 PM UTC
-  #   - cron: '0 13 * * 1-5'
+  schedule:
+    # runs every weekday at 1:00 PM UTC
+    - cron: '0 13 * * 1-5'
 
 env:
   CAMPERBOT_GITHUB_TOKEN: ${{ secrets.CROWDIN_CAMPERBOT_PAT }}
