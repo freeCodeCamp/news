@@ -168,6 +168,7 @@ jobs:
             korean,
             portuguese,
             swahili,
+            ukrainian,
             urdu
           ]
         site_tlds: [org]
