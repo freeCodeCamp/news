@@ -1,4 +1,4 @@
-name: i18n - Upload Docs
+name: i18n - Upload News
 on:
   workflow_dispatch:
   schedule:
@@ -12,8 +12,8 @@ env:
   CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_PROJECT_ID_NEWS }}
 
 jobs:
-  i18n-upload-docs-files:
-    name: Docs
+  i18n-upload-news-files:
+    name: News
     runs-on: ubuntu-20.04
 
     steps:
