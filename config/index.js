@@ -27,15 +27,15 @@ const locales = [
   'english',
   'espanol',
   'french',
+  'german',
+  'haitian',
   'italian',
   'japanese',
   'korean',
   'portuguese',
   'swahili',
-  'urdu',
-  'german',
-  'haitian',
-  'ukrainian'
+  'ukrainian',
+  'urdu'
 ];
 
 /* These strings set the i18next language. It needs to be the two character
@@ -49,15 +49,15 @@ const localeCodes = {
   english: 'en',
   espanol: 'es',
   french: 'fr',
+  german: 'de',
+  haitian: 'ht',
   italian: 'it',
   japanese: 'ja',
   korean: 'ko',
   portuguese: 'pt-BR',
   swahili: 'sw',
-  urdu: 'ur',
-  german: 'de',
-  haitian: 'ht',
-  ukrainian: 'uk'
+  ukrainian: 'uk',
+  urdu: 'ur'
 };
 
 const algoliaIndices = {
@@ -67,15 +67,15 @@ const algoliaIndices = {
   english: 'news',
   espanol: 'news-es',
   french: 'news-fr',
+  german: 'news-de',
+  haitian: 'news-ht',
   italian: 'news-it',
   japanese: 'news-ja',
   korean: 'news-ko',
   portuguese: 'news-pt-br',
   swahili: 'news-sw',
-  urdu: 'news-ur',
-  german: 'news-de',
-  haitian: 'news-ht',
-  ukrainian: 'news-uk'
+  ukrainian: 'news-uk',
+  urdu: 'news-ur'
 };
 
 const {
