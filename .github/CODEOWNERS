@@ -28,3 +28,15 @@ package-lock.json
 
 /package.json
 /package-lock.json
+
+# -------------------------------------------------
+# Exception for i18n PRs
+# -------------------------------------------------
+
+/config/i18n/locales/**/*.json @freecodecamp/i18n
+
+# -------------------------------------------------
+# Revert override for English because codeowners
+# doesn't support negation?
+# -------------------------------------------------
+/config/i18n/locales/english/*.json @freecodecamp/dev-team
