@@ -9,8 +9,8 @@ const getImageDimensions = async (url, title, cache) => {
     if (cache && imageDimensionMap[url]) return imageDimensionMap[url];
 
     const res = await probe(url);
-    const width = res.width ? res.width : defaultDimensions.width;
-    const height = res.height ? res.height : defaultDimensions.height;
+    const width = res?.width ? res?.width : defaultDimensions.width;
+    const height = res?.height ? res?.height : defaultDimensions.height;
 
     if (cache) {
       imageDimensionMap[url] = { width, height };

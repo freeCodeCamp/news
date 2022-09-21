@@ -8,7 +8,7 @@
 #
 #-------------------------------------------------
 
-name: Build and Deploy English News to Azure
+name: Eng - Build and Deploy
 
 on:
   workflow_dispatch:

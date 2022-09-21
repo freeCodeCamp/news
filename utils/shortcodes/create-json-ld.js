@@ -3,10 +3,8 @@ const translate = require('../translate');
 const { siteURL } = require('../../config');
 
 const createImageObj = (url, imageDimensions) => {
-  // To do: Look into why tags with a feature_image sometimes have
-  // an undefined width and/or height
-  const width = imageDimensions.width ? imageDimensions.width : 1920;
-  const height = imageDimensions.height ? imageDimensions.height : 1080;
+  const width = imageDimensions?.width ? imageDimensions?.width : 1920;
+  const height = imageDimensions?.height ? imageDimensions?.height : 1080;
 
   return {
     '@type': 'ImageObject',

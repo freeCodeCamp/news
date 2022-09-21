@@ -1,4 +1,4 @@
-name: Build and Deploy Localized News to Azure
+name: i18n - Build and Deploy
 
 on:
   workflow_dispatch:
@@ -21,6 +21,7 @@ jobs:
             chinese,
             espanol,
             french,
+            german,
             italian,
             japanese,
             korean,
@@ -59,6 +60,10 @@ jobs:
       FRENCH_GHOST_API_URL: ${{ secrets.FRENCH_GHOST_API_URL }}
       FRENCH_GHOST_API_VERSION: ${{ secrets.FRENCH_GHOST_API_VERSION }}
       FRENCH_GHOST_CONTENT_API_KEY: ${{ secrets.FRENCH_GHOST_CONTENT_API_KEY }}
+
+      GERMAN_GHOST_API_URL: ${{ secrets.GERMAN_GHOST_API_URL }}
+      GERMAN_GHOST_API_VERSION: ${{ secrets.GERMAN_GHOST_API_VERSION }}
+      GERMAN_GHOST_CONTENT_API_KEY: ${{ secrets.GERMAN_GHOST_CONTENT_API_KEY }}
 
       ITALIAN_GHOST_API_URL: ${{ secrets.ITALIAN_GHOST_API_URL }}
       ITALIAN_GHOST_API_VERSION: ${{ secrets.ITALIAN_GHOST_API_VERSION }}
@@ -152,6 +157,7 @@ jobs:
             chinese,
             espanol,
             french,
+            german,
             italian,
             japanese,
             korean,

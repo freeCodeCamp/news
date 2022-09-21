@@ -12,7 +12,7 @@
     "no-tutorials": "Não foram encontrados tutoriais"
   },
   "banner": {
-    "default": "{{ <0> }}Converse com outros desenvolvedores em português{{ </0> }}",
+    "default": "Aprenda a programar — {{ <0> }}currículo gratuito de 3 mil horas{{ </0> }}",
     "authenticated": "Apoie nossa organização sem fins lucrativos e nossa missão. {{ <0> }}Faça sua doação para o freeCodeCamp.org{{ </0> }}.",
     "authenticated-donor": "Obrigado por apoiar o freeCodeCamp com {{ <0> }}suas doações{{ </0> }}."
   },
@@ -52,15 +52,18 @@
       "translated-by": "{{ <0> }}Traduzido e adaptado por:{{ </0> }} {{ translator }}"
     },
     "locales": {
+      "arabic": "árabe",
+      "bengali": "bengali",
+      "chinese": "chinês",
       "english": "inglês",
       "espanol": "espanhol",
-      "chinese": "chinês",
-      "portuguese": "português",
+      "french": "francês",
       "italian": "italiano",
       "japanese": "japonês",
-      "arabic": "árabe",
-      "urdu": "urdu",
-      "bengali": "bengali"
+      "korean": "coreano",
+      "portuguese": "português",
+      "swahili": "suaíli",
+      "urdu": "urdu"
     }
   },
   "embed-title": "Conteúdo incorporado",
@@ -78,7 +81,7 @@
       "shop": "Loja",
       "support": "Apoio",
       "sponsors": "Patrocinadores",
-      "honesty": "Honestidade Acadêmica",
+      "honesty": "Honestidade acadêmica",
       "coc": "Código de conduta",
       "privacy": "Política de privacidade",
       "tos": "Termos de serviço",
@@ -86,9 +89,9 @@
     }
   },
   "fallback": {
-    "message": "Seu navegador não oferece suporte a HTML5 {{ element }}.",
-    "audio": "audio",
+    "message": "Seu navegador não oferece suporte a {{ element }} do HTML5.",
+    "audio": "áudio",
     "video": "vídeo"
   },
-  "ad-text": "Advertisement"
+  "ad-text": "Anúncio"
 }
