@@ -10,12 +10,9 @@ const {
 } = require('../../config');
 
 const generateAdHTML = type => {
-  // Note: data-full-width-responsive is set to false to prevent ads from
-  // overflowing their containers. This can work for ads in the body of the
-  // article, but doesn't look good for the banner at the bottom of the page.
-  return `<div class="ad-container ${
+  return `<div class="ad-wrapper ${
     type === 'banner' ? 'banner' : ''
-  }" data-test-label="ad-container">
+  }" data-test-label="ad-wrapper">
     <div class="ad-text" data-test-label="ad-text">${translate(
       'ad-text'
     ).toUpperCase()}</div>
@@ -24,13 +21,11 @@ const generateAdHTML = type => {
         style="display: block;"
         data-ad-client="${googleAdsenseDataAdClient}"
         data-ad-slot="${googleAdsenseDataAdSlot}"
-        data-ad-format="rectangle"
-        data-full-width-responsive="false"
+        data-ad-format="auto"
+        data-full-width-responsive="true"
     ></ins>
     <script>
-      window.addEventListener('load', () => {
-          if (notAuthenticated) (adsbygoogle = window.adsbygoogle || []).push({});
-      });
+        if (!isAuthenticated) (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
   </div>`;
 };

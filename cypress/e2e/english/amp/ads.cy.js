@@ -5,7 +5,7 @@ const {
 const selectors = {
   AMPAdScript: 'script[src*="amp-ad-0.1.js"]',
   ads: {
-    container: "[data-test-label='ad-container']",
+    container: "[data-test-label='ad-wrapper']",
     text: "[data-test-label='ad-text']"
   }
 };
@@ -42,13 +42,13 @@ describe('Ads', () => {
   it('ads within `section.post-full-content` should not be placed between two adjacent heading elements', () => {
     cy.get('section.post-full-content h1, h2, h3, h4, h5, h6').each(
       $heading => {
-        cy.wrap($heading).next().should('not.have.class', 'ad-container');
+        cy.wrap($heading).next().should('not.have.class', 'ad-wrapper');
       }
     );
   });
 
   it('amp-ad elements should have the expected attributes and values', () => {
-    cy.get('.ad-container amp-ad').each($el => {
+    cy.get('.ad-wrapper amp-ad').each($el => {
       // Test for the bare essential attributes since data-auto-format and data-full-width can cause other attributes
       // to change dynamically
       // To do: Refactor npm scripts and config to use Cypress env vars for data-ad-client and data-ad-slot. Might also

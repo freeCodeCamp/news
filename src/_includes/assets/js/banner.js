@@ -28,18 +28,18 @@ document.addEventListener('DOMContentLoaded', () => {
   const bannerDonorLink = `{% t 'links:banner.authenticated-donor' %}`;
 
   // eslint-disable-next-line no-undef
-  if (notAuthenticated) {
-    bannerTextNode.innerHTML = bannerDefaultText;
-    bannerAnchor.href = bannerDefaultLink;
-    bannerAnchor.setAttribute('text-variation', 'default');
-    // eslint-disable-next-line no-undef
-  } else if (notDonor) {
+  if (isAuthenticated) {
     bannerTextNode.innerHTML = bannerAuthText;
     bannerAnchor.href = bannerAuthLink;
     bannerAnchor.setAttribute('text-variation', 'authenticated');
-  } else {
+    // eslint-disable-next-line no-undef
+  } else if (isDonor) {
     bannerTextNode.innerHTML = bannerDonorText;
     bannerAnchor.href = bannerDonorLink;
     bannerAnchor.setAttribute('text-variation', 'donor');
+  } else {
+    bannerTextNode.innerHTML = bannerDefaultText;
+    bannerAnchor.href = bannerDefaultLink;
+    bannerAnchor.setAttribute('text-variation', 'default');
   }
 });
