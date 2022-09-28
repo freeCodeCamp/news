@@ -7,7 +7,7 @@
   "search": {
     "label": "Search",
     "accessible-name": "Submit your search query",
-    "placeholder": "Search 8,000+ tutorials",
+    "placeholder": "Search 9,000+ tutorials",
     "see-results": "See all results for {{ searchQuery }}",
     "no-tutorials": "No tutorials found"
   },
