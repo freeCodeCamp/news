@@ -22,6 +22,8 @@ const originalPostHandler = async post => {
       // Assume the original post is in English until the Chinese subdomain-to-subpath
       // transfer is complete. Note: This means that Chinese original posts that are
       // translated into English will not work until Chinese is moved to a subpath
+      // To do: Remove this when refactoring to use JSDOM to get info from the
+      // cached version of the page rather than from the Ghost API
       const originalPostLocale =
         pathSegments.length === 2 ? 'english' : pathSegments[0];
       const originalPostSlug = pathSegments[pathSegments.length - 1];
@@ -48,8 +50,7 @@ const originalPostHandler = async post => {
         title: originalPost.title,
         url: originalPost.url,
         published_at: originalPost.published_at,
-        primary_author: originalPost.primary_author,
-        locale_i18n: originalPostLocale
+        primary_author: originalPost.primary_author
       };
 
       const authorEl = translate(
@@ -57,7 +58,7 @@ const originalPostHandler = async post => {
         {
           '<0>': '<strong>',
           '</0>': '</strong>',
-          title: `<a href="${originalPost.url}" target="_blank" rel="noopener noreferrer" data-test-label="original-article">${originalPost.title}</a>`,
+          title: `<a href="${originalPost.url}" target="_blank" rel="noopener noreferrer" data-test-label="original-article-link">${originalPost.title}</a>`,
           author: `<a href="${originalPost.primary_author.url}" target="_blank" rel="noopener noreferrer" data-test-label="profile-link">${originalPost.primary_author.name}</a>`,
           interpolation: {
             escapeValue: false
