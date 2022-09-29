@@ -1,8 +1,14 @@
 const selectors = {
+  postCard: "[data-test-label='post-card']",
+  articleTitle:
+    'freeCodeCamp Just Got a Million Dollar Donation from an Alum to Build a Carbon-Neutral Web3 Curriculum',
   authorList: "[data-test-label='author-list']",
-  authorProfileImage: "[data-test-label='author-profile-image']",
+  authorListItem: "[data-test-label='author-list-item']",
+  authorProfileImage: "[data-test-label='profile-image']",
+  profileImage: "[data-test-label='profile-image']",
+  profileLink: "[data-test-label='profile-link']",
   avatar: "[data-test-label='avatar']",
-  postCard: "[data-test-label='post-card']"
+  postPublishedTime: "[data-test-label='post-published-time']"
 };
 
 describe('Search results', () => {
@@ -15,55 +21,96 @@ describe('Search results', () => {
     cy.visit('/search?query=mock%20search%20results');
   });
 
-  it('should render basic components', () => {
-    cy.get('nav').should('be.visible');
-    cy.get('.banner').should('be.visible');
-    cy.get('footer').should('be.visible');
+  context('General tests', () => {
+    it('the post card should contain an author list with an inner author list item', () => {
+      cy.get(selectors.postCard)
+        .contains(selectors.articleTitle)
+        .parentsUntil('article')
+        .find(selectors.authorList)
+        .then($el => {
+          cy.wrap($el).find(selectors.authorListItem);
+        });
+    });
+
+    it('the author list item should have profile image, profile link, and post published time elements', () => {
+      cy.get(selectors.postCard)
+        .contains(selectors.articleTitle)
+        .parentsUntil('article')
+        .find(selectors.authorListItem)
+        .then($el => {
+          cy.wrap($el).find(selectors.profileImage);
+          cy.wrap($el).find(selectors.profileLink);
+          cy.wrap($el).find(selectors.postPublishedTime);
+        });
+    });
+
+    it("the author's profile image should be wrapped in an anchor that points to the author's page", () => {
+      cy.get(selectors.postCard)
+        .contains(selectors.articleTitle)
+        .parentsUntil('article')
+        .find(selectors.authorListItem)
+        .find(selectors.profileImage)
+        .parent()
+        .then($el => {
+          expect($el.attr('href')).to.deep.equal(
+            'https://www.freecodecamp.org/news/author/quincylarson/'
+          );
+        });
+    });
+
+    it("the author's profile image should contain an `alt` attribute with the author's name", () => {
+      cy.get(selectors.postCard)
+        .contains(selectors.articleTitle)
+        .parentsUntil('article')
+        .find(selectors.authorProfileImage)
+        .then($el => expect($el[0].alt).to.equal('Quincy Larson'));
+    });
+
+    it('the post published time should convert to the expected UTC string', () => {
+      cy.get(selectors.postCard)
+        .contains(selectors.articleTitle)
+        .parentsUntil('article')
+        .find(selectors.authorListItem)
+        .find(selectors.postPublishedTime)
+        .then($el => {
+          const publishedTimeUTC = new Date($el.attr('datetime')).toUTCString();
+
+          expect(publishedTimeUTC).to.deep.equal(
+            'Wed, 19 Jan 2022 21:23:18 GMT'
+          );
+        });
+    });
   });
 
-  it("should show the author's profile image", () => {
-    cy.get(selectors.postCard)
-      .contains(
-        'freeCodeCamp Just Got a Million Dollar Donation from an Alum to Build a Carbon-Neutral Web3 Curriculum'
-      )
-      .parentsUntil('article')
-      .find(selectors.authorProfileImage)
-      .then($el => expect($el[0].tagName.toLowerCase()).to.equal('img'));
+  context('No author profile image', () => {
+    it('it should should show the avatar SVG', () => {
+      cy.get(selectors.postCard)
+        .contains(
+          'Web Scraping in Python – How to Scrape Sci-Fi Movies from IMDB'
+        )
+        .parentsUntil('article')
+        .find(selectors.avatar)
+        .then($el => expect($el[0].tagName.toLowerCase()).to.equal('svg'));
+    });
+
+    it("the avatar SVG should contain a `title` element with the author's name", () => {
+      cy.get(selectors.postCard)
+        .contains(
+          'Web Scraping in Python – How to Scrape Sci-Fi Movies from IMDB'
+        )
+        .parentsUntil('article')
+        .find(selectors.avatar)
+        .contains('title', 'Riley Predum');
+    });
   });
 
-  it("the author profile image should contain an `alt` attribute with the author's name", () => {
-    cy.get(selectors.postCard)
-      .contains(
-        'freeCodeCamp Just Got a Million Dollar Donation from an Alum to Build a Carbon-Neutral Web3 Curriculum'
-      )
-      .parentsUntil('article')
-      .find(selectors.authorProfileImage)
-      .then($el => expect($el[0].alt).to.equal('Quincy Larson'));
+  context('Author is freeCodeCamp.org', () => {
+    it("it should not show the `author-list`, which contain's the author's name and profile image", () => {
+      cy.get(selectors.postCard)
+        .contains('Common Technical Support Questions – freeCodeCamp FAQ')
+        .parentsUntil('article')
+        .find(selectors.authorList)
+        .should('not.exist');
+    });
   });
-
-  it('post cards written by an author with no profile image should show the author SVG', () => {
-    cy.get(selectors.postCard)
-      .contains('No Author Profile Pic')
-      .parentsUntil('article')
-      .find(selectors.avatar)
-      .then($el => expect($el[0].tagName.toLowerCase()).to.equal('svg'));
-  });
-
-  it("the avatar SVG should contain a `title` element with the author's name", () => {
-    cy.get(selectors.postCard)
-      .contains('No Author Profile Pic')
-      .parentsUntil('article')
-      .find(selectors.avatar)
-      .contains('title', 'Mrugesh Mohapatra');
-  });
-
-  it("posts written by 'freeCodeCamp.org' should not show the `author-list`, which contain's the author's name and profile image", () => {
-    cy.get(selectors.postCard)
-      .contains('Common Technical Support Questions – freeCodeCamp FAQ')
-      .parentsUntil('article')
-      .find(selectors.authorList)
-      .should('not.exist');
-  });
-
-  // To do: Finalize search schema and add tests for the original post / translator feature
 });
