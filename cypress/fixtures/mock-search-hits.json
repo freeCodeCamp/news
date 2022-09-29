@@ -1,121 +1,133 @@
-[
-  {
-    "title": "El Desafío #100DaysOfCode, su historia y por qué debes hacerlo para el 2021",
-    "author": {
-      "name": "Rafael D. Hernandez",
-      "url": "http://localhost:8080/espanol/news/author/rafael/",
-      "profileImage": "http://localhost:3030/content/images/size/w30/2022/02/rafael-photo.jpeg"
+{
+  "english": [
+    {
+      "title": "Web Scraping in Python – How to Scrape Sci-Fi Movies from IMDB",
+      "author": {
+        "name": "Riley Predum",
+        "url": "https://www.freecodecamp.org/news/author/riley/",
+        "profileImage": null
+      },
+      "tags": [
+        {
+          "name": "Python",
+          "url": "https://www.freecodecamp.org/news/tag/python/"
+        },
+        {
+          "name": "Web Scraping",
+          "url": "https://www.freecodecamp.org/news/tag/web-scraping/"
+        }
+      ],
+      "url": "https://www.freecodecamp.org/news/web-scraping-sci-fi-movies-from-imdb-with-python/",
+      "featureImage": "https://www.freecodecamp.org/news/content/images/2022/07/pexels-pixabay-270348--1-.jpg",
+      "publishedAt": "2022-08-09T19:50:10.664Z",
+      "publishedAtTimestamp": 1660074610,
+      "filterTerms": [],
+      "objectID": "62e30962e489f306baa8bd6b"
     },
-    "tags": [
-      {
-        "name": "100daysofcode",
-        "url": "http://localhost:8080/espanol/news/404/"
-      }
-    ],
-    "url": "http://localhost:8080/espanol/news/el-desafio-100daysofcode-su-historia-y-por-que-debes-probarlo-para-2022/",
-    "featureImage": "https://www.freecodecamp.org/espanol/news/content/images/2022/01/5f9c9afc740569d1a4ca2907.jpeg",
-    "publishedAt": "2022-01-16T22:46:14.993Z",
-    "publishedAtTimestamp": 1642373174,
-    "filterTerms": [],
-    "objectID": "61e337e117a453092f6956ca",
-    "originalPost": {
-      "title": "The #100DaysOfCode Challenge, its history, and why you should try it for 2021",
-      "url": "https://www.freecodecamp.org/news/the-crazy-history-of-the-100daysofcode-challenge-and-why-you-should-try-it-for-2018-6c89a76e298d/",
-      "publishedAt": "2020-12-09T16:20:00.000Z",
-      "publishedAtTimestamp": 1607530800,
+    {
+      "title": "freeCodeCamp Just Got a Million Dollar Donation from an Alum to Build a Carbon-Neutral Web3 Curriculum",
       "author": {
         "name": "Quincy Larson",
         "url": "https://www.freecodecamp.org/news/author/quincylarson/",
-        "profileImage": "http://localhost:3010/content/images/size/w30/2022/02/Quincy-Larson-photo.jpg"
+        "profileImage": "https://www.freecodecamp.org/news/content/images/2021/03/Quincy-Larson-photo.jpg"
       },
-      "localeI18n": "english"
+      "tags": [
+        {
+          "name": "freeCodeCamp Curriculum",
+          "url": "https://www.freecodecamp.org/news/tag/freecodecamp-curriculum/"
+        },
+        {
+          "name": "Web3",
+          "url": "https://www.freecodecamp.org/news/tag/web3/"
+        }
+      ],
+      "url": "https://www.freecodecamp.org/news/carbon-neutral-web3-curriculum-plans/",
+      "featureImage": "https://www.freecodecamp.org/news/content/images/2022/01/christian-wiediger-WkfDrhxDMC8-unsplash.jpg",
+      "publishedAt": "2022-01-19T21:23:18.910Z",
+      "publishedAtTimestamp": 1642627398,
+      "filterTerms": [],
+      "objectID": "61e79b46183181284a191680"
+    },
+    {
+      "title": "What Programming Language Should I Learn First in 2022? [Solved]",
+      "author": {
+        "name": "Quincy Larson",
+        "url": "https://www.freecodecamp.org/news/author/quincylarson/",
+        "profileImage": "https://www.freecodecamp.org/news/content/images/2021/03/Quincy-Larson-photo.jpg"
+      },
+      "tags": [
+        {
+          "name": "JavaScript",
+          "url": "https://www.freecodecamp.org/news/tag/javascript/"
+        },
+        {
+          "name": "Learn To Code",
+          "url": "https://www.freecodecamp.org/news/tag/learn-to-code/"
+        },
+        {
+          "name": "Programming Languages",
+          "url": "https://www.freecodecamp.org/news/tag/programming-languages/"
+        }
+      ],
+      "url": "https://www.freecodecamp.org/news/what-programming-language-should-i-learn-first-19a33b0a467d/",
+      "featureImage": "https://cdn-media-1.freecodecamp.org/images/1*1XEF9NuNQy0rSu4kVdbb6A.jpeg",
+      "publishedAt": "2022-01-14T08:17:00.000Z",
+      "publishedAtTimestamp": 1642148220,
+      "filterTerms": [],
+      "objectID": "5f9c9de4740569d1a4ca3a3d"
+    },
+    {
+      "title": "Common Technical Support Questions – freeCodeCamp FAQ",
+      "author": {
+        "name": "freeCodeCamp.org",
+        "url": "https://www.freecodecamp.org/news/author/freecodecamp/",
+        "profileImage": "https://www.freecodecamp.org/news/content/images/2021/05/freecodecamp-org-gravatar.jpeg"
+      },
+      "tags": [
+        {
+          "name": "freeCodeCamp",
+          "url": "https://www.freecodecamp.org/news/tag/freecodecamp/"
+        }
+      ],
+      "url": "https://www.freecodecamp.org/news/support/",
+      "featureImage": "https://cdn-media-2.freecodecamp.org/w1280/5f9c9f56740569d1a4ca4213.jpg",
+      "publishedAt": "2021-06-01T17:15:00.000Z",
+      "publishedAtTimestamp": 1622567700,
+      "filterTerms": [],
+      "objectID": "5f9c9f56740569d1a4ca4213"
     }
-  },
-  {
-    "title": "No Author Profile Pic",
-    "author": {
-      "name": "Mrugesh Mohapatra",
-      "url": "http://localhost:8080/news/author/mrugesh/",
-      "profileImage": null
-    },
-    "tags": [],
-    "url": "http://localhost:8080/news/no-author-profile-pic/",
-    "featureImage": "http://localhost:3010/content/images/2022/04/low-rez-publication-cover.png",
-    "publishedAt": "2022-04-14T07:08:53.000Z",
-    "publishedAtTimestamp": 1649920133,
-    "filterTerms": [],
-    "objectID": "6257c8621171f9000141309f"
-  },
-  {
-    "title": "freeCodeCamp Just Got a Million Dollar Donation from an Alum to Build a Carbon-Neutral Web3 Curriculum",
-    "author": {
-      "name": "Quincy Larson",
-      "url": "http://localhost:8080/news/author/quincylarson/",
-      "profileImage": "http://localhost:3010/content/images/2022/02/Quincy-Larson-photo.jpg"
-    },
-    "tags": [
-      {
-        "name": "freeCodeCamp Curriculum",
-        "url": "http://localhost:8080/news/tag/freecodecamp-curriculum/"
+  ],
+  "espanol": [
+    {
+      "title": "El Desafío #100DaysOfCode, su historia y por qué debes hacerlo para el 2021",
+      "author": {
+        "name": "Rafael D. Hernandez",
+        "url": "https://www.freecodecamp.org/espanol/news/author/rafael/",
+        "profileImage": "https://www.freecodecamp.org/espanol/news/content/images/2020/11/IMG_1344.JPG"
       },
-      {
-        "name": "Web3",
-        "url": "http://localhost:8080/news/news/tag/web3/"
+      "tags": [
+        {
+          "name": "100daysofcode",
+          "url": "https://www.freecodecamp.org/espanol/news/404/"
+        }
+      ],
+      "url": "https://www.freecodecamp.org/espanol/news/el-desafio-100daysofcode-su-historia-y-por-que-debes-probarlo-para-2022/",
+      "featureImage": "https://www.freecodecamp.org/espanol/news/content/images/2022/01/5f9c9afc740569d1a4ca2907.jpeg",
+      "publishedAt": "2022-01-16T22:46:14.993Z",
+      "publishedAtTimestamp": 1642373174,
+      "filterTerms": [],
+      "objectID": "61e337e117a453092f6956ca",
+      "originalPost": {
+        "title": "The #100DaysOfCode Challenge, its history, and why you should try it for 2021",
+        "url": "https://www.freecodecamp.org/news/the-crazy-history-of-the-100daysofcode-challenge-and-why-you-should-try-it-for-2018-6c89a76e298d/",
+        "publishedAt": "2020-12-09T16:20:00.000Z",
+        "publishedAtTimestamp": 1607530800,
+        "author": {
+          "name": "Quincy Larson",
+          "url": "https://www.freecodecamp.org/news/author/quincylarson/",
+          "profileImage": "https://www.freecodecamp.org/news/content/images/2021/03/Quincy-Larson-photo.jpg"
+        }
       }
-    ],
-    "url": "http://localhost:8080/news/carbon-neutral-web3-curriculum-plans/",
-    "featureImage": "https://www.freecodecamp.org/news/content/images/2022/01/christian-wiediger-WkfDrhxDMC8-unsplash.jpg",
-    "publishedAt": "2022-01-19T21:23:18.910Z",
-    "publishedAtTimestamp": 1642627398,
-    "filterTerms": [],
-    "objectID": "61e79b46183181284a191680"
-  },
-  {
-    "title": "What Programming Language Should I Learn First in 2022? [Solved]",
-    "author": {
-      "name": "Quincy Larson",
-      "url": "http://localhost:8080/news/author/quincylarson/",
-      "profileImage": "http://localhost:3010/content/images/2022/02/Quincy-Larson-photo.jpg"
-    },
-    "tags": [
-      {
-        "name": "JavaScript",
-        "url": "http://localhost:8080/news/tag/javascript/"
-      },
-      {
-        "name": "Learn To Code",
-        "url": "http://localhost:8080/news/tag/learn-to-code/"
-      },
-      {
-        "name": "Programming Languages",
-        "url": "http://localhost:8080/news/tag/programming-languages/"
-      }
-    ],
-    "url": "http://localhost:8080/news/what-programming-language-should-i-learn-first-19a33b0a467d/",
-    "featureImage": "https://cdn-media-1.freecodecamp.org/images/1*1XEF9NuNQy0rSu4kVdbb6A.jpeg",
-    "publishedAt": "2022-01-14T08:17:00.000Z",
-    "publishedAtTimestamp": 1642148220,
-    "filterTerms": [],
-    "objectID": "5f9c9de4740569d1a4ca3a3d"
-  },
-  {
-    "title": "Common Technical Support Questions – freeCodeCamp FAQ",
-    "author": {
-      "name": "freeCodeCamp.org",
-      "url": "https://www.freecodecamp.org/news/author/freecodecamp/",
-      "profileImage": "https://www.freecodecamp.org/news/content/images/2021/05/freecodecamp-org-gravatar.jpeg"
-    },
-    "tags": [
-      {
-        "name": "freeCodeCamp",
-        "url": "https://www.freecodecamp.org/news/tag/freecodecamp/"
-      }
-    ],
-    "url": "https://www.freecodecamp.org/news/support/",
-    "featureImage": "https://cdn-media-2.freecodecamp.org/w1280/5f9c9f56740569d1a4ca4213.jpg",
-    "publishedAt": "2021-06-01T17:15:00.000Z",
-    "publishedAtTimestamp": 1622567700,
-    "filterTerms": [],
-    "objectID": "5f9c9f56740569d1a4ca4213"
-  }
-]
+    }
+  ]
+}

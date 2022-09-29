@@ -3,6 +3,7 @@ const {
   algoliaAPIKey,
   algoliaIndex,
   adsEnabled,
+  currentLocale_i18n,
   eleventyEnv
 } = require('../../config');
 
@@ -11,5 +12,6 @@ module.exports = {
   algoliaAPIKey,
   algoliaIndex,
   adsEnabled,
+  currentLocale_i18n,
   eleventyEnv
 };
