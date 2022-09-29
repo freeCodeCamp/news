@@ -1,8 +1,7 @@
-{% macro roleListItem(authorOrTranslator, publishedAt, role, locale) %}
+{% macro roleListItem(authorOrTranslator, publishedAt, role) %}
     {# Use the full URL for original authors, and a relative path for
     translators and regular authors #}
     {% set authorOrTranslatorURL = authorOrTranslator.url if role === "author" else (authorOrTranslator.path | url) %}
-    {% set translatedLocale %}{% t "original-author-translator.locales." + locale %}{% endset %}
     
     <li class="author-list-item" data-test-label="{{ 'translator-list-item' if role === 'translator' else 'author-list-item' }}">
         <a href="{{ authorOrTranslatorURL }}" class="static-avatar">
@@ -29,8 +28,7 @@
             <a class="meta-item" href="{{ authorOrTranslatorURL }}" data-test-label="profile-link">
                 {% if role === 'author' %}
                     {% t 'original-author-translator.roles.author', {
-                        name: authorOrTranslator.name,
-                        locale: translatedLocale
+                        name: authorOrTranslator.name
                     } %}
                 {% elif role === 'translator' %}
                     {% t 'original-author-translator.roles.translator', {

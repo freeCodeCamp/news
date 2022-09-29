@@ -49,7 +49,7 @@
                 {% else %}
                     <ul class="author-list" data-test-label="author-list">
                         {% if post.original_post %}
-                            {{ roleListItem(post.original_post.primary_author, post.original_post.published_at, 'author', post.original_post.locale_i18n) }}
+                            {{ roleListItem(post.original_post.primary_author, post.original_post.published_at, 'author') }}
                             {{ roleListItem(post.primary_author, post.published_at, 'translator') }}
                         {% else %}
                             {{ roleListItem(post.primary_author, post.published_at) }}
