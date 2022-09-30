@@ -7,10 +7,14 @@
 {% set codeinjection_foot = post.codeinjection_foot %}
 {% set primaryTag = post.tags[0] %}
 {% set adsEnabled = secrets.adsEnabled %}
+{# Include 2 ads by default for all articles. Then add 1 ad for every 2 mins of
+reading time if reading time <= 4 mins. Else, add 1 ad for every 1 min of reading
+time #}
+{% set numOfSidebarAds = (((post.reading_time / 2) if post.reading_time <= 4 else (post.reading_time)) + 2) | round(0, 'floor') %}
 
 {% block content %}
     <main id="site-main" class="post-template site-main outer">
-        <div class="inner">
+        <div class="inner ad-layout">
             <article class="post-full post {{ "no-image" if not (post.feature_image) }}">
                 <header class="post-full-header">
                     <section class="post-full-meta">
@@ -51,9 +55,18 @@
                     </figure>
                 {% endif %}
                 <section class="post-full-content">
-                    <section class="post-content {{ "medium-migrated-article" if (post.primary_author.name === "freeCodeCamp.org") }}">
-                        {{ content | safe }}
-                    </section>
+                    <div class="post-and-sidebar">
+                        <section class="post-content {{ "medium-migrated-article" if (post.primary_author.name === "freeCodeCamp.org") }}">
+                            {{ content | safe }}
+                        </section>
+                        {% if adsEnabled %}
+                            <div class="sidebar">
+                                {% for i in range(0, numOfSidebarAds) %}
+                                    {% include "partials/ad.njk" %}
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
                     <hr />
                     {% if post.primary_author.name != "freeCodeCamp.org" %}
                         <div class="post-full-author-header" data-test-label="author-header-with-bio">
@@ -77,7 +90,9 @@
                     {% endif %}
                 </section>
                 {% if adsEnabled %}
-                    {{ post.banner_ad_html | safe }}
+                    <div class="banner-ad bottom">
+                        {% include "partials/ad.njk" %}
+                    </div>
                 {% endif %}
             </article>
         </div>

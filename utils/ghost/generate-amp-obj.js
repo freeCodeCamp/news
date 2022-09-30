@@ -29,7 +29,6 @@ const generateAMPObj = async obj => {
   const iframeEls = [...document.getElementsByTagName('iframe')];
   const audioEls = [...document.getElementsByTagName('audio')];
   const videoEls = [...document.getElementsByTagName('video')];
-  const adContainers = [...document.getElementsByClassName('ad-wrapper')];
 
   const setAllowedAttributes = (type, originalEl, ampEl) => {
     const allowedAttributes = allowedAMPAttributes[type];
@@ -206,27 +205,6 @@ const generateAMPObj = async obj => {
       ampObj.elements['amp-video'] = true;
 
       videoEl.replaceWith(ampVideoEl);
-    }),
-
-    // Create <amp-ad> elements from ads within the post body
-    // and ignore the banner ad for now
-    adContainers.map(adContainer => {
-      const adEl = adContainer.querySelector('ins');
-      let ampAdEl = document.createElement('amp-ad');
-
-      ampAdEl = setAllowedAttributes('amp-ad', adEl, ampAdEl);
-
-      // Set required amp-ad attributes
-      ampAdEl.setAttribute('width', '100vw');
-      ampAdEl.setAttribute('height', '320');
-      ampAdEl.setAttribute('type', 'adsense');
-      ampAdEl.setAttribute('data-auto-format', 'rspv');
-      ampAdEl.setAttribute('data-full-width', 'false');
-
-      // Remove attribute that only works on <ins> elements for regular pages
-      ampAdEl.removeAttribute('data-ad-format');
-
-      adEl.replaceWith(ampAdEl);
     })
   );
 

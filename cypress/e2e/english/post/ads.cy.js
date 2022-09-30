@@ -4,7 +4,7 @@ const selectors = {
     toggleAdLayout: '[data-test-label="toggle-ad-layout"]'
   },
   ads: {
-    container: "[data-test-label='ad-wrapper']",
+    wrapper: "[data-test-label='ad-wrapper']",
     text: "[data-test-label='ad-text']"
   }
 };
@@ -29,37 +29,29 @@ describe('Ads', () => {
 
   context('Not authenticated', () => {
     it('the post should contain at least one ad', () => {
-      cy.get(selectors.ads.container).should('have.length.gte', 1);
+      cy.get(selectors.ads.wrapper).should('have.length.gte', 1);
     });
 
     it('all ad containers in the post should be visible', () => {
-      cy.get(selectors.ads.container).should('be.visible');
+      cy.get(selectors.ads.wrapper).should('be.visible');
     });
 
     it('each ad container should contain a visible text disclaimer', () => {
-      cy.get(selectors.ads.container).each($el => {
+      cy.get(selectors.ads.wrapper).each($el => {
         cy.wrap($el).find(selectors.ads.text).should('be.visible');
       });
     });
 
     it('each ad container should contain an inner `ins` element', () => {
-      cy.get(selectors.ads.container).each($el => {
+      cy.get(selectors.ads.wrapper).each($el => {
         cy.wrap($el).find('ins');
       });
     });
 
     it('each ad container should contain an inner `script` element', () => {
-      cy.get(selectors.ads.container).each($el => {
+      cy.get(selectors.ads.wrapper).each($el => {
         cy.wrap($el).find('script').should('have.length', 1);
       });
-    });
-
-    it('ads within `section.post-full-content` should not be placed between two adjacent heading elements', () => {
-      cy.get('section.post-full-content h1, h2, h3, h4, h5, h6').each(
-        $heading => {
-          cy.wrap($heading).next().should('not.have.class', 'ad-wrapper');
-        }
-      );
     });
 
     it('ad elements should have the expected attributes and values', () => {
@@ -82,8 +74,8 @@ describe('Ads', () => {
       cy.reload(); // Reload the page to ensure the cookie is set and the styles to hide ad containers are applied
     });
 
-    it('all ad containers in the post should not be visible', () => {
-      cy.get(selectors.ads.container).should('not.be.visible');
+    it('all ad containers in the post should not exist', () => {
+      cy.get(selectors.ads.wrapper).should('not.exist');
     });
   });
 });
