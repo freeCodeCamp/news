@@ -43,11 +43,11 @@ describe('Post', () => {
           });
       });
 
-      it("the author card's profile link should contain the author's localized title and name", () => {
+      it("the author card's profile link text should match the expected text", () => {
         cy.get(selectors.authorHeaderNoBio)
           .find(selectors.authorCard)
           .then($el => {
-            expect($el.text().trim()).to.deep.equal(
+            expect($el.text().trim()).to.equal(
               `Autor: ${selectors.authorName}`
             );
           });
@@ -58,7 +58,7 @@ describe('Post', () => {
           .find(selectors.authorCard)
           .find(selectors.profileLink)
           .then($el => {
-            expect($el.attr('href')).to.deep.equal(
+            expect($el.attr('href')).to.equal(
               'https://www.freecodecamp.org/news/author/quincylarson/'
             );
           });
@@ -73,11 +73,11 @@ describe('Post', () => {
           });
       });
 
-      it("the translator card's profile link should contain the translator's localized title and name", () => {
+      it("the translator card's profile link text should match the expected text", () => {
         cy.get(selectors.authorHeaderNoBio)
           .find(selectors.translatorCard)
           .then($el => {
-            expect($el.text().trim()).to.deep.equal(
+            expect($el.text().trim()).to.equal(
               `Traducido y adaptado por: ${selectors.translatorName}`
             );
           });
@@ -88,9 +88,7 @@ describe('Post', () => {
           .find(selectors.translatorCard)
           .find(selectors.profileLink)
           .then($el => {
-            expect($el.attr('href')).to.deep.equal(
-              '/espanol/news/author/rafael/'
-            );
+            expect($el.attr('href')).to.equal('/espanol/news/author/rafael/');
           });
       });
     });
@@ -113,12 +111,12 @@ describe('Post', () => {
           });
       });
 
-      it("the author's profile link should contain the author's localized title and name", () => {
+      it("the author's profile link text should match the expected text", () => {
         cy.get(selectors.authorHeaderWithBio)
           .find(selectors.authorCard)
           .find(selectors.profileLink)
           .then($el => {
-            expect($el.text().trim()).to.deep.equal(
+            expect($el.text().trim()).to.equal(
               `Autor: ${selectors.authorName}`
             );
           });
@@ -129,7 +127,7 @@ describe('Post', () => {
           .find(selectors.authorCard)
           .find(selectors.profileLink)
           .then($el => {
-            expect($el.attr('href')).to.deep.equal(
+            expect($el.attr('href')).to.equal(
               'https://www.freecodecamp.org/news/author/quincylarson/'
             );
           });
@@ -152,12 +150,12 @@ describe('Post', () => {
           });
       });
 
-      it("the translator's profile link should contain the translator's localized title name", () => {
+      it("the translator's profile link text should match the expected text", () => {
         cy.get(selectors.authorHeaderWithBio)
           .find(selectors.translatorCard)
           .find(selectors.profileLink)
           .then($el => {
-            expect($el.text().trim()).to.deep.equal(
+            expect($el.text().trim()).to.equal(
               `Traducido y adaptado por: ${selectors.translatorName}`
             );
           });
@@ -168,9 +166,7 @@ describe('Post', () => {
           .find(selectors.translatorCard)
           .find(selectors.profileLink)
           .then($el => {
-            expect($el.attr('href')).to.deep.equal(
-              '/espanol/news/author/rafael/'
-            );
+            expect($el.attr('href')).to.equal('/espanol/news/author/rafael/');
           });
       });
 
@@ -194,9 +190,9 @@ describe('Post', () => {
         });
       });
 
-      it('the original article intro should contain the expected text', () => {
+      it('the original article intro text should match the expected original article intro text', () => {
         cy.get(selectors.authorIntro).then($el => {
-          expect($el.text().trim()).to.deep.equal(
+          expect($el.text().trim()).to.equal(
             `Artículo original: ${selectors.originalArticleTitle} por ${selectors.authorName}`
           );
         });
@@ -206,17 +202,17 @@ describe('Post', () => {
         cy.get(selectors.authorIntro)
           .find(selectors.originalArticleLink)
           .then($el => {
-            expect($el.attr('href')).to.deep.equal(
+            expect($el.attr('href')).to.equal(
               'https://www.freecodecamp.org/news/the-crazy-history-of-the-100daysofcode-challenge-and-why-you-should-try-it-for-2018-6c89a76e298d/'
             );
           });
       });
 
-      it("the author intro's profile link should contain the author's name", () => {
+      it("the author intro's profile link text should match the author's name", () => {
         cy.get(selectors.authorIntro)
           .find(selectors.profileLink)
           .then($el => {
-            expect($el.text().trim()).to.deep.equal(selectors.authorName);
+            expect($el.text().trim()).to.equal(selectors.authorName);
           });
       });
 
@@ -224,7 +220,7 @@ describe('Post', () => {
         cy.get(selectors.authorIntro)
           .find(selectors.profileLink)
           .then($el => {
-            expect($el.attr('href')).to.deep.equal(
+            expect($el.attr('href')).to.equal(
               'https://www.freecodecamp.org/news/author/quincylarson/'
             );
           });
@@ -236,9 +232,9 @@ describe('Post', () => {
         });
       });
 
-      it('the translator intro should contain the expected text', () => {
+      it('the translator intro text should match the expected translator intro text', () => {
         cy.get(selectors.translatorIntro).then($el => {
-          expect($el.text().trim()).to.deep.equal(
+          expect($el.text().trim()).to.equal(
             `Traducido y adaptado por: ${selectors.translatorName}`
           );
         });
@@ -248,9 +244,7 @@ describe('Post', () => {
         cy.get(selectors.translatorIntro)
           .find(selectors.profileLink)
           .then($el => {
-            expect($el.attr('href')).to.deep.equal(
-              '/espanol/news/author/rafael/'
-            );
+            expect($el.attr('href')).to.equal('/espanol/news/author/rafael/');
           });
       });
     });

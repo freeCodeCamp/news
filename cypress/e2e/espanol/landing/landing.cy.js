@@ -59,22 +59,20 @@ describe('Landing', () => {
         .find(selectors.profileImage)
         .parent()
         .then($el => {
-          expect($el.attr('href')).to.deep.equal(
+          expect($el.attr('href')).to.equal(
             'https://www.freecodecamp.org/news/author/quincylarson/'
           );
         });
     });
 
-    it("the author list item's profile link should contain the author's localized title and name", () => {
+    it("the author list item's profile link text should match the expected text", () => {
       cy.get(selectors.postCard)
         .contains(selectors.translatedArticleTitle)
         .parentsUntil('article')
         .find(selectors.authorListItem)
         .find(selectors.profileLink)
         .then($el => {
-          expect($el.text().trim()).to.deep.equal(
-            `Autor: ${selectors.authorName}`
-          );
+          expect($el.text().trim()).to.equal(`Autor: ${selectors.authorName}`);
         });
     });
 
@@ -85,7 +83,7 @@ describe('Landing', () => {
         .find(selectors.authorListItem)
         .find(selectors.profileLink)
         .then($el => {
-          expect($el.attr('href')).to.deep.equal(
+          expect($el.attr('href')).to.equal(
             'https://www.freecodecamp.org/news/author/quincylarson/'
           );
         });
@@ -100,9 +98,7 @@ describe('Landing', () => {
         .then($el => {
           const publishedTimeUTC = new Date($el.attr('datetime')).toUTCString();
 
-          expect(publishedTimeUTC).to.deep.equal(
-            'Wed, 09 Dec 2020 16:20:00 GMT'
-          );
+          expect(publishedTimeUTC).to.equal('Wed, 09 Dec 2020 16:20:00 GMT');
         });
     });
 
@@ -126,20 +122,18 @@ describe('Landing', () => {
         .find(selectors.profileImage)
         .parent()
         .then($el => {
-          expect($el.attr('href')).to.deep.equal(
-            '/espanol/news/author/rafael/'
-          );
+          expect($el.attr('href')).to.equal('/espanol/news/author/rafael/');
         });
     });
 
-    it("the translator list item's profile link should contain the translators's localized title and name", () => {
+    it("the translator list item's profile link text should match the expected text", () => {
       cy.get(selectors.postCard)
         .contains(selectors.translatedArticleTitle)
         .parentsUntil('article')
         .find(selectors.translatorListItem)
         .find(selectors.profileLink)
         .then($el => {
-          expect($el.text().trim()).to.deep.equal(
+          expect($el.text().trim()).to.equal(
             `Traducido y adaptado por: ${selectors.translatorName}`
           );
         });
@@ -152,9 +146,7 @@ describe('Landing', () => {
         .find(selectors.translatorListItem)
         .find(selectors.profileLink)
         .then($el => {
-          expect($el.attr('href')).to.deep.equal(
-            '/espanol/news/author/rafael/'
-          );
+          expect($el.attr('href')).to.equal('/espanol/news/author/rafael/');
         });
     });
 
@@ -167,9 +159,7 @@ describe('Landing', () => {
         .then($el => {
           const publishedTimeUTC = new Date($el.attr('datetime')).toUTCString();
 
-          expect(publishedTimeUTC).to.deep.equal(
-            'Sun, 16 Jan 2022 22:46:14 GMT'
-          );
+          expect(publishedTimeUTC).to.equal('Sun, 16 Jan 2022 22:46:14 GMT');
         });
     });
   });
