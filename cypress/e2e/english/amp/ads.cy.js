@@ -39,14 +39,6 @@ describe('Ads', () => {
     });
   });
 
-  it('ads within `section.post-full-content` should not be placed between two adjacent heading elements', () => {
-    cy.get('section.post-full-content h1, h2, h3, h4, h5, h6').each(
-      $heading => {
-        cy.wrap($heading).next().should('not.have.class', 'ad-wrapper');
-      }
-    );
-  });
-
   it('amp-ad elements should have the expected attributes and values', () => {
     cy.get('.ad-wrapper amp-ad').each($el => {
       // Test for the bare essential attributes since data-auto-format and data-full-width can cause other attributes
