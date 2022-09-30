@@ -212,7 +212,7 @@ describe('Post', () => {
           });
       });
 
-      it("the author intro's profile link should contain the author's and name", () => {
+      it("the author intro's profile link should contain the author's name", () => {
         cy.get(selectors.authorIntro)
           .find(selectors.profileLink)
           .then($el => {
