@@ -7,7 +7,7 @@
   "search": {
     "label": "Buscar",
     "accessible-name": "Envie sua consulta de pesquisa",
-    "placeholder": "Buscar entre os mais de 300 tutoriais",
+    "placeholder": "Buscar entre os mais de 350 tutoriais",
     "see-results": "Ver todos os resultados para {{ searchQuery }}",
     "no-tutorials": "Não foram encontrados tutoriais"
   },
