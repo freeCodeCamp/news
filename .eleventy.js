@@ -57,6 +57,21 @@ module.exports = function (config) {
 
     // Remove ads.txt from Chinese build
     if (currentLocale_i18n === 'chinese') unlinkSync('./dist/ads.txt');
+
+    // Write translated locales for the current build language to the assets directory
+    // as a workaround to display those strings in search-results.js instead of with the
+    // translation shortcode
+    const currLocaleTranslationsPath = `./config/i18n/locales/${currentLocale_i18n}/translations.json`;
+    const translationsObj = JSON.parse(
+      readFileSync(currLocaleTranslationsPath, { encoding: 'utf-8' })
+    );
+    const translatedLocales =
+      translationsObj['original-author-translator'].locales;
+
+    writeFileSync(
+      './dist/assets/translated-locales.json',
+      JSON.stringify(translatedLocales)
+    );
   });
 
   // RSS and AMP plugins
