@@ -5,7 +5,7 @@ const {
 const selectors = {
   AMPAdScript: 'script[src*="amp-ad-0.1.js"]',
   ads: {
-    container: "[data-test-label='ad-wrapper']",
+    wrapper: "[data-test-label='ad-wrapper']",
     text: "[data-test-label='ad-text']"
   }
 };
@@ -20,21 +20,21 @@ describe('Ads', () => {
   });
 
   it('the post should contain at least one ad', () => {
-    cy.get(selectors.ads.container).should('have.length.gte', 1);
+    cy.get(selectors.ads.wrapper).should('have.length.gte', 1);
   });
 
   it('all ad containers in the post should be visible', () => {
-    cy.get(selectors.ads.container).should('be.visible');
+    cy.get(selectors.ads.wrapper).should('be.visible');
   });
 
   it('each ad container should contain a visible text disclaimer', () => {
-    cy.get(selectors.ads.container).each($el => {
+    cy.get(selectors.ads.wrapper).each($el => {
       cy.wrap($el).find(selectors.ads.text).should('be.visible');
     });
   });
 
   it('each ad container should contain an inner `amp-ad` element', () => {
-    cy.get(selectors.ads.container).each($el => {
+    cy.get(selectors.ads.wrapper).each($el => {
       cy.wrap($el).find('amp-ad');
     });
   });

@@ -1,14 +1,15 @@
-<div class="ad-wrapper">
+<div class="ad-wrapper" data-test-label="ad-wrapper">
     {% set localizedAdText %}{% t 'ad-text' %}{% endset %}
     <div class="ad-text" data-test-label="ad-text">{{ localizedAdText | upper }}</div>
     <ins
         class="adsbygoogle"
-        style="display: block; height: 280px"
+        style="display: block; height: 280px;"
         data-ad-client="{{ secrets.googleAdsenseDataAdClient }}"
         data-ad-slot="{{ secrets.googleAdsenseDataAdSlot }}"
         data-ad-format="auto"
+        data-full-width-responsive="true"
     ></ins>
+    <script>
+        if (!isAuthenticated) (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
 </div>
-<script>
-    if (!isAuthenticated) (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
