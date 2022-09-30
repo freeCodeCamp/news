@@ -20,8 +20,18 @@ describe('AMP page', () => {
       cy.get(selectors.AMPAuthorHeader).children().should('have.length', 2);
     });
 
-    it("the AMP Author element should contain the author's name and the locale of the original article", () => {
-      cy.get(selectors.AMPAuthor).contains(`${selectors.authorName}`);
+    it("the AMP author paragraph's text should match the expected text", () => {
+      cy.get(selectors.AMPAuthor).then($el => {
+        expect($el.text().trim()).to.equal(`Autor: ${selectors.authorName}`);
+      });
+    });
+
+    it("the AMP translator paragraph's text should match the expected text", () => {
+      cy.get(selectors.AMPTranslator).then($el => {
+        expect($el.text().trim()).to.equal(
+          `Traducido y adaptado por: ${selectors.translatorName}`
+        );
+      });
     });
 
     it("the AMP Translator element should contain the translator's name", () => {
