@@ -65,13 +65,13 @@ describe('Landing', () => {
         });
     });
 
-    it("the author list item's profile link should contain the author's name and the locale of the original article", () => {
+    it("the author list item's profile link should contain the author's name", () => {
       cy.get(selectors.postCard)
         .contains(selectors.translatedArticleTitle)
         .parentsUntil('article')
         .find(selectors.authorListItem)
         .find(selectors.profileLink)
-        .contains(`${selectors.authorName} (inglés)`);
+        .contains(`${selectors.authorName}`);
     });
 
     it("the author list item's profile link should be a full URL that points to the original author's page", () => {

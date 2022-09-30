@@ -18,8 +18,8 @@ describe('AMP page', () => {
       cy.get(selectors.AMPAuthorHeader).children().should('have.length', 2);
     });
 
-    it("the AMP Author element should contain the author's name and the locale of the original article", () => {
-      cy.get(selectors.AMPAuthor).contains('Quincy Larson (inglés)');
+    it("the AMP Author element should contain the author's name", () => {
+      cy.get(selectors.AMPAuthor).contains('Quincy Larson');
     });
 
     it("the AMP Translator element should contain the translator's name", () => {

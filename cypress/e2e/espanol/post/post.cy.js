@@ -41,10 +41,10 @@ describe('Post', () => {
           });
       });
 
-      it("the author card's profile link should contain the author's name and the locale of the original article", () => {
+      it("the author card's profile link should contain the author's name", () => {
         cy.get(selectors.authorHeaderNoBio)
           .find(selectors.authorCard)
-          .contains(`${selectors.authorName} (inglés)`);
+          .contains(`${selectors.authorName}`);
       });
 
       it("the author card's profile link should be a full URL that points to the original author's page", () => {
@@ -103,10 +103,10 @@ describe('Post', () => {
           });
       });
 
-      it("the author card should contain the author's name and the locale of the original article", () => {
+      it("the author card should contain the author's name", () => {
         cy.get(selectors.authorHeaderWithBio)
           .find(selectors.authorCard)
-          .contains(`${selectors.authorName} (inglés)`);
+          .contains(`${selectors.authorName}`);
       });
 
       it("the author card's profile link should be a full URL that points to the original author's page", () => {
