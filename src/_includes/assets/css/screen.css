@@ -2384,10 +2384,12 @@ a.banner:hover span {
 }
 
 /* Adjust image and video widths when ads are enabled */
-.ad-layout .post-full-content .kg-image-card img, /* Ghost editor images */
-.ad-layout .post-full-content p img, /* Markdown images */
+/* Ghost editor images */
+.ad-layout .post-full-content .kg-image-card img,
+/* Markdown images */
+.ad-layout .post-full-content p img,
+/* HTML video */
 .ad-layout .post-full-content video {
-  /* HTML video */
   max-width: 100%;
 }
 
