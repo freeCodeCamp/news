@@ -22,4 +22,8 @@ describe('Ads', () => {
   it('the post should not include any ad containers', () => {
     cy.get(selectors.adContainer).should('not.exist');
   });
+
+  it('the post should not use the ad layout', () => {
+    cy.get('.ad-layout').should('not.exist');
+  });
 });
