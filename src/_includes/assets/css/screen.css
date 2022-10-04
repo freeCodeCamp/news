@@ -2383,10 +2383,11 @@ a.banner:hover span {
   margin-bottom: 10px;
 }
 
-/* Adjust Ghost editor and markdown images and HTML video widths when ads are enabled */
-.ad-layout .post-full-content .kg-image-card img,
-.ad-layout .post-full-content img,
+/* Adjust image and video widths when ads are enabled */
+.ad-layout .post-full-content .kg-image-card img, /* Ghost editor images */
+.ad-layout .post-full-content p img, /* Markdown images */
 .ad-layout .post-full-content video {
+  /* HTML video */
   max-width: 100%;
 }
 
