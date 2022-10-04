@@ -105,11 +105,6 @@ module.exports = function (config) {
 
   config.addNunjucksShortcode('toISOString', toISOStringShortcode);
 
-  // Selectively show comments section
-  config.addFilter('commentsEnabled', tagsArr => {
-    return !tagsArr.map(tag => tag.name).includes('#disable-comments');
-  });
-
   // Check for next page before showing 'Load More Articles' button
   config.addFilter('nextPageExists', href => {
     const nextPageRegExp = /\/\d+\/$/g;

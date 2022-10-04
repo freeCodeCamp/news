@@ -5,7 +5,6 @@ const selectors = {
     bottom:
       "[data-test-label='author-header-with-bio'] [data-test-label='avatar']"
   },
-  comments: "[data-test-label='comments']",
   socialRowCTA: "[data-test-label='social-row-cta']",
   tweetButton: "[data-test-label='tweet-button']"
 };
@@ -32,10 +31,6 @@ describe('Post', () => {
       cy.get(selectors.authorProfileImage).then($el =>
         expect($el[0].alt).to.equal('Quincy Larson')
       );
-    });
-
-    it('should not display a comments section', () => {
-      cy.get(selectors.comments).should('not.exist');
     });
 
     it('should display the social row', () => {
