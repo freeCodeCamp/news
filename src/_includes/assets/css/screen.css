@@ -14,20 +14,17 @@ on every page through _includes/layouts/default.njk
   7.1. Post Footer
      7.1.1 Single Author Byline
      7.1.2 Multiple Author Byline
-  7.3. Comments
-  7.4. Related Posts
-  7.5. Floating Header
-  7.6. Koenig Styles
+  7.2. Related Posts
+  7.3. Koenig Styles
 8.  Author Template
 9.  Error Template
 10. Site Footer
-11. Discourse integration
-12. buttons-row
-13. Tags
-14. learn-cta-row and social-row
-15. under-header-content donation
-16. Ads
-17. RTL layout
+11. buttons-row
+12. Tags
+13. learn-cta-row and social-row
+14. under-header-content donation
+15. Ads
+16. RTL layout
 
 */
 
@@ -854,7 +851,6 @@ make sure this only happens on large viewports / desktop-ish devices.
 .post-full-content dl,
 .post-full-content pre,
 .post-full-content blockquote,
-.post-full-comments,
 .footnotes {
   min-width: 100%;
 }
@@ -1418,15 +1414,7 @@ pre.runkit-element {
   opacity: 0.15;
 }
 
-/* 7.3. Comments
-/* ---------------------------------------------------------- */
-
-.post-full-comments {
-  margin: 0 auto;
-  max-width: 840px;
-}
-
-/* 7.4. Related posts
+/* 7.2. Related posts
 /* ---------------------------------------------------------- */
 
 .read-next-feed {
@@ -1545,10 +1533,7 @@ pre.runkit-element {
   color: var(--gray80);
 }
 
-/* 7.5. Floating Header
-/* ---------------------------------------------------------- */
-
-/* 7.6. Koenig Styles
+/* 7.3. Koenig Styles
 /* ---------------------------------------------------------- */
 
 .post-content {
@@ -2162,39 +2147,7 @@ p.footer-donation a:hover {
   }
 }
 
-/* 11. Discourse integration
-/* ---------------------------------------------------------- */
-
-#discourse-comments {
-  border: 1px solid #eeeef0;
-  padding: 70px 100px;
-}
-
-@media (max-width: 1170px) {
-  #discourse-comments {
-    padding: 5vw 7vw;
-  }
-}
-
-#trigger-load-comments {
-  width: 100%;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  outline: none;
-  border: 3px solid var(--gray90);
-  background: var(--gray10);
-  color: var(--gray90);
-  text-decoration: none;
-  padding: 5 16px;
-}
-
-#trigger-load-comments:hover {
-  background: var(--gray90);
-  color: var(--gray10);
-}
-
-/* 12. buttons-row
+/* 11. buttons-row
 /* ---------------------------------------------------------- */
 
 .read-more-row {
@@ -2225,7 +2178,7 @@ p.footer-donation a:hover {
   color: #eeeef0;
 }
 
-/* 13. Tags
+/* 12. Tags
 /* ---------------------------------------------------------- */
 
 .tags-row {
@@ -2261,7 +2214,7 @@ p.footer-donation a:hover {
   text-decoration: none;
 }
 
-/* 14. learn-cta-row and social-row
+/* 13. learn-cta-row and social-row
 /* ---------------------------------------------------------- */
 
 .social-row,
@@ -2310,7 +2263,7 @@ a.cta-button {
   }
 }
 
-/* 15. under-header-content donation
+/* 14. under-header-content donation
 /* ---------------------------------------------------------- */
 
 a.banner {
@@ -2365,7 +2318,7 @@ a.banner:hover span {
   }
 }
 
-/* 16. Ads
+/* 15. Ads
 /* ---------------------------------------------------------- */
 
 .ad-wrapper {
@@ -2415,7 +2368,7 @@ a.banner:hover span {
   }
 }
 
-/* 17. RTL layout
+/* 16. RTL layout
 /* ---------------------------------------------------------- */
 .rtl-layout {
   direction: rtl;
