@@ -14,7 +14,7 @@ time #}
 
 {% block content %}
     <main id="site-main" class="post-template site-main outer">
-        <div class="inner ad-layout">
+        <div class="inner {{ "ad-layout" if (adsEnabled) }}">
             <article class="post-full post {{ "no-image" if not (post.feature_image) }}">
                 <header class="post-full-header">
                     <section class="post-full-meta">
