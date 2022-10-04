@@ -2383,8 +2383,9 @@ a.banner:hover span {
   margin-bottom: 10px;
 }
 
-/* Adjust wide image and HTML video widths when ads are enabled */
-.ad-layout .post-full-content .kg-width-wide .kg-image,
+/* Adjust Ghost editor and markdown images and HTML video widths when ads are enabled */
+.ad-layout .post-full-content .kg-image-card img,
+.ad-layout .post-full-content img,
 .ad-layout .post-full-content video {
   max-width: 100%;
 }
