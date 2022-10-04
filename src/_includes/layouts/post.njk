@@ -83,7 +83,6 @@ time #}
                     {# Conditionally include partials based on Ghost language setting #}
                     {% ifAsync site.lang === "zh" %}
                         {% include "partials/learn-cta-row.njk" %}
-                        {% include "partials/comments.njk" %}
                     {% else %}
                         {% include "partials/social-row.njk" %}
                         {% include "partials/learn-cta-row.njk" %}
