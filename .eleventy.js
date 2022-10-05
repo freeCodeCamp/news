@@ -16,7 +16,6 @@ const {
   featureImageShortcode
 } = require('./utils/shortcodes/images');
 const cacheBusterShortcode = require('./utils/shortcodes/cache-buster');
-const sitemapFetcherShortcode = require('./utils/shortcodes/sitemap-fetcher');
 const createJSONLDShortcode = require('./utils/shortcodes/create-json-ld');
 const {
   publishedDateShortcode,
@@ -88,8 +87,6 @@ module.exports = function (config) {
   config.addNunjucksShortcode('fullEscaper', fullEscaper);
 
   config.addNunjucksAsyncShortcode('createJSONLD', createJSONLDShortcode);
-
-  config.addNunjucksAsyncShortcode('sitemapFetcher', sitemapFetcherShortcode);
 
   // Date and time shortcodes and filters
   config.addNunjucksShortcode('publishedDate', publishedDateShortcode);
