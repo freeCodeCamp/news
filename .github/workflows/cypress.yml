@@ -42,6 +42,14 @@ jobs:
       LOCALE_FOR_GHOST: ${{ matrix.languages }}
 
     steps:
+      # Remove this step after firefox launches 106 (hopefully it's fixed by then)
+      - name: Downgrade Firefox
+        run: |
+          curl https://ftp.mozilla.org/pub/firefox/releases/103.0/linux-x86_64/en-US/firefox-103.0.tar.bz2 --output firefox-103.0.tar.bz2
+          tar -xjf firefox-103.0.tar.bz2
+          sudo mv firefox /opt/
+          sudo mv /usr/bin/firefox /usr/bin/firefox_old
+          sudo ln -s /opt/firefox/firefox /usr/bin/firefox
       - name: Checkout source files
         uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b # tag=v3
 
