@@ -22,22 +22,45 @@ Happy Contributing!
 
 ## Build
 
-### Build Status
+### Deployment Status
 
-| Language | Status                                                                                                                                                                                                  |
-| :------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| English  | [![Build status](https://dev.azure.com/freeCodeCamp-org/news/_apis/build/status/build-deploy-eng)](https://dev.azure.com/freeCodeCamp-org/news/_build/latest?definitionId=31)                           |
-|  Others  | [![Build and Deploy Localized News to Azure](https://github.com/freeCodeCamp/news/actions/workflows/deploy-i18n.yml/badge.svg)](https://github.com/freeCodeCamp/news/actions/workflows/deploy-i18n.yml) |
+You can click on the badges below to go to the dashboards detailing the status of the latest deployments. If you see something is not right, wait for a few hours. Our team is usually on top of these with automated alerts.
+
+| Language     | Status                         |
+| :----------- | :----------------------------- |
+| English      | [![Deployment status][6]]([7]) |
+| Others(i18n) | [![Deployment status][8]]([9]) |
 
 ### Build Schedules
 
-i18n Publication: New builds are triggered every six hours (UTC).
+New builds to the `/news` sites are triggered as per the below schedule:
 
-English Publication: New builds are triggered every two hours (UTC).
+| Language     | Schedule (UTC)           |
+| :----------- | :----------------------- |
+| English      | Every 2 Hours - all days |
+| Others(i18n) | Every 6 Hours - all days |
 
-Please note there can be delays and issues in builds sometimes. Your published article and changes may take longer than usual to appear. You can check the status of the latest builds by clicking the Build Status badge in the previous section. We also have multiple layers of caching.
+**Note: Once a build is triggered, it can take upto an hour to complete, and cascade to all regions in the world.**
 
-When you publish a change, like updating scripts, a new article, updating old articles, adding or updating pages, etc., in Ghost CMS, it will eventually appear on the public-facing site. We recommend giving changes at least a day before reaching out to someone to take a look. The team gets alerts for all build failures, etc. You need not alert them again.
+### Freqyently Asked Questions
+
+#### Where do I check the status of the latest build?
+
+You can check the status of the latest builds by clicking the Deployment Status badge in the previous section.
+
+#### I published an article. Why has it not appeared on news yet?
+
+Your published article and changes may take longer than usual to appear. We also have multiple layers of caching. This helps us to serve the content faster to our users.
+
+When you publish a change, like updating scripts, a new article, updating old articles, adding or updating pages, etc., in Ghost CMS, it will eventually appear on the public-facing site.
+
+It can take up to 1 hour for the changes to appear on the site. If you are still not seeing the changes, please wait for a few hours.
+
+#### I see a build has failed, what should I do?
+
+We recommend giving changes at least a day before reaching out to someone to take a look. We have recovery workflows in place to fix most of the issues.
+
+Also, the team gets alerts for all build failures, etc. You need not alert them again.
 
 ## Copyright & License
 
@@ -49,3 +72,7 @@ Copyright (c) 2021 freeCodeCamp.org - Released under the
 [3]: https://www.11ty.io/
 [4]: https://github.com/TryGhost/eleventy-starter-ghost
 [5]: https://contribute.freecodecamp.org/#/
+[6]: https://dev.azure.com/freeCodeCamp-org/news/_apis/build/status/build-deploy-eng
+[7]: https://dev.azure.com/freeCodeCamp-org/news/_build/latest?definitionId=31
+[8]: https://github.com/freeCodeCamp/news/actions/workflows/deploy-i18n.yml/badge.svg
+[9]: https://github.com/freeCodeCamp/news/actions/workflows/deploy-i18n.yml
