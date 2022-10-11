@@ -29,6 +29,7 @@
     "develop:ci": "cross-env ELEVENTY_ENV=ci NODE_OPTIONS=--max-old-space-size=8192 eleventy --serve",
     "prebuild": "npm run clean",
     "build": "cross-env ELEVENTY_ENV=prod NODE_OPTIONS=--max-old-space-size=8192 eleventy",
+    "build:ci": "cross-env ELEVENTY_ENV=ci eleventy",
     "postbuild": "node ./config/i18n/generate-serve-config.js",
     "test": "jest",
     "lint": "npm-run-all lint:*",
@@ -88,6 +89,7 @@
     "js-yaml": "4.1.0",
     "jsdom": "19.0.0",
     "json-merge-patch": "1.0.2",
+    "libxmljs": "0.19.10",
     "lint-staged": "12.5.0",
     "lodash": "4.17.21",
     "md5": "2.3.0",
@@ -98,8 +100,7 @@
     "probe-image-size": "7.2.3",
     "sanitize-html": "2.7.2",
     "shx": "0.3.4",
-    "terser": "5.15.1",
-    "xml2js": "0.4.23"
+    "terser": "5.15.1"
   },
   "lint-staged": {
     "**/*": "prettier --write --ignore-unknown"

@@ -43,6 +43,20 @@ jobs:
       matrix:
         node-version: [16.x]
 
+    env:
+      BUILD_LANG: english
+
+      ENGLISH_GHOST_API_URL: ${{ secrets.CI_ENGLISH_GHOST_API_URL }}
+      ENGLISH_GHOST_API_VERSION: ${{ secrets.CI_ENGLISH_GHOST_API_VERSION }}
+      ENGLISH_GHOST_CONTENT_API_KEY: ${{ secrets.CI_ENGLISH_GHOST_CONTENT_API_KEY }}
+
+      POSTS_PER_PAGE: ${{ secrets.POSTS_PER_PAGE }}
+
+      SITE_DOMAIN: localhost:8080
+
+      LOCALE_FOR_UI: english
+      LOCALE_FOR_GHOST: english
+
     steps:
       - name: Checkout source code
         uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b # tag=v3
@@ -53,11 +67,27 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
 
-      - name: Set environment variables
-        run: cp sample.env .env
-
       - name: Install dependencies
         run: npm ci
 
+      - name: Login to Docker Hub
+        uses: docker/login-action@49ed152c8eca782a232dede0303416e8f356c37b # tag=v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_ACCESS_TOKEN }}
+
+      - name: Start English Ghost container
+        run: npm run start:containers --service english
+
+      - name: Sleep for 5 seconds
+        run: sleep 5s
+        shell: bash
+
+      - name: Build English CI site
+        run: npm run build:ci
+
       - name: Run tests
         run: npm run test
+
+      - name: Stop Ghost containers
+        run: npm run stop:containers

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="{{ site.url }}/sitemap.xsl"?>
+{% set isSitemapIndex = sitemap.path === '/sitemap.xml' %}
+{% set outerTagName = 'sitemapindex' if isSitemapIndex else 'urlset' %}
+{% set innerTagName = 'sitemap' if isSitemapIndex else 'url' %}
+<{{ outerTagName }}
+  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  {{ ('xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"' | safe) if not isSitemapIndex }}>
+  {% for entry in sitemap.entries %}
+    <{{ innerTagName }}>
+      <loc>{{ entry.loc }}</loc>
+      {% if entry.lastmod %}
+        <lastmod>{{ entry.lastmod }}</lastmod>
+      {% endif %}
+      {% if entry.image %}
+        <image:image>
+          <image:loc>{{ entry.image.loc }}</image:loc>
+          <image:caption>{{ entry.image.caption }}</image:caption>
+        </image:image>
+      {% endif %}
+    </{{ innerTagName }}>
+  {% endfor %}
+</{{ outerTagName }}>

@@ -1,9 +1,9 @@
 const Piscina = require('piscina');
 const { chunk, cloneDeep } = require('lodash');
-const { resolve } = require('path');
+const { resolve, basename } = require('path');
 
 const fetchFromGhost = require('../../utils/ghost/fetch-from-ghost');
-const { postsPerPage } = require('../../config');
+const { postsPerPage, siteURL } = require('../../config');
 
 const getUniqueList = (arr, key) => [
   ...new Map(arr.map(item => [item[key], item])).values()
@@ -186,12 +186,92 @@ module.exports = async () => {
     getCollectionFeeds(tags)
   ].flat();
 
+  const generateSitemapObject = (collection, type) => {
+    return {
+      path: `/sitemap-${type}.xml`,
+      entries: cloneDeep(collection).map(obj => {
+        const pageObj = {
+          loc: `${siteURL}${obj.path}`
+        };
+        // Append lastmod if obj is a post or page with an updated_at property
+        if (obj.updated_at)
+          pageObj.lastmod = new Date(obj.updated_at).toISOString();
+
+        // Handle images depending on the type of collection
+        let imageKey;
+        if ((type === 'posts' || 'pages' || 'tags') && obj.feature_image)
+          imageKey = 'feature_image';
+        if (type === 'authors') {
+          if (obj.profile_image) imageKey = 'profile_image';
+          if (obj.cover_image) imageKey = 'cover_image'; // Prefer cover_image over profile_image for authors
+        }
+
+        if (obj[imageKey]) {
+          pageObj.image = {
+            loc: obj[imageKey],
+            caption: basename(obj[imageKey])
+          };
+        }
+
+        return pageObj;
+      })
+    };
+  };
+
+  const sitemaps = [
+    generateSitemapObject(pages, 'pages'),
+    generateSitemapObject(posts, 'posts'),
+    generateSitemapObject(primaryAuthors, 'authors'),
+    generateSitemapObject(allTags, 'tags')
+  ];
+
+  // Add custom object for the landing page to the beginning of the pages sitemap collection entries array
+  sitemaps[0].entries = [
+    {
+      loc: `${siteURL}/`,
+      // Published pages aren't shown on the landing page, so use the most recently updated post
+      // for lastmod
+      lastmod: sitemaps[1].entries[0].lastmod
+    },
+    ...sitemaps[0].entries
+  ];
+
+  // Sort sitemap entries
+  sitemaps.forEach(sitemap =>
+    sitemap.entries.sort((a, b) => {
+      // Sort lastmod (posts and pages) in descending order
+      // and loc (authors and tags) in ascending / alphabetical order
+      if (a?.lastmod && b?.lastmod) {
+        return new Date(b.lastmod) - new Date(a.lastmod);
+      } else {
+        if (a.loc < b.loc) return -1;
+        if (a.loc > b.loc) return 1;
+        return 0;
+      }
+    })
+  );
+
+  // Add a sitemap index object to the sitemaps array and use some data from the existing pages, posts,
+  // authors, and tags sitemaps as entries to use in the template
+  sitemaps.unshift({
+    path: '/sitemap.xml',
+    entries: sitemaps.map(obj => {
+      const sitemapObj = {
+        loc: `${siteURL}${obj.path}`
+      };
+      if (obj.entries[0].lastmod) sitemapObj.lastmod = obj.entries[0].lastmod;
+
+      return sitemapObj;
+    })
+  });
+
   return {
     posts,
     pages,
     authors,
     tags,
     popularTags,
-    feeds
+    feeds,
+    sitemaps
   };
 };
