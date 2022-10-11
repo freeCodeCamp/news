@@ -28,8 +28,8 @@ You can click on the badges below to go to the dashboards detailing the status o
 
 | Language     | Status                         |
 | :----------- | :----------------------------- |
-| English      | [![Deployment status][6]]([7]) |
-| Others(i18n) | [![Deployment status][8]]([9]) |
+| English      | [![Deployment status][6]][7] |
+| Others(i18n) | [![Deployment status][8]][9] |
 
 ### Build Schedules
 
