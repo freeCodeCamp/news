@@ -2400,6 +2400,7 @@ a.banner:hover span {
 .rtl-layout .post-card-tags a {
   padding-right: 0;
   padding-left: 15px;
+  direction: ltr;
 }
 
 @media (min-width: 768px) {
