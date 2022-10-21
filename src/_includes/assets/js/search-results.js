@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', async () => {
   const urlParams = new URLSearchParams(window.location.search);
-  const queryStr = urlParams.get('query');
+  const queryStr = urlParams.get('query') || '';
   const postFeed = document.querySelector('.post-feed');
   let currPage = 0;
 
