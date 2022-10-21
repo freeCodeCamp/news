@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       <header class="post-card-header">
         ${
           hit?.tags[0]?.name
-            ? `<span class="post-card-tags"><a href="${hit.tags[0].url}">
+            ? `<span class="post-card-tags"><a dir="ltr" href="${hit.tags[0].url}">
           #${hit.tags[0].name}
         </a></span>`
             : ''
