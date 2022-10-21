@@ -8,7 +8,7 @@
 
 {% block content %}
     <div class="under-header-content">
-        <h1 data-test-label="tag-name" class="site-title tags-title">#{{ tag.name | upper }}</h1>
+        <h1 dir="ltr" data-test-label="tag-name" class="site-title tags-title">#{{ tag.name | upper }}</h1>
         <h2 class="site-description" data-test-label="tag-post-count">
             {% if postCount == 0 %}
                 {% t 'tag.no-posts' %}
@@ -22,7 +22,7 @@
         <div class="tags-row">
             {% for tag in popularTags %}
                 <a class='tag' href="{{ tag.path | url }}">
-                    <h3>#{{ tag.name }} <small> | {{ tag.count.posts }}</small></h3>
+                    <h3 dir="ltr">#{{ tag.name }} <small> | {{ tag.count.posts }}</small></h3>
                 </a>
             {% endfor %}
         </div>
