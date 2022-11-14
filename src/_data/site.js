@@ -1,6 +1,14 @@
+const algoliasearch = require('algoliasearch/lite');
 const { sourceAPI } = require('../../utils/ghost/api');
 const getImageDimensions = require('../../utils/get-image-dimensions');
-const { currentLocale_i18nISOCode, siteURL } = require('../../config');
+const {
+  algoliaAppId,
+  algoliaAPIKey,
+  algoliaIndex,
+  currentLocale_i18nISOCode,
+  eleventyEnv,
+  siteURL
+} = require('../../config');
 const translate = require('../../utils/translate');
 
 // Get Twitter profile based on links in config/i18n/locales/lang/links.json --
@@ -10,6 +18,9 @@ const getTwitterProfile = url => url.replace('https://twitter.com/', '@');
 const twitterURL = translate('links:twitter');
 const twitterProfile =
   twitterURL !== 'twitter' ? getTwitterProfile(twitterURL) : '@freecodecamp';
+
+const roundDownToNearestHundred = num => Math.floor(num / 100) * 100;
+const convertToLocalizedString = (num, ISOCode) => num.toLocaleString(ISOCode); // Uses commas or decimals depending on the locale
 
 module.exports = async () => {
   const site = await sourceAPI.settings
@@ -58,6 +69,27 @@ module.exports = async () => {
   // based on UI locale
   site.facebook = 'https://www.facebook.com/freecodecamp';
   site.twitter = twitterProfile;
+
+  // Get rounded total hits and convert to localized string for
+  // search bar placeholder
+  let roundedTotalHits;
+  if (eleventyEnv === 'ci') {
+    const mockHits = require('../../cypress/fixtures/mock-search-hits.json');
+
+    roundedTotalHits = roundDownToNearestHundred(mockHits.length);
+  } else {
+    const client = algoliasearch(algoliaAppId, algoliaAPIKey);
+    const index = client.initIndex(algoliaIndex);
+
+    const res = await index.search('');
+    roundedTotalHits = roundDownToNearestHundred(res?.nbHits);
+  }
+
+  site.roundedTotalHits = roundedTotalHits;
+  site.roundedTotalHitsLocalizedString = convertToLocalizedString(
+    roundedTotalHits,
+    currentLocale_i18nISOCode
+  );
 
   return site;
 };
