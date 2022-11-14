@@ -72,22 +72,22 @@ module.exports = async () => {
 
   // Get rounded total hits and convert to localized string for
   // search bar placeholder
-  let roundedTotalHits;
+  let roundedTotalEntries;
   if (eleventyEnv === 'ci') {
     const mockHits = require('../../cypress/fixtures/mock-search-hits.json');
 
-    roundedTotalHits = roundDownToNearestHundred(mockHits.length);
+    roundedTotalEntries = roundDownToNearestHundred(mockHits.length);
   } else {
     const client = algoliasearch(algoliaAppId, algoliaAPIKey);
     const index = client.initIndex(algoliaIndex);
 
     const res = await index.search('');
-    roundedTotalHits = roundDownToNearestHundred(res?.nbHits);
+    roundedTotalEntries = roundDownToNearestHundred(res?.nbHits);
   }
 
-  site.roundedTotalHits = roundedTotalHits;
-  site.roundedTotalHitsLocalizedString = convertToLocalizedString(
-    roundedTotalHits,
+  site.roundedTotalEntries = roundedTotalEntries;
+  site.roundedTotalEntriesLocalizedString = convertToLocalizedString(
+    roundedTotalEntries,
     currentLocale_i18nISOCode
   );
 

@@ -2,7 +2,9 @@
   {% if site.roundedTotalHits < 100 %}
     {%- t 'search.placeholder.generic' -%}
   {% else %}
-    {%- t 'search.placeholder.numbered', { roundedHits: '(site.roundedTotalHitsLocalizedString)' } -%}
+    {%- t 'search.placeholder.numbered', {
+      roundedTotalEntries: site.roundedTotalEntriesLocalizedString
+    } -%}
   {% endif %}
 {% endset %}
 <form id="search-form" data-test-label="search-bar">
