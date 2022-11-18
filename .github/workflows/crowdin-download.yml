@@ -57,12 +57,208 @@ jobs:
           # Uncomment below to debug
           # dryrun_action: true
 
-      # # Convert Simplified Chinese to Traditional #
-      # - name: Convert Chinese
-      #   uses: freecodecamp/crowdin-action@main
-      #   env:
-      #     PLUGIN: 'convert-chinese'
-      #     FILE_PATHS: '["/docs/i18n/chinese/"]'
+        ##### Download Arabic #####
+      - name: Crowdin Download Arabic Translations
+        uses: crowdin/github-action@master
+        # options: https://github.com/crowdin/github-action/blob/master/action.yml
+        with:
+          # uploads
+          upload_sources: false
+          upload_translations: false
+          auto_approve_imported: false
+          import_eq_suggestions: false
+
+          # downloads
+          download_translations: true
+          download_language: ar
+          skip_untranslated_files: false
+          export_only_approved: true
+
+          push_translations: false
+
+          # pull-request
+          create_pull_request: false
+
+          # global options
+          config: './crowdin-config.yml'
+          base_url: ${{ secrets.CROWDIN_BASE_URL_FCC }}
+
+          # Uncomment below to debug
+          # dryrun_action: true
+
+        ##### Download Chinese #####
+      - name: Crowdin Download Chinese Translations
+        uses: crowdin/github-action@master
+        # options: https://github.com/crowdin/github-action/blob/master/action.yml
+        with:
+          # uploads
+          upload_sources: false
+          upload_translations: false
+          auto_approve_imported: false
+          import_eq_suggestions: false
+
+          # downloads
+          download_translations: true
+          download_language: zh-CN
+          skip_untranslated_files: false
+          export_only_approved: true
+
+          push_translations: false
+
+          # pull-request
+          create_pull_request: false
+
+          # global options
+          config: './crowdin-config.yml'
+          base_url: ${{ secrets.CROWDIN_BASE_URL_FCC }}
+
+          # Uncomment below to debug
+          # dryrun_action: true
+
+        ##### Download German #####
+      - name: Crowdin Download German Translations
+        uses: crowdin/github-action@master
+        # options: https://github.com/crowdin/github-action/blob/master/action.yml
+        with:
+          # uploads
+          upload_sources: false
+          upload_translations: false
+          auto_approve_imported: false
+          import_eq_suggestions: false
+
+          # downloads
+          download_translations: true
+          download_language: de
+          skip_untranslated_files: false
+          export_only_approved: true
+
+          push_translations: false
+
+          # pull-request
+          create_pull_request: false
+
+          # global options
+          config: './crowdin-config.yml'
+          base_url: ${{ secrets.CROWDIN_BASE_URL_FCC }}
+
+          # Uncomment below to debug
+          # dryrun_action: true
+
+        ##### Download Italian #####
+      - name: Crowdin Download Italian Translations
+        uses: crowdin/github-action@master
+        # options: https://github.com/crowdin/github-action/blob/master/action.yml
+        with:
+          # uploads
+          upload_sources: false
+          upload_translations: false
+          auto_approve_imported: false
+          import_eq_suggestions: false
+
+          # downloads
+          download_translations: true
+          download_language: it
+          skip_untranslated_files: false
+          export_only_approved: true
+
+          push_translations: false
+
+          # pull-request
+          create_pull_request: false
+
+          # global options
+          config: './crowdin-config.yml'
+          base_url: ${{ secrets.CROWDIN_BASE_URL_FCC }}
+
+          # Uncomment below to debug
+          # dryrun_action: true
+
+        ##### Download Japanese #####
+      - name: Crowdin Download Japanese Translations
+        uses: crowdin/github-action@master
+        # options: https://github.com/crowdin/github-action/blob/master/action.yml
+        with:
+          # uploads
+          upload_sources: false
+          upload_translations: false
+          auto_approve_imported: false
+          import_eq_suggestions: false
+
+          # downloads
+          download_translations: true
+          download_language: ja
+          skip_untranslated_files: false
+          export_only_approved: true
+
+          push_translations: false
+
+          # pull-request
+          create_pull_request: false
+
+          # global options
+          config: './crowdin-config.yml'
+          base_url: ${{ secrets.CROWDIN_BASE_URL_FCC }}
+
+          # Uncomment below to debug
+          # dryrun_action: true
+
+        ##### Download Spanish #####
+      - name: Crowdin Download Spanish Translations
+        uses: crowdin/github-action@master
+        # options: https://github.com/crowdin/github-action/blob/master/action.yml
+        with:
+          # uploads
+          upload_sources: false
+          upload_translations: false
+          auto_approve_imported: false
+          import_eq_suggestions: false
+
+          # downloads
+          download_translations: true
+          download_language: es-EM
+          skip_untranslated_files: false
+          export_only_approved: true
+
+          push_translations: false
+
+          # pull-request
+          create_pull_request: false
+
+          # global options
+          config: './crowdin-config.yml'
+          base_url: ${{ secrets.CROWDIN_BASE_URL_FCC }}
+
+          # Uncomment below to debug
+          # dryrun_action: true
+
+        ##### Download Ukrainian #####
+      - name: Crowdin Download Ukrainian Translations
+        uses: crowdin/github-action@master
+        # options: https://github.com/crowdin/github-action/blob/master/action.yml
+        with:
+          # uploads
+          upload_sources: false
+          upload_translations: false
+          auto_approve_imported: false
+          import_eq_suggestions: false
+
+          # downloads
+          download_translations: true
+          download_language: uk
+          skip_untranslated_files: false
+          export_only_approved: true
+
+          push_translations: false
+
+          # pull-request
+          create_pull_request: false
+
+          # global options
+          config: './crowdin-config.yml'
+          base_url: ${{ secrets.CROWDIN_BASE_URL_FCC }}
+
+          # Uncomment below to debug
+          # dryrun_action: true
 
       # Create Commit
       - name: Commit Changes
