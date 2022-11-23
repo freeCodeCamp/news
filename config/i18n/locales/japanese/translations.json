@@ -1,20 +1,20 @@
 {
   "buttons": {
     "forum": "フォーラム",
-    "donate": "寄付",
-    "load-more-articles": "もっと見る"
+    "donate": "Donate",
+    "load-more-articles": "Load More Articles"
   },
   "search": {
-    "label": "検索",
-    "accessible-name": "検索クエリを送信",
-    "placeholder": "投稿を検索",
-    "see-results": "すべての結果を表示: {{ searchQuery }}",
-    "no-tutorials": "投稿が見つかりませんでした"
+    "label": "Search",
+    "accessible-name": "Submit your search query",
+    "placeholder": "Search 9,000+ tutorials",
+    "see-results": "See all results for {{ searchQuery }}",
+    "no-tutorials": "No tutorials found"
   },
   "banner": {
-    "default": "コーディングを学ぶ — {{ <0> }}約 3,000 時間のカリキュラムが無料{{ </0> }}",
+    "default": "Learn to code — {{ <0> }}free 3,000-hour curriculum{{ </0> }}",
     "authenticated": "当非営利団体とその使命をご支援ください。{{ <0> }}freeCodeCamp.org へのご寄付をお願いします{{ </0> }}。",
-    "authenticated-donor": "freeCodeCamp への{{ <0> }}ご寄付{{ </0> }}によるご支援、誠にありがとうございます。"
+    "authenticated-donor": "Thank you for supporting freeCodeCamp through {{ <0> }}your donations{{ </0> }}."
   },
   "default-bio": "{{ <0> }}他の投稿{{ </0> }}を読む。",
   "author": {
@@ -23,18 +23,18 @@
     "multiple-posts": "{{ postCount }} 件の投稿"
   },
   "tag": {
-    "no-posts": "投稿の一覧",
-    "one-post": "1 件の投稿",
-    "multiple-posts": "{{ postCount }} 件の投稿"
+    "no-posts": "A collection of posts",
+    "one-post": "A collection of 1 post",
+    "multiple-posts": "A collection of {{ postCount }} posts"
   },
   "404": {
     "page-not-found": "ページが見つかりません",
-    "go-to-front-page": "フロントページに移動"
+    "go-to-front-page": "Go to the front page"
   },
   "social-row": {
     "cta": {
-      "tweet-a-thanks": "お読みいただきありがとうございます。ぜひ著者にツイートしてお知らせください。{{ <0> }}著者宛てにツイート{{ </0> }}",
-      "tweet-it": "この記事が参考になりましたらぜひシェアしてください。{{ <0> }}ツイート{{ </0> }}"
+      "tweet-a-thanks": "If you read this far, tweet to the author to show them you care. {{ <0> }}Tweet a thanks{{ </0> }}",
+      "tweet-it": "If this article was helpful, {{ <0> }}tweet it{{ </0> }}."
     },
     "tweets": {
       "default": "この記事が参考になりました。{{ author }} さんありがとうございます。",
@@ -45,25 +45,28 @@
   "original-author-translator": {
     "roles": {
       "author": "著者: {{ name }} ({{ locale }})",
-      "translator": "翻訳: {{ name }}"
+      "translator": "Translator: {{ name }}"
     },
     "details": {
-      "original-article": "{{ <0> }}原文:{{ </0> }} {{ title }} ({{ author }})",
-      "translated-by": "{{ <0> }}翻訳・翻案:{{ </0> }} {{ translator }}"
+      "original-article": "{{ <0> }}Original article:{{ </0> }} {{ title }} by {{ author }}",
+      "translated-by": "{{ <0> }}Translated by:{{ </0> }} {{ translator }}"
     },
     "locales": {
+      "arabic": "アラビア語",
+      "bengali": "ベンガル語",
+      "chinese": "中国語",
       "english": "英語",
       "espanol": "スペイン語",
-      "chinese": "中国語",
-      "portuguese": "ポルトガル語",
+      "french": "フランス語",
       "italian": "イタリア語",
       "japanese": "日本語",
-      "arabic": "アラビア語",
-      "urdu": "ウルドゥー語",
-      "bengali": "ベンガル語"
+      "korean": "Korean",
+      "portuguese": "ポルトガル語",
+      "swahili": "スワヒリ語",
+      "urdu": "ウルドゥー語"
     }
   },
-  "embed-title": "埋め込みコンテンツ",
+  "embed-title": "Embedded content",
   "footer": {
     "tax-exempt-status": "freeCodeCamp は皆様のご寄付により支えられている非課税の 501(c)(3) 非営利団体です。(United States Federal Tax Identification Number: 82-0779546)",
     "mission-statement": "私たちのミッション: 人々が無料でコーディングを学べるよう支援することです。その実現のため、何千もの動画、記事、インタラクティブなコーディングレッスンを作成し、すべて無料で公開しています。さらに、数千の freeCodeCamp スタディグループが世界中に存在します。",
@@ -74,21 +77,21 @@
     "links": {
       "about": "私たちについて",
       "alumni": "卒業生ネットワーク",
-      "open-source": "オープンソース",
-      "shop": "ショップ",
-      "support": "サポート",
-      "sponsors": "スポンサー",
-      "honesty": "学問的誠実性",
-      "coc": "行動規範",
-      "privacy": "プライバシーポリシー",
-      "tos": "利用規約",
-      "copyright": "コピーライトポリシー"
+      "open-source": "Open Source",
+      "shop": "Shop",
+      "support": "Support",
+      "sponsors": "Sponsors",
+      "honesty": "Academic Honesty",
+      "coc": "Code of Conduct",
+      "privacy": "Privacy Policy",
+      "tos": "Terms of Service",
+      "copyright": "Copyright Policy"
     }
   },
   "fallback": {
-    "message": "お使いのブラウザはHTML5{{ element }}をサポートしていません。",
-    "audio": "オーディオ",
-    "video": "ビデオ"
+    "message": "Your browser doesn't support HTML5 {{ element }}.",
+    "audio": "audio",
+    "video": "video"
   },
   "ad-text": "Advertisement"
 }
