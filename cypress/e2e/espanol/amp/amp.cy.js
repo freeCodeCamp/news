@@ -19,7 +19,7 @@ describe('AMP page', () => {
     });
 
     it("the AMP Author element should contain the author's name and the locale of the original article", () => {
-      cy.get(selectors.AMPAuthor).contains('Quincy Larson (inglés)');
+      cy.get(selectors.AMPAuthor).contains('Quincy Larson');
     });
 
     it("the AMP Translator element should contain the translator's name", () => {
