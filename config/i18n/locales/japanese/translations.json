@@ -1,20 +1,20 @@
 {
   "buttons": {
     "forum": "フォーラム",
-    "donate": "Donate",
-    "load-more-articles": "Load More Articles"
+    "donate": "寄付",
+    "load-more-articles": "もっと見る"
   },
   "search": {
-    "label": "Search",
-    "accessible-name": "Submit your search query",
-    "placeholder": "Search 9,000+ tutorials",
-    "see-results": "See all results for {{ searchQuery }}",
-    "no-tutorials": "No tutorials found"
+    "label": "検索",
+    "accessible-name": "検索クエリを送信",
+    "placeholder": "投稿を検索",
+    "see-results": "{{ searchQuery }} のすべての結果を見る",
+    "no-tutorials": "投稿が見つかりませんでした"
   },
   "banner": {
-    "default": "Learn to code — {{ <0> }}free 3,000-hour curriculum{{ </0> }}",
+    "default": "コーディングを学ぶ — {{ <0> }}約 3,000 時間のカリキュラムが無料{{ </0> }}",
     "authenticated": "当非営利団体とその使命をご支援ください。{{ <0> }}freeCodeCamp.org へのご寄付をお願いします{{ </0> }}。",
-    "authenticated-donor": "Thank you for supporting freeCodeCamp through {{ <0> }}your donations{{ </0> }}."
+    "authenticated-donor": "freeCodeCamp への{{ <0> }}寄付{{ </0> }}によるご支援、誠にありがとうございます。"
   },
   "default-bio": "{{ <0> }}他の投稿{{ </0> }}を読む。",
   "author": {
@@ -23,9 +23,9 @@
     "multiple-posts": "{{ postCount }} 件の投稿"
   },
   "tag": {
-    "no-posts": "A collection of posts",
-    "one-post": "A collection of 1 post",
-    "multiple-posts": "A collection of {{ postCount }} posts"
+    "no-posts": "投稿一覧",
+    "one-post": "1 件の投稿",
+    "multiple-posts": "{{ postCount }} 件の投稿"
   },
   "404": {
     "page-not-found": "ページが見つかりません",

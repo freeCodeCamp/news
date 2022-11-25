@@ -7,7 +7,7 @@
   "search": {
     "label": "ابحث",
     "accessible-name": "إرسال استعلام البحث الخاص بك",
-    "placeholder": "البحث في 9000+ درس",
+    "placeholder": "ابحث في 60+ درس",
     "see-results": "مشاهدة كافة النتائج لـ {{ searchQuery }}",
     "no-tutorials": "لم يتم العثور على دروس"
   },
