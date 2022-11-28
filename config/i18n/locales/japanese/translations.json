@@ -29,12 +29,12 @@
   },
   "404": {
     "page-not-found": "ページが見つかりません",
-    "go-to-front-page": "Go to the front page"
+    "go-to-front-page": "フロントページに移動"
   },
   "social-row": {
     "cta": {
-      "tweet-a-thanks": "If you read this far, tweet to the author to show them you care. {{ <0> }}Tweet a thanks{{ </0> }}",
-      "tweet-it": "If this article was helpful, {{ <0> }}tweet it{{ </0> }}."
+      "tweet-a-thanks": "お読みいただきありがとうございます。ぜひ著者にツイートしてお知らせください。{{ <0> }}著者宛てにツイート{{ </0> }}",
+      "tweet-it": "この記事が参考になりましたらぜひシェアしてください。{{ <0> }}ツイート{{ </0> }}"
     },
     "tweets": {
       "default": "この記事が参考になりました。{{ author }} さんありがとうございます。",
@@ -45,11 +45,11 @@
   "original-author-translator": {
     "roles": {
       "author": "著者: {{ name }} ({{ locale }})",
-      "translator": "Translator: {{ name }}"
+      "translator": "翻訳: {{ name }}"
     },
     "details": {
-      "original-article": "{{ <0> }}Original article:{{ </0> }} {{ title }} by {{ author }}",
-      "translated-by": "{{ <0> }}Translated by:{{ </0> }} {{ translator }}"
+      "original-article": "{{ <0> }}原文:{{ </0> }} {{ title }} ({{ author }})",
+      "translated-by": "{{ <0> }}翻訳・翻案:{{ </0> }} {{ translator }}"
     },
     "locales": {
       "arabic": "アラビア語",
@@ -60,13 +60,13 @@
       "french": "フランス語",
       "italian": "イタリア語",
       "japanese": "日本語",
-      "korean": "Korean",
+      "korean": "韓国語",
       "portuguese": "ポルトガル語",
       "swahili": "スワヒリ語",
       "urdu": "ウルドゥー語"
     }
   },
-  "embed-title": "Embedded content",
+  "embed-title": "埋め込みコンテンツ",
   "footer": {
     "tax-exempt-status": "freeCodeCamp は皆様のご寄付により支えられている非課税の 501(c)(3) 非営利団体です。(United States Federal Tax Identification Number: 82-0779546)",
     "mission-statement": "私たちのミッション: 人々が無料でコーディングを学べるよう支援することです。その実現のため、何千もの動画、記事、インタラクティブなコーディングレッスンを作成し、すべて無料で公開しています。さらに、数千の freeCodeCamp スタディグループが世界中に存在します。",
@@ -77,21 +77,21 @@
     "links": {
       "about": "私たちについて",
       "alumni": "卒業生ネットワーク",
-      "open-source": "Open Source",
-      "shop": "Shop",
-      "support": "Support",
-      "sponsors": "Sponsors",
-      "honesty": "Academic Honesty",
-      "coc": "Code of Conduct",
-      "privacy": "Privacy Policy",
-      "tos": "Terms of Service",
-      "copyright": "Copyright Policy"
+      "open-source": "オープンソース",
+      "shop": "ショップ",
+      "support": "サポート",
+      "sponsors": "スポンサー",
+      "honesty": "学問的誠実性",
+      "coc": "行動規範",
+      "privacy": "プライバシーポリシー",
+      "tos": "利用規約",
+      "copyright": "コピーライトポリシー"
     }
   },
   "fallback": {
-    "message": "Your browser doesn't support HTML5 {{ element }}.",
-    "audio": "audio",
-    "video": "video"
+    "message": "お使いのブラウザは HTML5 {{ element }} をサポートしていません。",
+    "audio": "オーディオ",
+    "video": "ビデオ"
   },
-  "ad-text": "Advertisement"
+  "ad-text": "広告"
 }
