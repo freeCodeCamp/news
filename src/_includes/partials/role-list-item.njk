@@ -1,7 +1,7 @@
 {% macro roleListItem(authorOrTranslator, publishedAt, role, locale) %}
     {# Use the full URL for original authors, and a relative path for
     translators and regular authors #}
-    {% set authorOrTranslatorURL = authorOrTranslator.url if role === "author" else (authorOrTranslator.path | url) %}
+    {% set authorOrTranslatorURL = authorOrTranslator.url if role === "author" else (authorOrTranslator.path) %}
     {% set translatedLocale %}{% t "original-author-translator.locales." + locale %}{% endset %}
     
     <li class="author-list-item" data-test-label="{{ 'translator-list-item' if role === 'translator' else 'author-list-item' }}">

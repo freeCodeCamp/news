@@ -1,7 +1,7 @@
 {% macro byline(authorOrTranslator, lazyLoad, showBio, role, locale) %}
     {# Use the full URL for original authors, and a relative path for
     translators and regular authors #}
-    {% set authorOrTranslatorURL = authorOrTranslator.url if role === "author" else (authorOrTranslator.path | url) %}
+    {% set authorOrTranslatorURL = authorOrTranslator.url if role === "author" else (authorOrTranslator.path) %}
     {% set translatedLocale %}{% t "original-author-translator.locales." + locale %}{% endset %}
 
     <section class="author-card" data-test-label="{{ 'translator-card' if role === 'translator' else 'author-card' }}">

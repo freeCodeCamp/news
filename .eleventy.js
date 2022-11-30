@@ -117,32 +117,8 @@ module.exports = function (config) {
     });
   }
 
-  // Display 404 and RSS pages in BrowserSync
-  config.setBrowserSyncConfig({
-    callbacks: {
-      ready: (err, bs) => {
-        const content_404 = readFileSync('dist/404.html');
-        const content_RSS = readFileSync('dist/rss.xml');
-
-        bs.addMiddleware('*', (req, res) => {
-          if (req.url.match(/^\/rss\/?$/)) {
-            res.writeHead(302, { 'Content-Type': 'text/xml; charset=UTF-8' });
-
-            // Provides the RSS feed content without redirect
-            res.write(content_RSS);
-            res.end();
-          } else {
-            res.writeHead(404, { 'Content-Type': 'text/html; charset=UTF-8' });
-
-            // Provides the 404 content without redirect
-            res.write(content_404);
-            res.end();
-          }
-        });
-      },
-      startPath: sitePath
-    }
-  });
+  const { EleventyHtmlBasePlugin } = require('@11ty/eleventy');
+  config.addPlugin(EleventyHtmlBasePlugin);
 
   // Eleventy configuration
   return {
