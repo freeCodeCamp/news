@@ -8,7 +8,7 @@
     "label": "Search",
     "accessible-name": "Submit your search query",
     "placeholder": {
-      "generic": "Search our tutorials",
+      "default": "Search our tutorials",
       "numbered": "Search {{ roundedTotalEntries }}+ tutorials"
     },
     "see-results": "See all results for {{ searchQuery }}",

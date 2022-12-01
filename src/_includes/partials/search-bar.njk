@@ -1,6 +1,6 @@
 {% set searchPlaceholder %}
     {% if site.roundedTotalEntries < 100 %}
-        {%- t 'search.placeholder.generic' -%}
+        {%- t 'search.placeholder.default' -%}
     {% else %}
         {%- t 'search.placeholder.numbered', {
             roundedTotalEntries: site.roundedTotalEntriesLocalizedString
