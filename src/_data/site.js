@@ -2,6 +2,10 @@ const algoliasearch = require('algoliasearch/lite');
 const { sourceAPI } = require('../../utils/ghost/api');
 const getImageDimensions = require('../../utils/get-image-dimensions');
 const {
+  roundDownToNearestHundred,
+  convertToLocalizedString
+} = require('../../utils/search-bar-placeholder');
+const {
   algoliaAppId,
   algoliaAPIKey,
   algoliaIndex,
@@ -18,9 +22,6 @@ const getTwitterProfile = url => url.replace('https://twitter.com/', '@');
 const twitterURL = translate('links:twitter');
 const twitterProfile =
   twitterURL !== 'twitter' ? getTwitterProfile(twitterURL) : '@freecodecamp';
-
-const roundDownToNearestHundred = num => Math.floor(num / 100) * 100;
-const convertToLocalizedString = (num, ISOCode) => num.toLocaleString(ISOCode); // Uses commas or decimals depending on the locale
 
 module.exports = async () => {
   const site = await sourceAPI.settings
