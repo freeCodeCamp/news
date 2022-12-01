@@ -1,5 +1,5 @@
 {% set searchPlaceholder %}
-    {% if site.roundedTotalHits < 100 %}
+    {% if site.roundedTotalEntries < 100 %}
         {%- t 'search.placeholder.generic' -%}
     {% else %}
         {%- t 'search.placeholder.numbered', {
