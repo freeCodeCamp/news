@@ -4,7 +4,7 @@ const getImageDimensions = require('../../utils/get-image-dimensions');
 const {
   roundDownToNearestHundred,
   convertToLocalizedString
-} = require('../../utils/search-bar-placeholder');
+} = require('../../utils/search-bar-placeholder-number');
 const {
   algoliaAppId,
   algoliaAPIKey,

@@ -1,9 +1,9 @@
 const {
   roundDownToNearestHundred,
   convertToLocalizedString
-} = require('./search-bar-placeholder');
+} = require('./search-bar-placeholder-number');
 
-describe('Search bar placeholder tests:', () => {
+describe('Search bar placeholder number tests:', () => {
   describe('Number rounding', () => {
     test('Numbers less than 100 return 0', () => {
       const testArr = [0, 1, 50, 99];
