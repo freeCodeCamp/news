@@ -9,25 +9,25 @@ const {
 const roundDownToNearestHundred = num => Math.floor(num / 100) * 100;
 const convertToLocalizedString = (num, ISOCode) => num.toLocaleString(ISOCode); // Use commas or decimals depending on the locale
 
-const getRoundedTotalEntries = async () => {
-  let totalEntries = 0;
+const getRoundedTotalRecords = async () => {
+  let totalRecords = 0;
 
   try {
     if (eleventyEnv === 'ci') {
       const mockHits = require('../cypress/fixtures/mock-search-hits.json');
 
-      totalEntries = mockHits.length;
+      totalRecords = mockHits.length;
     } else {
       const client = algoliasearch(algoliaAppId, algoliaAPIKey);
       const index = client.initIndex(algoliaIndex);
       const res = await index.search('');
 
-      totalEntries = res?.nbHits;
+      totalRecords = res?.nbHits;
     }
   } catch (err) {
     console.warn(`
       ----------------------------------------------------------
-      Warning: Could not get the total number of Algolia entries
+      Warning: Could not get the total number of Algolia records
       ----------------------------------------------------------
       Make sure that Algolia keys and index are set up correctly,
       or that the mock search hits are available if running in CI
@@ -38,11 +38,11 @@ const getRoundedTotalEntries = async () => {
   `);
   }
 
-  return roundDownToNearestHundred(totalEntries);
+  return roundDownToNearestHundred(totalRecords);
 };
 
 module.exports = {
   roundDownToNearestHundred,
   convertToLocalizedString,
-  getRoundedTotalEntries
+  getRoundedTotalRecords
 };
