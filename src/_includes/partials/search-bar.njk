@@ -1,9 +1,9 @@
 {% set searchPlaceholder %}
-    {% if site.roundedTotalEntries < 100 %}
+    {% if site.roundedTotalRecords < 100 %}
         {%- t 'search.placeholder.default' -%}
     {% else %}
         {%- t 'search.placeholder.numbered', {
-            roundedTotalEntries: site.roundedTotalEntriesLocalizedString
+            roundedTotalRecords: site.roundedTotalRecordsLocalizedString
         } -%}
     {% endif %}
 {% endset %}

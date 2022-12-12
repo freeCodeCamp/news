@@ -9,7 +9,7 @@
     "accessible-name": "Submit your search query",
     "placeholder": {
       "default": "Search our tutorials",
-      "numbered": "Search {{ roundedTotalEntries }}+ tutorials"
+      "numbered": "Search {{ roundedTotalRecords }}+ tutorials"
     },
     "see-results": "See all results for {{ searchQuery }}",
     "no-tutorials": "No tutorials found"
