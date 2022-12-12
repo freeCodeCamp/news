@@ -1,18 +1,10 @@
-const algoliasearch = require('algoliasearch/lite');
 const { sourceAPI } = require('../../utils/ghost/api');
 const getImageDimensions = require('../../utils/get-image-dimensions');
 const {
-  roundDownToNearestHundred,
-  convertToLocalizedString
+  convertToLocalizedString,
+  getRoundedTotalEntries
 } = require('../../utils/search-bar-placeholder-number');
-const {
-  algoliaAppId,
-  algoliaAPIKey,
-  algoliaIndex,
-  currentLocale_i18nISOCode,
-  eleventyEnv,
-  siteURL
-} = require('../../config');
+const { currentLocale_i18nISOCode, siteURL } = require('../../config');
 const translate = require('../../utils/translate');
 
 // Get Twitter profile based on links in config/i18n/locales/lang/links.json --
@@ -71,21 +63,8 @@ module.exports = async () => {
   site.facebook = 'https://www.facebook.com/freecodecamp';
   site.twitter = twitterProfile;
 
-  // Get rounded total hits and convert to localized string for
-  // search bar placeholder
-  let roundedTotalEntries;
-  if (eleventyEnv === 'ci') {
-    const mockHits = require('../../cypress/fixtures/mock-search-hits.json');
-
-    roundedTotalEntries = roundDownToNearestHundred(mockHits.length);
-  } else {
-    const client = algoliasearch(algoliaAppId, algoliaAPIKey);
-    const index = client.initIndex(algoliaIndex);
-
-    const res = await index.search('');
-    roundedTotalEntries = roundDownToNearestHundred(res?.nbHits);
-  }
-
+  // Dynamic search bar placeholder number
+  const roundedTotalEntries = await getRoundedTotalEntries();
   site.roundedTotalEntries = roundedTotalEntries;
   site.roundedTotalEntriesLocalizedString = convertToLocalizedString(
     roundedTotalEntries,
