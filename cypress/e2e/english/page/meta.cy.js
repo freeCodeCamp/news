@@ -9,7 +9,7 @@ const pageExpectedMeta = {
     height: 500
   },
   excerpt:
-    "Once you've forwarded this receipt, we will award you with your donor badge on your freeCodeCamp profile. We will also turn off donation prompts for you. Thank you again for supporting our nonprofit. freeCodeCamp is a highly-efficient education NGO. This year alone, we've provided million hours of free education to"
+    "Once you've forwarded this receipt, we will award you with your donor badge on your freeCodeCamp profile. We will also turn off donation prompts for you. Thank you again for supporting our charity. freeCodeCamp is a highly-efficient education NGO. This year alone, we've provided million hours of free education to"
 };
 
 describe('Page metadata', () => {

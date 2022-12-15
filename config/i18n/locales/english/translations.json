@@ -13,7 +13,7 @@
   },
   "banner": {
     "default": "Learn to code — {{ <0> }}free 3,000-hour curriculum{{ </0> }}",
-    "authenticated": "Support our nonprofit and our mission. {{ <0> }}Donate to freeCodeCamp.org{{ </0> }}.",
+    "authenticated": "Support our charity and our mission. {{ <0> }}Donate to freeCodeCamp.org{{ </0> }}.",
     "authenticated-donor": "Thank you for supporting freeCodeCamp through {{ <0> }}your donations{{ </0> }}."
   },
   "default-bio": "Read {{ <0> }}more posts{{ </0> }}.",
@@ -68,12 +68,12 @@
   },
   "embed-title": "Embedded content",
   "footer": {
-    "tax-exempt-status": "freeCodeCamp is a donor-supported tax-exempt 501(c)(3) nonprofit organization (United States Federal Tax Identification Number: 82-0779546)",
+    "tax-exempt-status": "freeCodeCamp is a donor-supported tax-exempt 501(c)(3) charity organization (United States Federal Tax Identification Number: 82-0779546)",
     "mission-statement": "Our mission: to help people learn to code for free. We accomplish this by creating thousands of videos, articles, and interactive coding lessons - all freely available to the public. We also have thousands of freeCodeCamp study groups around the world.",
     "donation-initiatives": "Donations to freeCodeCamp go toward our education initiatives, and help pay for servers, services, and staff.",
     "donate-text": "You can {{ <0> }}make a tax-deductible donation here{{ </0> }}.",
     "trending-guides": "Trending Guides",
-    "our-nonprofit": "Our Nonprofit",
+    "our-nonprofit": "Our Chairty",
     "links": {
       "about": "About",
       "alumni": "Alumni Network",
