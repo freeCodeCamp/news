@@ -7,10 +7,14 @@ name: CI - Create CodeSee Maps
 
 jobs:
   test_map_action:
+    name: Run CodeSee Map Analysis
     runs-on: ubuntu-20.04
     if: ${{ github.actor != 'renovate[bot]' && github.actor != 'camperbot' }}
     continue-on-error: true
-    name: Run CodeSee Map Analysis
+    strategy:
+      matrix:
+        node-version: [18.x]
+
     steps:
       - name: checkout
         id: checkout
@@ -34,12 +38,11 @@ jobs:
 
       # CodeSee Maps Go support uses a static binary so there's no setup step required.
 
-      - name: Configure Node.js 16
+      - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@8c91899e586c5b171469028077307d293428b516 # tag=v3
         if: ${{ fromJSON(steps.detect-languages.outputs.languages).javascript }}
         with:
-          node-version: '16'
-          cache: npm
+          node-version: ${{ matrix.node-version }}
 
       - name: Configure Python 3.x
         uses: actions/setup-python@2c3dd9e7e29afd70cc0950079bde6c979d1f69f9 # v4

@@ -5,7 +5,7 @@ on:
 
 jobs:
   no-forks:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
       - name: Comment and Close
         uses: actions/github-script@d556feaca394842dc55e4734bf3bb9f685482fa0 # tag=v6

@@ -7,11 +7,11 @@ on:
 
 jobs:
   cypress-run:
-    name: Test
-    runs-on: ubuntu-latest
+    name: E2E
+    runs-on: ubuntu-20.04
     strategy:
       matrix:
-        node-version: [16.x]
+        node-version: [18.x]
         browsers: [chrome, firefox]
         languages: [english, chinese, espanol]
 
@@ -57,7 +57,6 @@ jobs:
         uses: actions/setup-node@8c91899e586c5b171469028077307d293428b516 # tag=v3
         with:
           node-version: ${{ matrix.node-version }}
-          cache: 'npm'
 
       - name: Install dependencies
         run: npm ci
