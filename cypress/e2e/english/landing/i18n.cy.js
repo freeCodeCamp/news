@@ -102,7 +102,7 @@ describe('Landing i18n', () => {
   });
 
   it('the bottom footer links do not render their i18n keys', () => {
-    // Change to mobile viewport so the 'Our Nonprofit' header is visible
+    // Change to mobile viewport so the 'Our Charity' header is visible
     cy.viewport(400, 660);
 
     cy.get(selectors.footer.ourNonprofit).should(
