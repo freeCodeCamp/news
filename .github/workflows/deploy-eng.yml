@@ -25,7 +25,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        node-version: [16.x]
+        node-version: [18.x]
         languages: [english]
         site_tlds: [dev, org]
 
@@ -86,7 +86,6 @@ jobs:
         uses: actions/setup-node@8c91899e586c5b171469028077307d293428b516 # tag=v3
         with:
           node-version: ${{ matrix.node-version }}
-          # cache: 'npm'
 
       - name: Install dependencies
         run: npm ci
@@ -122,7 +121,7 @@ jobs:
 
   deploy:
     name: Deploy
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     needs:
       - build
 
