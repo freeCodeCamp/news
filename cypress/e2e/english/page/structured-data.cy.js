@@ -18,7 +18,7 @@ describe('Page structured data (JSON-LD)', () => {
       'Please check your email for a donation receipt. Forward it to donors@freecodecamp.org.',
     url: 'http://localhost:8080/news/thank-you-for-donating/',
     datePublished: '2020-03-16T17:03:46.000Z',
-    dateModified: '2021-11-18T09:16:21.000Z',
+    dateModified: '2022-12-20T05:28:17.000Z',
     image: {
       '@type': 'ImageObject',
       url: 'https://www.freecodecamp.org/news/content/images/2020/03/fcc-banner.jpg',
@@ -26,7 +26,7 @@ describe('Page structured data (JSON-LD)', () => {
       height: 500
     },
     description:
-      'Once you&#x27;ve forwarded this receipt, we will award you with your donor badge on\nyour freeCodeCamp profile. We will also turn off donation prompts for you.\n\nThank you again for supporting our charity.\n\nfreeCodeCamp is a highly-efficient education NGO. This year alone, we&#x27;ve\nprovided million hours of free education to people around the world.\n\nAt our charity&#x27;s current operating budget, every dollar you donate to\nfreeCodeCamp translates into 50 hours worth of technology education.\n\nSome members '
+      'Once you&#x27;ve forwarded this receipt, we will award you with your donor badge on\nyour freeCodeCamp profile. We will also turn off donation prompts for you.\n\nThank you again for supporting our charity.\n\nfreeCodeCamp is a highly-efficient education NGO. This year alone, we&#x27;ve\nprovided million hours of free education to people around the world.\n\nAt our charity&#x27;s current operating budget, every dollar you donate to\nfreeCodeCamp translates into 50 hours worth of technology education.\n\nSome members of t'
   };
   let jsonLdObj;
 

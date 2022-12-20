@@ -121,7 +121,7 @@ describe('Page metadata', () => {
     cy.get('head meta[property="article:modified_time"]').should($metaEl => {
       const publishedTimeISO = new Date($metaEl.attr('content')).toISOString();
 
-      expect(publishedTimeISO).to.equal('2021-11-18T09:16:21.000Z');
+      expect(publishedTimeISO).to.equal('2022-12-20T05:28:17.000Z');
     });
   });
 
