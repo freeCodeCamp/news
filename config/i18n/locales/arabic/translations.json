@@ -7,13 +7,16 @@
   "search": {
     "label": "ابحث",
     "accessible-name": "إرسال استعلام البحث الخاص بك",
-    "placeholder": "ابحث في 60+ درس",
+    "placeholder": {
+      "default": "Search our tutorials",
+      "numbered": "Search {{ roundedTotalRecords }}+ tutorials"
+    },
     "see-results": "مشاهدة كافة النتائج لـ {{ searchQuery }}",
     "no-tutorials": "لم يتم العثور على دروس"
   },
   "banner": {
     "default": "{{ <0> }}الدردشة مع المطورين الآخرين باللغة العربية{{ </0> }}",
-    "authenticated": "قم بدعم مهمتنا و منظمتنا الغير ربحية. {{ <0> }}تبرع إلى freeCodeCamp.org{{ </0> }}.",
+    "authenticated": "Support our charity and our mission. {{ <0> }}Donate to freeCodeCamp.org{{ </0> }}.",
     "authenticated-donor": "شكرًا لك على دعم freeCodeCamp بواسطة {{ <0> }}تبرعاتك{{ <0/> }}."
   },
   "default-bio": "اقرأ {{ <0> }}المزيد من المقالات{{ </0> }}.",
@@ -68,12 +71,12 @@
   },
   "embed-title": "محتوى مضمن",
   "footer": {
-    "tax-exempt-status": "تكون freeCodeCamp منظمة خيرية معفاة من الضرائب 501 (c) (3) مدعومة من المتبرعين (رقم التعريف الضريبي الفيدرالي للولايات المتحدة: 82-0779546)",
+    "tax-exempt-status": "freeCodeCamp is a donor-supported tax-exempt 501(c)(3) charity organization (United States Federal Tax Identification Number: 82-0779546)",
     "mission-statement": "مهمتنا: مساعدة الناس على تعلم البرمجة مجانًا. نحقق ذلك بإنشاء الآلاف من مقاطع الفيديو والمقالات ودروس البرمجة التفاعلية - وكلها متاحة مجانًا للجمهور. لدينا أيضًا الآلاف من مجموعات دراسة freeCodeCamp في العالم.",
     "donation-initiatives": "تذهب التبرعات إلى freeCodeCamp نحو مبادراتنا التعليمية وتساعد في دفع تكاليف الحواسب والخدمات والموظفين.",
     "donate-text": "يمكنك {{ <0> }}تقديم التبرع المعفى من الضرائب هنا{{ </0> }}.",
     "trending-guides": "اشهر المقالات",
-    "our-nonprofit": "منظمتنا خيرية",
+    "our-nonprofit": "Our Charity",
     "links": {
       "about": "عن المنظمة",
       "alumni": "شبكة الخريجين",
