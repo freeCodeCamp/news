@@ -8,15 +8,15 @@
     "label": "Cerca",
     "accessible-name": "Invia la tua ricerca",
     "placeholder": {
-      "default": "Search our tutorials",
-      "numbered": "Search {{ roundedTotalRecords }}+ tutorials"
+      "default": "Cerca tra gli articoli",
+      "numbered": "Cerca tra più di {{ roundedTotalRecords }} articoli"
     },
     "see-results": "Vedi tutti i risultati per {{ searchQuery }}",
     "no-tutorials": "Nessun articolo trovato"
   },
   "banner": {
     "default": "{{ <0> }}Contribuisci anche tu a freeCodeCamp!{{ </0> }}",
-    "authenticated": "Support our charity and our mission. {{ <0> }}Donate to freeCodeCamp.org{{ </0> }}.",
+    "authenticated": "Supporta la nostra charity e la nostra missione. {{ <0> }}Dona a freeCodeCamp.org{{ </0> }}.",
     "authenticated-donor": "Grazie per supportare freeCodeCamp con le {{ <0> }}tue donazioni{{ </0> }}."
   },
   "default-bio": "Leggi {{ <0> }}altri articoli{{ </0> }}.",
@@ -71,12 +71,12 @@
   },
   "embed-title": "Contenuto incorporato",
   "footer": {
-    "tax-exempt-status": "freeCodeCamp is a donor-supported tax-exempt 501(c)(3) charity organization (United States Federal Tax Identification Number: 82-0779546)",
+    "tax-exempt-status": "freeCodeCamp è un'organizzazione di beneficenza 501(c)(3) esentasse supportata da donazioni (Numero di identificazione per le tasse federali negli Stati Uniti d'America: 82-0779546)",
     "mission-statement": "La nostra missione: aiutare le persone a imparare a programamre gratuitamente. Portiamo avanti la nostra missione creando centinaia di video, articoli e lezioni di programmazione interattive - tutto disponibile gratuitamente al pubblico. Abbiamo anche migliaia di gruppi di studio di freeCodeCamp in tutto il mondo.",
     "donation-initiatives": "Le donazioni a freeCodeCamp supportano le nostre iniziative educative e aiutano a pagare i server, i servizi e lo staff.",
     "donate-text": "Puoi {{ <0> }}fare una donazione qui{{ </0> }}.",
     "trending-guides": "Articoli più cliccati",
-    "our-nonprofit": "Our Charity",
+    "our-nonprofit": "La nostra Charity",
     "links": {
       "about": "Informazioni",
       "alumni": "Network degli alunni",
