@@ -28,7 +28,7 @@
   "tag": {
     "no-posts": "Колекція дописів",
     "one-post": "Колекція з 1 допису",
-    "multiple-posts": "Колекція з {{ postCount }}х дописів"
+    "multiple-posts": "Колекція з {{ postCount }} дописів"
   },
   "404": {
     "page-not-found": "Сторінку не знайдено",
