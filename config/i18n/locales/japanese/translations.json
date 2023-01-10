@@ -8,15 +8,15 @@
     "label": "検索",
     "accessible-name": "検索クエリを送信",
     "placeholder": {
-      "default": "Search our tutorials",
-      "numbered": "Search {{ roundedTotalRecords }}+ tutorials"
+      "default": "投稿を検索",
+      "numbered": "{{ roundedTotalRecords }} 件以上の投稿を検索"
     },
     "see-results": "{{ searchQuery }} のすべての結果を見る",
     "no-tutorials": "投稿が見つかりませんでした"
   },
   "banner": {
     "default": "コーディングを学ぶ — {{ <0> }}約 3,000 時間のカリキュラムが無料{{ </0> }}",
-    "authenticated": "Support our charity and our mission. {{ <0> }}Donate to freeCodeCamp.org{{ </0> }}.",
+    "authenticated": "当団体とその使命をご支援ください。{{ <0> }}freeCodeCamp.org へのご寄付をお願いします{{ </0> }}。",
     "authenticated-donor": "freeCodeCamp への{{ <0> }}寄付{{ </0> }}によるご支援、誠にありがとうございます。"
   },
   "default-bio": "{{ <0> }}他の投稿{{ </0> }}を読む。",
@@ -71,12 +71,12 @@
   },
   "embed-title": "埋め込みコンテンツ",
   "footer": {
-    "tax-exempt-status": "freeCodeCamp is a donor-supported tax-exempt 501(c)(3) charity organization (United States Federal Tax Identification Number: 82-0779546)",
+    "tax-exempt-status": "freeCodeCamp は皆様のご寄付により支えられている非課税の 501(c)(3) 慈善団体です。(United States Federal Tax Identification Number: 82-0779546)",
     "mission-statement": "私たちのミッション: 人々が無料でコーディングを学べるよう支援することです。その実現のため、何千もの動画、記事、インタラクティブなコーディングレッスンを作成し、すべて無料で公開しています。さらに、数千の freeCodeCamp スタディグループが世界中に存在します。",
     "donation-initiatives": "freeCodeCamp への寄付は教育活動のために用いられ、サーバー、サービス、スタッフなどの費用に充てられます。",
     "donate-text": "{{ <0> }}こちらからご寄付をお願いいたします{{ </0> }}。(場合により税控除可能)",
     "trending-guides": "人気の記事",
-    "our-nonprofit": "Our Charity",
+    "our-nonprofit": "組織情報",
     "links": {
       "about": "私たちについて",
       "alumni": "卒業生ネットワーク",
