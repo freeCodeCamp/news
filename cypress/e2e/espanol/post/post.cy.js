@@ -7,9 +7,8 @@ const selectors = {
   profileLink: "[data-test-label='profile-link']",
   authorBio: "[data-test-label='author-bio']",
   translatorBio: "[data-test-label='translator-bio']",
-  authorIntro: "[data-test-label='author-intro']",
-  originalArticle: "[data-test-label='original-article']",
-  translatorIntro: "[data-test-label='translator-intro']",
+  translationIntro: "[data-test-label='translation-intro']",
+  originalArticleLink: "[data-test-label='original-article-link']",
   authorName: 'Quincy Larson',
   translatorName: 'Rafael D. Hernandez'
 };
