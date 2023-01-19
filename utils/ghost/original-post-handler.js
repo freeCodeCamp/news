@@ -51,28 +51,26 @@ const originalPostHandler = async post => {
         locale_i18n: originalPostLocale
       };
 
-      const authorEl = translate(
+      const originalArticleHTML = translate(
         'original-author-translator.details.original-article',
         {
           '<0>': '<strong>',
           '</0>': '</strong>',
-          title: `<a href="${originalPost.url}" target="_blank" rel="noopener noreferrer" data-test-label="original-article">${originalPost.title}</a>`,
+          title: `<a href="${originalPost.url}" target="_blank" rel="noopener noreferrer" data-test-label="original-article-link">${originalPost.title}</a>`,
           interpolation: {
             escapeValue: false
           }
         }
       );
 
-      const introEl = `
-        <p>
-          <span data-test-label="author-intro">
-            ${authorEl}
-          </span>
+      const introHTML = `
+        <p data-test-label="translation-intro">
+          ${originalArticleHTML}
         </p>`;
 
       // Append details about the original article
       // to the beginning of the translated article
-      post.html = introEl + post.html;
+      post.html = introHTML + post.html;
     } catch (err) {
       console.warn(`
       ---------------------------------------------------------------
