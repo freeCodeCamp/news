@@ -51,8 +51,7 @@
       "translator": "Traduttore: {{ name }}"
     },
     "details": {
-      "original-article": "{{ <0> }}Articolo originale:{{ </0> }} {{ title }} di {{ author }}",
-      "translated-by": "{{ <0> }}Tradotto e adattato da:{{ </0> }} {{ translator }}"
+      "original-article": "{{ <0> }}Articolo originale:{{ </0> }} {{ title }}"
     },
     "locales": {
       "arabic": "arabo",

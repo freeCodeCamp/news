@@ -51,8 +51,7 @@
       "translator": "Перекладач: {{ name }}"
     },
     "details": {
-      "original-article": "{{ <0> }}Оригінальна стаття:{{ </0> }} {{ title }} від {{ author }}",
-      "translated-by": "{{ <0> }}Перекладач:{{ </0> }} {{ translator }}"
+      "original-article": "{{ <0> }}Оригінальна стаття:{{ </0> }} {{ title }}"
     },
     "locales": {
       "arabic": "Арабська",
