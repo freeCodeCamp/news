@@ -7,9 +7,8 @@ const selectors = {
   profileLink: "[data-test-label='profile-link']",
   authorBio: "[data-test-label='author-bio']",
   translatorBio: "[data-test-label='translator-bio']",
-  authorIntro: "[data-test-label='author-intro']",
-  originalArticle: "[data-test-label='original-article']",
-  translatorIntro: "[data-test-label='translator-intro']",
+  translationIntro: "[data-test-label='translation-intro']",
+  originalArticleLink: "[data-test-label='original-article-link']",
   authorName: 'Quincy Larson',
   translatorName: 'Rafael D. Hernandez'
 };
@@ -168,14 +167,14 @@ describe('Post', () => {
 
     context('Translated article intro', () => {
       it('the author intro should contain links to the original article', () => {
-        cy.get(selectors.authorIntro).then($el => {
-          cy.wrap($el).find(selectors.originalArticle);
+        cy.get(selectors.translationIntro).then($el => {
+          cy.wrap($el).find(selectors.originalArticleLink);
         });
       });
 
       it('the link to the original article should contain the expected text and `href` attribute', () => {
-        cy.get(selectors.authorIntro)
-          .find(selectors.originalArticle)
+        cy.get(selectors.translationIntro)
+          .find(selectors.originalArticleLink)
           .then($el => {
             cy.wrap($el).contains(
               'The #100DaysOfCode Challenge, its history, and why you should try it for 2021'
