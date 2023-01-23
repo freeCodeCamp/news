@@ -167,14 +167,14 @@ describe('Post', () => {
 
     context('Translated article intro', () => {
       it('the author intro should contain links to the original article', () => {
-        cy.get(selectors.authorIntro).then($el => {
-          cy.wrap($el).find(selectors.originalArticle);
+        cy.get(selectors.translationIntro).then($el => {
+          cy.wrap($el).find(selectors.originalArticleLink);
         });
       });
 
       it('the link to the original article should contain the expected text and `href` attribute', () => {
-        cy.get(selectors.authorIntro)
-          .find(selectors.originalArticle)
+        cy.get(selectors.translationIntro)
+          .find(selectors.originalArticleLink)
           .then($el => {
             cy.wrap($el).contains(
               'The #100DaysOfCode Challenge, its history, and why you should try it for 2021'
