@@ -1,93 +1,97 @@
 {
   "buttons": {
-    "forum": "Jukwaa",
-    "donate": "Changia",
-    "load-more-articles": "Onyesha Makala Zaidi"
+    "forum": "Forum",
+    "donate": "Donate",
+    "load-more-articles": "Load More Articles"
   },
   "search": {
-    "label": "Tafuta",
-    "accessible-name": "Wasilisha swali lako la utafutaji",
-    "placeholder": "Tafuta kati ya mafunzo yetu",
-    "see-results": "Tazama matokeo yote ya {{ searchQuery }}",
-    "no-tutorials": "Hakuna mafunzo yaliyopatikana"
+    "label": "Search",
+    "accessible-name": "Submit your search query",
+    "placeholder": {
+      "default": "Search our tutorials",
+      "numbered": "Search {{ roundedTotalRecords }}+ tutorials"
+    },
+    "see-results": "See all results for {{ searchQuery }}",
+    "no-tutorials": "No tutorials found"
   },
   "banner": {
-    "default": "Piga gumzo na — {{ <0> }}wasanidi wengine kwa Kiswahili{{ </0> }}",
-    "authenticated": "Saidia shirika letu lisilo la faida na dhamira yetu. {{ <0> }}Changia kwa freeCodeCamp.org{{ </0> }}.",
-    "authenticated-donor": "Asante kwa kusaidia freeCodeCamp kupitia {{ <0> }}michango yako{{ </0> }}."
+    "default": "Learn to code — {{ <0> }}free 3,000-hour curriculum{{ </0> }}",
+    "authenticated": "Support our charity and our mission. {{ <0> }}Donate to freeCodeCamp.org{{ </0> }}.",
+    "authenticated-donor": "Thank you for supporting freeCodeCamp through {{ <0> }}your donations{{ </0> }}."
   },
-  "default-bio": "Soma {{ <0> }}machapisho zaidi{{ </0> }}.",
+  "default-bio": "Read {{ <0> }}more posts{{ </0> }}.",
   "author": {
-    "no-posts": "Hakuna machapisho",
-    "one-post": "Chapisho 1",
-    "multiple-posts": "Machapisho {{ postCount }} "
+    "no-posts": "No posts",
+    "one-post": "1 post",
+    "multiple-posts": "{{ postCount }} posts"
   },
   "tag": {
-    "no-posts": "Mkusanyiko wa machapisho",
-    "one-post": "Mkusanyiko wa chapisho 1",
-    "multiple-posts": "Mkusanyiko wa machapisho {{ postCount }} "
+    "no-posts": "A collection of posts",
+    "one-post": "A collection of 1 post",
+    "multiple-posts": "A collection of {{ postCount }} posts"
   },
   "404": {
-    "page-not-found": "Ukurasa haujapatikana",
-    "go-to-front-page": "Nenda kwenye ukurasa wa mbele"
+    "page-not-found": "Page not found",
+    "go-to-front-page": "Go to the front page"
   },
   "social-row": {
     "cta": {
-      "tweet-a-thanks": "Ukisoma hadi hapa, toa tweet kwa mwandishi ili kumwonyesha kuwa umenufaika. {{ <0> }}Tweet shukrani{{ </0> }}",
-      "tweet-it": "Ikiwa nakala hii ilikuwa na manufaa, {{ <0> }}ishiriki kwa tweet{{ </0> }}."
+      "tweet-a-thanks": "If you read this far, tweet to the author to show them you care. {{ <0> }}Tweet a thanks{{ </0> }}",
+      "tweet-it": "If this article was helpful, {{ <0> }}tweet it{{ </0> }}."
     },
     "tweets": {
-      "default": "Asante {{ author }} kwa kuandika nakala hii muhimu.",
-      "translation": "Asante {{ author }} kwa kuandika nakala hii muhimu, na {{ translator }} kwa kutafsiri."
+      "default": "Thank you {{ author }} for writing this helpful article.",
+      "translation": "Thank you {{ author }} for writing this helpful article, and {{ translator }} for translating it."
     }
   },
-  "learn-to-code-cta": "Jifunze kuweka msimbo bila malipo. Mtaala wa chanzo wazi wa freeCodeCamp umesaidia zaidi ya watu 40,000 kupata kazi kama wasanidi. {{ <0> }}Anza{{ </0> }}",
+  "learn-to-code-cta": "Learn to code for free. freeCodeCamp's open source curriculum has helped more than 40,000 people get jobs as developers. {{ <0> }}Get started{{ </0> }}",
   "original-author-translator": {
     "roles": {
-      "author": "Mwandishi: {{ name }} ({{ locale }})",
-      "translator": "Mfasiri: {{ name }}"
+      "author": "Author: {{ name }} ({{ locale }})",
+      "translator": "Translator: {{ name }}"
     },
     "details": {
-      "original-article": "{{ <0> }}Makala asilia:{{ </0> }} {{ title }} na {{ author }}",
-      "translated-by": "{{ <0> }}Imetafsiriwa na:{{ </0> }} {{ translator }}"
+      "original-article": "{{ <0> }}Original article:{{ </0> }} {{ title }}"
     },
     "locales": {
-      "arabic": "Kiarabu",
-      "bengali": "Kibengali",
-      "chinese": "Kichina",
-      "english": "Kiingereza",
-      "espanol": "Kihispania",
-      "italian": "Kiitaliano",
-      "japanese": "Kijapani",
-      "portuguese": "Kireno",
-      "swahili": "Kiswahili",
-      "urdu": "Kiurdu"
+      "arabic": "Arabic",
+      "bengali": "Bengali",
+      "chinese": "Chinese",
+      "english": "English",
+      "espanol": "Spanish",
+      "french": "French",
+      "italian": "Italian",
+      "japanese": "Japanese",
+      "korean": "Korean",
+      "portuguese": "Portuguese",
+      "swahili": "Swahili",
+      "urdu": "Urdu"
     }
   },
   "embed-title": "Embedded content",
   "footer": {
-    "tax-exempt-status": "freeCodeCamp ni shirika lisilo la faida 501(c)(3) wala lisilo na faida la ushuru (Nambari ya Utambulisho ya Ushuru ya Shirikisho la Marekani: 82-0779546)",
-    "mission-statement": "Dhamira yet: kuwasaidia watu kujifunza kuweka msimbo bila malipo. Tunatimiza hili kwa kuunda maelfu ya video, makala, na masomo shirikishi ya usimbaji - yote yanapatikana bila malipo kwa umma. Pia tuna maelfu ya vikundi vya masomo vya freeCodeCamp kote ulimwenguni.",
-    "donation-initiatives": "Michango kwa freeCodeCamp huenda kwenye mipango yetu ya elimu na kusaidia kulipia seva, huduma na wafanyakazi.",
-    "donate-text": "Unaweza {{ <0> }}kutoa mchango unaokatwa kodi hapa{{ </0> }}.",
+    "tax-exempt-status": "freeCodeCamp is a donor-supported tax-exempt 501(c)(3) charity organization (United States Federal Tax Identification Number: 82-0779546)",
+    "mission-statement": "Our mission: to help people learn to code for free. We accomplish this by creating thousands of videos, articles, and interactive coding lessons - all freely available to the public. We also have thousands of freeCodeCamp study groups around the world.",
+    "donation-initiatives": "Donations to freeCodeCamp go toward our education initiatives, and help pay for servers, services, and staff.",
+    "donate-text": "You can {{ <0> }}make a tax-deductible donation here{{ </0> }}.",
     "trending-guides": "Trending Guides",
-    "our-nonprofit": "Our Nonprofit",
+    "our-nonprofit": "Our Charity",
     "links": {
       "about": "About",
       "alumni": "Alumni Network",
       "open-source": "Open Source",
-      "shop": "Duka",
-      "support": "Msaada",
-      "sponsors": "Wafadhili",
-      "honesty": "Uaminifu wa Kiakademiaty",
-      "coc": "Kanuni ya Maadili",
-      "privacy": "Sera ya Faragha",
-      "tos": "Masharti ya Huduma",
-      "copyright": "Sera ya Hakimiliki"
+      "shop": "Shop",
+      "support": "Support",
+      "sponsors": "Sponsors",
+      "honesty": "Academic Honesty",
+      "coc": "Code of Conduct",
+      "privacy": "Privacy Policy",
+      "tos": "Terms of Service",
+      "copyright": "Copyright Policy"
     }
   },
   "fallback": {
-    "message": "Kivinjari chako hakitumii HTML5 {{ element }}.",
+    "message": "Your browser doesn't support HTML5 {{ element }}.",
     "audio": "audio",
     "video": "video"
   },
