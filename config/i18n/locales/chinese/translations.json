@@ -8,15 +8,15 @@
     "label": "搜索",
     "accessible-name": "提交您的搜索查询",
     "placeholder": {
-      "default": "Search our tutorials",
-      "numbered": "Search {{ roundedTotalRecords }}+ tutorials"
+      "default": "搜索我们的教程",
+      "numbered": "搜索 {{ roundedTotalRecords }}+ 教程"
     },
     "see-results": "查看 {{ searchQuery }} 的所有结果",
     "no-tutorials": "未找到教程"
   },
   "banner": {
     "default": "学习编程 — {{ <0> }}3,000 小时免费课程{{ </0> }}",
-    "authenticated": "Support our charity and our mission. {{ <0> }}Donate to freeCodeCamp.org{{ </0> }}.",
+    "authenticated": "支持我们的慈善组织和我们的使命。{{ <0> }}捐款给 freeCodeCamp.org{{ </0> }}。",
     "authenticated-donor": "谢谢你{{ <0> }}捐款{{ </0> }}支持 freeCodeCamp。"
   },
   "default-bio": "阅读 {{ <0> }}更多文章{{ </0> }}。",
@@ -51,7 +51,7 @@
       "translator": "译者：{{ name }}"
     },
     "details": {
-      "original-article": "{{ <0> }}Original article:{{ </0> }} {{ title }}"
+      "original-article": "{{ <0> }}原文：{{ </0> }} {{ title }}"
     },
     "locales": {
       "arabic": "阿拉伯语",
@@ -70,12 +70,12 @@
   },
   "embed-title": "嵌入内容",
   "footer": {
-    "tax-exempt-status": "freeCodeCamp is a donor-supported tax-exempt 501(c)(3) charity organization (United States Federal Tax Identification Number: 82-0779546)",
+    "tax-exempt-status": "freeCodeCamp 是捐助者支持的 501(c)(3) 条款下具有免税资格的慈善组织（税号：82-0779546）。",
     "mission-statement": "我们的使命：帮助人们免费学习编程。我们通过创建成千上万的视频、文章和交互式编程课程——所有内容向公众免费开放——来实现这一目标。学员在世界各地自发成立数千个 freeCodeCamp 学习小组。",
     "donation-initiatives": "所有给 freeCodeCamp 的捐款都将用于我们的教育项目，购买服务器和其他服务，以及聘用员工。",
     "donate-text": "你可以{{ <0> }}点击此处免税捐款{{ </0> }}。",
     "trending-guides": "精选文章",
-    "our-nonprofit": "Our Charity",
+    "our-nonprofit": "我们的慈善机构",
     "links": {
       "about": "简介",
       "alumni": "校友网络",
