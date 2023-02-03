@@ -51,7 +51,7 @@
       "translator": "مترجم: {{ name }}"
     },
     "details": {
-      "original-article": "{{ <0> }}اصل مضمون:{{ </0> }} {{ title }} مضمون نگار"
+      "original-article": "{{ <0> }}اصل مضمون:{{ </0> }} {{ title }}"
     },
     "locales": {
       "arabic": "عربی",
