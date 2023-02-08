@@ -14,11 +14,10 @@ jobs:
       fail-fast: false
       matrix:
         node-version: [18.x]
-        languages:
-          [
+        languages: [
             arabic,
             bengali,
-            chinese,
+            # chinese,
             espanol,
             french,
             german,
@@ -160,11 +159,10 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        languages:
-          [
+        languages: [
             arabic,
             bengali,
-            chinese,
+            # chinese,
             espanol,
             french,
             german,
