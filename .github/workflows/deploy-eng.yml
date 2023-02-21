@@ -20,7 +20,7 @@ on:
 jobs:
   build:
     name: Build
-    runs-on: [self-hosted, on-azure]
+    runs-on: [self-hosted, on-aws]
 
     strategy:
       fail-fast: false
@@ -35,37 +35,65 @@ jobs:
       ALGOLIA_API_KEY: ${{ secrets.ALGOLIA_API_KEY }}
       ALGOLIA_APP_ID: ${{ secrets.ALGOLIA_APP_ID }}
 
-      ENGLISH_GHOST_API_URL: ${{ secrets.ENGLISH_GHOST_API_URL }}
-      ENGLISH_GHOST_API_VERSION: ${{ secrets.ENGLISH_GHOST_API_VERSION }}
-      ENGLISH_GHOST_CONTENT_API_KEY: ${{ secrets.ENGLISH_GHOST_CONTENT_API_KEY }}
+      ARABIC_GHOST_API_URL: ${{ secrets.ARABIC_GHOST_API_URL }}
+      ARABIC_GHOST_API_VERSION: ${{ secrets.ARABIC_GHOST_API_VERSION }}
+      ARABIC_GHOST_CONTENT_API_KEY: ${{ secrets.ARABIC_GHOST_CONTENT_API_KEY }}
+
+      BENGALI_GHOST_API_URL: ${{ secrets.BENGALI_GHOST_API_URL }}
+      BENGALI_GHOST_API_VERSION: ${{ secrets.BENGALI_GHOST_API_VERSION }}
+      BENGALI_GHOST_CONTENT_API_KEY: ${{ secrets.BENGALI_GHOST_CONTENT_API_KEY }}
 
       CHINESE_GHOST_API_URL: ${{ secrets.CHINESE_GHOST_API_URL }}
       CHINESE_GHOST_API_VERSION: ${{ secrets.CHINESE_GHOST_API_VERSION }}
       CHINESE_GHOST_CONTENT_API_KEY: ${{ secrets.CHINESE_GHOST_CONTENT_API_KEY }}
 
+      ENGLISH_GHOST_API_URL: ${{ secrets.ENGLISH_GHOST_API_URL }}
+      ENGLISH_GHOST_API_VERSION: ${{ secrets.ENGLISH_GHOST_API_VERSION }}
+      ENGLISH_GHOST_CONTENT_API_KEY: ${{ secrets.ENGLISH_GHOST_CONTENT_API_KEY }}
+
       ESPANOL_GHOST_API_URL: ${{ secrets.ESPANOL_GHOST_API_URL }}
       ESPANOL_GHOST_API_VERSION: ${{ secrets.ESPANOL_GHOST_API_VERSION }}
       ESPANOL_GHOST_CONTENT_API_KEY: ${{ secrets.ESPANOL_GHOST_CONTENT_API_KEY }}
+
+      FRENCH_GHOST_API_URL: ${{ secrets.FRENCH_GHOST_API_URL }}
+      FRENCH_GHOST_API_VERSION: ${{ secrets.FRENCH_GHOST_API_VERSION }}
+      FRENCH_GHOST_CONTENT_API_KEY: ${{ secrets.FRENCH_GHOST_CONTENT_API_KEY }}
+
+      GERMAN_GHOST_API_URL: ${{ secrets.GERMAN_GHOST_API_URL }}
+      GERMAN_GHOST_API_VERSION: ${{ secrets.GERMAN_GHOST_API_VERSION }}
+      GERMAN_GHOST_CONTENT_API_KEY: ${{ secrets.GERMAN_GHOST_CONTENT_API_KEY }}
+
+      INDONESIAN_GHOST_API_URL: ${{ secrets.INDONESIAN_GHOST_API_URL }}
+      INDONESIAN_GHOST_API_VERSION: ${{ secrets.INDONESIAN_GHOST_API_VERSION }}
+      INDONESIAN_GHOST_CONTENT_API_KEY: ${{ secrets.INDONESIAN_GHOST_CONTENT_API_KEY }}
 
       ITALIAN_GHOST_API_URL: ${{ secrets.ITALIAN_GHOST_API_URL }}
       ITALIAN_GHOST_API_VERSION: ${{ secrets.ITALIAN_GHOST_API_VERSION }}
       ITALIAN_GHOST_CONTENT_API_KEY: ${{ secrets.ITALIAN_GHOST_CONTENT_API_KEY }}
 
-      PORTUGUESE_GHOST_API_URL: ${{ secrets.PORTUGUESE_GHOST_API_URL }}
-      PORTUGUESE_GHOST_API_VERSION: ${{ secrets.PORTUGUESE_GHOST_API_VERSION }}
-      PORTUGUESE_GHOST_CONTENT_API_KEY: ${{ secrets.PORTUGUESE_GHOST_CONTENT_API_KEY }}
-
       JAPANESE_GHOST_API_URL: ${{ secrets.JAPANESE_GHOST_API_URL }}
       JAPANESE_GHOST_API_VERSION: ${{ secrets.JAPANESE_GHOST_API_VERSION }}
       JAPANESE_GHOST_CONTENT_API_KEY: ${{ secrets.JAPANESE_GHOST_CONTENT_API_KEY }}
 
-      ARABIC_GHOST_API_URL: ${{ secrets.ARABIC_GHOST_API_URL }}
-      ARABIC_GHOST_API_VERSION: ${{ secrets.ARABIC_GHOST_API_VERSION }}
-      ARABIC_GHOST_CONTENT_API_KEY: ${{ secrets.ARABIC_GHOST_CONTENT_API_KEY }}
+      KOREAN_GHOST_API_URL: ${{ secrets.KOREAN_GHOST_API_URL }}
+      KOREAN_GHOST_API_VERSION: ${{ secrets.KOREAN_GHOST_API_VERSION }}
+      KOREAN_GHOST_CONTENT_API_KEY: ${{ secrets.KOREAN_GHOST_CONTENT_API_KEY }}
 
-      URDU_GHOST_API_URL: ${{ secrets.ARABIC_GHOST_API_URL }}
-      URDU_GHOST_API_VERSION: ${{ secrets.ARABIC_GHOST_API_VERSION }}
-      URDU_GHOST_CONTENT_API_KEY: ${{ secrets.ARABIC_GHOST_CONTENT_API_KEY }}
+      PORTUGUESE_GHOST_API_URL: ${{ secrets.PORTUGUESE_GHOST_API_URL }}
+      PORTUGUESE_GHOST_API_VERSION: ${{ secrets.PORTUGUESE_GHOST_API_VERSION }}
+      PORTUGUESE_GHOST_CONTENT_API_KEY: ${{ secrets.PORTUGUESE_GHOST_CONTENT_API_KEY }}
+
+      SWAHILI_GHOST_API_URL: ${{ secrets.SWAHILI_GHOST_API_URL }}
+      SWAHILI_GHOST_API_VERSION: ${{ secrets.SWAHILI_GHOST_API_VERSION }}
+      SWAHILI_GHOST_CONTENT_API_KEY: ${{ secrets.SWAHILI_GHOST_CONTENT_API_KEY }}
+
+      UKRAINIAN_GHOST_API_URL: ${{ secrets.UKRAINIAN_GHOST_API_URL }}
+      UKRAINIAN_GHOST_API_VERSION: ${{ secrets.UKRAINIAN_GHOST_API_VERSION }}
+      UKRAINIAN_GHOST_CONTENT_API_KEY: ${{ secrets.UKRAINIAN_GHOST_CONTENT_API_KEY }}
+
+      URDU_GHOST_API_URL: ${{ secrets.URDU_GHOST_API_URL }}
+      URDU_GHOST_API_VERSION: ${{ secrets.URDU_GHOST_API_VERSION }}
+      URDU_GHOST_CONTENT_API_KEY: ${{ secrets.URDU_GHOST_CONTENT_API_KEY }}
 
       ADS_ENABLED: ${{ secrets.ADS_ENABLED }}
       GOOGLE_ADSENSE_DATA_AD_CLIENT: ${{ secrets.GOOGLE_ADSENSE_DATA_AD_CLIENT }}
@@ -96,7 +124,7 @@ jobs:
           NODE_ENV: production
 
       # - name: Set up Docker Buildx
-      #   uses: docker/setup-buildx-action@v1
+      #   uses: docker/setup-buildx-action@dc7b9719a96d48369863986a06765841d7ea23f6 # tag=v2
 
       - name: Docker login to Azure Container Registry
         uses: azure/docker-login@83efeb77770c98b620c73055fbb59b2847e17dc0 # v1
@@ -149,7 +177,7 @@ jobs:
           app-name: freecodecamp-news-${{ matrix.site_tlds }}-${{ matrix.languages }}
           images:
             ${{ secrets.ACR_NAME }}.azurecr.io/${{ matrix.site_tlds }}/news-${{
-            matrix.languages }}:${{ github.sha }}
+            matrix.languages }}:latest
 
       - name: Remove Old images
         run: |
