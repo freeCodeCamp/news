@@ -109,12 +109,12 @@ const getSiteURL = (lang, forOriginalArticle) => {
   // Special handling for original article feature, where we always want the final siteURL
   const computedDomain =
     !siteDomain || forOriginalArticle ? 'freecodecamp.org' : siteDomain;
-  computedPath = lang === 'english' ? 'news' : `${lang}/news`;
+  computedPath = lang === 'english' ? 'news' : `${lang}/news/`;
 
   if (computedDomain.startsWith('localhost')) {
-    return `http://${computedDomain}/${computedPath}`;
+    return `http://${computedDomain}/${computedPath}/`;
   } else {
-    return `https://www.${computedDomain}/${computedPath}`;
+    return `https://www.${computedDomain}/${computedPath}/`;
   }
 };
 
