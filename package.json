@@ -99,7 +99,7 @@
     "piscina": "3.2.0",
     "prettier": "2.8.4",
     "probe-image-size": "7.2.3",
-    "sanitize-html": "2.7.3",
+    "sanitize-html": "2.10.0",
     "shx": "0.3.4",
     "terser": "5.16.4"
   },
