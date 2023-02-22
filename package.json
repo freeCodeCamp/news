@@ -24,11 +24,11 @@
     "cypress:watch": "npm run cypress -- open",
     "dev": "npm run develop",
     "predevelop": "npm run clean",
-    "develop": "cross-env ELEVENTY_ENV=dev NODE_OPTIONS=--max-old-space-size=8192 eleventy --pathprefix=/news/ --serve",
+    "develop": "cross-env ELEVENTY_ENV=dev NODE_OPTIONS=--max-old-space-size=8192 eleventy --serve",
     "predevelop:ci": "npm run clean",
-    "develop:ci": "cross-env ELEVENTY_ENV=ci NODE_OPTIONS=--max-old-space-size=8192 eleventy --pathprefix=/news/ --serve",
+    "develop:ci": "cross-env ELEVENTY_ENV=ci NODE_OPTIONS=--max-old-space-size=8192 eleventy --serve",
     "prebuild": "npm run clean",
-    "build": "cross-env ELEVENTY_ENV=prod NODE_OPTIONS=--max-old-space-size=8192 eleventy --pathprefix=/news/",
+    "build": "cross-env ELEVENTY_ENV=prod NODE_OPTIONS=--max-old-space-size=8192 eleventy",
     "build:ci": "cross-env ELEVENTY_ENV=ci eleventy",
     "postbuild": "node ./config/i18n/generate-serve-config.js",
     "test": "jest",
@@ -65,7 +65,7 @@
     "https://github.com/freeCodeCamp/news/graphs/contributors"
   ],
   "devDependencies": {
-    "@11ty/eleventy": "2.0.0-canary.18",
+    "@11ty/eleventy": "2.0.0",
     "@11ty/eleventy-plugin-rss": "1.2.0",
     "@11ty/eleventy-upgrade-help": "1.0.1",
     "@tryghost/content-api": "1.11.16",
