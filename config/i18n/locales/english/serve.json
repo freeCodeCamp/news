@@ -21,6 +21,11 @@
       "destination": "/news/about"
     },
     {
+      "source": "/automate-mern-app-deployment-with-jenkins-and-aws",
+      "destination": "/news/automate-mern-app-deployment-with-jenkins",
+      "type": 302
+    },
+    {
       "source": "/intoduction-to-nodejs",
       "destination": "/news/introduction-to-nodejs",
       "type": 302
