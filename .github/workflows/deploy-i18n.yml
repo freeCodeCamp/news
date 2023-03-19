@@ -20,13 +20,10 @@ jobs:
             chinese,
             espanol,
             french,
-            german,
-            indonesian,
             italian,
             japanese,
             korean,
             portuguese,
-            swahili,
             ukrainian,
             urdu
           ]
@@ -165,13 +162,10 @@ jobs:
             chinese,
             espanol,
             french,
-            german,
-            indonesian,
             italian,
             japanese,
             korean,
             portuguese,
-            swahili,
             ukrainian,
             urdu
           ]
