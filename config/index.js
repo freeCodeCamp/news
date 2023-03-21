@@ -21,20 +21,15 @@ if (error) {
 }
 
 const locales = [
-  'arabic',
   'bengali',
   'chinese',
   'english',
   'espanol',
   'french',
-  'german',
-  'haitian',
   'italian',
-  'indonesian',
   'japanese',
   'korean',
   'portuguese',
-  'swahili',
   'ukrainian',
   'urdu'
 ];
@@ -44,39 +39,29 @@ const locales = [
  * Use a 639-1 code here https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
  */
 const localeCodes = {
-  arabic: 'ar',
   bengali: 'bn',
   chinese: 'zh',
   english: 'en',
   espanol: 'es',
   french: 'fr',
-  german: 'de',
-  haitian: 'ht',
   italian: 'it',
-  indonesian: 'id',
   japanese: 'ja',
   korean: 'ko',
   portuguese: 'pt-BR',
-  swahili: 'sw',
   ukrainian: 'uk',
   urdu: 'ur'
 };
 
 const algoliaIndices = {
-  arabic: 'news-ar',
   bengali: 'news-bn',
   chinese: 'news-zh',
   english: 'news',
   espanol: 'news-es',
   french: 'news-fr',
-  german: 'news-de',
-  haitian: 'news-ht',
   italian: 'news-it',
-  indonesian: 'news-id',
   japanese: 'news-ja',
   korean: 'news-ko',
   portuguese: 'news-pt-br',
-  swahili: 'news-sw',
   ukrainian: 'news-uk',
   urdu: 'news-ur'
 };
