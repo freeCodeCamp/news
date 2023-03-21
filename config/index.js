@@ -21,7 +21,6 @@ if (error) {
 }
 
 const locales = [
-  'bengali',
   'chinese',
   'english',
   'espanol',
@@ -39,7 +38,6 @@ const locales = [
  * Use a 639-1 code here https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
  */
 const localeCodes = {
-  bengali: 'bn',
   chinese: 'zh',
   english: 'en',
   espanol: 'es',
@@ -53,7 +51,6 @@ const localeCodes = {
 };
 
 const algoliaIndices = {
-  bengali: 'news-bn',
   chinese: 'news-zh',
   english: 'news',
   espanol: 'news-es',

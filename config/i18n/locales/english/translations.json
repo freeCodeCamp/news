@@ -54,7 +54,6 @@
       "original-article": "{{ <0> }}Original article:{{ </0> }} {{ title }}"
     },
     "locales": {
-      "bengali": "Bengali",
       "chinese": "Chinese",
       "english": "English",
       "espanol": "Spanish",
