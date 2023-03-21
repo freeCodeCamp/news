@@ -28,64 +28,6 @@ jobs:
           PLUGIN: 'generate-config'
           PROJECT_NAME: 'news'
 
-        ##### Download Arabic #####
-      - name: Crowdin Download Arabic Translations
-        uses: crowdin/github-action@master
-        # options: https://github.com/crowdin/github-action/blob/master/action.yml
-        with:
-          # uploads
-          upload_sources: false
-          upload_translations: false
-          auto_approve_imported: false
-          import_eq_suggestions: false
-
-          # downloads
-          download_translations: true
-          download_language: ar
-          skip_untranslated_files: false
-          export_only_approved: true
-
-          push_translations: false
-
-          # pull-request
-          create_pull_request: false
-
-          # global options
-          config: './crowdin-config.yml'
-          base_url: ${{ secrets.CROWDIN_BASE_URL_FCC }}
-
-          # Uncomment below to debug
-          # dryrun_action: true
-
-        ##### Download Bengali #####
-      - name: Crowdin Download Bengali Translations
-        uses: crowdin/github-action@master
-        # options: https://github.com/crowdin/github-action/blob/master/action.yml
-        with:
-          # uploads
-          upload_sources: false
-          upload_translations: false
-          auto_approve_imported: false
-          import_eq_suggestions: false
-
-          # downloads
-          download_translations: true
-          download_language: bn
-          skip_untranslated_files: false
-          export_only_approved: true
-
-          push_translations: false
-
-          # pull-request
-          create_pull_request: false
-
-          # global options
-          config: './crowdin-config.yml'
-          base_url: ${{ secrets.CROWDIN_BASE_URL_FCC }}
-
-          # Uncomment below to debug
-          # dryrun_action: true
-
         ##### Download Chinese #####
       - name: Crowdin Download Chinese Translations
         uses: crowdin/github-action@master
@@ -129,64 +71,6 @@ jobs:
           # downloads
           download_translations: true
           download_language: fr
-          skip_untranslated_files: false
-          export_only_approved: true
-
-          push_translations: false
-
-          # pull-request
-          create_pull_request: false
-
-          # global options
-          config: './crowdin-config.yml'
-          base_url: ${{ secrets.CROWDIN_BASE_URL_FCC }}
-
-          # Uncomment below to debug
-          # dryrun_action: true
-
-        ##### Download German #####
-      - name: Crowdin Download German Translations
-        uses: crowdin/github-action@master
-        # options: https://github.com/crowdin/github-action/blob/master/action.yml
-        with:
-          # uploads
-          upload_sources: false
-          upload_translations: false
-          auto_approve_imported: false
-          import_eq_suggestions: false
-
-          # downloads
-          download_translations: true
-          download_language: de
-          skip_untranslated_files: false
-          export_only_approved: true
-
-          push_translations: false
-
-          # pull-request
-          create_pull_request: false
-
-          # global options
-          config: './crowdin-config.yml'
-          base_url: ${{ secrets.CROWDIN_BASE_URL_FCC }}
-
-          # Uncomment below to debug
-          # dryrun_action: true
-
-        ##### Download Indonesian #####
-      - name: Crowdin Download Indonesian Translations
-        uses: crowdin/github-action@master
-        # options: https://github.com/crowdin/github-action/blob/master/action.yml
-        with:
-          # uploads
-          upload_sources: false
-          upload_translations: false
-          auto_approve_imported: false
-          import_eq_suggestions: false
-
-          # downloads
-          download_translations: true
-          download_language: id
           skip_untranslated_files: false
           export_only_approved: true
 
@@ -303,35 +187,6 @@ jobs:
           # downloads
           download_translations: true
           download_language: pt-BR
-          skip_untranslated_files: false
-          export_only_approved: true
-
-          push_translations: false
-
-          # pull-request
-          create_pull_request: false
-
-          # global options
-          config: './crowdin-config.yml'
-          base_url: ${{ secrets.CROWDIN_BASE_URL_FCC }}
-
-          # Uncomment below to debug
-          # dryrun_action: true
-
-        ##### Download Swahili #####
-      - name: Crowdin Download Swahili Translations
-        uses: crowdin/github-action@master
-        # options: https://github.com/crowdin/github-action/blob/master/action.yml
-        with:
-          # uploads
-          upload_sources: false
-          upload_translations: false
-          auto_approve_imported: false
-          import_eq_suggestions: false
-
-          # downloads
-          download_translations: true
-          download_language: sw
           skip_untranslated_files: false
           export_only_approved: true
 
