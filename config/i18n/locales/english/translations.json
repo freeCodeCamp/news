@@ -54,7 +54,6 @@
       "original-article": "{{ <0> }}Original article:{{ </0> }} {{ title }}"
     },
     "locales": {
-      "arabic": "Arabic",
       "bengali": "Bengali",
       "chinese": "Chinese",
       "english": "English",
@@ -64,7 +63,7 @@
       "japanese": "Japanese",
       "korean": "Korean",
       "portuguese": "Portuguese",
-      "swahili": "Swahili",
+      "ukrainian": "Ukrainian",
       "urdu": "Urdu"
     }
   },
