@@ -16,7 +16,6 @@ jobs:
         node-version: [18.x]
         languages:
           [
-            bengali,
             chinese,
             espanol,
             french,
@@ -158,7 +157,6 @@ jobs:
       matrix:
         languages:
           [
-            bengali,
             chinese,
             espanol,
             french,
