@@ -54,8 +54,6 @@
       "original-article": "{{ <0> }}اصل مضمون:{{ </0> }} {{ title }}"
     },
     "locales": {
-      "arabic": "عربی",
-      "bengali": "بنگالی",
       "chinese": "چینی",
       "english": "انگریزی",
       "espanol": "ہسپانوی",
@@ -64,7 +62,7 @@
       "japanese": "جاپانی",
       "korean": "کوریائی",
       "portuguese": "پرتگالی",
-      "swahili": "سواہلی",
+      "ukrainian": "Ukrainian",
       "urdu": "اردو"
     }
   },
