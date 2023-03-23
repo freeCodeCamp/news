@@ -54,8 +54,6 @@
       "original-article": "{{ <0> }}原文：{{ </0> }} {{ title }}"
     },
     "locales": {
-      "arabic": "阿拉伯语",
-      "bengali": "孟加拉语",
       "chinese": "中文",
       "english": "英语",
       "espanol": "西班牙语",
@@ -64,7 +62,7 @@
       "japanese": "日语",
       "korean": "韩语/朝鲜语",
       "portuguese": "葡萄牙语",
-      "swahili": "斯瓦希里语",
+      "ukrainian": "Ukrainian",
       "urdu": "乌尔都语"
     }
   },

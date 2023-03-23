@@ -54,8 +54,6 @@
       "original-article": "{{ <0> }}Оригінальна публікація:{{ </0> }} {{ title }}"
     },
     "locales": {
-      "arabic": "Арабська",
-      "bengali": "Бенгальська",
       "chinese": "Китайська",
       "english": "Англійська",
       "espanol": "Іспанська",
@@ -64,7 +62,7 @@
       "japanese": "Японська",
       "korean": "Корейська",
       "portuguese": "Португальська",
-      "swahili": "Суахілі",
+      "ukrainian": "Ukrainian",
       "urdu": "Урду"
     }
   },
