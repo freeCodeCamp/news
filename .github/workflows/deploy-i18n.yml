@@ -162,7 +162,7 @@ jobs:
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
-        uses: azure/webapps-deploy@2087f42f7c9306a8d6d45d733e45d2048a9a735a # v2
+        uses: azure/webapps-deploy@85270a1854658d167ab239bce43949edb336fa7c # v2
         with:
           app-name: freecodecamp-news-${{ matrix.site_tlds }}-${{ matrix.languages }}
           images:
