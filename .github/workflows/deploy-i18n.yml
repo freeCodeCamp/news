@@ -15,15 +15,7 @@ jobs:
       matrix:
         node-version: [18.x]
         languages:
-          [
-            chinese,
-            espanol,
-            italian,
-            japanese,
-            korean,
-            portuguese,
-            ukrainian
-          ]
+          [chinese, espanol, italian, japanese, korean, portuguese, ukrainian]
         site_tlds: [org]
 
     env:
@@ -134,15 +126,7 @@ jobs:
       fail-fast: false
       matrix:
         languages:
-          [
-            chinese,
-            espanol,
-            italian,
-            japanese,
-            korean,
-            portuguese,
-            ukrainian
-          ]
+          [chinese, espanol, italian, japanese, korean, portuguese, ukrainian]
         site_tlds: [org]
 
     # GitHub's deployment environment configuration.
