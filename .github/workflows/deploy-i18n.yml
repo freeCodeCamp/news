@@ -18,13 +18,11 @@ jobs:
           [
             chinese,
             espanol,
-            french,
             italian,
             japanese,
             korean,
             portuguese,
-            ukrainian,
-            urdu
+            ukrainian
           ]
         site_tlds: [org]
 
@@ -139,13 +137,11 @@ jobs:
           [
             chinese,
             espanol,
-            french,
             italian,
             japanese,
             korean,
             portuguese,
-            ukrainian,
-            urdu
+            ukrainian
           ]
         site_tlds: [org]
 
