@@ -68,7 +68,7 @@
     "@11ty/eleventy": "1.0.2",
     "@11ty/eleventy-plugin-rss": "1.2.0",
     "@11ty/eleventy-upgrade-help": "1.0.1",
-    "@tryghost/content-api": "1.11.7",
+    "@tryghost/content-api": "1.11.8",
     "@tryghost/helpers": "1.1.77",
     "algoliasearch": "4.17.0",
     "clean-css": "5.3.2",
