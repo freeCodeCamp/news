@@ -1,7 +1,8 @@
 document.addEventListener('DOMContentLoaded', async () => {
   const urlParams = new URLSearchParams(window.location.search);
-  const queryStr = urlParams.get('query');
+  const queryStr = urlParams.get('query') || '';
   const postFeed = document.querySelector('.post-feed');
+  const postsPerPage = Number('{{ secrets.postsPerPage }}');
   let currPage = 0;
 
   const getHits = async pageNo => {
@@ -21,7 +22,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       return index
         .search({
           query: queryStr,
-          hitsPerPage: 15,
+          hitsPerPage: postsPerPage,
           page: pageNo
         })
         .then(({ hits } = {}) => {
@@ -83,7 +84,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       <header class="post-card-header">
         ${
           hit?.tags[0]?.name
-            ? `<span class="post-card-tags"><a href="${hit.tags[0].url}">
+            ? `<span class="post-card-tags"><a dir="ltr" href="${hit.tags[0].url}">
           #${hit.tags[0].name}
         </a></span>`
             : ''
@@ -247,11 +248,10 @@ document.addEventListener('DOMContentLoaded', async () => {
       postFeed.appendChild(generateCardNode(hit, lazyLoad));
     });
 
-    // Only render "Load More Articles" button
-    // if there are more than 15 hits, meaning
-    // that there are up to 15 more hits in the
-    // next API call
-    if (hits.length === 15) {
+    // Only show the "Load More Articles" button if the number of
+    // returned hits is equal to postsPerPage, meaning that there
+    // are probably more hits to load on the next API call
+    if (hits.length === postsPerPage) {
       // Check for existing button and render if none exists
       document.querySelector('#readMoreBtn') ? '' : renderLoadMoreBtn();
     } else {

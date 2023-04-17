@@ -7,13 +7,16 @@
   "search": {
     "label": "Buscar",
     "accessible-name": "Envie sua consulta de pesquisa",
-    "placeholder": "Buscar entre os mais de 350 tutoriais",
+    "placeholder": {
+      "default": "Buscar em nossos tutoriais",
+      "numbered": "Buscar em mais de {{ roundedTotalRecords }} tutoriais"
+    },
     "see-results": "Ver todos os resultados para {{ searchQuery }}",
     "no-tutorials": "Não foram encontrados tutoriais"
   },
   "banner": {
     "default": "Aprenda a programar — {{ <0> }}currículo gratuito de 3 mil horas{{ </0> }}",
-    "authenticated": "Apoie nossa organização sem fins lucrativos e nossa missão. {{ <0> }}Faça sua doação para o freeCodeCamp.org{{ </0> }}.",
+    "authenticated": "Apoie nossa organização beneficente e nossa missão. {{ <0> }}Faça sua doação para o freeCodeCamp.org{{ </0> }}.",
     "authenticated-donor": "Obrigado por apoiar o freeCodeCamp com {{ <0> }}suas doações{{ </0> }}."
   },
   "default-bio": "Ler {{ <0> }}mais publicações{{ </0> }}.",
@@ -48,12 +51,9 @@
       "translator": "Tradutor: {{ name }}"
     },
     "details": {
-      "original-article": "{{ <0> }}Artigo original:{{ </0> }} {{ title }}, escrito por {{ author }}",
-      "translated-by": "{{ <0> }}Traduzido e adaptado por:{{ </0> }} {{ translator }}"
+      "original-article": "{{ <0> }}Artigo original:{{ </0> }} {{ title }}"
     },
     "locales": {
-      "arabic": "árabe",
-      "bengali": "bengali",
       "chinese": "chinês",
       "english": "inglês",
       "espanol": "espanhol",
@@ -62,18 +62,18 @@
       "japanese": "japonês",
       "korean": "coreano",
       "portuguese": "português",
-      "swahili": "suaíli",
+      "ukrainian": "ucraniano",
       "urdu": "urdu"
     }
   },
   "embed-title": "Conteúdo incorporado",
   "footer": {
-    "tax-exempt-status": "O freeCodeCamp é uma organização sem fins lucrativos 501(c)(3), isenta de impostos e apoiada por doações (Número de identificação fiscal federal dos Estados Unidos: 82-0779546).",
+    "tax-exempt-status": "O freeCodeCamp é uma organização beneficente 501(c)(3), isenta de impostos e apoiada por doações (Número de identificação fiscal federal dos Estados Unidos: 82-0779546).",
     "mission-statement": "Nossa missão: ajudar as pessoas a aprender a programar de forma gratuita. Conseguimos isto criando milhares de vídeos, artigos e lições de programação interativas, todas disponíveis gratuitamente para o público. Também temos milhares de grupos de estudo do freeCodeCamp em todo o mundo.",
     "donation-initiatives": "As doações feitas ao freeCodeCamp vão para nossas iniciativas educacionais e ajudam a pagar servidores, serviços e a equipe.",
     "donate-text": "Você pode fazer {{ <0> }}uma doação dedutível de impostos aqui{{ </0> }}.",
     "trending-guides": "Guias de tendências",
-    "our-nonprofit": "Nossa organização sem fins lucrativos",
+    "our-nonprofit": "Nossa instituição",
     "links": {
       "about": "Sobre",
       "alumni": "Rede de ex-alunos",

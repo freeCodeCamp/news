@@ -1,97 +1,97 @@
 {
   "buttons": {
-    "forum": "Forum",
-    "donate": "Donate",
-    "load-more-articles": "Load More Articles"
+    "forum": "Форум",
+    "donate": "Підтримати",
+    "load-more-articles": "Завантажити більше публікацій"
   },
   "search": {
-    "label": "Search",
-    "accessible-name": "Submit your search query",
-    "placeholder": "Search 8,000+ tutorials",
-    "see-results": "See all results for {{ searchQuery }}",
-    "no-tutorials": "No tutorials found"
+    "label": "Пошук",
+    "accessible-name": "Надіслати пошуковий запит",
+    "placeholder": {
+      "default": "Шукати серед публікацій",
+      "numbered": "Шукати серед {{ roundedTotalRecords }}+ публікацій"
+    },
+    "see-results": "Переглянути всі результати для {{ searchQuery }}",
+    "no-tutorials": "Не знайдено жодної публікації"
   },
   "banner": {
-    "default": "Learn to code — {{ <0> }}free 3,000-hour curriculum{{ </0> }}",
-    "authenticated": "Support our nonprofit and our mission. {{ <0> }}Donate to freeCodeCamp.org{{ </0> }}.",
-    "authenticated-donor": "Thank you for supporting freeCodeCamp through {{ <0> }}your donations{{ </0> }}."
+    "default": "Навчіться програмувати — {{<0> }}безоплатна навчальна програма на 3 000 годин{{</0> }}",
+    "authenticated": "Підтримайте нашу неприбуткову організацію та нашу місію. {{ <0> }}Зробіть внесок у freeCodeCamp.org{{ </0> }}.",
+    "authenticated-donor": "Дякуємо за підтримку freeCodeCamp через {{ <0> }}ваші внески{{ </0> }}."
   },
-  "default-bio": "Read {{ <0> }}more posts{{ </0> }}.",
+  "default-bio": "Прочитати {{ <0> }}більше дописів{{ </0> }}.",
   "author": {
-    "no-posts": "No posts",
-    "one-post": "1 post",
-    "multiple-posts": "{{ postCount }} posts"
+    "no-posts": "Немає дописів",
+    "one-post": "1 допис",
+    "multiple-posts": "Дописів: {{ postCount }}"
   },
   "tag": {
-    "no-posts": "A collection of posts",
-    "one-post": "A collection of 1 post",
-    "multiple-posts": "A collection of {{ postCount }} posts"
+    "no-posts": "Колекція дописів",
+    "one-post": "Колекція з 1 допису",
+    "multiple-posts": "Колекція з {{ postCount }} дописів"
   },
   "404": {
-    "page-not-found": "Page not found",
-    "go-to-front-page": "Go to the front page"
+    "page-not-found": "Сторінку не знайдено",
+    "go-to-front-page": "Перейти на головну сторінку"
   },
   "social-row": {
     "cta": {
-      "tweet-a-thanks": "If you read this far, tweet to the author to show them you care. {{ <0> }}Tweet a thanks{{ </0> }}",
-      "tweet-it": "If this article was helpful, {{ <0> }}tweet it{{ </0> }}."
+      "tweet-a-thanks": "Якщо ви дочитали до цього місця, твітніть автору, щоб показати, що вам не байдуже. {{ <0> }}Твітнути подяку{{ </0> }}",
+      "tweet-it": "Якщо ця публікація була корисною, {{ <0> }}твітніть про це{{ </0> }}."
     },
     "tweets": {
-      "default": "Thank you {{ author }} for writing this helpful article.",
-      "translation": "Thank you {{ author }} for writing this helpful article, and {{ translator }} for translating it."
+      "default": "Дякую {{ author }} за написання цієї корисної публікації.",
+      "translation": "Дякую {{ author }} за написання цієї корисної публікації та {{ translator }} за переклад."
     }
   },
-  "learn-to-code-cta": "Learn to code for free. freeCodeCamp's open source curriculum has helped more than 40,000 people get jobs as developers. {{ <0> }}Get started{{ </0> }}",
+  "learn-to-code-cta": "Навчіться програмувати безоплатно. Навчальна програма freeCodeCamp з відкритим кодом допомогла більш ніж 40 000 людям стати розробниками. {{ <0> }}Розпочати{{ </0> }}",
   "original-author-translator": {
     "roles": {
-      "author": "Author: {{ name }} ({{ locale }})",
-      "translator": "Translator: {{ name }}"
+      "author": "Автор: {{ name }} ({{ locale }})",
+      "translator": "Перекладач: {{ name }}"
     },
     "details": {
-      "original-article": "{{ <0> }}Original article:{{ </0> }} {{ title }} by {{ author }}",
-      "translated-by": "{{ <0> }}Translated by:{{ </0> }} {{ translator }}"
+      "original-article": "{{ <0> }}Оригінальна публікація:{{ </0> }} {{ title }}"
     },
     "locales": {
-      "arabic": "Arabic",
-      "bengali": "Bengali",
-      "chinese": "Chinese",
-      "english": "English",
-      "espanol": "Spanish",
-      "french": "French",
-      "italian": "Italian",
-      "japanese": "Japanese",
-      "korean": "Korean",
-      "portuguese": "Portuguese",
-      "swahili": "Swahili",
-      "urdu": "Urdu"
+      "chinese": "Китайська",
+      "english": "Англійська",
+      "espanol": "Іспанська",
+      "french": "Французька",
+      "italian": "Італійська",
+      "japanese": "Японська",
+      "korean": "Корейська",
+      "portuguese": "Португальська",
+      "ukrainian": "Українська",
+      "urdu": "Урду"
     }
   },
-  "embed-title": "Embedded content",
+  "embed-title": "Вбудований вміст",
   "footer": {
-    "tax-exempt-status": "freeCodeCamp is a donor-supported tax-exempt 501(c)(3) nonprofit organization (United States Federal Tax Identification Number: 82-0779546)",
-    "mission-statement": "Our mission: to help people learn to code for free. We accomplish this by creating thousands of videos, articles, and interactive coding lessons - all freely available to the public. We also have thousands of freeCodeCamp study groups around the world.",
-    "donation-initiatives": "Donations to freeCodeCamp go toward our education initiatives, and help pay for servers, services, and staff.",
-    "donate-text": "You can {{ <0> }}make a tax-deductible donation here{{ </0> }}.",
-    "trending-guides": "Trending Guides",
-    "our-nonprofit": "Our Nonprofit",
+    "tax-exempt-status": "freeCodeCamp – це некомерційна організація, яка підтримується спонсорськими внесками та звільнена від сплати податків 501(c)(3) (Федеральний ідентифікаційний номер платника податків США: 82-0779546)",
+    "mission-statement": "Ми хочемо допомогти людям безоплатно навчитися програмувати. Ми досягаємо цього, створюючи тисячі відео, публікацій та інтерактивних уроків з програмування – вони усі доступні для широкого загалу. Також ми маємо тисячі безоплатних навчальних груп freeCodeCamp у всьому світі.",
+    "donation-initiatives": "Внески до freeCodeCamp йдуть на наші освітні програми та допомагають оплачувати сервери, послуги та персонал.",
+    "donate-text": "Ви можете {{ <0> }}зробити неоподаткований внесок тут{{ </0> }}.",
+    "trending-guides": "Популярні статті",
+    "our-nonprofit": "Наша організація",
     "links": {
-      "about": "About",
-      "alumni": "Alumni Network",
-      "open-source": "Open Source",
-      "shop": "Shop",
-      "support": "Support",
-      "sponsors": "Sponsors",
-      "honesty": "Academic Honesty",
-      "coc": "Code of Conduct",
-      "privacy": "Privacy Policy",
-      "tos": "Terms of Service",
-      "copyright": "Copyright Policy"
+      "about": "Про нас",
+      "alumni": "Спільнота випускників",
+      "open-source": "Відкритий вихідний код",
+      "shop": "Магазин",
+      "support": "Допомога",
+      "sponsors": "Спонсори",
+      "honesty": "Академічна доброчесність",
+      "coc": "Кодекс поведінки",
+      "privacy": "Політика конфіденційності",
+      "tos": "Умови надання послуг",
+      "copyright": "Політика захисту авторських прав"
     }
   },
   "fallback": {
-    "message": "Your browser doesn't support HTML5 {{ element }}.",
-    "audio": "audio",
-    "video": "video"
+    "message": "Ваш браузер не підтримує {{ element }} HTML5.",
+    "audio": "аудіо",
+    "video": "відео"
   },
-  "ad-text": "Advertisement"
+  "ad-text": "Оголошення"
 }

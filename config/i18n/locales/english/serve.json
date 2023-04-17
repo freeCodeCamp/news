@@ -21,6 +21,16 @@
       "destination": "/news/about"
     },
     {
+      "source": "/how-to-change-color-in-matplotlip",
+      "destination": "/news/how-to-change-color-in-matplotlib",
+      "type": 302
+    },
+    {
+      "source": "/automate-mern-app-deployment-with-jenkins-and-aws",
+      "destination": "/news/automate-mern-app-deployment-with-jenkins",
+      "type": 302
+    },
+    {
       "source": "/intoduction-to-nodejs",
       "destination": "/news/introduction-to-nodejs",
       "type": 302

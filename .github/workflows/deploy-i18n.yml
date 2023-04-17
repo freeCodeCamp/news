@@ -13,23 +13,9 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        node-version: [16.x]
+        node-version: [18.x]
         languages:
-          [
-            arabic,
-            bengali,
-            chinese,
-            espanol,
-            french,
-            german,
-            italian,
-            japanese,
-            korean,
-            portuguese,
-            swahili,
-            ukrainian,
-            urdu
-          ]
+          [chinese, espanol, italian, japanese, korean, portuguese, ukrainian]
         site_tlds: [org]
 
     env:
@@ -37,14 +23,6 @@ jobs:
 
       ALGOLIA_API_KEY: ${{ secrets.ALGOLIA_API_KEY }}
       ALGOLIA_APP_ID: ${{ secrets.ALGOLIA_APP_ID }}
-
-      ARABIC_GHOST_API_URL: ${{ secrets.ARABIC_GHOST_API_URL }}
-      ARABIC_GHOST_API_VERSION: ${{ secrets.ARABIC_GHOST_API_VERSION }}
-      ARABIC_GHOST_CONTENT_API_KEY: ${{ secrets.ARABIC_GHOST_CONTENT_API_KEY }}
-
-      BENGALI_GHOST_API_URL: ${{ secrets.BENGALI_GHOST_API_URL }}
-      BENGALI_GHOST_API_VERSION: ${{ secrets.BENGALI_GHOST_API_VERSION }}
-      BENGALI_GHOST_CONTENT_API_KEY: ${{ secrets.BENGALI_GHOST_CONTENT_API_KEY }}
 
       CHINESE_GHOST_API_URL: ${{ secrets.CHINESE_GHOST_API_URL }}
       CHINESE_GHOST_API_VERSION: ${{ secrets.CHINESE_GHOST_API_VERSION }}
@@ -62,10 +40,6 @@ jobs:
       FRENCH_GHOST_API_VERSION: ${{ secrets.FRENCH_GHOST_API_VERSION }}
       FRENCH_GHOST_CONTENT_API_KEY: ${{ secrets.FRENCH_GHOST_CONTENT_API_KEY }}
 
-      GERMAN_GHOST_API_URL: ${{ secrets.GERMAN_GHOST_API_URL }}
-      GERMAN_GHOST_API_VERSION: ${{ secrets.GERMAN_GHOST_API_VERSION }}
-      GERMAN_GHOST_CONTENT_API_KEY: ${{ secrets.GERMAN_GHOST_CONTENT_API_KEY }}
-
       ITALIAN_GHOST_API_URL: ${{ secrets.ITALIAN_GHOST_API_URL }}
       ITALIAN_GHOST_API_VERSION: ${{ secrets.ITALIAN_GHOST_API_VERSION }}
       ITALIAN_GHOST_CONTENT_API_KEY: ${{ secrets.ITALIAN_GHOST_CONTENT_API_KEY }}
@@ -81,10 +55,6 @@ jobs:
       PORTUGUESE_GHOST_API_URL: ${{ secrets.PORTUGUESE_GHOST_API_URL }}
       PORTUGUESE_GHOST_API_VERSION: ${{ secrets.PORTUGUESE_GHOST_API_VERSION }}
       PORTUGUESE_GHOST_CONTENT_API_KEY: ${{ secrets.PORTUGUESE_GHOST_CONTENT_API_KEY }}
-
-      SWAHILI_GHOST_API_URL: ${{ secrets.SWAHILI_GHOST_API_URL }}
-      SWAHILI_GHOST_API_VERSION: ${{ secrets.SWAHILI_GHOST_API_VERSION }}
-      SWAHILI_GHOST_CONTENT_API_KEY: ${{ secrets.SWAHILI_GHOST_CONTENT_API_KEY }}
 
       UKRAINIAN_GHOST_API_URL: ${{ secrets.UKRAINIAN_GHOST_API_URL }}
       UKRAINIAN_GHOST_API_VERSION: ${{ secrets.UKRAINIAN_GHOST_API_VERSION }}
@@ -107,10 +77,10 @@ jobs:
 
     steps:
       - name: Checkout source code
-        uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b # tag=v3
+        uses: actions/checkout@8e5e7e5ab8b370d6c329ec480221332ada57f0ab # v3
 
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@969bd2663942d722d85b6a8626225850c2f7be4b # tag=v3
+        uses: actions/setup-node@64ed1c7eab4cce3362f8c340dee64e5eaeef8f7c # v3
         with:
           node-version: ${{ matrix.node-version }}
 
@@ -126,7 +96,7 @@ jobs:
       #   uses: docker/setup-buildx-action@dc7b9719a96d48369863986a06765841d7ea23f6 # tag=v2
 
       - name: Docker login to Azure Container Registry
-        uses: azure/docker-login@81744f9799e7eaa418697cb168452a2882ae844a # tag=v1
+        uses: azure/docker-login@83efeb77770c98b620c73055fbb59b2847e17dc0 # v1
         with:
           login-server: ${{ secrets.ACR_NAME }}.azurecr.io
           username: ${{ secrets.ACR_USERNAME }}
@@ -148,7 +118,7 @@ jobs:
 
   deploy:
     name: Deploy
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     needs:
       - build
 
@@ -156,21 +126,7 @@ jobs:
       fail-fast: false
       matrix:
         languages:
-          [
-            arabic,
-            bengali,
-            chinese,
-            espanol,
-            french,
-            german,
-            italian,
-            japanese,
-            korean,
-            portuguese,
-            swahili,
-            ukrainian,
-            urdu
-          ]
+          [chinese, espanol, italian, japanese, korean, portuguese, ukrainian]
         site_tlds: [org]
 
     # GitHub's deployment environment configuration.
@@ -186,7 +142,7 @@ jobs:
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
-        uses: azure/webapps-deploy@0b651ed7546ecfc75024011f76944cb9b381ef1e # tag=v2
+        uses: azure/webapps-deploy@85270a1854658d167ab239bce43949edb336fa7c # v2
         with:
           app-name: freecodecamp-news-${{ matrix.site_tlds }}-${{ matrix.languages }}
           images:

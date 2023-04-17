@@ -7,13 +7,16 @@
   "search": {
     "label": "Search",
     "accessible-name": "Submit your search query",
-    "placeholder": "Search 8,000+ tutorials",
+    "placeholder": {
+      "default": "Search our tutorials",
+      "numbered": "Search {{ roundedTotalRecords }}+ tutorials"
+    },
     "see-results": "See all results for {{ searchQuery }}",
     "no-tutorials": "No tutorials found"
   },
   "banner": {
     "default": "Learn to code — {{ <0> }}free 3,000-hour curriculum{{ </0> }}",
-    "authenticated": "Support our nonprofit and our mission. {{ <0> }}Donate to freeCodeCamp.org{{ </0> }}.",
+    "authenticated": "Support our charity and our mission. {{ <0> }}Donate to freeCodeCamp.org{{ </0> }}.",
     "authenticated-donor": "Thank you for supporting freeCodeCamp through {{ <0> }}your donations{{ </0> }}."
   },
   "default-bio": "Read {{ <0> }}more posts{{ </0> }}.",
@@ -48,12 +51,9 @@
       "translator": "Translator: {{ name }}"
     },
     "details": {
-      "original-article": "{{ <0> }}Original article:{{ </0> }} {{ title }} by {{ author }}",
-      "translated-by": "{{ <0> }}Translated by:{{ </0> }} {{ translator }}"
+      "original-article": "{{ <0> }}Original article:{{ </0> }} {{ title }}"
     },
     "locales": {
-      "arabic": "Arabic",
-      "bengali": "Bengali",
       "chinese": "Chinese",
       "english": "English",
       "espanol": "Spanish",
@@ -62,18 +62,18 @@
       "japanese": "Japanese",
       "korean": "Korean",
       "portuguese": "Portuguese",
-      "swahili": "Swahili",
+      "ukrainian": "Ukrainian",
       "urdu": "Urdu"
     }
   },
   "embed-title": "Embedded content",
   "footer": {
-    "tax-exempt-status": "freeCodeCamp is a donor-supported tax-exempt 501(c)(3) nonprofit organization (United States Federal Tax Identification Number: 82-0779546)",
+    "tax-exempt-status": "freeCodeCamp is a donor-supported tax-exempt 501(c)(3) charity organization (United States Federal Tax Identification Number: 82-0779546)",
     "mission-statement": "Our mission: to help people learn to code for free. We accomplish this by creating thousands of videos, articles, and interactive coding lessons - all freely available to the public. We also have thousands of freeCodeCamp study groups around the world.",
     "donation-initiatives": "Donations to freeCodeCamp go toward our education initiatives, and help pay for servers, services, and staff.",
     "donate-text": "You can {{ <0> }}make a tax-deductible donation here{{ </0> }}.",
     "trending-guides": "Trending Guides",
-    "our-nonprofit": "Our Nonprofit",
+    "our-nonprofit": "Our Charity",
     "links": {
       "about": "About",
       "alumni": "Alumni Network",

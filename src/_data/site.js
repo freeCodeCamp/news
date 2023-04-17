@@ -1,5 +1,9 @@
 const { sourceAPI } = require('../../utils/ghost/api');
 const getImageDimensions = require('../../utils/get-image-dimensions');
+const {
+  convertToLocalizedString,
+  getRoundedTotalRecords
+} = require('../../utils/search-bar-placeholder-number');
 const { currentLocale_i18nISOCode, siteURL } = require('../../config');
 const translate = require('../../utils/translate');
 
@@ -58,6 +62,14 @@ module.exports = async () => {
   // based on UI locale
   site.facebook = 'https://www.facebook.com/freecodecamp';
   site.twitter = twitterProfile;
+
+  // Dynamic search bar placeholder number
+  const roundedTotalRecords = await getRoundedTotalRecords();
+  site.roundedTotalRecords = roundedTotalRecords;
+  site.roundedTotalRecordsLocalizedString = convertToLocalizedString(
+    roundedTotalRecords,
+    currentLocale_i18nISOCode
+  );
 
   return site;
 };
