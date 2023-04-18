@@ -7,16 +7,17 @@
   "search": {
     "label": "搜索",
     "accessible-name": "提交您的搜索查询",
-    "placeholder": {
-      "default": "搜索我们的教程",
-      "numbered": "搜索 {{ roundedTotalRecords }}+ 教程"
-    },
+    "placeholder": "搜索 900+ 篇教程",
     "see-results": "查看 {{ searchQuery }} 的所有结果",
     "no-tutorials": "未找到教程"
   },
+  "comments": {
+    "show-comments": "显示评论",
+    "error": "抱歉，暂时无法加载评论，请稍后再试。"
+  },
   "banner": {
     "default": "学习编程 — {{ <0> }}3,000 小时免费课程{{ </0> }}",
-    "authenticated": "支持我们的慈善组织和我们的使命。{{ <0> }}捐款给 freeCodeCamp.org{{ </0> }}。",
+    "authenticated": "支持我们的非营利组织和我们的使命，{{ <0> }}给 freeCodeCamp.org 捐款{{ </0> }}。",
     "authenticated-donor": "谢谢你{{ <0> }}捐款{{ </0> }}支持 freeCodeCamp。"
   },
   "default-bio": "阅读 {{ <0> }}更多文章{{ </0> }}。",
@@ -34,46 +35,36 @@
     "page-not-found": "页面不存在",
     "go-to-front-page": "返回上一页"
   },
-  "social-row": {
-    "cta": {
-      "tweet-a-thanks": "如果你读到这里，请发推文给作者，向他们展示你的关心。{{ <0> }} 发推文感谢 {{ </0> }}",
-      "tweet-it": "如果这篇文章帮助到你的话，{{ <0> }} 发推文推荐一下 {{ </0> }}。"
-    },
-    "tweets": {
-      "default": "感谢作者 {{ author }} 写下这篇有帮助的文章。",
-      "translation": "感谢作者 {{ author }} 写下这篇有帮助的文章，同时感谢 {{ translator }} 翻译了这篇文章。"
-    }
-  },
   "learn-to-code-cta": "在 freeCodeCamp 免费学习编程。 freeCodeCamp 的开源课程已帮助 40,000 多人获得开发者工作。{{ <0> }}开始学习{{ </0> }}",
   "original-author-translator": {
     "roles": {
-      "author": "作者：{{ name }} ({{ locale }})",
-      "translator": "译者：{{ name }}"
+      "author": "作者: {{ name }} ({{ locale }})",
+      "translator": "译者: {{ name }}"
     },
     "details": {
-      "original-article": "{{ <0> }}原文：{{ </0> }} {{ title }}"
+      "original-article": "{{ <0> }}原文：{{ </0> }} {{ title }}，作者：{{ author }}",
+      "translated-by": "{{ <0> }}译者：{{ </0> }} {{ translator }}"
     },
     "locales": {
-      "chinese": "中文",
       "english": "英语",
       "espanol": "西班牙语",
-      "french": "法语",
+      "chinese": "中文",
+      "portuguese": "葡萄牙语",
       "italian": "意大利语",
       "japanese": "日语",
-      "korean": "韩语/朝鲜语",
-      "portuguese": "葡萄牙语",
-      "ukrainian": "乌克兰语",
-      "urdu": "乌尔都语"
+      "arabic": "阿拉伯语",
+      "urdu": "乌尔都语",
+      "bengali": "孟加拉语"
     }
   },
   "embed-title": "嵌入内容",
   "footer": {
-    "tax-exempt-status": "freeCodeCamp 是捐助者支持的 501(c)(3) 条款下具有免税资格的慈善组织（税号：82-0779546）。",
+    "tax-exempt-status": "freeCodeCamp 是捐助者支持的 501(c)(3) 条款下具有免税资格的非营利性组织（税号：82-0779546)。",
     "mission-statement": "我们的使命：帮助人们免费学习编程。我们通过创建成千上万的视频、文章和交互式编程课程——所有内容向公众免费开放——来实现这一目标。学员在世界各地自发成立数千个 freeCodeCamp 学习小组。",
     "donation-initiatives": "所有给 freeCodeCamp 的捐款都将用于我们的教育项目，购买服务器和其他服务，以及聘用员工。",
     "donate-text": "你可以{{ <0> }}点击此处免税捐款{{ </0> }}。",
     "trending-guides": "精选文章",
-    "our-nonprofit": "我们的慈善机构",
+    "our-nonprofit": "关于我们",
     "links": {
       "about": "简介",
       "alumni": "校友网络",
@@ -89,9 +80,8 @@
     }
   },
   "fallback": {
-    "message": "你的浏览器不支持 HTML5 {{ element }}。",
+    "message": "您的浏览器不支持 HTML5 {{ element }}。",
     "audio": "音频",
     "video": "视频"
-  },
-  "ad-text": "广告"
+  }
 }

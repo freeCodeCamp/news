@@ -1,5 +1,6 @@
 const { URL } = require('url');
 const { allGhostAPIInstances } = require('./api');
+const { computedPath } = require('../../config');
 const getImageDimensions = require('../get-image-dimensions');
 const translate = require('../translate');
 
@@ -51,26 +52,47 @@ const originalPostHandler = async post => {
         locale_i18n: originalPostLocale
       };
 
-      const originalArticleHTML = translate(
+      const authorEl = translate(
         'original-author-translator.details.original-article',
         {
           '<0>': '<strong>',
           '</0>': '</strong>',
-          title: `<a href="${originalPost.url}" target="_blank" rel="noopener noreferrer" data-test-label="original-article-link">${originalPost.title}</a>`,
+          title: `<a href="${originalPost.url}" target="_blank" rel="noopener noreferrer" data-test-label="original-article">${originalPost.title}</a>`,
+          author: `<a href="${originalPost.primary_author.url}" target="_blank" rel="noopener noreferrer" data-test-label="profile-link">${originalPost.primary_author.name}</a>`,
           interpolation: {
             escapeValue: false
           }
         }
       );
 
-      const introHTML = `
-        <p data-test-label="translation-intro">
-          ${originalArticleHTML}
+      const translatorEl = translate(
+        'original-author-translator.details.translated-by',
+        {
+          '<0>': '<strong>',
+          '</0>': '</strong>',
+          translator: `<a href="/${
+            computedPath + post.primary_author.path
+          }" data-test-label="profile-link">${post.primary_author.name}</a>`,
+          interpolation: {
+            escapeValue: false
+          }
+        }
+      );
+
+      const introEl = `
+        <p>
+          <span data-test-label="author-intro">
+            ${authorEl}
+          </span>
+          <br><br>
+          <span data-test-label="translator-intro">
+            ${translatorEl}
+          </span>
         </p>`;
 
-      // Append details about the original article
-      // to the beginning of the translated article
-      post.html = introHTML + post.html;
+      // Append details about the original article / author and translator
+      // to the beginning of the article
+      post.html = introEl + post.html;
     } catch (err) {
       console.warn(`
       ---------------------------------------------------------------

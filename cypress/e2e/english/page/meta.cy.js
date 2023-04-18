@@ -9,7 +9,7 @@ const pageExpectedMeta = {
     height: 500
   },
   excerpt:
-    "Once you've forwarded this receipt, we will award you with your donor badge on your freeCodeCamp profile. We will also turn off donation prompts for you. Thank you again for supporting our charity. freeCodeCamp is a highly-efficient education NGO. This year alone, we've provided million hours of free education to"
+    "Once you've forwarded this receipt, we will award you with your donor badge on your freeCodeCamp profile. We will also turn off donation prompts for you. Thank you again for supporting our nonprofit. freeCodeCamp is a highly-efficient education NGO. This year alone, we've provided million hours of free education to"
 };
 
 describe('Page metadata', () => {
@@ -121,7 +121,7 @@ describe('Page metadata', () => {
     cy.get('head meta[property="article:modified_time"]').should($metaEl => {
       const publishedTimeISO = new Date($metaEl.attr('content')).toISOString();
 
-      expect(publishedTimeISO).to.equal('2022-12-20T05:28:17.000Z');
+      expect(publishedTimeISO).to.equal('2021-11-18T09:16:21.000Z');
     });
   });
 

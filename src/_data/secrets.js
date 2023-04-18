@@ -5,8 +5,7 @@ const {
   adsEnabled,
   eleventyEnv,
   googleAdsenseDataAdClient,
-  googleAdsenseDataAdSlot,
-  postsPerPage
+  googleAdsenseDataAdSlot
 } = require('../../config');
 
 module.exports = {
@@ -16,6 +15,5 @@ module.exports = {
   adsEnabled,
   eleventyEnv,
   googleAdsenseDataAdClient,
-  googleAdsenseDataAdSlot,
-  postsPerPage
+  googleAdsenseDataAdSlot
 };

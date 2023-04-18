@@ -20,14 +20,14 @@ on:
 jobs:
   build:
     name: Build
-    runs-on: [self-hosted, on-aws]
+    runs-on: [self-hosted, on-azure]
 
     strategy:
       fail-fast: false
       matrix:
-        node-version: [18.x]
+        node-version: [16.x]
         languages: [english]
-        site_tlds: [dev]
+        site_tlds: [dev, org]
 
     env:
       BUILD_LANG: ${{ matrix.languages }}
@@ -35,45 +35,37 @@ jobs:
       ALGOLIA_API_KEY: ${{ secrets.ALGOLIA_API_KEY }}
       ALGOLIA_APP_ID: ${{ secrets.ALGOLIA_APP_ID }}
 
-      CHINESE_GHOST_API_URL: ${{ secrets.CHINESE_GHOST_API_URL }}
-      CHINESE_GHOST_API_VERSION: ${{ secrets.CHINESE_GHOST_API_VERSION }}
-      CHINESE_GHOST_CONTENT_API_KEY: ${{ secrets.CHINESE_GHOST_CONTENT_API_KEY }}
-
       ENGLISH_GHOST_API_URL: ${{ secrets.ENGLISH_GHOST_API_URL }}
       ENGLISH_GHOST_API_VERSION: ${{ secrets.ENGLISH_GHOST_API_VERSION }}
       ENGLISH_GHOST_CONTENT_API_KEY: ${{ secrets.ENGLISH_GHOST_CONTENT_API_KEY }}
+
+      CHINESE_GHOST_API_URL: ${{ secrets.CHINESE_GHOST_API_URL }}
+      CHINESE_GHOST_API_VERSION: ${{ secrets.CHINESE_GHOST_API_VERSION }}
+      CHINESE_GHOST_CONTENT_API_KEY: ${{ secrets.CHINESE_GHOST_CONTENT_API_KEY }}
 
       ESPANOL_GHOST_API_URL: ${{ secrets.ESPANOL_GHOST_API_URL }}
       ESPANOL_GHOST_API_VERSION: ${{ secrets.ESPANOL_GHOST_API_VERSION }}
       ESPANOL_GHOST_CONTENT_API_KEY: ${{ secrets.ESPANOL_GHOST_CONTENT_API_KEY }}
 
-      FRENCH_GHOST_API_URL: ${{ secrets.FRENCH_GHOST_API_URL }}
-      FRENCH_GHOST_API_VERSION: ${{ secrets.FRENCH_GHOST_API_VERSION }}
-      FRENCH_GHOST_CONTENT_API_KEY: ${{ secrets.FRENCH_GHOST_CONTENT_API_KEY }}
-
       ITALIAN_GHOST_API_URL: ${{ secrets.ITALIAN_GHOST_API_URL }}
       ITALIAN_GHOST_API_VERSION: ${{ secrets.ITALIAN_GHOST_API_VERSION }}
       ITALIAN_GHOST_CONTENT_API_KEY: ${{ secrets.ITALIAN_GHOST_CONTENT_API_KEY }}
-
-      JAPANESE_GHOST_API_URL: ${{ secrets.JAPANESE_GHOST_API_URL }}
-      JAPANESE_GHOST_API_VERSION: ${{ secrets.JAPANESE_GHOST_API_VERSION }}
-      JAPANESE_GHOST_CONTENT_API_KEY: ${{ secrets.JAPANESE_GHOST_CONTENT_API_KEY }}
-
-      KOREAN_GHOST_API_URL: ${{ secrets.KOREAN_GHOST_API_URL }}
-      KOREAN_GHOST_API_VERSION: ${{ secrets.KOREAN_GHOST_API_VERSION }}
-      KOREAN_GHOST_CONTENT_API_KEY: ${{ secrets.KOREAN_GHOST_CONTENT_API_KEY }}
 
       PORTUGUESE_GHOST_API_URL: ${{ secrets.PORTUGUESE_GHOST_API_URL }}
       PORTUGUESE_GHOST_API_VERSION: ${{ secrets.PORTUGUESE_GHOST_API_VERSION }}
       PORTUGUESE_GHOST_CONTENT_API_KEY: ${{ secrets.PORTUGUESE_GHOST_CONTENT_API_KEY }}
 
-      UKRAINIAN_GHOST_API_URL: ${{ secrets.UKRAINIAN_GHOST_API_URL }}
-      UKRAINIAN_GHOST_API_VERSION: ${{ secrets.UKRAINIAN_GHOST_API_VERSION }}
-      UKRAINIAN_GHOST_CONTENT_API_KEY: ${{ secrets.UKRAINIAN_GHOST_CONTENT_API_KEY }}
+      JAPANESE_GHOST_API_URL: ${{ secrets.JAPANESE_GHOST_API_URL }}
+      JAPANESE_GHOST_API_VERSION: ${{ secrets.JAPANESE_GHOST_API_VERSION }}
+      JAPANESE_GHOST_CONTENT_API_KEY: ${{ secrets.JAPANESE_GHOST_CONTENT_API_KEY }}
 
-      URDU_GHOST_API_URL: ${{ secrets.URDU_GHOST_API_URL }}
-      URDU_GHOST_API_VERSION: ${{ secrets.URDU_GHOST_API_VERSION }}
-      URDU_GHOST_CONTENT_API_KEY: ${{ secrets.URDU_GHOST_CONTENT_API_KEY }}
+      ARABIC_GHOST_API_URL: ${{ secrets.ARABIC_GHOST_API_URL }}
+      ARABIC_GHOST_API_VERSION: ${{ secrets.ARABIC_GHOST_API_VERSION }}
+      ARABIC_GHOST_CONTENT_API_KEY: ${{ secrets.ARABIC_GHOST_CONTENT_API_KEY }}
+
+      URDU_GHOST_API_URL: ${{ secrets.ARABIC_GHOST_API_URL }}
+      URDU_GHOST_API_VERSION: ${{ secrets.ARABIC_GHOST_API_VERSION }}
+      URDU_GHOST_CONTENT_API_KEY: ${{ secrets.ARABIC_GHOST_CONTENT_API_KEY }}
 
       ADS_ENABLED: ${{ secrets.ADS_ENABLED }}
       GOOGLE_ADSENSE_DATA_AD_CLIENT: ${{ secrets.GOOGLE_ADSENSE_DATA_AD_CLIENT }}
@@ -88,12 +80,13 @@ jobs:
 
     steps:
       - name: Checkout source code
-        uses: actions/checkout@8e5e7e5ab8b370d6c329ec480221332ada57f0ab # v3
+        uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b # tag=v3
 
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@64ed1c7eab4cce3362f8c340dee64e5eaeef8f7c # v3
+        uses: actions/setup-node@969bd2663942d722d85b6a8626225850c2f7be4b # tag=v3
         with:
           node-version: ${{ matrix.node-version }}
+          # cache: 'npm'
 
       - name: Install dependencies
         run: npm ci
@@ -104,10 +97,10 @@ jobs:
           NODE_ENV: production
 
       # - name: Set up Docker Buildx
-      #   uses: docker/setup-buildx-action@dc7b9719a96d48369863986a06765841d7ea23f6 # tag=v2
+      #   uses: docker/setup-buildx-action@v1
 
       - name: Docker login to Azure Container Registry
-        uses: azure/docker-login@83efeb77770c98b620c73055fbb59b2847e17dc0 # v1
+        uses: azure/docker-login@81744f9799e7eaa418697cb168452a2882ae844a # tag=v1
         with:
           login-server: ${{ secrets.ACR_NAME }}.azurecr.io
           username: ${{ secrets.ACR_USERNAME }}
@@ -129,7 +122,7 @@ jobs:
 
   deploy:
     name: Deploy
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     needs:
       - build
 
@@ -152,12 +145,12 @@ jobs:
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
-        uses: azure/webapps-deploy@85270a1854658d167ab239bce43949edb336fa7c # v2
+        uses: azure/webapps-deploy@0b651ed7546ecfc75024011f76944cb9b381ef1e # tag=v2
         with:
           app-name: freecodecamp-news-${{ matrix.site_tlds }}-${{ matrix.languages }}
           images:
             ${{ secrets.ACR_NAME }}.azurecr.io/${{ matrix.site_tlds }}/news-${{
-            matrix.languages }}:latest
+            matrix.languages }}:${{ github.sha }}
 
       - name: Remove Old images
         run: |

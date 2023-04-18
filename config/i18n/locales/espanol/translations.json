@@ -2,33 +2,30 @@
   "buttons": {
     "forum": "Foro",
     "donate": "Donar",
-    "load-more-articles": "Cargar más Artículos"
+    "load-more-articles": "Carga más Artículos"
   },
   "search": {
     "label": "Buscar",
-    "accessible-name": "Enviar tu consulta de búsqueda",
-    "placeholder": {
-      "default": "Search our tutorials",
-      "numbered": "Search {{ roundedTotalRecords }}+ tutorials"
-    },
+    "accessible-name": "Enviar su consulta de búsqueda",
+    "placeholder": "Buscar 300+ tutoriales",
     "see-results": "Ver todos los resultados de {{ searchQuery }}",
     "no-tutorials": "No se encontraron tutoriales"
   },
   "banner": {
-    "default": "Aprender a codificar — {{ <0> }}gratis 3,000-horas currículo{{ </0> }}",
-    "authenticated": "Support our charity and our mission. {{ <0> }}Donate to freeCodeCamp.org{{ </0> }}.",
+    "default": "{{ <0> }}Charla con otros desarrolladores en español{{ </0> }}",
+    "authenticated": "Authenticated: Apoya a nuestra organización sin fines de lucro y nuestra misión. {{ <0> }}Dona a freeCodeCamp.org{{ </0> }}.",
     "authenticated-donor": "Gracias por apoyar a freeCodeCamp a través de {{ <0> }}tus donaciones{{ </0> }}."
   },
   "default-bio": "Leer {{ <0> }}más publicaciones{{ </0> }}.",
   "author": {
-    "no-posts": "Sin publicaciones",
-    "one-post": "1 publicación",
-    "multiple-posts": "{{ postCount }} publicaciones"
+    "no-posts": "No hay artículos",
+    "one-post": "1 artículo",
+    "multiple-posts": "{{ postCount }} artículos"
   },
   "tag": {
-    "no-posts": "Una colección de publicaciones",
+    "no-posts": "Una colección de artículos",
     "one-post": "Una colección de 1 artículo",
-    "multiple-posts": "Una colección de {{ postCount }} publicaciones"
+    "multiple-posts": "Una colección de {{ postCount }} artículos"
   },
   "404": {
     "page-not-found": "Página no encontrada",
@@ -36,44 +33,44 @@
   },
   "social-row": {
     "cta": {
-      "tweet-a-thanks": "Si leíste hasta aquí, haz un tweet al autor para mostrarle que te importa su trabajo. {{ <0> }}Tuitea un agradecimiento{{ </0> }}",
-      "tweet-it": "Si este artículo te fue útil, {{ <0> }}tuitealo{{ </0> }}."
+      "tweet-a-thanks": "Si leíste hasta aquí, haz un tweet al autor para mostrarle que te importa su trabajo. {{ <0> }}Realiza un Tweet de agradecimiento{{ </0> }}",
+      "tweet-it": "Si este artículo te fue útil, {{ <0> }}haz un tweet{{ </0> }}."
     },
     "tweets": {
       "default": "Gracias {{ author }} por escribir este útil artículo.",
-      "translation": "Gracias {{ author }} por escribir este útil artículo y {{ translator }} por traducirlo."
+      "translation": "Gracias {{ author }} por escribir este útil artículo y {{ translator }} por tu traducción."
     }
   },
-  "learn-to-code-cta": "Aprende a codificar de forma gratuita. El plan de estudios de código abierto de freeCodeCamp ha ayudado a más de 40,000 personas a obtener trabajos como desarrolladores. {{ <0> }}Empezar{{ </0> }}",
+  "learn-to-code-cta": "Aprende a codificar de forma gratuita. El plan de estudios de código abierto de freeCodeCamp ha ayudado a más de 40,000 personas a obtener trabajos como desarrolladores. {{ <0> }}Empieza{{ </0> }}",
   "original-author-translator": {
     "roles": {
       "author": "Autor: {{ name }} ({{ locale }})",
-      "translator": "Traductor: {{ name }}"
+      "translator": "Traducido y adaptado por: {{ name }}"
     },
     "details": {
-      "original-article": "{{ <0> }}Original article:{{ </0> }} {{ title }}"
+      "original-article": "{{ <0> }}Artículo original:{{ </0> }} {{ title }} por {{ author }}",
+      "translated-by": "{{ <0> }}Traducido y adaptado por:{{ </0> }} {{ translator }}"
     },
     "locales": {
-      "chinese": "Chino",
-      "english": "Inglés",
-      "espanol": "Español",
-      "french": "Francés",
-      "italian": "Italiano",
-      "japanese": "Japonés",
-      "korean": "Coreano",
-      "portuguese": "Portugués",
-      "ukrainian": "Ukrainian",
-      "urdu": "Urdu"
+      "english": "inglés",
+      "espanol": "español",
+      "chinese": "chino",
+      "portuguese": "portugués",
+      "italian": "italiano",
+      "japanese": "japonés",
+      "arabic": "árabe",
+      "urdu": "urdu",
+      "bengali": "bengalí"
     }
   },
   "embed-title": "Contenido incrustado",
   "footer": {
-    "tax-exempt-status": "freeCodeCamp is a donor-supported tax-exempt 501(c)(3) charity organization (United States Federal Tax Identification Number: 82-0779546)",
-    "mission-statement": "Nuestra misión: ayudar a las personas a aprender a programar de forma gratuita. Logramos esto mediante la creación de miles de videos, artículos y lecciones de programación interactivas, todo disponibles gratuitamente para el público. También tenemos miles de grupos de estudio de FreeCodeCamp alrededor el mundo.",
-    "donation-initiatives": "Las donaciones a freeCodeCamp van dirigidas a nuestras iniciativas educativas y ayudan a pagar servidores, servicios y personal.",
+    "tax-exempt-status": "freeCodeCamp es una organización sin fines de lucro exenta de impuestos 501(c)(3) respaldada por donantes (Número de identificación fiscal federal de los Estados Unidos: 82-0779546)",
+    "mission-statement": "Nuestra misión: ayudar a las personas a aprender a programar de forma gratuita. Logramos esto mediante la creación de miles de videos, artículos y lecciones de programación interactivas, todos disponibles gratuitamente para el público. También tenemos miles de grupos de estudio de FreeCodeCamp en todo el mundo.",
+    "donation-initiatives": "Las donaciones a freeCodeCamp se destinan a nuestras iniciativas educativas y ayudan a pagar los servidores, los servicios y el personal.",
     "donate-text": "Puedes hacer {{ <0> }}una donación deducible de impuestos aquí{{ </0> }}.",
     "trending-guides": "Guías de tendencias",
-    "our-nonprofit": "Our Charity",
+    "our-nonprofit": "Nuestra organización sin fines de lucro",
     "links": {
       "about": "Acerca de",
       "alumni": "Red de ex-Alumnos",
@@ -93,5 +90,5 @@
     "audio": "audio",
     "video": "video"
   },
-  "ad-text": "Anuncio"
+  "ad-text": "Advertisement"
 }

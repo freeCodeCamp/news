@@ -7,8 +7,9 @@ const selectors = {
   profileLink: "[data-test-label='profile-link']",
   authorBio: "[data-test-label='author-bio']",
   translatorBio: "[data-test-label='translator-bio']",
-  translationIntro: "[data-test-label='translation-intro']",
-  originalArticleLink: "[data-test-label='original-article-link']",
+  authorIntro: "[data-test-label='author-intro']",
+  originalArticle: "[data-test-label='original-article']",
+  translatorIntro: "[data-test-label='translator-intro']",
   authorName: 'Quincy Larson',
   translatorName: 'Rafael D. Hernandez'
 };
@@ -43,7 +44,7 @@ describe('Post', () => {
       it("the author card's profile link should contain the author's name and the locale of the original article", () => {
         cy.get(selectors.authorHeaderNoBio)
           .find(selectors.authorCard)
-          .contains(`${selectors.authorName}`);
+          .contains(`${selectors.authorName} (inglés)`);
       });
 
       it("the author card's profile link should be a full URL that points to the original author's page", () => {
@@ -105,7 +106,7 @@ describe('Post', () => {
       it("the author card should contain the author's name and the locale of the original article", () => {
         cy.get(selectors.authorHeaderWithBio)
           .find(selectors.authorCard)
-          .contains(`${selectors.authorName}`);
+          .contains(`${selectors.authorName} (inglés)`);
       });
 
       it("the author card's profile link should be a full URL that points to the original author's page", () => {
@@ -166,21 +167,55 @@ describe('Post', () => {
     });
 
     context('Translated article intro', () => {
-      it('the author intro should contain links to the original article', () => {
-        cy.get(selectors.translationIntro).then($el => {
-          cy.wrap($el).find(selectors.originalArticleLink);
+      it("the author intro should contain links to the original article and author's page", () => {
+        cy.get(selectors.authorIntro).then($el => {
+          cy.wrap($el).find(selectors.originalArticle);
+          cy.wrap($el).find(selectors.profileLink);
         });
       });
 
       it('the link to the original article should contain the expected text and `href` attribute', () => {
-        cy.get(selectors.translationIntro)
-          .find(selectors.originalArticleLink)
+        cy.get(selectors.authorIntro)
+          .find(selectors.originalArticle)
           .then($el => {
             cy.wrap($el).contains(
               'The #100DaysOfCode Challenge, its history, and why you should try it for 2021'
             );
             expect($el.attr('href')).to.deep.equal(
               'https://www.freecodecamp.org/news/the-crazy-history-of-the-100daysofcode-challenge-and-why-you-should-try-it-for-2018-6c89a76e298d/'
+            );
+          });
+      });
+
+      it("the author intro's profile link should contain the author's name", () => {
+        cy.get(selectors.authorIntro)
+          .find(selectors.profileLink)
+          .contains(selectors.authorName);
+      });
+
+      it("the author intro's profile link should be a full URL that points to the original author's page", () => {
+        cy.get(selectors.authorIntro)
+          .find(selectors.profileLink)
+          .then($el => {
+            expect($el.attr('href')).to.deep.equal(
+              'https://www.freecodecamp.org/news/author/quincylarson/'
+            );
+          });
+      });
+
+      it("the translator intro should contain a link to the translator's page", () => {
+        cy.get(selectors.translatorIntro).then($el => {
+          cy.wrap($el).find(selectors.profileLink);
+        });
+      });
+
+      it("the translator's intro should  should be a relative URL that points to the translator's page on the current instance of News", () => {
+        cy.get(selectors.authorHeaderWithBio)
+          .find(selectors.translatorCard)
+          .find(selectors.profileLink)
+          .then($el => {
+            expect($el.attr('href')).to.deep.equal(
+              '/espanol/news/author/rafael/'
             );
           });
       });

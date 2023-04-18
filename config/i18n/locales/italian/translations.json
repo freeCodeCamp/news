@@ -6,17 +6,14 @@
   },
   "search": {
     "label": "Cerca",
-    "accessible-name": "Invia la tua ricerca",
-    "placeholder": {
-      "default": "Cerca tra gli articoli",
-      "numbered": "Cerca tra più di {{ roundedTotalRecords }} articoli"
-    },
+    "accessible-name": "Invia la tua query di cerca",
+    "placeholder": "Cerca tra più di 200 articoli",
     "see-results": "Vedi tutti i risultati per {{ searchQuery }}",
     "no-tutorials": "Nessun articolo trovato"
   },
   "banner": {
     "default": "{{ <0> }}Contribuisci anche tu a freeCodeCamp!{{ </0> }}",
-    "authenticated": "Supporta la nostra charity e la nostra missione. {{ <0> }}Dona a freeCodeCamp.org{{ </0> }}.",
+    "authenticated": "Supporta la nostra no-profit e la nostra missione. {{ <0> }}Dona a freeCodeCamp.org{{ </0> }}.",
     "authenticated-donor": "Grazie per supportare freeCodeCamp con le {{ <0> }}tue donazioni{{ </0> }}."
   },
   "default-bio": "Leggi {{ <0> }}altri articoli{{ </0> }}.",
@@ -26,9 +23,9 @@
     "multiple-posts": "{{ postCount }} articoli"
   },
   "tag": {
-    "no-posts": "Una raccolta di articoli",
-    "one-post": "Una raccolta di 1 articolo",
-    "multiple-posts": "Una raccolta di {{ postCount }} articoli"
+    "no-posts": "Una collezione di articoli",
+    "one-post": "Una collezione di 1 articolo",
+    "multiple-posts": "Una collezione di {{ postCount }} articoli"
   },
   "404": {
     "page-not-found": "Pagina non trovata",
@@ -44,48 +41,48 @@
       "translation": "Grazie {{ author }} per avere scritto questo utile articolo e {{ translator }} per averlo tradotto."
     }
   },
-  "learn-to-code-cta": "Impara a programmare gratuitamente. Il curriculum open source di freeCodeCamp ha aiutato più di 40.000 persone a ottenere un lavoro come programmatori. {{ <0> }}Inizia{{ </0> }}",
+  "learn-to-code-cta": "Impara a programmare gratuitamente. Il curriculum open source di freeCodeCamp ha aiutato più di 40.ooo persone ad ottenere un lavoro come programmatori. {{ <0> }}Inizia{{ </0> }}",
   "original-author-translator": {
     "roles": {
       "author": "Autore: {{ name }} ({{ locale }})",
       "translator": "Traduttore: {{ name }}"
     },
     "details": {
-      "original-article": "{{ <0> }}Articolo originale:{{ </0> }} {{ title }}"
+      "original-article": "{{ <0> }}Articolo originale:{{ </0> }} {{ title }} di {{ author }}",
+      "translated-by": "{{ <0> }}Tradotto e adattato da:{{ </0> }} {{ translator }}"
     },
     "locales": {
-      "chinese": "cinese",
       "english": "inglese",
       "espanol": "spagnolo",
-      "french": "francese",
+      "chinese": "cinese",
+      "portuguese": "portoghese",
       "italian": "italiano",
       "japanese": "giapponese",
-      "korean": "coreano",
-      "portuguese": "portoghese",
-      "ukrainian": "ucraino",
-      "urdu": "urdu"
+      "arabic": "arabo",
+      "urdu": "urdu",
+      "bengali": "bengalese"
     }
   },
   "embed-title": "Contenuto incorporato",
   "footer": {
-    "tax-exempt-status": "freeCodeCamp è un'organizzazione di beneficenza 501(c)(3) esentasse supportata da donazioni (Numero di identificazione per le tasse federali negli Stati Uniti d'America: 82-0779546)",
-    "mission-statement": "La nostra missione: aiutare le persone a imparare a programamre gratuitamente. Portiamo avanti la nostra missione creando centinaia di video, articoli e lezioni di programmazione interattive - tutto disponibile gratuitamente al pubblico. Abbiamo anche migliaia di gruppi di studio di freeCodeCamp in tutto il mondo.",
-    "donation-initiatives": "Le donazioni a freeCodeCamp supportano le nostre iniziative educative e aiutano a pagare i server, i servizi e lo staff.",
+    "tax-exempt-status": "freeCodeCamp è una organizazione no-profit 501(c)(3) esentasse supportata da donazioni (Numero di identificazione per le tasse federali negli Stati Uniti d'America: 82-0779546)",
+    "mission-statement": "La nostra missione: aiutare le persone a imparare a programamre gratuitamente. Portiamo avanti la nostra missione creando centinaia di video, articoli, e lezioni di programmazione interattive, tutto disponibile gratuitamente al pubblico. Abbiamo anche migliaia di gruppi di studi di freeCodeCamp attorno al mondo.",
+    "donation-initiatives": "Le donazioni a freeCodeCamp supportano le nostre iniziative di educazione e aiutano a pagare i server, i servizi e lo staff.",
     "donate-text": "Puoi {{ <0> }}fare una donazione qui{{ </0> }}.",
     "trending-guides": "Articoli più cliccati",
-    "our-nonprofit": "La nostra Charity",
+    "our-nonprofit": "La nostra no-profit",
     "links": {
-      "about": "Informazioni",
+      "about": "About",
       "alumni": "Network degli alunni",
       "open-source": "Open Source",
-      "shop": "Shop",
+      "shop": "Negozio",
       "support": "Supporto",
-      "sponsors": "Sponsor",
+      "sponsors": "Sponsors",
       "honesty": "Onestà accademica",
       "coc": "Codice di condotta",
       "privacy": "Politica sulla privacy",
       "tos": "Termini di servizio",
-      "copyright": "Politica sul Copyright"
+      "copyright": "Politica del Copyright"
     }
   },
   "fallback": {
@@ -93,5 +90,5 @@
     "audio": "audio",
     "video": "video"
   },
-  "ad-text": "Pubblicità"
+  "ad-text": "Advertisement"
 }

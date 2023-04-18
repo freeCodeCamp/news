@@ -23,7 +23,7 @@ time #}
                         </time>
                         {% if primaryTag %}
                             <span class="date-divider">/</span>
-                            <a  dir="ltr" href="{{ primaryTag.path | url }}">
+                            <a href="{{ primaryTag.path | url }}">
                                 #{{ primaryTag.name }}
                             </a>
                         {% endif %}
@@ -42,7 +42,7 @@ time #}
                 </div>
                 {% if post.feature_image %}
                     <figure class="post-full-image">
-                        {%
+                        {% 
                             featureImage
                             post.feature_image,
                             (title | escape),
