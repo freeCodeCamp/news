@@ -33,8 +33,8 @@ time #}
                 <div class="post-full-author-header" data-test-label="author-header-no-bio">
                     {% if post.primary_author.name != "freeCodeCamp.org" %}
                         {% if post.original_post %}
-                            {{ byline(post.original_post.primary_author, false, false, 'author', post.original_post.locale_i18n) }}
                             {{ byline(post.primary_author, false, false, 'translator') }}
+                            {{ byline(post.original_post.primary_author, false, false, 'author', post.original_post.locale_i18n) }}
                         {% else %}
                             {{ byline(post.primary_author, false, false) }}
                         {% endif %}
@@ -71,8 +71,8 @@ time #}
                     {% if post.primary_author.name != "freeCodeCamp.org" %}
                         <div class="post-full-author-header" data-test-label="author-header-with-bio">
                             {% if post.original_post %}
-                                {{ byline(post.original_post.primary_author, true, true, 'author', post.original_post.locale_i18n) }}
                                 {{ byline(post.primary_author, true, true, 'translator') }}
+                                {{ byline(post.original_post.primary_author, true, true, 'author', post.original_post.locale_i18n) }}
                             {% else %}
                                 {{ byline(post.primary_author, true, true) }}
                             {% endif %}
