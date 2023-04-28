@@ -12,8 +12,13 @@ const originalPostHandler = async post => {
   const match = originalPostRegex.exec(headAndFootCode);
 
   if (match) {
+    let href_value = '';
+    let link_text = '';
+
     try {
       const { pathname } = new URL(match.groups.url);
+      console.log('pathname', pathname);
+      console.log('match.groups.url', match.groups.url);
       // Currently, pathSegments is length 2 for English and Chinese
       // ( ['news', 'slug'] ), and length 3 for other locales
       // ( ['locale', 'news', 'slug'] )
@@ -51,26 +56,9 @@ const originalPostHandler = async post => {
         locale_i18n: originalPostLocale
       };
 
-      const originalArticleHTML = translate(
-        'original-author-translator.details.original-article',
-        {
-          '<0>': '<strong>',
-          '</0>': '</strong>',
-          title: `<a href="${originalPost.url}" target="_blank" rel="noopener noreferrer" data-test-label="original-article-link">${originalPost.title}</a>`,
-          interpolation: {
-            escapeValue: false
-          }
-        }
-      );
-
-      const introHTML = `
-        <p data-test-label="translation-intro">
-          ${originalArticleHTML}
-        </p>`;
-
-      // Append details about the original article
-      // to the beginning of the translated article
-      post.html = introHTML + post.html;
+      // Use the title of the original post as link text
+      href_value = originalPost.url;
+      link_text = originalPost.title;
     } catch (err) {
       console.warn(`
       ---------------------------------------------------------------
@@ -81,7 +69,32 @@ const originalPostHandler = async post => {
       post has not been deleted.
       ---------------------------------------------------------------
       `);
+
+      // Use URL in the script tag as link text
+      href_value = match.groups.url;
+      link_text = match.groups.url;
     }
+
+    const originalArticleHTML = translate(
+      'original-author-translator.details.original-article',
+      {
+        '<0>': '<strong>',
+        '</0>': '</strong>',
+        title: `<a href="${href_value}" target="_blank" rel="noopener noreferrer" data-test-label="original-article-link">${link_text}</a>`,
+        interpolation: {
+          escapeValue: false
+        }
+      }
+    );
+
+    const introHTML = `
+      <p data-test-label="translation-intro">
+        ${originalArticleHTML}
+      </p>`;
+
+    // Append details about the original article
+    // to the beginning of the translated article
+    post.html = introHTML + post.html;
   }
 
   return post;
