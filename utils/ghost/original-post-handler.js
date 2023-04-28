@@ -17,8 +17,6 @@ const originalPostHandler = async post => {
 
     try {
       const { pathname } = new URL(match.groups.url);
-      console.log('pathname', pathname);
-      console.log('match.groups.url', match.groups.url);
       // Currently, pathSegments is length 2 for English and Chinese
       // ( ['news', 'slug'] ), and length 3 for other locales
       // ( ['locale', 'news', 'slug'] )
