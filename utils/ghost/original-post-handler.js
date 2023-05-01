@@ -12,6 +12,9 @@ const originalPostHandler = async post => {
   const match = originalPostRegex.exec(headAndFootCode);
 
   if (match) {
+    let hrefValue = '';
+    let linkText = '';
+
     try {
       const { pathname } = new URL(match.groups.url);
       // Currently, pathSegments is length 2 for English and Chinese
@@ -51,26 +54,9 @@ const originalPostHandler = async post => {
         locale_i18n: originalPostLocale
       };
 
-      const originalArticleHTML = translate(
-        'original-author-translator.details.original-article',
-        {
-          '<0>': '<strong>',
-          '</0>': '</strong>',
-          title: `<a href="${originalPost.url}" target="_blank" rel="noopener noreferrer" data-test-label="original-article-link">${originalPost.title}</a>`,
-          interpolation: {
-            escapeValue: false
-          }
-        }
-      );
-
-      const introHTML = `
-        <p data-test-label="translation-intro">
-          ${originalArticleHTML}
-        </p>`;
-
-      // Append details about the original article
-      // to the beginning of the translated article
-      post.html = introHTML + post.html;
+      // Use the title of the original post as link text
+      hrefValue = originalPost.url;
+      linkText = originalPost.title;
     } catch (err) {
       console.warn(`
       ---------------------------------------------------------------
@@ -81,7 +67,32 @@ const originalPostHandler = async post => {
       post has not been deleted.
       ---------------------------------------------------------------
       `);
+
+      // Use URL in the script tag as link text
+      hrefValue = match.groups.url;
+      linkText = match.groups.url;
     }
+
+    const originalArticleHTML = translate(
+      'original-author-translator.details.original-article',
+      {
+        '<0>': '<strong>',
+        '</0>': '</strong>',
+        title: `<a href="${hrefValue}" target="_blank" rel="noopener noreferrer" data-test-label="original-article-link">${linkText}</a>`,
+        interpolation: {
+          escapeValue: false
+        }
+      }
+    );
+
+    const introHTML = `
+      <p data-test-label="translation-intro">
+        ${originalArticleHTML}
+      </p>`;
+
+    // Append details about the original article
+    // to the beginning of the translated article
+    post.html = introHTML + post.html;
   }
 
   return post;
