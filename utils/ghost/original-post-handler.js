@@ -12,8 +12,8 @@ const originalPostHandler = async post => {
   const match = originalPostRegex.exec(headAndFootCode);
 
   if (match) {
-    let href_value = '';
-    let link_text = '';
+    let hrefValue = '';
+    let linkText = '';
 
     try {
       const { pathname } = new URL(match.groups.url);
@@ -55,8 +55,8 @@ const originalPostHandler = async post => {
       };
 
       // Use the title of the original post as link text
-      href_value = originalPost.url;
-      link_text = originalPost.title;
+      hrefValue = originalPost.url;
+      linkText = originalPost.title;
     } catch (err) {
       console.warn(`
       ---------------------------------------------------------------
@@ -69,8 +69,8 @@ const originalPostHandler = async post => {
       `);
 
       // Use URL in the script tag as link text
-      href_value = match.groups.url;
-      link_text = match.groups.url;
+      hrefValue = match.groups.url;
+      linkText = match.groups.url;
     }
 
     const originalArticleHTML = translate(
@@ -78,7 +78,7 @@ const originalPostHandler = async post => {
       {
         '<0>': '<strong>',
         '</0>': '</strong>',
-        title: `<a href="${href_value}" target="_blank" rel="noopener noreferrer" data-test-label="original-article-link">${link_text}</a>`,
+        title: `<a href="${hrefValue}" target="_blank" rel="noopener noreferrer" data-test-label="original-article-link">${linkText}</a>`,
         interpolation: {
           escapeValue: false
         }
