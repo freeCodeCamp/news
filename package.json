@@ -65,7 +65,7 @@
     "https://github.com/freeCodeCamp/news/graphs/contributors"
   ],
   "devDependencies": {
-    "@11ty/eleventy": "2.0.0",
+    "@11ty/eleventy": "2.0.1",
     "@11ty/eleventy-plugin-rss": "1.2.0",
     "@11ty/eleventy-upgrade-help": "1.0.1",
     "@tryghost/content-api": "1.11.16",
