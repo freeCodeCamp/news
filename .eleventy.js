@@ -4,6 +4,7 @@ const {
   writeFileSync,
   unlinkSync
 } = require('graceful-fs');
+const { EleventyHtmlBasePlugin } = require('@11ty/eleventy');
 const pluginRSS = require('@11ty/eleventy-plugin-rss');
 const UpgradeHelper = require('@11ty/eleventy-upgrade-help');
 
@@ -117,7 +118,8 @@ module.exports = function (config) {
     });
   }
 
-  const { EleventyHtmlBasePlugin } = require('@11ty/eleventy');
+  // Use the new Base plugin to replace the old url filter method
+  // so we can deploy in a different directory
   config.addPlugin(EleventyHtmlBasePlugin);
 
   // Eleventy configuration
