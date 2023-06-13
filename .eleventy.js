@@ -6,7 +6,6 @@ const {
 } = require('graceful-fs');
 const { EleventyHtmlBasePlugin } = require('@11ty/eleventy');
 const pluginRSS = require('@11ty/eleventy-plugin-rss');
-const UpgradeHelper = require('@11ty/eleventy-upgrade-help');
 
 const cssMin = require('./utils/transforms/css-min');
 const jsMin = require('./utils/transforms/js-min');
@@ -29,8 +28,6 @@ const { currentLocale_i18n, eleventyEnv } = require('./config');
 const sitePath = require('./utils/site-path');
 
 module.exports = function (config) {
-  config.addPlugin(UpgradeHelper);
-
   // Minify inline CSS
   config.addFilter('cssMin', cssMin);
 
