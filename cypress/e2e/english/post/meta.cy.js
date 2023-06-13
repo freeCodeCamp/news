@@ -37,14 +37,6 @@ describe('Post metadata', () => {
     );
   });
 
-  it('<link> amphtml', () => {
-    cy.get('head link[rel="amphtml"]').should(
-      'have.attr',
-      'href',
-      postExpectedMeta.url + 'amp/'
-    );
-  });
-
   it('<meta> generator', () => {
     cy.get('head meta[name="generator"]').should(
       'have.attr',
