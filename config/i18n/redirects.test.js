@@ -12,17 +12,6 @@ describe('Redirect and rewrite tests:', () => {
         expect(Array.isArray(redirects)).toBe(true);
       });
 
-      // test('has a rewrite for RSS feeds', () => {
-      //   const expectedRSSRewrite = {
-      //     source: '/:authorOrTag?/:name?/rss',
-      //     destination: '/:authorOrTag?/:name?/rss.xml'
-      //   };
-
-      //   expect(serveObj.rewrites).toEqual(
-      //     expect.arrayContaining([expectedRSSRewrite])
-      //   );
-      // });
-
       test('redirect sources start with /', () => {
         redirects.map(redirect => expect(redirect.source).toMatch(/^\//));
       });
