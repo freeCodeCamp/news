@@ -3,6 +3,9 @@ locales = [...locales, 'dothraki'];
 
 const path = `${__dirname}`;
 
+// To do: Simplify the npm scripts and test the generated serve.json files
+// in the docker directory. Add a test for the first /slug/amp to
+// /news/slug or /lang/news/slug redirect.
 describe('Redirect and rewrite tests:', () => {
   locales.forEach(lang => {
     describe(`-- ${lang} --`, () => {
