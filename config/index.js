@@ -102,19 +102,17 @@ if (lang !== localeForGhost && localeForGhost !== 'local') {
   `);
 }
 
-let computedPath;
-
 // Config Computations
 const getSiteURL = (lang, forOriginalArticle) => {
   // Special handling for original article feature, where we always want the final siteURL
   const computedDomain =
     !siteDomain || forOriginalArticle ? 'freecodecamp.org' : siteDomain;
-  computedPath = lang === 'english' ? 'news' : `${lang}/news/`;
+  const computedPath = lang === 'english' ? '/news' : `/${lang}/news`;
 
   if (computedDomain.startsWith('localhost')) {
-    return `http://${computedDomain}/${computedPath}/`;
+    return `http://${computedDomain}${computedPath}/`;
   } else {
-    return `https://www.${computedDomain}/${computedPath}/`;
+    return `https://www.${computedDomain}${computedPath}/`;
   }
 };
 
@@ -126,7 +124,6 @@ module.exports = Object.assign(
     locales,
     localeCodes,
     algoliaIndices,
-    computedPath,
     getSiteURL,
     currentLocale_i18n: localeForUI || 'italian',
     currentLocale_i18nISOCode: !localeCodes[localeForUI]
