@@ -10,8 +10,15 @@ for (let language of locales) {
   const filePath = path.join(__dirname, `/locales/${language}/redirects.json`);
   const redirectsArray = require(filePath);
 
-  if (redirectsArray.length)
-    sourceClone.redirects = [...sourceClone.redirects, ...redirectsArray];
+  sourceClone.redirects = [
+    {
+      source: '/:slug/amp',
+      destination:
+        language === 'english' ? '/news/:slug' : `/${language}/news/:slug`,
+      type: 302
+    },
+    ...(redirectsArray.length ? redirectsArray : [])
+  ];
 
   mkdirSync(path.join(__dirname, `../../docker/languages/${language}`), {
     recursive: true
