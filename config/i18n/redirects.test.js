@@ -6,11 +6,10 @@ const path = `${__dirname}`;
 describe('Redirect and rewrite tests:', () => {
   locales.forEach(lang => {
     describe(`-- ${lang} --`, () => {
-      const serveObj = require(`${path}/locales/${lang}/serve.json`);
-      const redirects = serveObj.redirects;
+      const redirects = require(`${path}/locales/${lang}/redirects.json`);
 
-      test('has a non-empty serve.json file', () => {
-        expect(serveObj).toBeTruthy();
+      test('redirects is an array', () => {
+        expect(Array.isArray(redirects)).toBe(true);
       });
 
       // test('has a rewrite for RSS feeds', () => {
