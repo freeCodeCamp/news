@@ -1,4 +1,3 @@
-const generateAMPObj = require('./generate-amp-obj');
 const modifyGhostHTML = require('./modify-ghost-html');
 const originalPostHandler = require('./original-post-handler');
 const getImageDimensions = require('../../utils/get-image-dimensions');
@@ -143,10 +142,6 @@ const processBatch = async ({ batch, type, currBatchNo, totalBatches }) => {
       // alt attribute to images if one doesn't exist.
       // Also, append Google ads to post body and generate bottom banner ad if ads are enabled.
       if (obj.html) obj = await modifyGhostHTML(obj);
-
-      // Generate an object that contains AMP HTML and flags to conditionally include
-      // AMP scripts in the amp.njk template. Only do this for posts.
-      if (type === 'posts' && obj.html) obj.amp = await generateAMPObj(obj);
 
       return obj;
     })

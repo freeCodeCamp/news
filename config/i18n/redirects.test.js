@@ -3,26 +3,17 @@ locales = [...locales, 'dothraki'];
 
 const path = `${__dirname}`;
 
+// To do: Simplify the npm scripts and test the generated serve.json files
+// in the docker directory. Add a test for the first /slug/amp to
+// /news/slug or /lang/news/slug redirect.
 describe('Redirect and rewrite tests:', () => {
   locales.forEach(lang => {
     describe(`-- ${lang} --`, () => {
-      const serveObj = require(`${path}/locales/${lang}/serve.json`);
-      const redirects = serveObj.redirects;
+      const redirects = require(`${path}/locales/${lang}/redirects.json`);
 
-      test('has a non-empty serve.json file', () => {
-        expect(serveObj).toBeTruthy();
+      test('redirects is an array', () => {
+        expect(Array.isArray(redirects)).toBe(true);
       });
-
-      // test('has a rewrite for RSS feeds', () => {
-      //   const expectedRSSRewrite = {
-      //     source: '/:authorOrTag?/:name?/rss',
-      //     destination: '/:authorOrTag?/:name?/rss.xml'
-      //   };
-
-      //   expect(serveObj.rewrites).toEqual(
-      //     expect.arrayContaining([expectedRSSRewrite])
-      //   );
-      // });
 
       test('redirect sources start with /', () => {
         redirects.map(redirect => expect(redirect.source).toMatch(/^\//));

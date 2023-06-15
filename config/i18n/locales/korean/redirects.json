@@ -1,0 +1,22 @@
+[
+  {
+    "source": "/@:authorName",
+    "destination": "/korean/news/author/:authorName"
+  },
+  {
+    "source": "/tagged/:tagName",
+    "destination": "/korean/news/tag/:tagName"
+  },
+  {
+    "source": "/archive/:archiveSlug?",
+    "destination": "/korean/news"
+  },
+  {
+    "source": "/our-sponsors",
+    "destination": "/korean/news/sponsors"
+  },
+  {
+    "source": "/about-freecodecamp",
+    "destination": "/korean/news/about"
+  }
+]

@@ -13,7 +13,7 @@ const filesThatShouldExist = [
     name: 'meta-tags.json'
   },
   {
-    name: 'serve.json'
+    name: 'redirects.json'
   },
   {
     name: 'translations.json'
