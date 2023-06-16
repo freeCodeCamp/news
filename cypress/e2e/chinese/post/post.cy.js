@@ -5,7 +5,7 @@ const selectors = {
 describe('Post', () => {
   before(() => {
     // Update baseUrl to include current language
-    Cypress.config('baseUrl', 'http://localhost:8080/chinese/news');
+    Cypress.config('baseUrl', 'http://localhost:8080/chinese/news/');
     cy.visit('/javascript-array-length/');
   });
 

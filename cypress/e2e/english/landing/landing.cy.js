@@ -1,10 +1,12 @@
+const commonExpectedMeta = require('../../../fixtures/common-expected-meta.json');
 const { loadAllPosts } = require('../../../support/utils/post-cards');
 
 const selectors = {
   postCard: "[data-test-label='post-card']",
   authorList: "[data-test-label='author-list']",
   authorProfileImage: "[data-test-label='profile-image']",
-  avatar: "[data-test-label='avatar']"
+  avatar: "[data-test-label='avatar']",
+  siteNavLogo: "[data-test-label='site-nav-logo']"
 };
 
 describe('Landing', () => {
@@ -17,6 +19,14 @@ describe('Landing', () => {
     cy.get('nav').should('be.visible');
     cy.get('.banner').should('be.visible');
     cy.get('footer').should('be.visible');
+  });
+
+  it('the fCC logo in the nav should link to the full URL of the landing page', () => {
+    cy.get(selectors.siteNavLogo).should(
+      'have.attr',
+      'href',
+      commonExpectedMeta.siteUrl
+    );
   });
 
   it("should show the author's profile image", () => {
