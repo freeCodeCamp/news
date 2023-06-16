@@ -110,9 +110,9 @@ const getSiteURL = (lang, forOriginalArticle) => {
   const computedPath = lang === 'english' ? '/news' : `/${lang}/news`;
 
   if (computedDomain.startsWith('localhost')) {
-    return `http://${computedDomain}${computedPath}/`;
+    return `http://${computedDomain}${computedPath}`;
   } else {
-    return `https://www.${computedDomain}${computedPath}/`;
+    return `https://www.${computedDomain}${computedPath}`;
   }
 };
 
