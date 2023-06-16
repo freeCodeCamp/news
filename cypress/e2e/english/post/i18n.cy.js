@@ -9,7 +9,7 @@ const selectors = {
 describe('Post i18n', () => {
   context('Common', () => {
     before(() => {
-      cy.visit('/announcing-rust-course-replit-web');
+      cy.visit('/announcing-rust-course-replit-web/');
     });
 
     it('the learn CTA section should not render its i18n keys', () => {
@@ -22,7 +22,7 @@ describe('Post i18n', () => {
 
   context('Author with Twitter', () => {
     before(() => {
-      cy.visit('/announcing-rust-course-replit-web');
+      cy.visit('/announcing-rust-course-replit-web/');
     });
 
     it('the social row CTA should not render its i18n keys', () => {
@@ -41,7 +41,7 @@ describe('Post i18n', () => {
 
   context('Author with no Twitter or bio', () => {
     before(() => {
-      cy.visit('/no-author-profile-pic');
+      cy.visit('/no-author-profile-pic/');
     });
 
     it('the social row CTA should not render its i18n keys', () => {

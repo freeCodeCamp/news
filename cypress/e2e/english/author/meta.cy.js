@@ -13,7 +13,7 @@ const authorExpectedMeta = {
 describe('Author page metadata', () => {
   context("Quincy's author page", () => {
     before(() => {
-      cy.visit('/author/quincylarson');
+      cy.visit('/author/quincylarson/');
     });
 
     it('<title>', () => {
@@ -176,7 +176,7 @@ describe('Author page metadata', () => {
 
   context('freeCodeCamp author page', () => {
     before(() => {
-      cy.visit('/author/freecodecamp');
+      cy.visit('/author/freecodecamp/');
     });
 
     it("<meta> og:image should be set to the site's publication cover image when there's no custom banner image", () => {

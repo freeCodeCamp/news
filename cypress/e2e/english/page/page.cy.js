@@ -5,7 +5,7 @@ const selectors = {
 describe('Page', () => {
   context('General tests', () => {
     before(() => {
-      cy.visit('/thank-you-for-donating');
+      cy.visit('/thank-you-for-donating/');
     });
 
     it('should render', () => {

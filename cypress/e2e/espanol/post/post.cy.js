@@ -18,7 +18,7 @@ describe('Post', () => {
     // Update baseUrl to include current language
     Cypress.config('baseUrl', 'http://localhost:8080/espanol/news');
     cy.visit(
-      '/el-desafio-100daysofcode-su-historia-y-por-que-debes-probarlo-para-2022'
+      '/el-desafio-100daysofcode-su-historia-y-por-que-debes-probarlo-para-2022/'
     );
   });
 

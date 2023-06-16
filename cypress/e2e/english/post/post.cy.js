@@ -13,7 +13,7 @@ const selectors = {
 describe('Post', () => {
   context('General tests', () => {
     before(() => {
-      cy.visit('/announcing-rust-course-replit-web');
+      cy.visit('/announcing-rust-course-replit-web/');
     });
 
     it('should render', () => {
@@ -54,7 +54,7 @@ describe('Post', () => {
 
   context('Author with no profile picture', () => {
     before(() => {
-      cy.visit('/no-author-profile-pic');
+      cy.visit('/no-author-profile-pic/');
     });
 
     it('should render', () => {

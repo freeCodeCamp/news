@@ -17,7 +17,7 @@ describe('Author page structured data (JSON-LD)', () => {
   let jsonLdObj;
 
   before(() => {
-    cy.visit('/author/quincylarson');
+    cy.visit('/author/quincylarson/');
 
     jsonLdObj = cy
       .get('head script[type="application/ld+json"]')

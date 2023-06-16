@@ -10,7 +10,7 @@ const selectors = {
 
 describe('Tag page', () => {
   before(() => {
-    cy.visit('/tag/freecodecamp');
+    cy.visit('/tag/freecodecamp/');
   });
 
   it('should render', () => {

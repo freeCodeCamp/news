@@ -8,7 +8,7 @@ const tagExpectedMeta = {
 
 describe('Tag page metadata', () => {
   before(() => {
-    cy.visit('/tag/freecodecamp');
+    cy.visit('/tag/freecodecamp/');
   });
 
   it('<title>', () => {
