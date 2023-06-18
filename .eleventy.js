@@ -73,7 +73,6 @@ module.exports = function (config) {
     );
   });
 
-  // RSS and AMP plugins
   config.addPlugin(pluginRSS);
 
   config.addNunjucksShortcode('image', imageShortcode);
