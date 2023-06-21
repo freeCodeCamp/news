@@ -1,7 +1,6 @@
 const selectors = {
   scripts: {
-    adsense: 'script[src*="adsbygoogle.js"]',
-    toggleAdLayout: '[data-test-label="toggle-ad-layout"]'
+    adsense: 'script[src*="adsbygoogle.js"]'
   },
   adContainer: "[data-test-label='ad-wrapper']"
 };
@@ -15,10 +14,6 @@ describe('Ads', () => {
 
   it('the adsense script should not be within the `head` element', () => {
     cy.get(`head ${selectors.scripts.adsense}`).should('not.exist');
-  });
-
-  it('the toggle ads layout script should not be within the `head` element', () => {
-    cy.get(`head ${selectors.scripts.toggleAdLayout}`).should('not.exist');
   });
 
   it('the post should not include any ad containers', () => {

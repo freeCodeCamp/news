@@ -1,7 +1,6 @@
 const selectors = {
   scripts: {
-    adsense: 'script[src*="adsbygoogle.js"]',
-    toggleAdLayout: '[data-test-label="toggle-ad-layout"]'
+    adsense: 'script[src*="adsbygoogle.js"]'
   },
   ads: {
     wrapper: "[data-test-label='ad-wrapper']",
@@ -17,13 +16,6 @@ describe('Ads', () => {
 
     it('the adsense script should be within the `head` element', () => {
       cy.get(`head ${selectors.scripts.adsense}`).should('have.length', 1);
-    });
-
-    it('the toggle ads layout script should be within the `head` element', () => {
-      cy.get(`head ${selectors.scripts.toggleAdLayout}`).should(
-        'have.length',
-        1
-      );
     });
   });
 
