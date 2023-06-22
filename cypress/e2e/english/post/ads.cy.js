@@ -1,7 +1,6 @@
 const selectors = {
   scripts: {
-    adsense: 'script[src*="adsbygoogle.js"]',
-    toggleAdLayout: '[data-test-label="toggle-ad-layout"]'
+    adsense: 'script[src*="adsbygoogle.js"]'
   },
   ads: {
     wrapper: "[data-test-label='ad-wrapper']",
@@ -17,13 +16,6 @@ describe('Ads', () => {
 
     it('the adsense script should be within the `head` element', () => {
       cy.get(`head ${selectors.scripts.adsense}`).should('have.length', 1);
-    });
-
-    it('the toggle ads layout script should be within the `head` element', () => {
-      cy.get(`head ${selectors.scripts.toggleAdLayout}`).should(
-        'have.length',
-        1
-      );
     });
   });
 
@@ -94,21 +86,6 @@ describe('Ads', () => {
         cy.get('video').each($el => {
           expect($el.css('max-width')).to.equal('100%');
         });
-      });
-    });
-  });
-
-  // To do: Add another context for authenticated donors once we start setting that cookie on Learn
-  context('Authenticated', () => {
-    context('Ad wrappers and containers', () => {
-      before(() => {
-        cy.visit('/carbon-neutral-web3-curriculum-plans');
-        cy.setCookie('jwt_access_token', '0123456789');
-        cy.reload(); // Reload the page to ensure the cookie is set and the styles to hide ad containers are applied
-      });
-
-      it('all ad containers in the post should not exist', () => {
-        cy.get(selectors.ads.wrapper).should('not.exist');
       });
     });
   });
