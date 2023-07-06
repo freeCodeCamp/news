@@ -74,7 +74,7 @@ if (window) {
         videoWrapper.classList.add('fluid-width-video-wrapper');
 
         // Append wrappers and video to page
-        videoNode.parentNode.appendChild(videoContainer);
+        videoNode.parentNode.replaceChild(videoContainer, videoNode);
         videoContainer.appendChild(videoWrapper);
         videoWrapper.appendChild(videoNode);
 
