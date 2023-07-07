@@ -6,8 +6,8 @@ const selectors = {
       "[data-test-label='author-header-with-bio'] [data-test-label='avatar']"
   },
   embeddedVideos: {
-    fluidWidthVideoContainer: 'div.fluid-width-video-container',
-    fluidWidthVideoWrapper: 'div.fluid-width-video-wrapper',
+    fluidWidthVideoContainer: "[data-test-label='fluid-width-video-container']",
+    fluidWidthVideoWrapper: "[data-test-label='fluid-width-video-wrapper']",
     ghostEditor: {
       youtubeHeading:
         "[data-test-label='youtube-link-pasted-into-ghost-editor-heading']",
@@ -18,9 +18,9 @@ const selectors = {
       youtubeHeading: "[data-test-label='youtube-embedded-iframe-heading']",
       vimeoHeading: "[data-test-label='vimeo-embedded-iframe-heading']",
       bilibiliHeading: "[data-test-label='bilibili-embedded-iframe-heading']"
-    }
+    },
+    postContent: "[data-test-label='post-content']"
   },
-  postContent: 'section.post-content',
   socialRowCTA: "[data-test-label='social-row-cta']",
   tweetButton: "[data-test-label='tweet-button']"
 };
@@ -282,7 +282,7 @@ describe('Post', () => {
       });
 
       it('post content should end with the expected p element', () => {
-        cy.get(selectors.postContent)
+        cy.get(selectors.embeddedVideos.postContent)
           .find('p')
           .last()
           .then($el => {

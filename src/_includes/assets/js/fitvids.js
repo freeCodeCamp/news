@@ -68,10 +68,18 @@ if (window) {
 
         const videoContainer = document.createElement('div');
         videoContainer.classList.add('fluid-width-video-container');
+        videoContainer.setAttribute(
+          'data-test-label',
+          'fluid-width-video-container'
+        );
 
         const videoWrapper = document.createElement('div');
         videoWrapper.style.paddingTop = `${aspectRatio * 100}%`;
         videoWrapper.classList.add('fluid-width-video-wrapper');
+        videoWrapper.setAttribute(
+          'data-test-label',
+          'fluid-width-video-wrapper'
+        );
 
         // Append wrappers and video to page
         videoNode.parentNode.replaceChild(videoContainer, videoNode);
