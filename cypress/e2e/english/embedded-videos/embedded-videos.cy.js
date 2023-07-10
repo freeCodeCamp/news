@@ -111,23 +111,21 @@ describe('Embedded videos', () => {
             .next()
             .next()
             .then($el => {
-              const fluidWidthVideoContainer = $el[0];
+              const figure = $el[0];
 
-              expect(fluidWidthVideoContainer.tagName.toLowerCase()).to.equal(
-                'div'
+              expect(figure.tagName.toLowerCase()).to.equal('figure');
+              expect(figure.className).to.equal('kg-card kg-embed-card');
+              cy.wrap(figure).find(
+                selectors.embeddedVideos.fluidWidthVideoContainer
               );
-              expect(fluidWidthVideoContainer.className).to.equal(
-                'fluid-width-video-container'
-              );
-
-              cy.wrap(fluidWidthVideoContainer)
+              cy.wrap(figure)
                 .find(selectors.embeddedVideos.fluidWidthVideoWrapper)
                 .then($el => {
                   const fluidWidthVideoWrapper = $el[0];
 
                   expect(fluidWidthVideoWrapper.style.paddingTop).to.exist;
                 });
-              cy.wrap(fluidWidthVideoContainer)
+              cy.wrap(figure)
                 .find('iframe')
                 .then($el => {
                   const iframe = $el[0];
@@ -145,23 +143,21 @@ describe('Embedded videos', () => {
             .next()
             .next()
             .then($el => {
-              const fluidWidthVideoContainer = $el[0];
+              const figure = $el[0];
 
-              expect(fluidWidthVideoContainer.tagName.toLowerCase()).to.equal(
-                'div'
+              expect(figure.tagName.toLowerCase()).to.equal('figure');
+              expect(figure.className).to.equal('kg-card kg-embed-card');
+              cy.wrap(figure).find(
+                selectors.embeddedVideos.fluidWidthVideoContainer
               );
-              expect(fluidWidthVideoContainer.className).to.equal(
-                'fluid-width-video-container'
-              );
-
-              cy.wrap(fluidWidthVideoContainer)
+              cy.wrap(figure)
                 .find(selectors.embeddedVideos.fluidWidthVideoWrapper)
                 .then($el => {
                   const fluidWidthVideoWrapper = $el[0];
 
                   expect(fluidWidthVideoWrapper.style.paddingTop).to.exist;
                 });
-              cy.wrap(fluidWidthVideoContainer)
+              cy.wrap(figure)
                 .find('iframe')
                 .then($el => {
                   const iframe = $el[0];
@@ -179,23 +175,21 @@ describe('Embedded videos', () => {
             .next()
             .next()
             .then($el => {
-              const fluidWidthVideoContainer = $el[0];
+              const figure = $el[0];
 
-              expect(fluidWidthVideoContainer.tagName.toLowerCase()).to.equal(
-                'div'
+              expect(figure.tagName.toLowerCase()).to.equal('figure');
+              expect(figure.className).to.equal('kg-card kg-embed-card');
+              cy.wrap(figure).find(
+                selectors.embeddedVideos.fluidWidthVideoContainer
               );
-              expect(fluidWidthVideoContainer.className).to.equal(
-                'fluid-width-video-container'
-              );
-
-              cy.wrap(fluidWidthVideoContainer)
+              cy.wrap(figure)
                 .find(selectors.embeddedVideos.fluidWidthVideoWrapper)
                 .then($el => {
                   const fluidWidthVideoWrapper = $el[0];
 
                   expect(fluidWidthVideoWrapper.style.paddingTop).to.exist;
                 });
-              cy.wrap(fluidWidthVideoContainer)
+              cy.wrap(figure)
                 .find('iframe')
                 .then($el => {
                   const iframe = $el[0];
