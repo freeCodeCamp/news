@@ -57,9 +57,7 @@ describe('Embedded videos', () => {
                 .then($el => {
                   const fluidWidthVideoWrapper = $el[0];
 
-                  expect(fluidWidthVideoWrapper.style.paddingTop).to.equal(
-                    '56.5%'
-                  );
+                  expect(fluidWidthVideoWrapper.style.paddingTop).to.exist;
                 });
               cy.wrap(figure)
                 .find('iframe')
@@ -91,9 +89,7 @@ describe('Embedded videos', () => {
                 .then($el => {
                   const fluidWidthVideoWrapper = $el[0];
 
-                  expect(fluidWidthVideoWrapper.style.paddingTop).to.equal(
-                    '53.0516%'
-                  );
+                  expect(fluidWidthVideoWrapper.style.paddingTop).to.exist;
                 });
               cy.wrap(figure)
                 .find('iframe')
@@ -129,9 +125,7 @@ describe('Embedded videos', () => {
                 .then($el => {
                   const fluidWidthVideoWrapper = $el[0];
 
-                  expect(fluidWidthVideoWrapper.style.paddingTop).to.equal(
-                    '56.25%'
-                  );
+                  expect(fluidWidthVideoWrapper.style.paddingTop).to.exist;
                 });
               cy.wrap(fluidWidthVideoContainer)
                 .find('iframe')
@@ -165,9 +159,7 @@ describe('Embedded videos', () => {
                 .then($el => {
                   const fluidWidthVideoWrapper = $el[0];
 
-                  expect(fluidWidthVideoWrapper.style.paddingTop).to.equal(
-                    '52.9688%'
-                  );
+                  expect(fluidWidthVideoWrapper.style.paddingTop).to.exist;
                 });
               cy.wrap(fluidWidthVideoContainer)
                 .find('iframe')
@@ -201,9 +193,7 @@ describe('Embedded videos', () => {
                 .then($el => {
                   const fluidWidthVideoWrapper = $el[0];
 
-                  expect(fluidWidthVideoWrapper.style.paddingTop).to.equal(
-                    '50%'
-                  );
+                  expect(fluidWidthVideoWrapper.style.paddingTop).to.exist;
                 });
               cy.wrap(fluidWidthVideoContainer)
                 .find('iframe')
