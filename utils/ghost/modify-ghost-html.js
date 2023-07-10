@@ -9,12 +9,15 @@ const modifyGhostHTML = async obj => {
   const dom = new JSDOM(obj.html);
   const document = dom.window.document;
   const title = obj.title;
+  const embeds = [...document.getElementsByTagName('embed')];
   const images = [...document.getElementsByTagName('img')];
   const iframes = [...document.getElementsByTagName('iframe')];
 
-  fitVids(dom.window, document);
-
   await Promise.all(
+    embeds.map(async embed => {
+      fitVids(dom.window, document);
+    }),
+
     images.map(async image => {
       // To do: swap out the image URLs here once we have them auto synced
       // with an S3 bucket
@@ -29,8 +32,9 @@ const modifyGhostHTML = async obj => {
     }),
 
     iframes.map(async iframe => {
-      iframe.setAttribute('title', `${translate('embed-title')}`);
+      fitVids(dom.window, document);
 
+      iframe.setAttribute('title', `${translate('embed-title')}`);
       iframe.setAttribute('loading', 'lazy');
     })
   );
