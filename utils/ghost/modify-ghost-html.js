@@ -14,6 +14,7 @@ const modifyGhostHTML = async obj => {
   const iframes = [...document.getElementsByTagName('iframe')];
 
   await Promise.all(
+    // eslint-disable-next-line no-unused-vars
     embeds.map(async embed => {
       fitVids(dom.window, document);
     }),
