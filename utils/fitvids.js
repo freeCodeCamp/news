@@ -57,22 +57,20 @@ const fitVids = (window, document) => {
         count++;
       }
 
-      const videoContainer = document.createElement('div');
-      videoContainer.classList.add('fluid-width-video-container');
-      videoContainer.setAttribute(
-        'data-test-label',
-        'fluid-width-video-container'
-      );
-
-      const videoWrapper = document.createElement('div');
-      videoWrapper.style.paddingTop = `${aspectRatio * 100}%`;
-      videoWrapper.classList.add('fluid-width-video-wrapper');
-      videoWrapper.setAttribute('data-test-label', 'fluid-width-video-wrapper');
-
-      // Append wrappers and video to page
-      videoNode.parentNode.replaceChild(videoContainer, videoNode);
-      videoContainer.appendChild(videoWrapper);
-      videoWrapper.appendChild(videoNode);
+      videoNode.outerHTML = `<figure class='kg-card kg-embed-card'>
+        <div
+          class='fluid-width-video-container'
+          data-test-label='fluid-width-video-container'
+        >
+          <div
+            style='padding-top: ${aspectRatio * 100}%;'
+            class='fluid-width-video-wrapper'
+            data-test-label='fluid-width-video-wrapper'
+          >
+            ${videoNode.outerHTML}
+          </div>
+        </div>
+      </figure>`;
 
       if (videoNode.getAttribute('height')) videoNode.removeAttribute('height');
       if (videoNode.getAttribute('width')) videoNode.removeAttribute('width');
