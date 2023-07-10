@@ -3,6 +3,7 @@ const { JSDOM } = jsdom;
 const translate = require('../translate');
 const { setDefaultAlt } = require('./helpers');
 const getImageDimensions = require('../get-image-dimensions');
+const fitVids = require('../fitvids');
 
 const modifyGhostHTML = async obj => {
   const dom = new JSDOM(obj.html);
@@ -10,6 +11,8 @@ const modifyGhostHTML = async obj => {
   const title = obj.title;
   const images = [...document.getElementsByTagName('img')];
   const iframes = [...document.getElementsByTagName('iframe')];
+
+  fitVids(dom.window, document);
 
   await Promise.all(
     images.map(async image => {

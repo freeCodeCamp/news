@@ -102,17 +102,6 @@ time #}
     {% include "partials/prism.njk" %}
 {% endblock %}
 
-{% block headScripts %}
-    <script defer src="{% cacheBuster '/assets/js/fitvids.js' %}"></script>
-    {% set js %}
-        document.addEventListener('DOMContentLoaded', () => {
-            const postContent = document.querySelector('.post-full-content');
-            if (postContent) fitVids(postContent);
-        });
-    {% endset %}
-    <script>{{ js | jsMin | safe }}</script>
-{% endblock %}
-
 {% block monetization %}
     {% if adsEnabled %}
         <script
