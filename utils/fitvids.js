@@ -19,7 +19,7 @@ const fitVids = (window, document) => {
     allVideos.forEach(videoNode => {
       if (
         (videoNode.tagName.toLowerCase() === 'embed' &&
-          videoNode.parentNode.getAttribute('object').length) ||
+          videoNode.parentNode.getAttribute('object')?.length) ||
         videoNode.parentNode.classList.contains('fluid-width-video-wrapper')
       ) {
         return;
