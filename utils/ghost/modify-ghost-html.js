@@ -13,8 +13,7 @@ const modifyGhostHTML = async obj => {
   const images = [...document.getElementsByTagName('img')];
   const iframes = [...document.getElementsByTagName('iframe')];
 
-  if (embeds.length || iframes.length || videos.length)
-    fitVids(dom.window, document);
+  if (embeds.length || iframes.length) fitVids(dom.window, document);
 
   await Promise.all(
     images.map(async image => {
