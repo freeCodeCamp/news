@@ -2,18 +2,25 @@ const checkEmbeddedVideo = require('../../../support/utils/check-embedded-video'
 
 const selectors = {
   embeddedVideos: {
-    fluidWidthVideoContainer: "[data-test-label='fluid-width-video-container']",
-    fluidWidthVideoWrapper: "[data-test-label='fluid-width-video-wrapper']",
     ghostEditor: {
+      embedElHeading:
+        "[data-test-label='embed-element-heading-html-block-in-ghost-editor']",
+      objectElHeading:
+        "[data-test-label='object-element-heading-html-block-in-ghost-editor']",
       vimeoHeading:
-        "[data-test-label='vimeo-link-pasted-into-ghost-editor-heading']",
+        "[data-test-label='vimeo-heading-link-pasted-into-ghost-editor']",
       youtubeHeading:
-        "[data-test-label='youtube-link-pasted-into-ghost-editor-heading']"
+        "[data-test-label='youtube-heading-link-pasted-into-ghost-editor']"
     },
     markdown: {
-      bilibiliHeading: "[data-test-label='bilibili-embedded-iframe-heading']",
-      vimeoHeading: "[data-test-label='vimeo-embedded-iframe-heading']",
-      youtubeHeading: "[data-test-label='youtube-embedded-iframe-heading']"
+      bilibiliHeading:
+        "[data-test-label='bilibili-heading-iframe-in-markdown']",
+      embedElHeading:
+        "[data-test-label='embed-element-heading-html-in-markdown']",
+      objectElHeading:
+        "[data-test-label='object-element-heading-html-in-markdown']",
+      vimeoHeading: "[data-test-label='vimeo-heading-iframe-in-markdown']",
+      youtubeHeading: "[data-test-label='youtube-heading-iframe-in-markdown']"
     },
     postContent: "[data-test-label='post-content']"
   }
@@ -45,6 +52,7 @@ describe('Embedded videos', () => {
         it('should render the YouTube video with the expected wrappers and attributes', () => {
           checkEmbeddedVideo(
             selectors.embeddedVideos.ghostEditor.youtubeHeading,
+            'iframe',
             'https://www.youtube.com/embed/rfscVS0vtbw',
             0
           );
@@ -53,8 +61,27 @@ describe('Embedded videos', () => {
         it('should render the Vimeo video with the expected wrappers and attributes', () => {
           checkEmbeddedVideo(
             selectors.embeddedVideos.ghostEditor.vimeoHeading,
+            'iframe',
             'https://player.vimeo.com/video/700486996',
             1
+          );
+        });
+
+        it('should render the embed element with the expected wrappers and attributes', () => {
+          checkEmbeddedVideo(
+            selectors.embeddedVideos.ghostEditor.embedElHeading,
+            'embed',
+            'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+            2
+          );
+        });
+
+        it('should render the object element with the expected wrappers and attributes', () => {
+          checkEmbeddedVideo(
+            selectors.embeddedVideos.ghostEditor.objectElHeading,
+            'object',
+            'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+            3
           );
         });
       });
@@ -63,39 +90,58 @@ describe('Embedded videos', () => {
         it('should render the YouTube video with the expected wrappers and attributes', () => {
           checkEmbeddedVideo(
             selectors.embeddedVideos.markdown.youtubeHeading,
+            'iframe',
             'https://www.youtube.com/embed/PkZNo7MFNFg',
-            2
+            4
           );
         });
 
         it('should render the Vimeo video with the expected wrappers and attributes', () => {
           checkEmbeddedVideo(
             selectors.embeddedVideos.markdown.vimeoHeading,
+            'iframe',
             'https://player.vimeo.com/video/700486996',
-            3
+            5
           );
         });
 
         it('should render the Bilibili video with the expected wrappers and attributes', () => {
           checkEmbeddedVideo(
             selectors.embeddedVideos.markdown.bilibiliHeading,
+            'iframe',
             '//player.bilibili.com/player.html?aid=370761589&bvid=BV1iZ4y1p7kr&',
-            4
+            6
           );
         });
 
-        it('post content should end with the expected p element', () => {
-          cy.get(selectors.embeddedVideos.postContent)
-            .find('p')
-            .last()
-            .then($el => {
-              const p = $el[0];
-
-              expect(p.innerText).to.include(
-                'Cats secretly make all the worlds muffins.'
-              );
-            });
+        it('should render the embed element with the expected wrappers and attributes', () => {
+          checkEmbeddedVideo(
+            selectors.embeddedVideos.markdown.embedElHeading,
+            'embed',
+            'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+            7
+          );
         });
+
+        it('should render the object element with the expected wrappers and attributes', () => {
+          checkEmbeddedVideo(
+            selectors.embeddedVideos.markdown.objectElHeading,
+            'object',
+            'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+            8
+          );
+        });
+      });
+
+      it('post content should end with the expected p element', () => {
+        cy.get(selectors.embeddedVideos.postContent)
+          .children()
+          .last()
+          .then($el => {
+            const finalEl = $el[0];
+
+            expect(finalEl.tagName.toLowerCase()).to.equal('p');
+          });
       });
     });
   });

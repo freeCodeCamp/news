@@ -3,7 +3,7 @@ const selectors = {
   fluidWidthVideoWrapper: "[data-test-label='fluid-width-video-wrapper']"
 };
 
-const checkEmbeddedVideo = (headingSelector, videoSrc, i) => {
+const checkEmbeddedVideo = (headingSelector, elementName, videoURL, i) => {
   cy.get(headingSelector)
     .next()
     .next()
@@ -21,12 +21,14 @@ const checkEmbeddedVideo = (headingSelector, videoSrc, i) => {
           expect(fluidWidthVideoWrapper.style.paddingTop).to.exist;
         });
       cy.wrap(figure)
-        .find('iframe')
+        .find(elementName)
         .then($el => {
-          const iframe = $el[0];
+          const targetEl = $el[0];
 
-          expect(iframe.src).to.include(videoSrc);
-          expect(iframe.name).to.equal(`fitvid${i}`);
+          expect(
+            targetEl[elementName === 'object' ? 'data' : 'src']
+          ).to.include(videoURL);
+          expect(targetEl.name).to.equal(`fitvid${i}`);
         });
     });
 };
