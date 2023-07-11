@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
-const fitVids = (window, document) => {
+const fitVids = window => {
+  const document = window.document;
   let count = 0;
 
   [...document.children].forEach(node => {
