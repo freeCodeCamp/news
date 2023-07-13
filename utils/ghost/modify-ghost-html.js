@@ -7,13 +7,14 @@ const fitVids = require('../fitvids');
 
 const modifyGhostHTML = async obj => {
   const dom = new JSDOM(obj.html);
-  const document = dom.window.document;
+  const window = dom.window;
+  const document = window.document;
   const title = obj.title;
   const embeds = [...document.getElementsByTagName('embed')];
   const images = [...document.getElementsByTagName('img')];
   const iframes = [...document.getElementsByTagName('iframe')];
 
-  if (embeds.length || iframes.length) fitVids(dom.window);
+  if (embeds.length || iframes.length) fitVids(window);
 
   await Promise.all(
     images.map(async image => {

@@ -58,20 +58,28 @@ const fitVids = window => {
         count++;
       }
 
-      videoNode.outerHTML = `<figure class='kg-card kg-embed-card'>
+      const videoNodeParent = videoNode.parentNode;
+      const embeddedVideoHTML = `<figure class='kg-card kg-embed-card' data-test-label='fitted'>
         <div
           class='fluid-width-video-container'
-          data-test-label='fluid-width-video-container'
         >
           <div
             style='padding-top: ${aspectRatio * 100}%;'
             class='fluid-width-video-wrapper'
-            data-test-label='fluid-width-video-wrapper'
           >
             ${videoNode.outerHTML}
           </div>
         </div>
       </figure>`;
+
+      if (
+        videoNodeParent.tagName.toLowerCase() === 'figure' &&
+        videoNodeParent.classList.contains('kg-card')
+      ) {
+        videoNodeParent.outerHTML = embeddedVideoHTML;
+      } else {
+        videoNode.outerHTML = embeddedVideoHTML;
+      }
 
       if (videoNode.getAttribute('height')) videoNode.removeAttribute('height');
       if (videoNode.getAttribute('width')) videoNode.removeAttribute('width');
