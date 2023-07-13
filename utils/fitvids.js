@@ -29,7 +29,9 @@ const fitVids = window => {
         !window.getComputedStyle(videoNode)['height'] &&
         !window.getComputedStyle(videoNode)['width'] &&
         (isNaN(videoNode.getAttribute('height')) ||
-          isNaN(videoNode.getAttribute('width')))
+          isNaN(videoNode.getAttribute('width')) ||
+          !videoNode.getAttribute('height') ||
+          !videoNode.getAttribute('width'))
       ) {
         videoNode.setAttribute('height', 9);
         videoNode.setAttribute('width', 16);
