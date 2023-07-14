@@ -5,6 +5,7 @@ const selectors = {
     bottom:
       "[data-test-label='author-header-with-bio'] [data-test-label='avatar']"
   },
+  postContent: "[data-test-label='post-content']",
   socialRowCTA: "[data-test-label='social-row-cta']",
   tweetButton: "[data-test-label='tweet-button']"
 };
@@ -76,6 +77,27 @@ describe('Post', () => {
       Object.values(selectors.avatars).forEach(selector => {
         cy.get(selector).contains('title', 'Mrugesh Mohapatra');
       });
+    });
+  });
+
+  context('Embedded videos', () => {
+    before(() => {
+      cy.visit('/embedded-videos-post');
+    });
+
+    it('should render', () => {
+      cy.contains('Embedded Videos Post');
+    });
+
+    it('the final element of the post content should be a `p` element', () => {
+      cy.get(selectors.postContent)
+        .children()
+        .last()
+        .then($el => {
+          const finalEl = $el[0];
+
+          expect(finalEl.tagName.toLowerCase()).to.equal('p');
+        });
     });
   });
 });
