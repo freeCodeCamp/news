@@ -134,9 +134,10 @@ const checkEmbeddedVideos = obj => {
       });
 
       test('the embedded video has the expected attributes and values', () => {
-        expect(
-          embeddedVideo.tagName === 'object' ? 'data' : 'src'
-        ).toBeTruthy();
+        // Some embedded videos like ones from Bilibili don't have width and height attributes,
+        // so fitvids adds them.
+        expect(typeof parseInt(embeddedVideo.width)).toBe('number');
+        expect(typeof parseInt(embeddedVideo.height)).toBe('number');
         expect(embeddedVideo.name).toBe(`fitvid${i}`);
       });
     });
