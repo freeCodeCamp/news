@@ -26,34 +26,32 @@ const fitVids = window => {
         return;
       }
       if (
-        !window.getComputedStyle(videoNode)['height'] &&
         !window.getComputedStyle(videoNode)['width'] &&
-        (isNaN(videoNode.getAttribute('height')) ||
-          isNaN(videoNode.getAttribute('width')) ||
-          !videoNode.getAttribute('height') ||
-          !videoNode.getAttribute('width'))
+        !window.getComputedStyle(videoNode)['height'] &&
+        (isNaN(videoNode.getAttribute('width')) ||
+          isNaN(videoNode.getAttribute('height')) ||
+          !videoNode.getAttribute('width') ||
+          !videoNode.getAttribute('height'))
       ) {
         // Set a 16:9 aspect ratio if width and height are not set
         videoNode.setAttribute('width', 256);
         videoNode.setAttribute('height', 144);
       }
 
-      let height =
-          videoNode.tagName.toLowerCase() === 'object' ||
-          (videoNode.getAttribute('height') &&
-            !isNaN(parseInt(videoNode.getAttribute('height'), 10)))
-            ? parseInt(videoNode.getAttribute('height'), 10)
-            : parseFloat(
-                window
-                  .getComputedStyle(videoNode, null)
-                  .height.replace('px', '')
-              ),
-        width = !isNaN(parseInt(videoNode.getAttribute('width'), 10))
-          ? parseInt(videoNode.getAttribute('width'), 10)
+      const width = !isNaN(parseInt(videoNode.getAttribute('width'), 10))
+        ? parseInt(videoNode.getAttribute('width'), 10)
+        : parseFloat(
+            window.getComputedStyle(videoNode, null).width.replace('px', '')
+          );
+      const height =
+        videoNode.tagName.toLowerCase() === 'object' ||
+        (videoNode.getAttribute('height') &&
+          !isNaN(parseInt(videoNode.getAttribute('height'), 10)))
+          ? parseInt(videoNode.getAttribute('height'), 10)
           : parseFloat(
-              window.getComputedStyle(videoNode, null).width.replace('px', '')
-            ),
-        aspectRatio = height / width;
+              window.getComputedStyle(videoNode, null).height.replace('px', '')
+            );
+      const aspectRatio = height / width;
 
       if (!videoNode.getAttribute('name')) {
         const videoName = 'fitvid' + count;
