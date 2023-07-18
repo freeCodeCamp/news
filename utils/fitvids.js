@@ -33,8 +33,9 @@ const fitVids = window => {
           !videoNode.getAttribute('height') ||
           !videoNode.getAttribute('width'))
       ) {
-        videoNode.setAttribute('height', 9);
-        videoNode.setAttribute('width', 16);
+        // Set a 16:9 aspect ratio if width and height are not set
+        videoNode.setAttribute('width', 256);
+        videoNode.setAttribute('height', 144);
       }
 
       let height =
@@ -82,9 +83,6 @@ const fitVids = window => {
       } else {
         videoNode.outerHTML = embeddedVideoHTML;
       }
-
-      if (videoNode.getAttribute('height')) videoNode.removeAttribute('height');
-      if (videoNode.getAttribute('width')) videoNode.removeAttribute('width');
     });
   });
 };
