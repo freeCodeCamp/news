@@ -28,11 +28,7 @@ describe('Page', () => {
       cy.get(selectors.postContent)
         .children()
         .last()
-        .then($el => {
-          const finalEl = $el[0];
-
-          expect(finalEl.tagName.toLowerCase()).to.equal('p');
-        });
+        .should('have.prop', 'tagName', 'P')
     });
   });
 });
