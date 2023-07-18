@@ -24,11 +24,12 @@ describe('Page', () => {
       cy.contains('Embedded Videos Page');
     });
 
-    it('the final element of the page content should be a `p` element', () => {
+    it("the final element of the page's content block should be a `p` element, and not an embedded video modified by `fitvids` that was pushed to the bottom of the content block", () => {
       cy.get(selectors.postContent)
         .children()
         .last()
         .should('have.prop', 'tagName', 'P')
+        .should('not.have.attr', 'data-test-label', 'fitted');
     });
   });
 });

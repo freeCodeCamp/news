@@ -89,15 +89,12 @@ describe('Post', () => {
       cy.contains('Embedded Videos Post');
     });
 
-    it('the final element of the post content should be a `p` element', () => {
+    it("the final element of the post's content block should be a `p` element, and not an embedded video modified by `fitvids` that was pushed to the bottom of the content block", () => {
       cy.get(selectors.postContent)
         .children()
         .last()
-        .then($el => {
-          const finalEl = $el[0];
-
-          expect(finalEl.tagName.toLowerCase()).to.equal('p');
-        });
+        .should('have.prop', 'tagName', 'P')
+        .should('not.have.attr', 'data-test-label', 'fitted');
     });
   });
 });
