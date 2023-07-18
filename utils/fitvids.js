@@ -33,7 +33,7 @@ const fitVids = window => {
           !videoNode.getAttribute('width') ||
           !videoNode.getAttribute('height'))
       ) {
-        // Set a 16:9 aspect ratio if width and height are not set
+        // Set the width and height for a 16:9 aspect ratio if either attribute is not set
         videoNode.setAttribute('width', 256);
         videoNode.setAttribute('height', 144);
       }
