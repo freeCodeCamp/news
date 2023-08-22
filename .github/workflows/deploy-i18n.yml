@@ -135,30 +135,28 @@ jobs:
           docker push registry.digitalocean.com/${{ secrets.DOCR_NAME }}/${{ matrix.site_tlds }}/news-${{ matrix.languages }}:latest
 
       - name: Clean old DO images
-        uses: actions/github-script
-        with:
-          script: |
-            const { exec } = require('child_process');
-            const { promisify } = require('util');
-            
-            const asyncExec = promisify(exec);
-            const { stdout: rawTags } = await asyncExec("doctl registry repository list-tags org/news-${{ matrix.languages }} --output=json --context fcc");
-            const tags = JSON.parse(rawTags);
-            const toDelete = [];
-            for (const tag of tags) {
-                // if tag.updated_at is more than two days ago
-                if (new Date(tag.updated_at).getTime() < Date.now() - (1000 * 60 * 60 * 24 * 2)) {
-                  toDelete.push(tag.tag);
-                }
-            }
-            if (!toDelete.length) {
-                console.log("No outdated tags found.");
-                return;
-            }
-            console.log(`Found ${toDelete.length} outdated tags.`);
-            for (const tagName of toDelete) {
-                await asyncExec(`doctl registry repository delete-tag org/news-${{ matrix.languages }} ${tagName} --context fcc`)
-            }
+        run: |
+            rawResponse=$(doctl registry repository list-tags org/news-${{ matrix.languages }} --output=json)
+            tags=$(jq '[.[] | {updated_at, tag}]' <<<"$rawResponse")
+            toDelete=()
+            len=$(jq length <<<"$tags")
+            echo "Found $len tags."
+            for i in $(seq 0 $((len - 1))); do
+                tag=$(echo $tags | jq -r --argjson index "$i" '.[$index].tag')
+                updated=$(echo $tags | jq -r --argjson index "$i" '.[$index].updated_at')
+                updatedDate=$(date -d $updated +%s)
+                now=$(date +%s)
+                diff=$(($now - $updatedDate))
+                if [ "$tag" != "latest" ] && [ $diff -gt 604800 ]; then
+                    toDelete+=($tag)
+                fi
+            done
+            echo "Found ${#toDelete[@]} tags to delete."
+            for value in "${toDelete[@]}"; do
+                echo "Deleting tag: $value"
+                doctl registry repository delete-tag org/news-${{ matrix.languages }} ${tagName}
+            done
+        
 
       - name: Clean up Self-hosted setup
         uses: colpal/actions-clean@36e6ca1abd35efe61cb60f912bd7837f67887c8a # tag=v1
