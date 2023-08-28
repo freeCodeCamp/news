@@ -154,7 +154,7 @@ jobs:
           echo "Found ${#toDelete[@]} tags to delete."
           for value in "${toDelete[@]}"; do
               echo "Deleting tag: $value"
-              doctl registry repository delete-tag org/news-${{ matrix.languages }} $value
+              doctl registry repository delete-tag org/news-${{ matrix.languages }} $value --force
           done
 
       - name: Clean up Self-hosted setup
@@ -177,7 +177,7 @@ jobs:
         run: doctl registry login --expiry-seconds 1200
 
       - name: Trigger Garbage collection
-        run: doctl registry garbage-collection start --include-untagged-manifests
+        run: doctl registry garbage-collection start --include-untagged-manifests --force
 
   deploy:
     name: Deploy
