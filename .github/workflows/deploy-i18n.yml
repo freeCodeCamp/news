@@ -147,7 +147,7 @@ jobs:
               updatedDate=$(date -d $updated +%s)
               now=$(date +%s)
               diff=$(($now - $updatedDate))
-              if [ "$tag" != "latest" ] && [ $diff -gt 604800 ]; then
+              if [ "$tag" != "latest" ] && [ $diff -gt 172800 ]; then
                   toDelete+=($tag)
               fi
           done
