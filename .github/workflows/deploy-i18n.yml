@@ -136,27 +136,26 @@ jobs:
 
       - name: Clean old DO images
         run: |
-            rawResponse=$(doctl registry repository list-tags org/news-${{ matrix.languages }} --output=json)
-            tags=$(jq '[.[] | {updated_at, tag}]' <<<"$rawResponse")
-            toDelete=()
-            len=$(jq length <<<"$tags")
-            echo "Found $len tags."
-            for i in $(seq 0 $((len - 1))); do
-                tag=$(echo $tags | jq -r --argjson index "$i" '.[$index].tag')
-                updated=$(echo $tags | jq -r --argjson index "$i" '.[$index].updated_at')
-                updatedDate=$(date -d $updated +%s)
-                now=$(date +%s)
-                diff=$(($now - $updatedDate))
-                if [ "$tag" != "latest" ] && [ $diff -gt 604800 ]; then
-                    toDelete+=($tag)
-                fi
-            done
-            echo "Found ${#toDelete[@]} tags to delete."
-            for value in "${toDelete[@]}"; do
-                echo "Deleting tag: $value"
-                doctl registry repository delete-tag org/news-${{ matrix.languages }} ${tagName}
-            done
-        
+          rawResponse=$(doctl registry repository list-tags org/news-${{ matrix.languages }} --output=json)
+          tags=$(jq '[.[] | {updated_at, tag}]' <<<"$rawResponse")
+          toDelete=()
+          len=$(jq length <<<"$tags")
+          echo "Found $len tags."
+          for i in $(seq 0 $((len - 1))); do
+              tag=$(echo $tags | jq -r --argjson index "$i" '.[$index].tag')
+              updated=$(echo $tags | jq -r --argjson index "$i" '.[$index].updated_at')
+              updatedDate=$(date -d $updated +%s)
+              now=$(date +%s)
+              diff=$(($now - $updatedDate))
+              if [ "$tag" != "latest" ] && [ $diff -gt 604800 ]; then
+                  toDelete+=($tag)
+              fi
+          done
+          echo "Found ${#toDelete[@]} tags to delete."
+          for value in "${toDelete[@]}"; do
+              echo "Deleting tag: $value"
+              doctl registry repository delete-tag org/news-${{ matrix.languages }} ${tagName}
+          done
 
       - name: Clean up Self-hosted setup
         uses: colpal/actions-clean@36e6ca1abd35efe61cb60f912bd7837f67887c8a # tag=v1
@@ -167,12 +166,12 @@ jobs:
     runs-on: ubuntu-20.04
     needs:
       - build
-    
+
     steps:
       - name: Install doctl
         uses: digitalocean/action-doctl@v2
         with:
-         token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
 
       - name: Log in to DigitalOcean Container Registry with short-lived credentials
         run: doctl registry login --expiry-seconds 1200
