@@ -1,5 +1,5 @@
 FROM node:18-alpine
-RUN npm install -g --progress=false serve@13
+RUN npm install -g --progress=false serve
 
 ARG BUILD_LANGUAGE
 
