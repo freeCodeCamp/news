@@ -16,7 +16,7 @@ jobs:
         node-version: [18.x]
         languages:
           [chinese, espanol, italian, japanese, korean, portuguese, ukrainian]
-        site_tlds: [org]
+        site_tlds: [org, dev]
 
     env:
       BUILD_LANG: ${{ matrix.languages }}
