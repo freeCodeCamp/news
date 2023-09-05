@@ -136,7 +136,7 @@ jobs:
 
       - name: Clean old DO images
         run: |
-          rawResponse=$(doctl registry repository list-tags org/news-${{ matrix.languages }} --output=json)
+          rawResponse=$(doctl registry repository list-tags ${{ matrix.site_tlds }}/news-${{ matrix.languages }} --output=json)
           tags=$(jq '[.[] | {updated_at, tag}]' <<<"$rawResponse")
           toDelete=()
           len=$(jq length <<<"$tags")
@@ -154,7 +154,7 @@ jobs:
           echo "Found ${#toDelete[@]} tags to delete."
           for value in "${toDelete[@]}"; do
               echo "Deleting tag: $value"
-              doctl registry repository delete-tag org/news-${{ matrix.languages }} $value --force
+              doctl registry repository delete-tag ${{ matrix.site_tlds }}/news-${{ matrix.languages }} $value --force
           done
 
       - name: Clean up Self-hosted setup
