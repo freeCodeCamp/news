@@ -3,8 +3,7 @@ name: i18n - Build and Deploy
 on:
   workflow_dispatch:
   schedule:
-    # - cron: '0 0/6 * * *' # Build once every six hours
-    - cron: '0 0/1 * * *' # Temporarily build once every hour
+    - cron: '0 0/6 * * *' # Build once every six hours
 
 jobs:
   build:
