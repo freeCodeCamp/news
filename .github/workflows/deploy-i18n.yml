@@ -161,24 +161,6 @@ jobs:
         uses: colpal/actions-clean@36e6ca1abd35efe61cb60f912bd7837f67887c8a # tag=v1
         if: ${{ always() }} # To ensure this step runs even when earlier steps fail
 
-  clean:
-    name: Clean up DO images
-    runs-on: ubuntu-20.04
-    needs:
-      - build
-
-    steps:
-      - name: Install doctl
-        uses: digitalocean/action-doctl@v2
-        with:
-          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
-
-      - name: Log in to DigitalOcean Container Registry with short-lived credentials
-        run: doctl registry login --expiry-seconds 1200
-
-      - name: Trigger Garbage collection
-        run: doctl registry garbage-collection start --include-untagged-manifests --force
-
   deploy:
     name: Deploy
     runs-on: ubuntu-20.04
@@ -208,9 +190,7 @@ jobs:
         uses: azure/webapps-deploy@4bca689e4c7129e55923ea9c45401b22dc6aa96f # v2
         with:
           app-name: freecodecamp-news-${{ matrix.site_tlds }}-${{ matrix.languages }}
-          images:
-            ${{ secrets.ACR_NAME }}.azurecr.io/${{ matrix.site_tlds }}/news-${{
-            matrix.languages }}:latest
+          images: ${{ secrets.ACR_NAME }}.azurecr.io/${{ matrix.site_tlds }}/news-${{ matrix.languages }}:latest
 
       - name: Remove Old images
         run: |
@@ -218,7 +198,6 @@ jobs:
           --cmd "acr purge --filter '${{ matrix.site_tlds }}/news-${{ matrix.languages }}:.*' \
           --untagged --ago 2d" \
           --registry ${{ secrets.ACR_NAME }} /dev/null
-
       # - name: Clean up Self-hosted setup
       #   uses: colpal/actions-clean@v1
       #   if: ${{ always() }} # To ensure this step runs even when earlier steps fail
