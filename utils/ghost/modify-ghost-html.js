@@ -3,13 +3,18 @@ const { JSDOM } = jsdom;
 const translate = require('../translate');
 const { setDefaultAlt } = require('./helpers');
 const getImageDimensions = require('../get-image-dimensions');
+const fitVids = require('../fitvids');
 
 const modifyGhostHTML = async obj => {
   const dom = new JSDOM(obj.html);
-  const document = dom.window.document;
+  const window = dom.window;
+  const document = window.document;
   const title = obj.title;
+  const embeds = [...document.getElementsByTagName('embed')];
   const images = [...document.getElementsByTagName('img')];
   const iframes = [...document.getElementsByTagName('iframe')];
+
+  if (embeds.length || iframes.length) fitVids(window);
 
   await Promise.all(
     images.map(async image => {
@@ -27,7 +32,6 @@ const modifyGhostHTML = async obj => {
 
     iframes.map(async iframe => {
       iframe.setAttribute('title', `${translate('embed-title')}`);
-
       iframe.setAttribute('loading', 'lazy');
     })
   );

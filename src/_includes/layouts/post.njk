@@ -56,7 +56,7 @@ time #}
                 {% endif %}
                 <section class="post-full-content">
                     <div class="post-and-sidebar">
-                        <section class="post-content {{ "medium-migrated-article" if (post.primary_author.name === "freeCodeCamp.org") }}">
+                        <section class="post-content {{ "medium-migrated-article" if (post.primary_author.name === "freeCodeCamp.org") }}" data-test-label="post-content">
                             {{ content | safe }}
                         </section>
                         {% if adsEnabled %}
@@ -100,17 +100,6 @@ time #}
 
 {% block prism %}
     {% include "partials/prism.njk" %}
-{% endblock %}
-
-{% block headScripts %}
-    <script defer src="{% cacheBuster '/assets/js/fitvids.js' %}"></script>
-    {% set js %}
-        document.addEventListener('DOMContentLoaded', () => {
-            const postContent = document.querySelector('.post-full-content');
-            if (postContent) fitVids(postContent);
-        });
-    {% endset %}
-    <script>{{ js | jsMin | safe }}</script>
 {% endblock %}
 
 {% block monetization %}

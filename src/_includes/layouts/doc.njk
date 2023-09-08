@@ -31,7 +31,7 @@
                     </figure>
                 {% endif %}
                 <section class="post-full-content">
-                    <section class="post-content">
+                    <section class="post-content" data-test-label="post-content">
                         {{ content | safe }}
                     </section>
                     <hr />
@@ -47,17 +47,6 @@
             </article>
         </div>
     </main>
-{% endblock %}
-
-{% block headScripts %}
-    <script defer src="{% cacheBuster '/assets/js/fitvids.js' %}"></script>
-    {% set js %}
-        document.addEventListener('DOMContentLoaded', () => {
-            const postContent = document.querySelector('.post-full-content');
-            if (postContent) fitVids(postContent);
-        });
-    {% endset %}
-    <script>{{ js | jsMin | safe }}</script>
 {% endblock %}
 
 {% block seo %}

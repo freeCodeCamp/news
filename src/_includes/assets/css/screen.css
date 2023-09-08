@@ -979,10 +979,6 @@ Usage (In Ghost editor):
   color: inherit;
 }
 
-.post-full-content .fluid-width-video-wrapper {
-  margin: 1.5em 0 3em;
-}
-
 .post-full-content hr {
   margin: 4vw 0;
   border-top: 1px solid var(--gray15);
@@ -1618,8 +1614,26 @@ pre.runkit-element {
   min-width: 100%;
 }
 
-.kg-embed-card .fluid-width-video-wrapper {
+.fluid-width-video-container {
+  flex-grow: 1;
+  width: 100%;
+}
+
+.fluid-width-video-wrapper {
+  width: 100%;
+  position: relative;
   margin: 0;
+  padding: 0;
+}
+
+.fluid-width-video-wrapper iframe,
+.fluid-width-video-wrapper object,
+.fluid-width-video-wrapper embed {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
 
 @media (max-width: 1040px) {
