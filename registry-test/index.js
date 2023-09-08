@@ -18,7 +18,7 @@ const server = http.createServer((req, res) => {
   res.statusCode = 200;
   res.setHeader('Content-Type', 'text/plain');
   res.end(
-    `This is container/application is running on: ${process.env.BUILD_ID}`
+    `This is container/application is running on: ${process.env.BUILD_ID} \n`
   );
 });
 
