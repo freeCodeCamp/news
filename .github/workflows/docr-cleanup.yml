@@ -1,0 +1,22 @@
+name: DOCR - Garbage Collection
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '45 2 * * 6'
+
+jobs:
+  clean:
+    name: Garbage Collection
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Install doctl
+        uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+
+      - name: Log in to DigitalOcean Container Registry with short-lived credentials
+        run: doctl registry login --expiry-seconds 1200
+
+      - name: Trigger Garbage collection
+        run: doctl registry garbage-collection start --include-untagged-manifests --force
