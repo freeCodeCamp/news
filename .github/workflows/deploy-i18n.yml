@@ -123,11 +123,11 @@ jobs:
           docker push ${{ secrets.ACR_NAME }}.azurecr.io/${{ matrix.site_tlds }}/news-${{ matrix.languages }}:$tagname
           docker push ${{ secrets.ACR_NAME }}.azurecr.io/${{ matrix.site_tlds }}/news-${{ matrix.languages }}:latest
 
-      - name: Build the registry test image
-        run: |
-          cd registry-test
-          REGISTRY_NAME=${{ secrets.DOCR_NAME }} TAGNAME_CI=$tagname make build
-          cd ..
+      # - name: Build the registry test image
+      #   run: |
+      #     cd registry-test
+      #     REGISTRY_NAME=${{ secrets.DOCR_NAME }} TAGNAME_CI=$tagname make build
+      #     cd ..
 
       - name: Install doctl
         uses: digitalocean/action-doctl@v2
@@ -142,11 +142,11 @@ jobs:
           docker push registry.digitalocean.com/${{ secrets.DOCR_NAME }}/${{ matrix.site_tlds }}/news-${{ matrix.languages }}:$tagname
           docker push registry.digitalocean.com/${{ secrets.DOCR_NAME }}/${{ matrix.site_tlds }}/news-${{ matrix.languages }}:latest
 
-      - name: Push the registry test image
-        run: |
-          cd registry-test
-          REGISTRY_NAME=${{ secrets.DOCR_NAME }} TAGNAME_CI=$tagname make push
-          cd ..
+      # - name: Push the registry test image
+      #   run: |
+      #     cd registry-test
+      #     REGISTRY_NAME=${{ secrets.DOCR_NAME }} TAGNAME_CI=$tagname make push
+      #     cd ..
 
       - name: Clean old DO images
         run: |
