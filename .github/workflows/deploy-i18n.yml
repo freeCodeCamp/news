@@ -104,24 +104,10 @@ jobs:
       - name: Build & Tag Images
         run: |
           docker build . \
-          --tag ${{ secrets.ACR_NAME }}.azurecr.io/${{ matrix.site_tlds }}/news-${{ matrix.languages }}:$tagname \
-          --tag ${{ secrets.ACR_NAME }}.azurecr.io/${{ matrix.site_tlds }}/news-${{ matrix.languages }}:latest \
           --tag registry.digitalocean.com/${{ secrets.DOCR_NAME }}/${{ matrix.site_tlds }}/news-${{ matrix.languages }}:$tagname \
           --tag registry.digitalocean.com/${{ secrets.DOCR_NAME }}/${{ matrix.site_tlds }}/news-${{ matrix.languages }}:latest \
           --build-arg BUILD_LANGUAGE=${{ matrix.languages }} \
           --file docker/Dockerfile
-
-      - name: Docker login to Azure Container Registry
-        uses: azure/docker-login@83efeb77770c98b620c73055fbb59b2847e17dc0 # v1
-        with:
-          login-server: ${{ secrets.ACR_NAME }}.azurecr.io
-          username: ${{ secrets.ACR_USERNAME }}
-          password: ${{ secrets.ACR_PASSWORD }}
-
-      - name: Push Images to Azure Container Registry
-        run: |
-          docker push ${{ secrets.ACR_NAME }}.azurecr.io/${{ matrix.site_tlds }}/news-${{ matrix.languages }}:$tagname
-          docker push ${{ secrets.ACR_NAME }}.azurecr.io/${{ matrix.site_tlds }}/news-${{ matrix.languages }}:latest
 
       # - name: Build the registry test image
       #   run: |
@@ -175,43 +161,4 @@ jobs:
         uses: colpal/actions-clean@36e6ca1abd35efe61cb60f912bd7837f67887c8a # tag=v1
         if: ${{ always() }} # To ensure this step runs even when earlier steps fail
 
-  deploy:
-    name: Deploy
-    runs-on: ubuntu-20.04
-    needs:
-      - build
-
-    strategy:
-      fail-fast: false
-      matrix:
-        languages:
-          [chinese, espanol, italian, japanese, korean, portuguese, ukrainian]
-        site_tlds: [org]
-
-    # GitHub's deployment environment configuration.
-    # environment:
-    #   name: ${{ matrix.site_tlds }}
-    #   url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
-
-    steps:
-      - name: Azure Login
-        uses: azure/login@92a5484dfaf04ca78a94597f4f19fea633851fa2 # tag=v1
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
-
-      - name: Deploy to Azure Web App
-        id: deploy-to-webapp
-        uses: azure/webapps-deploy@4bca689e4c7129e55923ea9c45401b22dc6aa96f # v2
-        with:
-          app-name: freecodecamp-news-${{ matrix.site_tlds }}-${{ matrix.languages }}
-          images: ${{ secrets.ACR_NAME }}.azurecr.io/${{ matrix.site_tlds }}/news-${{ matrix.languages }}:latest
-
-      - name: Remove Old images
-        run: |
-          az acr run \
-          --cmd "acr purge --filter '${{ matrix.site_tlds }}/news-${{ matrix.languages }}:.*' \
-          --untagged --ago 2d" \
-          --registry ${{ secrets.ACR_NAME }} /dev/null
-      # - name: Clean up Self-hosted setup
-      #   uses: colpal/actions-clean@v1
-      #   if: ${{ always() }} # To ensure this step runs even when earlier steps fail
+# Deployments are automated via https://github.com/freeCodeCamp/news-config
