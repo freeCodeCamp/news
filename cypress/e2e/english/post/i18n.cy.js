@@ -8,7 +8,7 @@ const selectors = {
 
 describe('Post i18n', () => {
   context('Common', () => {
-    before(() => {
+    beforeEach(() => {
       cy.visit('/announcing-rust-course-replit-web');
     });
 
@@ -21,7 +21,7 @@ describe('Post i18n', () => {
   });
 
   context('Author with Twitter', () => {
-    before(() => {
+    beforeEach(() => {
       cy.visit('/announcing-rust-course-replit-web');
     });
 
@@ -40,7 +40,7 @@ describe('Post i18n', () => {
   });
 
   context('Author with no Twitter or bio', () => {
-    before(() => {
+    beforeEach(() => {
       cy.visit('/no-author-profile-pic');
     });
 
@@ -63,6 +63,10 @@ describe('Post i18n', () => {
   });
 
   context('Ads', () => {
+    beforeEach(() => {
+      cy.visit('/announcing-rust-course-replit-web');
+    });
+
     it('the advertisement disclaimer text should not render its i18n key', () => {
       cy.get(selectors.adText)
         .invoke('text')
