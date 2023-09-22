@@ -2,7 +2,7 @@ describe('Landing structured data (JSON-LD)', () => {
   const commonExpectedJsonLd = require('../../../fixtures/common-expected-json-ld.json');
   let jsonLdObj;
 
-  before(() => {
+  beforeEach(() => {
     cy.visit('/');
 
     jsonLdObj = cy

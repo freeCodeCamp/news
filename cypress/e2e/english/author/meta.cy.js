@@ -12,7 +12,7 @@ const authorExpectedMeta = {
 
 describe('Author page metadata', () => {
   context("Quincy's author page", () => {
-    before(() => {
+    beforeEach(() => {
       cy.visit('/author/quincylarson');
     });
 
@@ -175,7 +175,7 @@ describe('Author page metadata', () => {
   });
 
   context('freeCodeCamp author page', () => {
-    before(() => {
+    beforeEach(() => {
       cy.visit('/author/freecodecamp');
     });
 

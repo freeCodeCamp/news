@@ -3,7 +3,7 @@ const selectors = {
 };
 
 describe('404 i18n', () => {
-  before(() => {
+  beforeEach(() => {
     cy.visit('/testing-testing-1-2', { failOnStatusCode: false });
   });
 
