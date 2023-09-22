@@ -82,7 +82,7 @@ describe('Post', () => {
 
   context('Embedded videos', () => {
     before(() => {
-      cy.visit('/embedded-videos-post');
+      cy.visit('/embedded-videos-post/');
     });
 
     it('should render', () => {

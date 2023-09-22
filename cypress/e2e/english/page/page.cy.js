@@ -17,7 +17,7 @@ describe('Page', () => {
 
   context('Embedded videos', () => {
     before(() => {
-      cy.visit('/embedded-videos-page');
+      cy.visit('/embedded-videos-page/');
     });
 
     it('should render', () => {
