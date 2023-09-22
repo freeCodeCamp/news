@@ -20,6 +20,11 @@
     "destination": "/news/about"
   },
   {
+    "source": "/html-css-handbook-for-beginners",
+    "destination": "/news/the-html-handbook",
+    "type": 302
+  },
+  {
     "source": "/how-to-change-color-in-matplotlip",
     "destination": "/news/how-to-change-color-in-matplotlib",
     "type": 302
