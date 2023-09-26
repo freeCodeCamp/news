@@ -36,8 +36,8 @@
   },
   "social-row": {
     "cta": {
-      "tweet-a-thanks": "اگر آپ نیں آخر تک پڑھ لیا ہے، تو مصنف کو شکریہ کریں. {{ <0> }} شکریہ کا Tweet کریں {{ </0> }}",
-      "tweet-it": " {{ <0> }}Tweet  کریں{{ </0> }} اگر یہ آرٹیکل مفید لگا تو "
+      "tweet-a-thanks": "If you read this far, thank the author to show them you care. {{ <0> }}Say Thanks{{ </0> }}",
+      "tweet-it": "If this article was helpful, {{ <0> }}share it{{ </0> }}."
     },
     "tweets": {
       "default": "آپ کا بہت شکریہ، آپ نیں یہ آرٹیکل لکھا.  {{ author }}۔",

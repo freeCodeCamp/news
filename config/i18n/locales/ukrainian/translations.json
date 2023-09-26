@@ -36,8 +36,8 @@
   },
   "social-row": {
     "cta": {
-      "tweet-a-thanks": "Якщо ви дочитали до цього місця, твітніть автору, щоб показати, що вам не байдуже. {{ <0> }}Твітнути подяку{{ </0> }}",
-      "tweet-it": "Якщо ця публікація була корисною, {{ <0> }}твітніть про це{{ </0> }}."
+      "tweet-a-thanks": "If you read this far, thank the author to show them you care. {{ <0> }}Say Thanks{{ </0> }}",
+      "tweet-it": "If this article was helpful, {{ <0> }}share it{{ </0> }}."
     },
     "tweets": {
       "default": "Дякую {{ author }} за написання цієї корисної публікації.",
