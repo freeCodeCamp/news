@@ -1,5 +1,5 @@
 describe('404', () => {
-  before(() => {
+  beforeEach(() => {
     cy.visit('/testing-testing-1-2', { failOnStatusCode: false });
   });
 

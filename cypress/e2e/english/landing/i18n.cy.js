@@ -31,7 +31,7 @@ const selectors = {
 };
 
 describe('Landing i18n', () => {
-  before(() => {
+  beforeEach(() => {
     cy.visit('/');
   });
 

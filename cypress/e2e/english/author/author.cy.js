@@ -14,7 +14,7 @@ const selectors = {
 
 describe('Author page', () => {
   context('General tests', () => {
-    before(() => {
+    beforeEach(() => {
       cy.visit('/author/quincylarson');
     });
 
@@ -60,7 +60,7 @@ describe('Author page', () => {
   });
 
   context('Author with no profile image', () => {
-    before(() => {
+    beforeEach(() => {
       cy.visit('/author/mrugesh');
     });
 

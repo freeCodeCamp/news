@@ -30,7 +30,7 @@ describe('Page structured data (JSON-LD)', () => {
   };
   let jsonLdObj;
 
-  before(() => {
+  beforeEach(() => {
     cy.visit('/thank-you-for-donating');
 
     jsonLdObj = cy

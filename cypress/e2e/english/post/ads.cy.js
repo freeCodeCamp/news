@@ -10,7 +10,7 @@ const selectors = {
 
 describe('Ads', () => {
   context('General tests', () => {
-    before(() => {
+    beforeEach(() => {
       cy.visit('/carbon-neutral-web3-curriculum-plans');
     });
 
@@ -21,7 +21,7 @@ describe('Ads', () => {
 
   context('Not authenticated', () => {
     context('Ad wrappers and containers', () => {
-      before(() => {
+      beforeEach(() => {
         cy.visit('/carbon-neutral-web3-curriculum-plans');
       });
 
@@ -65,7 +65,7 @@ describe('Ads', () => {
     });
 
     context('Images and videos', () => {
-      before(() => {
+      beforeEach(() => {
         cy.visit('/ad-layout-images-and-videos');
       });
 

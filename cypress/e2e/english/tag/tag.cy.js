@@ -9,7 +9,7 @@ const selectors = {
 };
 
 describe('Tag page', () => {
-  before(() => {
+  beforeEach(() => {
     cy.visit('/tag/freecodecamp');
   });
 
