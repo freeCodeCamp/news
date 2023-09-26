@@ -8,7 +8,7 @@ const selectors = {
 };
 
 describe('Landing', () => {
-  before(() => {
+  beforeEach(() => {
     cy.visit('/');
     loadAllPosts();
   });

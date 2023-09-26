@@ -13,7 +13,7 @@ const pageExpectedMeta = {
 };
 
 describe('Page metadata', () => {
-  before(() => {
+  beforeEach(() => {
     cy.visit('/thank-you-for-donating');
   });
 

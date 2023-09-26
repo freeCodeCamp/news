@@ -6,7 +6,7 @@ const selectors = {
 };
 
 describe('Search results', () => {
-  before(() => {
+  beforeEach(() => {
     // Note: 11ty's local server will automatically add a trailing
     // slash immediately after `/search`, before the `query` URL
     // parameter. This does not happen on production since we
