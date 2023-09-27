@@ -36,8 +36,8 @@
   },
   "social-row": {
     "cta": {
-      "tweet-a-thanks": "If you read this far, thank the author to show them you care. {{ <0> }}Say Thanks{{ </0> }}",
-      "tweet-it": "If this article was helpful, {{ <0> }}share it{{ </0> }}."
+      "tweet-a-thanks": "Se você leu até aqui, agradeça ao autor para mostrar que você se importa com o trabalho. {{ <0> }}Agradeça{{ </0> }}",
+      "tweet-it": "Se este artigo foi útil, {{ <0> }}compartilhe-o{{ </0> }}."
     },
     "tweets": {
       "default": "Obrigado, {{ author }}, por ter escrito este artigo. Foi muito útil.",
