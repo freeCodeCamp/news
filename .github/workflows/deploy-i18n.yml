@@ -6,13 +6,13 @@ on:
     # Here are the times for the cron:
     #
     # Sun, Mon, Tue, Thu, Fri : at 00:00, 06:00, 12:00, 18:00 UTC
-    # Wed, Sat                : at 00:00, 06:00, --:--, 18:00 UTC
+    # Wed, Sat                : at --:--, 06:00, 12:00, 18:00 UTC
     #
     # There is a 6 hour maintenance window on Wednesdays and Saturdays,
     # and the crons are scheduled at 5 mins past the hour.
     #
     - cron: '5 0,6,12,18 * * 0-2,4-5'
-    - cron: '5 0,6,18 * * 3,6'
+    - cron: '5 6,12,18 * * 3,6'
 
 jobs:
   build:
