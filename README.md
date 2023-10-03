@@ -35,10 +35,10 @@ You can click on the badges below to go to the dashboards detailing the status o
 
 New builds to the `/news` sites are triggered as per the below schedule:
 
-| Language     | Schedule (UTC)           |
-| :----------- | :----------------------- |
-| English      | Every 2 Hours - all days |
-| Others(i18n) | Every 6 Hours - all days |
+| Language     | Schedule (UTC)                                                                    |
+| :----------- | :-------------------------------------------------------------------------------- |
+| English      | Every 3 Hours - except between UTC 00:00 - UTC 06:00 on Wed & Sat for maintenance |
+| Others(i18n) | Every 6 Hours - except between UTC 00:00 - UTC 06:00 on Wed & Sat for maintenance |
 
 **Note: Once a build is triggered, it can take upto an hour to complete, and cascade to all regions in the world.**
 
