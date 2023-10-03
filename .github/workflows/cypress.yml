@@ -8,7 +8,7 @@ on:
 jobs:
   cypress-run:
     name: E2E
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     strategy:
       matrix:
         node-version: [18.x]
@@ -51,7 +51,7 @@ jobs:
           sudo mv /usr/bin/firefox /usr/bin/firefox_old
           sudo ln -s /opt/firefox/firefox /usr/bin/firefox
       - name: Checkout source files
-        uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3
+        uses: actions/checkout@8ade135a41bc03ea155e62e844d188df1ea18608 # v4
 
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@5e21ff4d9bc1a8cf6de233a3057d20ec6b3fb69d # v3
@@ -62,7 +62,7 @@ jobs:
         run: npm ci
 
       - name: Login to Docker Hub
-        uses: docker/login-action@465a07811f14bebb1938fbed4728c6a1ff8901fc # v2
+        uses: docker/login-action@343f7c4344506bcbf9b4de18042ae17996df046d # v3
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_ACCESS_TOKEN }}
