@@ -41,8 +41,7 @@ jobs:
         uses: raisedadead/action-docr-cleanup@latest
         with:
           repository_name: '${{ matrix.variants }}/news-${{ matrix.repos }}'
-          dry_run: 'true' # Remove this line to actually delete images
-          days: '2'
+          days: '4'
 
   clean:
     name: Do Garbage Collection
