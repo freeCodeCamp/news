@@ -73,7 +73,7 @@
     "algoliasearch": "4.20.0",
     "clean-css": "5.3.2",
     "cross-env": "7.0.3",
-    "cypress": "13.3.0",
+    "cypress": "13.3.1",
     "dayjs": "1.11.10",
     "dotenv": "16.3.1",
     "eslint": "8.51.0",
