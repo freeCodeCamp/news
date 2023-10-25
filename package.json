@@ -103,5 +103,8 @@
   },
   "lint-staged": {
     "**/*": "prettier --write --ignore-unknown"
+  },
+  "dependencies": {
+    "qs": "^6.11.2"
   }
 }

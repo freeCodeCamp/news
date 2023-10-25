@@ -2,9 +2,9 @@ const fullEscaper = require('../full-escaper');
 const translate = require('../translate');
 const { siteURL } = require('../../config');
 
-const createImageObj = (url, imageDimensions) => {
-  const width = imageDimensions?.width ? imageDimensions?.width : 1920;
-  const height = imageDimensions?.height ? imageDimensions?.height : 1080;
+const createImageObj = url => {
+  const width = 1920;
+  const height = 1080;
 
   return {
     '@type': 'ImageObject',
@@ -15,15 +15,8 @@ const createImageObj = (url, imageDimensions) => {
 };
 
 const createAuthorObj = primaryAuthor => {
-  const {
-    name,
-    profile_image,
-    image_dimensions,
-    website,
-    twitter,
-    facebook,
-    path
-  } = primaryAuthor;
+  const { name, profile_image, website, twitter, facebook, path } =
+    primaryAuthor.attributes;
   const authorObj = {
     '@type': 'Person',
     name,
@@ -36,10 +29,7 @@ const createAuthorObj = primaryAuthor => {
   };
 
   if (profile_image) {
-    authorObj.image = createImageObj(
-      profile_image,
-      image_dimensions.profile_image
-    );
+    authorObj.image = createImageObj(profile_image);
   }
 
   return authorObj;
@@ -92,8 +82,8 @@ async function createJSONLDShortcode(type, site, data) {
         returnData.dateModified = new Date(data.updated_at).toISOString();
       if (data.tags) {
         // Filter out internal Ghost tags
-        const keywordString = data.tags
-          .map(tag => tag.name)
+        const keywordString = data.tags.data
+          .map(tag => tag.attributes.name)
           .filter(keyword => !keyword.startsWith('#'))
           .join(', ');
 
@@ -104,13 +94,10 @@ async function createJSONLDShortcode(type, site, data) {
       if (data.title) returnData.headline = fullEscaper(data.title);
 
       if (data.feature_image) {
-        returnData.image = createImageObj(
-          data.feature_image,
-          data.image_dimensions.feature_image
-        );
+        returnData.image = createImageObj(data.feature_image);
       }
 
-      returnData.author = createAuthorObj(data.primary_author);
+      returnData.author = createAuthorObj(data.author.data);
     }
 
     // Handle images for both types

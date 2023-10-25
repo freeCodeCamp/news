@@ -1,4 +1,4 @@
-const { sourceAPI } = require('../../utils/ghost/api');
+// const { sourceAPI } = require('../../utils/ghost/api');
 const getImageDimensions = require('../../utils/get-image-dimensions');
 const {
   convertToLocalizedString,
@@ -16,16 +16,17 @@ const twitterProfile =
   twitterURL !== 'twitter' ? getTwitterProfile(twitterURL) : '@freecodecamp';
 
 module.exports = async () => {
-  const site = await sourceAPI.settings
-    .browse({
-      include: 'url'
-    })
-    .catch(err => {
-      console.error(err);
-    });
+  // const site = await sourceAPI.settings
+  //   .browse({
+  //     include: 'url'
+  //   })
+  //   .catch(err => {
+  //     console.error(err);
+  //   });
+  const site = {};
 
   site.url = siteURL;
-  site.lang = currentLocale_i18nISOCode.toLowerCase();
+  site.lang = 'en';
 
   const logoUrl =
     'https://cdn.freecodecamp.org/platform/universal/fcc_primary.svg';

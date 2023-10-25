@@ -18,8 +18,8 @@ time #}
             <article class="post-full post {{ "no-image" if not (post.feature_image) }}">
                 <header class="post-full-header">
                     <section class="post-full-meta">
-                        <time class="post-full-meta-date" datetime="{{ post.published_at }}">
-                            {% publishedDate post.published_at %}
+                        <time class="post-full-meta-date" datetime="{{ post.publishedAt }}">
+                            {% publishedDate post.publishedAt %}
                         </time>
                         {% if primaryTag %}
                             <span class="date-divider">/</span>
@@ -31,9 +31,9 @@ time #}
                     <h1 class="post-full-title">{{ title }}</h1>
                 </header>
                 <div class="post-full-author-header" data-test-label="author-header-no-bio">
-                    {% if post.primary_author.name != "freeCodeCamp.org" %}
+                    {% if post.author.data.attributes.name != "freeCodeCamp.org" %}
                         {% if post.original_post %}
-                            {{ byline(post.primary_author, false, false, 'translator') }}
+                            {{ byline(post.author.data.attributes, false, false, 'translator') }}
                             {{ byline(post.original_post.primary_author, false, false, 'author', post.original_post.locale_i18n) }}
                         {% else %}
                             {{ byline(post.primary_author, false, false) }}
@@ -125,8 +125,8 @@ time #}
     {% endif %}
     <meta property="og:url" content="{{ site.url + post.path }}">
     <meta property="og:image" content="{{ post.feature_image }}">
-    <meta property="article:published_time" content="{% toISOString post.published_at %}">
-    <meta property="article:modified_time" content="{% toISOString post.updated_at %}">
+    <meta property="article:published_time" content="{% toISOString post.publishedAt %}">
+    <meta property="article:modified_time" content="{% toISOString post.updatedAt %}">
     {% for tag in post.tags %}
         <meta property="article:tag" content="{{ tag.name }}">
     {% endfor %}

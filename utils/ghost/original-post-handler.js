@@ -27,7 +27,7 @@ const originalPostHandler = async post => {
       const originalPostLocale =
         pathSegments.length === 2 ? 'english' : pathSegments[0];
       const originalPostSlug = pathSegments[pathSegments.length - 1];
-      const { api, siteURL } = allGhostAPIInstances[originalPostLocale];
+      const { api, siteURL } = allGhostAPIInstances;
       const originalPost = await api.posts.read({
         include: 'authors',
         slug: originalPostSlug

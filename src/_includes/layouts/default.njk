@@ -62,9 +62,9 @@
         {% block headScripts %}
         {% endblock %}
 
-        {# Both of these meta tags only appear in this form on the landing and 
+        {# Both of these meta tags only appear in this form on the landing and
         search pages. In other contexts, the description is an excerpt, and
-        and there is no keywords meta tag. Instead, the tag names act as 
+        and there is no keywords meta tag. Instead, the tag names act as
         keywords in structured data. #}
         {% if not permalink or permalink === "/search/" %}
             <meta name="keywords" content="{% t 'meta-tags:keywords' %}">
@@ -79,11 +79,6 @@
             <link rel="canonical" href="{{ site.url + page.url }}">
         {% endif %}
         <meta name="referrer" content="no-referrer-when-downgrade">
-
-        {% if pagination.nextPageHref | nextPageExists %}
-            {# Updated dynamically by src/_includes/pagination.js #}
-            <link rel="next" href="">
-        {% endif %}
 
         {% block seo %}
             {# Facebook OpenGraph #}
@@ -116,7 +111,7 @@
         {{ site.codeinjection_head | safe if site.codeinjection_head }}
         {{ codeinjection_head | safe if codeinjection_head }}
     </head>
-    
+
     {% if site.lang in ['ar', 'fa', 'ur', 'he'] %}
         <body class="home-template rtl-layout">
     {% else %}
@@ -136,7 +131,7 @@
             {% include "partials/footer.njk" %}
         </div>
 
-        {# Pulls scripts from other template files and include them after all assets 
+        {# Pulls scripts from other template files and include them after all assets
         have loaded / global setup is complete. For example, there's some JS which
         we only want to use in search-results.njk, but it needs to be included here
         after the global Algolia setup in src/_includes/assets/js/algolia.js. #}
