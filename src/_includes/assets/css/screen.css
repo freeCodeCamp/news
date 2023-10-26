@@ -172,13 +172,13 @@ body {
   z-index: 300;
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
   /* overflow-y: auto; */
   height: 40px;
   font-size: 1.2em;
   font-family: Lato, sans-serif;
   font-display: swap;
-  height: 38px;
+  height: var(--header-height);
   background: var(--theme-color);
   position: fixed;
   z-index: 1000;
