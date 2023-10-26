@@ -61,7 +61,7 @@ body {
 .site-main {
   z-index: 100;
   flex-grow: 1;
-  margin-top: calc(var(--header-height) * 3 + 5px);
+  margin-top: calc(var(--header-height) * 2 + 20px);
 }
 
 .under-header-content + .site-main {
