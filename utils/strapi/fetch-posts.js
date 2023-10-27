@@ -7,9 +7,9 @@ const fetchFromStrapi = async contentType => {
   if (contentType === 'posts') {
     const options = {
       publicationState: 'live',
-      populate: ['tags', 'author', 'feature_image'],
+      populate: ['tags', 'author', 'feature_image', 'author.profile_image'],
       pagination: {
-        limit: 25
+        limit: 1
       }
     };
 
@@ -28,6 +28,7 @@ const fetchFromStrapi = async contentType => {
     });
 
     const data = await res.json();
+    return data.data; // data.meta needs to be used for pagination
 
     const newPosts = data.data.map(post => {
       const postId = post.id;

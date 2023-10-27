@@ -1,6 +1,7 @@
 const Piscina = require('piscina');
 const { chunk, cloneDeep } = require('lodash');
 const { resolve, basename } = require('path');
+const fs = require('fs');
 
 const fetchFromGhost = require('../../utils/ghost/fetch-from-ghost');
 const fetchFromStrapi = require('../../utils/strapi/fetch-posts');
@@ -18,24 +19,25 @@ module.exports = async () => {
   // Chunk raw Ghost posts and pages and process them in batches
   // with a pool of workers to create posts and pages global data
   const batchSize = 200;
-  const posts = await fetchFromStrapi('posts');
+  const allPosts = await fetchFromStrapi('posts');
+  fs.writeFileSync('./posts.json', JSON.stringify(allPosts, null, 2));
   // const allPosts = await fetchFromGhost('posts');
   // const allPages = await fetchFromGhost('pages');
-  // const posts = await Promise.all(
-  //   chunk(allPosts, batchSize).map((batch, i, arr) =>
-  //     piscina.run({
-  //       batch,
-  //       type: 'posts',
-  //       currBatchNo: Number(i) + 1,
-  //       totalBatches: arr.length
-  //     })
-  //   )
-  // )
-  //   .then(arr => {
-  //     console.log('Finished processing all posts');
-  //     return arr.flat();
-  //   })
-  //   .catch(err => console.error(err));
+  const posts = await Promise.all(
+    chunk(allPosts, batchSize).map((batch, i, arr) =>
+      piscina.run({
+        batch,
+        type: 'posts',
+        currBatchNo: Number(i) + 1,
+        totalBatches: arr.length
+      })
+    )
+  )
+    .then(arr => {
+      console.log('Finished processing all posts');
+      return arr.flat();
+    })
+    .catch(err => console.error(err));
   // const pages = await Promise.all(
   //   chunk(allPages, batchSize).map((batch, i, arr) =>
   //     piscina.run({

@@ -6,7 +6,7 @@ const getImageDimensions = require('../get-image-dimensions');
 const fitVids = require('../fitvids');
 
 const modifyGhostHTML = async obj => {
-  const dom = new JSDOM(obj.html);
+  const dom = new JSDOM(obj.body);
   const window = dom.window;
   const document = window.document;
   const title = obj.title;
@@ -39,7 +39,7 @@ const modifyGhostHTML = async obj => {
   // The jsdom parser wraps the incomplete HTML from the Ghost
   // API with HTML, head, and body elements, so return whatever
   // is within the new body element it added
-  obj.html = document.body.innerHTML;
+  obj.body = document.body.innerHTML;
 
   return obj;
 };

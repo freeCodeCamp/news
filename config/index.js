@@ -152,7 +152,8 @@ module.exports = Object.assign(
       ? ''
       : googleAdsenseDataAdSlot,
     eleventyEnv: eleventyEnv || 'dev',
-    strapiApiUrl: process.env.STRAPI_API_URL,
+    strapiUrl: process.env.STRAPI_URL,
+    strapiApiUrl: `${process.env.STRAPI_URL}/api`,
     strapiAccessToken: process.env.STRAPI_ACCESS_TOKEN
   }
 );
