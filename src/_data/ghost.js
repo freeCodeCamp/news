@@ -1,7 +1,6 @@
 const Piscina = require('piscina');
 const { chunk, cloneDeep } = require('lodash');
 const { resolve, basename } = require('path');
-const fs = require('fs');
 
 const fetchFromGhost = require('../../utils/ghost/fetch-from-ghost');
 const fetchPosts = require('../../utils/strapi/fetch-posts');
@@ -37,7 +36,6 @@ module.exports = async () => {
       return arr.flat();
     })
     .catch(err => console.error(err));
-  fs.writeFileSync('./posts.json', JSON.stringify(posts, null, 2));
   // const pages = await Promise.all(
   //   chunk(allPages, batchSize).map((batch, i, arr) =>
   //     piscina.run({
@@ -94,60 +92,60 @@ module.exports = async () => {
   });
 
   // Create tags global data for tags pages
-  // const tags = [];
-  // const visibleTags = posts.reduce((arr, post) => {
-  //   return [...arr, ...post.tags.filter(tag => tag.visibility === 'public')];
-  // }, []);
-  // const allTags = getUniqueList(visibleTags, 'id');
-  // allTags.forEach(tag => {
-  //   // Attach posts to their respective tag
-  //   const currTagPosts = posts
-  //     .filter(post => post.tags.map(postTag => postTag.slug).includes(tag.slug))
-  //     .map(post => {
-  //       return {
-  //         title: post.title,
-  //         slug: post.slug,
-  //         path: post.path,
-  //         url: post.url,
-  //         feature_image: post.feature_image,
-  //         published_at: post.published_at,
-  //         author: post.author,
-  //         tags: [post.tags[0]], // Only include the first / primary tag
-  //         image_dimensions: { ...post.image_dimensions },
-  //         original_post: post?.original_post
-  //       };
-  //     });
-  //   // Save post count to tag object to help determine popular tags
-  //   tag.count = {
-  //     posts: currTagPosts.length
-  //   };
+  const tags = [];
+  const visibleTags = posts.reduce((arr, post) => {
+    return [...arr, ...post.tags.filter(tag => tag.visibility === 'public')];
+  }, []);
+  const allTags = getUniqueList(visibleTags, 'id');
+  allTags.forEach(tag => {
+    // Attach posts to their respective tag
+    const currTagPosts = posts
+      .filter(post => post.tags.map(postTag => postTag.slug).includes(tag.slug))
+      .map(post => {
+        return {
+          title: post.title,
+          slug: post.slug,
+          path: post.path,
+          url: post.url,
+          feature_image: post.feature_image,
+          publishedAt: post.publishedAt,
+          author: post.author,
+          tags: [post.tags[0]], // Only include the first / primary tag
+          image_dimensions: { ...post.image_dimensions },
+          original_post: post?.original_post
+        };
+      });
+    // Save post count to tag object to help determine popular tags
+    tag.count = {
+      posts: currTagPosts.length
+    };
 
-  //   const paginatedCurrTagPosts = chunk(currTagPosts, postsPerPage);
+    const paginatedCurrTagPosts = chunk(currTagPosts, postsPerPage);
 
-  //   paginatedCurrTagPosts.forEach((arr, i) => {
-  //     // For each entry in paginatedCurrTagPosts, add the tag object
-  //     // with some extra data for custom pagination
-  //     tags.push({
-  //       ...tag,
-  //       page: i,
-  //       posts: arr,
-  //       count: {
-  //         posts: currTagPosts.length
-  //       }
-  //     });
-  //   });
-  // });
+    paginatedCurrTagPosts.forEach((arr, i) => {
+      // For each entry in paginatedCurrTagPosts, add the tag object
+      // with some extra data for custom pagination
+      tags.push({
+        ...tag,
+        page: i,
+        posts: arr,
+        count: {
+          posts: currTagPosts.length
+        }
+      });
+    });
+  });
 
   // Create popularTags global data to show at the top of tag pages
-  // const popularTags = [...allTags]
-  //   .sort(
-  //     (a, b) =>
-  //       b.count.posts - a.count.posts ||
-  //       a.name
-  //         .toLowerCase()
-  //         .localeCompare(b.name.toLowerCase(), 'en', { sensitivity: 'base' })
-  //   )
-  //   .slice(0, 15);
+  const popularTags = [...allTags]
+    .sort(
+      (a, b) =>
+        b.count.posts - a.count.posts ||
+        a.name
+          .toLowerCase()
+          .localeCompare(b.name.toLowerCase(), 'en', { sensitivity: 'base' })
+    )
+    .slice(0, 15);
 
   const getCollectionFeeds = collection =>
     collection
@@ -182,8 +180,8 @@ module.exports = async () => {
         posts
       }
     ]),
-    getCollectionFeeds(authors)
-    // getCollectionFeeds(tags)
+    getCollectionFeeds(authors),
+    getCollectionFeeds(tags)
   ].flat();
 
   const generateSitemapObject = (collection, type) => {
@@ -221,8 +219,8 @@ module.exports = async () => {
   const sitemaps = [
     // generateSitemapObject(pages, 'pages'),
     generateSitemapObject(posts, 'posts'),
-    generateSitemapObject(authors, 'authors')
-    // generateSitemapObject(allTags, 'tags')
+    generateSitemapObject(authors, 'authors'),
+    generateSitemapObject(allTags, 'tags')
   ];
 
   // Add custom object for the landing page to the beginning of the pages sitemap collection entries array
@@ -269,8 +267,8 @@ module.exports = async () => {
     posts,
     // pages,
     authors,
-    // tags,
-    // popularTags,
+    tags,
+    popularTags,
     feeds,
     sitemaps
   };

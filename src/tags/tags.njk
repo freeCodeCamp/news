@@ -1,0 +1,9 @@
+---
+pagination:
+  data: ghost.tags
+  size: 1
+  alias: tag
+  addAllPagesToCollections: true
+layout: 'layouts/tag.njk'
+permalink: '{{ tag.path }}/{% if tag.page %}{{ tag.page }}/{% endif %}'
+---
