@@ -24,7 +24,6 @@ const removeUnusedKeys = obj => {
 };
 
 const processBatch = async ({ batch, type, currBatchNo, totalBatches }) => {
-  console.log('siteUrl', siteURL);
   console.log(`Processing ${type} batch ${currBatchNo} of ${totalBatches}...`);
 
   // Process current batch of posts / pages
@@ -36,18 +35,22 @@ const processBatch = async ({ batch, type, currBatchNo, totalBatches }) => {
       author: {
         id: oldPost.attributes.author.data.id,
         ...oldPost.attributes.author.data.attributes,
-        profile_image: {
-          id: oldPost.attributes.author.data.attributes.profile_image.data.id,
-          ...oldPost.attributes.author.data.attributes.profile_image.data
-            .attributes
-        }
+        profile_image:
+          oldPost.attributes.author.data.attributes.profile_image.data !== null
+            ? {
+                id: oldPost.attributes.author.data.attributes.profile_image.data
+                  .id,
+                ...oldPost.attributes.author.data.attributes.profile_image.data
+                  .attributes
+              }
+            : null
       },
       tags: oldPost.attributes.tags.data.map(tag => ({
         id: tag.id,
         ...tag.attributes
       })),
       feature_image:
-        oldPost.attributes.feature_image.data.length > 0
+        oldPost.attributes.feature_image.data !== null
           ? {
               id: oldPost.attributes.feature_image.data[0].id,
               ...oldPost.attributes.feature_image.data[0].attributes
