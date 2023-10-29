@@ -190,44 +190,44 @@ module.exports = async () => {
     // getCollectionFeeds(tags)
   ].flat();
 
-  // const generateSitemapObject = (collection, type) => {
-  //   return {
-  //     path: `/sitemap-${type}.xml`,
-  //     entries: cloneDeep(collection).map(obj => {
-  //       const pageObj = {
-  //         loc: `${siteURL}${obj.path}`
-  //       };
-  //       // Append lastmod if obj is a post or page with an updated_at property
-  //       if (obj.updatedAt)
-  //         pageObj.lastmod = new Date(obj.updatedAt).toISOString();
+  const generateSitemapObject = (collection, type) => {
+    return {
+      path: `/sitemap-${type}.xml`,
+      entries: cloneDeep(collection).map(obj => {
+        const pageObj = {
+          loc: `${siteURL}${obj.path}`
+        };
+        // Append lastmod if obj is a post or page with an updated_at property
+        if (obj.updatedAt)
+          pageObj.lastmod = new Date(obj.updatedAt).toISOString();
 
-  //       // Handle images depending on the type of collection
-  //       let imageKey;
-  //       if ((type === 'posts' || 'pages' || 'tags') && obj.feature_image)
-  //         imageKey = 'feature_image';
-  //       if (type === 'authors') {
-  //         if (obj.profile_image) imageKey = 'profile_image';
-  //         if (obj.cover_image) imageKey = 'cover_image'; // Prefer cover_image over profile_image for authors
-  //       }
+        // Handle images depending on the type of collection
+        let imageKey;
+        if ((type === 'posts' || 'pages' || 'tags') && obj.feature_image)
+          imageKey = 'feature_image';
+        if (type === 'authors') {
+          if (obj.profile_image) imageKey = 'profile_image';
+          if (obj.cover_image) imageKey = 'cover_image'; // Prefer cover_image over profile_image for authors
+        }
 
-  //       if (obj[imageKey]) {
-  //         pageObj.image = {
-  //           loc: obj[imageKey],
-  //           caption: basename(obj[imageKey])
-  //         };
-  //       }
+        if (obj[imageKey]) {
+          pageObj.image = {
+            loc: obj[imageKey],
+            caption: basename(obj[imageKey])
+          };
+        }
 
-  //       return pageObj;
-  //     })
-  //   };
-  // };
+        return pageObj;
+      })
+    };
+  };
 
-  // const sitemaps = [
-  //   // generateSitemapObject(pages, 'pages'),
-  //   generateSitemapObject(posts, 'posts'),
-  //   generateSitemapObject(primaryAuthors, 'authors')
-  //   // generateSitemapObject(allTags, 'tags')
-  // ];
+  const sitemaps = [
+    // generateSitemapObject(pages, 'pages'),
+    generateSitemapObject(posts, 'posts')
+    // generateSitemapObject(primaryAuthors, 'authors')
+    // generateSitemapObject(allTags, 'tags')
+  ];
 
   // Add custom object for the landing page to the beginning of the pages sitemap collection entries array
   // sitemaps[0].entries = [
@@ -241,33 +241,33 @@ module.exports = async () => {
   // ];
 
   // Sort sitemap entries
-  // sitemaps.forEach(sitemap =>
-  //   sitemap.entries.sort((a, b) => {
-  //     // Sort lastmod (posts and pages) in descending order
-  //     // and loc (authors and tags) in ascending / alphabetical order
-  //     if (a?.lastmod && b?.lastmod) {
-  //       return new Date(b.lastmod) - new Date(a.lastmod);
-  //     } else {
-  //       if (a.loc < b.loc) return -1;
-  //       if (a.loc > b.loc) return 1;
-  //       return 0;
-  //     }
-  //   })
-  // );
+  sitemaps.forEach(sitemap =>
+    sitemap.entries.sort((a, b) => {
+      // Sort lastmod (posts and pages) in descending order
+      // and loc (authors and tags) in ascending / alphabetical order
+      if (a?.lastmod && b?.lastmod) {
+        return new Date(b.lastmod) - new Date(a.lastmod);
+      } else {
+        if (a.loc < b.loc) return -1;
+        if (a.loc > b.loc) return 1;
+        return 0;
+      }
+    })
+  );
 
   // Add a sitemap index object to the sitemaps array and use some data from the existing pages, posts,
   // authors, and tags sitemaps as entries to use in the template
-  // sitemaps.unshift({
-  //   path: '/sitemap.xml',
-  //   entries: sitemaps.map(obj => {
-  //     const sitemapObj = {
-  //       loc: `${siteURL}${obj.path}`
-  //     };
-  //     if (obj.entries[0].lastmod) sitemapObj.lastmod = obj.entries[0].lastmod;
+  sitemaps.unshift({
+    path: '/sitemap.xml',
+    entries: sitemaps.map(obj => {
+      const sitemapObj = {
+        loc: `${siteURL}${obj.path}`
+      };
+      if (obj.entries[0].lastmod) sitemapObj.lastmod = obj.entries[0].lastmod;
 
-  //     return sitemapObj;
-  //   })
-  // });
+      return sitemapObj;
+    })
+  });
 
   return {
     posts,
@@ -275,7 +275,7 @@ module.exports = async () => {
     // authors,
     // tags,
     // popularTags,
-    feeds
-    // sitemaps
+    feeds,
+    sitemaps
   };
 };
