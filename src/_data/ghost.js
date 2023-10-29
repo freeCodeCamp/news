@@ -53,11 +53,12 @@ module.exports = async () => {
   //   .catch(err => console.error(err));
 
   // Create authors global data for author pages
-  const authors = getUniqueList(
+  const authors = [];
+  const allAuthors = getUniqueList(
     posts.map(post => post.author),
     'id'
   );
-  authors.forEach(author => {
+  allAuthors.forEach(author => {
     // Attach posts to their respective author
     const currAuthorPosts = posts
       .filter(post => post.author.id === author.id)
@@ -83,11 +84,14 @@ module.exports = async () => {
     paginatedCurrAuthorPosts.forEach((arr, i) => {
       // For each entry in paginatedCurrAuthorPosts, add some extra data to
       // the author object for custom pagination
-      author.page = i;
-      author.posts = arr;
-      author.count = {
-        posts: currAuthorPosts.length
-      };
+      authors.push({
+        ...author,
+        page: i,
+        posts: arr,
+        count: {
+          posts: currAuthorPosts.length
+        }
+      });
     });
   });
 
@@ -219,7 +223,7 @@ module.exports = async () => {
   const sitemaps = [
     // generateSitemapObject(pages, 'pages'),
     generateSitemapObject(posts, 'posts'),
-    generateSitemapObject(authors, 'authors'),
+    generateSitemapObject(allAuthors, 'authors'),
     generateSitemapObject(allTags, 'tags')
   ];
 
