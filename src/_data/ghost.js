@@ -153,42 +153,42 @@ module.exports = async () => {
   //   )
   //   .slice(0, 15);
 
-  // const getCollectionFeeds = collection =>
-  //   collection
-  //     // Filter out paginated authors / tags if they exist
-  //     .filter(obj => (obj.page ? obj.page === 0 : obj))
-  //     .map(obj => {
-  //       const feedObj = cloneDeep(obj);
-  //       // The main feed shows the last 10 posts. Tag and author
-  //       // pages show the last 15 posts
-  //       const feedPostLimit = feedObj.path === '/' ? 10 : 15;
+  const getCollectionFeeds = collection =>
+    collection
+      // Filter out paginated authors / tags if they exist
+      .filter(obj => (obj.page ? obj.page === 0 : obj))
+      .map(obj => {
+        const feedObj = cloneDeep(obj);
+        // The main feed shows the last 10 posts. Tag and author
+        // pages show the last 15 posts
+        const feedPostLimit = feedObj.path === '/' ? 10 : 15;
 
-  //       feedObj.posts = feedObj.posts.slice(0, feedPostLimit).map(post => {
-  //         // Append the feature image to the post content
-  //         if (post.feature_image)
-  //           post.body =
-  //             `<img src="${post.feature_image}" alt="${post.title}">` +
-  //             post.body;
+        feedObj.posts = feedObj.posts.slice(0, feedPostLimit).map(post => {
+          // Append the feature image to the post content
+          if (post.feature_image)
+            post.body =
+              `<img src="${post.feature_image}" alt="${post.title}">` +
+              post.body;
 
-  //         return post;
-  //       });
+          return post;
+        });
 
-  //       return feedObj;
-  //     });
+        return feedObj;
+      });
 
   // Create feeds global data for the main, tags, and authors
   // RSS feeds
-  // const feeds = [
-  //   // Create custom collection for main RSS feed
-  //   getCollectionFeeds([
-  //     {
-  //       path: '/',
-  //       posts
-  //     }
-  //   ]),
-  //   getCollectionFeeds(authors)
-  //   // getCollectionFeeds(tags)
-  // ].flat();
+  const feeds = [
+    // Create custom collection for main RSS feed
+    getCollectionFeeds([
+      {
+        path: '/',
+        posts
+      }
+    ])
+    // getCollectionFeeds(authors)
+    // getCollectionFeeds(tags)
+  ].flat();
 
   // const generateSitemapObject = (collection, type) => {
   //   return {
@@ -270,12 +270,12 @@ module.exports = async () => {
   // });
 
   return {
-    posts
+    posts,
     // pages,
     // authors,
     // tags,
     // popularTags,
-    // feeds,
+    feeds
     // sitemaps
   };
 };
