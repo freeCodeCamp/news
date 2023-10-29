@@ -34,7 +34,7 @@
                     <![CDATA[ {{ primaryTag.name }} ]]>
                 </category>
                 <dc:creator>
-                    <![CDATA[ {{ post.primary_author.name }} ]]>
+                    <![CDATA[ {{ post.author.name }} ]]>
                 </dc:creator>
                 <pubDate>{% buildDateFormatter site.timezone, post.published_at %}</pubDate>
                 <media:content url="{{ post.feature_image }}" medium="image" />

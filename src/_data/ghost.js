@@ -4,7 +4,7 @@ const { resolve, basename } = require('path');
 const fs = require('fs');
 
 const fetchFromGhost = require('../../utils/ghost/fetch-from-ghost');
-const fetchFromStrapi = require('../../utils/strapi/fetch-posts');
+const fetchPosts = require('../../utils/strapi/fetch-posts');
 const { postsPerPage, siteURL } = require('../../config');
 
 const getUniqueList = (arr, key) => [
@@ -19,8 +19,7 @@ module.exports = async () => {
   // Chunk raw Ghost posts and pages and process them in batches
   // with a pool of workers to create posts and pages global data
   const batchSize = 200;
-  const allPosts = await fetchFromStrapi('posts');
-  fs.writeFileSync('./posts.json', JSON.stringify(allPosts, null, 2));
+  const allPosts = await fetchPosts();
   // const allPosts = await fetchFromGhost('posts');
   // const allPages = await fetchFromGhost('pages');
   const posts = await Promise.all(
@@ -38,6 +37,7 @@ module.exports = async () => {
       return arr.flat();
     })
     .catch(err => console.error(err));
+  fs.writeFileSync('./posts.json', JSON.stringify(posts, null, 2));
   // const pages = await Promise.all(
   //   chunk(allPages, batchSize).map((batch, i, arr) =>
   //     piscina.run({
@@ -57,13 +57,13 @@ module.exports = async () => {
   // Create authors global data for author pages
   const authors = [];
   const primaryAuthors = getUniqueList(
-    posts.map(post => post.author.data),
+    posts.map(post => post.author),
     'id'
   );
   primaryAuthors.forEach(author => {
     // Attach posts to their respective author
     const currAuthorPosts = posts
-      .filter(post => post.author.data.id === author.id)
+      .filter(post => post.author.id === author.id)
       .map(post => {
         return {
           title: post.title,
@@ -71,8 +71,8 @@ module.exports = async () => {
           path: post.path,
           url: post.url,
           feature_image: post.feature_image,
-          published_at: post.published_at,
-          primary_author: post.primary_author,
+          publishedAt: post.publishedAt,
+          author: post.author,
           tags: [post.tags[0]], // Only include the first / primary tag
           image_dimensions: { ...post.image_dimensions },
           original_post: post?.original_post
@@ -115,7 +115,7 @@ module.exports = async () => {
   //         url: post.url,
   //         feature_image: post.feature_image,
   //         published_at: post.published_at,
-  //         primary_author: post.primary_author,
+  //         author: post.author,
   //         tags: [post.tags[0]], // Only include the first / primary tag
   //         image_dimensions: { ...post.image_dimensions },
   //         original_post: post?.original_post
@@ -153,129 +153,129 @@ module.exports = async () => {
   //   )
   //   .slice(0, 15);
 
-  const getCollectionFeeds = collection =>
-    collection
-      // Filter out paginated authors / tags if they exist
-      .filter(obj => (obj.page ? obj.page === 0 : obj))
-      .map(obj => {
-        const feedObj = cloneDeep(obj);
-        // The main feed shows the last 10 posts. Tag and author
-        // pages show the last 15 posts
-        const feedPostLimit = feedObj.path === '/' ? 10 : 15;
+  // const getCollectionFeeds = collection =>
+  //   collection
+  //     // Filter out paginated authors / tags if they exist
+  //     .filter(obj => (obj.page ? obj.page === 0 : obj))
+  //     .map(obj => {
+  //       const feedObj = cloneDeep(obj);
+  //       // The main feed shows the last 10 posts. Tag and author
+  //       // pages show the last 15 posts
+  //       const feedPostLimit = feedObj.path === '/' ? 10 : 15;
 
-        feedObj.posts = feedObj.posts.slice(0, feedPostLimit).map(post => {
-          // Append the feature image to the post content
-          if (post.feature_image)
-            post.body =
-              `<img src="${post.feature_image}" alt="${post.title}">` +
-              post.body;
+  //       feedObj.posts = feedObj.posts.slice(0, feedPostLimit).map(post => {
+  //         // Append the feature image to the post content
+  //         if (post.feature_image)
+  //           post.body =
+  //             `<img src="${post.feature_image}" alt="${post.title}">` +
+  //             post.body;
 
-          return post;
-        });
+  //         return post;
+  //       });
 
-        return feedObj;
-      });
+  //       return feedObj;
+  //     });
 
   // Create feeds global data for the main, tags, and authors
   // RSS feeds
-  const feeds = [
-    // Create custom collection for main RSS feed
-    getCollectionFeeds([
-      {
-        path: '/',
-        posts
-      }
-    ]),
-    getCollectionFeeds(authors)
-    // getCollectionFeeds(tags)
-  ].flat();
+  // const feeds = [
+  //   // Create custom collection for main RSS feed
+  //   getCollectionFeeds([
+  //     {
+  //       path: '/',
+  //       posts
+  //     }
+  //   ]),
+  //   getCollectionFeeds(authors)
+  //   // getCollectionFeeds(tags)
+  // ].flat();
 
-  const generateSitemapObject = (collection, type) => {
-    return {
-      path: `/sitemap-${type}.xml`,
-      entries: cloneDeep(collection).map(obj => {
-        const pageObj = {
-          loc: `${siteURL}${obj.path}`
-        };
-        // Append lastmod if obj is a post or page with an updated_at property
-        if (obj.updatedAt)
-          pageObj.lastmod = new Date(obj.updatedAt).toISOString();
+  // const generateSitemapObject = (collection, type) => {
+  //   return {
+  //     path: `/sitemap-${type}.xml`,
+  //     entries: cloneDeep(collection).map(obj => {
+  //       const pageObj = {
+  //         loc: `${siteURL}${obj.path}`
+  //       };
+  //       // Append lastmod if obj is a post or page with an updated_at property
+  //       if (obj.updatedAt)
+  //         pageObj.lastmod = new Date(obj.updatedAt).toISOString();
 
-        // Handle images depending on the type of collection
-        let imageKey;
-        if ((type === 'posts' || 'pages' || 'tags') && obj.feature_image)
-          imageKey = 'feature_image';
-        if (type === 'authors') {
-          if (obj.profile_image) imageKey = 'profile_image';
-          if (obj.cover_image) imageKey = 'cover_image'; // Prefer cover_image over profile_image for authors
-        }
+  //       // Handle images depending on the type of collection
+  //       let imageKey;
+  //       if ((type === 'posts' || 'pages' || 'tags') && obj.feature_image)
+  //         imageKey = 'feature_image';
+  //       if (type === 'authors') {
+  //         if (obj.profile_image) imageKey = 'profile_image';
+  //         if (obj.cover_image) imageKey = 'cover_image'; // Prefer cover_image over profile_image for authors
+  //       }
 
-        if (obj[imageKey]) {
-          pageObj.image = {
-            loc: obj[imageKey],
-            caption: basename(obj[imageKey])
-          };
-        }
+  //       if (obj[imageKey]) {
+  //         pageObj.image = {
+  //           loc: obj[imageKey],
+  //           caption: basename(obj[imageKey])
+  //         };
+  //       }
 
-        return pageObj;
-      })
-    };
-  };
+  //       return pageObj;
+  //     })
+  //   };
+  // };
 
-  const sitemaps = [
-    // generateSitemapObject(pages, 'pages'),
-    generateSitemapObject(posts, 'posts'),
-    generateSitemapObject(primaryAuthors, 'authors')
-    // generateSitemapObject(allTags, 'tags')
-  ];
+  // const sitemaps = [
+  //   // generateSitemapObject(pages, 'pages'),
+  //   generateSitemapObject(posts, 'posts'),
+  //   generateSitemapObject(primaryAuthors, 'authors')
+  //   // generateSitemapObject(allTags, 'tags')
+  // ];
 
   // Add custom object for the landing page to the beginning of the pages sitemap collection entries array
-  sitemaps[0].entries = [
-    {
-      loc: `${siteURL}/`,
-      // Published pages aren't shown on the landing page, so use the most recently updated post
-      // for lastmod
-      lastmod: sitemaps[0].entries[0].lastmod
-    },
-    ...sitemaps[0].entries
-  ];
+  // sitemaps[0].entries = [
+  //   {
+  //     loc: `${siteURL}/`,
+  //     // Published pages aren't shown on the landing page, so use the most recently updated post
+  //     // for lastmod
+  //     lastmod: sitemaps[1].entries[0].lastmod
+  //   },
+  //   ...sitemaps[0].entries
+  // ];
 
   // Sort sitemap entries
-  sitemaps.forEach(sitemap =>
-    sitemap.entries.sort((a, b) => {
-      // Sort lastmod (posts and pages) in descending order
-      // and loc (authors and tags) in ascending / alphabetical order
-      if (a?.lastmod && b?.lastmod) {
-        return new Date(b.lastmod) - new Date(a.lastmod);
-      } else {
-        if (a.loc < b.loc) return -1;
-        if (a.loc > b.loc) return 1;
-        return 0;
-      }
-    })
-  );
+  // sitemaps.forEach(sitemap =>
+  //   sitemap.entries.sort((a, b) => {
+  //     // Sort lastmod (posts and pages) in descending order
+  //     // and loc (authors and tags) in ascending / alphabetical order
+  //     if (a?.lastmod && b?.lastmod) {
+  //       return new Date(b.lastmod) - new Date(a.lastmod);
+  //     } else {
+  //       if (a.loc < b.loc) return -1;
+  //       if (a.loc > b.loc) return 1;
+  //       return 0;
+  //     }
+  //   })
+  // );
 
   // Add a sitemap index object to the sitemaps array and use some data from the existing pages, posts,
   // authors, and tags sitemaps as entries to use in the template
-  sitemaps.unshift({
-    path: '/sitemap.xml',
-    entries: sitemaps.map(obj => {
-      const sitemapObj = {
-        loc: `${siteURL}${obj.path}`
-      };
-      if (obj.entries[0].lastmod) sitemapObj.lastmod = obj.entries[0].lastmod;
+  // sitemaps.unshift({
+  //   path: '/sitemap.xml',
+  //   entries: sitemaps.map(obj => {
+  //     const sitemapObj = {
+  //       loc: `${siteURL}${obj.path}`
+  //     };
+  //     if (obj.entries[0].lastmod) sitemapObj.lastmod = obj.entries[0].lastmod;
 
-      return sitemapObj;
-    })
-  });
+  //     return sitemapObj;
+  //   })
+  // });
 
   return {
-    posts,
+    posts
     // pages,
-    authors,
+    // authors,
     // tags,
     // popularTags,
-    feeds,
-    sitemaps
+    // feeds,
+    // sitemaps
   };
 };

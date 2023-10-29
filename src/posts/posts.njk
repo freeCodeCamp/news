@@ -8,4 +8,4 @@ layout: 'layouts/post.njk'
 permalink: '{{ post.path }}'
 ---
 
-{{ post.html | safe if post.html }}
+{{ post.body | safe if post.body }}

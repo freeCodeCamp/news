@@ -1,4 +1,4 @@
-{% if post.primary_author.twitter or post.original_post.primary_author.twitter %}
+{% if post.author.twitter or post.original_post.author.twitter %}
     {% set tweetCTAKey = 'social-row.cta.tweet-a-thanks' %}
 {% else %}
     {% set tweetCTAKey = 'social-row.cta.tweet-it' %}

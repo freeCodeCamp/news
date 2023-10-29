@@ -31,12 +31,12 @@ time #}
                     <h1 class="post-full-title">{{ title }}</h1>
                 </header>
                 <div class="post-full-author-header" data-test-label="author-header-no-bio">
-                    {% if post.author.data.attributes.name != "freeCodeCamp.org" %}
+                    {% if post.author.name != "freeCodeCamp.org" %}
                         {% if post.original_post %}
-                            {{ byline(post.author.data.attributes, false, false, 'translator') }}
-                            {{ byline(post.original_post.primary_author, false, false, 'author', post.original_post.locale_i18n) }}
+                            {{ byline(post.author, false, false, 'translator') }}
+                            {{ byline(post.original_post.author, false, false, 'author', post.original_post.locale_i18n) }}
                         {% else %}
-                            {{ byline(post.primary_author, false, false) }}
+                            {{ byline(post.author, false, false) }}
                         {% endif %}
                     {% endif %}
                 </div>
@@ -56,7 +56,7 @@ time #}
                 {% endif %}
                 <section class="post-full-content">
                     <div class="post-and-sidebar">
-                        <section class="post-content {{ "medium-migrated-article" if (post.primary_author.name === "freeCodeCamp.org") }}" data-test-label="post-content">
+                        <section class="post-content {{ "medium-migrated-article" if (post.author.name === "freeCodeCamp.org") }}" data-test-label="post-content">
                             {{ content | safe }}
                         </section>
                         {% if adsEnabled %}
@@ -68,13 +68,13 @@ time #}
                         {% endif %}
                     </div>
                     <hr />
-                    {% if post.primary_author.name != "freeCodeCamp.org" %}
+                    {% if post.author.name != "freeCodeCamp.org" %}
                         <div class="post-full-author-header" data-test-label="author-header-with-bio">
                             {% if post.original_post %}
-                                {{ byline(post.primary_author, true, true, 'translator') }}
-                                {{ byline(post.original_post.primary_author, true, true, 'author', post.original_post.locale_i18n) }}
+                                {{ byline(post.author, true, true, 'translator') }}
+                                {{ byline(post.original_post.author, true, true, 'author', post.original_post.locale_i18n) }}
                             {% else %}
-                                {{ byline(post.primary_author, true, true) }}
+                                {{ byline(post.author, true, true) }}
                             {% endif %}
                         </div>
                         <hr />
@@ -131,8 +131,8 @@ time #}
         <meta property="article:tag" content="{{ tag.name }}">
     {% endfor %}
     <meta property="article:publisher" content="https://www.facebook.com/freecodecamp">
-    {% if post.primary_author.facebook %}
-        <meta property="article:author" content="{{ post.primary_author.facebook }}">
+    {% if post.author.facebook %}
+        <meta property="article:author" content="{{ post.author.facebook }}">
     {% endif %}
 
     {# Twitter Card #}
@@ -144,12 +144,12 @@ time #}
     <meta name="twitter:url" content="{{ site.url + post.path }}">
     <meta name="twitter:image" content="{{ post.feature_image }}">
     <meta name="twitter:label1" content="Written by">
-    <meta name="twitter:data1" content="{{ post.primary_author.name }}">
+    <meta name="twitter:data1" content="{{ post.author.name }}">
     <meta name="twitter:label2" content="Filed under">
     <meta name="twitter:data2" content="{{ post.tags | join(", ", "name") }}">
     <meta name="twitter:site" content="{{ site.twitter }}">
-    {% if post.primary_author.twitter %}
-        <meta name="twitter:creator" content="{{ post.primary_author.twitter }}">
+    {% if post.author.twitter %}
+        <meta name="twitter:creator" content="{{ post.author.twitter }}">
     {% endif %}
 
     <meta property="og:image:width" content="{{ post.image_dimensions.feature_image.width }}">

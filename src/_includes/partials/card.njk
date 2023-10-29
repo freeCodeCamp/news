@@ -44,15 +44,15 @@
                 </header>
             </div>
             <footer class="post-card-meta">
-                {% if post.primary_author.name === "freeCodeCamp.org" %}
+                {% if post.author.name === "freeCodeCamp.org" %}
                     <time class="meta-item-single" datetime="{{ post.publishedAt }}">{% timeAgo post.publishedAt %}</time>
                 {% else %}
                     <ul class="author-list" data-test-label="author-list">
                         {% if post.original_post %}
-                            {{ roleListItem(post.primary_author, post.publishedAt, 'translator') }}
-                            {{ roleListItem(post.original_post.primary_author, post.original_post.publishedAt, 'author', post.original_post.locale_i18n) }}
+                            {{ roleListItem(post.author, post.publishedAt, 'translator') }}
+                            {{ roleListItem(post.original_post.author, post.original_post.publishedAt, 'author', post.original_post.locale_i18n) }}
                         {% else %}
-                            {{ roleListItem(post.primary_author, post.publishedAt) }}
+                            {{ roleListItem(post.author, post.publishedAt) }}
                         {% endif %}
                     </ul>
                 {% endif %}

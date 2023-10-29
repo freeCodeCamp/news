@@ -31,6 +31,8 @@ function imageShortcode(
       src="${imageUrls[imageUrls.length - 1]}"
       class="${classes}"
       alt="${alt}"
+      width="${dimensions.width}"
+      height="${dimensions.height}"
       onerror="this.style.display='none'"
       ${lazyLoad ? 'loading="lazy"' : ''}
       data-test-label="${testLabel}"
@@ -44,7 +46,7 @@ function featureImageShortcode(src, alt, sizes, widths, dimensions) {
     ? widths.map(width =>
         src.replace('/content/images/', `/content/images/size/w${width}/`)
       )
-    : ['http://localhost:1337' + src];
+    : [src];
 
   return `
     <picture>
@@ -66,6 +68,8 @@ function featureImageShortcode(src, alt, sizes, widths, dimensions) {
         onerror="this.style.display='none'"
         src="${imageUrls[imageUrls.length - 1]}"
         alt="${alt}",
+        width="${dimensions.width}"
+        height="${dimensions.height}"
       >
     </picture>
   `;

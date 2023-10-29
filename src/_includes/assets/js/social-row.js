@@ -4,8 +4,8 @@ document.addEventListener('DOMContentLoaded', () => {
   // Use Nunjucks URL encoding here in case titles have any special characters like backticks
   const title = '{{ post.title | urlencode }}'.replace(/&#39;/g, '%27');
   const twitterHandles = {
-    originalPostAuthor: '{{ post.original_post.primary_author.twitter }}',
-    currentPostAuthor: '{{ post.primary_author.twitter }}' // Author or translator depending on context
+    originalPostAuthor: '{{ post.original_post.author.twitter }}',
+    currentPostAuthor: '{{ post.author.twitter }}' // Author or translator depending on context
   };
   const isTranslation = Boolean('{{ post.original_post }}');
   let thanks;
@@ -17,8 +17,8 @@ document.addEventListener('DOMContentLoaded', () => {
     (twitterHandles.originalPostAuthor || twitterHandles.currentPostAuthor)
   ) {
     const names = {
-      originalPostAuthor: '{{ post.original_post.primary_author.name }}',
-      currentPostAuthor: '{{ post.primary_author.name }}'
+      originalPostAuthor: '{{ post.original_post.author.name }}',
+      currentPostAuthor: '{{ post.author.name }}'
     };
 
     // Use either a Twitter handle or name in the tweet message

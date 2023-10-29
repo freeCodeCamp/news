@@ -16,7 +16,7 @@ const createImageObj = url => {
 
 const createAuthorObj = primaryAuthor => {
   const { name, profile_image, website, twitter, facebook, path } =
-    primaryAuthor.attributes;
+    primaryAuthor;
   const authorObj = {
     '@type': 'Person',
     name,
@@ -76,14 +76,14 @@ async function createJSONLDShortcode(type, site, data) {
       returnData.description = fullEscaper(data.description);
 
     if (type === 'article') {
-      if (data.published_at)
-        returnData.datePublished = new Date(data.published_at).toISOString();
-      if (data.updated_at)
-        returnData.dateModified = new Date(data.updated_at).toISOString();
+      if (data.publishedAt)
+        returnData.datePublished = new Date(data.publishedAt).toISOString();
+      if (data.updatedAt)
+        returnData.dateModified = new Date(data.updatedAt).toISOString();
       if (data.tags) {
         // Filter out internal Ghost tags
-        const keywordString = data.tags.data
-          .map(tag => tag.attributes.name)
+        const keywordString = data.tags
+          .map(tag => tag.name)
           .filter(keyword => !keyword.startsWith('#'))
           .join(', ');
 
@@ -97,7 +97,7 @@ async function createJSONLDShortcode(type, site, data) {
         returnData.image = createImageObj(data.feature_image);
       }
 
-      returnData.author = createAuthorObj(data.author.data);
+      returnData.author = createAuthorObj(data.author);
     }
 
     // Handle images for both types
