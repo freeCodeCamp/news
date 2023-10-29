@@ -55,12 +55,11 @@ module.exports = async () => {
   //   .catch(err => console.error(err));
 
   // Create authors global data for author pages
-  const authors = [];
-  const primaryAuthors = getUniqueList(
+  const authors = getUniqueList(
     posts.map(post => post.author),
     'id'
   );
-  primaryAuthors.forEach(author => {
+  authors.forEach(author => {
     // Attach posts to their respective author
     const currAuthorPosts = posts
       .filter(post => post.author.id === author.id)
@@ -84,16 +83,13 @@ module.exports = async () => {
     const paginatedCurrAuthorPosts = chunk(currAuthorPosts, postsPerPage);
 
     paginatedCurrAuthorPosts.forEach((arr, i) => {
-      // For each entry in paginatedCurrAuthorPosts, add the author object
-      // with some extra data for custom pagination
-      authors.push({
-        ...author,
-        page: i,
-        posts: arr,
-        count: {
-          posts: currAuthorPosts.length
-        }
-      });
+      // For each entry in paginatedCurrAuthorPosts, add some extra data to
+      // the author object for custom pagination
+      author.page = i;
+      author.posts = arr;
+      author.count = {
+        posts: currAuthorPosts.length
+      };
     });
   });
 
@@ -185,8 +181,8 @@ module.exports = async () => {
         path: '/',
         posts
       }
-    ])
-    // getCollectionFeeds(authors)
+    ]),
+    getCollectionFeeds(authors)
     // getCollectionFeeds(tags)
   ].flat();
 
@@ -224,8 +220,8 @@ module.exports = async () => {
 
   const sitemaps = [
     // generateSitemapObject(pages, 'pages'),
-    generateSitemapObject(posts, 'posts')
-    // generateSitemapObject(primaryAuthors, 'authors')
+    generateSitemapObject(posts, 'posts'),
+    generateSitemapObject(authors, 'authors')
     // generateSitemapObject(allTags, 'tags')
   ];
 
@@ -272,7 +268,7 @@ module.exports = async () => {
   return {
     posts,
     // pages,
-    // authors,
+    authors,
     // tags,
     // popularTags,
     feeds,
