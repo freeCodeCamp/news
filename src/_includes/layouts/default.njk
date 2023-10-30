@@ -80,6 +80,11 @@
         {% endif %}
         <meta name="referrer" content="no-referrer-when-downgrade">
 
+        {% if pagination.nextPageHref | nextPageExists %}
+            {# Updated dynamically by src/_includes/pagination.js #}
+            <link rel="next" href="">
+        {% endif %}
+
         {% block seo %}
             {# Facebook OpenGraph #}
             <meta property="og:site_name" content="{{ site.title }}">
