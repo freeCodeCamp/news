@@ -1,8 +1,6 @@
 const modifyGhostHTML = require('./modify-ghost-html');
 const originalPostHandler = require('./original-post-handler');
-const errorLogger = require('../../utils/error-logger');
 const { siteURL, strapiUrl } = require('../../config');
-const stripDomain = require('../../utils/strip-domain');
 
 const removeUnusedKeys = obj => {
   // TODO: Confirm again if any other fields need to be removed
@@ -129,8 +127,8 @@ const processBatch = async ({ batch, type, currBatchNo, totalBatches }) => {
     newPost.publishedAt = new Date(newPost.publishedAt);
 
     // Original author / translator feature
-    // if (newPost.codeinjection_head || newPost.codeinjection_foot)
-    //   newPost = await originalPostHandler(newPost);
+    if (newPost.codeinjection_head || newPost.codeinjection_foot)
+      newPost = await originalPostHandler(newPost);
 
     // Stash original excerpt and escape for structured data.
     // Shorten the default excerpt and replace newlines -- the

@@ -1,6 +1,6 @@
 const { URL } = require('url');
+const qs = require('qs');
 const { allGhostAPIInstances } = require('./api');
-const getImageDimensions = require('../get-image-dimensions');
 const translate = require('../translate');
 
 const originalPostHandler = async post => {
@@ -27,30 +27,81 @@ const originalPostHandler = async post => {
       const originalPostLocale =
         pathSegments.length === 2 ? 'english' : pathSegments[0];
       const originalPostSlug = pathSegments[pathSegments.length - 1];
-      const { api, siteURL } = allGhostAPIInstances;
-      const originalPost = await api.posts.read({
-        include: 'authors',
-        slug: originalPostSlug
+      const { strapiUrl, strapiAccessToken, siteURL } =
+        allGhostAPIInstances[originalPostLocale];
+      const postUrl = `${strapiUrl}/api/posts?${qs.stringify(
+        {
+          populate: ['tags', 'author', 'feature_image', 'author.profile_image'],
+          filters: {
+            slug: {
+              $eq: originalPostSlug
+            }
+          }
+        },
+        {
+          encodeValuesOnly: true
+        }
+      )}`;
+      const res = await fetch(postUrl, {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${strapiAccessToken}`
+        }
       });
+      const data = await res.json();
+      const unprocessedPost = data.data[0];
+      const originalPost = {
+        id: unprocessedPost.id,
+        ...unprocessedPost.attributes,
+        author: {
+          id: unprocessedPost.attributes.author.data.id,
+          ...unprocessedPost.attributes.author.data.attributes,
+          profile_image:
+            unprocessedPost.attributes.author.data.attributes.profile_image
+              .data !== null
+              ? {
+                  id: unprocessedPost.attributes.author.data.attributes
+                    .profile_image.data.id,
+                  ...unprocessedPost.attributes.author.data.attributes
+                    .profile_image.data.attributes
+                }
+              : null
+        },
+        tags: unprocessedPost.attributes.tags.data.map(tag => ({
+          id: tag.id,
+          ...tag.attributes
+        })),
+        feature_image:
+          unprocessedPost.attributes.feature_image.data !== null
+            ? {
+                id: unprocessedPost.attributes.feature_image.data[0].id,
+                ...unprocessedPost.attributes.feature_image.data[0].attributes
+              }
+            : null
+      };
 
       // Convert URLs to final published version
       originalPost.url = `${siteURL}/${originalPostSlug}/`;
-      originalPost.primary_author.url = `${siteURL}/author/${originalPost.primary_author.slug}/`;
+      originalPost.author.url = `${siteURL}/author/${originalPost.author.slug}/`;
 
-      if (originalPost.primary_author.profile_image) {
-        originalPost.primary_author.image_dimensions = {
-          ...originalPost.primary_author.image_dimensions
+      if (originalPost.author.profile_image) {
+        originalPost.author.image_dimensions = {
+          ...originalPost.author.image_dimensions
         };
-        originalPost.primary_author.image_dimensions.profile_image =
-          await getImageDimensions(originalPost.primary_author.profile_image);
+        originalPost.author.image_dimensions.profile_image = {
+          width: originalPost.author.profile_image.width ?? 600,
+          height: originalPost.author.profile_image.height ?? 400
+        };
+        originalPost.author.profile_image =
+          strapiUrl + originalPost.author.profile_image.url;
       }
 
       // Add an `original_post` object to the current post
       post.original_post = {
         title: originalPost.title,
         url: originalPost.url,
-        published_at: originalPost.published_at,
-        primary_author: originalPost.primary_author,
+        publishedAt: originalPost.publishedAt,
+        author: originalPost.author,
         locale_i18n: originalPostLocale
       };
 
@@ -92,7 +143,7 @@ const originalPostHandler = async post => {
 
     // Append details about the original article
     // to the beginning of the translated article
-    post.html = introHTML + post.html;
+    post.body = introHTML + post.body;
   }
 
   return post;

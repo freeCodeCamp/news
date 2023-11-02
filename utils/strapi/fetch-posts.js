@@ -1,6 +1,4 @@
-const { cloneDeep } = require('lodash');
 const { strapiApiUrl, strapiAccessToken } = require('../../config');
-const stripDomain = require('../strip-domain');
 const qs = require('qs');
 
 const wait = seconds => {

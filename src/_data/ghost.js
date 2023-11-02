@@ -2,7 +2,6 @@ const Piscina = require('piscina');
 const { chunk, cloneDeep } = require('lodash');
 const { resolve, basename } = require('path');
 
-const fetchFromGhost = require('../../utils/ghost/fetch-from-ghost');
 const fetchPosts = require('../../utils/strapi/fetch-posts');
 const { postsPerPage, siteURL } = require('../../config');
 
