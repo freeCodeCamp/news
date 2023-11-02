@@ -2,9 +2,9 @@ const fullEscaper = require('../full-escaper');
 const translate = require('../translate');
 const { siteURL } = require('../../config');
 
-const createImageObj = url => {
-  const width = 1920;
-  const height = 1080;
+const createImageObj = (url, imageDimensions) => {
+  const width = imageDimensions?.width ? imageDimensions?.width : 1920;
+  const height = imageDimensions?.height ? imageDimensions?.height : 1080;
 
   return {
     '@type': 'ImageObject',
@@ -14,9 +14,16 @@ const createImageObj = url => {
   };
 };
 
-const createAuthorObj = primaryAuthor => {
-  const { name, profile_image, website, twitter, facebook, path } =
-    primaryAuthor;
+const createAuthorObj = author => {
+  const {
+    name,
+    profile_image,
+    image_dimensions,
+    website,
+    twitter,
+    facebook,
+    path
+  } = author;
   const authorObj = {
     '@type': 'Person',
     name,
@@ -29,7 +36,10 @@ const createAuthorObj = primaryAuthor => {
   };
 
   if (profile_image) {
-    authorObj.image = createImageObj(profile_image);
+    authorObj.image = createImageObj(
+      profile_image,
+      image_dimensions.profile_image
+    );
   }
 
   return authorObj;
@@ -94,7 +104,10 @@ async function createJSONLDShortcode(type, site, data) {
       if (data.title) returnData.headline = fullEscaper(data.title);
 
       if (data.feature_image) {
-        returnData.image = createImageObj(data.feature_image);
+        returnData.image = createImageObj(
+          data.feature_image,
+          data.image_dimensions.feature_image
+        );
       }
 
       returnData.author = createAuthorObj(data.author);
