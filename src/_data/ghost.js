@@ -18,8 +18,6 @@ module.exports = async () => {
   // with a pool of workers to create posts and pages global data
   const batchSize = 200;
   const allPosts = await fetchPosts();
-  // const allPosts = await fetchFromGhost('posts');
-  // const allPages = await fetchFromGhost('pages');
   const posts = await Promise.all(
     chunk(allPosts, batchSize).map((batch, i, arr) =>
       piscina.run({
