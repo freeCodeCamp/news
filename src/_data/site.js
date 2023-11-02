@@ -26,7 +26,7 @@ module.exports = async () => {
   const site = {};
 
   site.url = siteURL;
-  site.lang = 'en';
+  site.lang = currentLocale_i18nISOCode.toLowerCase();
 
   const logoUrl =
     'https://cdn.freecodecamp.org/platform/universal/fcc_primary.svg';
