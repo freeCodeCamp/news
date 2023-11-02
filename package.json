@@ -98,13 +98,11 @@
     "piscina": "4.1.0",
     "prettier": "3.0.3",
     "probe-image-size": "7.2.3",
+    "qs": "^6.11.2",
     "shx": "0.3.4",
     "terser": "5.24.0"
   },
   "lint-staged": {
     "**/*": "prettier --write --ignore-unknown"
-  },
-  "dependencies": {
-    "qs": "^6.11.2"
   }
 }
