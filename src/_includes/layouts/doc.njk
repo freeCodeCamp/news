@@ -18,7 +18,7 @@
                 </header>
                 {% if doc.feature_image %}
                     <figure class="post-full-image">
-                        {% 
+                        {%
                             featureImage
                             doc.feature_image,
                             (title | escape),
@@ -61,8 +61,8 @@
     {% endif %}
     <meta property="og:url" content="{{ site.url + doc.path }}">
     <meta property="og:image" content="{{ doc.feature_image }}">
-    <meta property="article:published_time" content="{% toISOString doc.published_at %}">
-    <meta property="article:modified_time" content="{% toISOString doc.updated_at %}">
+    <meta property="article:published_time" content="{% toISOString doc.publishedAt %}">
+    <meta property="article:modified_time" content="{% toISOString doc.updatedAt %}">
     {% for tag in doc.tags %}
         <meta property="article:tag" content="{{ tag.name }}">
     {% endfor %}
