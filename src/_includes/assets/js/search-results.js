@@ -55,8 +55,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   const generateCardNode = (hit, lazyLoad) => {
     const featureImageEl = `
       <a class="post-card-image-link" href="${hit.url}" aria-label="${
-      hit.title
-    }">
+        hit.title
+      }">
         <img
           class="post-card-image"
           srcset="
@@ -133,8 +133,8 @@ document.addEventListener('DOMContentLoaded', async () => {
                 {% t 'original-author-translator.roles.author', { name: '${
                   hit.originalPost.author.name
                 }', locale: '${
-                translatedLocales[hit.originalPost.localeI18n]
-              }' } %}
+                  translatedLocales[hit.originalPost.localeI18n]
+                }' } %}
               </a>
               <time class="meta-item" datetime="${
                 hit.originalPost.publishedAt
