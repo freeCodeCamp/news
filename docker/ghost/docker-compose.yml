@@ -1,6 +1,6 @@
 services:
   english:
-    image: ghost:3
+    image: ghost:5
     restart: always
     ports:
       - 3010:2368
@@ -13,7 +13,7 @@ services:
       - ./config.production.json:/var/lib/ghost/config.production.json
 
   chinese:
-    image: ghost:3
+    image: ghost:5
     restart: always
     ports:
       - 3020:2368
@@ -26,7 +26,7 @@ services:
       - ./config.production.json:/var/lib/ghost/config.production.json
 
   espanol:
-    image: ghost:3
+    image: ghost:5
     restart: always
     ports:
       - 3030:2368
