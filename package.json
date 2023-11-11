@@ -83,7 +83,7 @@
     "eslint-utils": "3.0.0",
     "graceful-fs": "4.2.11",
     "husky": "8.0.3",
-    "i18next": "23.7.1",
+    "i18next": "23.7.2",
     "i18next-fs-backend": "2.3.0",
     "jest": "29.7.0",
     "jest-json-schema-extended": "1.0.1",
