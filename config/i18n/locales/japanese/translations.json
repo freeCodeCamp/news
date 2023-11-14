@@ -36,8 +36,8 @@
   },
   "social-row": {
     "cta": {
-      "tweet-a-thanks": "If you read this far, thank the author to show them you care. {{ <0> }}Say Thanks{{ </0> }}",
-      "tweet-it": "If this article was helpful, {{ <0> }}share it{{ </0> }}."
+      "tweet-a-thanks": "お読みいただきありがとうございます。ぜひ著者にも感謝のコメントを伝えましょう。{{ <0> }}共有{{ </0> }}",
+      "tweet-it": "この記事が参考になりましたらぜひシェアしてください。{{ <0> }}共有{{ </0> }}"
     },
     "tweets": {
       "default": "この記事が参考になりました。{{ author }} さんありがとうございます。",
