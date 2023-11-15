@@ -69,7 +69,7 @@
   "embed-title": "Embedded content",
   "footer": {
     "tax-exempt-status": "freeCodeCamp ایک ڈونر سپورٹڈ ٹیکس سے مستثنیٰ 501(c)(3) غیر منفعتی تنظیم ہے (امریکہ کا وفاقی ٹیکس شناختی نمبر: 82-0779546)",
-    "mission-statement": "ہمارا مشن: لوگوں کو مفت میں کوڈ سیکھنے میں مدد کرنا۔ ہم اسے ہزاروں ویڈیوز، مضامین، اور انٹرایکٹو کوڈنگ اسباق بنا کر پورا کرتے ہیں - یہ سب عوام کے لیے  publicly دستیاب ہیں۔ ہمارے پاس دنیا بھر میں ہزاروں freeCodeCamp اسٹڈی گروپس بھی ہیں۔ ",
+    "mission-statement": "Our mission: to help people learn to code for free. We accomplish this by creating thousands of videos, articles, and interactive coding lessons - all freely available to the public.",
     "donation-initiatives": "freeCodeCamp کو عطیات ہمارے تعلیمی اقدامات کی طرف جاتے ہیں، اور سرورز، services اور عملے کی تنخواہ کی ادائیگی میں مدد کرتے ہیں۔ ",
     "donate-text": "{{ <0> }} آپ یہاں ایک ٹیکس deductible donation دے سکتے ہیں. {{ </0> }}۔",
     "trending-guides": "ٹرینڈنگ گائیڈز",

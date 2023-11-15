@@ -69,7 +69,7 @@
   "embed-title": "Contenido incrustado",
   "footer": {
     "tax-exempt-status": "freeCodeCamp is a donor-supported tax-exempt 501(c)(3) charity organization (United States Federal Tax Identification Number: 82-0779546)",
-    "mission-statement": "Nuestra misión: ayudar a las personas a aprender a programar de forma gratuita. Logramos esto mediante la creación de miles de videos, artículos y lecciones de programación interactivas, todo disponibles gratuitamente para el público. También tenemos miles de grupos de estudio de FreeCodeCamp alrededor el mundo.",
+    "mission-statement": "Our mission: to help people learn to code for free. We accomplish this by creating thousands of videos, articles, and interactive coding lessons - all freely available to the public.",
     "donation-initiatives": "Las donaciones a freeCodeCamp van dirigidas a nuestras iniciativas educativas y ayudan a pagar servidores, servicios y personal.",
     "donate-text": "Puedes hacer {{ <0> }}una donación deducible de impuestos aquí{{ </0> }}.",
     "trending-guides": "Guías de tendencias",
