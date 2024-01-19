@@ -1945,63 +1945,84 @@ pre.runkit-element {
 /* ---------------------------------------------------------- */
 
 .site-footer {
-  position: relative;
   color: var(--gray85);
   background: var(--gray05);
   line-height: 1.6;
-}
-
-.footer-container {
-  margin-right: auto;
-  margin-left: auto;
-  padding-left: 15px;
-  padding-right: 15px;
-  padding-top: 40px;
-  padding-bottom: 40px;
+  padding: 40px 15px;
   font-size: 16px;
-  overflow-x: hidden;
 }
 
-.footer-container p {
+.footer-top {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(30.5em, 1fr));
+}
+
+@media (max-width: 500px) {
+  .footer-top {
+    grid-template-columns: repeat(auto-fit, minmax(19em, 1fr));
+  }
+}
+
+.footer-top,
+.footer-bottom {
+  width: min(100%, 1300px);
+  margin-inline: auto;
+}
+
+.site-footer p {
   margin: 0 0 1.45rem;
   line-height: 30px;
+  font-size: 16px;
 }
 
-.footer-container a {
+.site-footer a {
   color: var(--gray85);
   text-decoration: none;
+  padding: 2px;
 }
 
-.footer-container .col-header {
-  flex: 0 0 100%;
-  padding-bottom: 15px;
+.site-footer a:hover {
+  text-decoration: underline;
+}
+
+.site-footer .col-header,
+.trending-guides .col-header {
+  text-align: center;
   font-weight: 700;
   font-size: 16px;
-  text-align: center;
   padding: 0 15px 15px;
+  margin-bottom: 0;
+}
+
+.trending-guides-articles {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(11em, 1fr));
+  grid-column-gap: 3rem;
+  grid-row-gap: 0.5rem;
+}
+
+@media (max-width: 1400px) {
+  .trending-guides-articles {
+    grid-template-columns: repeat(auto-fit, minmax(12em, 1fr));
+  }
+}
+
+@media (max-width: 800px) {
+  .trending-guides-articles {
+    grid-template-columns: repeat(auto-fit, minmax(13em, 1fr));
+  }
 }
 
 .footer-row {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
   margin: 0;
 }
 
 .footer-col {
-  display: flex;
-  flex-direction: column;
-  flex: 0 0 100%;
-  padding-left: 15px;
-  padding-right: 15px;
+  padding-inline: 15px;
   font-size: 16px;
-}
-
-.footer-right,
-.footer-left {
-  display: flex;
-  flex-direction: column;
-  flex: 0 0 100%;
 }
 
 .footer-col a {
@@ -2009,30 +2030,23 @@ pre.runkit-element {
 }
 
 .footer-desc-col {
-  flex: 1 0 90%;
-  display: flex;
-  flex-direction: column;
-  padding-left: 15px;
-  padding-right: 15px;
+  padding-inline: 15px;
   margin-bottom: 30px;
+  align-self: center;
 }
 
 .footer-desc-col a {
   text-decoration: underline;
+  padding: 2px;
 }
 
 p.footer-donation {
-  /* display: flex; */
   font-weight: 700;
   font-size: 18px;
 }
 
 p.footer-donation a:hover {
   text-decoration: none;
-}
-
-.footer-container .col-spacer {
-  margin-top: -3rem;
 }
 
 .trending-guides {
@@ -2051,54 +2065,14 @@ p.footer-donation a:hover {
 }
 
 @media (min-width: 500px) {
-  .trending-guides-row {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-  }
-
-  .footer-col-3 {
-    flex: 1 0 100%;
-    flex-direction: row;
-  }
-
-  .footer-right {
-    padding-left: 15px;
-  }
-
-  .footer-col-1,
-  .footer-col-2,
-  .footer-right,
-  .footer-left {
-    flex: 1 0 45%;
-    height: auto;
+  .footer-col {
     font-size: 15;
   }
 }
 
 @media (min-width: 800px) {
-  .footer-container {
-    width: 750px;
-  }
-
-  .footer-col-1,
-  .footer-col-2,
-  .footer-col-3 {
-    flex: 1 0 25%;
-    height: auto;
+  .footer-col {
     font-size: 16.5;
-  }
-
-  .footer-col-3 {
-    flex-direction: column;
-  }
-
-  .footer-right {
-    padding-left: 0;
-  }
-
-  .footer-container .col-spacer {
-    margin-top: 40px;
   }
 
   .footer-bottom .our-nonprofit a {
@@ -2106,22 +2080,7 @@ p.footer-donation a:hover {
   }
 }
 
-@media (min-width: 1020px) {
-  .footer-container {
-    width: 850px;
-  }
-}
-
 @media (min-width: 1200px) {
-  .footer-container {
-    width: 1170px;
-  }
-
-  .footer-top {
-    display: flex;
-    flex-direction: row;
-  }
-
   .footer-desc-col {
     flex: 1 0 45%;
   }
@@ -2130,39 +2089,27 @@ p.footer-donation a:hover {
     flex: 1 0 58%;
   }
 
-  .footer-col-1 {
-    flex: 1 0 25%;
-  }
-
-  .footer-col-3 {
-    flex: 1 0 30%;
-  }
-
-  .footer-col-2 {
-    flex: 1 0 20%;
-  }
-
   p.footer-donation {
-    margin-top: 18px;
+    margin-top: 40px;
   }
 
   .footer-bottom .our-nonprofit {
-    padding: 0 10px;
+    padding-inline: 10px;
+    padding-top: 1.25rem;
     justify-content: space-between;
   }
 
   .footer-bottom .col-header {
-    display: none;
+    visibility: hidden;
+    padding: 0px;
+    margin: 0;
+    height: 1px;
   }
 
   .our-nonprofit {
-    margin-top: 20px;
-  }
-
-  .footer-divider {
-    height: 1px;
-    margin: 0 15px;
-    background-color: var(--gray15);
+    border-top: 1px;
+    border-top-style: solid;
+    border-top-color: var(--gray15);
   }
 }
 

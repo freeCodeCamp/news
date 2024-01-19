@@ -1,197 +1,243 @@
 {% set donateUrl %}{% t "links:donate" %}{% endset %}
 
 <footer class="site-footer">
-    <div class="footer-container">
-        <div class="footer-top">
-            <div class="footer-desc-col">
-                <p data-test-label="tax-exempt-status">{% t 'footer.tax-exempt-status' %}</p>
-                <p data-test-label="mission-statement">{% t 'footer.mission-statement' %}</p>
-                <p data-test-label="donation-initiatives">{% t 'footer.donation-initiatives' %}</p>
-                <p class="footer-donation" data-test-label="donate-text">
-                    {% t 'footer.donate-text', {
-                        '<0>': '<a href="' + ( donateUrl ) + '" class="inline" rel="noopener noreferrer" target="_blank" >',
-                        '</0>': '</a>',
-                        interpolation: {
-                            escapeValue: false
-                        }
-                    } %}
-                </p>
-            </div>
-            <div class="trending-guides" data-test-label="trending-guides">
-                <div class="col-header">{% t 'footer.trending-guides' %}</div>
-                <div class="trending-guides-row">
-                    <div class="footer-col footer-col-1">
-                        <a href="{% t 'trending:article0link' %}" rel="noopener noreferrer" target="_blank">
-                            {%- set article0title %}{% t 'trending:article0title' %}{% endset -%}
-                            {{ article0title | escape }}
-                        </a>
-                        <a href="{% t 'trending:article1link' %}" rel="noopener noreferrer" target="_blank">
-                            {%- set article1title %}{% t 'trending:article1title' %}{% endset -%}
-                            {{ article1title | escape }}
-                        </a>
-                        <a href="{% t 'trending:article2link' %}" rel="noopener noreferrer" target="_blank">
-                            {%- set article2title %}{% t 'trending:article2title' %}{% endset -%}
-                            {{ article2title | escape }}
-                        </a>
-                        <a href="{% t 'trending:article3link' %}" rel="noopener noreferrer" target="_blank">
-                            {%- set article3title %}{% t 'trending:article3title' %}{% endset -%}
-                            {{ article3title | escape }}
-                        </a>
-                        <a href="{% t 'trending:article4link' %}" rel="noopener noreferrer" target="_blank">
-                            {%- set article4title %}{% t 'trending:article4title' %}{% endset -%}
-                            {{ article4title | escape }}
-                        </a>
-                        <a href="{% t 'trending:article5link' %}" rel="noopener noreferrer" target="_blank">
-                            {%- set article5title %}{% t 'trending:article5title' %}{% endset -%}
-                            {{ article5title | escape }}
-                        </a>
-                        <a href="{% t 'trending:article6link' %}" rel="noopener noreferrer" target="_blank">
-                            {%- set article6title %}{% t 'trending:article6title' %}{% endset -%}
-                            {{ article6title | escape }}
-                        </a>
-                        <a href="{% t 'trending:article7link' %}" rel="noopener noreferrer" target="_blank">
-                            {%- set article7title %}{% t 'trending:article7title' %}{% endset -%}
-                            {{ article7title | escape }}
-                        </a>
-                        <a href="{% t 'trending:article8link' %}" rel="noopener noreferrer" target="_blank">
-                            {%- set article8title %}{% t 'trending:article8title' %}{% endset -%}
-                            {{ article8title | escape }}
-                        </a>
-                        <a href="{% t 'trending:article9link' %}" rel="noopener noreferrer" target="_blank">
-                            {%- set article9title %}{% t 'trending:article9title' %}{% endset -%}
-                            {{ article9title | escape }}
-                        </a>
-                    </div>
-                    <div class="footer-col footer-col-2">
-                        <a href="{% t 'trending:article10link' %}" rel="noopener noreferrer" target="_blank">
-                            {%- set article10title %}{% t 'trending:article10title' %}{% endset -%}
-                            {{ article10title | escape }}
-                        </a>
-                        <a href="{% t 'trending:article11link' %}" rel="noopener noreferrer" target="_blank">
-                            {%- set article11title %}{% t 'trending:article11title' %}{% endset -%}
-                            {{ article11title | escape }}
-                        </a>
-                        <a href="{% t 'trending:article12link' %}" rel="noopener noreferrer" target="_blank">
-                            {%- set article12title %}{% t 'trending:article12title' %}{% endset -%}
-                            {{ article12title | escape }}
-                        </a>
-                        <a href="{% t 'trending:article13link' %}" rel="noopener noreferrer" target="_blank">
-                            {%- set article13title %}{% t 'trending:article13title' %}{% endset -%}
-                            {{ article13title | escape }}
-                        </a>
-                        <a href="{% t 'trending:article14link' %}" rel="noopener noreferrer" target="_blank">
-                            {%- set article14title %}{% t 'trending:article14title' %}{% endset -%}
-                            {{ article14title | escape }}
-                        </a>
-                        <a href="{% t 'trending:article15link' %}" rel="noopener noreferrer" target="_blank">
-                            {%- set article15title %}{% t 'trending:article15title' %}{% endset -%}
-                            {{ article15title | escape }}
-                        </a>
-                        <a href="{% t 'trending:article16link' %}" rel="noopener noreferrer" target="_blank">
-                            {%- set article16title %}{% t 'trending:article16title' %}{% endset -%}
-                            {{ article16title | escape }}
-                        </a>
-                        <a href="{% t 'trending:article17link' %}" rel="noopener noreferrer" target="_blank">
-                            {%- set article17title %}{% t 'trending:article17title' %}{% endset -%}
-                            {{ article17title | escape }}
-                        </a>
-                        <a href="{% t 'trending:article18link' %}" rel="noopener noreferrer" target="_blank">
-                            {%- set article18title %}{% t 'trending:article18title' %}{% endset -%}
-                            {{ article18title | escape }}
-                        </a>
-                        <a href="{% t 'trending:article19link' %}" rel="noopener noreferrer" target="_blank">
-                            {%- set article19title %}{% t 'trending:article19title' %}{% endset -%}
-                            {{ article19title | escape }}
-                        </a>
-                    </div>
-                    <div class="footer-col footer-col-3">
-                        <div class="footer-left">
-                            <a href="{% t 'trending:article20link' %}" rel="noopener noreferrer" target="_blank">
-                                {%- set article20title %}{% t 'trending:article20title' %}{% endset -%}
-                                {{ article20title | escape }}
-                            </a>
-                            <a href="{% t 'trending:article21link' %}" rel="noopener noreferrer" target="_blank">
-                                {%- set article21title %}{% t 'trending:article21title' %}{% endset -%}
-                                {{ article21title | escape }}
-                            </a>
-                            <a href="{% t 'trending:article22link' %}" rel="noopener noreferrer" target="_blank">
-                                {%- set article22title %}{% t 'trending:article22title' %}{% endset -%}
-                                {{ article22title | escape }}
-                            </a>
-                            <a href="{% t 'trending:article23link' %}" rel="noopener noreferrer" target="_blank">
-                                {%- set article23title %}{% t 'trending:article23title' %}{% endset -%}
-                                {{ article23title | escape }}
-                            </a>
-                            <a href="{% t 'trending:article24link' %}" rel="noopener noreferrer" target="_blank">
-                                {%- set article24title %}{% t 'trending:article24title' %}{% endset -%}
-                                {{ article24title | escape }}
-                            </a>
-                        </div>
-
-                        <div class="footer-right">
-                            <a href="{% t 'trending:article25link' %}" rel="noopener noreferrer" target="_blank">
-                                {%- set article25title %}{% t 'trending:article25title' %}{% endset -%}
-                                {{ article25title | escape }}
-                            </a>
-                            <a href="{% t 'trending:article26link' %}" rel="noopener noreferrer" target="_blank">
-                                {%- set article26title %}{% t 'trending:article26title' %}{% endset -%}
-                                {{ article26title | escape }}
-                            </a>
-                            <a href="{% t 'trending:article27link' %}" rel="noopener noreferrer" target="_blank">
-                                {%- set article27title %}{% t 'trending:article27title' %}{% endset -%}
-                                {{ article27title | escape }}
-                            </a>
-                            <a href="{% t 'trending:article28link' %}" rel="noopener noreferrer" target="_blank">
-                                {%- set article28title %}{% t 'trending:article28title' %}{% endset -%}
-                                {{ article28title | escape }}
-                            </a>
-                            <a href="{% t 'trending:article29link' %}" rel="noopener noreferrer" target="_blank">
-                                {%- set article29title %}{% t 'trending:article29title' %}{% endset -%}
-                                {{ article29title | escape }}
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <div class="footer-top">
+        <div class="footer-desc-col">
+            <p data-test-label="tax-exempt-status">{% t 'footer.tax-exempt-status' %}</p>
+            <p data-test-label="mission-statement">{% t 'footer.mission-statement' %}</p>
+            <p data-test-label="donation-initiatives">{% t 'footer.donation-initiatives' %}</p>
+            <p class="footer-donation" data-test-label="donate-text">
+                {% t 'footer.donate-text', {
+                    '<0>': '<a href="' + ( donateUrl ) + '" class="inline" rel="noopener noreferrer" target="_blank" >',
+                    '</0>': '</a>',
+                    interpolation: {
+                        escapeValue: false
+                    }
+                } %}
+            </p>
         </div>
-        <div class='footer-bottom'>
-            <div class="col-header" data-test-label="our-nonprofit">{% t 'footer.our-nonprofit' %}</div>
-            <div class="footer-divider"></div>
-            <div class="our-nonprofit">
-                <a href="{% t 'links:footer.about' %}" rel="noopener noreferrer" target="_blank" data-test-label="about">
-                    {% t 'footer.links.about' %}
-                </a>
-                <a href="https://www.linkedin.com/school/free-code-camp/people/" rel="noopener noreferrer" target="_blank" data-test-label="alumni">
-                    {% t 'footer.links.alumni' %}
-                </a>
-                <a href="https://github.com/freeCodeCamp/" rel="noopener noreferrer" target="_blank" data-test-label="open-source">
-                    {% t 'footer.links.open-source' %}
-                </a>
-                <a href="https://www.freecodecamp.org/news/shop/" rel="noopener noreferrer" target="_blank" data-test-label="shop">
-                    {% t 'footer.links.shop' %}
-                </a>
-                <a href="{% t 'links:footer.support' %}" rel="noopener noreferrer" target="_blank" data-test-label="support">
-                    {% t 'footer.links.support' %}
-                </a>
-                <a href="https://www.freecodecamp.org/news/sponsors/" rel="noopener noreferrer" target="_blank" data-test-label="sponsors">
-                    {% t 'footer.links.sponsors' %}
-                </a>
-                <a href="{% t 'links:footer.honesty' %}" rel="noopener noreferrer" target="_blank" data-test-label="honesty">
-                    {% t 'footer.links.honesty' %}
-                </a>
-                <a href="{% t 'links:footer.coc' %}" rel="noopener noreferrer" target="_blank" data-test-label="coc">
-                    {% t 'footer.links.coc' %}
-                </a>
-                <a href="https://www.freecodecamp.org/news/privacy-policy/" rel="noopener noreferrer" target="_blank" data-test-label="privacy">
-                    {% t 'footer.links.privacy' %}
-                </a>
-                <a href="https://www.freecodecamp.org/news/terms-of-service/" rel="noopener noreferrer" target="_blank" data-test-label="tos">
-                    {% t 'footer.links.tos' %}
-                </a>
-                <a href="https://www.freecodecamp.org/news/copyright-policy/" rel="noopener noreferrer" target="_blank" data-test-label="copyright">
-                    {% t 'footer.links.copyright' %}
-                </a>
-            </div>
+        <div class="trending-guides" data-test-label="trending-guides">
+            <h2 id="trending-guides" class="col-header">{% t 'footer.trending-guides' %}</h2>
+            <ul class="trending-guides-articles" aria-labelledby="trending-guides">
+                <li>
+                    <a href="{% t 'trending:article0link' %}" rel="noopener noreferrer" target="_blank">
+                        {%- set article0title %}{% t 'trending:article0title' %}{% endset -%}
+                        {{ article0title | escape }}
+                    </a>
+                </li>
+                <li>
+                    <a href="{% t 'trending:article1link' %}" rel="noopener noreferrer" target="_blank">
+                        {%- set article1title %}{% t 'trending:article1title' %}{% endset -%}
+                        {{ article1title | escape }}
+                    </a>
+                </li>
+                <li>
+                    <a href="{% t 'trending:article2link' %}" rel="noopener noreferrer" target="_blank">
+                        {%- set article2title %}{% t 'trending:article2title' %}{% endset -%}
+                        {{ article2title | escape }}
+                    </a>
+                </li>
+                <li>
+                    <a href="{% t 'trending:article3link' %}" rel="noopener noreferrer" target="_blank">
+                        {%- set article3title %}{% t 'trending:article3title' %}{% endset -%}
+                        {{ article3title | escape }}
+                    </a>
+                </li>
+                <li>
+                    <a href="{% t 'trending:article4link' %}" rel="noopener noreferrer" target="_blank">
+                        {%- set article4title %}{% t 'trending:article4title' %}{% endset -%}
+                        {{ article4title | escape }}
+                    </a>
+                </li>
+                <li>
+                    <a href="{% t 'trending:article5link' %}" rel="noopener noreferrer" target="_blank">
+                        {%- set article5title %}{% t 'trending:article5title' %}{% endset -%}
+                        {{ article5title | escape }}
+                    </a>
+                </li>
+                <li>
+                    <a href="{% t 'trending:article6link' %}" rel="noopener noreferrer" target="_blank">
+                        {%- set article6title %}{% t 'trending:article6title' %}{% endset -%}
+                        {{ article6title | escape }}
+                    </a>
+                </li>
+                <li>
+                    <a href="{% t 'trending:article7link' %}" rel="noopener noreferrer" target="_blank">
+                        {%- set article7title %}{% t 'trending:article7title' %}{% endset -%}
+                        {{ article7title | escape }}
+                    </a>
+                </li>
+                <li>
+                    <a href="{% t 'trending:article8link' %}" rel="noopener noreferrer" target="_blank">
+                        {%- set article8title %}{% t 'trending:article8title' %}{% endset -%}
+                        {{ article8title | escape }}
+                    </a>
+                </li>
+                <li>
+                    <a href="{% t 'trending:article9link' %}" rel="noopener noreferrer" target="_blank">
+                        {%- set article9title %}{% t 'trending:article9title' %}{% endset -%}
+                        {{ article9title | escape }}
+                    </a>
+                </li>
+                <li>
+                    <a href="{% t 'trending:article10link' %}" rel="noopener noreferrer" target="_blank">
+                        {%- set article10title %}{% t 'trending:article10title' %}{% endset -%}
+                        {{ article10title | escape }}
+                    </a>
+                </li>
+                <li>
+                    <a href="{% t 'trending:article11link' %}" rel="noopener noreferrer" target="_blank">
+                        {%- set article11title %}{% t 'trending:article11title' %}{% endset -%}
+                        {{ article11title | escape }}
+                    </a>
+                </li>
+                <li>
+                    <a href="{% t 'trending:article12link' %}" rel="noopener noreferrer" target="_blank">
+                        {%- set article12title %}{% t 'trending:article12title' %}{% endset -%}
+                        {{ article12title | escape }}
+                    </a>
+                </li>
+                <li>
+                    <a href="{% t 'trending:article13link' %}" rel="noopener noreferrer" target="_blank">
+                        {%- set article13title %}{% t 'trending:article13title' %}{% endset -%}
+                        {{ article13title | escape }}
+                    </a>
+                </li>
+                <li>
+                    <a href="{% t 'trending:article14link' %}" rel="noopener noreferrer" target="_blank">
+                        {%- set article14title %}{% t 'trending:article14title' %}{% endset -%}
+                        {{ article14title | escape }}
+                    </a>
+                </li>
+                <li>
+                    <a href="{% t 'trending:article15link' %}" rel="noopener noreferrer" target="_blank">
+                        {%- set article15title %}{% t 'trending:article15title' %}{% endset -%}
+                        {{ article15title | escape }}
+                    </a>
+                </li>
+                <li>
+                    <a href="{% t 'trending:article16link' %}" rel="noopener noreferrer" target="_blank">
+                        {%- set article16title %}{% t 'trending:article16title' %}{% endset -%}
+                        {{ article16title | escape }}
+                    </a>
+                </li>
+                <li>
+                    <a href="{% t 'trending:article17link' %}" rel="noopener noreferrer" target="_blank">
+                        {%- set article17title %}{% t 'trending:article17title' %}{% endset -%}
+                        {{ article17title | escape }}
+                    </a>
+                </li>
+                <li>
+                    <a href="{% t 'trending:article18link' %}" rel="noopener noreferrer" target="_blank">
+                        {%- set article18title %}{% t 'trending:article18title' %}{% endset -%}
+                        {{ article18title | escape }}
+                    </a>
+                </li>
+                <li>
+                    <a href="{% t 'trending:article19link' %}" rel="noopener noreferrer" target="_blank">
+                        {%- set article19title %}{% t 'trending:article19title' %}{% endset -%}
+                        {{ article19title | escape }}
+                    </a>
+                </li>
+                <li>
+                    <a href="{% t 'trending:article20link' %}" rel="noopener noreferrer" target="_blank">
+                        {%- set article20title %}{% t 'trending:article20title' %}{% endset -%}
+                        {{ article20title | escape }}
+                    </a>
+                </li>
+                <li>
+                    <a href="{% t 'trending:article21link' %}" rel="noopener noreferrer" target="_blank">
+                        {%- set article21title %}{% t 'trending:article21title' %}{% endset -%}
+                        {{ article21title | escape }}
+                    </a>
+                </li>
+                <li>
+                    <a href="{% t 'trending:article22link' %}" rel="noopener noreferrer" target="_blank">
+                        {%- set article22title %}{% t 'trending:article22title' %}{% endset -%}
+                        {{ article22title | escape }}
+                    </a>
+                </li>
+                <li>
+                    <a href="{% t 'trending:article23link' %}" rel="noopener noreferrer" target="_blank">
+                        {%- set article23title %}{% t 'trending:article23title' %}{% endset -%}
+                        {{ article23title | escape }}
+                    </a>
+                </li>
+                <li>
+                    <a href="{% t 'trending:article24link' %}" rel="noopener noreferrer" target="_blank">
+                        {%- set article24title %}{% t 'trending:article24title' %}{% endset -%}
+                        {{ article24title | escape }}
+                    </a>
+                </li>
+                <li>
+                    <a href="{% t 'trending:article25link' %}" rel="noopener noreferrer" target="_blank">
+                        {%- set article25title %}{% t 'trending:article25title' %}{% endset -%}
+                        {{ article25title | escape }}
+                    </a>
+                </li>
+                <li>
+                    <a href="{% t 'trending:article26link' %}" rel="noopener noreferrer" target="_blank">
+                        {%- set article26title %}{% t 'trending:article26title' %}{% endset -%}
+                        {{ article26title | escape }}
+                    </a>
+                </li>
+                <li>
+                    <a href="{% t 'trending:article27link' %}" rel="noopener noreferrer" target="_blank">
+                        {%- set article27title %}{% t 'trending:article27title' %}{% endset -%}
+                        {{ article27title | escape }}
+                    </a>
+                </li>
+                <li>
+                    <a href="{% t 'trending:article28link' %}" rel="noopener noreferrer" target="_blank">
+                        {%- set article28title %}{% t 'trending:article28title' %}{% endset -%}
+                        {{ article28title | escape }}
+                    </a>
+                </li>
+                <li>
+                    <a href="{% t 'trending:article29link' %}" rel="noopener noreferrer" target="_blank">
+                        {%- set article29title %}{% t 'trending:article29title' %}{% endset -%}
+                        {{ article29title | escape }}
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class='footer-bottom'>
+        <h2 class="col-header" data-test-label="our-nonprofit">{% t 'footer.our-nonprofit' %}</h2>
+        <div class="our-nonprofit">
+            <a href="{% t 'links:footer.about' %}" rel="noopener noreferrer" target="_blank" data-test-label="about">
+                {% t 'footer.links.about' %}
+            </a>
+            <a href="https://www.linkedin.com/school/free-code-camp/people/" rel="noopener noreferrer" target="_blank" data-test-label="alumni">
+                {% t 'footer.links.alumni' %}
+            </a>
+            <a href="https://github.com/freeCodeCamp/" rel="noopener noreferrer" target="_blank" data-test-label="open-source">
+                {% t 'footer.links.open-source' %}
+            </a>
+            <a href="https://www.freecodecamp.org/news/shop/" rel="noopener noreferrer" target="_blank" data-test-label="shop">
+                {% t 'footer.links.shop' %}
+            </a>
+            <a href="{% t 'links:footer.support' %}" rel="noopener noreferrer" target="_blank" data-test-label="support">
+                {% t 'footer.links.support' %}
+            </a>
+            <a href="https://www.freecodecamp.org/news/sponsors/" rel="noopener noreferrer" target="_blank" data-test-label="sponsors">
+                {% t 'footer.links.sponsors' %}
+            </a>
+            <a href="{% t 'links:footer.honesty' %}" rel="noopener noreferrer" target="_blank" data-test-label="honesty">
+                {% t 'footer.links.honesty' %}
+            </a>
+            <a href="{% t 'links:footer.coc' %}" rel="noopener noreferrer" target="_blank" data-test-label="coc">
+                {% t 'footer.links.coc' %}
+            </a>
+            <a href="https://www.freecodecamp.org/news/privacy-policy/" rel="noopener noreferrer" target="_blank" data-test-label="privacy">
+                {% t 'footer.links.privacy' %}
+            </a>
+            <a href="https://www.freecodecamp.org/news/terms-of-service/" rel="noopener noreferrer" target="_blank" data-test-label="tos">
+                {% t 'footer.links.tos' %}
+            </a>
+            <a href="https://www.freecodecamp.org/news/copyright-policy/" rel="noopener noreferrer" target="_blank" data-test-label="copyright">
+                {% t 'footer.links.copyright' %}
+            </a>
         </div>
     </div>
 </footer>
