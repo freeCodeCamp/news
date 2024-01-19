@@ -1,5 +1,6 @@
 (async () => {
   const readMoreBtn = document.getElementById('readMoreBtn');
+  const readMoreRow = document.querySelector('.read-more-row');
   const postFeed = document.querySelector('.post-feed');
   let nextPageNum = 1;
 
@@ -20,7 +21,7 @@
         nextPageNum++;
         return parser.parseFromString(text, 'text/html');
       } else {
-        readMoreBtn.style.display = 'none';
+        readMoreRow.remove();
       }
     } catch (e) {
       console.error(`Connection error: ${e}`);
