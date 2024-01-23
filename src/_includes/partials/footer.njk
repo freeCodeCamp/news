@@ -1,4 +1,6 @@
 {% set donateUrl %}{% t "links:donate" %}{% endset %}
+{# {% from "assets/images/footer-ads/apple-store-badge.njk" import appleStoreBadge %}
+{% from "assets/images/footer-ads/google-play-badge.njk" import googlePlayBadge %} #}
 
 <footer class="site-footer">
     <div class="footer-top">
@@ -200,6 +202,34 @@
                     </a>
                 </li>
             </ul>
+            <div class="spacer" style="padding: 15px 0;"></div>
+            <div>
+                <h2 id="mobile-app" class="col-header">
+                    {% t "footer.mobile-app" %}
+                </h2>
+                <div class="min-h-[1px] px-[15px] md:w-2/3 md:ml-[16.6%]">
+                    <ul aria-labelledby="mobile-app" class="mobile-app-container">
+                        <li>
+                            <a href="https://apps.apple.com/us/app/freecodecamp/id6446908151?itsct=apps_box_link&itscg=30200" rel="noopener noreferrer" target="_blank">
+                                <img
+                                    src="https://cdn.freecodecamp.org/platform/universal/apple-store-badge.svg"
+                                    lang="en"
+                                    alt="Download on the App Store"
+                                />
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://play.google.com/store/apps/details?id=org.freecodecamp" rel="noopener noreferrer" target="_blank">
+                                <img
+                                    src="https://cdn.freecodecamp.org/platform/universal/google-play-badge.svg"
+                                    lang="en"
+                                    alt="Get it on Google Play"
+                                />
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
     <div class='footer-bottom'>
