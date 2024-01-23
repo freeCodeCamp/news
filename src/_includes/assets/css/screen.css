@@ -2004,6 +2004,11 @@ pre.runkit-element {
   grid-row-gap: 0.5rem;
 }
 
+.trending-guides-articles li {
+  padding: 0;
+  margin: 0;
+}
+
 @media (max-width: 1400px) {
   .trending-guides-articles {
     grid-template-columns: repeat(auto-fit, minmax(12em, 1fr));
