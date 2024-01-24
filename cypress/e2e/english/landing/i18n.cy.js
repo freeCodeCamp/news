@@ -13,7 +13,8 @@ const selectors = {
     donateText: "[data-test-label='donate-text']",
     trendingGuides: "[data-test-label='trending-guides']",
     ourNonprofit: "[data-test-label='our-nonprofit']",
-    trendingGuideLinks: "[data-test-label='trending-guides'] a",
+    trendingGuideLinks:
+      "[data-test-label='trending-guides'] .trending-guides-articles a",
     links: {
       about: "[data-test-label='about']",
       alumni: "[data-test-label='alumni']",
