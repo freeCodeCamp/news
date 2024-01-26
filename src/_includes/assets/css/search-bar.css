@@ -11,7 +11,7 @@
   color: var(--gray00);
   background: var(--gray75);
   border: none;
-  margin: 15px 0 0 0px;
+  margin: 6px 0 0 0px;
   padding: 0 10px 0 30px;
   font-size: 18px;
   height: 26px;
@@ -27,7 +27,7 @@
 .ais-SearchBox-submit {
   position: absolute;
   left: 0.5rem;
-  top: 32%;
+  top: 24%;
   width: 20px;
   height: 20px;
   margin: 0;
