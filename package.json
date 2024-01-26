@@ -37,7 +37,7 @@
     "lint:i18n-schema": "node ./config/i18n/schema-validation.js",
     "lint:pretty": "prettier --check .",
     "format": "prettier --write .",
-    "prepare": "husky install"
+    "prepare": "husky"
   },
   "repository": {
     "type": "git",
