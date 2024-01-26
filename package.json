@@ -67,7 +67,7 @@
   "devDependencies": {
     "@11ty/eleventy": "1.0.2",
     "@11ty/eleventy-plugin-rss": "1.2.0",
-    "@11ty/eleventy-upgrade-help": "1.0.1",
+    "@11ty/eleventy-upgrade-help": "2.0.5",
     "@tryghost/content-api": "1.11.20",
     "@tryghost/helpers": "1.1.88",
     "algoliasearch": "4.20.0",
