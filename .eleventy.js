@@ -42,6 +42,34 @@ module.exports = function (config) {
     manifest = {};
   });
 
+  config.addCollection('combinedPosts', function (collection) {
+    const hnPosts = collection.getAll()[0].data.hashnode.posts.map(post => {
+      return {
+        title: post.title,
+        slug: post.slug,
+        published_at: post.publishedAt,
+        feature_image: post.coverImage.url,
+        image_dimensions: {
+          feature_image: post.coverImage.url
+        },
+        primary_author: {
+          name: post.author.name,
+          profile_image: post.author.profilePicture,
+          image_dimensions: {
+            profile_image: post.author.profilePicture
+          }
+        }
+      };
+    });
+    const combinedPosts = [
+      ...hnPosts,
+      ...collection.getAll()[0].data.ghost.posts
+    ].sort((a, b) => {
+      return new Date(b.published_at) - new Date(a.published_at);
+    });
+    return combinedPosts;
+  });
+
   config.on('afterBuild', () => {
     // Minify CSS
     const cssDir = './dist/assets/css';

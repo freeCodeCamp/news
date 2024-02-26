@@ -17,18 +17,19 @@ const allGhostAPIInstances = ['local', ...locales].reduce((obj, currLocale) => {
         ghostAPIURL: url,
         siteURL: getSiteURL(currLocale, true)
       };
-    } else {
-      console.warn(`
-      ---------------------------------------------------------------
-      Warning: Unable to initialize the Content API for ${currLocale}
-      ---------------------------------------------------------------
-      These keys are missing:
-
-      ${upperLocale}_GHOST_API_URL = ${url}
-      ${upperLocale}_GHOST_CONTENT_API_KEY = ${key}
-      ${upperLocale}_GHOST_API_VERSION = ${version}
-      `);
     }
+    // else {
+    //   console.warn(`
+    //   ---------------------------------------------------------------
+    //   Warning: Unable to initialize the Content API for ${currLocale}
+    //   ---------------------------------------------------------------
+    //   These keys are missing:
+
+    //   ${upperLocale}_GHOST_API_URL = ${url}
+    //   ${upperLocale}_GHOST_CONTENT_API_KEY = ${key}
+    //   ${upperLocale}_GHOST_API_VERSION = ${version}
+    //   `);
+    // }
   } catch (err) {
     console.warn(`
       ---------------------------------------------------------------
