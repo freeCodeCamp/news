@@ -1,4 +1,5 @@
 const getImageDimensions = require('../../utils/get-image-dimensions');
+const modifyHashnodeHTML = require('./modify-hashnode-html');
 
 const processBatch = async ({ batch, currBatchNo, totalBatches }) => {
   console.log(
@@ -6,45 +7,50 @@ const processBatch = async ({ batch, currBatchNo, totalBatches }) => {
   );
 
   // Process current batch of posts / pages
-  await Promise.all(
-    batch.map(async obj => {
-      if (obj.coverImage) {
-        obj.feature_image = obj.coverImage.url;
-        obj.image_dimensions = { ...obj.image_dimensions };
-        obj.image_dimensions.feature_image = await getImageDimensions(
-          obj.feature_image,
-          obj.title
-        );
-      }
+  const newBatch = [];
+  for (const oldPost of batch) {
+    let newPost = {};
 
-      if (obj.author.profilePicture) {
-        obj.primary_author = {
-          profile_image: obj.author.profilePicture
-        };
-        obj.primary_author.image_dimensions = {
-          ...obj.primary_author.image_dimensions
-        };
-        obj.primary_author.image_dimensions.profile_image =
-          await getImageDimensions(
-            obj.primary_author.profile_image,
-            obj.primary_author.name,
-            true
-          );
-      }
+    newPost.id = oldPost.id;
+    newPost.slug = oldPost.slug;
+    newPost.title = oldPost.title;
+    newPost.subtitle = oldPost.subtitle;
 
-      obj.primary_author = {
-        ...obj.primary_author,
-        name: obj.author.name
-      };
-      obj.published_at = obj.publishedAt;
-      obj.updated_at = obj.updatedAt;
-      obj.path = `/${obj.slug}/`;
+    if (oldPost.coverImage) {
+      newPost.feature_image = oldPost.coverImage.url;
+      newPost.image_dimensions = {};
+      newPost.image_dimensions.feature_image = await getImageDimensions(
+        newPost.feature_image,
+        newPost.title
+      );
+    }
 
-      return obj;
-    })
-  );
+    const newPostAuthor = {};
+    newPostAuthor.name = oldPost.author.name;
+    newPostAuthor.path = `/${oldPost.author.username}/`;
+    newPostAuthor.url = `/author/${oldPost.author.username}/`;
+    if (oldPost.author.profilePicture) {
+      newPostAuthor.profile_image = oldPost.author.profilePicture;
+      newPostAuthor.image_dimensions = {};
+      newPostAuthor.image_dimensions.profile_image = await getImageDimensions(
+        newPostAuthor.profile_image,
+        newPostAuthor.name,
+        true
+      );
+    }
+    newPost.primary_author = newPostAuthor;
 
-  return batch;
+    newPost.published_at = new Date(oldPost.publishedAt);
+    newPost.updated_at = new Date(oldPost.updatedAt);
+    newPost.path = `/${oldPost.slug}/`;
+    newPost.html = oldPost.content.html;
+
+    newPost = await modifyHashnodeHTML(newPost);
+
+    newBatch.push(newPost);
+  }
+
+  return newBatch;
 };
 
 module.exports = processBatch;

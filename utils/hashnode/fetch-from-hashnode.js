@@ -31,6 +31,9 @@ const fetchFromHashnode = async () => {
         url
       }
       brief
+      content {
+        html
+      }
       publishedAt
       updatedAt
     }
