@@ -45,8 +45,6 @@ module.exports = function (config) {
   config.addCollection('combinedPosts', collection => {
     const hashnodePosts = collection.getAll()[0].data.hashnode.posts;
     const ghostPosts = collection.getAll()[0].data.ghost.posts;
-    // Write above result to a json file
-    console.log(hashnodePosts);
 
     const combinedPosts = [...hashnodePosts, ...ghostPosts];
     return combinedPosts;

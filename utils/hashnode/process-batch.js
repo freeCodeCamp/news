@@ -45,6 +45,14 @@ const processBatch = async ({ batch, currBatchNo, totalBatches }) => {
     }
     newPost.primary_author = newPostAuthor;
 
+    newPost.tags = oldPost.tags.map(tag => {
+      tag.path = `/tag/${tag.slug}/`;
+      // TODO: Setting all tags as public for now. Have to decide how we'll
+      // handle private tags.
+      tag.visibility = 'public';
+      return tag;
+    });
+
     newPost.published_at = oldPost.publishedAt;
     newPost.updated_at = oldPost.updatedAt;
     newPost.path = `/${oldPost.slug}/`;

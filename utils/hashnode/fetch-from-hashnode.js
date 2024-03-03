@@ -30,6 +30,11 @@ const fetchFromHashnode = async () => {
           facebook
         }
       }
+      tags {
+        id
+        name
+        slug
+      }
       coverImage {
         url
       }

@@ -4,7 +4,7 @@
 {% set title = tag.name + " - " + site.title %}
 {% set canonicalUrl = site.url + tag.path %}
 {% set postCount = tag.count.posts %}
-{% set popularTags = ghost.popularTags %}
+{% set popularTags = hashnode.popularTags %}
 
 {% block content %}
     <div class="under-header-content">
@@ -18,7 +18,7 @@
                 {% t 'tag.multiple-posts', { postCount: postCount } %}
             {% endif %}
         </h2>
-        
+
         <div class="tags-row">
             {% for tag in popularTags %}
                 <a class='tag' href="{{ tag.path | url }}">
