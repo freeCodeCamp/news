@@ -70,17 +70,29 @@ const fetchFromHashnode = async () => {
     }
   `;
 
-  const res = await request(process.env.HASHNODE_API_URL, query, {
-    host: sourceHashnodeHost,
-    first: 10
-  });
+  const allPosts = [];
+  let after = '';
+  let hasNextPage = true;
 
-  // console.log(res);
-  const posts = res?.publication?.posts?.edges.map(({ node }) => node) || [];
+  while (hasNextPage) {
+    const res = await request(process.env.HASHNODE_API_URL, query, {
+      host: sourceHashnodeHost,
+      first: 20,
+      after
+    });
 
-  await wait(0.2);
+    const resPosts = res.publication.posts?.edges.map(({ node }) => node) || [];
+    const pageInfo = res.publication.posts.pageInfo;
 
-  return posts;
+    after = pageInfo.endCursor;
+    hasNextPage = pageInfo.hasNextPage;
+
+    allPosts.push(...resPosts);
+
+    await wait(0.2);
+  }
+
+  return allPosts;
 };
 
 module.exports = fetchFromHashnode;
