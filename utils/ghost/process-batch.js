@@ -38,7 +38,9 @@ const removeUnusedKeys = obj => {
 };
 
 const processBatch = async ({ batch, type, currBatchNo, totalBatches }) => {
-  console.log(`Processing ${type} batch ${currBatchNo} of ${totalBatches}...`);
+  console.log(
+    `Processing Ghost ${type} batch ${currBatchNo} of ${totalBatches}...`
+  );
 
   // Process current batch of posts / pages
   await Promise.all(

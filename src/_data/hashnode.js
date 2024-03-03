@@ -254,12 +254,12 @@ module.exports = async () => {
   });
 
   return {
-    posts,
-    // pages,
-    authors,
-    tags,
-    popularTags,
-    feeds,
-    sitemaps
+    // posts,
+    // // pages,
+    // authors,
+    // tags,
+    // popularTags,
+    // feeds,
+    // sitemaps
   };
 };

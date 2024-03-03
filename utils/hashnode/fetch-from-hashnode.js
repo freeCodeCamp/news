@@ -84,6 +84,9 @@ const fetchFromHashnode = async () => {
     const resPosts = res.publication.posts?.edges.map(({ node }) => node) || [];
     const pageInfo = res.publication.posts.pageInfo;
 
+    if (resPosts.length > 0)
+      console.log(`Fetched Hashnode page ${pageInfo.endCursor}...`);
+
     after = pageInfo.endCursor;
     hasNextPage = pageInfo.hasNextPage;
 

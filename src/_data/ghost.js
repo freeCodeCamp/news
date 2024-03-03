@@ -3,25 +3,31 @@ const { chunk, cloneDeep } = require('lodash');
 const { resolve, basename } = require('path');
 
 const fetchFromGhost = require('../../utils/ghost/fetch-from-ghost');
+const fetchFromHashnode = require('../../utils/hashnode/fetch-from-hashnode');
 const { postsPerPage, siteURL } = require('../../config');
+const errorLogger = require('../../utils/error-logger');
 
 const getUniqueList = (arr, key) => [
   ...new Map(arr.map(item => [item[key], item])).values()
 ];
 
-const piscina = new Piscina({
+const piscinaGhost = new Piscina({
   filename: resolve(__dirname, '../../utils/ghost/process-batch')
+});
+const piscinaHashnode = new Piscina({
+  filename: resolve(__dirname, '../../utils/hashnode/process-batch')
 });
 
 module.exports = async () => {
   // Chunk raw Ghost posts and pages and process them in batches
   // with a pool of workers to create posts and pages global data
   const batchSize = 200;
-  const allPosts = await fetchFromGhost('posts');
-  const allPages = await fetchFromGhost('pages');
-  const posts = await Promise.all(
-    chunk(allPosts, batchSize).map((batch, i, arr) =>
-      piscina.run({
+  const allGhostPosts = await fetchFromGhost('posts');
+  const allHashnodePosts = await fetchFromHashnode();
+
+  const ghostPosts = await Promise.all(
+    chunk(allGhostPosts, batchSize).map((batch, i, arr) =>
+      piscinaGhost.run({
         batch,
         type: 'posts',
         currBatchNo: Number(i) + 1,
@@ -34,9 +40,43 @@ module.exports = async () => {
       return arr.flat();
     })
     .catch(err => console.error(err));
+  const hashnodePosts = await Promise.all(
+    chunk(allHashnodePosts, batchSize).map((batch, i, arr) =>
+      piscinaHashnode.run({
+        batch,
+        currBatchNo: Number(i) + 1,
+        totalBatches: arr.length
+      })
+    )
+  )
+    .then(arr => {
+      console.log('Finished processing all posts');
+      return arr.flat();
+    })
+    .catch(err => console.error(err));
+
+  const ghostPostSlugsSet = new Set(ghostPosts.map(post => post.slug));
+  const hashnodePostSlugsSet = new Set(hashnodePosts.map(post => post.slug));
+  const commonPostSlugs = [...ghostPostSlugsSet].filter(slug =>
+    hashnodePostSlugsSet.has(slug)
+  );
+
+  const posts = [...ghostPosts, ...hashnodePosts]
+    .filter(post => {
+      if (commonPostSlugs.includes(post.slug)) {
+        errorLogger({ type: 'duplicate', name: post.title });
+        return false;
+      }
+      return true;
+    })
+    .sort((a, b) => {
+      return new Date(b.published_at) - new Date(a.published_at);
+    });
+
+  const allPages = await fetchFromGhost('pages');
   const pages = await Promise.all(
     chunk(allPages, batchSize).map((batch, i, arr) =>
-      piscina.run({
+      piscinaGhost.run({
         batch,
         type: 'pages',
         currBatchNo: Number(i) + 1,
@@ -54,7 +94,7 @@ module.exports = async () => {
   const authors = [];
   const primaryAuthors = getUniqueList(
     posts.map(post => post.primary_author),
-    'id'
+    'slug'
   );
   primaryAuthors.forEach(author => {
     // Attach posts to their respective author
@@ -98,7 +138,7 @@ module.exports = async () => {
   const visibleTags = posts.reduce((arr, post) => {
     return [...arr, ...post.tags.filter(tag => tag.visibility === 'public')];
   }, []);
-  const allTags = getUniqueList(visibleTags, 'id');
+  const allTags = getUniqueList(visibleTags, 'slug');
   allTags.forEach(tag => {
     // Attach posts to their respective tag
     const currTagPosts = posts

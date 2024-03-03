@@ -30,7 +30,9 @@ const fetchFromGhost = async endpoint => {
 
     lastPage = ghostRes.meta.pagination.pages;
     if (ghostRes.length > 0)
-      console.log(`Fetched ${endpoint} page ${currPage} of ${lastPage}...`);
+      console.log(
+        `Fetched Ghost ${endpoint} page ${currPage} of ${lastPage}...`
+      );
     currPage = ghostRes.meta.pagination.next;
 
     ghostRes.forEach(obj => data.push(obj));

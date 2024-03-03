@@ -3,7 +3,7 @@ const modifyHashnodeHTML = require('./modify-hashnode-html');
 
 const processBatch = async ({ batch, currBatchNo, totalBatches }) => {
   console.log(
-    `Processing hashnode posts batch ${currBatchNo} of ${totalBatches}...`
+    `Processing Hashnode posts batch ${currBatchNo} of ${totalBatches}...`
   );
 
   // Process current batch of posts / pages
