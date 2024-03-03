@@ -45,8 +45,8 @@ const processBatch = async ({ batch, currBatchNo, totalBatches }) => {
     }
     newPost.primary_author = newPostAuthor;
 
-    newPost.published_at = new Date(oldPost.publishedAt);
-    newPost.updated_at = new Date(oldPost.updatedAt);
+    newPost.published_at = oldPost.publishedAt;
+    newPost.updated_at = oldPost.updatedAt;
     newPost.path = `/${oldPost.slug}/`;
     newPost.html = oldPost.content.html;
 
