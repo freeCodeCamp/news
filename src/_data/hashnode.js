@@ -3,6 +3,7 @@ const { basename, resolve } = require('path');
 const Piscina = require('piscina');
 
 const { postsPerPage, siteURL } = require('../../config');
+const errorLogger = require('../../utils/error-logger');
 const fetchFromHashnode = require('../../utils/hashnode/fetch-from-hashnode');
 
 const getUniqueList = (arr, key) => [
@@ -42,6 +43,12 @@ module.exports = async () => {
     const currAuthorPosts = posts
       .filter(post => post.primary_author.id === author.id)
       .map(post => {
+        // NOTE: Dummy error logger to test error handling
+        if (post.slug === 'day-52-cicd-pipeline-on-aws-part-3') {
+          console.log('Error: ', post.title);
+          errorLogger({ type: 'duplicate', name: post.title });
+        }
+
         return {
           title: post.title,
           slug: post.slug,
