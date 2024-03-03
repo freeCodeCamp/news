@@ -24,7 +24,7 @@ permalink: 404.html
         <aside class="outer">
             <div class="inner">
                 <div class="post-feed">
-                    {% for post in ghost.posts.slice(0, 4) %}
+                    {% for post in hashnode.posts.slice(0, 4) %}
                         {{ card(post, loop.index0) }}
                     {% endfor %}
                 </div>
