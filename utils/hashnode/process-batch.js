@@ -31,9 +31,11 @@ const processBatch = async ({ batch, currBatchNo, totalBatches }) => {
     newPostAuthor.name = oldPost.author.name;
     newPostAuthor.username = oldPost.author.username;
     newPostAuthor.bio = oldPost.author.bio.text;
-    newPostAuthor.path = `/author/${oldPost.author.username}/`;
+    newPostAuthor.location = oldPost.author.location;
+    newPostAuthor.website = oldPost.author.socialMediaLinks.website;
     newPostAuthor.twitter = oldPost.author.socialMediaLinks.twitter;
     newPostAuthor.facebook = oldPost.author.socialMediaLinks.facebook;
+    newPostAuthor.path = `/author/${oldPost.author.username}/`;
     if (oldPost.author.profilePicture) {
       newPostAuthor.profile_image = oldPost.author.profilePicture;
       newPostAuthor.image_dimensions = {};

@@ -26,9 +26,11 @@ const fetchFromHashnode = async () => {
         }
         profilePicture
         socialMediaLinks {
+          website
           twitter
           facebook
         }
+        location
       }
       tags {
         id
