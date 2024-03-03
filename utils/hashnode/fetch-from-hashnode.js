@@ -22,15 +22,19 @@ const fetchFromHashnode = async () => {
         username
         name
         bio {
-          html
           text
         }
         profilePicture
+        socialMediaLinks {
+          twitter
+          facebook
+        }
       }
       coverImage {
         url
       }
       brief
+      readTimeInMinutes
       content {
         html
       }

@@ -15,6 +15,7 @@ const processBatch = async ({ batch, currBatchNo, totalBatches }) => {
     newPost.slug = oldPost.slug;
     newPost.title = oldPost.title;
     newPost.subtitle = oldPost.subtitle;
+    newPost.reading_time = oldPost.readTimeInMinutes;
 
     if (oldPost.coverImage) {
       newPost.feature_image = oldPost.coverImage.url;
@@ -26,9 +27,13 @@ const processBatch = async ({ batch, currBatchNo, totalBatches }) => {
     }
 
     const newPostAuthor = {};
+    newPostAuthor.id = oldPost.author.id;
     newPostAuthor.name = oldPost.author.name;
-    newPostAuthor.path = `/${oldPost.author.username}/`;
-    newPostAuthor.url = `/author/${oldPost.author.username}/`;
+    newPostAuthor.username = oldPost.author.username;
+    newPostAuthor.bio = oldPost.author.bio.text;
+    newPostAuthor.path = `/author/${oldPost.author.username}/`;
+    newPostAuthor.twitter = oldPost.author.socialMediaLinks.twitter;
+    newPostAuthor.facebook = oldPost.author.socialMediaLinks.facebook;
     if (oldPost.author.profilePicture) {
       newPostAuthor.profile_image = oldPost.author.profilePicture;
       newPostAuthor.image_dimensions = {};
