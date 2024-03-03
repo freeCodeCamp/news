@@ -1,5 +1,5 @@
+const modifyHTMLContent = require('../modify-html-content');
 const getImageDimensions = require('../../utils/get-image-dimensions');
-const modifyHashnodeHTML = require('./modify-hashnode-html');
 
 const processBatch = async ({ batch, currBatchNo, totalBatches }) => {
   console.log(
@@ -9,7 +9,7 @@ const processBatch = async ({ batch, currBatchNo, totalBatches }) => {
   // Process current batch of posts / pages
   const newBatch = [];
   for (const oldPost of batch) {
-    let newPost = {};
+    const newPost = {};
 
     newPost.id = oldPost.id;
     newPost.slug = oldPost.slug;
@@ -58,9 +58,10 @@ const processBatch = async ({ batch, currBatchNo, totalBatches }) => {
     newPost.published_at = oldPost.publishedAt;
     newPost.updated_at = oldPost.updatedAt;
     newPost.path = `/${oldPost.slug}/`;
-    newPost.html = oldPost.content.html;
-
-    newPost = await modifyHashnodeHTML(newPost);
+    newPost.html = await modifyHTMLContent({
+      postContent: oldPost.content.html,
+      postTitle: newPost.title
+    });
 
     newBatch.push(newPost);
   }
