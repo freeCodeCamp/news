@@ -36,7 +36,7 @@ module.exports = async () => {
     )
   )
     .then(arr => {
-      console.log('Finished processing all posts');
+      console.log('Finished processing all Ghost posts');
       return arr.flat();
     })
     .catch(err => console.error(err));
@@ -50,7 +50,7 @@ module.exports = async () => {
     )
   )
     .then(arr => {
-      console.log('Finished processing all posts');
+      console.log('Finished processing all Hashnode posts');
       return arr.flat();
     })
     .catch(err => console.error(err));
