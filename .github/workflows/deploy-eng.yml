@@ -12,10 +12,17 @@ name: Eng - Build and Deploy
 
 on:
   workflow_dispatch:
-  # build every 90 minutes
-  # schedule:
-  #   - cron: '00 0-21/3 * * *'
-  #   - cron: '30 1-22/3 * * *'
+    schedule:
+      # Here are the times for the cron:
+      #
+      # Sun, Mon, Tue, Thu, Fri : at 00:00, 03:00, 06:00, 09:00, 12:00, 15:00, 18:00 UTC
+      # Wed, Sat                : at --:--, --:--, 06:00, 09:00, 12:00, 15:00, 18:00 UTC
+      #
+      # There is a 6 hour maintenance window on Wednesdays and Saturdays,
+      # and the crons are scheduled at 5 mins past the hour.
+      #
+      - cron: '5 0,3,6,9,12,15,18 * * 0-2,4-5'
+      - cron: '5 6,9,12,15,18 * * 3,6'
 
 jobs:
   build:
@@ -96,7 +103,9 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - name: Install dependencies
-        run: npm ci
+        run: |
+          npm ci
+          sudo apt-get install make
 
       - name: Build site
         run: npm run build
@@ -105,67 +114,46 @@ jobs:
 
       # - name: Set up Docker Buildx
       #   uses: docker/setup-buildx-action@dc7b9719a96d48369863986a06765841d7ea23f6 # tag=v2
-
-      - name: Docker login to Azure Container Registry
-        uses: azure/docker-login@83efeb77770c98b620c73055fbb59b2847e17dc0 # v1
-        with:
-          login-server: ${{ secrets.ACR_NAME }}.azurecr.io
-          username: ${{ secrets.ACR_USERNAME }}
-          password: ${{ secrets.ACR_PASSWORD }}
-
-      - name: Build & Push Docker Images
+      - name: Create a tagname
+        id: tagname
         run: |
-          tagname=$(git rev-parse --short HEAD)-$(date +%Y%m%d)-$(date +%H%M)
+          echo "tagname=$(git rev-parse --short HEAD)-$(date +%Y%m%d)-$(date +%H%M)" >> $GITHUB_ENV
+
+      - name: Build & Tag Images
+        run: |
           docker build . \
-          --tag ${{ secrets.ACR_NAME }}.azurecr.io/${{ matrix.site_tlds }}/news-${{ matrix.languages }}:$tagname \
-          --tag ${{ secrets.ACR_NAME }}.azurecr.io/${{ matrix.site_tlds }}/news-${{ matrix.languages }}:latest \
+          --tag registry.digitalocean.com/${{ secrets.DOCR_NAME }}/${{ matrix.site_tlds }}/news-${{ matrix.languages }}:$tagname \
+          --tag registry.digitalocean.com/${{ secrets.DOCR_NAME }}/${{ matrix.site_tlds }}/news-${{ matrix.languages }}:latest \
           --build-arg BUILD_LANGUAGE=${{ matrix.languages }} \
           --file docker/Dockerfile
-          docker push --all-tags ${{ secrets.ACR_NAME }}.azurecr.io/${{ matrix.site_tlds }}/news-${{ matrix.languages }}
+
+      # - name: Build the registry test image
+      #   run: |
+      #     cd registry-test
+      #     REGISTRY_NAME=${{ secrets.DOCR_NAME }} TAGNAME_CI=$tagname make build
+      #     cd ..
+
+      - name: Install doctl
+        uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+
+      - name: Log in to DigitalOcean Container Registry with short-lived credentials
+        run: doctl registry login --expiry-seconds 1200
+
+      - name: Push image to DigitalOcean Container Registry
+        run: |
+          docker push registry.digitalocean.com/${{ secrets.DOCR_NAME }}/${{ matrix.site_tlds }}/news-${{ matrix.languages }}:$tagname
+          docker push registry.digitalocean.com/${{ secrets.DOCR_NAME }}/${{ matrix.site_tlds }}/news-${{ matrix.languages }}:latest
+
+      # - name: Push the registry test image
+      #   run: |
+      #     cd registry-test
+      #     REGISTRY_NAME=${{ secrets.DOCR_NAME }} TAGNAME_CI=$tagname make push
+      #     cd ..
 
       - name: Clean up Self-hosted setup
         uses: colpal/actions-clean@36e6ca1abd35efe61cb60f912bd7837f67887c8a # tag=v1
         if: ${{ always() }} # To ensure this step runs even when earlier steps fail
 
-  deploy:
-    name: Deploy
-    runs-on: ubuntu-22.04
-    needs:
-      - build
-
-    strategy:
-      fail-fast: false
-      matrix:
-        languages: [english]
-        site_tlds: [dev]
-
-    # GitHub's deployment environment configuration.
-    # environment:
-    #   name: ${{ matrix.site_tlds }}
-    #   url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
-
-    steps:
-      - name: Azure Login
-        uses: azure/login@cb79c773a3cfa27f31f25eb3f677781210c9ce3d # v1
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
-
-      - name: Deploy to Azure Web App
-        id: deploy-to-webapp
-        uses: azure/webapps-deploy@145a0687697df1d8a28909569f6e5d86213041f9 # v3
-        with:
-          app-name: freecodecamp-news-${{ matrix.site_tlds }}-${{ matrix.languages }}
-          images:
-            ${{ secrets.ACR_NAME }}.azurecr.io/${{ matrix.site_tlds }}/news-${{
-            matrix.languages }}:latest
-
-      - name: Remove Old images
-        run: |
-          az acr run \
-          --cmd "acr purge --filter '${{ matrix.site_tlds }}/news-${{ matrix.languages }}:.*' \
-          --untagged --ago 2d" \
-          --registry ${{ secrets.ACR_NAME }} /dev/null
-
-      # - name: Clean up Self-hosted setup
-      #   uses: colpal/actions-clean@v1
-      #   if: ${{ always() }} # To ensure this step runs even when earlier steps fail
+# Deployments are automated via https://github.com/freeCodeCamp/news-config
