@@ -96,7 +96,7 @@
     "node-fetch": "2.7.0",
     "npm-run-all2": "6.1.2",
     "piscina": "4.3.0",
-    "prettier": "3.2.4",
+    "prettier": "3.2.5",
     "probe-image-size": "7.2.3",
     "shx": "0.3.4",
     "terser": "5.29.1"
