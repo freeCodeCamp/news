@@ -29,7 +29,7 @@ const processBatch = async ({ batch, currBatchNo, totalBatches }) => {
     const newPostAuthor = {};
     newPostAuthor.id = oldPost.author.id;
     newPostAuthor.name = oldPost.author.name;
-    newPostAuthor.username = oldPost.author.username;
+    newPostAuthor.slug = oldPost.author.username;
     newPostAuthor.bio = oldPost.author.bio.text;
     newPostAuthor.location = oldPost.author.location;
     newPostAuthor.website = oldPost.author.socialMediaLinks.website;
