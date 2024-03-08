@@ -4,11 +4,7 @@
 
 Welcome to freeCodeCamp's [Developer News][1] codebase — A JAMStack app built with [Ghost][2] & [11ty][3] & lots of love from the community.
 
-The code is based on this [template][4]. We use this project to build and deploy multiple instances of our publications in several world languages.
-
-Content is fetched from Ghost, packaged into docker images, and deployed to Azure WebApp for Containers on Azure App Service.
-
-All of the services are then distributed globally by our CDN provider.
+The code is based on this [template][4]. We use this project to build and deploy multiple instances of our publications in several world languages. All of the services are then distributed globally by our CDN provider.
 
 ## Contributing
 
@@ -72,7 +68,7 @@ Copyright (c) 2021 freeCodeCamp.org - Released under the
 [3]: https://www.11ty.io/
 [4]: https://github.com/TryGhost/eleventy-starter-ghost
 [5]: https://contribute.freecodecamp.org/#/
-[6]: https://dev.azure.com/freeCodeCamp-org/news/_apis/build/status/build-deploy-eng
-[7]: https://dev.azure.com/freeCodeCamp-org/news/_build/latest?definitionId=31
+[6]: https://github.com/freeCodeCamp/news/actions/workflows/deploy-eng.yml/badge.svg
+[7]: https://github.com/freeCodeCamp/news/actions/workflows/deploy-eng.yml
 [8]: https://github.com/freeCodeCamp/news/actions/workflows/deploy-i18n.yml/badge.svg
 [9]: https://github.com/freeCodeCamp/news/actions/workflows/deploy-i18n.yml
