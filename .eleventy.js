@@ -28,8 +28,6 @@ const { currentLocale_i18n, eleventyEnv } = require('./config');
 const sitePath = require('./utils/site-path');
 
 module.exports = function (config) {
-  config.addPlugin(UpgradeHelper);
-
   // Minify inline CSS
   config.addFilter('cssMin', cssMin);
 
@@ -74,6 +72,9 @@ module.exports = function (config) {
   });
 
   config.addPlugin(pluginRSS);
+
+  // If you have other `addPlugin` calls, it’s important that UpgradeHelper is added last.
+  config.addPlugin(UpgradeHelper);
 
   config.addNunjucksShortcode('image', imageShortcode);
 
