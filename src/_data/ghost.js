@@ -73,6 +73,14 @@ module.exports = async () => {
       return new Date(b.published_at) - new Date(a.published_at);
     });
 
+  // Stop building if there are posts with duplicate slugs
+  if (commonPostSlugs.length) {
+    console.error(
+      `Duplicate post slugs found: ${commonPostSlugs.length}. You can view the list of duplicate posts in duplicate-errors.log file. Exiting...`
+    );
+    process.exit(1);
+  }
+
   const allPages = await fetchFromGhost('pages');
   const pages = await Promise.all(
     chunk(allPages, batchSize).map((batch, i, arr) =>
