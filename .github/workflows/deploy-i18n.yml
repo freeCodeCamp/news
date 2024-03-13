@@ -24,7 +24,8 @@ jobs:
       matrix:
         node-version: [18.x]
         languages:
-          [chinese, espanol, italian, japanese, korean, portuguese, ukrainian]
+          # [chinese, espanol, italian, japanese, korean, portuguese, ukrainian]
+          [italian]
         site_tlds: [org]
 
     env:
