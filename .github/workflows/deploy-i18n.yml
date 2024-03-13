@@ -17,15 +17,14 @@ on:
 jobs:
   build:
     name: Build
-    runs-on: [self-hosted, on-aws]
+    runs-on: ubuntu-22.04
 
     strategy:
       fail-fast: false
       matrix:
         node-version: [18.x]
         languages:
-          # [chinese, espanol, italian, japanese, korean, portuguese, ukrainian]
-          [italian]
+          [chinese, espanol, italian, japanese, korean, portuguese, ukrainian]
         site_tlds: [org]
 
     env:
