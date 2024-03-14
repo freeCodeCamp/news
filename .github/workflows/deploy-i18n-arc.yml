@@ -1,0 +1,131 @@
+name: ARC Test
+
+on:
+  workflow_dispatch:
+  # schedule:
+  #   # Here are the times for the cron:
+  #   #
+  #   # Sun, Mon, Tue, Thu, Fri : at 00:00, 06:00, 12:00, 18:00 UTC
+  #   # Wed, Sat                : at --:--, 06:00, 12:00, 18:00 UTC
+  #   #
+  #   # There is a 6 hour maintenance window on Wednesdays and Saturdays,
+  #   # and the crons are scheduled at 5 mins past the hour.
+  #   #
+  #   - cron: '5 0,6,12,18 * * 0-2,4-5'
+  #   - cron: '5 6,12,18 * * 3,6'
+
+jobs:
+  build:
+    name: Build
+    runs-on: gha-sh-runners-news
+
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version: [18.x]
+        languages:
+          [chinese, espanol, italian, japanese, korean, portuguese, ukrainian]
+        site_tlds: [dev]
+
+    env:
+      BUILD_LANG: ${{ matrix.languages }}
+
+      ALGOLIA_API_KEY: ${{ secrets.ALGOLIA_API_KEY }}
+      ALGOLIA_APP_ID: ${{ secrets.ALGOLIA_APP_ID }}
+
+      CHINESE_GHOST_API_URL: ${{ secrets.CHINESE_GHOST_API_URL }}
+      CHINESE_GHOST_API_VERSION: ${{ secrets.CHINESE_GHOST_API_VERSION }}
+      CHINESE_GHOST_CONTENT_API_KEY: ${{ secrets.CHINESE_GHOST_CONTENT_API_KEY }}
+
+      ENGLISH_GHOST_API_URL: ${{ secrets.ENGLISH_GHOST_API_URL }}
+      ENGLISH_GHOST_API_VERSION: ${{ secrets.ENGLISH_GHOST_API_VERSION }}
+      ENGLISH_GHOST_CONTENT_API_KEY: ${{ secrets.ENGLISH_GHOST_CONTENT_API_KEY }}
+
+      ESPANOL_GHOST_API_URL: ${{ secrets.ESPANOL_GHOST_API_URL }}
+      ESPANOL_GHOST_API_VERSION: ${{ secrets.ESPANOL_GHOST_API_VERSION }}
+      ESPANOL_GHOST_CONTENT_API_KEY: ${{ secrets.ESPANOL_GHOST_CONTENT_API_KEY }}
+
+      FRENCH_GHOST_API_URL: ${{ secrets.FRENCH_GHOST_API_URL }}
+      FRENCH_GHOST_API_VERSION: ${{ secrets.FRENCH_GHOST_API_VERSION }}
+      FRENCH_GHOST_CONTENT_API_KEY: ${{ secrets.FRENCH_GHOST_CONTENT_API_KEY }}
+
+      ITALIAN_GHOST_API_URL: ${{ secrets.ITALIAN_GHOST_API_URL }}
+      ITALIAN_GHOST_API_VERSION: ${{ secrets.ITALIAN_GHOST_API_VERSION }}
+      ITALIAN_GHOST_CONTENT_API_KEY: ${{ secrets.ITALIAN_GHOST_CONTENT_API_KEY }}
+
+      JAPANESE_GHOST_API_URL: ${{ secrets.JAPANESE_GHOST_API_URL }}
+      JAPANESE_GHOST_API_VERSION: ${{ secrets.JAPANESE_GHOST_API_VERSION }}
+      JAPANESE_GHOST_CONTENT_API_KEY: ${{ secrets.JAPANESE_GHOST_CONTENT_API_KEY }}
+
+      KOREAN_GHOST_API_URL: ${{ secrets.KOREAN_GHOST_API_URL }}
+      KOREAN_GHOST_API_VERSION: ${{ secrets.KOREAN_GHOST_API_VERSION }}
+      KOREAN_GHOST_CONTENT_API_KEY: ${{ secrets.KOREAN_GHOST_CONTENT_API_KEY }}
+
+      PORTUGUESE_GHOST_API_URL: ${{ secrets.PORTUGUESE_GHOST_API_URL }}
+      PORTUGUESE_GHOST_API_VERSION: ${{ secrets.PORTUGUESE_GHOST_API_VERSION }}
+      PORTUGUESE_GHOST_CONTENT_API_KEY: ${{ secrets.PORTUGUESE_GHOST_CONTENT_API_KEY }}
+
+      UKRAINIAN_GHOST_API_URL: ${{ secrets.UKRAINIAN_GHOST_API_URL }}
+      UKRAINIAN_GHOST_API_VERSION: ${{ secrets.UKRAINIAN_GHOST_API_VERSION }}
+      UKRAINIAN_GHOST_CONTENT_API_KEY: ${{ secrets.UKRAINIAN_GHOST_CONTENT_API_KEY }}
+
+      URDU_GHOST_API_URL: ${{ secrets.URDU_GHOST_API_URL }}
+      URDU_GHOST_API_VERSION: ${{ secrets.URDU_GHOST_API_VERSION }}
+      URDU_GHOST_CONTENT_API_KEY: ${{ secrets.URDU_GHOST_CONTENT_API_KEY }}
+
+      ADS_ENABLED: ${{ secrets.ADS_ENABLED }}
+      GOOGLE_ADSENSE_DATA_AD_CLIENT: ${{ secrets.GOOGLE_ADSENSE_DATA_AD_CLIENT }}
+      GOOGLE_ADSENSE_DATA_AD_SLOT: ${{ secrets.GOOGLE_ADSENSE_DATA_AD_SLOT }}
+
+      POSTS_PER_PAGE: ${{ secrets.POSTS_PER_PAGE }}
+
+      SITE_DOMAIN: freecodecamp.${{ matrix.site_tlds }}
+
+      LOCALE_FOR_UI: ${{ matrix.languages }}
+      LOCALE_FOR_GHOST: ${{ matrix.languages }}
+
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@60edb5dd545a775178f52524783378180af0d1f8 # v4
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install dependencies
+        run: |
+          npm ci
+
+      - name: Build site
+        run: npm run build
+        env:
+          NODE_ENV: production
+
+      - name: Create a tagname
+        id: tagname
+        run: |
+          echo "tagname=$(git rev-parse --short HEAD)-$(date +%Y%m%d)-$(date +%H%M)" >> $GITHUB_ENV
+
+      - name: Build & Tag Images
+        run: |
+          docker build . \
+          --tag registry.digitalocean.com/${{ secrets.DOCR_NAME }}/${{ matrix.site_tlds }}/news-${{ matrix.languages }}:$tagname \
+          --tag registry.digitalocean.com/${{ secrets.DOCR_NAME }}/${{ matrix.site_tlds }}/news-${{ matrix.languages }}:latest \
+          --build-arg BUILD_LANGUAGE=${{ matrix.languages }} \
+          --file docker/Dockerfile
+
+      - name: Install doctl
+        uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+
+      - name: Log in to DigitalOcean Container Registry with short-lived credentials
+        run: doctl registry login --expiry-seconds 1200
+
+      - name: Push image to DigitalOcean Container Registry
+        run: |
+          docker push registry.digitalocean.com/${{ secrets.DOCR_NAME }}/${{ matrix.site_tlds }}/news-${{ matrix.languages }}:$tagname
+          docker push registry.digitalocean.com/${{ secrets.DOCR_NAME }}/${{ matrix.site_tlds }}/news-${{ matrix.languages }}:latest
+
+# Deployments are automated via https://github.com/freeCodeCamp/news-config
