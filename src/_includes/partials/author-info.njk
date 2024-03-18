@@ -2,7 +2,7 @@
 
 <div class="under-header-content">
     {% if author.profile_image %}
-        {% 
+        {%
             image
             author.profile_image,
             "author-profile-image",
@@ -76,7 +76,7 @@
         {% endif %}
         <a
             class="social-link social-link-rss"
-            href="https://feedly.com/i/subscription/feed/{{ site.url + author.path }}rss/"
+            href="https://feedly.com/i/subscription/feed/{{ author.path | htmlBaseUrl }}rss/"
             target="_blank"
             rel="noopener"
         >
