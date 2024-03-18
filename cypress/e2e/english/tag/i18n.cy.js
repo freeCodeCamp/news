@@ -4,7 +4,7 @@ const selectors = {
 
 describe('Tag page i18n', () => {
   it('a tag page with 1 post does not render its post count i18n key', () => {
-    cy.visit('/tag/blogging');
+    cy.visit('/tag/blogging/');
 
     cy.get(selectors.tagPostCount)
       .invoke('text')
@@ -13,7 +13,7 @@ describe('Tag page i18n', () => {
   });
 
   it('a tag page with multiple posts does not render its post count i18n key', () => {
-    cy.visit('/tag/freecodecamp');
+    cy.visit('/tag/freecodecamp/');
 
     cy.get(selectors.tagPostCount)
       .invoke('text')

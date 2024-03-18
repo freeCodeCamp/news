@@ -4,7 +4,7 @@ const selectors = {
 
 describe('Author page i18n', () => {
   it('an author page with multiple posts does not render its post count i18n key', () => {
-    cy.visit('/author/quincylarson');
+    cy.visit('/author/quincylarson/');
 
     cy.get(selectors.authorPostCount)
       .invoke('text')

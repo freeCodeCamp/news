@@ -5,7 +5,7 @@ const selectors = {
 describe('Page', () => {
   context('General tests', () => {
     beforeEach(() => {
-      cy.visit('/thank-you-for-donating');
+      cy.visit('/thank-you-for-donating/');
     });
 
     it('should render', () => {
@@ -17,7 +17,7 @@ describe('Page', () => {
 
   context('Embedded videos', () => {
     beforeEach(() => {
-      cy.visit('/embedded-videos-page');
+      cy.visit('/embedded-videos-page/');
     });
 
     it('should render', () => {
