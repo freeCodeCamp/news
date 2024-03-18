@@ -1,6 +1,6 @@
 describe('404', () => {
   beforeEach(() => {
-    cy.visit('/testing-testing-1-2', { failOnStatusCode: false });
+    cy.visit('/testing-testing-1-2/', { failOnStatusCode: false });
   });
 
   it('should render basic components', () => {
