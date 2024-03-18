@@ -68,7 +68,7 @@ Copyright (c) 2021 freeCodeCamp.org - Released under the
 [3]: https://www.11ty.io/
 [4]: https://github.com/TryGhost/eleventy-starter-ghost
 [5]: https://contribute.freecodecamp.org/#/
-[6]: https://github.com/freeCodeCamp/news/actions/workflows/deploy-eng.yml/badge.svg
-[7]: https://github.com/freeCodeCamp/news/actions/workflows/deploy-eng.yml
+[6]: https://dev.azure.com/freeCodeCamp-org/news/_apis/build/status/build-deploy-eng
+[7]: https://dev.azure.com/freeCodeCamp-org/news/_build/latest?definitionId=31
 [8]: https://github.com/freeCodeCamp/news/actions/workflows/deploy-i18n.yml/badge.svg
 [9]: https://github.com/freeCodeCamp/news/actions/workflows/deploy-i18n.yml
