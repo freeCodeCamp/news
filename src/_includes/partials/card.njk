@@ -6,7 +6,7 @@
 
     <article class="post-card" data-test-label="post-card">
         {% if post.feature_image %}
-            <a class="post-card-image-link" href="{{ post.path | htmlBaseUrl }}" aria-label="{{ post.title }}">
+            <a class="post-card-image-link" href="{{ post.path }}" aria-label="{{ post.title }}">
                 {%
                     image
                     post.feature_image,
@@ -31,13 +31,13 @@
                 <header class="post-card-header">
                     {% if primaryTag %}
                         <span class="post-card-tags">
-                            <a dir="ltr"  href="{{ primaryTag.path | htmlBaseUrl }}">
+                            <a dir="ltr"  href="{{ primaryTag.path }}">
                                 #{{ primaryTag.name }}
                             </a>
                         </span>
                     {% endif %}
                     <h2 class="post-card-title">
-                        <a href="{{ post.path | htmlBaseUrl }}">
+                        <a href="{{ post.path }}">
                             {{ post.title }}
                         </a>
                     </h2>
@@ -52,7 +52,6 @@
                             {{ roleListItem(post.primary_author, post.published_at, 'translator') }}
                             {{ roleListItem(post.original_post.primary_author, post.original_post.published_at, 'author', post.original_post.locale_i18n) }}
                         {% else %}
-                            {{ "testtesttesttest" + post.primary_author.url }}
                             {{ roleListItem(post.primary_author, post.published_at) }}
                         {% endif %}
                     </ul>

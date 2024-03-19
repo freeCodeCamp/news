@@ -121,7 +121,12 @@ module.exports = function (config) {
 
   // Use the new Base plugin to replace the old url filter method
   // so we can deploy in a different directory
-  config.addPlugin(EleventyHtmlBasePlugin);
+  config.addPlugin(EleventyHtmlBasePlugin, {
+    baseHref: sitePath,
+    filters: {
+      base: 'htmlBaseUrl'
+    }
+  });
 
   // Eleventy configuration
   return {

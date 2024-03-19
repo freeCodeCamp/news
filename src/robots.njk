@@ -2,6 +2,6 @@
 permalink: 'robots.txt'
 ---
 User-agent: *
-Sitemap: {{ "/sitemap.xml" | htmlBaseUrl }}
+Sitemap: {{ "/sitemap.xml" | htmlBaseUrl(site.url) }}
 Disallow: /ghost/
 Disallow: /p/
