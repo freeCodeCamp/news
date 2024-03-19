@@ -6,7 +6,6 @@ const {
 } = require('graceful-fs');
 const { EleventyHtmlBasePlugin } = require('@11ty/eleventy');
 const pluginRSS = require('@11ty/eleventy-plugin-rss');
-const UpgradeHelper = require('@11ty/eleventy-upgrade-help');
 
 const cssMin = require('./utils/transforms/css-min');
 const jsMin = require('./utils/transforms/js-min');
@@ -73,9 +72,6 @@ module.exports = function (config) {
   });
 
   config.addPlugin(pluginRSS);
-
-  // If you have other `addPlugin` calls, it’s important that UpgradeHelper is added last.
-  config.addPlugin(UpgradeHelper);
 
   config.addNunjucksShortcode('image', imageShortcode);
 
