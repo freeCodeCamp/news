@@ -9,7 +9,7 @@ DOCKER_REPO := registry.digitalocean.com/${REGISTRY_NAME}/ops/test
 .PHONY: build
 build:
 	docker build \
-  --build-arg BUILD_ID=$(LOCAL_TAGNAME) \
+	--build-arg BUILD_ID=$(LOCAL_TAGNAME) \
 	--platform linux/amd64 \
 	--tag $(DOCKER_REPO):${LOCAL_TAGNAME} \
 	--tag $(DOCKER_REPO):latest \

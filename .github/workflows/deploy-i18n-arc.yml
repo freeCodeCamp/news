@@ -1,23 +1,23 @@
-name: i18n - Build and Deploy
+name: ARC Test
 
 on:
   workflow_dispatch:
-  schedule:
-    # Here are the times for the cron:
-    #
-    # Sun, Mon, Tue, Thu, Fri : at 00:00, 06:00, 12:00, 18:00 UTC
-    # Wed, Sat                : at --:--, 06:00, 12:00, 18:00 UTC
-    #
-    # There is a 6 hour maintenance window on Wednesdays and Saturdays,
-    # and the crons are scheduled at 5 mins past the hour.
-    #
-    - cron: '5 0,6,12,18 * * 0-2,4-5'
-    - cron: '5 6,12,18 * * 3,6'
+  # schedule:
+  #   # Here are the times for the cron:
+  #   #
+  #   # Sun, Mon, Tue, Thu, Fri : at 00:00, 06:00, 12:00, 18:00 UTC
+  #   # Wed, Sat                : at --:--, 06:00, 12:00, 18:00 UTC
+  #   #
+  #   # There is a 6 hour maintenance window on Wednesdays and Saturdays,
+  #   # and the crons are scheduled at 5 mins past the hour.
+  #   #
+  #   - cron: '5 0,6,12,18 * * 0-2,4-5'
+  #   - cron: '5 6,12,18 * * 3,6'
 
 jobs:
   build:
     name: Build
-    runs-on: ubuntu-22.04
+    runs-on: gha-sh-runners-news
 
     strategy:
       fail-fast: false
@@ -25,7 +25,7 @@ jobs:
         node-version: [18.x]
         languages:
           [chinese, espanol, italian, japanese, korean, portuguese, ukrainian]
-        site_tlds: [org]
+        site_tlds: [dev]
 
     env:
       BUILD_LANG: ${{ matrix.languages }}
@@ -96,15 +96,12 @@ jobs:
       - name: Install dependencies
         run: |
           npm ci
-          sudo apt-get install make
 
       - name: Build site
         run: npm run build
         env:
           NODE_ENV: production
 
-      # - name: Set up Docker Buildx
-      #   uses: docker/setup-buildx-action@dc7b9719a96d48369863986a06765841d7ea23f6 # tag=v2
       - name: Create a tagname
         id: tagname
         run: |
@@ -118,12 +115,6 @@ jobs:
           --build-arg BUILD_LANGUAGE=${{ matrix.languages }} \
           --file docker/Dockerfile
 
-      # - name: Build the registry test image
-      #   run: |
-      #     cd registry-test
-      #     REGISTRY_NAME=${{ secrets.DOCR_NAME }} TAGNAME_CI=$tagname make build
-      #     cd ..
-
       - name: Install doctl
         uses: digitalocean/action-doctl@v2
         with:
@@ -136,15 +127,5 @@ jobs:
         run: |
           docker push registry.digitalocean.com/${{ secrets.DOCR_NAME }}/${{ matrix.site_tlds }}/news-${{ matrix.languages }}:$tagname
           docker push registry.digitalocean.com/${{ secrets.DOCR_NAME }}/${{ matrix.site_tlds }}/news-${{ matrix.languages }}:latest
-
-      # - name: Push the registry test image
-      #   run: |
-      #     cd registry-test
-      #     REGISTRY_NAME=${{ secrets.DOCR_NAME }} TAGNAME_CI=$tagname make push
-      #     cd ..
-
-      - name: Clean up Self-hosted setup
-        uses: colpal/actions-clean@36e6ca1abd35efe61cb60f912bd7837f67887c8a # tag=v1
-        if: ${{ always() }} # To ensure this step runs even when earlier steps fail
 
 # Deployments are automated via https://github.com/freeCodeCamp/news-config
