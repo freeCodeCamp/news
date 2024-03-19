@@ -133,7 +133,8 @@ module.exports = async () => {
           primary_author: post.primary_author,
           tags: [post.tags[0]], // Only include the first / primary tag
           image_dimensions: { ...post.image_dimensions },
-          original_post: post?.original_post
+          original_post: post?.original_post,
+          html: post.html
         };
       });
 
@@ -176,7 +177,8 @@ module.exports = async () => {
           primary_author: post.primary_author,
           tags: [post.tags[0]], // Only include the first / primary tag
           image_dimensions: { ...post.image_dimensions },
-          original_post: post?.original_post
+          original_post: post?.original_post,
+          html: post.html
         };
       });
     // Save post count to tag object to help determine popular tags
@@ -220,16 +222,7 @@ module.exports = async () => {
         // The main feed shows the last 10 posts. Tag and author
         // pages show the last 15 posts
         const feedPostLimit = feedObj.path === '/' ? 10 : 15;
-
-        feedObj.posts = feedObj.posts.slice(0, feedPostLimit).map(post => {
-          // Append the feature image to the post content
-          if (post.feature_image)
-            post.html =
-              `<img src="${post.feature_image}" alt="${post.title}">` +
-              post.html;
-
-          return post;
-        });
+        feedObj.posts = feedObj.posts.slice(0, feedPostLimit);
 
         return feedObj;
       });
