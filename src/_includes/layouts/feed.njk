@@ -28,7 +28,7 @@
                     <![CDATA[ {{ post.excerpt | safe }} ]]>
                 </description>
                 <link>{{ post.path | htmlBaseUrl(site.url) }}</link>
-                <guid isPermaLink="false">{{ post.comment_id }}</guid>
+                <guid isPermaLink="false">{{ post.id }}</guid>
                 <category>
                     {% set primaryTag = post.tags[0] %}
                     <![CDATA[ {{ primaryTag.name }} ]]>
