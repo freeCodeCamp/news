@@ -1,9 +1,4 @@
-const {
-  readFileSync,
-  readdirSync,
-  writeFileSync,
-  unlinkSync
-} = require('graceful-fs');
+const { readFileSync, readdirSync, writeFileSync } = require('graceful-fs');
 const pluginRSS = require('@11ty/eleventy-plugin-rss');
 const UpgradeHelper = require('@11ty/eleventy-upgrade-help');
 
@@ -53,9 +48,6 @@ module.exports = function (config) {
 
       writeFileSync(fullPath, cssMin(content));
     });
-
-    // Remove ads.txt from Chinese build
-    if (currentLocale_i18n === 'chinese') unlinkSync('./dist/ads.txt');
 
     // Write translated locales for the current build language to the assets directory
     // as a workaround to display those strings in search-results.js instead of with the
