@@ -99,7 +99,7 @@ eleventyExcludeFromCollections: true
                         </table>
                     </xsl:if>
                     <xsl:if test="count(sitemap:sitemapindex/sitemap:sitemap) &lt; 1">
-                        <p class="desc"><a href="{{ "/sitemap.xml" | htmlBaseUrl(site.url) }}" class="back-link">&#8592; Back to index</a></p>
+                        <p class="desc"><a href="{{ '/sitemap.xml' | htmlBaseUrl(site.url) }}" class="back-link">&#8592; Back to index</a></p>
                         <table id="sitemap" cellpadding="3">
                             <thead>
                                 <tr>
