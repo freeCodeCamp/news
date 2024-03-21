@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <?xml-stylesheet type="text/xsl" href="{{ '/sitemap.xsl' | htmlBaseUrl(site.url) }}"?>
-{% set isSitemapIndex = sitemap.path === '/sitemap.xml' %}
+{% set isSitemapIndex = sitemap.path === 'sitemap.xml' %}
 {% set outerTagName = 'sitemapindex' if isSitemapIndex else 'urlset' %}
 {% set innerTagName = 'sitemap' if isSitemapIndex else 'url' %}
 <{{ outerTagName }}
