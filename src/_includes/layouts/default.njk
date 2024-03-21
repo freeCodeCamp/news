@@ -111,7 +111,7 @@
         {% endblock %}
 
         <meta name="generator" content="Eleventy">
-        <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ site.url + "/rss/" }}">
+        <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ '/rss/' | htmlBaseUrl(site.url) }}">
 
         {{ site.codeinjection_head | safe if site.codeinjection_head }}
         {{ codeinjection_head | safe if codeinjection_head }}
