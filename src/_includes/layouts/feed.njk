@@ -8,16 +8,16 @@
         <description>
             <![CDATA[ {% t 'meta-tags:description' %} ]]>
         </description>
-        <link>{{ site.url + "/" }}</link>
+        <link>{{ site.url }}</link>
         <image>
             <url>https://cdn.freecodecamp.org/universal/favicons/favicon.png</url>
             {% set metaTitle %}{% t 'meta-tags:title' %}{% endset %}
             <title>{{ (metaTitle | escape) if feed.path === "/" else (feed.name | safe + " - freeCodeCamp.org") }}</title>
-            <link>{{ site.url + "/" }}</link>
+            <link>{{ site.url }}</link>
         </image>
         <generator>Eleventy</generator>
         <lastBuildDate>{% buildDateFormatter site.timezone %}</lastBuildDate>
-        <atom:link href="{{ site.url + '/' }}" rel="self" type="application/rss+xml" />
+        <atom:link href="{{ site.url }}" rel="self" type="application/rss+xml" />
         <ttl>60</ttl>
         {% for post in feed.posts %}
             <item>
@@ -27,7 +27,7 @@
                 <description>
                     <![CDATA[ {{ post.excerpt | safe }} ]]>
                 </description>
-                <link>{{ site.url + post.path }}</link>
+                <link>{{ post.path | htmlBaseUrl(site.url) }}</link>
                 <guid isPermaLink="false">{{ post.comment_id }}</guid>
                 <category>
                     {% set primaryTag = post.tags[0] %}

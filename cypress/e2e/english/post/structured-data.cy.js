@@ -32,7 +32,7 @@ describe('Post structured data (JSON-LD)', () => {
   let jsonLdObj;
 
   beforeEach(() => {
-    cy.visit('/announcing-rust-course-replit-web');
+    cy.visit('/announcing-rust-course-replit-web/');
 
     jsonLdObj = cy
       .get('head script[type="application/ld+json"]')

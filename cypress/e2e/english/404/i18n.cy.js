@@ -4,7 +4,7 @@ const selectors = {
 
 describe('404 i18n', () => {
   beforeEach(() => {
-    cy.visit('/testing-testing-1-2', { failOnStatusCode: false });
+    cy.visit('/testing-testing-1-2/', { failOnStatusCode: false });
   });
 
   it('the error message elements do not render their i18n keys', () => {

@@ -1,6 +1,6 @@
 const { readFileSync, readdirSync, writeFileSync } = require('graceful-fs');
+const { EleventyHtmlBasePlugin } = require('@11ty/eleventy');
 const pluginRSS = require('@11ty/eleventy-plugin-rss');
-const UpgradeHelper = require('@11ty/eleventy-upgrade-help');
 
 const cssMin = require('./utils/transforms/css-min');
 const jsMin = require('./utils/transforms/js-min');
@@ -23,8 +23,6 @@ const { currentLocale_i18n, eleventyEnv } = require('./config');
 const sitePath = require('./utils/site-path');
 
 module.exports = function (config) {
-  config.addPlugin(UpgradeHelper);
-
   // Minify inline CSS
   config.addFilter('cssMin', cssMin);
 
@@ -109,30 +107,12 @@ module.exports = function (config) {
     });
   }
 
-  // Display 404 and RSS pages in BrowserSync
-  config.setBrowserSyncConfig({
-    callbacks: {
-      ready: (err, bs) => {
-        const content_404 = readFileSync('dist/404.html');
-        const content_RSS = readFileSync('dist/rss.xml');
-
-        bs.addMiddleware('*', (req, res) => {
-          if (req.url.match(/^\/rss\/?$/)) {
-            res.writeHead(302, { 'Content-Type': 'text/xml; charset=UTF-8' });
-
-            // Provides the RSS feed content without redirect
-            res.write(content_RSS);
-            res.end();
-          } else {
-            res.writeHead(404, { 'Content-Type': 'text/html; charset=UTF-8' });
-
-            // Provides the 404 content without redirect
-            res.write(content_404);
-            res.end();
-          }
-        });
-      },
-      startPath: sitePath
+  // Use the new Base plugin to replace the old url filter method
+  // so we can deploy in a different directory
+  config.addPlugin(EleventyHtmlBasePlugin, {
+    baseHref: sitePath,
+    filters: {
+      base: 'htmlBaseUrl'
     }
   });
 

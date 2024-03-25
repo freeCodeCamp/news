@@ -6,7 +6,7 @@
 
     <article class="post-card" data-test-label="post-card">
         {% if post.feature_image %}
-            <a class="post-card-image-link" href="{{ post.path | url }}" aria-label="{{ post.title }}">
+            <a class="post-card-image-link" href="{{ post.path }}" aria-label="{{ post.title }}">
                 {%
                     image
                     post.feature_image,
@@ -31,13 +31,13 @@
                 <header class="post-card-header">
                     {% if primaryTag %}
                         <span class="post-card-tags">
-                            <a dir="ltr"  href="{{ primaryTag.path | url }}">
+                            <a dir="ltr"  href="{{ primaryTag.path }}">
                                 #{{ primaryTag.name }}
                             </a>
                         </span>
                     {% endif %}
                     <h2 class="post-card-title">
-                        <a href="{{ post.path | url }}">
+                        <a href="{{ post.path }}">
                             {{ post.title }}
                         </a>
                     </h2>

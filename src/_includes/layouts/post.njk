@@ -2,7 +2,7 @@
 {% from "partials/byline.njk" import byline %}
 
 {% set title = post.title %}
-{% set canonicalUrl = site.url + post.path %}
+{% set canonicalUrl = post.path | htmlBaseUrl(site.url) %}
 {% set codeinjection_head = post.codeinjection_head %}
 {% set codeinjection_foot = post.codeinjection_foot %}
 {% set primaryTag = post.tags[0] %}
@@ -23,7 +23,7 @@ time #}
                         </time>
                         {% if primaryTag %}
                             <span class="date-divider">/</span>
-                            <a  dir="ltr" href="{{ primaryTag.path | url }}">
+                            <a  dir="ltr" href="{{ primaryTag.path }}">
                                 #{{ primaryTag.name }}
                             </a>
                         {% endif %}
@@ -123,7 +123,7 @@ time #}
     {% if post.excerpt %}
         <meta property="og:description" content="{{ post.excerpt }}">
     {% endif %}
-    <meta property="og:url" content="{{ site.url + post.path }}">
+    <meta property="og:url" content="{{ post.path | htmlBaseUrl(site.url) }}">
     <meta property="og:image" content="{{ post.feature_image }}">
     <meta property="article:published_time" content="{% toISOString post.published_at %}">
     <meta property="article:modified_time" content="{% toISOString post.updated_at %}">
@@ -141,7 +141,7 @@ time #}
     {% if post.excerpt %}
         <meta name="twitter:description" content="{{ post.excerpt }}">
     {% endif %}
-    <meta name="twitter:url" content="{{ site.url + post.path }}">
+    <meta name="twitter:url" content="{{ post.path | htmlBaseUrl(site.url) }}">
     <meta name="twitter:image" content="{{ post.feature_image }}">
     <meta name="twitter:label1" content="Written by">
     <meta name="twitter:data1" content="{{ post.primary_author.name }}">

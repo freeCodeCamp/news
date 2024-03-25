@@ -2,7 +2,7 @@
 {% from "partials/card.njk" import card %}
 
 {% set title = tag.name + " - " + site.title %}
-{% set canonicalUrl = site.url + tag.path %}
+{% set canonicalUrl = tag.path | htmlBaseUrl(site.url) %}
 {% set postCount = tag.count.posts %}
 {% set popularTags = ghost.popularTags %}
 
@@ -18,10 +18,10 @@
                 {% t 'tag.multiple-posts', { postCount: postCount } %}
             {% endif %}
         </h2>
-        
+
         <div class="tags-row">
             {% for tag in popularTags %}
-                <a class='tag' href="{{ tag.path | url }}">
+                <a class='tag' href="{{ tag.path }}">
                     <h3 dir="ltr">#{{ tag.name }} <small> | {{ tag.count.posts }}</small></h3>
                 </a>
             {% endfor %}
@@ -47,7 +47,7 @@
     <meta property="og:type" content="website">
     <meta property="og:title" content="{{ title }}">
     <meta property="og:description" content="{% t 'meta-tags:description' %}">
-    <meta property="og:url" content="{{ site.url + tag.path }}">
+    <meta property="og:url" content="{{ tag.path | htmlBaseUrl(site.url) }}">
     <meta property="og:image" content="{{ tag.feature_image if tag.feature_image else site.cover_image }}">
     <meta property="article:publisher" content="https://www.facebook.com/freecodecamp">
 
@@ -55,7 +55,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="{{ title }}">
     <meta name="twitter:description" content="{% t 'meta-tags:description' %}">
-    <meta name="twitter:url" content="{{ site.url + tag.path }}">
+    <meta name="twitter:url" content="{{ tag.path | htmlBaseUrl(site.url) }}">
     <meta name="twitter:image" content="{{ tag.feature_image if tag.feature_image else site.cover_image }}">
     <meta name="twitter:site" content="{{ site.twitter }}">
 

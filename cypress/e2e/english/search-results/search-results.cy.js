@@ -7,12 +7,12 @@ const selectors = {
 
 describe('Search results', () => {
   beforeEach(() => {
-    // Note: 11ty's local server will automatically add a trailing
-    // slash immediately after `/search`, before the `query` URL
+    // Note: 11ty's dev server expects a trailing slash
+    // immediately after `/search`, before the `query` URL
     // parameter. This does not happen on production since we
     // don't redirect from the non-trailing slash version of the
     // page to the trailing slash version
-    cy.visit('/search?query=mock%20search%20results');
+    cy.visit('/search/?query=mock%20search%20results');
   });
 
   it('should render basic components', () => {

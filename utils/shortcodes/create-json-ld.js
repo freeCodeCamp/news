@@ -22,12 +22,13 @@ const createAuthorObj = primaryAuthor => {
     website,
     twitter,
     facebook,
-    path
+    path // in `/author/username/` format
   } = primaryAuthor;
+  const authorPath = path.replace(/^\//, '');
   const authorObj = {
     '@type': 'Person',
     name,
-    url: siteURL + path,
+    url: siteURL + authorPath,
     sameAs: [
       website ? fullEscaper(website) : null,
       facebook ? `https://www.facebook.com/${facebook}` : null,
@@ -48,7 +49,7 @@ const createAuthorObj = primaryAuthor => {
 async function createJSONLDShortcode(type, site, data) {
   // Main site settings from site object
   const { logo, cover_image, image_dimensions } = site;
-  const url = `${siteURL}/`;
+  const url = `${siteURL}`;
   const typeMap = {
     index: 'WebSite',
     article: 'Article',

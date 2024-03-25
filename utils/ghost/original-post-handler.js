@@ -34,8 +34,8 @@ const originalPostHandler = async post => {
       });
 
       // Convert URLs to final published version
-      originalPost.url = `${siteURL}/${originalPostSlug}/`;
-      originalPost.primary_author.url = `${siteURL}/author/${originalPost.primary_author.slug}/`;
+      originalPost.url = `${siteURL}${originalPostSlug}/`;
+      originalPost.primary_author.url = `${siteURL}author/${originalPost.primary_author.slug}/`;
 
       if (originalPost.primary_author.profile_image) {
         originalPost.primary_author.image_dimensions = {
