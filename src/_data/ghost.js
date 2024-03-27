@@ -23,7 +23,7 @@ module.exports = async () => {
   // with a pool of workers to create posts and pages global data
   const batchSize = 200;
   const allGhostPosts = await fetchFromGhost('posts');
-  const allHashnodePosts = await fetchFromHashnode();
+  const allHashnodePosts = await fetchFromHashnode('posts');
 
   const ghostPosts = await Promise.all(
     chunk(allGhostPosts, batchSize).map((batch, i, arr) =>
@@ -44,6 +44,7 @@ module.exports = async () => {
     chunk(allHashnodePosts, batchSize).map((batch, i, arr) =>
       piscinaHashnode.run({
         batch,
+        type: 'posts',
         currBatchNo: Number(i) + 1,
         totalBatches: arr.length
       })
@@ -81,9 +82,10 @@ module.exports = async () => {
     process.exit(1);
   }
 
-  const allPages = await fetchFromGhost('pages');
-  const pages = await Promise.all(
-    chunk(allPages, batchSize).map((batch, i, arr) =>
+  const allGhostPages = await fetchFromGhost('pages');
+  const allHashnodePages = await fetchFromHashnode('pages');
+  const ghostPages = await Promise.all(
+    chunk(allGhostPages, batchSize).map((batch, i, arr) =>
       piscinaGhost.run({
         batch,
         type: 'pages',
@@ -93,10 +95,27 @@ module.exports = async () => {
     )
   )
     .then(arr => {
-      console.log('Finished processing all pages');
+      console.log('Finished processing all Ghost pages');
       return arr.flat();
     })
     .catch(err => console.error(err));
+  const hashnodePages = await Promise.all(
+    chunk(allHashnodePages, batchSize).map((batch, i, arr) =>
+      piscinaHashnode.run({
+        batch,
+        type: 'pages',
+        currBatchNo: Number(i) + 1,
+        totalBatches: arr.length
+      })
+    )
+  )
+    .then(arr => {
+      console.log('Finished processing all Hashnode pages');
+      return arr.flat();
+    })
+    .catch(err => console.error(err));
+
+  const pages = [...ghostPages, ...hashnodePages]; // check for duplicate slugs
 
   // Create authors global data for author pages
   const authors = [];
