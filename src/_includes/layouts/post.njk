@@ -61,9 +61,13 @@ time #}
                         </section>
                         {% if adsEnabled %}
                             <div class="sidebar">
-                                {% for i in range(0, numOfSidebarAds) %}
-                                    {% include "partials/ad.njk" %}
-                                {% endfor %}
+                                {% if canonicalUrl == "https://www.freecodecamp.org/news/are-you-being-micro-managed-manage-your-relationship-with-your-manager-instead-9ad10b28bcda/" %}
+                                    {% include "partials/gam-ad.njk" %}
+                                {% else %}
+                                    {% for i in range(0, numOfSidebarAds) %}
+                                        {% include "partials/ad.njk" %}
+                                    {% endfor %}
+                                {% endif %}
                             </div>
                         {% endif %}
                     </div>
@@ -88,7 +92,7 @@ time #}
                         {% include "partials/learn-cta-row.njk" %}
                     {% endif %}
                 </section>
-                {% if adsEnabled %}
+                {% if adsEnabled and canonicalUrl != "https://www.freecodecamp.org/news/are-you-being-micro-managed-manage-your-relationship-with-your-manager-instead-9ad10b28bcda/" %}
                     <div class="banner-ad bottom">
                         {% include "partials/ad.njk" %}
                     </div>
@@ -103,7 +107,7 @@ time #}
 {% endblock %}
 
 {% block monetization %}
-    {% if adsEnabled %}
+    {% if adsEnabled and canonicalUrl != "https://www.freecodecamp.org/news/are-you-being-micro-managed-manage-your-relationship-with-your-manager-instead-9ad10b28bcda/" %}
         <script
             data-ad-client="{{ secrets.googleAdsenseDataAdClient }}"
             src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
