@@ -72,7 +72,8 @@ const {
   ALGOLIA_API_KEY: algoliaAPIKey,
   ADS_ENABLED: adsEnabled,
   GOOGLE_ADSENSE_DATA_AD_CLIENT: googleAdsenseDataAdClient,
-  GOOGLE_ADSENSE_DATA_AD_SLOT: googleAdsenseDataAdSlot
+  GOOGLE_ADSENSE_DATA_AD_SLOT: googleAdsenseDataAdSlot,
+  HASHNODE_API_URL: hashnodeAPIURL
 } = process.env;
 
 // Validations
@@ -151,6 +152,10 @@ module.exports = Object.assign(
     googleAdsenseDataAdSlot: !googleAdsenseDataAdSlot
       ? ''
       : googleAdsenseDataAdSlot,
-    eleventyEnv: eleventyEnv || 'dev'
+    eleventyEnv: eleventyEnv || 'dev',
+    hashnodeAPIURL:
+      !hashnodeAPIURL || hashnodeAPIURL === 'api_url_from_hashnode_dashboard'
+        ? ''
+        : hashnodeAPIURL
   }
 );
