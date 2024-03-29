@@ -2,7 +2,9 @@ const { gql, request } = require('graphql-request');
 const { sourceHashnodeHost } = require('../ghost/api');
 const wait = require('../wait');
 
-const fetchFromHashnode = async endpoint => {
+const fetchFromHashnode = async () => {
+  if (!sourceHashnodeHost) return [];
+
   const postFieldsFragment = gql`
     fragment PostFields on Post {
       id
@@ -40,7 +42,8 @@ const fetchFromHashnode = async endpoint => {
       updatedAt
     }
   `;
-  const postsQuery = gql`
+
+  const query = gql`
     ${postFieldsFragment}
     query PostsByPublication($host: String!, $first: Int!, $after: String) {
       publication(host: $host) {
@@ -60,36 +63,7 @@ const fetchFromHashnode = async endpoint => {
     }
   `;
 
-  const pageFieldsFragment = `fragment PageFields on StaticPage {
-    id
-    slug
-    title
-    content {
-      html
-    }
-  }`;
-  const pagesQuery = gql`
-    ${pageFieldsFragment}
-    query PagesByPublication($host: String!, $first: Int!, $after: String) {
-      publication(host: $host) {
-        id
-        staticPages(first: $first, after: $after) {
-          edges {
-            node {
-              ...PageFields
-            }
-          }
-          pageInfo {
-            endCursor
-            hasNextPage
-          }
-        }
-      }
-    }
-  `;
-
-  const data = [];
-  const query = endpoint === 'posts' ? postsQuery : pagesQuery;
+  const allPosts = [];
   let after = '';
   let hasNextPage = true;
 
@@ -100,25 +74,21 @@ const fetchFromHashnode = async endpoint => {
       after
     });
 
-    const resData =
-      res.publication[
-        endpoint === 'posts' ? 'posts' : 'staticPages'
-      ]?.edges.map(({ node }) => node) || [];
-    const pageInfo =
-      res.publication[endpoint === 'posts' ? 'posts' : 'staticPages'].pageInfo;
+    const resPosts = res.publication.posts?.edges.map(({ node }) => node) || [];
+    const pageInfo = res.publication.posts.pageInfo;
 
-    if (resData.length > 0)
-      console.log(`Fetched Hashnode ${endpoint} ${pageInfo.endCursor}...`);
+    if (resPosts.length > 0)
+      console.log(`Fetched Hashnode page ${pageInfo.endCursor}...`);
 
     after = pageInfo.endCursor;
     hasNextPage = pageInfo.hasNextPage;
 
-    data.push(...resData);
+    allPosts.push(...resPosts);
 
-    await wait(200);
+    await wait(0.2);
   }
 
-  return data;
+  return allPosts;
 };
 
 module.exports = fetchFromHashnode;
