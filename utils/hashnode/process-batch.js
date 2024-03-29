@@ -62,6 +62,16 @@ const processBatch = async ({ batch, currBatchNo, totalBatches }) => {
       postTitle: newPost.title
     });
 
+    if (oldPost.brief) {
+      newPost.original_excerpt = oldPost.brief;
+
+      newPost.excerpt = oldPost.brief
+        .replace(/\n+/g, ' ')
+        .split(' ')
+        .slice(0, 50)
+        .join(' ');
+    }
+
     newBatch.push(newPost);
   }
 
