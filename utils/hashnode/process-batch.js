@@ -72,6 +72,8 @@ const processBatch = async ({ batch, currBatchNo, totalBatches }) => {
         .join(' ');
     }
 
+    newPost.source = 'Hashnode';
+
     newBatch.push(newPost);
   }
 

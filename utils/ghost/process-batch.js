@@ -148,6 +148,8 @@ const processBatch = async ({ batch, type, currBatchNo, totalBatches }) => {
         postTitle: obj.title
       });
 
+      obj.source = 'Ghost';
+
       return obj;
     })
   );

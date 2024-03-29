@@ -5,7 +5,7 @@ const { resolve, basename } = require('path');
 const fetchFromGhost = require('../../utils/ghost/fetch-from-ghost');
 const fetchFromHashnode = require('../../utils/hashnode/fetch-from-hashnode');
 const { postsPerPage, siteURL } = require('../../config');
-const errorLogger = require('../../utils/error-logger');
+const pingEditorialTeam = require('../../utils/ping-editorial-team');
 
 const getUniqueList = (arr, key) => [
   ...new Map(arr.map(item => [item[key], item])).values()
@@ -55,31 +55,21 @@ module.exports = async () => {
     })
     .catch(err => console.error(err));
 
-  const ghostPostSlugsSet = new Set(ghostPosts.map(post => post.slug));
-  const hashnodePostSlugsSet = new Set(hashnodePosts.map(post => post.slug));
-  const commonPostSlugs = [...ghostPostSlugsSet].filter(slug =>
-    hashnodePostSlugsSet.has(slug)
-  );
-
+  // Check for duplicate post slugs between Ghost and Hashnode,
+  // use the first instance of the post, and log the duplicates
+  const duplicates = [];
   const posts = [...ghostPosts, ...hashnodePosts]
-    .filter(post => {
-      if (commonPostSlugs.includes(post.slug)) {
-        errorLogger({ type: 'duplicate', name: post.title });
+    .sort((a, b) => new Date(a.published_at) - new Date(b.published_at)) // Sort by published date in ascending order
+    .filter((post, i, arr) => {
+      if (arr.findIndex(p => p.slug === post.slug) !== i) {
+        duplicates.push(post);
         return false;
       }
       return true;
     })
-    .sort((a, b) => {
-      return new Date(b.published_at) - new Date(a.published_at);
-    });
+    .reverse(); // Reverse the order to show the most recent posts first
 
-  // Stop building if there are posts with duplicate slugs
-  if (commonPostSlugs.length) {
-    console.error(
-      `Duplicate post slugs found: ${commonPostSlugs.length}. You can view the list of duplicate posts in duplicate-errors.log file. Exiting...`
-    );
-    process.exit(1);
-  }
+  if (duplicates.length) pingEditorialTeam(duplicates);
 
   const allPages = await fetchFromGhost('pages');
   const pages = await Promise.all(
