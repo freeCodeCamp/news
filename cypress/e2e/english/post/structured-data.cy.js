@@ -1,6 +1,6 @@
 describe('Post structured data (JSON-LD)', () => {
   const commonExpectedJsonLd = require('../../../fixtures/common-expected-json-ld.json');
-  const postExpectedJsonLd = {
+  const ghostPostExpectedJsonLd = {
     '@type': 'Article',
     author: {
       '@type': 'Person',
@@ -29,44 +29,127 @@ describe('Post structured data (JSON-LD)', () => {
     description:
       'As you may know, I&#x27;ve been a fan of Replit since way back in 2012. I used early\nversions of the website when I was learning to code. \n\nFor me, Replit was a place to code my solutions for Project Euler problems, and\nto practice my Python and JavaScript skills.\n\nOver the past decade, Replit has come a long way [https://replit.com/]. Their\nteam has evolved the coding platform into a full-blown multiplayer IDE where you\ncan collaborate with other developers, and host your apps for free.\n\nOne way a l'
   };
+  const hashnodePostExpectedJsonLd = {
+    '@type': 'Article',
+    author: {
+      '@type': 'Person',
+      name: 'Abigail Rennemeyer',
+      image: {
+        '@type': 'ImageObject',
+        url: 'https://cdn.hashnode.com/res/hashnode/image/upload/v1579037532919/F7MLrJxZF.jpeg',
+        width: 3991,
+        height: 3990
+      },
+      url: 'http://localhost:8080/news/author/abbeyrenn/',
+      sameAs: ['https://twitter.com/abbeyrenn']
+    },
+    headline: 'Introducing freeCodeCamp Press – Free Books for Developers',
+    url: 'http://localhost:8080/news/freecodecamp-press-books-handbooks/',
+    datePublished: '2023-08-29T15:00:00.000Z',
+    dateModified: '2024-04-01T12:58:13.648Z',
+    image: {
+      '@type': 'ImageObject',
+      url: 'https://cdn.hashnode.com/res/hashnode/image/upload/v1711976285627/4fb04ca0-1e79-4d9d-9737-6a986fc37324.png',
+      width: 1505,
+      height: 788
+    },
+    keywords: 'freeCodeCamp.org, technical writing',
+    description:
+      'The freeCodeCamp community has published more than 10,000 tutorials on our publication over the years. But lately we&#x27;ve focused on creating even longer resources for learning math, programming, and computer science.\nThis is why we&#x27;ve created freeCode...'
+  };
   let jsonLdObj;
 
-  beforeEach(() => {
-    cy.visit('/announcing-rust-course-replit-web/');
+  context('Ghost sourced posts', () => {
+    beforeEach(() => {
+      cy.visit('/announcing-rust-course-replit-web/');
 
-    jsonLdObj = cy
-      .get('head script[type="application/ld+json"]')
-      .then($script => {
-        jsonLdObj = JSON.parse($script.text());
-      });
+      jsonLdObj = cy
+        .get('head script[type="application/ld+json"]')
+        .then($script => {
+          jsonLdObj = JSON.parse($script.text());
+        });
+    });
+
+    it('matches the expected base values', () => {
+      expect(jsonLdObj['@context']).to.equal(commonExpectedJsonLd['@context']);
+      expect(jsonLdObj['@type']).to.equal(ghostPostExpectedJsonLd['@type']);
+      expect(jsonLdObj.url).to.equal(ghostPostExpectedJsonLd.url);
+      expect(jsonLdObj.datePublished).to.equal(
+        ghostPostExpectedJsonLd.datePublished
+      );
+      expect(jsonLdObj.dateModified).to.equal(
+        ghostPostExpectedJsonLd.dateModified
+      );
+      expect(jsonLdObj.description).to.equal(
+        ghostPostExpectedJsonLd.description
+      );
+      expect(jsonLdObj.headline).to.equal(ghostPostExpectedJsonLd.headline);
+      expect(jsonLdObj.keywords).to.equal(ghostPostExpectedJsonLd.keywords);
+    });
+
+    it('matches the expected publisher values', () => {
+      expect(jsonLdObj.publisher).to.deep.equal(commonExpectedJsonLd.publisher);
+    });
+
+    it('matches the expected image values', () => {
+      expect(jsonLdObj.image).to.deep.equal(ghostPostExpectedJsonLd.image);
+    });
+
+    it('matches the expected mainEntityOfPage values', () => {
+      expect(jsonLdObj.mainEntityOfPage).to.deep.equal(
+        commonExpectedJsonLd.mainEntityOfPage
+      );
+    });
+
+    it('matches the expected author values', () => {
+      expect(jsonLdObj.author).to.deep.equal(ghostPostExpectedJsonLd.author);
+    });
   });
 
-  it('matches the expected base values', () => {
-    expect(jsonLdObj['@context']).to.equal(commonExpectedJsonLd['@context']);
-    expect(jsonLdObj['@type']).to.equal(postExpectedJsonLd['@type']);
-    expect(jsonLdObj.url).to.equal(postExpectedJsonLd.url);
-    expect(jsonLdObj.datePublished).to.equal(postExpectedJsonLd.datePublished);
-    expect(jsonLdObj.dateModified).to.equal(postExpectedJsonLd.dateModified);
-    expect(jsonLdObj.description).to.equal(postExpectedJsonLd.description);
-    expect(jsonLdObj.headline).to.equal(postExpectedJsonLd.headline);
-    expect(jsonLdObj.keywords).to.equal(postExpectedJsonLd.keywords);
-  });
+  context('Hashnode sourced posts', () => {
+    beforeEach(() => {
+      cy.visit('/freecodecamp-press-books-handbooks/');
 
-  it('matches the expected publisher values', () => {
-    expect(jsonLdObj.publisher).to.deep.equal(commonExpectedJsonLd.publisher);
-  });
+      jsonLdObj = cy
+        .get('head script[type="application/ld+json"]')
+        .then($script => {
+          jsonLdObj = JSON.parse($script.text());
+        });
+    });
 
-  it('matches the expected image values', () => {
-    expect(jsonLdObj.image).to.deep.equal(postExpectedJsonLd.image);
-  });
+    it('matches the expected base values', () => {
+      expect(jsonLdObj['@context']).to.equal(commonExpectedJsonLd['@context']);
+      expect(jsonLdObj['@type']).to.equal(hashnodePostExpectedJsonLd['@type']);
+      expect(jsonLdObj.url).to.equal(hashnodePostExpectedJsonLd.url);
+      expect(jsonLdObj.datePublished).to.equal(
+        hashnodePostExpectedJsonLd.datePublished
+      );
+      expect(jsonLdObj.dateModified).to.equal(
+        hashnodePostExpectedJsonLd.dateModified
+      );
+      expect(jsonLdObj.description).to.equal(
+        hashnodePostExpectedJsonLd.description
+      );
+      expect(jsonLdObj.headline).to.equal(hashnodePostExpectedJsonLd.headline);
+      expect(jsonLdObj.keywords).to.equal(hashnodePostExpectedJsonLd.keywords);
+    });
 
-  it('matches the expected mainEntityOfPage values', () => {
-    expect(jsonLdObj.mainEntityOfPage).to.deep.equal(
-      commonExpectedJsonLd.mainEntityOfPage
-    );
-  });
+    it('matches the expected publisher values', () => {
+      expect(jsonLdObj.publisher).to.deep.equal(commonExpectedJsonLd.publisher);
+    });
 
-  it('matches the expected author values', () => {
-    expect(jsonLdObj.author).to.deep.equal(postExpectedJsonLd.author);
+    it('matches the expected image values', () => {
+      expect(jsonLdObj.image).to.deep.equal(hashnodePostExpectedJsonLd.image);
+    });
+
+    it('matches the expected mainEntityOfPage values', () => {
+      expect(jsonLdObj.mainEntityOfPage).to.deep.equal(
+        commonExpectedJsonLd.mainEntityOfPage
+      );
+    });
+
+    it('matches the expected author values', () => {
+      expect(jsonLdObj.author).to.deep.equal(hashnodePostExpectedJsonLd.author);
+    });
   });
 });

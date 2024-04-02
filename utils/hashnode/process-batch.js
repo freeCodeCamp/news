@@ -76,6 +76,8 @@ const processBatch = async ({ batch, currBatchNo, totalBatches }) => {
       postTitle: newPost.title
     });
 
+    // Note: Longer posts include an ellipsis. We can decide how to
+    // handle this in the future.
     if (oldPost.brief) {
       newPost.original_excerpt = oldPost.brief;
 
