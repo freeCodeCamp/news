@@ -32,8 +32,22 @@ const processBatch = async ({ batch, currBatchNo, totalBatches }) => {
     newPostAuthor.bio = oldPost.author.bio.text;
     newPostAuthor.location = oldPost.author.location;
     newPostAuthor.website = oldPost.author.socialMediaLinks.website;
-    newPostAuthor.twitter = oldPost.author.socialMediaLinks.twitter;
-    newPostAuthor.facebook = oldPost.author.socialMediaLinks.facebook;
+    // Note: Mutate Twitter and Facebook links so they're just the username like
+    // on Ghost for now.
+    // TODO: Simplify social media links and how they're used throughout the build
+    // in the future.
+    newPostAuthor.twitter = oldPost.author.socialMediaLinks.twitter
+      ? oldPost.author.socialMediaLinks.twitter.replace(
+          'https://twitter.com/',
+          '@'
+        )
+      : null;
+    newPostAuthor.facebook = oldPost.author.socialMediaLinks.facebook
+      ? oldPost.author.socialMediaLinks.facebook.replace(
+          'https://www.facebook.com/',
+          ''
+        )
+      : null;
     newPostAuthor.path = `/author/${oldPost.author.username}/`;
     if (oldPost.author.profilePicture) {
       newPostAuthor.profile_image = oldPost.author.profilePicture;
