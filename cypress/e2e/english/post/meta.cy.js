@@ -14,7 +14,7 @@ const postExpectedMeta = {
 
 describe('Post metadata', () => {
   beforeEach(() => {
-    cy.visit('/announcing-rust-course-replit-web');
+    cy.visit('/announcing-rust-course-replit-web/');
   });
 
   it('<title>', () => {

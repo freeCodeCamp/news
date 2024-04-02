@@ -1,7 +1,7 @@
 {% extends 'layouts/default.njk' %}
 
 {% set title = doc.title %}
-{% set canonicalUrl = site.url + doc.path %}
+{% set canonicalUrl = doc.path | htmlBaseUrl(site.url) %}
 {% set codeinjection_head = doc.codeinjection_head %}
 {% set codeinjection_foot = doc.codeinjection_foot %}
 
@@ -18,7 +18,7 @@
                 </header>
                 {% if doc.feature_image %}
                     <figure class="post-full-image">
-                        {% 
+                        {%
                             featureImage
                             doc.feature_image,
                             (title | escape),
@@ -59,7 +59,7 @@
     {% if doc.excerpt %}
         <meta property="og:description" content="{{ doc.excerpt }}">
     {% endif %}
-    <meta property="og:url" content="{{ site.url + doc.path }}">
+    <meta property="og:url" content="{{ doc.path | htmlBaseUrl(site.url) }}">
     <meta property="og:image" content="{{ doc.feature_image }}">
     {% if doc.published_at %}
         <meta property="article:published_time" content="{% toISOString doc.published_at %}">
@@ -81,7 +81,7 @@
     {% if doc.excerpt %}
         <meta name="twitter:description" content="{{ doc.excerpt }}">
     {% endif %}
-    <meta name="twitter:url" content="{{ site.url + doc.path }}">
+    <meta name="twitter:url" content="{{ doc.path | htmlBaseUrl(site.url) }}">
     <meta name="twitter:image" content="{{ doc.feature_image }}">
     <meta name="twitter:label1" content="Written by">
     <meta name="twitter:data1" content="{{ doc.primary_author.name }}">

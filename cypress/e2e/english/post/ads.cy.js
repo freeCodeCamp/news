@@ -11,7 +11,7 @@ const selectors = {
 describe('Ads', () => {
   context('General tests', () => {
     beforeEach(() => {
-      cy.visit('/carbon-neutral-web3-curriculum-plans');
+      cy.visit('/carbon-neutral-web3-curriculum-plans/');
     });
 
     it('the adsense script should be within the `head` element', () => {
@@ -22,7 +22,7 @@ describe('Ads', () => {
   context('Not authenticated', () => {
     context('Ad wrappers and containers', () => {
       beforeEach(() => {
-        cy.visit('/carbon-neutral-web3-curriculum-plans');
+        cy.visit('/carbon-neutral-web3-curriculum-plans/');
       });
 
       it('the post should contain at least one ad', () => {
@@ -66,7 +66,7 @@ describe('Ads', () => {
 
     context('Images and videos', () => {
       beforeEach(() => {
-        cy.visit('/ad-layout-images-and-videos');
+        cy.visit('/ad-layout-images-and-videos/');
       });
 
       it('All Ghost editor images in the post body should have a max-width of 100%', () => {

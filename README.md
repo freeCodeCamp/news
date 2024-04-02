@@ -4,11 +4,7 @@
 
 Welcome to freeCodeCamp's [Developer News][1] codebase — A JAMStack app built with [Ghost][2] & [11ty][3] & lots of love from the community.
 
-The code is based on this [template][4]. We use this project to build and deploy multiple instances of our publications in several world languages.
-
-Content is fetched from Ghost, packaged into docker images, and deployed to Azure WebApp for Containers on Azure App Service.
-
-All of the services are then distributed globally by our CDN provider.
+The code is based on this [template][4]. We use this project to build and deploy multiple instances of our publications in several world languages. All of the services are then distributed globally by our CDN provider.
 
 ## Contributing
 

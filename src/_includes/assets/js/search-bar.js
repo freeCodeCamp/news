@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!query.isEmpty) {
               return `
               <div class="aa-suggestion footer-suggestion">
-                <a id="algolia-footer-selector" href="{{ site.url }}/search?query=${searchQuery}">
+                <a id="algolia-footer-selector" href="{{ '/search?query=${searchQuery}' | htmlBaseUrl(site.url) }}">
                   <div class="algolia-result algolia-footer">
                     {% t 'search.see-results', { searchQuery: '${searchQuery}' } %}
                   </div>
@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // If footer is selected, set to search results path
     hitSelected = suggestion
       ? suggestion.url
-      : `{{ site.url }}/search?query=${searchQuery}`;
+      : `{{ '/search?query=${searchQuery}' | htmlBaseUrl(site.url) }}`;
 
     // Let browser handle click, and do not go to selection on tab key press
     if (
@@ -103,7 +103,9 @@ document.addEventListener('DOMContentLoaded', () => {
       const articleUrl = hitSelected.querySelector('a').href;
       window.location.assign(articleUrl);
     } else if (!hitSelected && searchQuery && hits) {
-      window.location.assign(`{{ site.url }}/search?query=${searchQuery}`);
+      window.location.assign(
+        `{{ '/search?query=${searchQuery}' | htmlBaseUrl(site.url) }}`
+      );
     }
   }
 

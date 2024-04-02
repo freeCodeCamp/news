@@ -31,7 +31,7 @@ describe('Page structured data (JSON-LD)', () => {
   let jsonLdObj;
 
   beforeEach(() => {
-    cy.visit('/thank-you-for-donating');
+    cy.visit('/thank-you-for-donating/');
 
     jsonLdObj = cy
       .get('head script[type="application/ld+json"]')

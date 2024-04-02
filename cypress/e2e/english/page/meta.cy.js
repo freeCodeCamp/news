@@ -14,7 +14,7 @@ const pageExpectedMeta = {
 
 describe('Page metadata', () => {
   beforeEach(() => {
-    cy.visit('/thank-you-for-donating');
+    cy.visit('/thank-you-for-donating/');
   });
 
   it('<title>', () => {

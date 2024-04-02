@@ -226,10 +226,11 @@ module.exports = async () => {
 
   const generateSitemapObject = (collection, type) => {
     return {
-      path: `/sitemap-${type}.xml`,
+      path: `sitemap-${type}.xml`,
       entries: cloneDeep(collection).map(obj => {
+        const objPath = obj.path.replace(/^\//, '');
         const pageObj = {
-          loc: `${siteURL}${obj.path}`
+          loc: siteURL + objPath
         };
         // Append lastmod if obj is a post or page with an updated_at property
         if (obj.updated_at)
@@ -266,7 +267,7 @@ module.exports = async () => {
   // Add custom object for the landing page to the beginning of the pages sitemap collection entries array
   sitemaps[0].entries = [
     {
-      loc: `${siteURL}/`,
+      loc: `${siteURL}`,
       // Published pages aren't shown on the landing page, so use the most recently updated post
       // for lastmod
       lastmod: sitemaps[1].entries[0].lastmod
@@ -292,7 +293,7 @@ module.exports = async () => {
   // Add a sitemap index object to the sitemaps array and use some data from the existing pages, posts,
   // authors, and tags sitemaps as entries to use in the template
   sitemaps.unshift({
-    path: '/sitemap.xml',
+    path: 'sitemap.xml',
     entries: sitemaps.map(obj => {
       const sitemapObj = {
         loc: `${siteURL}${obj.path}`

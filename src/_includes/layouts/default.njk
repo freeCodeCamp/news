@@ -62,9 +62,9 @@
         {% block headScripts %}
         {% endblock %}
 
-        {# Both of these meta tags only appear in this form on the landing and 
+        {# Both of these meta tags only appear in this form on the landing and
         search pages. In other contexts, the description is an excerpt, and
-        and there is no keywords meta tag. Instead, the tag names act as 
+        and there is no keywords meta tag. Instead, the tag names act as
         keywords in structured data. #}
         {% if not permalink or permalink === "/search/" %}
             <meta name="keywords" content="{% t 'meta-tags:keywords' %}">
@@ -76,7 +76,7 @@
         {% if canonicalUrl %}
             <link rel="canonical" href="{{ canonicalUrl }}">
         {% else %}
-            <link rel="canonical" href="{{ site.url + page.url }}">
+            <link rel="canonical" href="{{ page.url | htmlBaseUrl(site.url) }}">
         {% endif %}
         <meta name="referrer" content="no-referrer-when-downgrade">
 
@@ -91,7 +91,7 @@
             <meta property="og:type" content="website">
             <meta property="og:title" content="{{ site.title }}">
             <meta property="og:description" content="{% t 'meta-tags:description' %}">
-            <meta property="og:url" content="{{ site.url + page.url }}">
+            <meta property="og:url" content="{{ page.url | htmlBaseUrl(site.url) }}">
             <meta property="og:image" content="{{ site.cover_image }}">
             <meta property="article:publisher" content="https://www.facebook.com/freecodecamp">
 
@@ -99,7 +99,7 @@
             <meta name="twitter:card" content="summary_large_image">
             <meta name="twitter:title" content="{{ site.title }}">
             <meta name="twitter:description" content="{% t 'meta-tags:description' %}">
-            <meta name="twitter:url" content="{{ site.url + page.url }}">
+            <meta name="twitter:url" content="{{ page.url | htmlBaseUrl(site.url) }}">
             <meta name="twitter:image" content="{{ site.cover_image }}">
             <meta name="twitter:site" content="{{ site.twitter }}">
 
@@ -111,12 +111,23 @@
         {% endblock %}
 
         <meta name="generator" content="Eleventy">
-        <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ site.url + "/rss/" }}">
+        <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ '/rss/' | htmlBaseUrl(site.url) }}">
 
         {{ site.codeinjection_head | safe if site.codeinjection_head }}
         {{ codeinjection_head | safe if codeinjection_head }}
+        {% if canonicalUrl == "https://www.freecodecamp.org/news/are-you-being-micro-managed-manage-your-relationship-with-your-manager-instead-9ad10b28bcda/" %}
+            <script async src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"></script>
+            <script>
+            window.googletag = window.googletag || {cmd: []};
+            googletag.cmd.push(function() {
+                googletag.defineSlot('/23075930536/homepage-top-test', [[300, 1050], [300, 600]], 'div-gpt-ad-1711446808518-0').addService(googletag.pubads());
+                googletag.pubads().enableSingleRequest();
+                googletag.enableServices();
+            });
+            </script>
+        {% endif %}
     </head>
-    
+
     {% if site.lang in ['ar', 'fa', 'ur', 'he'] %}
         <body class="home-template rtl-layout">
     {% else %}
@@ -136,7 +147,7 @@
             {% include "partials/footer.njk" %}
         </div>
 
-        {# Pulls scripts from other template files and include them after all assets 
+        {# Pulls scripts from other template files and include them after all assets
         have loaded / global setup is complete. For example, there's some JS which
         we only want to use in search-results.njk, but it needs to be included here
         after the global Algolia setup in src/_includes/assets/js/algolia.js. #}

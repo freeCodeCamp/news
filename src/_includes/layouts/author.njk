@@ -2,7 +2,7 @@
 {% from "partials/card.njk" import card %}
 
 {% set title = author.name + " - " + site.title %}
-{% set canonicalUrl = site.url + author.path %}
+{% set canonicalUrl = author.path | htmlBaseUrl(site.url) %}
 {% set defaultDescription %}{% t 'meta-tags:description' %}{% endset %}
 
 {% block content %}
@@ -32,7 +32,7 @@
     <meta property="og:type" content="profile">
     <meta property="og:title" content="{{ title }}">
     <meta property="og:description" content="{{ author.bio if author.bio else defaultDescription }}">
-    <meta property="og:url" content="{{ site.url + author.path }}">
+    <meta property="og:url" content="{{ author.path | htmlBaseUrl(site.url) }}">
     <meta property="og:image" content="{{ author.cover_image if author.cover_image else site.cover_image }}">
     <meta property="article:publisher" content="https://www.facebook.com/freecodecamp">
     {% if author.facebook %}
@@ -43,7 +43,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="{{ title }}">
     <meta name="twitter:description" content="{{ author.bio if author.bio else defaultDescription }}">
-    <meta name="twitter:url" content="{{ site.url + author.path }}">
+    <meta name="twitter:url" content="{{ author.path | htmlBaseUrl(site.url) }}">
     <meta name="twitter:image" content="{{ author.cover_image if author.cover_image else site.cover_image }}">
     <meta name="twitter:site" content="{{ site.twitter }}">
     {% if author.twitter %}
