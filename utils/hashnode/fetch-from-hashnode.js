@@ -1,5 +1,6 @@
 const { gql, request } = require('graphql-request');
 const { sourceHashnodeHost } = require('../ghost/api');
+const { eleventyEnv, currentLocale_i18n } = require('../../config');
 const wait = require('../wait');
 
 const fetchFromHashnode = async () => {
@@ -68,11 +69,14 @@ const fetchFromHashnode = async () => {
   let hasNextPage = true;
 
   while (hasNextPage) {
-    const res = await request(process.env.HASHNODE_API_URL, query, {
-      host: sourceHashnodeHost,
-      first: 20,
-      after
-    });
+    const res =
+      eleventyEnv === 'ci' && currentLocale_i18n === 'english'
+        ? require('../../cypress/fixtures/mock-hashnode-posts.json')
+        : await request(process.env.HASHNODE_API_URL, query, {
+            host: sourceHashnodeHost,
+            first: 20,
+            after
+          });
 
     const resPosts = res.publication.posts?.edges.map(({ node }) => node) || [];
     const pageInfo = res.publication.posts.pageInfo;
