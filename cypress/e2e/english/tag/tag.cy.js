@@ -1,5 +1,4 @@
 const {
-  getPostCards,
   loadAndCountAllPostCards
 } = require('../../../support/utils/post-cards');
 
