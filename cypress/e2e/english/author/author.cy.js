@@ -136,7 +136,6 @@ describe('Author page', () => {
 
     it("should show a default image from Hashnode's CDN", () => {
       cy.get(selectors.authorProfileImage).then($el => {
-        console.log($el[0].tagName);
         expect($el[0].src).to.include('cdn.hashnode.com');
         expect($el[0].tagName.toLowerCase()).to.equal('img');
       });
