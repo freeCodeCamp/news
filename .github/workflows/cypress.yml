@@ -30,6 +30,9 @@ jobs:
       ESPANOL_GHOST_API_VERSION: ${{ secrets.CI_ESPANOL_GHOST_API_VERSION }}
       ESPANOL_GHOST_CONTENT_API_KEY: ${{ secrets.CI_ESPANOL_GHOST_CONTENT_API_KEY }}
 
+      HASHNODE_API_URL: api_url_from_hashnode_dashboard
+      ENGLISH_HASHNODE_HOST: host_from_hashnode_dashboard
+
       ADS_ENABLED: true
       GOOGLE_ADSENSE_DATA_AD_CLIENT: ca-pub-1234567890
       GOOGLE_ADSENSE_DATA_AD_SLOT: 1234567890
