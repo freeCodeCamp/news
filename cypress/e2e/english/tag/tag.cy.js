@@ -8,21 +8,46 @@ const selectors = {
   tagPostCount: "[data-test-label='tag-post-count']"
 };
 
-describe('Tag page', () => {
-  beforeEach(() => {
-    cy.visit('/tag/freecodecamp/');
+describe('Tag pages', () => {
+  context('Ghost sourced tags', () => {
+    beforeEach(() => {
+      cy.visit('/tag/javascript/');
+    });
+
+    it('should render', () => {
+      cy.contains(selectors.tagName, '#JAVASCRIPT');
+    });
+
+    it('the number of total posts should match the post count at the top of the page (3)', () => {
+      loadAndCountAllPostCards(selectors.tagPostCount);
+    });
   });
 
-  it('should render', () => {
-    cy.contains(selectors.tagName, '#FREECODECAMP');
+  context('Hashnode sourced tags', () => {
+    beforeEach(() => {
+      cy.visit('/tag/c-programming/');
+    });
+
+    it('should render', () => {
+      cy.contains(selectors.tagName, '#C PROGRAMMING');
+    });
+
+    it('the number of total posts should match the post count at the top of the page (1)', () => {
+      loadAndCountAllPostCards(selectors.tagPostCount);
+    });
   });
 
-  // To do: run tests against a tag with more total posts
-  it(`should show 7 posts on load`, () => {
-    getPostCards().should('have.length.gte', 7);
-  });
+  context('Ghost and Hashnode sourced tags', () => {
+    beforeEach(() => {
+      cy.visit('/tag/freecodecamp/');
+    });
 
-  it('should show the correct number of total posts', () => {
-    loadAndCountAllPostCards(selectors.tagPostCount);
+    it('should render', () => {
+      cy.contains(selectors.tagName, '#FREECODECAMP');
+    });
+
+    it('the number of total posts should match the post count at the top of the page (12)', () => {
+      loadAndCountAllPostCards(selectors.tagPostCount);
+    });
   });
 });

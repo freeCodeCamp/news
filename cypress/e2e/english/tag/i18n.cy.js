@@ -13,7 +13,7 @@ describe('Tag page i18n', () => {
   });
 
   it('a tag page with multiple posts does not render its post count i18n key', () => {
-    cy.visit('/tag/freecodecamp/');
+    cy.visit('/tag/freecodecamp/'); // This tag contains a mix of Ghost and Hashnode sourced posts
 
     cy.get(selectors.tagPostCount)
       .invoke('text')

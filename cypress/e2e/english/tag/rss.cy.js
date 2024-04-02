@@ -1,7 +1,7 @@
 const { decodeHTML, XMLToDOM } = require('../../../support/utils/rss');
 const commonExpectedMeta = require('../../../fixtures/common-expected-meta.json');
-const expectedTagTitle = `Community - ${commonExpectedMeta.siteName}`;
-const feedPath = '/tag/community/rss.xml';
+const expectedTagTitle = `freeCodeCamp - ${commonExpectedMeta.siteName}`;
+const feedPath = '/tag/freecodecamp/rss.xml'; // This tag contains a mix of Ghost and Hashnode sourced posts
 
 describe('Author page RSS feed', () => {
   it('should start with a UTF-8 encoding declaration', () => {
@@ -11,7 +11,7 @@ describe('Author page RSS feed', () => {
     });
   });
 
-  it('should have the channel title <![CDATA[ Community - freeCodeCamp.org ]]>', () => {
+  it('should have the channel title <![CDATA[ freeCodeCamp - freeCodeCamp.org ]]>', () => {
     cy.request(feedPath).then(async res => {
       const feed = XMLToDOM(res.body);
       const channelTitle = feed.querySelector('channel title').innerHTML.trim();
@@ -82,12 +82,12 @@ describe('Author page RSS feed', () => {
     });
   });
 
-  it('should return 15 articles', () => {
+  it('should return 12 articles', () => {
     cy.request(feedPath).then(async res => {
       const feed = XMLToDOM(res.body);
       const articles = feed.querySelectorAll('item');
 
-      expect([...articles]).to.have.lengthOf(15);
+      expect([...articles]).to.have.lengthOf(12);
     });
   });
 });
