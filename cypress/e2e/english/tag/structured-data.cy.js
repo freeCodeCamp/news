@@ -12,7 +12,7 @@ describe('Tag page structured data (JSON-LD)', () => {
   let jsonLdObj;
 
   beforeEach(() => {
-    cy.visit('/tag/freecodecamp/');
+    cy.visit('/tag/freecodecamp/'); // This tag contains a mix of Ghost and Hashnode sourced posts
 
     jsonLdObj = cy
       .get('head script[type="application/ld+json"]')

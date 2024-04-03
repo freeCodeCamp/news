@@ -8,7 +8,7 @@ const tagExpectedMeta = {
 
 describe('Tag page metadata', () => {
   beforeEach(() => {
-    cy.visit('/tag/freecodecamp/');
+    cy.visit('/tag/freecodecamp/'); // This tag contains a mix of Ghost and Hashnode sourced posts
   });
 
   it('<title>', () => {

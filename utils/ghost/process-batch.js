@@ -1,5 +1,5 @@
-const modifyGhostHTML = require('./modify-ghost-html');
 const originalPostHandler = require('./original-post-handler');
+const modifyHTMLContent = require('../modify-html-content');
 const getImageDimensions = require('../../utils/get-image-dimensions');
 const errorLogger = require('../../utils/error-logger');
 const { siteURL } = require('../../config');
@@ -38,7 +38,9 @@ const removeUnusedKeys = obj => {
 };
 
 const processBatch = async ({ batch, type, currBatchNo, totalBatches }) => {
-  console.log(`Processing ${type} batch ${currBatchNo} of ${totalBatches}...`);
+  console.log(
+    `Processing Ghost ${type} batch ${currBatchNo} of ${totalBatches}...`
+  );
 
   // Process current batch of posts / pages
   await Promise.all(
@@ -141,7 +143,12 @@ const processBatch = async ({ batch, type, currBatchNo, totalBatches }) => {
       // Enable lazy loading of images and embedded videos, set width, height, and add a default
       // alt attribute to images if one doesn't exist.
       // Also, append Google ads to post body and generate bottom banner ad if ads are enabled.
-      if (obj.html) obj = await modifyGhostHTML(obj);
+      obj.html = await modifyHTMLContent({
+        postContent: obj.html,
+        postTitle: obj.title
+      });
+
+      obj.source = 'Ghost';
 
       return obj;
     })

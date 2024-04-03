@@ -1,12 +1,5 @@
 const { sourceAPI } = require('./api');
-
-const wait = seconds => {
-  return new Promise(resolve => {
-    setTimeout(() => {
-      resolve(seconds);
-    }, seconds * 1000);
-  });
-};
+const wait = require('../wait');
 
 const fetchFromGhost = async endpoint => {
   let currPage = 1;
@@ -30,11 +23,13 @@ const fetchFromGhost = async endpoint => {
 
     lastPage = ghostRes.meta.pagination.pages;
     if (ghostRes.length > 0)
-      console.log(`Fetched ${endpoint} page ${currPage} of ${lastPage}...`);
+      console.log(
+        `Fetched Ghost ${endpoint} page ${currPage} of ${lastPage}...`
+      );
     currPage = ghostRes.meta.pagination.next;
 
     ghostRes.forEach(obj => data.push(obj));
-    await wait(0.2);
+    await wait(200);
   }
 
   return data;

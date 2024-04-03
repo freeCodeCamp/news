@@ -111,7 +111,8 @@ async function createJSONLDShortcode(type, site, data) {
         );
       }
 
-      returnData.author = createAuthorObj(data.primary_author);
+      if (data.primary_author)
+        returnData.author = createAuthorObj(data.primary_author);
     }
 
     // Handle images for both types

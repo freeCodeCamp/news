@@ -10,12 +10,14 @@ const allGhostAPIInstances = ['local', ...locales].reduce((obj, currLocale) => {
     const url = process.env[`${upperLocale}_GHOST_API_URL`];
     const key = process.env[`${upperLocale}_GHOST_CONTENT_API_KEY`];
     const version = process.env[`${upperLocale}_GHOST_API_VERSION`];
+    const hashnodeHost = process.env[`${upperLocale}_HASHNODE_HOST`];
 
     if (url && key && version) {
       obj[currLocale] = {
         api: new GhostContentAPI({ url, key, version }),
         ghostAPIURL: url,
-        siteURL: getSiteURL(currLocale, true)
+        siteURL: getSiteURL(currLocale, true),
+        hashnodeHost
       };
     } else {
       console.warn(`
@@ -36,7 +38,6 @@ const allGhostAPIInstances = ['local', ...locales].reduce((obj, currLocale) => {
       ---------------------------------------------------------------
       Please double check that the correct keys are included in the
       .env file.
-
       You can ignore this warning if this instance of Ghost is set
       to private, if you don't need the original / author translator
       feature for this locale, or if a test suite is running.
@@ -47,7 +48,8 @@ const allGhostAPIInstances = ['local', ...locales].reduce((obj, currLocale) => {
   return obj;
 }, {});
 
-const { api, ghostAPIURL } = allGhostAPIInstances[currentLocale_ghost];
+const { api, ghostAPIURL, hashnodeHost } =
+  allGhostAPIInstances[currentLocale_ghost];
 
 // Export the source API instance and source API URL to strip domains for
 // relative links for the current site build and fetch the current sitemap.
@@ -56,5 +58,6 @@ const { api, ghostAPIURL } = allGhostAPIInstances[currentLocale_ghost];
 module.exports = {
   sourceAPI: api,
   sourceAPIURL: ghostAPIURL,
+  sourceHashnodeHost: hashnodeHost,
   allGhostAPIInstances
 };
