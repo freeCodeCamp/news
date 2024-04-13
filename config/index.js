@@ -24,13 +24,11 @@ const locales = [
   'chinese',
   'english',
   'espanol',
-  'french',
   'italian',
   'japanese',
   'korean',
   'portuguese',
-  'ukrainian',
-  'urdu'
+  'ukrainian'
 ];
 
 /* These strings set the i18next language. It needs to be the two character
@@ -41,26 +39,22 @@ const localeCodes = {
   chinese: 'zh',
   english: 'en',
   espanol: 'es',
-  french: 'fr',
   italian: 'it',
   japanese: 'ja',
   korean: 'ko',
   portuguese: 'pt-BR',
-  ukrainian: 'uk',
-  urdu: 'ur'
+  ukrainian: 'uk'
 };
 
 const algoliaIndices = {
   chinese: 'news-zh',
   english: 'news',
   espanol: 'news-es',
-  french: 'news-fr',
   italian: 'news-it',
   japanese: 'news-ja',
   korean: 'news-ko',
   portuguese: 'news-pt-br',
-  ukrainian: 'news-uk',
-  urdu: 'news-ur'
+  ukrainian: 'news-uk'
 };
 
 const {
