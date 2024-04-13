@@ -9,12 +9,13 @@ const {
 
 const pingEditorialTeam = async duplicatesArr => {
   const msg = `Posts with duplicate slugs have been found between Ghost and Hashnode. The following posts have been removed from the latest build:
-  
+
 ${duplicatesArr.map(post => `- "${post.title}" with the slug "/${post.slug}" on the ${currentLocale_i18n.charAt(0).toUpperCase() + currentLocale_i18n.slice(1)} ${post.source} publication`).join('\n')}
 
 Please update the post slugs on either Ghost or Hashnode to include them in future builds.
 `;
-  console.warn(`
+  process.env['FCC_DISABLE_WARNING'] === 'false' &&
+    console.warn(`
 -----------------------------------------------
 WARNING: Duplicate Posts Found
 -----------------------------------------------

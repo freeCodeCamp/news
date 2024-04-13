@@ -25,7 +25,8 @@ const getRoundedTotalRecords = async () => {
       totalRecords = res?.nbHits;
     }
   } catch (err) {
-    console.warn(`
+    process.env['FCC_DISABLE_WARNING'] === 'false' &&
+      console.warn(`
       ----------------------------------------------------------
       Warning: Could not get the total number of Algolia records
       ----------------------------------------------------------

@@ -20,7 +20,8 @@ const allGhostAPIInstances = ['local', ...locales].reduce((obj, currLocale) => {
         hashnodeHost
       };
     } else {
-      console.warn(`
+      process.env['FCC_DISABLE_WARNING'] === 'false' &&
+        console.warn(`
       ---------------------------------------------------------------
       Warning: Unable to initialize the Content API for ${currLocale}
       ---------------------------------------------------------------
@@ -32,7 +33,8 @@ const allGhostAPIInstances = ['local', ...locales].reduce((obj, currLocale) => {
       `);
     }
   } catch (err) {
-    console.warn(`
+    process.env['FCC_DISABLE_WARNING'] === 'false' &&
+      console.warn(`
       ---------------------------------------------------------------
       Warning: Unable to initialize the Content API for ${currLocale}
       ---------------------------------------------------------------

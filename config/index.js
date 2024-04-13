@@ -9,7 +9,8 @@ const envFileName = eleventyEnv === 'ci' ? '.env.ci' : '.env';
 const { error } = require('dotenv').config({ path: envPath });
 
 if (error) {
-  console.warn(`
+  process.env['FCC_DISABLE_WARNING'] === 'false' &&
+    console.warn(`
     ----------------------------------------------------
     Warning: ${envFileName} file not found.
     ----------------------------------------------------
@@ -89,7 +90,8 @@ if (!lang) {
   `);
 }
 if (lang !== localeForGhost && localeForGhost !== 'local') {
-  console.warn(`
+  process.env['FCC_DISABLE_WARNING'] === 'false' &&
+    console.warn(`
     ----------------------------------------------------
     Warning: Mismatch between UI locale and Ghost locale.
     ----------------------------------------------------
