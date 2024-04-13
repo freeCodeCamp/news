@@ -24,7 +24,7 @@ const fetchFromGhost = async endpoint => {
     lastPage = ghostRes.meta.pagination.pages;
     if (ghostRes.length > 0)
       console.log(
-        `Fetched Ghost ${endpoint} page ${currPage} of ${lastPage}...`
+        `Fetched Ghost ${endpoint} page ${currPage} of ${lastPage}...and using ${process.memoryUsage.rss() / 1024 / 1024} MB of memory`
       );
     currPage = ghostRes.meta.pagination.next;
 

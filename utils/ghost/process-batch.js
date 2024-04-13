@@ -39,7 +39,7 @@ const removeUnusedKeys = obj => {
 
 const processBatch = async ({ batch, type, currBatchNo, totalBatches }) => {
   console.log(
-    `Processing Ghost ${type} batch ${currBatchNo} of ${totalBatches}...`
+    `Processing Ghost ${type} batch ${currBatchNo} of ${totalBatches}...and using ${process.memoryUsage.rss() / 1024 / 1024} MB of memory`
   );
 
   // Process current batch of posts / pages
