@@ -4,7 +4,7 @@
 {% set title = tag.name + " - " + site.title %}
 {% set canonicalUrl = tag.path | htmlBaseUrl(site.url) %}
 {% set postCount = tag.count.posts %}
-{% set popularTags = ghost.popularTags %}
+{% set popularTags = datasource.popularTags %}
 
 {% block content %}
     <div class="under-header-content">
