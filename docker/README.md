@@ -5,8 +5,8 @@ This directory contains the Dockerfile to build out the image for the publicatio
 **What's in this directory:**
 
 - The [`ghost`](./ghost) directory contains the docker-compose file and seed content for standing up a set of local Ghost instances. This is useful for local development and testing against a cluster of Ghost instances.
-- The [`dev`](./dev) directory contains the docker-compose file to stand up a prod-like news instances that builds the eleventy output and serves it up. The build depends on the configurations set in the `.env` file in the root of the project.
-- The [`prd`](./prd) directory contains the docker-compose file to stand up a prod-like news instances that pulls down the image from the registry and serves it up. This should be the closest to the production environment.
+- The [`test/dev`](./test/dev) directory contains the docker-compose file to stand up a prod-like news instances that builds the eleventy output and serves it up. The build depends on the configurations set in the `.env` file in the root of the project.
+- The [`test/prd`](./test/prd) directory contains the docker-compose file to stand up a prod-like news instances that pulls down the image from the registry and serves it up. This should be the closest to the production environment.
 
 ## Instructions
 
