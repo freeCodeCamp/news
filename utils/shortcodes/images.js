@@ -41,7 +41,7 @@ function imageShortcode(
 }
 
 // Copy images over from Ghost
-function featureImageShortcode(src, alt, sizes, widths, dimensions) {
+function featureImageShortcode(src, alt, sizes, widths, dimensions, testLabel) {
   const imageUrls = src.match(ghostImageRe)
     ? widths.map(width =>
         src.replace('/content/images/', `/content/images/size/w${width}/`)
@@ -70,6 +70,7 @@ function featureImageShortcode(src, alt, sizes, widths, dimensions) {
         alt="${alt}",
         width="${dimensions.width}"
         height="${dimensions.height}"
+        data-test-label="${testLabel}"
       >
     </picture>
   `;
