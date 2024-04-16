@@ -15,7 +15,7 @@ time #}
 {% block content %}
     <main id="site-main" class="post-template site-main outer">
         <div class="inner {{ "ad-layout" if (adsEnabled) }}">
-            <article class="post-full post {{ "no-image" if not (post.feature_image) }}">
+            <article class="post-full post }}">
                 <header class="post-full-header">
                     <section class="post-full-meta">
                         <time class="post-full-meta-date" datetime="{{ post.published_at }}">
@@ -40,20 +40,18 @@ time #}
                         {% endif %}
                     {% endif %}
                 </div>
-                {% if post.feature_image %}
-                    <figure class="post-full-image">
-                        {%
-                            featureImage
-                            post.feature_image,
-                            (title | escape),
-                            "(max-width: 800px) 400px,
-                             (max-width: 1170px) 700px,
-                             1400px",
-                            [300, 600, 1000, 2000],
-                            post.image_dimensions.feature_image
-                        %}
-                    </figure>
-                {% endif %}
+                <figure class="post-full-image">
+                    {%
+                        featureImage
+                        post.feature_image,
+                        (title | escape),
+                        "(max-width: 800px) 400px,
+                            (max-width: 1170px) 700px,
+                            1400px",
+                        [300, 600, 1000, 2000],
+                        post.image_dimensions.feature_image
+                    %}
+                </figure>
                 <section class="post-full-content">
                     <div class="post-and-sidebar">
                         <section class="post-content {{ "medium-migrated-article" if (post.primary_author.name === "freeCodeCamp.org") }}" data-test-label="post-content">

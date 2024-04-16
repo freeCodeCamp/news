@@ -2,6 +2,7 @@ const commonExpectedMeta = require('../../../fixtures/common-expected-meta.json'
 const { loadAllPosts } = require('../../../support/utils/post-cards');
 
 const selectors = {
+  featureImage: "[data-test-label='feature-image']",
   postCard: "[data-test-label='post-card']",
   authorList: "[data-test-label='author-list']",
   authorProfileImage: "[data-test-label='profile-image']",
@@ -71,5 +72,11 @@ describe('Landing', () => {
       .parentsUntil('article')
       .find(selectors.authorList)
       .should('not.exist');
+  });
+
+  it('each post card should contain a feature image', () => {
+    const numberOfPosts = Cypress.$(selectors.postCard).length;
+
+    cy.get(selectors.featureImage).should('have.length', numberOfPosts);
   });
 });

@@ -1,4 +1,5 @@
 const selectors = {
+  featureImage: "[data-test-label='feature-image']",
   postContent: "[data-test-label='post-content']"
 };
 
@@ -30,6 +31,26 @@ describe('Page', () => {
         .last()
         .should('have.prop', 'tagName', 'P')
         .should('not.have.attr', 'data-test-label', 'fitted');
+    });
+  });
+
+  context('Includes feature image', () => {
+    beforeEach(() => {
+      cy.visit('/thank-you-for-donating/');
+    });
+
+    it('pages with a feature image should include a feature image element', () => {
+      cy.get(selectors.featureImage).should('exist');
+    });
+  });
+
+  context('No feature image', () => {
+    beforeEach(() => {
+      cy.visit('/embedded-videos-page/');
+    });
+
+    it('pages with no feature image should **not** fall back to the default fCC indigo image', () => {
+      cy.get(selectors.featureImage).should('not.exist');
     });
   });
 });

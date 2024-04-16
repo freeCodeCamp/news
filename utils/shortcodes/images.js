@@ -70,6 +70,7 @@ function featureImageShortcode(src, alt, sizes, widths, dimensions) {
         alt="${alt}",
         width="${dimensions.width}"
         height="${dimensions.height}"
+        data-test-label="feature-image"
       >
     </picture>
   `;

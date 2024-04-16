@@ -16,14 +16,19 @@ const processBatch = async ({ batch, currBatchNo, totalBatches }) => {
     newPost.title = oldPost.title;
     newPost.reading_time = oldPost.readTimeInMinutes;
 
-    if (oldPost.coverImage) {
-      newPost.feature_image = oldPost.coverImage.url;
-      newPost.image_dimensions = {};
-      newPost.image_dimensions.feature_image = await getImageDimensions(
-        newPost.feature_image,
-        newPost.title
-      );
-    }
+    // Set a default feature image for posts if one doesn't exist
+    // Note: We're not handling pages from Hashnode, so there's no
+    // need to handle cases where we may not want to have a cover image
+    // for a particular page.
+    newPost.feature_image = oldPost?.coverImage?.url
+      ? oldPost.coverImage.url
+      : 'https://cdn.freecodecamp.org/platform/universal/fcc_meta_1920X1080-indigo.png';
+
+    newPost.image_dimensions = {};
+    newPost.image_dimensions.feature_image = await getImageDimensions(
+      newPost.feature_image,
+      newPost.title
+    );
 
     const newPostAuthor = {};
     newPostAuthor.id = oldPost.author.id;

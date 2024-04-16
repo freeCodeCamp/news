@@ -50,8 +50,13 @@ const processBatch = async ({ batch, type, currBatchNo, totalBatches }) => {
       obj.primary_author = removeUnusedKeys(obj.primary_author);
       obj.tags.map(tag => removeUnusedKeys(tag));
 
-      // Feature image resolutions for structured data
+      // Set a default feature image for posts if one doesn't exist
+      if (type === 'posts' && !obj.feature_image)
+        obj.feature_image =
+          'https://cdn.freecodecamp.org/platform/universal/fcc_meta_1920X1080-indigo.png';
+
       if (obj.feature_image) {
+        // Feature image resolutions for structured data
         obj.image_dimensions = { ...obj.image_dimensions };
         obj.image_dimensions.feature_image = await getImageDimensions(
           obj.feature_image,

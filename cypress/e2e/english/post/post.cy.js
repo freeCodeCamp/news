@@ -1,4 +1,5 @@
 const selectors = {
+  featureImage: "[data-test-label='feature-image']",
   authorProfileImage: "[data-test-label='profile-image']",
   ghostDefaultAvatar: "[data-test-label='avatar']",
   postContent: "[data-test-label='post-content']",
@@ -98,6 +99,22 @@ describe('Post', () => {
           .should('not.have.attr', 'data-test-label', 'fitted');
       });
     });
+
+    context('No feature image', () => {
+      beforeEach(() => {
+        cy.visit('/ghost-no-feature-image/');
+      });
+
+      it('posts with no feature image should fall back to the default fCC indigo image', () => {
+        cy.get(selectors.featureImage)
+          .should('exist')
+          .then($el =>
+            expect($el[0].src).to.equal(
+              'https://cdn.freecodecamp.org/platform/universal/fcc_meta_1920X1080-indigo.png'
+            )
+          );
+      });
+    });
   });
 
   context('Hashnode sourced posts', () => {
@@ -175,6 +192,22 @@ describe('Post', () => {
         cy.get(selectors.authorProfileImage).then($el =>
           expect($el[0].alt).to.equal('Dionysia Lemonaki')
         );
+      });
+    });
+
+    context('No feature image', () => {
+      beforeEach(() => {
+        cy.visit('/hashnode-no-feature-image/');
+      });
+
+      it('posts with no feature image should fall back to the default fCC indigo image', () => {
+        cy.get(selectors.featureImage)
+          .should('exist')
+          .then($el =>
+            expect($el[0].src).to.equal(
+              'https://cdn.freecodecamp.org/platform/universal/fcc_meta_1920X1080-indigo.png'
+            )
+          );
       });
     });
   });
