@@ -61,8 +61,10 @@ time #}
                         </section>
                         {% if adsEnabled %}
                             <div class="sidebar">
-                                {% if canonicalUrl == "http://localhost:8080/news/embedded-videos-post/" %}
-                                    {% include "partials/gam-ad.njk" %}
+                                {% if canonicalUrl == "https://www.freecodecamp.org/news/are-you-being-micro-managed-manage-your-relationship-with-your-manager-instead-9ad10b28bcda/" %}
+                                    {% for i in range(0, numOfSidebarAds) %}
+                                        {% include "partials/gam-ad.njk" %}
+                                      {% endfor %}
                                 {% else %}
                                     {% for i in range(0, numOfSidebarAds) %}
                                         {% include "partials/ad.njk" %}
@@ -92,7 +94,7 @@ time #}
                         {% include "partials/learn-cta-row.njk" %}
                     {% endif %}
                 </section>
-                {% if adsEnabled and canonicalUrl != "http://localhost:8080/news/embedded-videos-post/" %}
+                {% if adsEnabled and canonicalUrl != "https://www.freecodecamp.org/news/are-you-being-micro-managed-manage-your-relationship-with-your-manager-instead-9ad10b28bcda/" %}
                     <div class="banner-ad bottom">
                         {% include "partials/ad.njk" %}
                     </div>
@@ -107,13 +109,17 @@ time #}
 {% endblock %}
 
 {% block monetization %}
-    {% if adsEnabled and canonicalUrl != "http://localhost:8080/news/embedded-videos-post/" %}
-        <script
-            data-ad-client="{{ secrets.googleAdsenseDataAdClient }}"
-            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
-            crossorigin="anonymous"
-            async
-        ></script>
+    {% if adsEnabled %}
+        {% if canonicalUrl == "https://www.freecodecamp.org/news/are-you-being-micro-managed-manage-your-relationship-with-your-manager-instead-9ad10b28bcda/" %}
+            {% include "partials/gam-lazy-loader.njk" %}
+        {% else %}
+            <script
+                data-ad-client="{{ secrets.googleAdsenseDataAdClient }}"
+                src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+                crossorigin="anonymous"
+                async
+            ></script>
+        {% endif %}
     {% endif %}
 {% endblock %}
 

@@ -1,0 +1,39 @@
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var adElements = document.querySelectorAll('.side-bar-ad-slot');
+        let counter = 0;
+        adElements.forEach(function(adElement) {
+            adElement.id = 'side-gam-ad-' + counter;
+            counter++;  // Increment the counter for the next ad element
+        });
+
+        // Define the distance from viewport as a variable
+        var loadBeforeViewport = 200; // Distance in pixels before the ad enters the viewport
+
+        window.googletag = window.googletag || {cmd: []};
+        googletag.cmd.push(function() {
+            adElements.forEach(function(adElement) {
+                googletag.defineSlot('/23075930536/homepage-top-test', [300, 600], adElement.id)
+                         .addService(googletag.pubads());
+
+                let observer = new IntersectionObserver((entries) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting || entry.boundingClientRect.top <= loadBeforeViewport) {
+                            googletag.display(entry.target.id);
+                            observer.unobserve(entry.target); // Stop observing once the ad is loaded
+                        }
+                    });
+                }, {
+                    root: null, // Observe relative to the viewport
+                    rootMargin: '-' + loadBeforeViewport + 'px 0px 0px 0px', // Adjust rootMargin to use the variable
+                    threshold: 0.01
+                });
+
+                observer.observe(adElement); // Start observing each ad element
+            });
+
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    });
+</script>

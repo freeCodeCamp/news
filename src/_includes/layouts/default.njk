@@ -115,16 +115,8 @@
 
         {{ site.codeinjection_head | safe if site.codeinjection_head }}
         {{ codeinjection_head | safe if codeinjection_head }}
-        {% if canonicalUrl == "http://localhost:8080/news/embedded-videos-post/" %}
+        {% if canonicalUrl == "https://www.freecodecamp.org/news/are-you-being-micro-managed-manage-your-relationship-with-your-manager-instead-9ad10b28bcda/" %}
             <script async src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"></script>
-            <script>
-            window.googletag = window.googletag || {cmd: []};
-            googletag.cmd.push(function() {
-                googletag.defineSlot('/23075930536/homepage-top-test', [[300, 1050], [300, 600]], 'div-gpt-ad-1711446808518-0').addService(googletag.pubads());
-                googletag.pubads().enableSingleRequest();
-                googletag.enableServices();
-            });
-            </script>
         {% endif %}
     </head>
 
