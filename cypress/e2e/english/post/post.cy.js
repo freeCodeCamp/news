@@ -1,4 +1,5 @@
 const selectors = {
+  fccSource: "[data-test-label='x-fcc-source']",
   featureImage: "[data-test-label='feature-image']",
   authorProfileImage: "[data-test-label='profile-image']",
   ghostDefaultAvatar: "[data-test-label='avatar']",
@@ -18,6 +19,10 @@ describe('Post', () => {
         cy.contains(
           "We're Building New Courses on Rust and Python + the Replit.web Framework"
         );
+      });
+
+      it('should contain the fCC source meta tag with Ghost as a source', () => {
+        cy.get(selectors.fccSource).should('have.attr', 'content', 'Ghost');
       });
     });
 
@@ -127,6 +132,10 @@ describe('Post', () => {
         cy.contains(
           'Introducing freeCodeCamp Press – Free Books for Developers'
         );
+      });
+
+      it('should contain the fCC source meta tag with Hashnode as a source', () => {
+        cy.get(selectors.fccSource).should('have.attr', 'content', 'Hashnode');
       });
     });
 

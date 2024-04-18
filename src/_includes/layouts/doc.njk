@@ -99,3 +99,8 @@
 {% block jsonLd %}
     <script type="application/ld+json">{% createJSONLD 'article', site, doc %}</script>
 {% endblock %}
+
+{# Note: We can remove this once we source all pages from a single CMS #}
+{% block datasourceInfo %}
+  <meta name="x-fcc-source" data-test-label="x-fcc-source" content="{{ doc.source }}">
+{% endblock %}
