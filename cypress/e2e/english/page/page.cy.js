@@ -1,4 +1,5 @@
 const selectors = {
+  fccSource: "[data-test-label='x-fcc-source']",
   featureImage: "[data-test-label='feature-image']",
   postContent: "[data-test-label='post-content']"
 };
@@ -13,6 +14,10 @@ describe('Page', () => {
       cy.contains(
         'Please check your email for a donation receipt. Forward it to donors@freecodecamp.org.'
       );
+    });
+
+    it('should contain the fCC source meta tag with Ghost as a source', () => {
+      cy.get(selectors.fccSource).should('have.attr', 'content', 'Ghost');
     });
   });
 
