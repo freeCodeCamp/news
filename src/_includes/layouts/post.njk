@@ -167,3 +167,8 @@ time #}
 {% block jsonLd %}
     <script type="application/ld+json">{% createJSONLD 'article', site, post %}</script>
 {% endblock %}
+
+{# Note: We can remove this once we source all posts from a single CMS #}
+{% block datasourceInfo %}
+  <meta name="x-fcc-source" data-test-label="x-fcc-source" content="{{ post.source }}">
+{% endblock %}
