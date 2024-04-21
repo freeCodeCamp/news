@@ -15,7 +15,7 @@ time #}
 {% block content %}
     <main id="site-main" class="post-template site-main outer">
         <div class="inner {{ "ad-layout" if (adsEnabled) }}">
-            <article class="post-full post }}">
+            <article class="post-full post">
                 <header class="post-full-header">
                     <section class="post-full-meta">
                         <time class="post-full-meta-date" datetime="{{ post.published_at }}">
@@ -61,7 +61,7 @@ time #}
                             <div class="sidebar">
                                 {% if canonicalUrl == "https://www.freecodecamp.org/news/are-you-being-micro-managed-manage-your-relationship-with-your-manager-instead-9ad10b28bcda/" %}
                                     {% for i in range(0, numOfSidebarAds) %}
-                                        {% include "partials/gam-ad.njk" %}
+                                        {% include "partials/gam-ad-sidebar.njk" %}
                                       {% endfor %}
                                 {% else %}
                                     {% for i in range(0, numOfSidebarAds) %}
@@ -92,9 +92,13 @@ time #}
                         {% include "partials/learn-cta-row.njk" %}
                     {% endif %}
                 </section>
-                {% if adsEnabled and canonicalUrl != "https://www.freecodecamp.org/news/are-you-being-micro-managed-manage-your-relationship-with-your-manager-instead-9ad10b28bcda/" %}
+                {% if adsEnabled %}
                     <div class="banner-ad bottom">
-                        {% include "partials/ad.njk" %}
+                        {% if canonicalUrl == "https://www.freecodecamp.org/news/are-you-being-micro-managed-manage-your-relationship-with-your-manager-instead-9ad10b28bcda/" %}
+                            {% include "partials/gam-ad-bottom.njk" %}
+                        {% else %}
+                            {% include "partials/ad.njk" %}
+                        {% endif %}
                     </div>
                 {% endif %}
             </article>
