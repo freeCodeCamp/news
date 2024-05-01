@@ -97,7 +97,7 @@ module.exports = async () => {
   primaryAuthors.forEach(author => {
     // Attach posts to their respective author
     const currAuthorPosts = posts
-      .filter(post => post.primary_author.id === author.id)
+      .filter(post => post.primary_author.slug === author.slug)
       .map(post => {
         return {
           title: post.title,
