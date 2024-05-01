@@ -29,6 +29,20 @@ describe('Author page', () => {
       cy.viewport(499, 660);
       cy.get(selectors.bullet).should('not.be.visible');
     });
+
+    // Note: Quincy's username / slug on Hashnode is actually `quincy`, but has been changed in the test
+    // data to `quincylarson` to match his Ghost username / slug. This test can be removed once we migrate
+    // everything to Hashnode.
+    it('pages for authors with the same slug / username on both Ghost and Hashnode should show all posts', () => {
+      // Hashnode sourced post
+      cy.contains(
+        'Ben Awad is a GameDev Who Sleeps 9 Hours EVERY NIGHT to be Productive [Podcast #121]'
+      );
+      // Ghost sourced post
+      cy.contains(
+        'freeCodeCamp Just Got a Million Dollar Donation from an Alum to Build a Carbon-Neutral Web3 Curriculum'
+      );
+    });
   });
 
   context('Ghost sourced authors', () => {
