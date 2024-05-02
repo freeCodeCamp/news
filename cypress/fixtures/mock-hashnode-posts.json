@@ -5,6 +5,51 @@
       "edges": [
         {
           "node": {
+            "id": "662bc86c57b91227386cc393",
+            "slug": "ben-awad-is-a-gamedev-who-sleeps-9-hours-every-night-to-be-productive-podcast-121",
+            "title": "Ben Awad is a GameDev Who Sleeps 9 Hours EVERY NIGHT to be Productive [Podcast #121]",
+            "author": {
+              "id": "5dfa3725066598ab2752cc5d",
+              "username": "quincylarson",
+              "name": "Quincy Larson",
+              "bio": {
+                "text": ""
+              },
+              "profilePicture": "https://cdn.hashnode.com/res/hashnode/image/upload/v1640878938509/PLqvxeH9g.jpeg",
+              "socialMediaLinks": {
+                "website": "https://www.freecodecamp.org",
+                "twitter": "https://www.twitter.com/ossia",
+                "facebook": ""
+              },
+              "location": ""
+            },
+            "tags": [
+              {
+                "id": "5ef8f394f32a5119fc5d3ae3",
+                "name": "GameDev",
+                "slug": "gamedev"
+              },
+              {
+                "id": "56744721958ef13879b94a60",
+                "name": "Productivity",
+                "slug": "productivity"
+              }
+            ],
+            "coverImage": {
+              "url": "https://cdn.hashnode.com/res/hashnode/image/upload/v1714145342153/09d7ca1e-feb2-4aac-8a68-b28060ee646c.jpeg"
+            },
+            "brief": "On this week's episode of the podcast, freeCodeCamp founder Quincy Larson interviews Ben Awad, a game developer who creates developer tutorials on YouTube and TikTok.\nI hope you enjoy our conversation.\nCan you guess what bass line I'm playing on my b...",
+            "readTimeInMinutes": 1,
+            "content": {
+              "html": "<p>On this week's episode of the podcast, freeCodeCamp founder Quincy Larson interviews Ben Awad, a game developer who creates developer tutorials on YouTube and TikTok.</p>\n<p>I hope you enjoy our conversation.</p>\n<p>Can you guess what bass line I'm playing on my bass during the intro? It's from a 1979 song.</p>\n<p>You can watch the interview on freeCodeCamp's YouTube channel:</p>\n<p>Or you can listen to the podcast in Apple Podcasts, Spotify, or your favorite podcast app. You can also listen to the podcast below, right in your browser:</p>\n<p>Be sure to follow The freeCodeCamp podcast in your favorite podcast app. And share this podcast with a friend. Let's inspire more folks to learn to code and build careers for themselves in tech.</p>\n<p>Also, I want to thank the 8,983 kind people who support our charity each month, and who make this podcast possible. You can join them and support our mission at: <a target=\"_blank\" href=\"https://www.freecodecamp.org/donate\">https://www.freecodecamp.org/donate</a></p>\n<h2 id=\"heading-links-we-talk-about-during-the-interview\">Links we talk about during the interview:</h2>\n<p>Ben's game, Void Pet on Android and iOS (Built in React Native): <a target=\"_blank\" href=\"https://voidpet.com/\">https://voidpet.com/</a></p>\n<p>XKCD coming on \"Real Programmers\" that Quincy mentions: <a target=\"_blank\" href=\"https://xkcd.com/378/\">https://xkcd.com/378/</a></p>\n<p>React Native course by Ben Awad: <a target=\"_blank\" href=\"https://www.freecodecamp.org/news/create-an-app-that-works-on-ios-android-and-the-web-with-react-native-web/\">https://www.freecodecamp.org/news/create-an-app-that-works-on-ios-android-and-the-web-with-react-native-web/</a></p>\n<p>I couldn't find my Mac Control hotkeys video tutorial that I mentioned anywhere, so I wrote a quick article explaining how to use these: <a target=\"_blank\" href=\"https://www.freecodecamp.org/news//mac-control-keyboard-shortcuts-hotkeys-macos\">https://www.freecodecamp.org/news//mac-control-keyboard-shortcuts-hotkeys-macos</a></p>\n",
+              "markdown": "On this week's episode of the podcast, freeCodeCamp founder Quincy Larson interviews Ben Awad, a game developer who creates developer tutorials on YouTube and TikTok.\n\nI hope you enjoy our conversation.\n\nCan you guess what bass line I'm playing on my bass during the intro? It's from a 1979 song.\n\nYou can watch the interview on freeCodeCamp's YouTube channel:\n\nOr you can listen to the podcast in Apple Podcasts, Spotify, or your favorite podcast app. You can also listen to the podcast below, right in your browser:\n\nBe sure to follow The freeCodeCamp podcast in your favorite podcast app. And share this podcast with a friend. Let's inspire more folks to learn to code and build careers for themselves in tech.\n\nAlso, I want to thank the 8,983 kind people who support our charity each month, and who make this podcast possible. You can join them and support our mission at: [https://www.freecodecamp.org/donate](https://www.freecodecamp.org/donate)\n\n## Links we talk about during the interview:\n\nBen's game, Void Pet on Android and iOS (Built in React Native): [https://voidpet.com/](https://voidpet.com/)\n\nXKCD coming on \"Real Programmers\" that Quincy mentions: [https://xkcd.com/378/](https://xkcd.com/378/)\n\nReact Native course by Ben Awad: [https://www.freecodecamp.org/news/create-an-app-that-works-on-ios-android-and-the-web-with-react-native-web/](https://www.freecodecamp.org/news/create-an-app-that-works-on-ios-android-and-the-web-with-react-native-web/)\n\nI couldn't find my Mac Control hotkeys video tutorial that I mentioned anywhere, so I wrote a quick article explaining how to use these: [https://www.freecodecamp.org/news//mac-control-keyboard-shortcuts-hotkeys-macos](https://www.freecodecamp.org/news//mac-control-keyboard-shortcuts-hotkeys-macos)"
+            },
+            "publishedAt": "2024-04-26T15:29:48.337Z",
+            "updatedAt": "2024-04-26T19:26:49.174Z"
+          }
+        },
+        {
+          "node": {
             "id": "661e2bc550a7433c8ecc4d0b",
             "slug": "hashnode-no-feature-image",
             "title": "Hashnode No Feature Image",
