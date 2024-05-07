@@ -1,7 +1,10 @@
 const jsdom = require('jsdom');
 const { JSDOM } = jsdom;
 const translate = require('./translate');
-const { setDefaultAlt } = require('./modify-html-helpers');
+const {
+  generateHashnodeEmbedMarkup,
+  setDefaultAlt
+} = require('./modify-html-helpers');
 const getImageDimensions = require('./get-image-dimensions');
 const fitVids = require('./fitvids');
 
@@ -9,6 +12,22 @@ const modifyHTMLContent = async ({ postContent, postTitle }) => {
   const dom = new JSDOM(postContent);
   const window = dom.window;
   const document = window.document;
+  const hashnodeEmbedAnchorEls = [
+    ...document.querySelectorAll('div.embed-wrapper a.embed-card')
+  ];
+
+  await Promise.all(
+    hashnodeEmbedAnchorEls.map(async anchorEl => {
+      const embedWrapper = anchorEl.parentElement;
+      const embedURL = anchorEl.href;
+      const embedIframe = await generateHashnodeEmbedMarkup(embedURL);
+
+      if (embedIframe) {
+        embedWrapper.innerHTML = `<div class="webembed-wrapper">${embedIframe}</div>`;
+      }
+    })
+  );
+
   const embeds = [...document.getElementsByTagName('embed')];
   const images = [...document.getElementsByTagName('img')];
   const iframes = [...document.getElementsByTagName('iframe')];

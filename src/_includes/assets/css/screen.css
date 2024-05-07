@@ -25,6 +25,7 @@ on every page through _includes/layouts/default.njk
 14. under-header-content donation
 15. Ads
 16. RTL layout
+17. Hashnode
 
 */
 
@@ -2433,4 +2434,20 @@ a.banner:hover span {
 .rtl-layout .post-full-content p code {
   direction: ltr;
   unicode-bidi: isolate;
+}
+
+/* 17. Hashnode
+/* ---------------------------------------------------------- */
+
+.embed-wrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.webembed-wrapper {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
 }
