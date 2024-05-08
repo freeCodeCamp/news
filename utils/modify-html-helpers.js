@@ -16,6 +16,7 @@ const generateHashnodeEmbedMarkup = async embedURL => {
           width="560"
           height="315"
           src="https://www.youtube.com/embed/${id}"
+          style="aspect-ratio: 16 / 9; width: 100%; height: auto;"
           title="YouTube video player"
           frameborder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -36,6 +37,7 @@ const generateHashnodeEmbedMarkup = async embedURL => {
           width="640"
           height="360"
           src="https://player.vimeo.com/video/${id}"
+          style="aspect-ratio: 16 / 9; width: 100%; height: auto;"
           title="Vimeo embed"
           frameborder="0"
           allow="autoplay; fullscreen; picture-in-picture"
@@ -47,8 +49,9 @@ const generateHashnodeEmbedMarkup = async embedURL => {
       return `
         <iframe
           width="100%"
-          height="300"
+          height="350"
           src="${embedURL.replace(/\/pen\/|\/full\//, '/embed/')}"
+          style="aspect-ratio: 16 / 9; width: 100%; height: auto;"
           title="CodePen embed"
           scrolling="no"
           frameborder="0"
@@ -66,8 +69,9 @@ const generateHashnodeEmbedMarkup = async embedURL => {
       return `
         <iframe
           width="100%"
-          height="500"
+          height="350"
           src="${embedURL.replace('/s/', '/embed/')}"
+          style="aspect-ratio: 16 / 9; width: 100%; height: auto;"
           title="CodeSandbox embed"
           style="border:0; border-radius: 4px; overflow: hidden;"
           allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media; usb"
@@ -100,14 +104,8 @@ const generateHashnodeEmbedMarkup = async embedURL => {
     if (giphyMatch) {
       const giphyId = giphyMatch[1].split('-').pop();
 
-      // https://i.giphy.com/VmzI60RQG0fuw.gif
-      // https://media.giphy.com/media/VmzI60RQG0fuw/giphy.gif
-      // https://giphy.com/gifs/VmzI60RQG0fuw
-      // https://giphy.com/gifs/music-videos-mariah-carey-dreamlover-VmzI60RQG0fuw
-
-      // Note: Try to remove div wrapper in the future and add padding dynamically via resizer script
       return `
-        <div style="width:100%;height:0;padding-bottom:125%;position:relative;">
+        <div style="width: 100%; height: 0; padding-bottom: 125%; position: relative;">
           <iframe
             width="100%"
             height="100%" 
@@ -118,25 +116,6 @@ const generateHashnodeEmbedMarkup = async embedURL => {
             allowFullScreen=""
           ></iframe>
         </div>`;
-
-      // return `
-      //   <iframe
-      //     width="100%"
-      //     height="100%"
-      //     src="https://giphy.com/embed/${giphyId}"
-      //     style="position: absolute;"
-      //     frameBorder="0"
-      //     allowFullScreen=""
-      //   ></iframe>`;
-      /* 
-          <div style="width:100%;height:0;padding-bottom:125%;position:relative;">
-            <iframe src="https://giphy.com/embed/VbnUQpnihPSIgIXuZv" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen
-              ></iframe>
-          </div>
-            <p>
-              <a href="https://giphy.com/gifs/computer-cat-wearing-glasses-VbnUQpnihPSIgIXuZv">via GIPHY</a>
-            </p>
-          */
     }
 
     if (/https:\/\/gist\.github\.com\//.test(embedURL)) {
@@ -147,9 +126,10 @@ const generateHashnodeEmbedMarkup = async embedURL => {
     if (/https:\/\/glitch\.com\/embed\//.test(embedURL)) {
       return `
         <iframe
-          src="${embedURL}"
           width="100%"
           height="500"
+          src="${embedURL}"
+          style="aspect-ratio: 16 / 9; width: 100%; height: auto;"
           title="Glitch embed"
           allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media"
           style="border: 0;"
@@ -167,28 +147,12 @@ const generateHashnodeEmbedMarkup = async embedURL => {
         <iframe
           width="100%"
           height="400"
+          src="https://w.soundcloud.com/player/?url=${embedURL}&visual=true&show_artwork=true"
+          style="aspect-ratio: 16 / 9; width: 100%; height: auto;"
           title="SoundCloud embed"
           scrolling="no"
           frameborder="no"
           allow="autoplay"
-          src="https://w.soundcloud.com/player/?url=${embedURL}&visual=true&show_artwork=true"
-        ></iframe>`;
-    }
-
-    if (/https:\/\/anchor\.fm\//.test(embedURL)) {
-      const podcastPath = new URL(embedURL).pathname;
-      const [podcastName, _, podcastSlug] = podcastPath
-        .split('/')
-        .filter(Boolean);
-
-      return `
-        <iframe
-          width="100%"
-          height="100%"
-          src="https://anchor.fm/${podcastName}/embed/episodes/${podcastSlug}"
-          title="Anchor embed"
-          frameborder="0"
-          scrolling="no"
         ></iframe>`;
     }
 
@@ -201,10 +165,30 @@ const generateHashnodeEmbedMarkup = async embedURL => {
           width="100%"
           height="${type === 'playlist' ? 352 : 152}"
           src="https://open.spotify.com/embed/${type}/${id}"
+          style="${type === 'playlist' ? 'aspect-ratio: 16 / 9; width: 100%; height: auto;' : ''}"
           title="Spotify embed"
           frameborder="0"
           allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
           allowfullscreen=""
+        ></iframe>`;
+    }
+
+    if (/https:\/\/anchor\.fm\//.test(embedURL)) {
+      const podcastPath = new URL(embedURL).pathname;
+      const [podcastName, _, podcastSlug] = podcastPath
+        .split('/')
+        .filter(Boolean);
+
+      // Assume the podcast is an episode and use the same height as the Spotify embed
+      // for a single episode
+      return `
+        <iframe
+          width="100%"
+          height="152"
+          src="https://anchor.fm/${podcastName}/embed/episodes/${podcastSlug}"
+          title="Anchor embed"
+          frameborder="0"
+          scrolling="no"
         ></iframe>`;
     }
 
@@ -214,11 +198,11 @@ const generateHashnodeEmbedMarkup = async embedURL => {
 
       return `
         <iframe
-          src="https://runkit.com/e/oembed-iframe?target=%2Fusers%2F${username}%2Frepositories%2F${repoHash}%2Fdefault&referrer="
           width="100%"
           height="350"
+          src="https://runkit.com/e/oembed-iframe?target=%2Fusers%2F${username}%2Frepositories%2F${repoHash}%2Fdefault&referrer="
+          style="aspect-ratio: 16 / 9; width: 100%; height: auto;"
           title="RunKit embed"
-          scrolling="no"
           frameborder="no"
           allow="autoplay"
         ></iframe>`;
@@ -234,7 +218,7 @@ const generateHashnodeEmbedMarkup = async embedURL => {
     // No HTML can be generated or found for the given URL
     return null;
   } catch (err) {
-    console.log(`Error processing Hashnode embeds: ${err}`);
+    console.log(`Error processing Hashnode embed: ${err}`);
   }
 };
 

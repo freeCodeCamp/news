@@ -8,7 +8,7 @@ const {
 const getImageDimensions = require('./get-image-dimensions');
 const fitVids = require('./fitvids');
 
-const modifyHTMLContent = async ({ postContent, postTitle }) => {
+const modifyHTMLContent = async ({ postContent, postTitle, source }) => {
   const dom = new JSDOM(postContent);
   const window = dom.window;
   const document = window.document;
@@ -20,10 +20,10 @@ const modifyHTMLContent = async ({ postContent, postTitle }) => {
     hashnodeEmbedAnchorEls.map(async anchorEl => {
       const embedWrapper = anchorEl.parentElement;
       const embedURL = anchorEl.href;
-      const embedIframe = await generateHashnodeEmbedMarkup(embedURL);
+      const embedMarkup = await generateHashnodeEmbedMarkup(embedURL);
 
-      if (embedIframe) {
-        embedWrapper.innerHTML = `<div class="webembed-wrapper">${embedIframe}</div>`;
+      if (embedMarkup) {
+        embedWrapper.innerHTML = embedMarkup;
       }
     })
   );
@@ -32,7 +32,7 @@ const modifyHTMLContent = async ({ postContent, postTitle }) => {
   const images = [...document.getElementsByTagName('img')];
   const iframes = [...document.getElementsByTagName('iframe')];
 
-  if (embeds.length || iframes.length) fitVids(window);
+  if (source === 'Ghost' && (embeds.length || iframes.length)) fitVids(window);
 
   await Promise.all(
     images.map(async image => {

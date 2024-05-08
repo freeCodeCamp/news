@@ -2439,15 +2439,15 @@ a.banner:hover span {
 /* 17. Hashnode
 /* ---------------------------------------------------------- */
 
+.post-full-content .embed-wrapper {
+  /* margin: 1.5em 0 3em; */
+  margin-top: 1.25em;
+  margin-bottom: 1.25em;
+}
+
 .embed-wrapper {
   display: flex;
   justify-content: center;
   width: 100%;
   overflow-x: hidden;
-}
-
-.webembed-wrapper {
-  position: relative;
-  overflow: hidden;
-  width: 100%;
 }
