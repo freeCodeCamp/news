@@ -50,6 +50,21 @@ const modifyHTMLContent = async ({ postContent, postTitle, source }) => {
 
     iframes.map(async iframe => {
       if (!iframe.title) iframe.setAttribute('title', translate('embed-title'));
+      // Mimic the behavior of the Hashnode embeds for better spacing
+      if (
+        source === 'Hashnode' &&
+        ![...iframe?.parentElement?.classList].includes(
+          'embed-wrapper',
+          'giphy-wrapper'
+        )
+      ) {
+        const embedWrapper = document.createElement('div');
+
+        embedWrapper.classList.add('embed-wrapper');
+        iframe.parentElement.replaceChild(embedWrapper, iframe);
+        embedWrapper.appendChild(iframe);
+      }
+
       iframe.setAttribute('loading', 'lazy');
     })
   );

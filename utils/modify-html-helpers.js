@@ -105,7 +105,7 @@ const generateHashnodeEmbedMarkup = async embedURL => {
       const giphyId = giphyMatch[1].split('-').pop();
 
       return `
-        <div style="width: 100%; height: 0; padding-bottom: 125%; position: relative;">
+        <div class="giphy-wrapper" style="width: 100%; height: 0; padding-bottom: 125%; position: relative;">
           <iframe
             width="100%"
             height="100%" 
