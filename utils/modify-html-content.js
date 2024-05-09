@@ -49,7 +49,7 @@ const modifyHTMLContent = async ({ postContent, postTitle, source }) => {
     }),
 
     iframes.map(async iframe => {
-      iframe.setAttribute('title', `${translate('embed-title')}`);
+      if (!iframe.title) iframe.setAttribute('title', translate('embed-title'));
       iframe.setAttribute('loading', 'lazy');
     })
   );
