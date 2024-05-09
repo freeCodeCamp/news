@@ -1,3 +1,5 @@
+const extract = (...args) =>
+  import('@extractus/oembed-extractor').then(({ extract }) => extract(...args));
 const getVideoId = (...args) =>
   import('get-video-id').then(({ default: getVideoId }) => getVideoId(...args));
 const { parse } = require('path');
@@ -108,7 +110,7 @@ const generateHashnodeEmbedMarkup = async embedURL => {
         <div class="giphy-wrapper" style="width: 100%; height: 0; padding-bottom: 125%; position: relative;">
           <iframe
             width="100%"
-            height="100%" 
+            height="100%"
             title="Giphy embed"
             src="https://giphy.com/embed/${giphyId}"
             style="position: absolute"

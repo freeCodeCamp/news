@@ -50,7 +50,8 @@ const modifyHTMLContent = async ({ postContent, postTitle, source }) => {
 
     iframes.map(async iframe => {
       if (!iframe.title) iframe.setAttribute('title', translate('embed-title'));
-      // Mimic the behavior of the Hashnode embeds for better spacing
+      // For iframes on Hashnode that were copy and pasted into an HTML block,
+      // wrap them in a div similar to how Hashnode does for links in embed blocks
       if (
         source === 'Hashnode' &&
         ![...iframe?.parentElement?.classList].includes(
