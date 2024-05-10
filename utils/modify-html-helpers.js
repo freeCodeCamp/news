@@ -1,110 +1,127 @@
 const getVideoId = (...args) =>
   import('get-video-id').then(({ default: getVideoId }) => getVideoId(...args));
-const jsdom = require('jsdom');
-const { JSDOM } = jsdom;
 const { parse } = require('path');
 
-const embedAttributes = {
-  youtube: {
-    width: 560,
-    height: 315,
-    title: 'YouTube video player',
-    allow:
-      'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share',
-    referrerpolicy: 'strict-origin-when-cross-origin',
-    allowfullscreen: ''
-  },
-  vimeo: {
-    width: 640,
-    height: 360,
-    title: 'Vimeo embed',
-    allow: 'autoplay; fullscreen; picture-in-picture',
-    allowfullscreen: ''
-  },
-  codepen: {
-    width: '100%',
-    height: 350,
-    title: 'CodePen embed',
-    scrolling: 'no',
-    allowtransparency: 'true',
-    allowfullscreen: 'true'
-  },
-  codesandbox: {
-    width: '100%',
-    height: 350,
-    title: 'CodeSandbox embed',
-    allow:
-      'geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media; usb',
-    sandbox:
-      'allow-modals allow-forms allow-popups allow-scripts allow-same-origin'
-  },
-  giphy: {
-    width: '100%',
-    height: '100%',
-    title: 'Giphy embed',
-    allowfullscreen: ''
-  },
-  glitch: {
-    width: '100%',
-    height: 500,
-    title: 'Glitch embed',
-    allow:
-      'geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media'
-  },
-  soundcloud: {
-    width: '100%',
-    height: 400,
-    title: 'SoundCloud embed',
-    scrolling: 'no'
-  },
-  spotify: {
-    width: '100%',
-    title: 'Spotify embed',
-    allow:
-      'autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture',
-    allowfullscreen: ''
-  },
-  anchor: {
-    width: '100%',
-    height: 152,
-    title: 'Anchor embed',
-    scrolling: 'no'
-  },
-  runkit: {
-    width: '100%',
-    height: 350,
-    title: 'RunKit embed',
-    allow: 'autoplay'
-  }
-};
-
-const setEmbedAttributes = (iframeEl, embedType) => {
-  const attributes = embedAttributes[embedType];
-  for (const [key, value] of Object.entries(attributes)) {
-    iframeEl.setAttribute(key, value);
-  }
+const embedMarkupMap = {
+  youtube: id => `
+    <iframe
+      width="560"
+      height="315"
+      src="https://www.youtube.com/embed/${id}"
+      style="aspect-ratio: 16 / 9; width: 100%; height: auto;"
+      title="YouTube video player"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      referrerpolicy="strict-origin-when-cross-origin"
+      allowfullscreen=""
+    ></iframe>`,
+  vimeo: id => `
+    <iframe
+      width="640"
+      height="360"
+      src="https://player.vimeo.com/video/${id}"
+      style="aspect-ratio: 16 / 9; width: 100%; height: auto;"
+      title="Vimeo embed"
+      allow="autoplay; fullscreen; picture-in-picture"
+      allowfullscreen=""
+    ></iframe>`,
+  codepen: url => `
+    <iframe
+      width="100%"
+      height="350"
+      src="${url.replace(/\/pen\/|\/full\//, '/embed/')}"
+      style="aspect-ratio: 16 / 9; width: 100%; height: auto;"
+      title="CodePen embed"
+      scrolling="no"
+      allowtransparency="true"
+      allowfullscreen="true"
+    ></iframe>`,
+  codesandbox: url => `
+    <iframe
+      width="100%"
+      height="350"
+      src="${url.replace('/s/', '/embed/')}"
+      style="aspect-ratio: 16 / 9; width: 100%; height: auto;"
+      title="CodeSandbox embed"
+      style="border:0; border-radius: 4px; overflow: hidden;"
+      allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media; usb"
+      sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"
+    ></iframe>`,
+  twitter: url => `
+    <blockquote class="twitter-tweet">
+      <a href="${url}"></a>
+    </blockquote>
+    <script defer src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>`,
+  giphy: id => `
+    <div class="giphy-wrapper" style="width: 100%; height: 0; padding-bottom: 125%; position: relative;">
+      <iframe
+        width="100%"
+        height="100%"
+        title="Giphy embed"
+        src="https://giphy.com/embed/${id}"
+        style="position: absolute"
+        allowFullScreen=""
+      ></iframe>
+    </div>`,
+  gist: url => `<script src="${url}.js"></script>`,
+  glitch: url => `
+    <iframe
+      width="100%"
+      height="500"
+      src="${url}"
+      style="aspect-ratio: 16 / 9; width: 100%; height: auto;"
+      title="Glitch embed"
+      allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media"
+      style="border: 0;"
+    ></iframe>`,
+  soundcloud: url => `
+    <iframe
+      width="100%"
+      height="400"
+      src="https://w.soundcloud.com/player/?url=${url}&visual=true&show_artwork=true"
+      style="aspect-ratio: 16 / 9; width: 100%; height: auto;"
+      title="SoundCloud embed"
+      scrolling="no"
+      allow="autoplay"
+    ></iframe>`,
+  spotify: (type, id) => `
+    <iframe
+      width="100%"
+      height="${type === 'playlist' ? 352 : 152}"
+      src="https://open.spotify.com/embed/${type}/${id}"
+      style="${type === 'playlist' ? 'aspect-ratio: 16 / 9; width: 100%; height: auto;' : ''}"
+      title="Spotify embed"
+      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+      allowfullscreen=""
+    ></iframe>`,
+  anchor: (name, type, slug) => `
+    <iframe
+      width="100%"
+      height="152"
+      src="https://anchor.fm/${name}/embed/${type}/${slug}"
+      title="Anchor embed"
+      scrolling="no"
+    ></iframe>`,
+  runkit: (username, repoHash) => `
+    <iframe
+      width="100%"
+      height="350"
+      src="https://runkit.com/e/oembed-iframe?target=%2Fusers%2F${username}%2Frepositories%2F${repoHash}%2Fdefault&referrer="
+      style="aspect-ratio: 16 / 9; width: 100%; height: auto;"
+      title="RunKit embed"
+      allow="autoplay"
+    ></iframe>`
 };
 
 const generateHashnodeEmbedMarkup = async embedURL => {
   try {
-    const dom = new JSDOM();
-    const document = dom.window.document;
-    const iframe = document.createElement('iframe');
-    iframe.setAttribute(
-      'style',
-      'aspect-ratio: 16 / 9; width: 100%; height: auto;'
-    ); // Set a default aspect ratio for most embeds
-
     if (
       [/https:\/\/.*\.?youtube\.com\//, /https:\/\/youtu\.be\//].some(pattern =>
         pattern.test(embedURL)
       )
     ) {
       const { id } = await getVideoId(embedURL);
-      setEmbedAttributes(iframe, 'youtube');
-      iframe.setAttribute('src', `https://www.youtube.com/embed/${id}`);
 
-      return iframe.outerHTML;
+      return embedMarkupMap.youtube(id);
     }
 
     if (
@@ -113,20 +130,12 @@ const generateHashnodeEmbedMarkup = async embedURL => {
       )
     ) {
       const { id } = await getVideoId(embedURL);
-      setEmbedAttributes(iframe, 'vimeo');
-      iframe.setAttribute('src', `https://player.vimeo.com/video/${id}`);
 
-      return iframe.outerHTML;
+      return embedMarkupMap.vimeo(id);
     }
 
     if (/https:\/\/codepen.io\//.test(embedURL)) {
-      setEmbedAttributes(iframe, 'codepen');
-      iframe.setAttribute(
-        'src',
-        embedURL.replace(/\/pen\/|\/full\//, '/embed/')
-      );
-
-      return iframe.outerHTML;
+      return embedMarkupMap.codepen(embedURL);
     }
 
     if (
@@ -135,10 +144,7 @@ const generateHashnodeEmbedMarkup = async embedURL => {
         /https:\/\/codesandbox.io\/embed\//
       ].some(pattern => pattern.test(embedURL))
     ) {
-      setEmbedAttributes(iframe, 'codesandbox');
-      iframe.setAttribute('src', embedURL);
-
-      return iframe.outerHTML;
+      return embedMarkupMap.codesandbox(embedURL);
     }
 
     if (
@@ -147,11 +153,7 @@ const generateHashnodeEmbedMarkup = async embedURL => {
         /https:\/\/.*\.twitter\.com\/.*\/status\//
       ].some(pattern => pattern.test(embedURL))
     ) {
-      return `
-        <blockquote class="twitter-tweet">
-          <a href="${embedURL}"></a>
-        </blockquote>
-        <script defer src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>`;
+      return embedMarkupMap.twitter(embedURL);
     }
 
     const giphyRegExpressions = [
@@ -165,30 +167,16 @@ const generateHashnodeEmbedMarkup = async embedURL => {
       .filter(match => match)[0];
     if (giphyMatch) {
       const giphyId = giphyMatch[1].split('-').pop();
-      const giphyWrapper = document.createElement('div');
-      giphyWrapper.classList.add('giphy-wrapper');
-      giphyWrapper.setAttribute(
-        'style',
-        'width: 100%; height: 0; padding-bottom: 125%; position: relative;'
-      );
-      setEmbedAttributes(iframe, 'giphy');
-      iframe.setAttribute('src', `https://giphy.com/embed/${giphyId}`);
-      iframe.setAttribute('style', 'position: absolute');
 
-      giphyWrapper.appendChild(iframe);
-      return giphyWrapper.outerHTML;
+      return embedMarkupMap.giphy(giphyId);
     }
 
     if (/https:\/\/gist\.github\.com\//.test(embedURL)) {
-      return `
-        <script src="${embedURL}.js"></script>`;
+      return embedMarkupMap.gist(embedURL);
     }
 
     if (/https:\/\/glitch\.com\/embed\//.test(embedURL)) {
-      setEmbedAttributes(iframe, 'glitch');
-      iframe.setAttribute('src', embedURL);
-
-      return iframe.outerHTML;
+      return embedMarkupMap.glitch(embedURL);
     }
 
     if (
@@ -198,27 +186,14 @@ const generateHashnodeEmbedMarkup = async embedURL => {
         /https:\/\/soundcloud\.app\.goog\.gl\//
       ].some(pattern => pattern.test(embedURL))
     ) {
-      setEmbedAttributes(iframe, 'soundcloud');
-      iframe.setAttribute(
-        'src',
-        `https://w.soundcloud.com/player/?url=${embedURL}&visual=true&show_artwork=true`
-      );
-
-      return iframe.outerHTML;
+      return embedMarkupMap.soundcloud(embedURL);
     }
 
     if (/https:\/\/open\.spotify\.com\//.test(embedURL)) {
       const embedPath = new URL(embedURL).pathname;
       const [type, id] = embedPath.split('/').filter(Boolean);
-      setEmbedAttributes(iframe, 'spotify');
-      if (type !== 'playlist') iframe.removeAttribute('style');
-      iframe.setAttribute('height', type === 'playlist' ? 352 : 152);
-      iframe.setAttribute(
-        'src',
-        `https://open.spotify.com/embed/${type}/${id}`
-      );
 
-      return iframe.outerHTML;
+      return embedMarkupMap.spotify(type, id);
     }
 
     if (/https:\/\/anchor\.fm\//.test(embedURL)) {
@@ -226,29 +201,15 @@ const generateHashnodeEmbedMarkup = async embedURL => {
       const [podcastName, type, podcastSlug] = podcastPath
         .split('/')
         .filter(Boolean);
-      setEmbedAttributes(iframe, 'anchor');
-      // Assume the podcast is an episode and use the same height as the Spotify embed
-      // for a single episode
-      iframe.setAttribute('height', 152);
-      iframe.removeAttribute('style');
-      iframe.setAttribute(
-        'src',
-        `https://anchor.fm/${podcastName}/embed/${type}/${podcastSlug}`
-      );
 
-      return iframe.outerHTML;
+      return embedMarkupMap.anchor(podcastName, type, podcastSlug);
     }
 
     if (/https:\/\/runkit\.com\//.test(embedURL)) {
       const embedPath = new URL(embedURL).pathname;
       const [username, repoHash] = embedPath.split('/').filter(Boolean);
-      setEmbedAttributes(iframe, 'runkit');
-      iframe.setAttribute(
-        'src',
-        `https://runkit.com/e/oembed-iframe?target=%2Fusers%2F${username}%2Frepositories%2F${repoHash}%2Fdefault&referrer=`
-      );
 
-      return iframe.outerHTML;
+      return embedMarkupMap.runkit(username, repoHash);
     }
 
     // No HTML can be generated or found for the given URL
