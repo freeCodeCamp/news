@@ -67,7 +67,6 @@
   "devDependencies": {
     "@11ty/eleventy": "2.0.1",
     "@11ty/eleventy-plugin-rss": "1.2.0",
-    "@extractus/oembed-extractor": "4.0.5",
     "@tryghost/content-api": "1.11.21",
     "@tryghost/helpers": "1.1.90",
     "algoliasearch": "4.23.3",

@@ -1,5 +1,3 @@
-const extract = (...args) =>
-  import('@extractus/oembed-extractor').then(({ extract }) => extract(...args));
 const getVideoId = (...args) =>
   import('get-video-id').then(({ default: getVideoId }) => getVideoId(...args));
 const { parse } = require('path');
@@ -208,13 +206,6 @@ const generateHashnodeEmbedMarkup = async embedURL => {
           frameborder="no"
           allow="autoplay"
         ></iframe>`;
-    }
-
-    // Attempt to extract oembed data from the URL for other providers
-    const oembedRes = await extract(embedURL);
-    // Some providers don't return an HTML embed, so check for one and return it if it exists
-    if (oembedRes.hasOwnProperty('html')) {
-      return oembedRes.html;
     }
 
     // No HTML can be generated or found for the given URL
