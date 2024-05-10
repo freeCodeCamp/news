@@ -175,7 +175,7 @@ const generateHashnodeEmbedMarkup = async embedURL => {
 
     if (/https:\/\/anchor\.fm\//.test(embedURL)) {
       const podcastPath = new URL(embedURL).pathname;
-      const [podcastName, _, podcastSlug] = podcastPath
+      const [podcastName, type, podcastSlug] = podcastPath
         .split('/')
         .filter(Boolean);
 
@@ -185,7 +185,7 @@ const generateHashnodeEmbedMarkup = async embedURL => {
         <iframe
           width="100%"
           height="152"
-          src="https://anchor.fm/${podcastName}/embed/episodes/${podcastSlug}"
+          src="https://anchor.fm/${podcastName}/embed/${type}/${podcastSlug}"
           title="Anchor embed"
           frameborder="0"
           scrolling="no"
