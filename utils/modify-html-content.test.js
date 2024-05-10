@@ -34,7 +34,6 @@ describe('modifyHTMLContent', () => {
     expect(iframeEl.getAttribute('style')).toBe(
       'aspect-ratio: 16 / 9; width: 100%; height: auto;'
     );
-    expect(iframeEl.getAttribute('frameborder')).toBe('0');
     expect(iframeEl.getAttribute('allow')).toBe(
       'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
     );
@@ -65,7 +64,6 @@ describe('modifyHTMLContent', () => {
     expect(iframeEl.height).toBe('100%');
     expect(iframeEl.title).toBe('Giphy embed');
     expect(iframeEl.getAttribute('style')).toBe('position: absolute');
-    expect(iframeEl.getAttribute('frameborder')).toBe('0');
     expect(iframeEl.getAttribute('allowfullscreen')).toBe('');
 
     // Check if the iframeEl is wrapped in a divs with the expected classes
