@@ -54,9 +54,8 @@ const modifyHTMLContent = async ({ postContent, postTitle, source }) => {
       // wrap them in a div similar to how Hashnode does for links in embed blocks
       if (
         source === 'Hashnode' &&
-        ![...iframe?.parentElement?.classList].includes(
-          'embed-wrapper',
-          'giphy-wrapper'
+        !['embed-wrapper', 'giphy-wrapper'].some(className =>
+          iframe?.parentElement?.classList.contains(className)
         )
       ) {
         const embedWrapper = document.createElement('div');

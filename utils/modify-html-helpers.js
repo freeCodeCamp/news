@@ -91,7 +91,7 @@ const generateHashnodeEmbedMarkup = async embedURL => {
         <blockquote class="twitter-tweet">
           <a href="${embedURL}"></a>
         </blockquote>
-        <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>`;
+        <script defer src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>`;
     }
 
     const giphyRegExpressions = [
