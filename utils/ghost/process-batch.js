@@ -50,6 +50,9 @@ const processBatch = async ({ batch, type, currBatchNo, totalBatches }) => {
       obj.primary_author = removeUnusedKeys(obj.primary_author);
       obj.tags.map(tag => removeUnusedKeys(tag));
 
+      // Set the source of the publication for tracking and later processing
+      obj.source = 'Ghost';
+
       // Set a default feature image for posts if one doesn't exist
       if (type === 'posts' && !obj.feature_image)
         obj.feature_image =
@@ -150,10 +153,9 @@ const processBatch = async ({ batch, type, currBatchNo, totalBatches }) => {
       // Also, append Google ads to post body and generate bottom banner ad if ads are enabled.
       obj.html = await modifyHTMLContent({
         postContent: obj.html,
-        postTitle: obj.title
+        postTitle: obj.title,
+        source: obj.source
       });
-
-      obj.source = 'Ghost';
 
       return obj;
     })

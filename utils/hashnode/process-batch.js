@@ -16,6 +16,9 @@ const processBatch = async ({ batch, currBatchNo, totalBatches }) => {
     newPost.title = oldPost.title;
     newPost.reading_time = oldPost.readTimeInMinutes;
 
+    // Set the source of the publication for tracking and later processing
+    newPost.source = 'Hashnode';
+
     // Set a default feature image for posts if one doesn't exist
     // Note: We're not handling pages from Hashnode, so there's no
     // need to handle cases where we may not want to have a cover image
@@ -78,7 +81,8 @@ const processBatch = async ({ batch, currBatchNo, totalBatches }) => {
     newPost.path = `/${oldPost.slug}/`;
     newPost.html = await modifyHTMLContent({
       postContent: oldPost.content.html,
-      postTitle: newPost.title
+      postTitle: newPost.title,
+      source: newPost.source
     });
 
     // Note: Longer posts include an ellipsis. We can decide how to
@@ -92,8 +96,6 @@ const processBatch = async ({ batch, currBatchNo, totalBatches }) => {
         .slice(0, 50)
         .join(' ');
     }
-
-    newPost.source = 'Hashnode';
 
     newBatch.push(newPost);
   }

@@ -1,19 +1,38 @@
 const jsdom = require('jsdom');
 const { JSDOM } = jsdom;
 const translate = require('./translate');
-const { setDefaultAlt } = require('./modify-html-helpers');
+const {
+  generateHashnodeEmbedMarkup,
+  setDefaultAlt
+} = require('./modify-html-helpers');
 const getImageDimensions = require('./get-image-dimensions');
 const fitVids = require('./fitvids');
 
-const modifyHTMLContent = async ({ postContent, postTitle }) => {
+const modifyHTMLContent = async ({ postContent, postTitle, source }) => {
   const dom = new JSDOM(postContent);
   const window = dom.window;
   const document = window.document;
+  const hashnodeEmbedAnchorEls = [
+    ...document.querySelectorAll('div.embed-wrapper a.embed-card')
+  ];
+
+  await Promise.all(
+    hashnodeEmbedAnchorEls.map(async anchorEl => {
+      const embedWrapper = anchorEl.parentElement;
+      const embedURL = anchorEl.href;
+      const embedMarkup = await generateHashnodeEmbedMarkup(embedURL);
+
+      if (embedMarkup) {
+        embedWrapper.innerHTML = embedMarkup;
+      }
+    })
+  );
+
   const embeds = [...document.getElementsByTagName('embed')];
   const images = [...document.getElementsByTagName('img')];
   const iframes = [...document.getElementsByTagName('iframe')];
 
-  if (embeds.length || iframes.length) fitVids(window);
+  if (source === 'Ghost' && (embeds.length || iframes.length)) fitVids(window);
 
   await Promise.all(
     images.map(async image => {
@@ -30,7 +49,22 @@ const modifyHTMLContent = async ({ postContent, postTitle }) => {
     }),
 
     iframes.map(async iframe => {
-      iframe.setAttribute('title', `${translate('embed-title')}`);
+      if (!iframe.title) iframe.setAttribute('title', translate('embed-title'));
+      // For iframes on Hashnode that were copy and pasted into an HTML block,
+      // wrap them in a div similar to how Hashnode does for links in embed blocks
+      if (
+        source === 'Hashnode' &&
+        !['embed-wrapper', 'giphy-wrapper'].some(className =>
+          iframe?.parentElement?.classList.contains(className)
+        )
+      ) {
+        const embedWrapper = document.createElement('div');
+
+        embedWrapper.classList.add('embed-wrapper');
+        iframe.parentElement.replaceChild(embedWrapper, iframe);
+        embedWrapper.appendChild(iframe);
+      }
+
       iframe.setAttribute('loading', 'lazy');
     })
   );
