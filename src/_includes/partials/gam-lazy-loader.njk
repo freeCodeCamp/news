@@ -1,5 +1,7 @@
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+
+    console.log('it is running');
     var adElements = document.querySelectorAll('.side-bar-ad-slot');
     let counter = 0;
 
@@ -8,54 +10,38 @@ document.addEventListener('DOMContentLoaded', function() {
         adElement.id = 'side-gam-ad-' + counter;
         counter++;  // Increment the counter for the next ad element
     });
-
-    // Define the distance in pixels before the ad enters viewport
-    var loadBeforeViewport = 100; 
     
     window.googletag = window.googletag || {cmd: []};
     googletag.cmd.push(function() {
 
-        // Display side ads based on user scroll
+        // Define side ads
         adElements.forEach(function(adElement) {
             googletag.defineSlot('/23075930536/post-side', [300, 600], adElement.id)
                      .addService(googletag.pubads());
-
-            let observer = new IntersectionObserver((entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        googletag.display(entry.target.id);
-                        observer.unobserve(entry.target); // Stop observing once the ad is loaded
-                    }
-                });
-            }, {
-                root: null,
-                rootMargin: '0px 0px ' + loadBeforeViewport + 'px 0px', 
-                threshold: 0
-            });
-
-            observer.observe(adElement); // Start observing each ad element
         });
 
-        // Button side ads based on user scroll
-        const bottomAdElement = document.getElementById("gam-ad-bottom");
+        // Define bottom ad
         googletag.defineSlot('/23075930536/post-bottom', ['fluid'], 'gam-ad-bottom').addService(googletag.pubads());
 
-        const bottomAdObserver = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    googletag.display(entry.target.id);
-                    bottomAdObserver.unobserve(entry.target); // Stop observing once the ad is loaded
-                }
-            });
-        }, {
-            root: null,
-            rootMargin: '0px 0px ' + loadBeforeViewport + 'px 0px', 
-            threshold: 0
+        // Enable lazy loading with default settings.
+        googletag.pubads().enableLazyLoad();
+
+        googletag.pubads().addEventListener("slotRequested", (event) => {
+            console.log(`Slot ${event.slot.getSlotElementId()} fetched`);
         });
-        bottomAdObserver.observe(bottomAdElement); 
+
+        googletag.pubads().addEventListener("slotOnload", (event) => {
+            console.log(`Slot ${event.slot.getSlotElementId()} rendered`);
+        });
 
         googletag.pubads().enableSingleRequest();
         googletag.enableServices();
+
+
+        // Display all ad slots to trigger lazy loading
+        if (adElements.length > 0) {
+            googletag.display(adElements[0].id);
+        }
     });
 });
 </script>
