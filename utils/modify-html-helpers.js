@@ -78,13 +78,14 @@ const generateHashnodeEmbedMarkup = async embedURL => {
 
     if (
       [
-        /https:\/\/twitter\.com\/.*\/status\//,
-        /https:\/\/.*\.twitter\.com\/.*\/status\//
+        /https:\/\/x.com\/.*\//,
+        /https:\/\/(x|twitter)\.com\/.*\/status\//,
+        /https:\/\/.*\.(x|twitter)\.com\/.*\/status\//
       ].some(pattern => pattern.test(embedURL))
     ) {
       return `
         <blockquote class="twitter-tweet">
-          <a href="${embedURL}"></a>
+          <a href="${embedURL.replace('x.com', 'twitter.com')}"></a>
         </blockquote>
         <script defer src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>`;
     }
