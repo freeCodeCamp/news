@@ -9,6 +9,7 @@ const mockHashnodeEmbeds = {
     '<div class="embed-wrapper"><div class="embed-loading"><div class="loadingRow"></div><div class="loadingRow"></div></div><a class="embed-card" href="https://giphy.com/gifs/computer-cat-wearing-glasses-VbnUQpnihPSIgIXuZv">https://giphy.com/gifs/computer-cat-wearing-glasses-VbnUQpnihPSIgIXuZv</a></div>',
   twitter:
     '<div class="embed-wrapper"><div class="embed-loading"><div class="loadingRow"></div><div class="loadingRow"></div></div><a class="embed-card" href="https://twitter.com/freeCodeCamp/status/1780642881054609864">https://twitter.com/freeCodeCamp/status/1780642881054609864</a></div>',
+  x: '<div class="embed-wrapper"><div class="embed-loading"><div class="loadingRow"></div><div class="loadingRow"></div></div><a class="embed-card" href="https://x.com/freeCodeCamp/status/1793688847299018852">https://x.com/freeCodeCamp/status/1793688847299018852</a></div>',
   githubGist:
     '<div class="gist-block embed-wrapper" data-gist-show-loading="false" data-id="539dbbd01ebfd36fd8a671124d290f5a"><div class="embed-loading"><div class="loadingRow"></div><div class="loadingRow"></div></div><a href="https://gist.github.com/scissorsneedfoodtoo/539dbbd01ebfd36fd8a671124d290f5a" class="embed-card">https://gist.github.com/scissorsneedfoodtoo/539dbbd01ebfd36fd8a671124d290f5a</a></div>',
   iframeInHTMLBlock:
@@ -94,6 +95,33 @@ describe('modifyHTMLContent', () => {
     expect(blockquoteEl.children.length).toBe(1);
     expect(blockquoteEl.querySelector('a').href).toBe(
       'https://twitter.com/freeCodeCamp/status/1780642881054609864'
+    );
+    expect(scriptEl).toBeTruthy();
+    expect(scriptEl.src).toBe('https://platform.twitter.com/widgets.js');
+    expect(scriptEl.getAttribute('defer')).toBe('');
+
+    // Check if the blockquoteEl is wrapped in a div with the expected class
+    expect(blockquoteEl.parentElement.tagName).toBe('DIV');
+    expect(blockquoteEl.parentElement.classList).toContain('embed-wrapper');
+  });
+
+  it('X embeds should return the expected modified HTML', async () => {
+    const modifiedHTML = await modifyHTMLContent({
+      postContent: mockHashnodeEmbeds.x,
+      postTitle: 'Test Post',
+      source: 'Hashnode'
+    });
+    const dom = new JSDOM(modifiedHTML);
+    const document = dom.window.document;
+    const blockquoteEl = document.querySelector('blockquote');
+    const scriptEl = document.querySelector('script');
+
+    expect(blockquoteEl).toBeTruthy();
+    expect(blockquoteEl.classList).toContain('twitter-tweet');
+    expect(blockquoteEl.children.length).toBe(1);
+    expect(blockquoteEl.querySelector('a').href).not.toContain('x.com');
+    expect(blockquoteEl.querySelector('a').href).toBe(
+      'https://twitter.com/freeCodeCamp/status/1793688847299018852'
     );
     expect(scriptEl).toBeTruthy();
     expect(scriptEl.src).toBe('https://platform.twitter.com/widgets.js');
