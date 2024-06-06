@@ -3,21 +3,26 @@ document.addEventListener('DOMContentLoaded', function() {
 
     console.log('it is running');
     var adElements = document.querySelectorAll('.side-bar-ad-slot');
-    let counter = 0;
-
-    // Give unique ids to sidebar ad elements 
-    adElements.forEach(function(adElement) {
-        adElement.id = 'side-gam-ad-' + counter;
-        counter++;  // Increment the counter for the next ad element
-    });
+    var sidebar = document.querySelector('.sidebar');
+    var isSideBarDisplayed = window.getComputedStyle(sidebar).display !== 'none';
+    var counter = 0;
     
     window.googletag = window.googletag || {cmd: []};
     googletag.cmd.push(function() {
 
-        // Define side ads
-        adElements.forEach(function(adElement) {
-            googletag.defineSlot('/23075930536/post-side', [[292, 30], [240, 400], [300, 75], [216, 54], [250, 360], [300, 50], 'fluid', [300, 31], [120, 20], [300, 250], [120, 30], [180, 150], [200, 446], [168, 42], [200, 200], [160, 600], [120, 90], [125, 125], [240, 133], [120, 60], [1, 1], [120, 240], [220, 90], [216, 36], [250, 250], [168, 28], [234, 60], [120, 600], [300, 600], [88, 31], [300, 100]], adElement.id).addService(googletag.pubads());
-        });
+        if(isSideBarDisplayed){
+
+            // Give unique ids to sidebar ad elements 
+            adElements.forEach(function(adElement) {
+                adElement.id = 'side-gam-ad-' + counter;
+                counter++;  // Increment the counter for the next ad element
+            });
+
+            // Define side ads
+            adElements.forEach(function(adElement) {
+                googletag.defineSlot('/23075930536/post-side', [[292, 30], [240, 400], [300, 75], [216, 54], [250, 360], [300, 50], 'fluid', [300, 31], [120, 20], [300, 250], [120, 30], [180, 150], [200, 446], [168, 42], [200, 200], [160, 600], [120, 90], [125, 125], [240, 133], [120, 60], [1, 1], [120, 240], [220, 90], [216, 36], [250, 250], [168, 28], [234, 60], [120, 600], [300, 600], [88, 31], [300, 100]], adElement.id).addService(googletag.pubads());
+            });
+        }
 
         // Define bottom ad
         googletag.defineSlot('/23075930536/post-bottom', ['fluid'], 'gam-ad-bottom').addService(googletag.pubads());
@@ -37,10 +42,9 @@ document.addEventListener('DOMContentLoaded', function() {
         googletag.enableServices();
 
 
-        // Display all ad slots to trigger lazy loading
-        if (adElements.length > 0) {
-            googletag.display(adElements[0].id);
-        }
+        // Trigger lazy loading
+        googletag.display('gam-ad-bottom');
+
     });
 });
 </script>
