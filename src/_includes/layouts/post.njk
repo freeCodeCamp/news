@@ -125,6 +125,21 @@ time #}
     {% endif %}
 {% endblock %}
 
+{% block mathjax %}
+    {% for tag in post.tags %}
+        {% if ((tag.slug | lower) === 'mathjax') %}
+            <script
+                type="text/javascript"
+                id="MathJax-script"
+                data-test-label="mathjax-script"
+                src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+                {# src="https://cdn.freecodecamp.org/news-assets/mathjax/3.2.2/tex-mml-chtml.min.js" #}
+                defer
+            ></script>
+        {% endif %}
+    {% endfor %}
+{% endblock %}
+
 {% block seo %}
     <meta name="description" content="{{ post.excerpt }}">
 
