@@ -55,6 +55,10 @@
         {% block monetization %}
         {% endblock %}
 
+        {# Dynamically load MathJax script #}
+        {% block mathjax %}
+        {% endblock %}
+
         {# Pulls scripts that can be safely cached and placed / defered
         in the head, but that we want to include only when readers go to
         specific pages that require them (ex. published-date.js on the

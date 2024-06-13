@@ -16,6 +16,7 @@ on every page through _includes/layouts/default.njk
      7.1.2 Multiple Author Byline
   7.2. Related Posts
   7.3. Koenig Styles
+  7.4. MathJax Styles
 8.  Author Template
 9.  Error Template
 10. Site Footer
@@ -1820,6 +1821,15 @@ pre.runkit-element {
   .kg-bookmark-content {
     order: 2;
   }
+}
+
+/* 7.4. MathJax Styles
+/* ---------------------------------------------------------- */
+
+p:has(mjx-container.MathJax) {
+  display: inline-block;
+  max-width: 100%;
+  overflow: auto;
 }
 
 /* 8. Author Template

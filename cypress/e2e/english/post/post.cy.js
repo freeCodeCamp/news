@@ -5,7 +5,8 @@ const selectors = {
   ghostDefaultAvatar: "[data-test-label='avatar']",
   postContent: "[data-test-label='post-content']",
   socialRowCTA: "[data-test-label='social-row-cta']",
-  tweetButton: "[data-test-label='tweet-button']"
+  tweetButton: "[data-test-label='tweet-button']",
+  mathJaxScript: "[data-test-label='mathjax-script']"
 };
 
 describe('Post', () => {
@@ -120,6 +121,38 @@ describe('Post', () => {
           );
       });
     });
+
+    context('MathJax', () => {
+      context('Contains MathJax equations', () => {
+        beforeEach(() => {
+          cy.visit('/graph-neural-networks-explained-with-examples/');
+        });
+
+        it('should have the MathJax script', () => {
+          cy.get(selectors.mathJaxScript).should('exist');
+        });
+
+        it('should render MathJax equations within the post', () => {
+          cy.get('mjx-container').should('exist');
+        });
+      });
+
+      context('Does not contain MathJax equations', () => {
+        beforeEach(() => {
+          cy.visit(
+            '/what-programming-language-should-i-learn-first-19a33b0a467d/'
+          );
+        });
+
+        it('should not have the MathJax script', () => {
+          cy.get(selectors.mathJaxScript).should('not.exist');
+        });
+
+        it('should not render MathJax equations within the post', () => {
+          cy.get('mjx-container').should('not.exist');
+        });
+      });
+    });
   });
 
   context('Hashnode sourced posts', () => {
@@ -217,6 +250,36 @@ describe('Post', () => {
               'https://cdn.freecodecamp.org/platform/universal/fcc_meta_1920X1080-indigo.png'
             )
           );
+      });
+    });
+
+    context('MathJax', () => {
+      context('Contains MathJax equations', () => {
+        beforeEach(() => {
+          cy.visit('/how-do-numerical-conversions-work/');
+        });
+
+        it('should have the MathJax script', () => {
+          cy.get(selectors.mathJaxScript).should('exist');
+        });
+
+        it('should render MathJax equations within the post', () => {
+          cy.get('mjx-container').should('exist');
+        });
+      });
+
+      context('Does not contain MathJax equations', () => {
+        beforeEach(() => {
+          cy.visit('/freecodecamp-press-books-handbooks/');
+        });
+
+        it('should not have the MathJax script', () => {
+          cy.get(selectors.mathJaxScript).should('not.exist');
+        });
+
+        it('should not render MathJax equations within the post', () => {
+          cy.get('mjx-container').should('not.exist');
+        });
       });
     });
   });
