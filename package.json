@@ -96,7 +96,7 @@
     "md5": "2.3.0",
     "node-fetch": "2.7.0",
     "npm-run-all2": "6.2.0",
-    "piscina": "4.5.1",
+    "piscina": "4.6.0",
     "prettier": "3.3.2",
     "probe-image-size": "7.2.3",
     "shx": "0.3.4",
