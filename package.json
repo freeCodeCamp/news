@@ -95,7 +95,7 @@
     "lodash": "4.17.21",
     "md5": "2.3.0",
     "node-fetch": "2.7.0",
-    "npm-run-all2": "6.2.0",
+    "npm-run-all2": "6.2.1",
     "piscina": "4.6.1",
     "prettier": "3.3.2",
     "probe-image-size": "7.2.3",
