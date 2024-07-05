@@ -21,12 +21,13 @@ WARNING: Duplicate Posts Found
 -----------------------------------------------
 ${msg}
 `);
+  console.error(msg);
   errorLogger({ type: 'duplicate-posts', name: msg });
 
-  try {
-    // Prevent sending messages while in dev or CI environments
-    if (eleventyEnv === 'dev' || eleventyEnv === 'ci') return;
+  // Prevent sending messages while in dev or CI environments
+  if (eleventyEnv === 'dev' || eleventyEnv === 'ci') return;
 
+  try {
     const chatWebhookURL = `https://chat.googleapis.com/v1/spaces/AAAAHMCb1fg/messages?key=${chatWebhookKey}&token=${chatWebhookToken}`;
     const res = await fetch(chatWebhookURL, {
       method: 'POST',
