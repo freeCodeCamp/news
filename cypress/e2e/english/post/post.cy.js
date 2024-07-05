@@ -1,5 +1,6 @@
 const selectors = {
   fccSource: "[data-test-label='x-fcc-source']",
+  fullMetaDate: "[data-test-label='post-full-meta-date']",
   featureImage: "[data-test-label='feature-image']",
   authorProfileImage: "[data-test-label='profile-image']",
   ghostDefaultAvatar: "[data-test-label='avatar']",
@@ -153,6 +154,25 @@ describe('Post', () => {
         });
       });
     });
+
+    // Note: Remove this testing block once we migrate all posts to Hashnode
+    context('Duplicate slugs', () => {
+      beforeEach(() => {
+        cy.visit('/learn-react-in-spanish-course-for-beginners/');
+      });
+
+      it('should render the older post', () => {
+        cy.contains('Learn React in Spanish – Course for Beginners');
+        cy.get(selectors.fullMetaDate).then($el => {
+          const publishedTimeUTC = new Date($el.attr('datetime')).toUTCString();
+
+          expect(publishedTimeUTC).to.deep.equal(
+            'Tue, 15 Mar 2022 11:30:00 GMT'
+          );
+        });
+        cy.get(selectors.fccSource).should('have.attr', 'content', 'Ghost');
+      });
+    });
   });
 
   context('Hashnode sourced posts', () => {
@@ -280,6 +300,29 @@ describe('Post', () => {
         it('should not render MathJax equations within the post', () => {
           cy.get('mjx-container').should('not.exist');
         });
+      });
+    });
+
+    // Note: Remove this testing block once we migrate all posts to Hashnode
+    context('Duplicate slugs', () => {
+      beforeEach(() => {
+        cy.visit(
+          '/ben-awad-is-a-gamedev-who-sleeps-9-hours-every-night-to-be-productive-podcast-121/'
+        );
+      });
+
+      it('should render the older post', () => {
+        cy.contains(
+          'Ben Awad is a GameDev Who Sleeps 9 Hours EVERY NIGHT to be Productive [Podcast #121]'
+        );
+        cy.get(selectors.fullMetaDate).then($el => {
+          const publishedTimeUTC = new Date($el.attr('datetime')).toUTCString();
+
+          expect(publishedTimeUTC).to.deep.equal(
+            'Fri, 26 Apr 2024 15:29:48 GMT'
+          );
+        });
+        cy.get(selectors.fccSource).should('have.attr', 'content', 'Hashnode');
       });
     });
   });

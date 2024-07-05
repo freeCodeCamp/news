@@ -18,7 +18,7 @@ time #}
             <article class="post-full post">
                 <header class="post-full-header">
                     <section class="post-full-meta">
-                        <time class="post-full-meta-date" datetime="{{ post.published_at }}">
+                        <time class="post-full-meta-date" data-test-label="post-full-meta-date" datetime="{{ post.published_at }}">
                             {% publishedDate post.published_at %}
                         </time>
                         {% if primaryTag %}
