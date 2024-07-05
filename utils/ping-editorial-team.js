@@ -21,7 +21,6 @@ WARNING: Duplicate Posts Found
 -----------------------------------------------
 ${msg}
 `);
-  console.error(msg);
   errorLogger({ type: 'duplicate-posts', name: msg });
 
   // Prevent sending messages while in dev or CI environments
