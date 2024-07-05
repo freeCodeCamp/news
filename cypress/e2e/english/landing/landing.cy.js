@@ -5,9 +5,11 @@ const selectors = {
   featureImage: "[data-test-label='feature-image']",
   postCard: "[data-test-label='post-card']",
   authorList: "[data-test-label='author-list']",
+  authorListItem: "[data-test-label='author-list-item']",
   authorProfileImage: "[data-test-label='profile-image']",
   avatar: "[data-test-label='avatar']",
-  siteNavLogo: "[data-test-label='site-nav-logo']"
+  siteNavLogo: "[data-test-label='site-nav-logo']",
+  postPublishedTime: "[data-test-label='post-published-time']"
 };
 
 describe('Landing', () => {
@@ -78,5 +80,42 @@ describe('Landing', () => {
     const numberOfPosts = Cypress.$(selectors.postCard).length;
 
     cy.get(selectors.featureImage).should('have.length', numberOfPosts);
+  });
+
+  // Note: Remove this testing block once we migrate all posts to Hashnode
+  context('Duplicate slugs', () => {
+    it('should render the older Ghost-sourced post', () => {
+      cy.get(selectors.postCard)
+        .contains('Learn React in Spanish – Course for Beginners')
+        .should('have.length', 1)
+        .parentsUntil('article')
+        .find(selectors.authorListItem)
+        .find(selectors.postPublishedTime)
+        .then($el => {
+          const publishedTimeUTC = new Date($el.attr('datetime')).toUTCString();
+
+          expect(publishedTimeUTC).to.deep.equal(
+            'Tue, 15 Mar 2022 11:30:00 GMT'
+          );
+        });
+    });
+
+    it('should render the older Hashnode-sourced post', () => {
+      cy.get(selectors.postCard)
+        .contains(
+          'Ben Awad is a GameDev Who Sleeps 9 Hours EVERY NIGHT to be Productive [Podcast #121]'
+        )
+        .should('have.length', 1)
+        .parentsUntil('article')
+        .find(selectors.authorListItem)
+        .find(selectors.postPublishedTime)
+        .then($el => {
+          const publishedTimeUTC = new Date($el.attr('datetime')).toUTCString();
+
+          expect(publishedTimeUTC).to.deep.equal(
+            'Fri, 26 Apr 2024 15:29:48 GMT'
+          );
+        });
+    });
   });
 });

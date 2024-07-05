@@ -5,6 +5,50 @@
       "edges": [
         {
           "node": {
+            "id": "667c1452ad32b772504628e0",
+            "slug": "learn-react-in-spanish-course-for-beginners",
+            "title": "Learn React in Spanish - Course for Beginners",
+            "author": {
+              "id": "6354793a48f6ebd7a37ed09c",
+              "username": "estefaniacn",
+              "name": "Estefania Cassingena Navone",
+              "bio": {
+                "text": "I'm a software developer, technical writer and online instructor. I love writing detailed articles with diagrams and step by step explanations. \n"
+              },
+              "profilePicture": "https://cdn.hashnode.com/res/hashnode/image/upload/v1703976621259/kfejzerAQ.png",
+              "socialMediaLinks": {
+                "website": "https://estefaniacn.github.io/",
+                "twitter": "https://twitter.com/EstefaniaCassN",
+                "facebook": ""
+              },
+              "location": ""
+            },
+            "tags": [
+              {
+                "id": "56744723958ef13879b95434",
+                "name": "React",
+                "slug": "reactjs"
+              },
+              {
+                "id": "5cdd96c19ce5aced51b87873",
+                "name": "español",
+                "slug": "espanol"
+              }
+            ],
+            "coverImage": {
+              "url": "https://cdn.hashnode.com/res/hashnode/image/upload/v1718999350130/3e442fe6-4f06-4b48-8102-c8bc4def3946.png"
+            },
+            "brief": "React is one of the most popular front-end web development libraries for building web applications with reusable components. If you're a web developer, React can be super helpful for you.\nWe just published a 5-hour course on the freeCodeCamp.org Span...",
+            "readTimeInMinutes": 3,
+            "content": {
+              "html": "<p>React is one of the most popular front-end web development libraries for building web applications with reusable components. If you're a web developer, React can be super helpful for you.</p>\n<p>We just published a 5-hour course on the <a target=\"_blank\" href=\"https://www.youtube.com/freecodecampespanol\">freeCodeCamp.org Spanish YouTube channel</a> that will teach you React step by step. You will start by installing and configuring React with <code>create-react-app</code> and Vite and gradually dive into more advanced topics, including components, JSX, hooks, events, forms, and more.</p>\n<p>If you have Spanish-speaking friends, you are welcome to share the <a target=\"_blank\" href=\"https://www.freecodecamp.org/espanol/news/aprende-react-con-apis-y-firebase-curso-desde-cero\"><strong>Spanish version of this article</strong></a> with them.</p>\n<p>Carpi Coder teaches this course. He is a web developer who has learned from many communities, including freeCodeCamp. In 2020, he created his YouTube channel to share his knowledge and now he is sharing his in-depth course with the freeCodeCamp community.</p>\n<p>Before we dive into the course content, let's see what React is and why you should learn it...</p>\n<h1 id=\"heading-react-for-beginners\">React for Beginners</h1>\n<p>React is one of the most popular front-end web development libraries. The results of the <a target=\"_blank\" href=\"https://survey.stackoverflow.co/2023/#web-frameworks-and-technologies\">Stack Overflow Developer Survey 2023</a> confirm this.</p>\n<p>When developers were asked this question:</p>\n<blockquote>\n<p>Which <strong>web frameworks and web technologies</strong> have you done extensive development work in over the past year, and which do you want to work in over the next year?</p>\n</blockquote>\n<p><strong>40.58%</strong> of them chose React.</p>\n<p>React and Node.js were the most common web technologies used by all respondents.</p>\n<p><img src=\"https://cdn.hashnode.com/res/hashnode/image/upload/v1719000934631/fb271486-f229-42a5-8629-746bb6310f0a.png\" alt class=\"image--center mx-auto\" /></p>\n<p>The popularity and worldwide use of React shows how relevant it is and will continue to be in the web development industry.</p>\n<p>Key advantages of React include:</p>\n<ul>\n<li><p><strong>Component-Based Architecture</strong>. React applications are built by breaking down complex user interfaces (UIs) into smaller, simpler, and independent components.</p>\n</li>\n<li><p><strong>Virtual DOM</strong>. React uses a virtual representation of the real DOM of the web application for making updates. With this virtual DOM, it can efficiently update only the parts of the user interface that need to be updated.</p>\n</li>\n<li><p><strong>Support for JSX syntax</strong>. With JSX, you can define the structure of React components with a syntax that is very similar to HTML combined with JavaScript.</p>\n</li>\n</ul>\n<p>React also has a very large and active community of developers and libraries for many different purposes. It's super helpful for building maintainable and user-friendly web applications.</p>\n<p><strong>💡 Tip:</strong> The official React logo is an atom. 👇</p>\n<p><img src=\"https://cdn.hashnode.com/res/hashnode/image/upload/v1719002500087/60ae6dda-564c-4199-bd01-0f6560b4abd6.png\" alt class=\"image--center mx-auto\" /></p>\n<h1 id=\"heading-react-course-in-spanish\">React Course in Spanish</h1>\n<p>Awesome. Now that you know more about React, let's see what you will learn during the course:</p>\n<ul>\n<li><p>How to install React with <code>create-react-app</code> and with Vite.</p>\n</li>\n<li><p>JSX</p>\n</li>\n<li><p>Components</p>\n</li>\n<li><p>Props</p>\n</li>\n<li><p>Hooks</p>\n</li>\n<li><p>Components lifecycle</p>\n</li>\n<li><p>Promises</p>\n</li>\n<li><p>Events</p>\n</li>\n<li><p>Forms</p>\n</li>\n<li><p>And more...</p>\n</li>\n</ul>\n<p>💡 <strong>Tip:</strong> This course is great for beginners. If you are taking your first steps in React, Carpi Coder will guide you step by step.</p>\n<p><img src=\"https://cdn.hashnode.com/res/hashnode/image/upload/v1719003104391/eab7016c-a491-4ba9-9020-23abe7e69d9a.png\" alt class=\"image--center mx-auto\" /></p>\n<p>You will also learn more advanced techniques, like how to:</p>\n<ul>\n<li><p>Fetch and display data from an API.</p>\n</li>\n<li><p>Integrate your React application with a Firebase database.</p>\n</li>\n<li><p>Deploy your React application on Netlify, a cloud platform for deploying and managing web applications and websites.</p>\n</li>\n</ul>\n<p>💡 <strong>Tip:</strong> During the course, you will create the Firebase database step by step, so you can take the course even if you don't have previous knowledge of Firebase.</p>\n<p>If you are ready to start learning React, check out the course in Spanish on the <a target=\"_blank\" href=\"https://www.youtube.com/freecodecampespanol\">freeCodeCamp.org Spanish YouTube channel</a>:</p>\n<div class=\"embed-wrapper\"><div class=\"embed-loading\"><div class=\"loadingRow\"></div><div class=\"loadingRow\"></div></div><a class=\"embed-card\" href=\"https://www.youtube.com/watch?v=oumXEuPM8RQ\">https://www.youtube.com/watch?v=oumXEuPM8RQ</a></div>\n<p> </p>\n<p>✍️ Course created by Carpi Coder.</p>\n<ul>\n<li><p>YouTube: <a target=\"_blank\" href=\"https://www.youtube.com/c/CarpiCoder\">@carpicoder</a></p>\n</li>\n<li><p>Instagram: <a target=\"_blank\" href=\"http://instagram.com/carpicoder\">instagram.com/carpicoder</a></p>\n</li>\n<li><p>TikTok: <a target=\"_blank\" href=\"http://tiktok.com/@carpicoder\">tiktok.com/@carpicoder</a></p>\n</li>\n<li><p>Sitio Web: <a target=\"_blank\" href=\"https://carpicoder.com/\">https://carpicoder.com/</a></p>\n</li>\n<li><p>X: <a target=\"_blank\" href=\"https://x.com/carpicoder\">https://x.com/carpicoder</a></p>\n</li>\n<li><p>GitHub: <a target=\"_blank\" href=\"https://github.com/carpicoder\">https://github.com/carpicoder</a></p>\n</li>\n<li><p>LinkedIn: <a target=\"_blank\" href=\"http://linkedin.com/in/matiascoletta\">linkedin.com/in/matiascoletta</a></p>\n</li>\n</ul>\n"
+            },
+            "publishedAt": "2024-06-26T13:14:58.345Z",
+            "updatedAt": "2024-07-03T16:53:10.326Z"
+          }
+        },
+        {
+          "node": {
             "id": "66578856935992fb202d9272",
             "slug": "how-do-numerical-conversions-work",
             "title": "How Do Numerical Conversions Work in Computer Systems? Explained With Examples",
