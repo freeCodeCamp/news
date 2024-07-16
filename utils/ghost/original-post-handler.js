@@ -1,5 +1,7 @@
 const { URL } = require('url');
-const { allGhostAPIInstances } = require('./api');
+const fetch = require('node-fetch');
+const jsdom = require('jsdom');
+const { JSDOM } = jsdom;
 const getImageDimensions = require('../get-image-dimensions');
 const translate = require('../translate');
 
@@ -12,54 +14,72 @@ const originalPostHandler = async post => {
   const match = originalPostRegex.exec(headAndFootCode);
 
   if (match) {
-    let hrefValue = '';
-    let linkText = '';
+    const originalPostURLObj = new URL(match.groups.url);
+    // Set hrefValue and linkText to the original post URL by default
+    let hrefValue = originalPostURLObj.href;
+    let linkText = originalPostURLObj.href;
 
     try {
-      const { pathname } = new URL(match.groups.url);
       // Currently, pathSegments is length 2 for English and Chinese
       // ( ['news', 'slug'] ), and length 3 for other locales
       // ( ['locale', 'news', 'slug'] )
-      let pathSegments = pathname.split('/').filter(str => str);
+      const pathSegments = originalPostURLObj.pathname
+        .split('/')
+        .filter(str => str);
       // Assume the original post is in English until the Chinese subdomain-to-subpath
       // transfer is complete. Note: This means that Chinese original posts that are
       // translated into English will not work until Chinese is moved to a subpath
       const originalPostLocale =
         pathSegments.length === 2 ? 'english' : pathSegments[0];
-      const originalPostSlug = pathSegments[pathSegments.length - 1];
-      const { api, siteURL } = allGhostAPIInstances[originalPostLocale];
-      const originalPost = await api.posts.read({
-        include: 'authors',
-        slug: originalPostSlug
-      });
-
-      // Convert URLs to final published version
-      originalPost.url = `${siteURL}${originalPostSlug}/`;
-      originalPost.primary_author.url = `${siteURL}author/${originalPost.primary_author.slug}/`;
-
-      if (originalPost.primary_author.profile_image) {
-        originalPost.primary_author.image_dimensions = {
-          ...originalPost.primary_author.image_dimensions
-        };
-        originalPost.primary_author.image_dimensions.profile_image =
-          await getImageDimensions(
-            originalPost.primary_author.profile_image,
-            `Original author profile image: ${originalPost.primary_author.profile_image}`
-          );
-      }
-
-      // Add an `original_post` object to the current post
-      post.original_post = {
-        title: originalPost.title,
-        url: originalPost.url,
-        published_at: originalPost.published_at,
-        primary_author: originalPost.primary_author,
+      const originalPostRes = await fetch(originalPostURLObj.href);
+      const originalPostHTML = await originalPostRes.text();
+      const originalPostDom = new JSDOM(originalPostHTML);
+      const document = originalPostDom.window.document;
+      const originalPostDate = document.querySelector(
+        '.post-full-meta-date'
+      ).dateTime;
+      const originalPostTitle = document
+        .querySelector('.post-full-title')
+        .textContent.trim();
+      const originalAuthorImageSrc =
+        document.querySelector('.author-card img').src;
+      const originalAuthorName = document
+        .querySelector('.author-card .author-card-name')
+        .textContent.trim();
+      const originalAuthorRelativePath = document.querySelector(
+        '.author-card .author-card-name a'
+      ).href;
+      const originalAuthorURL = `${originalPostURLObj.origin}${originalAuthorRelativePath}`;
+      const originalAuthorPageRes = await fetch(originalAuthorURL);
+      const originalAuthorPageHTML = await originalAuthorPageRes.text();
+      const originalAuthorPageDom = new JSDOM(originalAuthorPageHTML);
+      const originalAuthorPageDocument = originalAuthorPageDom.window.document;
+      const originalAuthorBio = originalAuthorPageDocument
+        .querySelector('.author-bio')
+        .textContent.trim();
+      const originalPostObj = {
+        url: originalPostURLObj.href,
+        published_at: originalPostDate,
+        title: originalPostTitle,
+        primary_author: {
+          name: originalAuthorName,
+          profile_image: originalAuthorImageSrc,
+          url: originalAuthorURL,
+          bio: originalAuthorBio || null,
+          image_dimensions: {
+            profile_image: {
+              ...(await getImageDimensions(originalAuthorImageSrc))
+            }
+          }
+        },
         locale_i18n: originalPostLocale
       };
 
+      // Add an `original_post` object to the current post
+      post.original_post = originalPostObj;
+
       // Use the title of the original post as link text
-      hrefValue = originalPost.url;
-      linkText = originalPost.title;
+      linkText = originalPostTitle;
     } catch (err) {
       console.warn(`
       ---------------------------------------------------------------
@@ -70,10 +90,6 @@ const originalPostHandler = async post => {
       post has not been deleted.
       ---------------------------------------------------------------
       `);
-
-      // Use URL in the script tag as link text
-      hrefValue = match.groups.url;
-      linkText = match.groups.url;
     }
 
     const originalArticleHTML = translate(
