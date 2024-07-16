@@ -70,7 +70,7 @@ const processBatch = async ({
         obj.image_dimensions = { ...obj.image_dimensions };
         obj.image_dimensions.feature_image = await getImageDimensions(
           obj.feature_image,
-          obj.title
+          `Ghost post feature image: ${obj.title}`
         );
       }
 
@@ -82,8 +82,7 @@ const processBatch = async ({
         obj.primary_author.image_dimensions.profile_image =
           await getImageDimensions(
             obj.primary_author.profile_image,
-            obj.primary_author.name,
-            true
+            `Ghost author profile image: ${obj.primary_author.name}`
           );
       }
 
@@ -94,8 +93,7 @@ const processBatch = async ({
         obj.primary_author.image_dimensions.cover_image =
           await getImageDimensions(
             obj.primary_author.cover_image,
-            obj.primary_author.name,
-            true
+            `Ghost author cover image: ${obj.primary_author.name}`
           );
       }
 
@@ -106,8 +104,7 @@ const processBatch = async ({
             tag.image_dimensions = { ...tag.image_dimensions };
             tag.image_dimensions.feature_image = await getImageDimensions(
               tag.feature_image,
-              tag.name,
-              true
+              `Ghost tag feature image: ${tag.name}`
             );
           }
         })
