@@ -23,13 +23,15 @@ module.exports = async () => {
   // with a pool of workers to create posts and pages global data
   const batchSize = 200;
   const allGhostPosts = await fetchFromGhost('posts');
-  const allHashnodePosts = await fetchFromHashnode();
+  const allHashnodePosts = await fetchFromHashnode('posts');
+  const allGhostPages = await fetchFromGhost('pages');
+  const allHashnodePages = await fetchFromHashnode('pages');
 
   const ghostPosts = await Promise.all(
     chunk(allGhostPosts, batchSize).map((batch, i, arr) =>
       piscinaGhost.run({
         batch,
-        type: 'posts',
+        contentType: 'posts',
         currBatchNo: Number(i) + 1,
         totalBatches: arr.length
       })
@@ -44,6 +46,7 @@ module.exports = async () => {
     chunk(allHashnodePosts, batchSize).map((batch, i, arr) =>
       piscinaHashnode.run({
         batch,
+        contentType: 'posts',
         currBatchNo: Number(i) + 1,
         totalBatches: arr.length
       })
@@ -55,38 +58,54 @@ module.exports = async () => {
     })
     .catch(err => console.error(err));
 
-  // Check for duplicate post slugs between Ghost and Hashnode,
-  // use the first instance of the post, and log the duplicates
-  const duplicates = [];
-  const posts = [...ghostPosts, ...hashnodePosts]
-    .sort((a, b) => new Date(a.published_at) - new Date(b.published_at)) // Sort by published date in ascending order
-    .filter((post, i, arr) => {
-      if (arr.findIndex(p => p.slug === post.slug) !== i) {
-        duplicates.push(post);
-        return false;
-      }
-      return true;
-    })
-    .reverse(); // Reverse the order to show the most recent posts first
-
-  if (duplicates.length) pingEditorialTeam(duplicates);
-
-  const allPages = await fetchFromGhost('pages');
-  const pages = await Promise.all(
-    chunk(allPages, batchSize).map((batch, i, arr) =>
+  const ghostPages = await Promise.all(
+    chunk(allGhostPages, batchSize).map((batch, i, arr) =>
       piscinaGhost.run({
         batch,
-        type: 'pages',
+        contentType: 'pages',
         currBatchNo: Number(i) + 1,
         totalBatches: arr.length
       })
     )
   )
     .then(arr => {
-      console.log('Finished processing all pages');
+      console.log('Finished processing all Ghost pages');
       return arr.flat();
     })
     .catch(err => console.error(err));
+  const hashnodePages = await Promise.all(
+    chunk(allHashnodePages, batchSize).map((batch, i, arr) =>
+      piscinaHashnode.run({
+        batch,
+        contentType: 'pages',
+        currBatchNo: Number(i) + 1,
+        totalBatches: arr.length
+      })
+    )
+  ).then(arr => {
+    console.log('Finished processing all Hashnode pages');
+    return arr.flat();
+  });
+
+  // Check for duplicate post / page slugs between Ghost and Hashnode,
+  // use the first instance of the post, and log the duplicates
+  const duplicates = [];
+  const filterDuplicates = arr => {
+    return arr
+      .sort((a, b) => new Date(a?.published_at) - new Date(b?.published_at)) // Sort by published date in ascending order
+      .filter((obj, i, arr) => {
+        if (arr.findIndex(o => o.slug === obj.slug) !== i) {
+          duplicates.push(obj);
+          return false;
+        }
+        return true;
+      })
+      .reverse(); // Reverse the order to show the most recent posts / pages first
+  };
+
+  const posts = filterDuplicates([...ghostPosts, ...hashnodePosts]);
+  const pages = filterDuplicates([...ghostPages, ...hashnodePages]);
+  if (duplicates.length) pingEditorialTeam(duplicates);
 
   // Create authors global data for author pages
   const authors = [];

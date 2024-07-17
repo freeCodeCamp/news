@@ -8,20 +8,21 @@ const {
 } = require('../config');
 
 const pingEditorialTeam = async duplicatesArr => {
-  const msg = `Posts with duplicate slugs have been found between Ghost and Hashnode. The following posts have been removed from the latest build:
+  const msg = `Posts / pages with duplicate slugs have been found between Ghost and Hashnode. The following have been removed from the latest build:
 
-${duplicatesArr.map(post => `- "${post.title}" with the slug "/${post.slug}" on the ${currentLocale_i18n.charAt(0).toUpperCase() + currentLocale_i18n.slice(1)} ${post.source} publication`).join('\n')}
+${duplicatesArr.map(obj => `- The ${obj.contentType} titled "${obj.title}" with the slug "/${obj.slug}" on the ${currentLocale_i18n.charAt(0).toUpperCase() + currentLocale_i18n.slice(1)} ${obj.source} publication`).join('\n')}
 
-Please update the post slugs on either Ghost or Hashnode to include them in future builds.
+Please update the post / page slugs on either Ghost or Hashnode to include them in future builds.
 `;
   process.env['FCC_DISABLE_WARNING'] === 'false' &&
     console.warn(`
 -----------------------------------------------
-WARNING: Duplicate Posts Found
+WARNING: Duplicate Post / Page Slugs Found
 -----------------------------------------------
 ${msg}
 `);
-  errorLogger({ type: 'duplicate-posts', name: msg });
+  errorLogger({ type: 'duplicate-slugs', name: msg });
+  console.log({ msg });
 
   // Prevent sending messages while in dev or CI environments
   if (eleventyEnv === 'dev' || eleventyEnv === 'ci') return;
