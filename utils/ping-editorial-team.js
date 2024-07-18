@@ -22,7 +22,6 @@ WARNING: Duplicate Post / Page Slugs Found
 ${msg}
 `);
   errorLogger({ type: 'duplicate-slugs', name: msg });
-  console.log({ msg });
 
   // Prevent sending messages while in dev or CI environments
   if (eleventyEnv === 'dev' || eleventyEnv === 'ci') return;
