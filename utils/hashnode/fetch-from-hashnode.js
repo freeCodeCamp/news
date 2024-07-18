@@ -83,20 +83,14 @@ const fetchFromHashnode = async contentType => {
   let hasNextPage = true;
 
   while (hasNextPage) {
-    // const res =
-    //   eleventyEnv === 'ci' && currentLocale_i18n === 'english'
-    //     ? require('../../cypress/fixtures/mock-hashnode-posts.json')
-    //     : await request(process.env.HASHNODE_API_URL, query, {
-    //         host: sourceHashnodeHost,
-    //         first: 20,
-    //         after
-    //       });
-
-    const res = await request(process.env.HASHNODE_API_URL, query, {
-      host: sourceHashnodeHost,
-      first: 20,
-      after
-    });
+    const res =
+      eleventyEnv === 'ci' && currentLocale_i18n === 'english'
+        ? require(`../../cypress/fixtures/mock-hashnode-${contentType}.json`)
+        : await request(process.env.HASHNODE_API_URL, query, {
+            host: sourceHashnodeHost,
+            first: 20,
+            after
+          });
 
     const resData =
       res.publication[fieldName]?.edges.map(({ node }) => node) || [];
