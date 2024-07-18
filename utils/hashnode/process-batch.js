@@ -1,5 +1,7 @@
 const modifyHTMLContent = require('../modify-html-content');
 const getImageDimensions = require('../../utils/get-image-dimensions');
+const { stripHTMLTags } = require('../../utils/modify-html-helpers');
+const shortenExcerpt = require('../../utils/shorten-excerpt');
 
 const processBatch = async ({
   batch,
@@ -29,6 +31,18 @@ const processBatch = async ({
       postTitle: newObj.title,
       source: newObj.source
     });
+
+    // Hashnode pages don't have a brief that we can cast as an excerpt or original_excerpt,
+    // so we strip the HTML tags from the body text to generate a brief for SEO and structured data.
+    if (!Object.hasOwn(oldObj, 'brief')) {
+      const sanitizedBodyText = stripHTMLTags(newObj.html);
+      oldObj.brief = shortenExcerpt(sanitizedBodyText);
+    }
+
+    // Note: Longer posts include an ellipsis. We can decide how to
+    // handle this in the future.
+    newObj.original_excerpt = oldObj.brief;
+    newObj.excerpt = shortenExcerpt(oldObj.brief);
 
     if (contentType === 'posts') {
       // Set a default feature image for posts if one doesn't exist
@@ -91,18 +105,6 @@ const processBatch = async ({
       newObj.published_at = oldObj.publishedAt;
       newObj.updated_at = oldObj.updatedAt;
       newObj.reading_time = oldObj.readTimeInMinutes;
-
-      // Note: Longer posts include an ellipsis. We can decide how to
-      // handle this in the future.
-      if (oldObj.brief) {
-        newObj.original_excerpt = oldObj.brief;
-
-        newObj.excerpt = oldObj.brief
-          .replace(/\n+/g, ' ')
-          .split(' ')
-          .slice(0, 50)
-          .join(' ');
-      }
     }
 
     newBatch.push(newObj);

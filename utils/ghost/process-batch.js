@@ -4,6 +4,7 @@ const getImageDimensions = require('../../utils/get-image-dimensions');
 const errorLogger = require('../../utils/error-logger');
 const { siteURL } = require('../../config');
 const stripDomain = require('../../utils/strip-domain');
+const shortenExcerpt = require('../../utils/shorten-excerpt');
 
 const removeUnusedKeys = obj => {
   const keysToRemove = [
@@ -147,11 +148,7 @@ const processBatch = async ({
       if (obj.excerpt) {
         obj.original_excerpt = obj.excerpt;
 
-        obj.excerpt = obj.excerpt
-          .replace(/\n+/g, ' ')
-          .split(' ')
-          .slice(0, 50)
-          .join(' ');
+        obj.excerpt = shortenExcerpt(obj.excerpt);
       }
 
       // Enable lazy loading of images and embedded videos, set width, height, and add a default

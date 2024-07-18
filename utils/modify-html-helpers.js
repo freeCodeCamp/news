@@ -1,6 +1,7 @@
 const getVideoId = (...args) =>
   import('get-video-id').then(({ default: getVideoId }) => getVideoId(...args));
 const { parse } = require('path');
+const { JSDOM } = require('jsdom');
 
 const generateHashnodeEmbedMarkup = async embedURL => {
   try {
@@ -215,7 +216,13 @@ const setDefaultAlt = el => {
   return el;
 };
 
+const stripHTMLTags = str => {
+  const dom = new JSDOM(str);
+  return dom.window.document.body.textContent || '';
+};
+
 module.exports = {
   generateHashnodeEmbedMarkup,
-  setDefaultAlt
+  setDefaultAlt,
+  stripHTMLTags
 };
