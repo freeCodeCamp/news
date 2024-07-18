@@ -88,7 +88,9 @@ module.exports = async () => {
   });
 
   // Check for duplicate post / page slugs between Ghost and Hashnode,
-  // use the first instance of the post, and log the duplicates
+  // use the first instance of the post, and log the duplicates. Also, because
+  // Hashnode pages don't have a published_at date, they will always be marked as
+  // duplicates if they share a slug with an existing Ghost page.
   const duplicates = [];
   const filterDuplicates = arr => {
     return arr
