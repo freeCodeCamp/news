@@ -14,7 +14,7 @@
         <div class="inner">
             <article class="post-full post {{ "no-image" if not (doc.feature_image) }}">
                 <header class="post-full-header">
-                    <h1 class="post-full-title">{{ title }}</h1>
+                    <h1 class="post-full-title" data-test-label="post-full-title">{{ title }}</h1>
                 </header>
                 {% if doc.feature_image %}
                     <figure class="post-full-image">

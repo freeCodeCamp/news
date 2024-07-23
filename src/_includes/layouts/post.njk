@@ -28,7 +28,7 @@ time #}
                             </a>
                         {% endif %}
                     </section>
-                    <h1 class="post-full-title">{{ title }}</h1>
+                    <h1 class="post-full-title" data-test-label="post-full-title">{{ title }}</h1>
                 </header>
                 <div class="post-full-author-header" data-test-label="author-header-no-bio">
                     {% if post.primary_author.name != "freeCodeCamp.org" %}

@@ -1,6 +1,7 @@
 const selectors = {
   fccSource: "[data-test-label='x-fcc-source']",
   featureImage: "[data-test-label='feature-image']",
+  postFullTitle: "[data-test-label='post-full-title']",
   postContent: "[data-test-label='post-content']",
   articlePublishedTime: 'head meta[property="article:published_time"]'
 };
@@ -60,22 +61,6 @@ describe('Page', () => {
         cy.get(selectors.featureImage).should('not.exist');
       });
     });
-
-    // Note: Remove this testing block once we migrate all pages to Hashnode
-    context('Duplicate slugs', () => {
-      beforeEach(() => {
-        cy.visit('/thank-you-for-donating/');
-      });
-
-      // Basic rendering and content are tested above in the "General tests" context
-      it('should render the older page with the expected published date', () => {
-        cy.get(selectors.articlePublishedTime).should(
-          'have.attr',
-          'content',
-          '2020-03-16T17:03:46.000Z'
-        );
-      });
-    });
   });
 
   context('Hashnode sourced pages', () => {
@@ -95,6 +80,41 @@ describe('Page', () => {
       it('should not contain the article:published_time meta tag', () => {
         cy.get(selectors.articlePublishedTime).should('not.exist');
       });
+    });
+  });
+
+  // Note: Remove this testing block once we migrate all posts to Hashnode
+  context('Duplicate slugs', () => {
+    // We only test for Ghost sourced pages here when a Ghost and Hashnode
+    // page have the same slug because Hashnode pages do not show a published
+    // date, so Ghost sourced pages are the only ones that will be built in this
+    // scenario.
+    it('should build the Ghost page if a Hashnode page has the same slug', () => {
+      cy.visit('/thank-you-for-donating/');
+      cy.get(selectors.postFullTitle).then($el => {
+        expect($el.text().trim()).to.equal(
+          'Please check your email for a donation receipt. Forward it to donors@freecodecamp.org.'
+        );
+      });
+      cy.get(selectors.articlePublishedTime).should(
+        'have.attr',
+        'content',
+        '2020-03-16T17:03:46.000Z'
+      );
+      cy.get(selectors.fccSource).should('have.attr', 'content', 'Ghost');
+    });
+
+    it('should build the original Ghost page if a more recent Hashnode post has the same slug', () => {
+      cy.visit('/top-contributors-2023/');
+      cy.get(selectors.postFullTitle).then($el => {
+        expect($el.text().trim()).to.equal('Top Contributors 2023');
+      });
+      cy.get(selectors.articlePublishedTime).should(
+        'have.attr',
+        'content',
+        '2023-12-20T07:53:00.000Z'
+      );
+      cy.get(selectors.fccSource).should('have.attr', 'content', 'Ghost');
     });
   });
 });

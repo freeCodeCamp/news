@@ -4,6 +4,7 @@ const selectors = {
   featureImage: "[data-test-label='feature-image']",
   authorProfileImage: "[data-test-label='profile-image']",
   ghostDefaultAvatar: "[data-test-label='avatar']",
+  postFullTitle: "[data-test-label='post-full-title']",
   postContent: "[data-test-label='post-content']",
   socialRowCTA: "[data-test-label='social-row-cta']",
   tweetButton: "[data-test-label='tweet-button']",
@@ -154,25 +155,6 @@ describe('Post', () => {
         });
       });
     });
-
-    // Note: Remove this testing block once we migrate all posts to Hashnode
-    context('Duplicate slugs', () => {
-      beforeEach(() => {
-        cy.visit('/learn-react-in-spanish-course-for-beginners/');
-      });
-
-      it('should render the older post', () => {
-        cy.contains('Learn React in Spanish – Course for Beginners');
-        cy.get(selectors.fullMetaDate).then($el => {
-          const publishedTimeUTC = new Date($el.attr('datetime')).toUTCString();
-
-          expect(publishedTimeUTC).to.deep.equal(
-            'Tue, 15 Mar 2022 11:30:00 GMT'
-          );
-        });
-        cy.get(selectors.fccSource).should('have.attr', 'content', 'Ghost');
-      });
-    });
   });
 
   context('Hashnode sourced posts', () => {
@@ -302,28 +284,67 @@ describe('Post', () => {
         });
       });
     });
+  });
 
-    // Note: Remove this testing block once we migrate all posts to Hashnode
-    context('Duplicate slugs', () => {
-      beforeEach(() => {
-        cy.visit(
-          '/ben-awad-is-a-gamedev-who-sleeps-9-hours-every-night-to-be-productive-podcast-121/'
+  // Note: Remove this testing block once we migrate all posts to Hashnode
+  context('Duplicate slugs', () => {
+    it('should build the original Ghost post if a more recent Hashnode post has the same slug', () => {
+      cy.visit('/learn-react-in-spanish-course-for-beginners/');
+      cy.get(selectors.postFullTitle).then($el => {
+        expect($el.text().trim()).to.equal(
+          'Learn React in Spanish – Course for Beginners'
         );
       });
+      cy.get(selectors.fullMetaDate).then($el => {
+        const publishedTimeUTC = new Date($el.attr('datetime')).toUTCString();
+        expect(publishedTimeUTC).to.deep.equal('Tue, 15 Mar 2022 11:30:00 GMT');
+      });
+      cy.get(selectors.fccSource).should('have.attr', 'content', 'Ghost');
+    });
 
-      it('should render the older post', () => {
-        cy.contains(
+    it('should build the original Ghost post if a more recent Hashnode page has the same slug', () => {
+      cy.visit('/2021-top-contributors/');
+      cy.get(selectors.postFullTitle).then($el => {
+        expect($el.text().trim()).to.equal(
+          'The Top freeCodeCamp Contributors of 2021'
+        );
+      });
+      cy.get(selectors.fullMetaDate).then($el => {
+        const publishedTimeUTC = new Date($el.attr('datetime')).toUTCString();
+        expect(publishedTimeUTC).to.deep.equal('Thu, 30 Dec 2021 14:56:08 GMT');
+      });
+      cy.get(selectors.fccSource).should('have.attr', 'content', 'Ghost');
+    });
+
+    it('should build the original Hashnode post if a more recent Ghost post has the same slug', () => {
+      cy.visit(
+        '/ben-awad-is-a-gamedev-who-sleeps-9-hours-every-night-to-be-productive-podcast-121/'
+      );
+      cy.get(selectors.postFullTitle).then($el => {
+        expect($el.text().trim()).to.equal(
           'Ben Awad is a GameDev Who Sleeps 9 Hours EVERY NIGHT to be Productive [Podcast #121]'
         );
-        cy.get(selectors.fullMetaDate).then($el => {
-          const publishedTimeUTC = new Date($el.attr('datetime')).toUTCString();
-
-          expect(publishedTimeUTC).to.deep.equal(
-            'Fri, 26 Apr 2024 15:29:48 GMT'
-          );
-        });
-        cy.get(selectors.fccSource).should('have.attr', 'content', 'Hashnode');
       });
+      cy.get(selectors.fullMetaDate).then($el => {
+        const publishedTimeUTC = new Date($el.attr('datetime')).toUTCString();
+
+        expect(publishedTimeUTC).to.deep.equal('Fri, 26 Apr 2024 15:29:48 GMT');
+      });
+      cy.get(selectors.fccSource).should('have.attr', 'content', 'Hashnode');
+    });
+
+    it('should build the original Hashnode post if a more recent Ghost page has the same slug', () => {
+      cy.visit('/how-do-numerical-conversions-work/');
+      cy.get(selectors.postFullTitle).then($el => {
+        expect($el.text().trim()).to.equal(
+          'How Do Numerical Conversions Work in Computer Systems? Explained With Examples'
+        );
+      });
+      cy.get(selectors.fullMetaDate).then($el => {
+        const publishedTimeUTC = new Date($el.attr('datetime')).toUTCString();
+        expect(publishedTimeUTC).to.deep.equal('Wed, 29 May 2024 19:56:06 GMT');
+      });
+      cy.get(selectors.fccSource).should('have.attr', 'content', 'Hashnode');
     });
   });
 });

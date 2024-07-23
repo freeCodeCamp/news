@@ -14,11 +14,21 @@
         },
         {
           "node": {
+            "id": "66976ec57f7fd862065d2bd4",
+            "slug": "2021-top-contributors",
+            "title": "The Top freeCodeCamp Contributors of 2021 (Duplicate slug of a pre-existing Ghost post)",
+            "content": {
+              "html": "<p>This Hashnode page has the same slug as a pre-existing Ghost post and should not be built</p>\n"
+            }
+          }
+        },
+        {
+          "node": {
             "id": "66976ec57f7fd862065d2bd3",
             "slug": "thank-you-for-donating",
-            "title": "Please check your email for a receipt and forward it to donors@freecodecamp.org.",
+            "title": "Please check your email for a receipt and forward it to donors@freecodecamp.org. (Duplicate slug of a pre-existing Ghost page)",
             "content": {
-              "html": "<p>Once you've forwarded this receipt, we will award you with your donor badge on your freeCodeCamp profile. We will also turn off donation prompts for you.</p>\n<p>Thank you again for supporting our charity.</p>\n<p>freeCodeCamp is a highly-efficient education NGO. This year alone, we've provided million hours of free education to people around the world.</p>\n<p>At our charity's current operating budget, every dollar you donate to freeCodeCamp translates into 50 hours worth of technology education.</p>\n<p><img src=\"https://cdn.hashnode.com/res/hashnode/image/upload/v1721200182165/f49e51d7-2567-44e1-971f-6a7b149c6ba4.jpeg\" alt class=\"image--center mx-auto\" />\n<em>Some members of the freeCodeCamp team (from left to right): Miya, Mrugesh, Quincy, Kris, Ahmad</em></p>\n<p>When you donate to freeCodeCamp, you help people learn new skills and provide for their families.</p>\n<p>You also help us create new resources for you and your family to use to expand your own technology skills.</p>\n<p>If you need help with your current or past donations, just email <a target=\"_blank\" href=\"mailto:donations@example.com\">donations@example.com</a> and tell us how we can help.</p>\n<p>Happy coding. 🏕️</p>\n"
+              "html": "<p>This Hashnode page has the same slug as a pre-existing Ghost page and should not be built.</p>\n"
             }
           }
         }
