@@ -1,0 +1,42 @@
+{
+  "publication": {
+    "staticPages": {
+      "edges": [
+        {
+          "node": {
+            "id": "6698b0d32204c0bcdb9636b4",
+            "slug": "thank-you-for-being-a-supporter",
+            "title": "Thank You for Being a Supporter",
+            "content": {
+              "html": "<p>freeCodeCamp is a highly-efficient education NGO. This year alone, we've provided million hours of free education to people around the world.</p>\n<p>At our charity's current operating budget, every dollar you donate to freeCodeCamp translates into 50 hours worth of technology education.</p>\n<p>When you donate to freeCodeCamp, you help people learn new skills and provide for their families.</p>\n<p>You also help us create new resources for you and your family to use to expand your own technology skills.</p>\n<p>Thank you again for supporting our charity.</p>\n"
+            }
+          }
+        },
+        {
+          "node": {
+            "id": "66976ec57f7fd862065d2bd4",
+            "slug": "2021-top-contributors",
+            "title": "The Top freeCodeCamp Contributors of 2021 (Duplicate slug of a pre-existing Ghost post)",
+            "content": {
+              "html": "<p>This Hashnode page has the same slug as a pre-existing Ghost post and should not be built</p>\n"
+            }
+          }
+        },
+        {
+          "node": {
+            "id": "66976ec57f7fd862065d2bd3",
+            "slug": "thank-you-for-donating",
+            "title": "Please check your email for a receipt and forward it to donors@freecodecamp.org. (Duplicate slug of a pre-existing Ghost page)",
+            "content": {
+              "html": "<p>This Hashnode page has the same slug as a pre-existing Ghost page and should not be built.</p>\n"
+            }
+          }
+        }
+      ],
+      "pageInfo": {
+        "endCursor": "MQ==",
+        "hasNextPage": false
+      }
+    }
+  }
+}

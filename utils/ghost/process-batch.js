@@ -4,6 +4,7 @@ const getImageDimensions = require('../../utils/get-image-dimensions');
 const errorLogger = require('../../utils/error-logger');
 const { siteURL } = require('../../config');
 const stripDomain = require('../../utils/strip-domain');
+const shortenExcerpt = require('../../utils/shorten-excerpt');
 
 const removeUnusedKeys = obj => {
   const keysToRemove = [
@@ -37,9 +38,14 @@ const removeUnusedKeys = obj => {
   return obj;
 };
 
-const processBatch = async ({ batch, type, currBatchNo, totalBatches }) => {
+const processBatch = async ({
+  batch,
+  contentType,
+  currBatchNo,
+  totalBatches
+}) => {
   console.log(
-    `Processing Ghost ${type} batch ${currBatchNo} of ${totalBatches}...and using ${process.memoryUsage.rss() / 1024 / 1024} MB of memory`
+    `Processing Ghost ${contentType} batch ${currBatchNo} of ${totalBatches}...and using ${process.memoryUsage.rss() / 1024 / 1024} MB of memory`
   );
 
   // Process current batch of posts / pages
@@ -50,11 +56,12 @@ const processBatch = async ({ batch, type, currBatchNo, totalBatches }) => {
       obj.primary_author = removeUnusedKeys(obj.primary_author);
       obj.tags.map(tag => removeUnusedKeys(tag));
 
-      // Set the source of the publication for tracking and later processing
+      // Set the source of the publication and whether it's a page or post for tracking and later processing
       obj.source = 'Ghost';
+      obj.contentType = contentType === 'posts' ? 'post' : 'page';
 
       // Set a default feature image for posts if one doesn't exist
-      if (type === 'posts' && !obj.feature_image)
+      if (contentType === 'posts' && !obj.feature_image)
         obj.feature_image =
           'https://cdn.freecodecamp.org/platform/universal/fcc_meta_1920X1080-indigo.png';
 
@@ -141,11 +148,7 @@ const processBatch = async ({ batch, type, currBatchNo, totalBatches }) => {
       if (obj.excerpt) {
         obj.original_excerpt = obj.excerpt;
 
-        obj.excerpt = obj.excerpt
-          .replace(/\n+/g, ' ')
-          .split(' ')
-          .slice(0, 50)
-          .join(' ');
+        obj.excerpt = shortenExcerpt(obj.excerpt);
       }
 
       // Enable lazy loading of images and embedded videos, set width, height, and add a default

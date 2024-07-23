@@ -3,8 +3,9 @@ const { sourceHashnodeHost } = require('../ghost/api');
 const { eleventyEnv, currentLocale_i18n } = require('../../config');
 const wait = require('../wait');
 
-const fetchFromHashnode = async () => {
+const fetchFromHashnode = async contentType => {
   if (!sourceHashnodeHost) return [];
+  const fieldName = contentType === 'posts' ? 'posts' : 'staticPages';
 
   const postFieldsFragment = gql`
     fragment PostFields on Post {
@@ -44,15 +45,28 @@ const fetchFromHashnode = async () => {
     }
   `;
 
+  const staticPageFieldsFragment = gql`
+    fragment StaticPageFields on StaticPage {
+      id
+      slug
+      title
+      content {
+        html
+        markdown
+      }
+    }
+  `;
+
   const query = gql`
     ${postFieldsFragment}
-    query PostsByPublication($host: String!, $first: Int!, $after: String) {
+    ${staticPageFieldsFragment}
+    query DataFromPublication($host: String!, $first: Int!, $after: String) {
       publication(host: $host) {
         id
-        posts(first: $first, after: $after) {
+        ${fieldName}(first: $first, after: $after) {
           edges {
             node {
-              ...PostFields
+              ...${contentType === 'posts' ? 'PostFields' : 'StaticPageFields'}
             }
           }
           pageInfo {
@@ -64,35 +78,38 @@ const fetchFromHashnode = async () => {
     }
   `;
 
-  const allPosts = [];
+  const data = [];
   let after = '';
   let hasNextPage = true;
 
   while (hasNextPage) {
     const res =
       eleventyEnv === 'ci' && currentLocale_i18n === 'english'
-        ? require('../../cypress/fixtures/mock-hashnode-posts.json')
+        ? require(`../../cypress/fixtures/mock-hashnode-${contentType}.json`)
         : await request(process.env.HASHNODE_API_URL, query, {
             host: sourceHashnodeHost,
             first: 20,
             after
           });
 
-    const resPosts = res.publication.posts?.edges.map(({ node }) => node) || [];
-    const pageInfo = res.publication.posts.pageInfo;
+    const resData =
+      res.publication[fieldName]?.edges.map(({ node }) => node) || [];
+    const pageInfo = res.publication[fieldName]?.pageInfo;
 
-    if (resPosts.length > 0)
-      console.log(`Fetched Hashnode page ${pageInfo.endCursor}...`);
+    if (resData.length > 0)
+      console.log(
+        `Fetched Hashnode ${contentType} ${pageInfo.endCursor}... and using ${process.memoryUsage.rss() / 1024 / 1024} MB of memory`
+      );
 
     after = pageInfo.endCursor;
     hasNextPage = pageInfo.hasNextPage;
 
-    allPosts.push(...resPosts);
+    data.push(...resData);
 
-    await wait(0.2);
+    await wait(200);
   }
 
-  return allPosts;
+  return data;
 };
 
 module.exports = fetchFromHashnode;

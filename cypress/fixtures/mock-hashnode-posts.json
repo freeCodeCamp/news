@@ -1,13 +1,43 @@
 {
   "publication": {
-    "id": "65dc2b7cbb4eb0cd565b4463",
     "posts": {
       "edges": [
         {
           "node": {
+            "id": "662bc86c57b91227386cc399",
+            "slug": "top-contributors-2023",
+            "title": "Top Contributors 2023 (Duplicate slug of a pre-existing Ghost page)",
+            "author": {
+              "id": "5dfa3725066598ab2752cc5d",
+              "username": "quincylarson",
+              "name": "Quincy Larson",
+              "bio": {
+                "text": ""
+              },
+              "profilePicture": "https://cdn.hashnode.com/res/hashnode/image/upload/v1640878938509/PLqvxeH9g.jpeg",
+              "socialMediaLinks": {
+                "website": "https://www.freecodecamp.org",
+                "twitter": "https://www.twitter.com/ossia",
+                "facebook": ""
+              },
+              "location": ""
+            },
+            "tags": [],
+            "coverImage": null,
+            "brief": "Congratulations – you've found my super secret page for Top Contributors\nWe appreciate your contributions to the community.\n...",
+            "readTimeInMinutes": 1,
+            "content": {
+              "html": "<p>Congratulations – you've found my super secret page for Top Contributors</p>\n<p>We appreciate your contributions to the community.</p>\n<p>...</p>\n"
+            },
+            "publishedAt": "2024-07-23T15:29:48.337Z",
+            "updatedAt": "2024-07-23T19:26:49.174Z"
+          }
+        },
+        {
+          "node": {
             "id": "667c1452ad32b772504628e0",
             "slug": "learn-react-in-spanish-course-for-beginners",
-            "title": "Learn React in Spanish - Course for Beginners",
+            "title": "Learn React in Spanish - Course for Beginners (Duplicate slug of a pre-existing Ghost post)",
             "author": {
               "id": "6354793a48f6ebd7a37ed09c",
               "username": "estefaniacn",
