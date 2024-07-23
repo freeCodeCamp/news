@@ -104,33 +104,13 @@ module.exports = async () => {
     return arr.filter(obj => !duplicateIds.includes(obj.id));
   };
 
+  // Sort posts by published date in descending order before building
   const posts = removeDuplicates([...ghostPosts, ...hashnodePosts]).sort(
-    (a, b) => new Date(b.published_at) - new Date(a.published_at) // Sort by published date in descending order before building
+    (a, b) => new Date(b.published_at) - new Date(a.published_at)
   );
-  const pages = removeDuplicates([...ghostPages, ...hashnodePages]); // Pages don't have a published_at date, so no need to sort
+  // Pages don't have a published_at date, so no need to sort
+  const pages = removeDuplicates([...ghostPages, ...hashnodePages]);
   if (duplicates.length) pingEditorialTeam(duplicates);
-
-  // // Check for duplicate post / page slugs between Ghost and Hashnode,
-  // // use the first instance of the post, and log the duplicates. Also, because
-  // // Hashnode pages don't have a published_at date, they will always be marked as
-  // // duplicates if they share a slug with an existing Ghost page.
-  // const duplicates = [];
-  // const filterDuplicates = arr => {
-  //   return arr
-  //     .sort((a, b) => new Date(a?.published_at) - new Date(b?.published_at)) // Sort by published date in ascending order
-  //     .filter((obj, i, arr) => {
-  //       if (arr.findIndex(o => o.slug === obj.slug) !== i) {
-  //         duplicates.push(obj);
-  //         return false;
-  //       }
-  //       return true;
-  //     })
-  //     .reverse(); // Reverse the order to show the most recent posts / pages first
-  // };
-
-  // const posts = filterDuplicates([...ghostPosts, ...hashnodePosts]);
-  // const pages = filterDuplicates([...ghostPages, ...hashnodePages]);
-  // if (duplicates.length) pingEditorialTeam(duplicates);
 
   // Create authors global data for author pages
   const authors = [];
