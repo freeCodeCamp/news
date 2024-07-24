@@ -94,6 +94,7 @@
     "lint-staged": "15.2.7",
     "lodash": "4.17.21",
     "md5": "2.3.0",
+    "node-cache": "5.1.2",
     "node-fetch": "2.7.0",
     "npm-run-all2": "6.2.2",
     "piscina": "4.6.1",

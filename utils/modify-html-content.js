@@ -38,7 +38,10 @@ const modifyHTMLContent = async ({ postContent, postTitle, source }) => {
     images.map(async image => {
       // To do: swap out the image URLs here once we have them auto synced
       // with an S3 bucket
-      const { width, height } = await getImageDimensions(image.src, postTitle);
+      const { width, height } = await getImageDimensions(
+        image.src,
+        `Body image in ${postTitle}: ${image.src}`
+      );
 
       image.setAttribute('width', width);
       image.setAttribute('height', height);

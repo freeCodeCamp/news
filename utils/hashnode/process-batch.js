@@ -24,7 +24,8 @@ const processBatch = async ({
     newObj.title = oldObj.title;
     // Set the source of the publication and whether it's a page or post for tracking and later processing
     newObj.source = 'Hashnode';
-    newObj.contentType = contentType === 'posts' ? 'post' : 'page';
+    const singularContentType = contentType.slice(0, -1);
+    newObj.contentType = singularContentType;
 
     newObj.html = await modifyHTMLContent({
       postContent: oldObj.content.html,
@@ -56,7 +57,7 @@ const processBatch = async ({
       newObj.image_dimensions = {};
       newObj.image_dimensions.feature_image = await getImageDimensions(
         newObj.feature_image,
-        newObj.title
+        `Hashnode ${singularContentType} feature image: ${newObj.title}`
       );
 
       const newObjAuthor = {};
@@ -88,8 +89,7 @@ const processBatch = async ({
         newObjAuthor.image_dimensions = {};
         newObjAuthor.image_dimensions.profile_image = await getImageDimensions(
           newObjAuthor.profile_image,
-          newObjAuthor.name,
-          true
+          `Hashnode author profile image: ${newObjAuthor.name}`
         );
       }
       newObj.primary_author = newObjAuthor;

@@ -42,7 +42,10 @@ const originalPostHandler = async post => {
           ...originalPost.primary_author.image_dimensions
         };
         originalPost.primary_author.image_dimensions.profile_image =
-          await getImageDimensions(originalPost.primary_author.profile_image);
+          await getImageDimensions(
+            originalPost.primary_author.profile_image,
+            `Original author profile image: ${originalPost.primary_author.profile_image}`
+          );
       }
 
       // Add an `original_post` object to the current post

@@ -58,7 +58,8 @@ const processBatch = async ({
 
       // Set the source of the publication and whether it's a page or post for tracking and later processing
       obj.source = 'Ghost';
-      obj.contentType = contentType === 'posts' ? 'post' : 'page';
+      const singularContentType = contentType.slice(0, -1);
+      obj.contentType = singularContentType;
 
       // Set a default feature image for posts if one doesn't exist
       if (contentType === 'posts' && !obj.feature_image)
@@ -70,7 +71,7 @@ const processBatch = async ({
         obj.image_dimensions = { ...obj.image_dimensions };
         obj.image_dimensions.feature_image = await getImageDimensions(
           obj.feature_image,
-          obj.title
+          `Ghost ${singularContentType} feature image: ${obj.title}`
         );
       }
 
@@ -82,8 +83,7 @@ const processBatch = async ({
         obj.primary_author.image_dimensions.profile_image =
           await getImageDimensions(
             obj.primary_author.profile_image,
-            obj.primary_author.name,
-            true
+            `Ghost author profile image: ${obj.primary_author.name}`
           );
       }
 
@@ -94,8 +94,7 @@ const processBatch = async ({
         obj.primary_author.image_dimensions.cover_image =
           await getImageDimensions(
             obj.primary_author.cover_image,
-            obj.primary_author.name,
-            true
+            `Ghost author cover image: ${obj.primary_author.name}`
           );
       }
 
@@ -106,8 +105,7 @@ const processBatch = async ({
             tag.image_dimensions = { ...tag.image_dimensions };
             tag.image_dimensions.feature_image = await getImageDimensions(
               tag.feature_image,
-              tag.name,
-              true
+              `Ghost tag feature image: ${tag.name}`
             );
           }
         })

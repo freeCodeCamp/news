@@ -41,8 +41,14 @@ module.exports = async () => {
   site.icon = iconUrl;
 
   // Determine image dimensions before server runs for structured data
-  const logoDimensions = await getImageDimensions(logoUrl);
-  const coverImageDimensions = await getImageDimensions(coverImageUrl);
+  const logoDimensions = await getImageDimensions(
+    logoUrl,
+    `Site logo: ${logoUrl}`
+  );
+  const coverImageDimensions = await getImageDimensions(
+    coverImageUrl,
+    `Site cover image: ${coverImageUrl}`
+  );
 
   site.image_dimensions = {
     logo: {
