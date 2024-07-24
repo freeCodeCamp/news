@@ -24,7 +24,8 @@ const processBatch = async ({
     newObj.title = oldObj.title;
     // Set the source of the publication and whether it's a page or post for tracking and later processing
     newObj.source = 'Hashnode';
-    newObj.contentType = contentType === 'posts' ? 'post' : 'page';
+    const singularContentType = contentType.slice(0, -1);
+    newObj.contentType = singularContentType;
 
     newObj.html = await modifyHTMLContent({
       postContent: oldObj.content.html,
@@ -32,51 +33,11 @@ const processBatch = async ({
       source: newObj.source
     });
 
-    // Set a default feature image for posts if one doesn't exist
-    // Note: We're not handling pages from Hashnode, so there's no
-    // need to handle cases where we may not want to have a cover image
-    // for a particular page.
-    newPost.feature_image = oldPost?.coverImage?.url
-      ? oldPost.coverImage.url
-      : 'https://cdn.freecodecamp.org/platform/universal/fcc_meta_1920X1080-indigo.png';
-
-    newPost.image_dimensions = {};
-    newPost.image_dimensions.feature_image = await getImageDimensions(
-      newPost.feature_image,
-      `Hashnode post feature image: ${newPost.title}`
-    );
-
-    const newPostAuthor = {};
-    newPostAuthor.id = oldPost.author.id;
-    newPostAuthor.name = oldPost.author.name;
-    newPostAuthor.slug = oldPost.author.username;
-    newPostAuthor.bio = oldPost.author.bio.text;
-    newPostAuthor.location = oldPost.author.location;
-    newPostAuthor.website = oldPost.author.socialMediaLinks.website;
-    // Note: Mutate Twitter and Facebook links so they're just the username like
-    // on Ghost for now.
-    // TODO: Simplify social media links and how they're used throughout the build
-    // in the future.
-    newPostAuthor.twitter = oldPost.author.socialMediaLinks.twitter
-      ? oldPost.author.socialMediaLinks.twitter.replace(
-          'https://twitter.com/',
-          '@'
-        )
-      : null;
-    newPostAuthor.facebook = oldPost.author.socialMediaLinks.facebook
-      ? oldPost.author.socialMediaLinks.facebook.replace(
-          'https://www.facebook.com/',
-          ''
-        )
-      : null;
-    newPostAuthor.path = `/author/${oldPost.author.username}/`;
-    if (oldPost.author.profilePicture) {
-      newPostAuthor.profile_image = oldPost.author.profilePicture;
-      newPostAuthor.image_dimensions = {};
-      newPostAuthor.image_dimensions.profile_image = await getImageDimensions(
-        newPostAuthor.profile_image,
-        `Hashnode author profile image: ${newPostAuthor.name}`
-      );
+    // Hashnode pages don't have a brief that we can cast as an excerpt or original_excerpt,
+    // so we strip the HTML tags from the body text to generate a brief for SEO and structured data.
+    if (!Object.hasOwn(oldObj, 'brief')) {
+      const sanitizedBodyText = stripHTMLTags(newObj.html);
+      oldObj.brief = shortenExcerpt(sanitizedBodyText);
     }
 
     // Note: Longer posts include an ellipsis. We can decide how to
@@ -96,7 +57,7 @@ const processBatch = async ({
       newObj.image_dimensions = {};
       newObj.image_dimensions.feature_image = await getImageDimensions(
         newObj.feature_image,
-        newObj.title
+        `Hashnode ${singularContentType} feature image: ${newObj.title}`
       );
 
       const newObjAuthor = {};
@@ -128,8 +89,7 @@ const processBatch = async ({
         newObjAuthor.image_dimensions = {};
         newObjAuthor.image_dimensions.profile_image = await getImageDimensions(
           newObjAuthor.profile_image,
-          newObjAuthor.name,
-          true
+          `Hashnode author profile image: ${newObjAuthor.name}`
         );
       }
       newObj.primary_author = newObjAuthor;

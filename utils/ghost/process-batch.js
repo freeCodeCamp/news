@@ -58,7 +58,8 @@ const processBatch = async ({
 
       // Set the source of the publication and whether it's a page or post for tracking and later processing
       obj.source = 'Ghost';
-      obj.contentType = contentType === 'posts' ? 'post' : 'page';
+      const singularContentType = contentType.slice(0, -1);
+      obj.contentType = singularContentType;
 
       // Set a default feature image for posts if one doesn't exist
       if (contentType === 'posts' && !obj.feature_image)
@@ -70,7 +71,7 @@ const processBatch = async ({
         obj.image_dimensions = { ...obj.image_dimensions };
         obj.image_dimensions.feature_image = await getImageDimensions(
           obj.feature_image,
-          `Ghost post feature image: ${obj.title}`
+          `Ghost ${singularContentType} feature image: ${obj.title}`
         );
       }
 
