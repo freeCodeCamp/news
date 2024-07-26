@@ -2,7 +2,8 @@
   "buttons": {
     "forum": "Forum",
     "donate": "Donate",
-    "load-more-articles": "Load More Articles"
+    "load-more-articles": "Load More Articles",
+    "toggle-dark-mode": "Toggle Dark Mode"
   },
   "search": {
     "label": "Search",

@@ -34,7 +34,7 @@ on every page through _includes/layouts/default.njk
 /* ---------------------------------------------------------- */
 
 body {
-  background: #fff;
+  background: var(--primary-background);
 }
 
 .img {
@@ -180,7 +180,7 @@ body {
   font-family: Lato, sans-serif;
   font-display: swap;
   height: var(--header-height);
-  background: var(--theme-color);
+  background: var(--gray90);
   position: fixed;
   z-index: 1000;
   color: #fff;
@@ -263,7 +263,7 @@ a.nav-forum,
 a.nav-forum:hover,
 .nav li a:hover {
   background: white;
-  color: var(--theme-color);
+  color: var(--gray90);
   text-decoration: none;
 }
 
@@ -302,7 +302,7 @@ a.nav-forum {
   background-color: #feac32;
   background-image: linear-gradient(#fecc4c, #ffac33);
   border: 3px solid #feac32;
-  color: var(--theme-color);
+  color: var(--gray90);
 }
 
 .toggle-button-nav:hover,
@@ -312,7 +312,7 @@ a.nav-forum {
   border-width: 3px;
   border-color: #f1a02a;
   background-image: none;
-  color: var(--theme-color);
+  color: var(--gray90);
   text-decoration: none;
 }
 
@@ -378,7 +378,7 @@ a.nav-forum {
 .rss-button svg {
   margin-bottom: 1px;
   height: 2.1rem;
-  fill: #fff;
+  fill: var(--primary-background);
 }
 
 @media (max-width: 999px) {
@@ -442,7 +442,7 @@ a.nav-forum {
   overflow: hidden;
   margin: 0 20px 50px;
   min-height: 100px;
-  background: #fff center center;
+  background: var(--primary-background) center center;
   background-size: cover;
 }
 
@@ -474,7 +474,7 @@ a.nav-forum {
 
 .post-card-tags a {
   margin-bottom: 1.3rem;
-  color: var(--gray75);
+  color: var(--quaternary-color);
   font-size: 1.5rem;
   line-height: 1.15em;
   font-weight: 500;
@@ -583,7 +583,7 @@ a.nav-forum {
   margin: 0 -5px;
   width: 34px;
   height: 34px;
-  border: #fff 2px solid;
+  border: var(--primary-background) 2px solid;
 }
 
 .moving-avatar {
@@ -592,7 +592,7 @@ a.nav-forum {
   margin: 0 -6px;
   width: 56px;
   height: 56px;
-  border: #fff 2px solid;
+  border: var(--primary-background) 2px solid;
   transition: all 0.5s cubic-bezier(0.4, 0.01, 0.165, 0.99) 0.7s;
 }
 
@@ -614,7 +614,7 @@ a.nav-forum {
 .reading-time {
   flex-shrink: 0;
   margin-left: 20px;
-  color: var(--gray75);
+  color: var(--quaternary-color);
   font-size: 1.2rem;
   line-height: 20px;
   font-weight: 500;
@@ -625,7 +625,7 @@ a.nav-forum {
 
 .meta-item-single {
   flex-shrink: 0;
-  color: var(--gray75);
+  color: var(--quaternary-color);
   font-size: 1.2rem;
   line-height: 33px;
   font-weight: 500;
@@ -722,7 +722,7 @@ make sure this only happens on large viewports / desktop-ish devices.
 .post-template.site-main,
 .page-template.site-main {
   padding-bottom: 4vw;
-  background: #fff;
+  background: var(--primary-background);
 }
 
 .post-full {
@@ -803,7 +803,7 @@ make sure this only happens on large viewports / desktop-ish devices.
   font-display: swap;
   font-size: 2.2rem;
   line-height: 1.6em;
-  background: #fff;
+  background: var(--primary-background);
 }
 
 /* Japanese font */
@@ -1954,8 +1954,8 @@ p:has(mjx-container.MathJax) {
 /* ---------------------------------------------------------- */
 
 .site-footer {
-  color: var(--gray85);
-  background: var(--gray05);
+  color: var(--secondary-color);
+  background: var(--secondary-background);
   line-height: 1.6;
   padding: 40px 15px;
   font-size: 16px;
@@ -1985,7 +1985,7 @@ p:has(mjx-container.MathJax) {
 }
 
 .site-footer a {
-  color: var(--gray85);
+  color: var(--secondary-color);
   text-decoration: none;
   padding: 2px;
 }
@@ -2271,7 +2271,7 @@ a.cta-button {
 a.banner {
   position: fixed;
   top: var(--header-height);
-  background-color: var(--blue-dark);
+  background-color: var(--dark-blue);
   align-items: center;
   justify-content: center;
   font-size: 14px;

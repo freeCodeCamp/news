@@ -4,7 +4,6 @@
 :root {
   /* Colours */
   --dark-blue: #002ead;
-  --theme-color: #0a0a23;
   --gray90: #0a0a23;
   --gray85: #1b1b32;
   --gray80: #2a2a40;
@@ -15,8 +14,31 @@
   --gray05: #eeeef0;
   --gray00: #fff;
   --header-height: 38px;
-  --blue-dark: #002ead;
 }
+
+body {
+    --primary-color: var(--gray90);
+    --secondary-color: var(--gray85);
+    --tertiary-color: var(--gray80);
+    --quaternary-color: var(--gray75);
+    --quaternary-background: var(--gray15);
+    --tertiary-background: var(--gray10);
+    --secondary-background: var(--gray05);
+    --primary-background: var(--gray00);
+}
+
+body.dark-mode
+{
+    --primary-color: var(--gray00);
+    --secondary-color: var(--gray05);
+    --tertiary-color: var(--gray10);
+    --quaternary-color: var(--gray15);
+    --quaternary-background: var(--gray75);
+    --tertiary-background: var(--gray80);
+    --secondary-background: var(--gray85);
+    --primary-background: var(--gray90);
+}
+
 
 /* Fonts
 /*------------------------------------------------------------*/
@@ -295,7 +317,7 @@ body {
   font-style: normal;
   letter-spacing: 0;
   text-rendering: optimizeLegibility;
-  background: #fff;
+  background: var(--primary-background);
 
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
