@@ -56,9 +56,12 @@ const originalPostHandler = async str => {
       if (cachedOriginalAuthor) {
         originalAuthorObj = cachedOriginalAuthor;
       } else {
+        // Fetch the original author's page and get the author's bio
+        // and fall back to freeCodeCamp.org if author info isn't found
+        // because it should be an unclaimed migrated post
         const originalAuthorImageSrc =
           document.querySelector('.author-card img')?.src ||
-          'https://www.freecodecamp.org/news/content/images/2021/05/freecodecamp-org-gravatar.jpeg'; // To do: Add this gravatar to the CDN and update this URL
+          'https://cdn.freecodecamp.org/platform/universal/freecodecamp-org-gravatar.jpeg';
         const originalAuthorName =
           document
             .querySelector('.author-card .author-card-name')
