@@ -1,10 +1,10 @@
 const { gql, request } = require('graphql-request');
-const { sourceHashnodeHost } = require('../ghost/api');
+const { hashnodeHost } = require('../api');
 const { eleventyEnv, currentLocale_i18n } = require('../../config');
 const wait = require('../wait');
 
 const fetchFromHashnode = async contentType => {
-  if (!sourceHashnodeHost) return [];
+  if (!hashnodeHost) return [];
   const fieldName = contentType === 'posts' ? 'posts' : 'staticPages';
 
   const postFieldsFragment = gql`
@@ -90,7 +90,7 @@ const fetchFromHashnode = async contentType => {
       eleventyEnv === 'ci' && currentLocale_i18n === 'english'
         ? require(`../../cypress/fixtures/mock-hashnode-${contentType}.json`)
         : await request(process.env.HASHNODE_API_URL, query, {
-            host: sourceHashnodeHost,
+            host: hashnodeHost,
             first: 20,
             after
           });

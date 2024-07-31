@@ -1,4 +1,4 @@
-const { sourceAPI } = require('../../utils/ghost/api');
+const { ghostAPI } = require('../../utils/api');
 const getImageDimensions = require('../../utils/get-image-dimensions');
 const {
   convertToLocalizedString,
@@ -16,7 +16,10 @@ const twitterProfile =
   twitterURL !== 'twitter' ? getTwitterProfile(twitterURL) : '@freecodecamp';
 
 module.exports = async () => {
-  const site = await sourceAPI.settings
+  // To do: Combine sensible defaults for all locales here and make sure any
+  // meta descriptions, tags, and so on have been moved to the i18n files and
+  // are being used in the templates
+  const site = await ghostAPI.settings
     .browse({
       include: 'url'
     })
