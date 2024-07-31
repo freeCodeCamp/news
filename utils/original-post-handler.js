@@ -8,7 +8,7 @@ const translate = require('./translate');
 
 const originalPostHandler = async str => {
   const originalPostRegex =
-    /const\s+fCCOriginalPost\s+=\s+("|')(?<url>.*)\1;?/gi;
+    /(const\s+)?fCCOriginalPost\s+=\s+("|')(?<url>.*)\2;?/gi;
   const match = originalPostRegex.exec(str);
 
   if (match) {
