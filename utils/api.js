@@ -8,7 +8,7 @@ const version = process.env[`${upperLocale}_GHOST_API_VERSION`];
 
 const ghostAPI = new GhostContentAPI({ url, key, version });
 
-const hashnodeHost = process.env.ENGLISH_HASHNODE_HOST;
+const hashnodeHost = process.env[`${upperLocale}_HASHNODE_HOST`];
 
 module.exports = {
   ghostAPI,
