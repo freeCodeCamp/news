@@ -40,6 +40,9 @@ const fetchFromHashnode = async contentType => {
       content {
         html
       }
+      seo {
+        description
+      }
       publishedAt
       updatedAt
     }

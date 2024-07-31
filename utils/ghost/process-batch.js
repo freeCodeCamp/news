@@ -1,4 +1,4 @@
-const originalPostHandler = require('./original-post-handler');
+const originalPostHandler = require('../original-post-handler');
 const modifyHTMLContent = require('../modify-html-content');
 const getImageDimensions = require('../../utils/get-image-dimensions');
 const errorLogger = require('../../utils/error-logger');
@@ -137,8 +137,16 @@ const processBatch = async ({
       obj.published_at = new Date(obj.published_at);
 
       // Original author / translator feature
-      if (obj.codeinjection_head || obj.codeinjection_foot)
-        obj = await originalPostHandler(obj);
+      if (obj.codeinjection_head || obj.codeinjection_foot) {
+        const originalPostData = await originalPostHandler(
+          [obj.codeinjection_head, obj.codeinjection_foot]
+            .filter(Boolean)
+            .join()
+        );
+
+        obj.original_post = originalPostData;
+        obj.html = originalPostData?.introHTML + obj.html;
+      }
 
       // Stash original excerpt and escape for structured data.
       // Shorten the default excerpt and replace newlines -- the
