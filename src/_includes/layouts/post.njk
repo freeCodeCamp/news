@@ -32,7 +32,7 @@ time #}
                 </header>
                 <div class="post-full-author-header" data-test-label="author-header-no-bio">
                     {% if post.primary_author.name != "freeCodeCamp.org" %}
-                        {% if post.original_post %}
+                        {% if post.original_post.primary_author %}
                             {{ byline(post.primary_author, false, false, 'translator') }}
                             {{ byline(post.original_post.primary_author, false, false, 'author', post.original_post.locale_i18n) }}
                         {% else %}
