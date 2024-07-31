@@ -14,11 +14,6 @@ const selectors = {
 };
 
 describe('Original author / translator feature', () => {
-  before(() => {
-    // Update baseUrl to include current language
-    Cypress.config('baseUrl', 'http://localhost:8080/news/');
-  });
-
   beforeEach(() => {
     cy.visit(
       '/denny-perez-from-accountant-to-coder-creating-communities-and-inspiring-women-s2-ep-13/'
