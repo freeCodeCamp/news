@@ -94,7 +94,7 @@ const originalPostHandler = async str => {
         url: originalPostURLObj.href,
         published_at: originalPostDate,
         title: originalPostTitle,
-        primary_author: originalAuthorObj,
+        primary_author: originalAuthorObj ?? {},
         locale_i18n: originalPostLocale
       };
 
