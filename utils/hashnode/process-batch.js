@@ -131,7 +131,6 @@ const processBatch = async ({
     })
   );
 
-  console.log(batch);
   return batch;
 };
 
