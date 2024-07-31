@@ -1,3 +1,9 @@
+#
+#
+# WARNING: This workflow is NOT in use, see the Azure pipelines instead.
+#
+#
+
 name: Eng - Build and Deploy
 
 on:
@@ -109,21 +115,21 @@ jobs:
           --build-arg BUILD_LANGUAGE=${{ matrix.languages }} \
           --file docker/Dockerfile
 
-      - name: Install doctl
-        uses: digitalocean/action-doctl@v2
-        with:
-          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+      # - name: Install doctl
+      #   uses: digitalocean/action-doctl@v2
+      #   with:
+      #     token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
 
-      - name: Log in to DigitalOcean Container Registry with short-lived credentials
-        run: doctl registry login --expiry-seconds 1200
+      # - name: Log in to DigitalOcean Container Registry with short-lived credentials
+      #   run: doctl registry login --expiry-seconds 1200
 
-      - name: Push image to DigitalOcean Container Registry
-        run: |
-          docker push registry.digitalocean.com/${{ secrets.DOCR_NAME }}/${{ matrix.site_tlds }}/news-${{ matrix.languages }}:$tagname
-          docker push registry.digitalocean.com/${{ secrets.DOCR_NAME }}/${{ matrix.site_tlds }}/news-${{ matrix.languages }}:latest
+      # - name: Push image to DigitalOcean Container Registry
+      #   run: |
+      #     docker push registry.digitalocean.com/${{ secrets.DOCR_NAME }}/${{ matrix.site_tlds }}/news-${{ matrix.languages }}:$tagname
+      #     docker push registry.digitalocean.com/${{ secrets.DOCR_NAME }}/${{ matrix.site_tlds }}/news-${{ matrix.languages }}:latest
 
-      - name: Clean up Self-hosted setup
-        uses: colpal/actions-clean@36e6ca1abd35efe61cb60f912bd7837f67887c8a # tag=v1
-        if: ${{ always() }} # To ensure this step runs even when earlier steps fail
+      # - name: Clean up Self-hosted setup
+      #   uses: colpal/actions-clean@36e6ca1abd35efe61cb60f912bd7837f67887c8a # tag=v1
+      #   if: ${{ always() }} # To ensure this step runs even when earlier steps fail
 
-# Deployments are automated via https://github.com/freeCodeCamp/news-config
+# Deployments are automated via https://github.com/freeCodeCamp/news-docker-swarm-config
