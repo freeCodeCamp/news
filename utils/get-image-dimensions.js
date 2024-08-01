@@ -1,8 +1,6 @@
 const probe = require('probe-image-size');
 const errorLogger = require('./error-logger');
 const { getCache, setCache } = require('./cache');
-// // Cache image dimensions we know will be repeated, like author profile and cover images
-// const imageDimensionMap = {};
 const defaultDimensions = { width: 600, height: 400 };
 
 const getImageDimensions = async (url, description) => {

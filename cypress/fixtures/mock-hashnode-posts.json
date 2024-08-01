@@ -4,6 +4,45 @@
       "edges": [
         {
           "node": {
+            "id": "667a667c600acffa96ab6704",
+            "slug": "denny-perez-from-accountant-to-coder-creating-communities-and-inspiring-women-s2-ep-13",
+            "title": "Denny Perez: From Accountant to Coder, Creating Communities and Inspiring Women | S2 Ep. 13",
+            "author": {
+              "id": "5e135008490269cb3022acbf",
+              "username": "scissorsneedfoodtoo",
+              "name": "Kristofer Koishigawa",
+              "bio": {
+                "text": ""
+              },
+              "profilePicture": "https://cdn.hashnode.com/res/hashnode/image/upload/v1710857138258/qSuNPwWGp.jpeg",
+              "socialMediaLinks": {
+                "website": "https://kriskoishigawa.com",
+                "twitter": "https://twitter.com/kriskoishigawa",
+                "facebook": ""
+              },
+              "location": ""
+            },
+            "tags": [
+              {
+                "id": "56744723958ef13879b9549b",
+                "name": "Testing",
+                "slug": "testing"
+              }
+            ],
+            "coverImage": null,
+            "readTimeInMinutes": 1,
+            "content": {
+              "html": "<p>In this episode, Denny Pérez shares his experience in organizing programming communities and events. He describes his role as a software quality analyst at Nventive and his initiative to create a programming group for girls in Montreal, recruiting those interested in learning the Spanish language...</p>\n"
+            },
+            "seo": {
+              "description": "const = fCCOriginalPost = \"https://www.freecodecamp.org/espanol/news/denny-perez-de-contadora-a-coder-creando-comunidades-e-inspirando-mujeres-s2-ep-13/\";"
+            },
+            "publishedAt": "2024-07-31T06:56:31.474Z",
+            "updatedAt": "2024-07-31T06:53:31.474Z"
+          }
+        },
+        {
+          "node": {
             "id": "662bc86c57b91227386cc399",
             "slug": "top-contributors-2023",
             "title": "Top Contributors 2023 (Duplicate slug of a pre-existing Ghost page)",

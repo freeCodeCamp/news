@@ -1,10 +1,13 @@
-const originalPostHandler = require('./original-post-handler');
+const originalPostHandler = require('../original-post-handler');
 const modifyHTMLContent = require('../modify-html-content');
 const getImageDimensions = require('../../utils/get-image-dimensions');
 const errorLogger = require('../../utils/error-logger');
 const { siteURL } = require('../../config');
-const stripDomain = require('../../utils/strip-domain');
 const shortenExcerpt = require('../../utils/shorten-excerpt');
+const { ghostAPIURL } = require('../../utils/api');
+
+// Strip current Ghost domain from URLs
+const stripGhostDomain = url => url.replace(ghostAPIURL, '');
 
 const removeUnusedKeys = obj => {
   const keysToRemove = [
@@ -113,8 +116,8 @@ const processBatch = async ({
 
       // General cleanup and prep -- attach path to post / page
       // objects, convert dates, and fix pages that should exist
-      obj.path = stripDomain(obj.url);
-      obj.primary_author.path = stripDomain(obj.primary_author.url);
+      obj.path = stripGhostDomain(obj.url);
+      obj.primary_author.path = stripGhostDomain(obj.primary_author.url);
       obj.tags.forEach(tag => {
         // Log and fix tag pages that point to 404 due to a Ghost error
         if (tag.url.endsWith('/404/') && tag.visibility === 'public') {
@@ -122,7 +125,7 @@ const processBatch = async ({
           tag.url = `${siteURL}/tag/${tag.slug}/`;
         }
 
-        tag.path = stripDomain(tag.url);
+        tag.path = stripGhostDomain(tag.url);
       });
 
       // Log and fix author pages that point to 404 due to a Ghost error
@@ -131,14 +134,22 @@ const processBatch = async ({
         obj.primary_author.url = `${siteURL}/author/${obj.primary_author.slug}/`;
       }
 
-      obj.primary_author.path = stripDomain(obj.primary_author.url);
+      obj.primary_author.path = stripGhostDomain(obj.primary_author.url);
 
       // Convert publish date into a Date object
       obj.published_at = new Date(obj.published_at);
 
       // Original author / translator feature
-      if (obj.codeinjection_head || obj.codeinjection_foot)
-        obj = await originalPostHandler(obj);
+      if (obj.codeinjection_head || obj.codeinjection_foot) {
+        const originalPostData = await originalPostHandler(
+          [obj.codeinjection_head, obj.codeinjection_foot]
+            .filter(Boolean)
+            .join()
+        );
+
+        obj.original_post = originalPostData;
+        obj.html = originalPostData?.introHTML + obj.html;
+      }
 
       // Stash original excerpt and escape for structured data.
       // Shorten the default excerpt and replace newlines -- the

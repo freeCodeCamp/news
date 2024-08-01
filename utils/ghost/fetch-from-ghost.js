@@ -1,4 +1,4 @@
-const { sourceAPI } = require('./api');
+const { ghostAPI } = require('../api');
 const wait = require('../wait');
 
 const fetchFromGhost = async endpoint => {
@@ -12,7 +12,7 @@ const fetchFromGhost = async endpoint => {
   };
 
   while (currPage && currPage <= lastPage) {
-    const ghostRes = await sourceAPI[endpoint]
+    const ghostRes = await ghostAPI[endpoint]
       .browse({
         ...options,
         page: currPage
