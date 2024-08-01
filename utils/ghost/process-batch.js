@@ -144,11 +144,14 @@ const processBatch = async ({
         const originalPostData = await originalPostHandler(
           [obj.codeinjection_head, obj.codeinjection_foot]
             .filter(Boolean)
-            .join()
+            .join(),
+          obj.title
         );
 
-        obj.original_post = originalPostData;
-        obj.html = originalPostData?.introHTML + obj.html;
+        if (originalPostData) {
+          obj.original_post = originalPostData;
+          obj.html = originalPostData.introHTML + obj.html;
+        }
       }
 
       // Stash original excerpt and escape for structured data.
