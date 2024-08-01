@@ -16,7 +16,7 @@ const twitterProfile =
   twitterURL !== 'twitter' ? getTwitterProfile(twitterURL) : '@freecodecamp';
 
 module.exports = async () => {
-  // To do: Combine sensible defaults for all locales here and make sure any
+  // TODO: Combine sensible defaults for all locales here and make sure any
   // meta descriptions, tags, and so on have been moved to the i18n files and
   // are being used in the templates
   const site = await ghostAPI.settings
