@@ -1,24 +1,18 @@
-#
-#
-# WARNING: This workflow is NOT in use, see the Azure pipelines instead.
-#
-#
-
 name: Eng - Build and Deploy
 
 on:
   workflow_dispatch:
-  # schedule:
-  # Here are the times for the cron:
-  #
-  # Sun, Mon, Tue, Thu, Fri : at 00:00, 03:00, 06:00, 09:00, 12:00, 15:00, 18:00 UTC
-  # Wed, Sat                : at --:--, --:--, 06:00, 09:00, 12:00, 15:00, 18:00 UTC
-  #
-  # There is a 6 hour maintenance window on Wednesdays and Saturdays,
-  # and the crons are scheduled at 5 mins past the hour.
-  #
-  # - cron: '5 0,3,6,9,12,15,18 * * 0-2,4-5'
-  # - cron: '5 6,9,12,15,18 * * 3,6'
+  schedule:
+    # Here are the times for the cron:
+    #
+    # Sun, Mon, Tue, Thu, Fri : at 00:00, 03:00, 06:00, 09:00, 12:00, 15:00, 18:00, 21:00 UTC
+    # Wed, Sat                : at --:--, --:--, 06:00, 09:00, 12:00, 15:00, 18:00, 21:00 UTC
+    #
+    # There is a 6 hour maintenance window on Wednesdays and Saturdays,
+    # and the crons are scheduled at 5 mins past the hour.
+    #
+    - cron: '5 0,3,6,9,12,15,18,21 * * 0-2,4-5'
+    - cron: '5 6,9,12,15,18,21 * * 3,6'
 
 jobs:
   build:
@@ -115,18 +109,18 @@ jobs:
           --build-arg BUILD_LANGUAGE=${{ matrix.languages }} \
           --file docker/Dockerfile
 
-      # - name: Install doctl
-      #   uses: digitalocean/action-doctl@v2
-      #   with:
-      #     token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+      - name: Install doctl
+        uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
 
-      # - name: Log in to DigitalOcean Container Registry with short-lived credentials
-      #   run: doctl registry login --expiry-seconds 1200
+      - name: Log in to DigitalOcean Container Registry with short-lived credentials
+        run: doctl registry login --expiry-seconds 1200
 
-      # - name: Push image to DigitalOcean Container Registry
-      #   run: |
-      #     docker push registry.digitalocean.com/${{ secrets.DOCR_NAME }}/${{ matrix.site_tlds }}/news-${{ matrix.languages }}:$tagname
-      #     docker push registry.digitalocean.com/${{ secrets.DOCR_NAME }}/${{ matrix.site_tlds }}/news-${{ matrix.languages }}:latest
+      - name: Push image to DigitalOcean Container Registry
+        run: |
+          docker push registry.digitalocean.com/${{ secrets.DOCR_NAME }}/${{ matrix.site_tlds }}/news-${{ matrix.languages }}:$tagname
+          docker push registry.digitalocean.com/${{ secrets.DOCR_NAME }}/${{ matrix.site_tlds }}/news-${{ matrix.languages }}:latest
 
       # - name: Clean up Self-hosted setup
       #   uses: colpal/actions-clean@36e6ca1abd35efe61cb60f912bd7837f67887c8a # tag=v1
