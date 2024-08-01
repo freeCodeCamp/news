@@ -118,11 +118,15 @@ const processBatch = async ({
         // it doesn't have to included in the final returned object.
         if (obj?.seo?.description) {
           const originalPostData = await originalPostHandler(
-            obj.seo.description
+            obj.seo.description,
+            obj.title
           );
 
-          obj.original_post = originalPostData;
-          obj.html = originalPostData?.introHTML + obj.html;
+          if (originalPostData) {
+            obj.original_post = originalPostData;
+            obj.html = originalPostData.introHTML + obj.html;
+          }
+
           delete obj.seo;
         }
       }

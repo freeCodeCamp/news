@@ -6,19 +6,20 @@ const { getCache, setCache } = require('./cache');
 const getImageDimensions = require('./get-image-dimensions');
 const translate = require('./translate');
 
-const originalPostHandler = async str => {
+const originalPostHandler = async (originalPostFlag, translatedPostTitle) => {
+  let hrefValue;
+  let linkText;
+  let originalPostObj = {};
   const originalPostRegex =
     /(const\s+)?fCCOriginalPost\s+=\s+("|')(?<url>.*)\2;?/gi;
-  const match = originalPostRegex.exec(str);
+  const match = originalPostRegex.exec(originalPostFlag);
 
-  if (match) {
-    let originalPostObj = {};
-    const originalPostURLObj = new URL(match.groups.url);
-    // Set hrefValue and linkText to the original post URL by default
-    let hrefValue = originalPostURLObj.href;
-    let linkText = originalPostURLObj.href;
-
-    try {
+  try {
+    if (match) {
+      const originalPostURLObj = new URL(match.groups.url);
+      // Set hrefValue and linkText to the original post URL by default
+      hrefValue = originalPostURLObj.href;
+      linkText = originalPostURLObj.href;
       // Currently, postPathSegments is length 2 for English and Chinese
       // ( ['news', 'slug'] ), and length 3 for other locales
       // ( ['locale', 'news', 'slug'] )
@@ -40,7 +41,6 @@ const originalPostHandler = async str => {
       const originalPostTitle = document
         .querySelector('.post-full-title')
         .textContent.trim();
-
       // Get the original author's data
       let originalAuthorObj = {};
       const originalAuthorRelativePath =
@@ -50,7 +50,6 @@ const originalPostHandler = async str => {
         .split('/')
         .filter(Boolean)
         .pop();
-
       // Check if the original author data is cached
       const cachedOriginalAuthor = getCache(originalAuthorSlug);
       if (cachedOriginalAuthor) {
@@ -76,7 +75,6 @@ const originalPostHandler = async str => {
           originalAuthorPageDocument
             .querySelector('.author-bio')
             ?.textContent.trim() || null;
-
         originalAuthorObj = {
           name: originalAuthorName,
           profile_image: originalAuthorImageSrc,
@@ -88,7 +86,6 @@ const originalPostHandler = async str => {
             }
           }
         };
-
         // Cache the original author data
         setCache(originalAuthorSlug, originalAuthorObj);
       }
@@ -103,18 +100,22 @@ const originalPostHandler = async str => {
 
       // Use the title of the original post as link text
       linkText = originalPostTitle;
-    } catch (err) {
-      console.warn(`
+    }
+  } catch (err) {
+    console.warn(`
       ---------------------------------------------------------------
       Warning: Unable to fetch the post at
-      ${match.groups.url}
+      "${match.groups.url}" in the post titled
+      "${translatedPostTitle}".
       ---------------------------------------------------------------
       Please ensure that the Ghost instance is live and that the
       post has not been deleted.
       ---------------------------------------------------------------
       `);
-    }
+  }
 
+  // Intro HTML for the original post if there were no errors
+  if (hrefValue) {
     const originalArticleDetailsMarkup = translate(
       'original-author-translator.details.original-article',
       {
