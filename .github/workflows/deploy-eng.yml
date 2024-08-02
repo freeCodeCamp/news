@@ -71,6 +71,9 @@ jobs:
       GOOGLE_ADSENSE_DATA_AD_CLIENT: ${{ secrets.GOOGLE_ADSENSE_DATA_AD_CLIENT }}
       GOOGLE_ADSENSE_DATA_AD_SLOT: ${{ secrets.GOOGLE_ADSENSE_DATA_AD_SLOT }}
 
+      HASHNODE_API_URL: ${{ secrets.HASHNODE_API_URL }}
+      ENGLISH_HASHNODE_HOST: ${{ secrets.ENGLISH_HASHNODE_HOST }}
+
       POSTS_PER_PAGE: ${{ secrets.POSTS_PER_PAGE }}
 
       SITE_DOMAIN: freecodecamp.${{ matrix.site_tlds }}
