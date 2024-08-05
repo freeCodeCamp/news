@@ -105,5 +105,8 @@
   },
   "lint-staged": {
     "**/*": "prettier --write --ignore-unknown"
+  },
+  "dependencies": {
+    "@fortawesome/free-solid-svg-icons": "^6.6.0"
   }
 }

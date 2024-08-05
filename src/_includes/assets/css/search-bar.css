@@ -205,7 +205,7 @@ a:active {
 
 /* Show default colors if disabled */
 .disabled:hover {
-  background: #eeeef0;
+  background: var(--secondary-background);
   color: #0a0a23;
 }
 

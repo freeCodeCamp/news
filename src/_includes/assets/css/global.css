@@ -4,7 +4,6 @@
 :root {
   /* Colours */
   --dark-blue: #002ead;
-  --theme-color: #0a0a23;
   --gray90: #0a0a23;
   --gray85: #1b1b32;
   --gray80: #2a2a40;
@@ -15,7 +14,28 @@
   --gray05: #eeeef0;
   --gray00: #fff;
   --header-height: 38px;
-  --blue-dark: #002ead;
+}
+
+body {
+  --primary-color: var(--gray90);
+  --secondary-color: var(--gray85);
+  --tertiary-color: var(--gray80);
+  --quaternary-color: var(--gray75);
+  --quaternary-background: var(--gray15);
+  --tertiary-background: var(--gray10);
+  --secondary-background: var(--gray05);
+  --primary-background: var(--gray00);
+}
+
+body.dark-mode {
+  --primary-color: var(--gray00);
+  --secondary-color: var(--gray05);
+  --tertiary-color: var(--gray10);
+  --quaternary-color: var(--gray15);
+  --quaternary-background: var(--gray75);
+  --tertiary-background: var(--gray80);
+  --secondary-background: var(--gray85);
+  --primary-background: var(--gray90);
 }
 
 /* Fonts
@@ -295,7 +315,7 @@ body {
   font-style: normal;
   letter-spacing: 0;
   text-rendering: optimizeLegibility;
-  background: #fff;
+  background: var(--primary-background);
 
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -493,4 +513,262 @@ h6 {
   margin: 1.5em 0 0.5em;
   font-size: 1.4rem;
   font-weight: 500;
+}
+
+/**
+ * Site header menu list
+ */
+.nav-list {
+  background-color: var(--gray90);
+  display: none;
+  justify-content: flex-end;
+  list-style: none;
+  padding: 0;
+  position: absolute;
+  right: 0;
+  width: 100%;
+}
+
+@media (min-width: 980px) {
+  .nav-list {
+    max-width: 15rem;
+  }
+}
+
+/**
+ * Site header language list
+ */
+.lang-button-nav[aria-expanded='true'] + .nav-list {
+  -ms-overflow-style: none;
+  display: block;
+  max-height: calc(100vh - var(--header-height));
+  overflow-y: auto;
+  scrollbar-width: none;
+  top: calc(var(--header-height));
+}
+
+.lang-button-nav[aria-expanded='true'] + .nav-list::-webkit-scrollbar {
+  display: none;
+}
+
+@media (min-width: 601px) {
+  [dir='rtl'] .nav-list {
+    right: auto;
+    left: 0;
+  }
+}
+
+/**
+ * Site header language list
+ */
+.lang-button-nav[aria-expanded='true'] + .nav-list {
+  -ms-overflow-style: none;
+  display: block;
+  max-height: calc(100vh - var(--header-height));
+  overflow-y: auto;
+  scrollbar-width: none;
+  top: calc(var(--header-height));
+}
+
+.lang-button-nav[aria-expanded='true'] + .nav-list::-webkit-scrollbar {
+  display: none;
+}
+
+/* WCAG fix */
+.sr-only {
+  color: white;
+  background-color: black;
+}
+
+/**
+ * Site header sub menu items
+ */
+.nav-link {
+  padding: 2px 15px 0;
+  display: flex;
+  align-items: center;
+  color: var(--gray00);
+  background-color: var(--gray90);
+  white-space: normal;
+  min-height: var(--header-sub-element-size);
+  width: 100%;
+  border: none;
+  height: 100%;
+}
+
+.nav-link:focus {
+  outline-offset: -3px;
+}
+
+.nav-link:focus:not(:focus-visible) {
+  background-color: inherit;
+  color: inherit;
+}
+
+.nav-link:not([aria-disabled='true']):hover,
+.nav-link:focus-visible {
+  color: var(--gray90);
+  background-color: var(--gray10);
+}
+
+.nav-link:not([aria-disabled='true']):hover {
+  text-decoration: none;
+  cursor: pointer;
+  outline-color: transparent !important;
+}
+
+button.nav-link[aria-disabled='true'] {
+  background-color: inherit;
+}
+
+li > button.nav-link-signout:not([aria-disabled='true']):is(:hover, :focus) {
+  background-color: var(--danger-background);
+  color: var(--danger-color);
+}
+
+.nav-link .fa-external-link-alt {
+  color: var(--gray45);
+}
+
+.nav-link-supporter {
+  color: var(--yellow-light);
+  background: var(--yellow-dark);
+}
+
+.nav-link-supporter:hover,
+.nav-link-supporter:active,
+.nav-link-supporter:focus,
+.nav-link-supporter:focus-visible {
+  color: var(--yellow-dark) !important;
+  background: var(--yellow-light) !important;
+}
+
+.nav-link-supporter svg {
+  height: auto;
+  width: 1em;
+}
+
+/**
+ * Check mark for current language
+ */
+.nav-lang-list-option[aria-current='true'] {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='32' height='32' preserveAspectRatio='xMidYMid meet' viewBox='0 0 16 16'%3E%3Cg fill='white'%3E%3Cpath d='M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06a.733.733 0 0 1 1.047 0l3.052 3.093l5.4-6.425a.247.247 0 0 1 .02-.022z'%3E%3C/path%3E%3C/g%3E%3C/svg%3E");
+  background-size: 1.2rem;
+  background-position: calc(100% - 10px) center;
+  background-repeat: no-repeat;
+}
+
+.nav-lang-list-option[aria-current='true']:hover,
+.nav-lang-list-option[aria-current='true']:focus-visible {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='32' height='32' preserveAspectRatio='xMidYMid meet' viewBox='0 0 16 16'%3E%3Cg fill='currentColor'%3E%3Cpath d='M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06a.733.733 0 0 1 1.047 0l3.052 3.093l5.4-6.425a.247.247 0 0 1 .02-.022z'%3E%3C/path%3E%3C/g%3E%3C/svg%3E") !important;
+}
+
+/**
+ * Site navigation first level CTA's
+ */
+.exposed-button-nav,
+.lang-button-nav {
+  align-items: center;
+  background-color: var(--gray90);
+  border: 1px solid var(--gray00);
+  color: var(--gray00);
+  display: flex;
+  font-size: 18px;
+  height: var(--header-element-size);
+  justify-content: center;
+  min-width: var(--header-element-size);
+  padding: 0 4px;
+}
+
+@media (min-width: 601px) {
+  .exposed-button-nav {
+    padding-inline: 12px;
+  }
+}
+
+.exposed-button-nav:hover,
+.exposed-button-nav:hover:focus {
+  border: 1px solid var(--gray00);
+}
+
+.exposed-button-nav:is(
+    :hover,
+    :hover:focus,
+    [aria-expanded='true'],
+    [aria-expanded='true']:hover
+  ),
+.lang-button-nav:is(
+    :hover,
+    :hover:focus,
+    [aria-expanded='true'],
+    [aria-expanded='false'].force-show
+  ) {
+  background-color: var(--gray00);
+  color: var(--gray90);
+}
+
+/**
+ * Text and icon handling for first level CTA's
+ *
+ * Login btn icon is used in other places different from the site navigation
+ * and is expected to not to be displayed. The default is to hide the element
+ * but on the site navigation display it only on small viewports.
+ */
+.login-btn-icon {
+  display: none;
+}
+
+#toggle-button-nav .menu-btn-text,
+#universal-nav .login-btn-text {
+  display: none;
+}
+
+@media (min-width: 601px) {
+  #toggle-button-nav .menu-btn-text,
+  #universal-nav .login-btn-text {
+    display: inline-block;
+  }
+}
+
+#toggle-button-nav .menu-btn-icon,
+#universal-nav .login-btn-icon {
+  display: inline-block;
+}
+
+@media (min-width: 601px) {
+  #toggle-button-nav .menu-btn-icon,
+  #universal-nav .login-btn-icon {
+    display: none;
+  }
+}
+
+/**
+ * Link items with icon or checkboxes
+ */
+.nav-link-flex {
+  display: flex;
+  justify-content: space-between;
+}
+
+.display-menu {
+  -ms-overflow-style: none;
+  display: block;
+  max-height: calc(
+    100vh - var(--header-height) - var(--header-sub-element-size)
+  );
+  overflow-y: auto;
+  scrollbar-width: none;
+  text-align: left;
+  top: calc(var(--header-height) + var(--header-sub-element-size));
+}
+
+@media (min-width: 980px) {
+  .display-menu {
+    max-height: calc(100vh - var(--header-height));
+    top: var(--header-height);
+  }
+}
+
+.display-menu::-webkit-scrollbar {
+  display: none;
 }
