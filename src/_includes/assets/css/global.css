@@ -16,28 +16,6 @@
   --header-height: 38px;
 }
 
-body {
-  --primary-color: var(--gray90);
-  --secondary-color: var(--gray85);
-  --tertiary-color: var(--gray80);
-  --quaternary-color: var(--gray75);
-  --quaternary-background: var(--gray15);
-  --tertiary-background: var(--gray10);
-  --secondary-background: var(--gray05);
-  --primary-background: var(--gray00);
-}
-
-body.dark-mode {
-  --primary-color: var(--gray00);
-  --secondary-color: var(--gray05);
-  --tertiary-color: var(--gray10);
-  --quaternary-color: var(--gray15);
-  --quaternary-background: var(--gray75);
-  --tertiary-background: var(--gray80);
-  --secondary-background: var(--gray85);
-  --primary-background: var(--gray90);
-}
-
 /* Fonts
 /*------------------------------------------------------------*/
 /*@import url("https://fonts.googleapis.com/css?family=Lato:400,400i,700|Roboto+Mono:400,700");*/
@@ -305,7 +283,17 @@ html {
 
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
+
 body {
+  --primary-color: var(--gray90);
+  --secondary-color: var(--gray85);
+  --tertiary-color: var(--gray80);
+  --quaternary-color: var(--gray75);
+  --quaternary-background: var(--gray15);
+  --tertiary-background: var(--gray10);
+  --secondary-background: var(--gray05);
+  --primary-background: var(--gray00);
+
   overflow-x: hidden;
   color: var(--gray90);
   font-family: 'Lato', sans-serif;
@@ -321,6 +309,17 @@ body {
   -moz-osx-font-smoothing: grayscale;
   -moz-font-feature-settings: 'liga' on;
   font-feature-settings: 'liga1' on;
+}
+
+body.dark-mode {
+  --primary-color: var(--gray00);
+  --secondary-color: var(--gray05);
+  --tertiary-color: var(--gray10);
+  --quaternary-color: var(--gray15);
+  --quaternary-background: var(--gray75);
+  --tertiary-background: var(--gray80);
+  --secondary-background: var(--gray85);
+  --primary-background: var(--gray90);
 }
 
 ::selection {
@@ -556,22 +555,6 @@ h6 {
     right: auto;
     left: 0;
   }
-}
-
-/**
- * Site header language list
- */
-.lang-button-nav[aria-expanded='true'] + .nav-list {
-  -ms-overflow-style: none;
-  display: block;
-  max-height: calc(100vh - var(--header-height));
-  overflow-y: auto;
-  scrollbar-width: none;
-  top: calc(var(--header-height));
-}
-
-.lang-button-nav[aria-expanded='true'] + .nav-list::-webkit-scrollbar {
-  display: none;
 }
 
 /* WCAG fix */

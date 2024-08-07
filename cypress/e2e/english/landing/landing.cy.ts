@@ -7,10 +7,15 @@ const selectors = {
   authorList: "[data-test-label='author-list']",
   authorListItem: "[data-test-label='author-list-item']",
   authorProfileImage: "[data-test-label='profile-image']",
+  darkModeButton: "[data-test-label='dark-mode-button']",
   avatar: "[data-test-label='avatar']",
   siteNavLogo: "[data-test-label='site-nav-logo']",
+  menuButton: "[data-test-label='header-menu-button']",
+  menu: "[data-test-label='header-menu']",
   postPublishedTime: "[data-test-label='post-published-time']"
 };
+
+// header-menu-button
 
 describe('Landing', () => {
   beforeEach(() => {
@@ -30,6 +35,29 @@ describe('Landing', () => {
       'href',
       commonExpectedMeta.siteUrl
     );
+  });
+
+  it('Clicking the menu button should open the menu', function () {
+    const menuButton = cy.get(selectors.menuButton);
+    const menu = cy.get(selectors.menu);
+    expect(menuButton).to.be.visible();
+    menuButton.click();
+    expect(menu).to.be.visible();
+  });
+
+  it('The menu should be able to change the theme', function () {
+    const menuButton = cy.get(selectors.menuButton);
+    const menu = cy.get(selectors.menu);
+    menuButton.click();
+    expect(menuButton).to.be.visible();
+    const themeButton = cy.get(selectors.darkModeButton);
+    themeButton.click();
+    cy.get('body').should('have.class', 'dark-mode');
+    expect(menu).to.be.hidden();
+    menuButton.click();
+    expect(menu).to.be.visible();
+    themeButton.click();
+    cy.get('body').should('not.have.class', 'dark-mode');
   });
 
   it("should show the author's profile image", () => {

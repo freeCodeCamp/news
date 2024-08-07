@@ -171,7 +171,7 @@ body {
 /* ---------------------------------------------------------- */
 
 .site-nav {
-  z-index: 300;
+  z-index: 1000;
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
@@ -182,7 +182,6 @@ body {
   height: var(--header-height);
   background: var(--gray90);
   position: fixed;
-  z-index: 1000;
   color: #fff;
   width: 100%;
 }
