@@ -20,6 +20,26 @@
     "destination": "/news/about"
   },
   {
+    "source": "/nameerror-name-plot_cases_simple-is-not-defined-how-to-fix-this-python-error",
+    "destination": "/news/nameerror-name-plot-cases-simple-is-not-defined-how-to-fix-this-python-error",
+    "type": 302
+  },
+  {
+    "source": "/dns_probe_finished_nxdomain-error-solved",
+    "destination": "/news/dns-probe-finished-nxdomain-error-solved",
+    "type": 302
+  },
+  {
+    "source": "/row_number-in-sql-select-top-example-in-sql-and-sql-server2",
+    "destination": "/news/row-number-in-sql-select-top-example-in-sql-and-sql-server",
+    "type": 302
+  },
+  {
+    "source": "/how-to-use-join-and-string_agg-in-microsoft-sql-server",
+    "destination": "/news/how-to-use-join-and-string-agg-in-microsoft-sql-server",
+    "type": 302
+  },
+  {
     "source": "/html-css-handbook-for-beginners",
     "destination": "/news/the-html-handbook",
     "type": 302
