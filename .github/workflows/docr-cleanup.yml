@@ -21,7 +21,7 @@ jobs:
           - portuguese
           - ukrainian
         variants:
-          - dev
+          # - dev
           - org
         # Exclude the following combinations
         exclude:
