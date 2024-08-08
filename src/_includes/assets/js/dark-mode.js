@@ -29,4 +29,11 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('fcc-dark-mode', 'disabled');
       }
     });
+
+  document
+    .getElementById('toggle-dark-mode')
+    .addEventListener('blur', function () {
+      document.getElementById('nav-list')?.classList.remove('display-menu');
+      document.getElementById('nav-list').ariaExpanded = 'false';
+    });
 });
