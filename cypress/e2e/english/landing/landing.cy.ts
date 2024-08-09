@@ -38,40 +38,22 @@ describe('Landing', () => {
   });
 
   it('Clicking the menu button should open the menu', function () {
-    cy.get(selectors.menuButton)
-      .should('be.visible')
-      .click()
-      .then(() => {
-        cy.get(selectors.menu).should('be.visible');
-      });
+    cy.get(selectors.menuButton).should('be.visible').click();
+    cy.get(selectors.menu).should('be.visible');
   });
 
   it('The menu should be able to change the theme', function () {
-    cy.get(selectors.menuButton)
-      .click()
-      .then(() => {
-        cy.get(selectors.menu).should('be.visible');
-        cy.get(selectors.darkModeButton)
-          .click()
-          .then(() => {
-            cy.get('body').should('have.class', 'dark-mode');
-            cy.get(selectors.siteNavLogo)
-              .click()
-              .then(() => {
-                cy.get(selectors.menu).should('not.be.visible');
-                cy.get(selectors.menuButton)
-                  .click()
-                  .then(() => {
-                    cy.get(selectors.menu).should('be.visible');
-                    cy.get(selectors.darkModeButton)
-                      .click()
-                      .then(() => {
-                        cy.get('body').should('not.have.class', 'dark-mode');
-                      });
-                  });
-              });
-          });
-      });
+    cy.get(selectors.menuButton).click();
+    cy.get(selectors.menu).should('be.visible');
+    cy.get(selectors.darkModeButton).click();
+
+    cy.get('body').should('have.class', 'dark-mode');
+    cy.get(selectors.siteNavLogo).click();
+    cy.get(selectors.menu).should('not.be.visible');
+    cy.get(selectors.menuButton).click();
+    cy.get(selectors.menu).should('be.visible');
+    cy.get(selectors.darkModeButton).click();
+    cy.get('body').should('not.have.class', 'dark-mode');
   });
 
   it("should show the author's profile image", () => {
