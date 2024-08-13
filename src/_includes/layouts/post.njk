@@ -59,7 +59,7 @@ time #}
                         </section>
                         {% if adsEnabled %}
                             <div class="sidebar">
-                                {% if canonicalUrl == "https://www.freecodecamp.org/news/are-you-being-micro-managed-manage-your-relationship-with-your-manager-instead-9ad10b28bcda/" %}
+                                {% if canonicalUrl | shouldCanonicalHaveGAM %}
                                     {% for i in range(0, numOfSidebarAds) %}
                                         {% include "partials/gam-ad-sidebar.njk" %}
                                       {% endfor %}
@@ -94,7 +94,7 @@ time #}
                 </section>
                 {% if adsEnabled %}
                     <div class="banner-ad bottom">
-                        {% if canonicalUrl == "https://www.freecodecamp.org/news/are-you-being-micro-managed-manage-your-relationship-with-your-manager-instead-9ad10b28bcda/" %}
+                        {% if canonicalUrl | shouldCanonicalHaveGAM %}
                             {% include "partials/gam-ad-bottom.njk" %}
                         {% else %}
                             {% include "partials/ad.njk" %}
@@ -112,7 +112,7 @@ time #}
 
 {% block monetization %}
     {% if adsEnabled %}
-        {% if canonicalUrl == "https://www.freecodecamp.org/news/are-you-being-micro-managed-manage-your-relationship-with-your-manager-instead-9ad10b28bcda/" %}
+        {% if canonicalUrl | shouldCanonicalHaveGAM %}
             {% include "partials/gam-lazy-loader.njk" %}
         {% else %}
             <script

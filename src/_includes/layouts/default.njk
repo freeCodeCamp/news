@@ -119,7 +119,7 @@
 
         {{ site.codeinjection_head | safe if site.codeinjection_head }}
         {{ codeinjection_head | safe if codeinjection_head }}
-        {% if canonicalUrl == "https://www.freecodecamp.org/news/are-you-being-micro-managed-manage-your-relationship-with-your-manager-instead-9ad10b28bcda/" %}
+        {% if canonicalUrl | shouldCanonicalHaveGAM %}
             <script async src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"></script>
         {% endif %}
 
