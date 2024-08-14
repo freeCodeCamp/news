@@ -101,7 +101,7 @@
     "prettier": "3.3.3",
     "probe-image-size": "7.2.3",
     "shx": "0.3.4",
-    "terser": "5.31.5"
+    "terser": "5.31.6"
   },
   "lint-staged": {
     "**/*": "prettier --write --ignore-unknown"
