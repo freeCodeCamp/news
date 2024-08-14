@@ -1,5 +1,3 @@
-const { before } = require('lodash');
-
 describe('Post structured data (JSON-LD)', () => {
   const commonExpectedJsonLd = require('../../../fixtures/common-expected-json-ld.json');
   const ghostPostExpectedJsonLd = {
@@ -61,52 +59,52 @@ describe('Post structured data (JSON-LD)', () => {
   };
   let jsonLdObj;
 
-  // context('Ghost sourced posts', () => {
-  //   beforeEach(() => {
-  //     cy.visit('/announcing-rust-course-replit-web/');
+  context('Ghost sourced posts', () => {
+    beforeEach(() => {
+      cy.visit('/announcing-rust-course-replit-web/');
 
-  //     jsonLdObj = cy
-  //       .get('head script[type="application/ld+json"]')
-  //       .then($script => {
-  //         jsonLdObj = JSON.parse($script.text());
-  //       });
-  //   });
+      jsonLdObj = cy
+        .get('head script[type="application/ld+json"]')
+        .then($script => {
+          jsonLdObj = JSON.parse($script.text());
+        });
+    });
 
-  //   it('matches the expected base values', () => {
-  //     expect(jsonLdObj['@context']).to.equal(commonExpectedJsonLd['@context']);
-  //     expect(jsonLdObj['@type']).to.equal(ghostPostExpectedJsonLd['@type']);
-  //     expect(jsonLdObj.url).to.equal(ghostPostExpectedJsonLd.url);
-  //     expect(jsonLdObj.datePublished).to.equal(
-  //       ghostPostExpectedJsonLd.datePublished
-  //     );
-  //     expect(jsonLdObj.dateModified).to.equal(
-  //       ghostPostExpectedJsonLd.dateModified
-  //     );
-  //     expect(jsonLdObj.description).to.equal(
-  //       ghostPostExpectedJsonLd.description
-  //     );
-  //     expect(jsonLdObj.headline).to.equal(ghostPostExpectedJsonLd.headline);
-  //     expect(jsonLdObj.keywords).to.equal(ghostPostExpectedJsonLd.keywords);
-  //   });
+    it('matches the expected base values', () => {
+      expect(jsonLdObj['@context']).to.equal(commonExpectedJsonLd['@context']);
+      expect(jsonLdObj['@type']).to.equal(ghostPostExpectedJsonLd['@type']);
+      expect(jsonLdObj.url).to.equal(ghostPostExpectedJsonLd.url);
+      expect(jsonLdObj.datePublished).to.equal(
+        ghostPostExpectedJsonLd.datePublished
+      );
+      expect(jsonLdObj.dateModified).to.equal(
+        ghostPostExpectedJsonLd.dateModified
+      );
+      expect(jsonLdObj.description).to.equal(
+        ghostPostExpectedJsonLd.description
+      );
+      expect(jsonLdObj.headline).to.equal(ghostPostExpectedJsonLd.headline);
+      expect(jsonLdObj.keywords).to.equal(ghostPostExpectedJsonLd.keywords);
+    });
 
-  //   it('matches the expected publisher values', () => {
-  //     expect(jsonLdObj.publisher).to.deep.equal(commonExpectedJsonLd.publisher);
-  //   });
+    it('matches the expected publisher values', () => {
+      expect(jsonLdObj.publisher).to.deep.equal(commonExpectedJsonLd.publisher);
+    });
 
-  //   it('matches the expected image values', () => {
-  //     expect(jsonLdObj.image).to.deep.equal(ghostPostExpectedJsonLd.image);
-  //   });
+    it('matches the expected image values', () => {
+      expect(jsonLdObj.image).to.deep.equal(ghostPostExpectedJsonLd.image);
+    });
 
-  //   it('matches the expected mainEntityOfPage values', () => {
-  //     expect(jsonLdObj.mainEntityOfPage).to.deep.equal(
-  //       commonExpectedJsonLd.mainEntityOfPage
-  //     );
-  //   });
+    it('matches the expected mainEntityOfPage values', () => {
+      expect(jsonLdObj.mainEntityOfPage).to.deep.equal(
+        commonExpectedJsonLd.mainEntityOfPage
+      );
+    });
 
-  //   it('matches the expected author values', () => {
-  //     expect(jsonLdObj.author).to.deep.equal(ghostPostExpectedJsonLd.author);
-  //   });
-  // });
+    it('matches the expected author values', () => {
+      expect(jsonLdObj.author).to.deep.equal(ghostPostExpectedJsonLd.author);
+    });
+  });
 
   context('Hashnode sourced posts', () => {
     context('General test cases', () => {
