@@ -27,6 +27,7 @@ const processBatch = async ({
         postTitle: obj.title,
         source: obj.source
       });
+      delete obj.content;
 
       // Hashnode pages don't have a brief that we can cast as an excerpt or original_excerpt,
       // so we strip the HTML tags from the body text to generate a brief for SEO and structured data.
@@ -107,7 +108,7 @@ const processBatch = async ({
         });
 
         obj.published_at = obj.publishedAt;
-        obj.updated_at = obj.updatedAt;
+        obj.updated_at = obj.updatedAt ? obj.updatedAt : obj.publishedAt;
         obj.reading_time = obj.readTimeInMinutes;
         delete obj.publishedAt;
         delete obj.updatedAt;
