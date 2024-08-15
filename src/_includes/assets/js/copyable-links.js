@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
   const headers = document.querySelectorAll('h1, h2, h3');
-  console.log(headers);
   headers.forEach(header => {
     const Link = document.createElement('a');
     Link.href = `#${header.id}`;
