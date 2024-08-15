@@ -28,12 +28,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const bannerDonorLink = `{% t 'links:banner.authenticated-donor' %}`;
 
   // eslint-disable-next-line no-undef
-  if (isAuthenticated) {
+  if (isAuthenticated && !isDonor) {
     bannerTextNode.innerHTML = bannerAuthText;
     bannerAnchor.href = bannerAuthLink;
     bannerAnchor.setAttribute('text-variation', 'authenticated');
     // eslint-disable-next-line no-undef
-  } else if (isDonor) {
+  } else if (isAuthenticated && isDonor) {
     bannerTextNode.innerHTML = bannerDonorText;
     bannerAnchor.href = bannerDonorLink;
     bannerAnchor.setAttribute('text-variation', 'donor');
