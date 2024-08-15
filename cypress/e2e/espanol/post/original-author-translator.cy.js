@@ -57,7 +57,7 @@ describe('Original author / translator feature', () => {
             .find(selectors.profileLink)
             .then($el => {
               expect($el.attr('href')).to.deep.equal(
-                'https://www.freecodecamp.org/news/author/quincylarson/'
+                'https://www.freecodecamp.org/news/author/quincy/' // TODO: Figure out a way to uncouple this from live data on Hashnode
               );
             });
         });
@@ -103,7 +103,9 @@ describe('Original author / translator feature', () => {
             .then($el => {
               cy.wrap($el).find(selectors.profileImage);
               cy.wrap($el).find(selectors.profileLink);
-              cy.wrap($el).find(selectors.authorBio);
+              // TODO: Figure out a way to uncouple this from live data on Hashnode.
+              // Also, Quincy has a tagline on his Hashnode profile, not a bio.
+              // cy.wrap($el).find(selectors.authorBio);
             });
         });
 
@@ -119,16 +121,17 @@ describe('Original author / translator feature', () => {
             .find(selectors.profileLink)
             .then($el => {
               expect($el.attr('href')).to.deep.equal(
-                'https://www.freecodecamp.org/news/author/quincylarson/'
+                'https://www.freecodecamp.org/news/author/quincy/' // TODO: Figure out a way to uncouple this from live data on Hashnode
               );
             });
         });
 
         it("the author card's bio should contain the expected text", () => {
-          cy.get(selectors.authorHeaderWithBio)
-            .find(selectors.authorCard)
-            .find(selectors.authorBio)
-            .contains('The teacher who founded freeCodeCamp.org.');
+          cy.get(selectors.authorHeaderWithBio).find(selectors.authorCard);
+          // TODO: Figure out a way to uncouple this from live data on Hashnode.
+          // Also, Quincy has a tagline on his Hashnode profile, not a bio.
+          // .find(selectors.authorBio)
+          // .contains('The teacher who founded freeCodeCamp.org.');
         });
 
         it('the translator card should contain a profile image, a profile link, and a bio', () => {

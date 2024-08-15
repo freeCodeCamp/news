@@ -54,7 +54,7 @@ describe('Original author / translator feature', () => {
       .parent()
       .then($el => {
         expect($el.attr('href')).to.deep.equal(
-          'https://www.freecodecamp.org/news/author/quincylarson/'
+          'https://www.freecodecamp.org/news/author/quincy/' // TODO: Figure out a way to uncouple this from live data on Hashnode
         );
       });
   });
@@ -76,7 +76,7 @@ describe('Original author / translator feature', () => {
       .find(selectors.profileLink)
       .then($el => {
         expect($el.attr('href')).to.deep.equal(
-          'https://www.freecodecamp.org/news/author/quincylarson/'
+          'https://www.freecodecamp.org/news/author/quincy/' // TODO: Figure out a way to uncouple this from live data on Hashnode
         );
       });
   });
