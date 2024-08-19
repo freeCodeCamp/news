@@ -2,7 +2,7 @@
 
 # Developer News
 
-Welcome to freeCodeCamp's [Developer News][1] codebase — A JAMStack app built with [Ghost][2] & [11ty][3] & lots of love from the community.
+Welcome to freeCodeCamp's [Developer News][1] codebase — A JAMStack app built with [Hashnode][2], [11ty][3] & lots of love from the community.
 
 The code is based on this [template][4]. We use this project to build and deploy multiple instances of our publications in several world languages. All of the services are then distributed globally by our CDN provider.
 
@@ -64,10 +64,10 @@ Copyright (c) 2021 freeCodeCamp.org - Released under the
 [BSD 3 license](LICENSE.md).
 
 [1]: https://www.freecodecamp.org/news
-[2]: https://ghost.org/
-[3]: https://www.11ty.io/
+[2]: https://hashnode.com
+[3]: https://www.11ty.io
 [4]: https://github.com/TryGhost/eleventy-starter-ghost
-[5]: https://contribute.freecodecamp.org/#/
+[5]: https://contribute.freecodecamp.org
 [6]: https://github.com/freeCodeCamp/news/actions/workflows/deploy-eng.yml/badge.svg
 [7]: https://github.com/freeCodeCamp/news/actions/workflows/deploy-eng.yml
 [8]: https://github.com/freeCodeCamp/news/actions/workflows/deploy-i18n.yml/badge.svg
