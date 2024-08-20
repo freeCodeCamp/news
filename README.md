@@ -24,7 +24,7 @@ You can click on the badges below to go to the dashboards detailing the status o
 
 | Language     | Status (Click to see details) |
 | :----------- | :---------------------------- |
-| English      | [![Deployment status][6]][7]  |
+| English      | [![Deployment status][6]][7]  👈 Yes – you can click these things! |
 | Others(i18n) | [![Deployment status][8]][9]  |
 
 ### Build Schedules
