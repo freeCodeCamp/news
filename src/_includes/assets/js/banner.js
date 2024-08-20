@@ -26,17 +26,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   } %}`;
   const bannerDonorLink = `{% t 'links:banner.authenticated-donor' %}`;
-
   // eslint-disable-next-line no-undef
-  if (isAuthenticated && !isDonor) {
-    bannerTextNode.innerHTML = bannerAuthText;
-    bannerAnchor.href = bannerAuthLink;
-    bannerAnchor.setAttribute('text-variation', 'authenticated');
-    // eslint-disable-next-line no-undef
-  } else if (isAuthenticated && isDonor) {
-    bannerTextNode.innerHTML = bannerDonorText;
-    bannerAnchor.href = bannerDonorLink;
-    bannerAnchor.setAttribute('text-variation', 'donor');
+  if (isAuthenticated) {
+    bannerTextNode.innerHTML = isDonor ? bannerDonorText : bannerAuthText;
+    bannerAnchor.href = isDonor ? bannerDonorLink : bannerAuthLink;
+    const textVariationType = isDonor ? 'donor' : 'authenticated';
+    bannerAnchor.setAttribute('text-variation', textVariationType);
   } else {
     bannerTextNode.innerHTML = bannerDefaultText;
     bannerAnchor.href = bannerDefaultLink;
