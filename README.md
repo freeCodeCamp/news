@@ -22,10 +22,10 @@ Happy Contributing!
 
 You can click on the badges below to go to the dashboards detailing the status of the latest deployments. If you see something is not right, wait for a few hours. Our team is usually on top of these with automated alerts.
 
-| Language     | Status (Click to see details) |
-| :----------- | :---------------------------- |
-| English      | [![Deployment status][6]][7]  👈 Yes – you can click these things! |
-| Others(i18n) | [![Deployment status][8]][9]  |
+| Language     | Status (Click to see details)                                     |
+| :----------- | :---------------------------------------------------------------- |
+| English      | [![Deployment status][6]][7] 👈 Yes – you can click these things! |
+| Others(i18n) | [![Deployment status][8]][9]                                      |
 
 ### Build Schedules
 
