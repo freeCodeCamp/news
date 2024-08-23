@@ -103,7 +103,6 @@ module.exports = function (config) {
     if (!canonical || canonical.startsWith('http://localhost:')) {
       return false;
     }
-    // Don't add Google Ad Manager to localhost
     return true;
   });
 
