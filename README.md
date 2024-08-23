@@ -12,16 +12,11 @@ If you have found an issue or a bug in this repository, please connect with us i
 
 Happy Contributing!
 
-## Build
+## Builds and Deployments
 
-### Deployment Status
+### Build
 
-You can click on the badges below to go to the dashboards detailing the status of the latest deployments. If you see something is not right, wait for a few hours. Our team is usually on top of these with automated alerts.
-
-| Language     | Status (Click to see details)                                     |
-| :----------- | :---------------------------------------------------------------- |
-| English      | [![Deployment status][7]][8] 👈 Yes – you can click these things! |
-| Others(i18n) | [![Deployment status][9]][10]                                     |
+We use GHA to build the news sites. Workflows are in the `.github/workflows` directory.
 
 ### Build Schedules
 
@@ -35,7 +30,20 @@ New builds to the `/news` sites are triggered according to the schedule below:
 > [!Important]
 > Once a build is triggered, it can take up to an hour to complete and cascade to all regions in the world.
 
-### Frequently Asked Questions
+### Deployment
+
+We deploy the news sites on a private [Docker Swarm cluster](https://github.com/freeCodeCamp/news-docker-swarm-config).
+
+### Deployment Status
+
+You can click on the badges below to go to the dashboards detailing the status of the latest deployments. If you see something is not right, wait for a few hours. Our team is usually on top of these with automated alerts.
+
+| Language     | Status (Click to see details)                                     |
+| :----------- | :---------------------------------------------------------------- |
+| English      | [![Deployment status][7]][8] 👈 Yes – you can click these things! |
+| Others(i18n) | [![Deployment status][9]][10]                                     |
+
+## Frequently Asked Questions
 
 #### Where can I check the status of the latest build?
 
