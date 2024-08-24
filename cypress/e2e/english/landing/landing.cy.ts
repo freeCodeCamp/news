@@ -49,7 +49,7 @@ describe('Landing', () => {
         'Learn Responsive Web Design by Building 20 Projects – a Major freeCodeCamp Curriculum Update'
       )
       .parentsUntil('article')
-      .find(selectors.authorProfileImage)
+      .find<HTMLImageElement>(selectors.authorProfileImage)
       .then($el => expect($el[0].alt).to.equal('Quincy Larson'));
   });
 

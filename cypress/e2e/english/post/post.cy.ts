@@ -114,7 +114,7 @@ describe('Post', () => {
       });
 
       it('posts with no feature image should fall back to the default fCC indigo image', () => {
-        cy.get(selectors.featureImage)
+        cy.get<HTMLImageElement>(selectors.featureImage)
           .should('exist')
           .then($el =>
             expect($el[0].src).to.equal(
@@ -226,14 +226,14 @@ describe('Post', () => {
       });
 
       it("should show a default image from Hashnode's CDN in the bylines at the top and bottom of the article", () => {
-        cy.get(selectors.authorProfileImage).then($el => {
+        cy.get<HTMLImageElement>(selectors.authorProfileImage).then($el => {
           expect($el[0].src).to.include('cdn.hashnode.com');
           expect($el[0].tagName.toLowerCase()).to.equal('img');
         });
       });
 
       it("the default image in the bylines at the top and bottom of the article should contain an `alt` attribute with the author's name", () => {
-        cy.get(selectors.authorProfileImage).then($el =>
+        cy.get<HTMLImageElement>(selectors.authorProfileImage).then($el =>
           expect($el[0].alt).to.equal('Dionysia Lemonaki')
         );
       });
@@ -245,7 +245,7 @@ describe('Post', () => {
       });
 
       it('posts with no feature image should fall back to the default fCC indigo image', () => {
-        cy.get(selectors.featureImage)
+        cy.get<HTMLImageElement>(selectors.featureImage)
           .should('exist')
           .then($el =>
             expect($el[0].src).to.equal(

@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "lib": ["es6", "dom"],
+    "allowJs": true,
+    "types": ["cypress", "node"],
+    "moduleDetection": "force",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "preserveValueImports": false
+  },
+  "include": ["**/*.ts"]
+}

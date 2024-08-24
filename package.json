@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Eleventy for https://www.freecodecamp.org/news",
   "main": ".eleventy.js",
+  "type": "module",
   "engines": {
     "node": ">=18",
     "npm": ">=8"
@@ -101,7 +102,8 @@
     "prettier": "3.3.3",
     "probe-image-size": "7.2.3",
     "shx": "0.3.4",
-    "terser": "5.31.6"
+    "terser": "5.31.6",
+    "typescript": "^5.5.4"
   },
   "lint-staged": {
     "**/*": "prettier --write --ignore-unknown"
