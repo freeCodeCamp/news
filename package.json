@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "Eleventy for https://www.freecodecamp.org/news",
   "main": ".eleventy.js",
-  "type": "module",
   "engines": {
     "node": ">=18",
     "npm": ">=8"
