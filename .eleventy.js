@@ -99,15 +99,11 @@ module.exports = function (config) {
 
   // Check if the canonical URL should have Google Ad Manager
   config.addFilter('shouldCanonicalHaveGAM', canonical => {
-    // canonical with various viewership to test ad placements.
-    const testUrls = [
-      'https://www.freecodecamp.org/news/are-you-being-micro-managed-manage-your-relationship-with-your-manager-instead-9ad10b28bcda/',
-      'https://www.freecodecamp.org/news/get-mongodb-url-to-connect-to-a-nodejs-application/',
-      'https://www.freecodecamp.org/news/python-bytes-to-string-how-to-convert-a-bytestring/',
-      'https://www.freecodecamp.org/news/how-to-write-unit-tests-in-react/',
-      'http://localhost:8080/news/embedded-videos-post/'
-    ];
-    return testUrls.includes(canonical);
+    // Don't add Google Ad Manager to localhost
+    if (!canonical || canonical.startsWith('http://localhost:')) {
+      return false;
+    }
+    return true;
   });
 
   // Don't ignore the same files ignored in the git repo
