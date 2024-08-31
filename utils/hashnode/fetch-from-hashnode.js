@@ -1,6 +1,10 @@
 const { gql, request } = require('graphql-request');
 const { hashnodeHost } = require('../api');
-const { eleventyEnv, currentLocale_i18n } = require('../../config');
+const {
+  eleventyEnv,
+  currentLocale_i18n,
+  hashnodeAPIURL
+} = require('../../config');
 const wait = require('../wait');
 
 const fetchFromHashnode = async contentType => {
@@ -96,7 +100,7 @@ const fetchFromHashnode = async contentType => {
             ? require(
                 `../../cypress/fixtures/mock-hashnode-${contentType}.json`
               )
-            : await request(process.env.HASHNODE_API_URL, query, {
+            : await request(hashnodeAPIURL, query, {
                 host: hashnodeHost,
                 first: 20,
                 after

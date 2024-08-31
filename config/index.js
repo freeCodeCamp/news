@@ -150,7 +150,7 @@ module.exports = Object.assign(
     eleventyEnv: eleventyEnv || 'dev',
     hashnodeAPIURL:
       !hashnodeAPIURL || hashnodeAPIURL === 'api_url_from_hashnode_dashboard'
-        ? ''
+        ? 'https://gql.hashnode.com'
         : hashnodeAPIURL,
     chatWebhookKey:
       !chatWebhookKey ||
