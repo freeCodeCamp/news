@@ -116,7 +116,15 @@ const fetchFromHashnode = async contentType => {
           );
 
         after = pageInfo.endCursor;
-        hasNextPage = pageInfo.hasNextPage;
+        if (process.env.HASHNODE_DEBUG_MODE_FIRST_PAGE_ONLY) {
+          console.log(
+            'HASHNODE_DEBUG_MODE_FIRST_PAGE_ONLY is active. Fetching only the first page.'
+          );
+        }
+
+        hasNextPage =
+          pageInfo.hasNextPage &&
+          !process.env.HASHNODE_DEBUG_MODE_FIRST_PAGE_ONLY;
 
         data.push(...resData);
 
