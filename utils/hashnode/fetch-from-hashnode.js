@@ -86,28 +86,54 @@ const fetchFromHashnode = async contentType => {
   let hasNextPage = true;
 
   while (hasNextPage) {
-    const res =
-      eleventyEnv === 'ci' && currentLocale_i18n === 'english'
-        ? require(`../../cypress/fixtures/mock-hashnode-${contentType}.json`)
-        : await request(process.env.HASHNODE_API_URL, query, {
-            host: hashnodeHost,
-            first: 20,
-            after
-          });
+    let retries = 3;
+    let success = false;
 
-    const resData =
-      res.publication[fieldName]?.edges.map(({ node }) => node) || [];
-    const pageInfo = res.publication[fieldName]?.pageInfo;
+    while (retries > 0 && !success) {
+      try {
+        const res =
+          eleventyEnv === 'ci' && currentLocale_i18n === 'english'
+            ? require(
+                `../../cypress/fixtures/mock-hashnode-${contentType}.json`
+              )
+            : await request(process.env.HASHNODE_API_URL, query, {
+                host: hashnodeHost,
+                first: 20,
+                after
+              });
 
-    if (resData.length > 0)
-      console.log(
-        `Fetched Hashnode ${contentType} ${pageInfo.endCursor}... and using ${process.memoryUsage.rss() / 1024 / 1024} MB of memory`
-      );
+        const resData =
+          res.publication[fieldName]?.edges.map(({ node }) => node) || [];
+        const pageInfo = res.publication[fieldName]?.pageInfo;
 
-    after = pageInfo.endCursor;
-    hasNextPage = pageInfo.hasNextPage;
+        if (resData.length > 0)
+          console.log(
+            `Fetched Hashnode ${contentType} ${pageInfo.endCursor}... and using ${process.memoryUsage.rss() / 1024 / 1024} MB of memory`
+          );
 
-    data.push(...resData);
+        after = pageInfo.endCursor;
+        hasNextPage = pageInfo.hasNextPage;
+
+        data.push(...resData);
+
+        success = true;
+      } catch (error) {
+        if (error.message.includes('ECONNRESET') && retries > 1) {
+          console.log(
+            `Connection reset error. Retrying... (${retries - 1} attempts left)`
+          );
+          retries--;
+          await wait(10000); // Wait for 10 seconds before retrying
+        } else {
+          throw error; // If it's not a connection reset or no more retries, rethrow the error
+        }
+      }
+    }
+
+    if (!success) {
+      console.error('Failed to fetch data after multiple retries');
+      break;
+    }
 
     await wait(200);
   }
