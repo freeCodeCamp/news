@@ -11,6 +11,13 @@ const fetchFromGhost = async endpoint => {
     limit: 200
   };
 
+  if (process.env.DO_NOT_FETCH_FROM_GHOST) {
+    console.log(
+      'DO_NOT_FETCH_FROM_GHOST is active. This is likely because Ghost is not available for this environment.'
+    );
+    return [];
+  }
+
   while (currPage && currPage <= lastPage) {
     const ghostRes = await ghostAPI[endpoint]
       .browse({
