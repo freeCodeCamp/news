@@ -37,7 +37,8 @@
     "lint:i18n-schema": "node ./config/i18n/schema-validation.js",
     "lint:pretty": "prettier --check .",
     "format": "prettier --write .",
-    "prepare": "husky"
+    "prepare": "husky",
+    "type-check": "tsc --noEmit"
   },
   "repository": {
     "type": "git",
@@ -105,6 +106,10 @@
     "typescript": "^5.5.4"
   },
   "lint-staged": {
-    "**/*": "prettier --write --ignore-unknown"
+    "!(*.ts)": "prettier --write --ignore-unknown",
+    "*.ts": [
+      "pnpm run type-check",
+      "prettier --write --ignore-unknown"
+    ]
   }
 }
