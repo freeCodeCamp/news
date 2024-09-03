@@ -51,6 +51,10 @@
         {% endset %}
         <script>{{ js | jsMin | safe }}</script>
 
+        {% if canonicalUrl | shouldCanonicalHaveGAM %}
+            <script src="https://securepubads.g.doubleclick.net/tag/js/gpt.js" crossorigin="anonymous" async></script>
+        {% endif %}
+
         {# Dynamically load Adsense scripts #}
         {% block monetization %}
         {% endblock %}
@@ -119,9 +123,6 @@
 
         {{ site.codeinjection_head | safe if site.codeinjection_head }}
         {{ codeinjection_head | safe if codeinjection_head }}
-        {% if canonicalUrl | shouldCanonicalHaveGAM %}
-            <script async src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"></script>
-        {% endif %}
 
         {% block datasourceInfo %}
         {% endblock %}
