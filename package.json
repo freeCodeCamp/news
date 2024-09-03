@@ -38,7 +38,7 @@
     "lint:pretty": "prettier --check .",
     "format": "prettier --write .",
     "prepare": "husky",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc -p ./cypress/tsconfig.json --noEmit"
   },
   "repository": {
     "type": "git",
