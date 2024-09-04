@@ -108,7 +108,7 @@
   "lint-staged": {
     "!(*.ts)": "prettier --write --ignore-unknown",
     "*.ts": [
-      "pnpm run type-check",
+      "npm run type-check",
       "prettier --write --ignore-unknown"
     ]
   }
