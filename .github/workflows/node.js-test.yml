@@ -87,5 +87,8 @@ jobs:
       - name: Run tests
         run: npm run test
 
+      - name: Perform Typescript Typecheck
+        run: npm run type-check
+
       - name: Stop Ghost containers
         run: npm run stop:containers
