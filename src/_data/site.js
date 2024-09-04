@@ -1,4 +1,3 @@
-const { ghostAPI } = require('../../utils/api');
 const getImageDimensions = require('../../utils/get-image-dimensions');
 const {
   convertToLocalizedString,
@@ -14,43 +13,34 @@ const getTwitterProfile = url => url.replace('https://twitter.com/', '@');
 const twitterURL = translate('links:twitter');
 const twitterProfile =
   twitterURL !== 'twitter' ? getTwitterProfile(twitterURL) : '@freecodecamp';
+const logoURL =
+  'https://cdn.freecodecamp.org/platform/universal/fcc_primary.svg';
+const coverImageURL =
+  'https://cdn.freecodecamp.org/platform/universal/fcc_meta_1920X1080-indigo.png';
+const iconURL = 'https://cdn.freecodecamp.org/universal/favicons/favicon.ico';
 
 module.exports = async () => {
-  // TODO: Combine sensible defaults for all locales here and make sure any
-  // meta descriptions, tags, and so on have been moved to the i18n files and
-  // are being used in the templates
-  const site = await ghostAPI.settings
-    .browse({
-      include: 'url'
-    })
-    .catch(err => {
-      console.error(err);
-    });
-
-  site.url = siteURL;
-  site.lang = currentLocale_i18nISOCode.toLowerCase();
-
-  const logoUrl =
-    'https://cdn.freecodecamp.org/platform/universal/fcc_primary.svg';
-  site.logo = logoUrl;
-
-  const coverImageUrl =
-    'https://cdn.freecodecamp.org/platform/universal/fcc_meta_1920X1080-indigo.png';
-  site.cover_image = coverImageUrl;
-  site.og_image = coverImageUrl;
-  site.twitter_image = coverImageUrl;
-
-  const iconUrl = 'https://cdn.freecodecamp.org/universal/favicons/favicon.ico';
-  site.icon = iconUrl;
+  const site = {
+    url: siteURL,
+    lang: currentLocale_i18nISOCode.toLowerCase(),
+    title: 'freeCodeCamp.org',
+    facebook: 'https://www.facebook.com/freecodecamp',
+    twitter: twitterProfile,
+    logo: logoURL,
+    cover_image: coverImageURL,
+    og_image: coverImageURL,
+    twitter_image: coverImageURL,
+    iconURL: iconURL
+  };
 
   // Determine image dimensions before server runs for structured data
   const logoDimensions = await getImageDimensions(
-    logoUrl,
-    `Site logo: ${logoUrl}`
+    logoURL,
+    `Site logo: ${logoURL}`
   );
   const coverImageDimensions = await getImageDimensions(
-    coverImageUrl,
-    `Site cover image: ${coverImageUrl}`
+    coverImageURL,
+    `Site cover image: ${coverImageURL}`
   );
 
   site.image_dimensions = {
@@ -63,14 +53,6 @@ module.exports = async () => {
       height: coverImageDimensions.height
     }
   };
-
-  // Set default title across all publications
-  site.title = 'freeCodeCamp.org';
-
-  // Set default Facebook account, and set Twitter account
-  // based on UI locale
-  site.facebook = 'https://www.facebook.com/freecodecamp';
-  site.twitter = twitterProfile;
 
   // Dynamic search bar placeholder number
   const roundedTotalRecords = await getRoundedTotalRecords();
