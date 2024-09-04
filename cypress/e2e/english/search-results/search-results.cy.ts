@@ -37,7 +37,7 @@ describe('Search results', () => {
         'freeCodeCamp Just Got a Million Dollar Donation from an Alum to Build a Carbon-Neutral Web3 Curriculum'
       )
       .parentsUntil('article')
-      .find(selectors.authorProfileImage)
+      .find<HTMLImageElement>(selectors.authorProfileImage)
       .then($el => expect($el[0].alt).to.equal('Quincy Larson'));
   });
 

@@ -37,7 +37,8 @@
     "lint:i18n-schema": "node ./config/i18n/schema-validation.js",
     "lint:pretty": "prettier --check .",
     "format": "prettier --write .",
-    "prepare": "husky"
+    "prepare": "husky",
+    "type-check": "tsc -p ./cypress/tsconfig.json --noEmit"
   },
   "repository": {
     "type": "git",
@@ -101,9 +102,14 @@
     "prettier": "3.3.3",
     "probe-image-size": "7.2.3",
     "shx": "0.3.4",
-    "terser": "5.31.6"
+    "terser": "5.31.6",
+    "typescript": "^5.5.4"
   },
   "lint-staged": {
-    "**/*": "prettier --write --ignore-unknown"
+    "!(*.ts)": "prettier --write --ignore-unknown",
+    "*.ts": [
+      "npm run type-check",
+      "prettier --write --ignore-unknown"
+    ]
   }
 }

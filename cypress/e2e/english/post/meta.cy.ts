@@ -370,14 +370,16 @@ describe('Post metadata', () => {
 
       // This article has two tags
       it('<meta> article:tag', () => {
-        cy.get('head meta[property="article:tag"]').then($metaEls => {
-          const tags = Array.from($metaEls).map(metaEl => metaEl.content);
+        cy.get<HTMLMetaElement>('head meta[property="article:tag"]').then(
+          $metaEls => {
+            const tags = Array.from($metaEls).map(metaEl => metaEl.content);
 
-          expect(tags).to.have.members([
-            'freeCodeCamp.org',
-            'technical writing'
-          ]);
-        });
+            expect(tags).to.have.members([
+              'freeCodeCamp.org',
+              'technical writing'
+            ]);
+          }
+        );
       });
 
       it('<meta> article:publisher', () => {

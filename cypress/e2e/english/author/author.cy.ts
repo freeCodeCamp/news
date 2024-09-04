@@ -62,7 +62,7 @@ describe('Author page', () => {
       });
 
       it("the author profile image should contain an `alt` attribute with the author's name", () => {
-        cy.get(selectors.authorProfileImage).then($el =>
+        cy.get<HTMLImageElement>(selectors.authorProfileImage).then($el =>
           expect($el[0].alt).to.equal('Quincy Larson')
         );
       });
@@ -119,7 +119,7 @@ describe('Author page', () => {
       });
 
       it("the author profile image should contain an `alt` attribute with the author's name", () => {
-        cy.get(selectors.authorProfileImage).then($el =>
+        cy.get<HTMLImageElement>(selectors.authorProfileImage).then($el =>
           expect($el[0].alt).to.equal('Abigail Rennemeyer')
         );
       });
@@ -149,14 +149,14 @@ describe('Author page', () => {
     });
 
     it("should show a default image from Hashnode's CDN", () => {
-      cy.get(selectors.authorProfileImage).then($el => {
+      cy.get<HTMLImageElement>(selectors.authorProfileImage).then($el => {
         expect($el[0].src).to.include('cdn.hashnode.com');
         expect($el[0].tagName.toLowerCase()).to.equal('img');
       });
     });
 
     it("the default image should contain an `alt` attribute with the author's name", () => {
-      cy.get(selectors.authorProfileImage).then($el =>
+      cy.get<HTMLImageElement>(selectors.authorProfileImage).then($el =>
         expect($el[0].alt).to.equal('Dionysia Lemonaki')
       );
     });
