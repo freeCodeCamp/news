@@ -2,9 +2,14 @@ const selectors = {
   authorPostCount: "[data-test-label='author-post-count']"
 };
 
-describe('Author page i18n (Hashnode sourced)', () => {
+describe('Author page i18n (Ghost sourced)', () => {
+  before(() => {
+    // Update baseUrl to include current language
+    Cypress.config('baseUrl', 'http://localhost:8080/espanol/news/');
+  });
+
   it('an author page with one post does not render its post count i18n key', () => {
-    cy.visit('/author/abbeyrenn/');
+    cy.visit('/author/rafael/');
 
     cy.get(selectors.authorPostCount)
       .invoke('text')

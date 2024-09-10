@@ -20,8 +20,14 @@
   },
   "url": "http://localhost:8080/news/",
   "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "http://localhost:8080/news/"
+    "english": {
+      "@type": "WebPage",
+      "@id": "http://localhost:8080/news/"
+    },
+    "espanol": {
+      "@type": "WebPage",
+      "@id": "http://localhost:8080/espanol/news/"
+    }
   },
   "description": "Browse thousands of programming tutorials written by experts. Learn Web Development, Data Science, DevOps, Security, and get developer career advice."
 }

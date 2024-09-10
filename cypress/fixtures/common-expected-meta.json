@@ -1,9 +1,17 @@
 {
   "siteName": "freeCodeCamp.org",
-  "siteUrl": "http://localhost:8080/news/",
-  "title": "freeCodeCamp Programming Tutorials: Python, JavaScript, Git & More",
-  "keywords": "freeCodeCamp, programming, front-end, programmer, article, regular expressions, Python, JavaScript, AWS, JSON, HTML, CSS, Bootstrap, React, Vue, Webpack",
-  "description": "Browse thousands of programming tutorials written by experts. Learn Web Development, Data Science, DevOps, Security, and get developer career advice.",
+  "english": {
+    "siteUrl": "http://localhost:8080/news/",
+    "title": "freeCodeCamp Programming Tutorials: Python, JavaScript, Git & More",
+    "keywords": "freeCodeCamp, programming, front-end, programmer, article, regular expressions, Python, JavaScript, AWS, JSON, HTML, CSS, Bootstrap, React, Vue, Webpack",
+    "description": "Browse thousands of programming tutorials written by experts. Learn Web Development, Data Science, DevOps, Security, and get developer career advice."
+  },
+  "espanol": {
+    "siteUrl": "http://localhost:8080/espanol/news/",
+    "title": "freeCodeCamp Programming Tutorials: Python, JavaScript, Git & More",
+    "keywords": "freeCodeCamp, programming, front-end, programmer, article, regular expressions, Python, JavaScript, AWS, JSON, HTML, CSS, Bootstrap, React, Vue, Webpack",
+    "description": "Descubre miles de cursos de programación escritos por expertos. Aprende Desarrollo Web, Ciencia de Datos, DevOps, Seguridad y obtén asesoramiento profesional para desarrolladores."
+  },
   "publicationCover": {
     "url": "https://cdn.freecodecamp.org/platform/universal/fcc_meta_1920X1080-indigo.png",
     "width": 1920,

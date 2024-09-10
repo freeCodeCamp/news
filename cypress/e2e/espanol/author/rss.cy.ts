@@ -1,11 +1,16 @@
 const { decodeHTML, XMLToDOM } = require('../../../support/utils/rss');
 const commonExpectedMeta = require('../../../fixtures/common-expected-meta.json');
 const author = {
-  expectedTitle: `Abigail Rennemeyer - freeCodeCamp.org`,
-  feedPath: '/author/abbeyrenn/rss.xml'
+  expectedTitle: `Rafael D. Hernandez - freeCodeCamp.org`,
+  feedPath: '/author/rafael/rss.xml'
 };
 
-describe('Author page RSS feed (Hashnode sourced)', () => {
+describe('Author page RSS feed (Ghost sourced)', () => {
+  before(() => {
+    // Update baseUrl to include current language
+    Cypress.config('baseUrl', 'http://localhost:8080/espanol/news/');
+  });
+
   it('should start with a UTF-8 encoding declaration', () => {
     cy.request(author.feedPath).then(async res => {
       expect(res.body.startsWith('<?xml version="1.0" encoding="UTF-8"?>')).to
@@ -13,7 +18,7 @@ describe('Author page RSS feed (Hashnode sourced)', () => {
     });
   });
 
-  it('should have the channel title <![CDATA[ Quincy Larson - freeCodeCamp.org ]]>', () => {
+  it('should have the channel title <![CDATA[ Rafael D. Hernandez - freeCodeCamp.org ]]>', () => {
     cy.request(author.feedPath).then(async res => {
       const feed = XMLToDOM(res.body);
       const channelTitle = feed.querySelector('channel title').innerHTML.trim();
@@ -22,7 +27,7 @@ describe('Author page RSS feed (Hashnode sourced)', () => {
     });
   });
 
-  it(`should have the channel description <![CDATA[ ${commonExpectedMeta.english.description} ]]>`, () => {
+  it(`should have the channel description <![CDATA[ ${commonExpectedMeta.espanol.description} ]]>`, () => {
     cy.request(author.feedPath).then(async res => {
       const feed = XMLToDOM(res.body);
       const channelDescription = feed
@@ -30,17 +35,17 @@ describe('Author page RSS feed (Hashnode sourced)', () => {
         .innerHTML.trim();
 
       expect(channelDescription).to.equal(
-        `<![CDATA[ ${commonExpectedMeta.english.description} ]]>`
+        `<![CDATA[ ${commonExpectedMeta.espanol.description} ]]>`
       );
     });
   });
 
-  it('should have the channel link http://localhost:8080/news/', () => {
+  it('should have the channel link http://localhost:8080/espanol/news/', () => {
     cy.request(author.feedPath).then(async res => {
       const feed = XMLToDOM(res.body);
       const channelLink = feed.querySelector('channel link').innerHTML.trim();
 
-      expect(channelLink).to.equal(`${commonExpectedMeta.english.siteUrl}`);
+      expect(channelLink).to.equal(`${commonExpectedMeta.espanol.siteUrl}`);
     });
   });
 
@@ -59,7 +64,7 @@ describe('Author page RSS feed (Hashnode sourced)', () => {
 
       expect(channelImageURL).to.equal(commonExpectedMeta.favicon.png);
       expect(channelImageTitle).to.equal(author.expectedTitle);
-      expect(channelImageLink).to.equal(commonExpectedMeta.english.siteUrl);
+      expect(channelImageLink).to.equal(commonExpectedMeta.espanol.siteUrl);
     });
   });
 
@@ -84,12 +89,12 @@ describe('Author page RSS feed (Hashnode sourced)', () => {
     });
   });
 
-  it('should return 1 article', () => {
+  it('should return 15 articles', () => {
     cy.request(author.feedPath).then(async res => {
       const feed = XMLToDOM(res.body);
       const articles = feed.querySelectorAll('item');
 
-      expect([...articles]).to.have.lengthOf(1);
+      expect([...articles]).to.have.lengthOf(15);
     });
   });
 });

@@ -1,37 +1,25 @@
 const commonExpectedMeta = require('../../../fixtures/common-expected-meta.json');
 const authorExpectedMeta = {
-  title: 'Abigail Rennemeyer - freeCodeCamp.org',
-  url: 'http://localhost:8080/news/author/abbeyrenn/',
+  title: 'Rafael D. Hernandez - freeCodeCamp.org',
+  url: 'http://localhost:8080/espanol/news/author/rafael/',
+  image: {
+    url: 'http://localhost:3030/content/images/2024/09/fccbg_25e868b401.png', // Custom banner image -- hidden on author page
+    width: 1500,
+    height: 500
+  },
   description:
-    'I love editing articles and working with contributors. I also love the outdoors and good food.\n'
+    'Web Developer | Global Language Translations Lead at @freeCodeCamp'
 };
 
-describe('Author page metadata (Hashnode sourced)', () => {
-  context('freeCodeCamp author page', () => {
-    beforeEach(() => {
-      cy.visit('/author/freecodecamp/');
-    });
-
-    it("<meta> og:image should be set to the site's publication cover image when there's no custom banner image", () => {
-      cy.get('head meta[property="og:image"]').should(
-        'have.attr',
-        'content',
-        commonExpectedMeta.publicationCover.url
-      );
-    });
-
-    it("<meta> twitter:image should be set to the site's publication cover image when there's no custom banner image", () => {
-      cy.get('head meta[name="twitter:image"]').should(
-        'have.attr',
-        'content',
-        commonExpectedMeta.publicationCover.url
-      );
-    });
+describe('Author page metadata (Ghost sourced)', () => {
+  before(() => {
+    // Update baseUrl to include current language
+    Cypress.config('baseUrl', 'http://localhost:8080/espanol/news/');
   });
 
-  context("Abbey's author page", () => {
+  context("Rafael's author page", () => {
     beforeEach(() => {
-      cy.visit('/author/abbeyrenn/');
+      cy.visit('/author/rafael/');
     });
 
     it('<title>', () => {
@@ -94,12 +82,20 @@ describe('Author page metadata (Hashnode sourced)', () => {
       );
     });
 
-    // No custom banner, so falls back to the site's publication cover image
+    it('<meta> og:url', () => {
+      cy.get('head meta[property="og:url"]').should(
+        'have.attr',
+        'content',
+        authorExpectedMeta.url
+      );
+    });
+
+    // Has a custom banner image
     it('<meta> og:image', () => {
       cy.get('head meta[property="og:image"]').should(
         'have.attr',
         'content',
-        commonExpectedMeta.publicationCover.url
+        authorExpectedMeta.image.url
       );
     });
 
@@ -107,7 +103,7 @@ describe('Author page metadata (Hashnode sourced)', () => {
       cy.get('head meta[property="og:image:width"]').should(
         'have.attr',
         'content',
-        commonExpectedMeta.publicationCover.width
+        authorExpectedMeta.image.width
       );
     });
 
@@ -115,7 +111,7 @@ describe('Author page metadata (Hashnode sourced)', () => {
       cy.get('head meta[property="og:image:height"]').should(
         'have.attr',
         'content',
-        commonExpectedMeta.publicationCover.height
+        authorExpectedMeta.image.height
       );
     });
 
@@ -159,12 +155,11 @@ describe('Author page metadata (Hashnode sourced)', () => {
       );
     });
 
-    // No custom banner, so falls back to the site's publication cover image
     it('<meta> twitter:image', () => {
       cy.get('head meta[name="twitter:image"]').should(
         'have.attr',
         'content',
-        commonExpectedMeta.publicationCover.url
+        authorExpectedMeta.image.url
       );
     });
 
@@ -172,7 +167,7 @@ describe('Author page metadata (Hashnode sourced)', () => {
       cy.get('head meta[name="twitter:site"]').should(
         'have.attr',
         'content',
-        commonExpectedMeta.twitter.username
+        '@freecodecampes'
       );
     });
 
@@ -181,7 +176,7 @@ describe('Author page metadata (Hashnode sourced)', () => {
       cy.get('head meta[name="twitter:creator"]').should(
         'have.attr',
         'content',
-        '@abbeyrenn'
+        '@RafaelDavisH'
       );
     });
   });
