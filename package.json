@@ -9,7 +9,7 @@
   },
   "scripts": {
     "start": "npm run develop",
-    "start:ci:english": "LOCALE_FOR_UI=english LOCALE_FOR_GHOST=english npm run develop:ci",
+    "start:ci:english": "LOCALE_FOR_UI=english DO_NOT_FETCH_FROM_GHOST=true npm run develop:ci",
     "start:ci:chinese": "LOCALE_FOR_UI=chinese LOCALE_FOR_GHOST=chinese npm run develop:ci",
     "start:ci:espanol": "LOCALE_FOR_UI=espanol LOCALE_FOR_GHOST=espanol npm run develop:ci",
     "start:containers": "docker compose -f './docker/ghost/docker-compose.yml' up -d",
