@@ -108,7 +108,7 @@
   "lint-staged": {
     "!(*.ts)": "prettier --write --ignore-unknown",
     "*.ts": [
-      "npm run type-check",
+      "bash -c 'npm run type-check'",
       "prettier --write --ignore-unknown"
     ]
   }
