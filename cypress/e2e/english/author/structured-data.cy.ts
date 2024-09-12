@@ -31,7 +31,7 @@ describe('Author page structured data (JSON-LD – Hashnode sourced)', () => {
 
   it('matches the expected mainEntityOfPage values', () => {
     expect(jsonLdObj.mainEntityOfPage).to.deep.equal(
-      commonExpectedJsonLd.mainEntityOfPage.english
+      commonExpectedJsonLd.english.mainEntityOfPage
     );
   });
 });

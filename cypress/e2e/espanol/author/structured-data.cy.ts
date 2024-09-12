@@ -47,7 +47,7 @@ describe('Author page structured data (JSON-LD – Ghost sourced)', () => {
 
   it('matches the expected mainEntityOfPage values', () => {
     expect(jsonLdObj.mainEntityOfPage).to.deep.equal(
-      commonExpectedJsonLd.mainEntityOfPage.espanol
+      commonExpectedJsonLd.espanol.mainEntityOfPage
     );
   });
 });

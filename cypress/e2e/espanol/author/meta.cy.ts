@@ -167,7 +167,7 @@ describe('Author page metadata (Ghost sourced)', () => {
       cy.get('head meta[name="twitter:site"]').should(
         'have.attr',
         'content',
-        '@freecodecampes'
+        commonExpectedMeta.espanol.twitterUsername
       );
     });
 

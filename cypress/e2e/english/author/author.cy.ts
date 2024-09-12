@@ -51,6 +51,10 @@ describe('Author page (Hashnode sourced)', () => {
   // Hashnode provides a default image for authors who don't upload a profile picture,
   // so basic tests for profile images are fine
   context('Author with profile image', () => {
+    beforeEach(() => {
+      cy.visit('/author/abbeyrenn/');
+    });
+
     it("should show the author's profile image", () => {
       cy.get(selectors.authorProfileImage).then($el =>
         expect($el[0].tagName.toLowerCase()).to.equal('img')

@@ -44,8 +44,8 @@ describe('Author page (Ghost sourced)', () => {
       cy.get(selectors.authorPostCount).should('be.visible');
     });
 
-    it(`should show 25 posts on load`, () => {
-      getPostCards().should('have.length', 15);
+    it(`should show 16 posts on load`, () => {
+      getPostCards().should('have.length', 16);
     });
 
     it('should show the correct number of total posts', () => {
