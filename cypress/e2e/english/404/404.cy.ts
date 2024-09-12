@@ -4,6 +4,7 @@ const selectors = {
 };
 
 describe('404', () => {
+  // Tests here should apply to all 404 pages, regardless of the source
   beforeEach(() => {
     cy.visit('/testing-testing-1-2/', { failOnStatusCode: false });
   });
@@ -18,7 +19,7 @@ describe('404', () => {
     cy.get(selectors.errorLink).should(
       'have.attr',
       'href',
-      commonExpectedMeta.siteUrl
+      commonExpectedMeta.english.siteUrl
     );
   });
 });
