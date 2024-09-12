@@ -12,7 +12,7 @@ const selectors = {
   translatorName: 'Kristofer Koishigawa'
 };
 
-describe('Original author / translator feature', () => {
+describe('Original author / translator feature (Hashnode sourced)', () => {
   beforeEach(() => {
     cy.visit('/');
   });

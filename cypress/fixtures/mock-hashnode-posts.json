@@ -4,6 +4,155 @@
       "edges": [
         {
           "node": {
+            "id": "66e1f8b2fd5bd0f4a063f328",
+            "slug": "learn-music-production-for-beginners",
+            "title": "Learn Music Production for Beginners",
+            "author": {
+              "id": "5f68e7df6dfc523d0a894e7c",
+              "username": "beaucarnes",
+              "name": "Beau Carnes",
+              "bio": {
+                "text": "I'm a teacher and developer with freeCodeCamp.org. I run the freeCodeCamp.org YouTube channel.\n"
+              },
+              "tagline": "",
+              "profilePicture": "https://cdn.hashnode.com/res/hashnode/image/upload/v1713211849730/O5mmKs5h0.jpg",
+              "socialMediaLinks": {
+                "website": "",
+                "twitter": "",
+                "facebook": ""
+              },
+              "location": "Michigan"
+            },
+            "tags": [
+              {
+                "id": "56744721958ef13879b949c6",
+                "name": "music",
+                "slug": "music"
+              },
+              {
+                "id": "56ced112f0ec33085f1cc5ab",
+                "name": "youtube",
+                "slug": "youtube"
+              }
+            ],
+            "coverImage": {
+              "url": "https://cdn.hashnode.com/res/hashnode/image/upload/v1726085276839/735597b4-50a4-4792-be6a-7bca34a732f9.png"
+            },
+            "brief": "Are you interested in exploring the world of music production but don't know where to start? We just posted comprehensive course designed for beginners that will guide you through the process of creating music tracks in various styles using FL Studio...",
+            "readTimeInMinutes": 3,
+            "content": {
+              "html": "<p>Are you interested in exploring the world of music production but don't know where to start? We just posted comprehensive course designed for beginners that will guide you through the process of creating music tracks in various styles using FL Studio. Developed by Tristan Wilcox, this course requires no prior music experience and offers a hands-on approach to learning music production.</p>\n<h3 id=\"heading-course-overview\">Course Overview</h3>\n<p>This course is structured to take you from the basics of music production to mastering your own tracks. Here's a breakdown of what you'll learn:</p>\n<ol>\n<li><p><strong>Introduction</strong>: Get an overview of the course and what to expect as you embark on your music production journey.</p>\n</li>\n<li><p><strong>Chapter 1 - Instruments</strong>: Learn about the different instruments available in FL Studio and how to use them to create unique sounds.</p>\n</li>\n<li><p><strong>Chapter 2 - Chords, Melody, Bass</strong>: Discover the fundamentals of music theory, including how to create chords, melodies, and bass lines that form the backbone of your tracks.</p>\n</li>\n<li><p><strong>Chapter 3 - Playlist</strong>: Understand how to organize and arrange your music using the playlist feature in FL Studio.</p>\n</li>\n<li><p><strong>Chapters 4/5 - Drums and FX</strong>: Explore the world of percussion and sound effects, learning how to add depth and rhythm to your music.</p>\n</li>\n<li><p><strong>Chapter 6 - Structure</strong>: Learn how to structure your tracks to create engaging and dynamic compositions.</p>\n</li>\n<li><p><strong>Chapter 7 - Mixing</strong>: Dive into the art of mixing, balancing different elements of your track to achieve a polished sound.</p>\n</li>\n<li><p><strong>Chapter 8 - Automation</strong>: Discover how to use automation to add movement and interest to your music.</p>\n</li>\n<li><p><strong>Chapter 9 - Mastering</strong>: Learn the final steps of music production, mastering your tracks to ensure they sound great on all playback systems.</p>\n</li>\n<li><p><strong>Chapter 10 - The Final Chapter</strong>: Bring everything together and complete your first music production project.</p>\n</li>\n</ol>\n<h3 id=\"heading-understanding-fl-studio\">Understanding FL Studio</h3>\n<p>FL Studio, also known as FruityLoops, is a powerful digital audio workstation (DAW) that is widely used by music producers around the world. It offers an intuitive interface and a wide range of features that make it ideal for beginners and professionals alike. Here’s a closer look at what makes FL Studio a great choice for music production:</p>\n<ul>\n<li><p><strong>User-Friendly Interface</strong>: FL Studio's interface is designed to be easy to navigate, with a pattern-based music sequencer that allows you to create and edit music with ease.</p>\n</li>\n<li><p><strong>Unlimited Free Trial</strong>: One of the standout features of FL Studio is its unlimited free trial, which allows you to explore all its features without any time restrictions. This makes it an excellent choice for beginners who want to experiment with music production before committing to a purchase.</p>\n</li>\n<li><p><strong>Comprehensive Toolset</strong>: FL Studio comes equipped with a wide array of tools and plugins, including synthesizers, samplers, and effects processors, giving you everything you need to create professional-quality music.</p>\n</li>\n<li><p><strong>Versatility</strong>: Whether you're interested in electronic music, hip-hop, pop, or any other genre, FL Studio provides the flexibility to produce music in a variety of styles.</p>\n</li>\n<li><p><strong>Strong Community Support</strong>: With a large and active user community, FL Studio offers plenty of resources, tutorials, and forums where you can learn from other producers and share your own experiences.</p>\n</li>\n</ul>\n<h3 id=\"heading-get-started-today\">Get Started Today</h3>\n<p>If you're ready to start your music production journey, this course is the perfect place to begin. Watch the full course on the freeCodeCamp.org YouTube channel.</p>\n"
+            },
+            "seo": {
+              "description": null
+            },
+            "publishedAt": "2024-09-11T20:08:18.992Z",
+            "updatedAt": null
+          }
+        },
+        {
+          "node": {
+            "id": "66e093d482502b33f0f6b7ce",
+            "slug": "pass-the-azure-ai-engineer-associate-certification-ai-102",
+            "title": "Pass the Azure AI Engineer Associate Certification (AI-102)",
+            "author": {
+              "id": "5f68e7df6dfc523d0a894e7c",
+              "username": "beaucarnes",
+              "name": "Beau Carnes",
+              "bio": {
+                "text": "I'm a teacher and developer with freeCodeCamp.org. I run the freeCodeCamp.org YouTube channel.\n"
+              },
+              "tagline": "",
+              "profilePicture": "https://cdn.hashnode.com/res/hashnode/image/upload/v1713211849730/O5mmKs5h0.jpg",
+              "socialMediaLinks": {
+                "website": "",
+                "twitter": "",
+                "facebook": ""
+              },
+              "location": "Michigan"
+            },
+            "tags": [
+              {
+                "id": "56744721958ef13879b94d89",
+                "name": "Azure",
+                "slug": "azure"
+              },
+              {
+                "id": "57d4461ed17cab545cab66de",
+                "name": "Certification",
+                "slug": "certification"
+              },
+              {
+                "id": "56ced112f0ec33085f1cc5ab",
+                "name": "youtube",
+                "slug": "youtube"
+              }
+            ],
+            "coverImage": {
+              "url": "https://cdn.hashnode.com/res/hashnode/image/upload/v1725993924398/c2501267-b4ce-42cb-a73a-215d03a50aa0.png"
+            },
+            "brief": "Are you ready to take your AI skills to the next level and earn the Azure AI Engineer Associate Certification (AI-102)? We just posted a comprehensive course on the freeCodeCamp.org YouTube channel that is designed to help you prepare for and pass th...",
+            "readTimeInMinutes": 3,
+            "content": {
+              "html": "<p>Are you ready to take your AI skills to the next level and earn the Azure AI Engineer Associate Certification (AI-102)? We just posted a comprehensive course on the freeCodeCamp.org YouTube channel that is designed to help you prepare for and pass this certification exam.</p>\n<p>This course offers an in-depth exploration of Azure AI services, Azure AI Search, and Azure OpenAI, equipping you with the knowledge and skills needed to excel as a Microsoft Azure AI engineer. Andrew Brown of ExamPro developed this course.</p>\n<h3 id=\"heading-course-overview\">Course Overview</h3>\n<p>The course is structured to guide you through the essential components of the Azure AI Engineer Associate Certification. It begins with an introduction and an exam guide breakdown, setting the stage for a deep dive into the technical and practical aspects of Azure AI.</p>\n<p>Here are the key sections of the course:</p>\n<ol>\n<li><p><strong>Setup</strong>: Learn how to set up your development environment and get acquainted with OpenAI Studio and AI Studio.</p>\n</li>\n<li><p><strong>Gen AI Primer</strong>: Understand the differences between AI and Generative AI, foundational models, large language models, and the intricacies of transformer architecture, tokenization, embeddings, and attention mechanisms.</p>\n</li>\n<li><p><strong>ML and AI Concepts</strong>: Explore supervised and unsupervised learning, neural networks, deep learning, and the tools like Jupyter Notebooks that facilitate AI development.</p>\n</li>\n<li><p><strong>Responsible AI</strong>: Learn about the principles of responsible AI, including fairness, reliability, privacy, inclusiveness, transparency, and accountability. Learn about the Responsible AI Standard V2 and how to apply these guidelines in real-world scenarios.</p>\n</li>\n<li><p><strong>Azure AI Services</strong>: Gain hands-on experience with Azure AI Services, including setup, diagnostic logging, and the differences between Azure AI Services and Azure AI Studio. Explore Azure OpenAI Service models, deployment types, and prompt engineering.</p>\n</li>\n<li><p><strong>Azure AI Search</strong>: Discover the capabilities of Azure AI Search, including RAG, document cracking, HNSW, and semantic ranking.</p>\n</li>\n<li><p><strong>Text Analytics and Computer Vision</strong>: Learn about natural language processing, sentiment analysis, PII extraction, and the capabilities of Azure AI Vision Studio.</p>\n</li>\n<li><p><strong>Custom Vision and Document Intelligence</strong>: Understand custom vision project types, features, and object detection, as well as Azure AI Document Intelligence and form recognition.</p>\n</li>\n<li><p><strong>Speech API and AI Video Indexer</strong>: Explore the Speech API and AI Video Indexer to enhance your AI solutions with audio and video processing capabilities.</p>\n</li>\n<li><p><strong>Content Safety and Language Understanding</strong>: Implement content moderation solutions and explore language understanding with LUIS and QnA Maker.</p>\n</li>\n<li><p><strong>Face Service and Cleanup</strong>: Learn about the Face Service and how to effectively clean up your AI projects.</p>\n</li>\n</ol>\n<h3 id=\"heading-certification-overview\">Certification Overview</h3>\n<p>As a Microsoft Azure AI engineer, you will be responsible for building, managing, and deploying AI solutions that leverage Azure AI. This role involves participating in all phases of AI solutions development, from requirements definition and design to deployment, integration, and maintenance. You will work closely with solution architects, data scientists, data engineers, and other specialists to build secure, end-to-end AI solutions.</p>\n<p>The skills measured in the certification include planning and managing an Azure AI solution, implementing content moderation, computer vision, natural language processing, knowledge mining, document intelligence, and generative AI solutions.</p>\n<h3 id=\"heading-get-started\">Get Started</h3>\n<p>To start your journey towards becoming an Azure AI Engineer Associate, watch the <a target=\"_blank\" href=\"https://youtu.be/scJ4mobwjBQ\">full course on the freeCodeCamp.org YouTube channel</a> (14-hour watch).</p>\n<div class=\"embed-wrapper\"><div class=\"embed-loading\"><div class=\"loadingRow\"></div><div class=\"loadingRow\"></div></div><a class=\"embed-card\" href=\"https://youtu.be/scJ4mobwjBQ\">https://youtu.be/scJ4mobwjBQ</a></div>\n"
+            },
+            "seo": {
+              "description": null
+            },
+            "publishedAt": "2024-09-10T18:45:40.504Z",
+            "updatedAt": null
+          }
+        },
+        {
+          "node": {
+            "id": "66db21dc4fe490d5a33e959d",
+            "slug": "surviving-40-years-in-tech-jack-herrington-podcast-140",
+            "title": "Surviving 40 years in the software industry [Interview with Jack Herrington Podcast #140]",
+            "author": {
+              "id": "5dfa3725066598ab2752cc5d",
+              "username": "quincy",
+              "name": "Quincy Larson",
+              "bio": {
+                "text": ""
+              },
+              "tagline": "Teacher at freeCodeCamp.org",
+              "profilePicture": "https://cdn.hashnode.com/res/hashnode/image/upload/v1640878938509/PLqvxeH9g.jpeg",
+              "socialMediaLinks": {
+                "website": "https://www.freecodecamp.org",
+                "twitter": "https://www.twitter.com/ossia",
+                "facebook": ""
+              },
+              "location": ""
+            },
+            "tags": [
+              {
+                "id": "56744722958ef13879b950d3",
+                "name": "podcast",
+                "slug": "podcast"
+              },
+              {
+                "id": "57bdae5c93309a25047c5f7d",
+                "name": "learn to code",
+                "slug": "learn-to-code"
+              }
+            ],
+            "coverImage": {
+              "url": "https://cdn.hashnode.com/res/hashnode/image/upload/v1725637064637/247793ab-f250-4618-9e14-b2ec1261d022.png"
+            },
+            "brief": "On this week's episode of the podcast, I interview Jack Herrington. As a kid he had to work to overcome Dyslexia and didn't have good enough grades to get into college. Despite this, he's worked as a software engineer for more than 40 years at compan...",
+            "readTimeInMinutes": 2,
+            "content": {
+              "html": "<p>On this week's episode of the podcast, I interview Jack Herrington. As a kid he had to work to overcome Dyslexia and didn't have good enough grades to get into college. Despite this, he's worked as a software engineer for more than 40 years at companies like Nike, Adobe, and Walmart.</p>\n<p>He also runs the popular Blue Collar Coder YouTube channel.</p>\n<p>We talk about:</p>\n<ul>\n<li><p>How Jack struggled with Dyslexia, had terrible grades that couldn't get him into college, but got really into GameDev in the early 1980s</p>\n</li>\n<li><p>Early developer job opportunities that took his family from his home town in Pennsylvania to Melbourne Australia</p>\n</li>\n<li><p>How he started blogging as he learned, and ultimately published 6 programming books</p>\n</li>\n</ul>\n<p>Can you guess what song I'm playing on my bass during the intro? It's from a 1979 New Wave song.</p>\n<p>Also, I want to thank the 10,443 kind people who support our charity each month, and who make this podcast possible. You can join them and support our mission at: <a target=\"_blank\" href=\"https://www.freecodecamp.org/donate\">https://www.freecodecamp.org/donate</a></p>\n<p>You can watch the interview on YouTube:</p>\n<div class=\"embed-wrapper\"><div class=\"embed-loading\"><div class=\"loadingRow\"></div><div class=\"loadingRow\"></div></div><a class=\"embed-card\" href=\"https://youtu.be/ZMoio54hPsc?si=RIDBoYHMYoD-HnI_\">https://youtu.be/ZMoio54hPsc?si=RIDBoYHMYoD-HnI_</a></div>\n<p> </p>\n<p>Or you can listen to the podcast in Apple Podcasts, Spotify, or your favorite podcast app. Be sure to follow the freeCodeCamp Podcast there so you'll get new episodes each Friday.</p>\n<p>Links we talk about during our conversation:</p>\n<p>The Blue Collar Coder YouTube channel: <a target=\"_blank\" href=\"https://www.youtube.com/@jherr\">https://www.youtube.com/@jherr</a></p>\n<p>Jack on Twitter: <a target=\"_blank\" href=\"https://twitter.com/jherr\">https://twitter.com/jherr</a></p>\n<p>1984 ad from Apple: <a target=\"_blank\" href=\"https://www.youtube.com/watch?v=VtvjbmoDx-I\">https://www.youtube.com/watch?v=VtvjbmoDx-I</a></p>\n<p>Edward Tufte, the academic Jack mentions: <a target=\"_blank\" href=\"https://en.wikipedia.org/wiki/Edward_Tufte\">https://en.wikipedia.org/wiki/Edward_Tufte</a></p>\n<p>Ben Affleck's funny drunk DVD commentary on Armageddon movie (this contains profanity so don't listen to with young kids around): <a target=\"_blank\" href=\"https://www.tiktok.com/@alltherightmovies/video/7238180210527505690?lang=en\">https://www.tiktok.com/@alltherightmovies/video/7238180210527505690?lang=en</a></p>\n"
+            },
+            "seo": {
+              "description": null
+            },
+            "publishedAt": "2024-09-06T15:38:04.955Z",
+            "updatedAt": "2024-09-06T15:38:51.733Z"
+          }
+        },
+        {
+          "node": {
             "id": "66d4608b230dff016690584b",
             "slug": "what-is-recursion",
             "title": "How Does Recursion Work? Explained with Code Examples",

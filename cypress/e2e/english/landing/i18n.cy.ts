@@ -31,7 +31,7 @@ const selectors = {
   }
 };
 
-describe('Landing i18n', () => {
+describe('Landing i18n (Hashnode sourced)', () => {
   beforeEach(() => {
     cy.visit('/');
   });
