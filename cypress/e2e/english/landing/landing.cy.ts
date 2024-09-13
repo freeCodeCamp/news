@@ -27,6 +27,14 @@ describe('Landing (Hashnode sourced)', () => {
       cy.get('footer').should('be.visible');
     });
 
+    // Because all templates readers see use `default.njk` as a base,
+    // we can test the favicon here
+    it('should have a favicon', () => {
+      cy.get('head link[rel="icon"]')
+        .should('have.attr', 'href')
+        .should('equal', commonExpectedMeta.favicon.ico);
+    });
+
     it('the default banner text should be default if not authenticated', function () {
       cy.get(selectors.banner).contains(
         'Learn to code — free 3,000-hour curriculum'
