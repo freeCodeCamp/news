@@ -5,6 +5,7 @@
 {% set canonicalUrl = post.path | htmlBaseUrl(site.url) %}
 {% set codeinjection_head = post.codeinjection_head %}
 {% set codeinjection_foot = post.codeinjection_foot %}
+{% set fCCAuthorRegEx = r/^freeCodeCamp(\.org)?$/ %}
 {% set primaryTag = post.tags[0] %}
 {% set adsEnabled = secrets.adsEnabled %}
 {# Include 2 ads by default for all articles. Then add 1 ad for every 2 mins of
@@ -31,7 +32,7 @@ time #}
                     <h1 class="post-full-title" data-test-label="post-full-title">{{ title }}</h1>
                 </header>
                 <div class="post-full-author-header" data-test-label="author-header-no-bio">
-                    {% if post.primary_author.name != "freeCodeCamp.org" %}
+                    {% if not fCCAuthorRegEx.test(post.primary_author.name) %}
                         {% if post.original_post.primary_author %}
                             {{ byline(post.primary_author, false, false, 'translator') }}
                             {{ byline(post.original_post.primary_author, false, false, 'author', post.original_post.locale_i18n) }}
@@ -72,7 +73,7 @@ time #}
                         {% endif %}
                     </div>
                     <hr />
-                    {% if post.primary_author.name != "freeCodeCamp.org" %}
+                    {% if not fCCAuthorRegEx.test(post.primary_author.name) %}
                         <div class="post-full-author-header" data-test-label="author-header-with-bio">
                             {% if post.original_post %}
                                 {{ byline(post.primary_author, true, true, 'translator') }}
