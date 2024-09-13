@@ -1,25 +1,30 @@
 const commonExpectedMeta = require('../../../fixtures/common-expected-meta.json');
-const hashnodePageExpectedMeta = {
-  title: 'Thank You for Being a Supporter',
-  url: 'http://localhost:8080/news/thank-you-for-being-a-supporter/',
+const ghostPageExpectedMeta = {
+  title: 'Gracias por ser un partidario',
+  url: 'http://localhost:8080/espanol/news/gracias-por-ser-un-partidario/',
   excerpt:
-    "freeCodeCamp is a highly-efficient education NGO. This year alone, we've provided million hours of free education to people around the world. At our charity's current operating budget, every dollar you donate to freeCodeCamp translates into 50 hours worth of technology education. When you donate to freeCodeCamp, you help people learn"
+    'freeCodeCamp es una ONG educativa muy eficiente. Solo este año, hemos brindado millones de horas de educación gratuita a personas de todo el mundo. Con el presupuesto operativo actual de nuestra organización benéfica, cada dólar que donas a freeCodeCamp se traduce en 50 horas de educación tecnológica. Cuando donas a'
 };
 
-describe('Page metadata (Hashnode sourced)', () => {
+describe('Page metadata (Ghost sourced)', () => {
+  before(() => {
+    // Update baseUrl to include current language
+    Cypress.config('baseUrl', 'http://localhost:8080/espanol/news/');
+  });
+
   beforeEach(() => {
-    cy.visit('/thank-you-for-being-a-supporter/');
+    cy.visit('/gracias-por-ser-un-partidario/');
   });
 
   it('<title>', () => {
-    cy.title().should('eq', hashnodePageExpectedMeta.title);
+    cy.title().should('eq', ghostPageExpectedMeta.title);
   });
 
   it('<meta> description', () => {
     cy.get('head meta[name="description"]').should(
       'have.attr',
       'content',
-      hashnodePageExpectedMeta.excerpt
+      ghostPageExpectedMeta.excerpt
     );
   });
 
@@ -27,7 +32,7 @@ describe('Page metadata (Hashnode sourced)', () => {
     cy.get('head link[rel="canonical"]').should(
       'have.attr',
       'href',
-      hashnodePageExpectedMeta.url
+      ghostPageExpectedMeta.url
     );
   });
 
@@ -59,7 +64,7 @@ describe('Page metadata (Hashnode sourced)', () => {
     cy.get('head meta[property="og:title"]').should(
       'have.attr',
       'content',
-      hashnodePageExpectedMeta.title
+      ghostPageExpectedMeta.title
     );
   });
 
@@ -67,7 +72,7 @@ describe('Page metadata (Hashnode sourced)', () => {
     cy.get('head meta[property="og:description"]').should(
       'have.attr',
       'content',
-      hashnodePageExpectedMeta.excerpt
+      ghostPageExpectedMeta.excerpt
     );
   });
 
@@ -75,8 +80,24 @@ describe('Page metadata (Hashnode sourced)', () => {
     cy.get('head meta[property="og:url"]').should(
       'have.attr',
       'content',
-      hashnodePageExpectedMeta.url
+      ghostPageExpectedMeta.url
     );
+  });
+
+  it('<meta> article:published_time', () => {
+    cy.get('head meta[property="article:published_time"]').should($metaEl => {
+      const publishedTimeISO = new Date($metaEl.attr('content')).toISOString();
+
+      expect(publishedTimeISO).to.equal('2024-09-13T10:11:05.000Z');
+    });
+  });
+
+  it('<meta> article:modified_time', () => {
+    cy.get('head meta[property="article:modified_time"]').should($metaEl => {
+      const publishedTimeISO = new Date($metaEl.attr('content')).toISOString();
+
+      expect(publishedTimeISO).to.equal('2024-09-13T10:11:05.000Z');
+    });
   });
 
   it('<meta> article:publisher', () => {
@@ -99,7 +120,7 @@ describe('Page metadata (Hashnode sourced)', () => {
     cy.get('head meta[name="twitter:title"]').should(
       'have.attr',
       'content',
-      hashnodePageExpectedMeta.title
+      ghostPageExpectedMeta.title
     );
   });
 
@@ -107,7 +128,7 @@ describe('Page metadata (Hashnode sourced)', () => {
     cy.get('head meta[name="twitter:description"]').should(
       'have.attr',
       'content',
-      hashnodePageExpectedMeta.excerpt
+      ghostPageExpectedMeta.excerpt
     );
   });
 
@@ -115,7 +136,7 @@ describe('Page metadata (Hashnode sourced)', () => {
     cy.get('head meta[name="twitter:url"]').should(
       'have.attr',
       'content',
-      hashnodePageExpectedMeta.url
+      ghostPageExpectedMeta.url
     );
   });
 
@@ -127,8 +148,7 @@ describe('Page metadata (Hashnode sourced)', () => {
     );
   });
 
-  // Hashnode pages don't have an author associated with them, so we
-  // handle this in the doc.njk template directly
+  // This page was authored by the freeCodeCamp.org owner account
   it('<meta> twitter:data1', () => {
     cy.get('head meta[name="twitter:data1"]').should(
       'have.attr',
@@ -141,7 +161,7 @@ describe('Page metadata (Hashnode sourced)', () => {
     cy.get('head meta[name="twitter:site"]').should(
       'have.attr',
       'content',
-      commonExpectedMeta.english.twitterUsername
+      commonExpectedMeta.espanol.twitterUsername
     );
   });
 });
