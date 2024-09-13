@@ -30,7 +30,7 @@ module.exports = async () => {
     cover_image: coverImageURL,
     og_image: coverImageURL,
     twitter_image: coverImageURL,
-    iconURL: iconURL
+    icon: iconURL
   };
 
   // Determine image dimensions before server runs for structured data
