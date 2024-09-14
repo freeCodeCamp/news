@@ -1,6 +1,7 @@
 {% from "partials/role-list-item.njk" import roleListItem %}
 
 {% macro card(post, index) %}
+    {% set fCCAuthorRegEx = r/^freeCodeCamp(\.org)?$/ %}
     {% set lazyLoad = true if (index >= 4) else false %}
     {% set primaryTag = post.tags[0] %}
 
@@ -40,7 +41,7 @@
                 </header>
             </div>
             <footer class="post-card-meta">
-                {% if post.primary_author.name === "freeCodeCamp.org" %}
+                {% if fCCAuthorRegEx.test(post.primary_author.name) %}
                     <time class="meta-item-single" datetime="{{ post.published_at }}">{% timeAgo post.published_at %}</time>
                 {% else %}
                     <ul class="author-list" data-test-label="author-list">
