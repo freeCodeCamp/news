@@ -11,24 +11,35 @@ const selectors = {
   mathJaxScript: "[data-test-label='mathjax-script']"
 };
 
-describe('Post (Hashnode sourced)', () => {
+describe('Post (Ghost sourced)', () => {
+  before(() => {
+    // Update baseUrl to include current language
+    Cypress.config('baseUrl', 'http://localhost:8080/espanol/news/');
+  });
+
   context('General tests', () => {
     beforeEach(() => {
-      cy.visit('/freecodecamp-press-books-handbooks/');
+      cy.visit(
+        '/como-funciona-el-operado-de-signo-de-interrogacion-javascript/'
+      );
     });
 
     it('should render', () => {
-      cy.contains('Introducing freeCodeCamp Press – Free Books for Developers');
+      cy.contains(
+        'Cómo funciona el operador de signo de interrogación (?) en JavaScript'
+      );
     });
 
-    it('should contain the fCC source meta tag with Hashnode as a source', () => {
-      cy.get(selectors.fccSource).should('have.attr', 'content', 'Hashnode');
+    it('should contain the fCC source meta tag with Ghost as a source', () => {
+      cy.get(selectors.fccSource).should('have.attr', 'content', 'Ghost');
     });
   });
 
   context('Author with a Twitter handle', () => {
     beforeEach(() => {
-      cy.visit('/freecodecamp-press-books-handbooks/');
+      cy.visit(
+        '/como-funciona-el-operado-de-signo-de-interrogacion-javascript/'
+      );
     });
 
     it('should display the social row', () => {
@@ -41,7 +52,7 @@ describe('Post (Hashnode sourced)', () => {
         .should('include', 'window.open')
         .should(
           'include',
-          'https://twitter.com/intent/tweet?text=Thank%20you%20%40abbeyrenn%20for%20writing%20this%20helpful%20article.%0A%0AIntroducing%20freeCodeCamp%20Press%20%E2%80%93%20Free%20Books%20for%20Developers%0A%0Ahttp://localhost:8080/news/freecodecamp-press-books-handbooks/'
+          'https://twitter.com/intent/tweet?text=Gracias%20%40RafaelDavisH%20por%20escribir%20este%20%C3%BAtil%20art%C3%ADculo.%0A%0AC%C3%B3mo%20funciona%20el%20operador%20de%20signo%20de%20interrogaci%C3%B3n%20(%3F)%20en%20JavaScript%0A%0Ahttp://localhost:8080/espanol/news/como-funciona-el-operado-de-signo-de-interrogacion-javascript/'
         )
         .should('include', 'share-twitter')
         .should('include', 'width=550, height=235')
@@ -51,7 +62,7 @@ describe('Post (Hashnode sourced)', () => {
 
   context('Author with no Twitter handle', () => {
     beforeEach(() => {
-      cy.visit('/the-c-programming-handbook-for-beginners/');
+      cy.visit('/ghost-no-author-profile-pic/');
     });
 
     it('should display the social row', () => {
@@ -64,7 +75,7 @@ describe('Post (Hashnode sourced)', () => {
         .should('include', 'window.open')
         .should(
           'include',
-          'https://twitter.com/intent/tweet?text=The%20C%20Programming%20Handbook%20for%20Beginners%0A%0Ahttp://localhost:8080/news/the-c-programming-handbook-for-beginners/'
+          'https://twitter.com/intent/tweet?text=Ghost%20No%20Author%20Profile%20Pic%0A%0Ahttp://localhost:8080/espanol/news/ghost-no-author-profile-pic/'
         )
         .should('include', 'share-twitter')
         .should('include', 'width=550, height=235')
@@ -74,26 +85,26 @@ describe('Post (Hashnode sourced)', () => {
 
   context('Author with no profile image', () => {
     beforeEach(() => {
-      cy.visit('/the-c-programming-handbook-for-beginners/');
+      cy.visit('/ghost-no-author-profile-pic/');
     });
 
-    it("should show a default image from Hashnode's CDN in the bylines at the top and bottom of the article", () => {
-      cy.get<HTMLImageElement>(selectors.authorProfileImage).then($el => {
-        expect($el[0].src).to.include('cdn.hashnode.com');
-        expect($el[0].tagName.toLowerCase()).to.equal('img');
-      });
+    it('should show the avatar SVG in the bylines at the top and bottom of the article', () => {
+      cy.get(selectors.ghostDefaultAvatar).then($el =>
+        expect($el[0].tagName.toLowerCase()).to.equal('svg')
+      );
     });
 
-    it("the default image in the bylines at the top and bottom of the article should contain an `alt` attribute with the author's name", () => {
-      cy.get<HTMLImageElement>(selectors.authorProfileImage).then($el =>
-        expect($el[0].alt).to.equal('Dionysia Lemonaki')
+    it("all avatar SVGs should contain a `title` element with the author's name", () => {
+      cy.get(selectors.ghostDefaultAvatar).contains(
+        'title',
+        'Mrugesh Mohapatra'
       );
     });
   });
 
   context('No feature image', () => {
     beforeEach(() => {
-      cy.visit('/hashnode-no-feature-image/');
+      cy.visit('/ghost-no-feature-image/');
     });
 
     it('posts with no feature image should fall back to the default fCC indigo image', () => {
@@ -110,7 +121,9 @@ describe('Post (Hashnode sourced)', () => {
   context('MathJax', () => {
     context('Contains MathJax equations', () => {
       beforeEach(() => {
-        cy.visit('/how-do-numerical-conversions-work/');
+        cy.visit(
+          '/como-funcionan-las-conversiones-numericas-en-los-sistemas-informaticos-explicado-con-ejemplos/'
+        );
       });
 
       it('should have the MathJax script', () => {
@@ -124,7 +137,9 @@ describe('Post (Hashnode sourced)', () => {
 
     context('Does not contain MathJax equations', () => {
       beforeEach(() => {
-        cy.visit('/freecodecamp-press-books-handbooks/');
+        cy.visit(
+          '/como-funciona-el-operado-de-signo-de-interrogacion-javascript/'
+        );
       });
 
       it('should not have the MathJax script', () => {

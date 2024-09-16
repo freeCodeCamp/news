@@ -9,9 +9,10 @@ const selectors = {
 };
 
 describe('Ads', () => {
+  // Tests here should apply to all posts, regardless of the source
   context('General tests', () => {
     beforeEach(() => {
-      cy.visit('/carbon-neutral-web3-curriculum-plans/');
+      cy.visit('/how-do-numerical-conversions-work/');
     });
 
     it('the adsense script should be within the `head` element', () => {
@@ -22,7 +23,7 @@ describe('Ads', () => {
   context('Not authenticated', () => {
     context('Ad wrappers and containers', () => {
       beforeEach(() => {
-        cy.visit('/carbon-neutral-web3-curriculum-plans/');
+        cy.visit('/how-do-numerical-conversions-work/');
       });
 
       it('the post should contain at least one ad', () => {
@@ -60,31 +61,6 @@ describe('Ads', () => {
           expect($el.attr('data-ad-slot')).to.equal('1234567890');
           expect($el.attr('data-ad-format')).to.equal('auto');
           expect($el.attr('data-full-width-responsive')).to.equal('true');
-        });
-      });
-    });
-
-    context('Images and videos', () => {
-      beforeEach(() => {
-        cy.visit('/ad-layout-images-and-videos/');
-      });
-
-      it('All Ghost editor images in the post body should have a max-width of 100%', () => {
-        cy.get('.ad-layout .post-full-content .kg-image-card img').each($el => {
-          expect($el.css('max-width')).to.equal('100%');
-        });
-      });
-
-      it('All markdown images in the post body should have a max-width of 100%', () => {
-        cy.get('.ad-layout .post-full-content p img').each($el => {
-          expect($el.css('max-width')).to.equal('100%');
-        });
-      });
-
-      // Note: HTML and markdown video embeds are rendered the same way
-      it('All HTML videos in the post body should have a max-width of 100%', () => {
-        cy.get('video').each($el => {
-          expect($el.css('max-width')).to.equal('100%');
         });
       });
     });

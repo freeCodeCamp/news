@@ -6,10 +6,17 @@ const selectors = {
   adText: "[data-test-label='ad-text']"
 };
 
-describe('Post i18n (Hashnode sourced)', () => {
+describe('Post i18n (Ghost sourced)', () => {
+  before(() => {
+    // Update baseUrl to include current language
+    Cypress.config('baseUrl', 'http://localhost:8080/espanol/news/');
+  });
+
   context('General tests', () => {
     beforeEach(() => {
-      cy.visit('/freecodecamp-press-books-handbooks/');
+      cy.visit(
+        '/como-funciona-el-operado-de-signo-de-interrogacion-javascript/'
+      );
     });
 
     it('the learn CTA section should not render its i18n keys', () => {
@@ -29,7 +36,9 @@ describe('Post i18n (Hashnode sourced)', () => {
 
   context('Author with Twitter', () => {
     beforeEach(() => {
-      cy.visit('/freecodecamp-press-books-handbooks/');
+      cy.visit(
+        '/como-funciona-el-operado-de-signo-de-interrogacion-javascript/'
+      );
     });
 
     it('the social row CTA should not render its i18n keys', () => {
@@ -48,7 +57,7 @@ describe('Post i18n (Hashnode sourced)', () => {
 
   context('Author with no Twitter or bio', () => {
     beforeEach(() => {
-      cy.visit('/the-c-programming-handbook-for-beginners/');
+      cy.visit('/ghost-no-author-profile-pic/');
     });
 
     it('the social row CTA should not render its i18n keys', () => {
