@@ -1,12 +1,17 @@
 const commonExpectedMeta = require('../../../fixtures/common-expected-meta.json');
 const tagExpectedMeta = {
-  title: 'freeCodeCamp.org - freeCodeCamp.org',
-  url: 'http://localhost:8080/news/tag/freecodecamp/',
+  title: 'freeCodeCamp - freeCodeCamp.org',
+  url: 'http://localhost:8080/espanol/news/tag/freecodecamp/',
   description:
-    'Browse thousands of programming tutorials written by experts. Learn Web Development, Data Science, DevOps, Security, and get developer career advice.'
+    'Descubre miles de cursos de programación escritos por expertos. Aprende Desarrollo Web, Ciencia de Datos, DevOps, Seguridad y obtén asesoramiento profesional para desarrolladores.'
 };
 
-describe('Tag page metadata (Hashnode sourced)', () => {
+describe('Tag page metadata (Ghost sourced)', () => {
+  before(() => {
+    // Update baseUrl to include current language
+    Cypress.config('baseUrl', 'http://localhost:8080/espanol/news/');
+  });
+
   beforeEach(() => {
     cy.visit('/tag/freecodecamp/');
   });
@@ -148,7 +153,7 @@ describe('Tag page metadata (Hashnode sourced)', () => {
     cy.get('head meta[name="twitter:site"]').should(
       'have.attr',
       'content',
-      commonExpectedMeta.english.twitterUsername
+      commonExpectedMeta.espanol.twitterUsername
     );
   });
 });

@@ -1,12 +1,17 @@
 const commonExpectedJsonLd = require('../../../fixtures/common-expected-json-ld.json');
 const tagExpectedJsonLd = {
   '@type': 'Series',
-  url: 'http://localhost:8080/news/tag/freecodecamp/',
-  name: 'freeCodeCamp.org'
+  url: 'http://localhost:8080/espanol/news/tag/freecodecamp/',
+  name: 'freeCodeCamp'
 };
 let jsonLdObj;
 
-describe('Tag page structured data (JSON-LD – Hashnode sourced)', () => {
+describe('Tag page structured data (JSON-LD – Ghost sourced)', () => {
+  before(() => {
+    // Update baseUrl to include current language
+    Cypress.config('baseUrl', 'http://localhost:8080/espanol/news/');
+  });
+
   beforeEach(() => {
     cy.visit('/tag/freecodecamp/'); // This tag contains a mix of Ghost and Hashnode sourced posts
 
@@ -26,13 +31,13 @@ describe('Tag page structured data (JSON-LD – Hashnode sourced)', () => {
 
   it('matches the expected publisher values', () => {
     expect(jsonLdObj.publisher).to.deep.equal(
-      commonExpectedJsonLd.english.publisher
+      commonExpectedJsonLd.espanol.publisher
     );
   });
 
   it('matches the expected mainEntityOfPage values', () => {
     expect(jsonLdObj.mainEntityOfPage).to.deep.equal(
-      commonExpectedJsonLd.english.mainEntityOfPage
+      commonExpectedJsonLd.espanol.mainEntityOfPage
     );
   });
 });

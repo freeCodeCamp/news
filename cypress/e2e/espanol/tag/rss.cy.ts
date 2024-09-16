@@ -1,8 +1,13 @@
 const { decodeHTML, XMLToDOM } = require('../../../support/utils/rss');
 const commonExpectedMeta = require('../../../fixtures/common-expected-meta.json');
-const expectedTagTitle = `freeCodeCamp.org - ${commonExpectedMeta.siteName}`;
+const expectedTagTitle = `freeCodeCamp - ${commonExpectedMeta.siteName}`;
 const feedPath = '/tag/freecodecamp/rss.xml';
-describe('Author page RSS feed (Hashnode sourced)', () => {
+describe('Author page RSS feed (Ghost sourced)', () => {
+  before(() => {
+    // Update baseUrl to include current language
+    Cypress.config('baseUrl', 'http://localhost:8080/espanol/news/');
+  });
+
   it('should start with a UTF-8 encoding declaration', () => {
     cy.request(feedPath).then(async res => {
       expect(res.body.startsWith('<?xml version="1.0" encoding="UTF-8"?>')).to
@@ -19,7 +24,7 @@ describe('Author page RSS feed (Hashnode sourced)', () => {
     });
   });
 
-  it(`should have the channel description <![CDATA[ ${commonExpectedMeta.english.description} ]]>`, () => {
+  it(`should have the channel description <![CDATA[ ${commonExpectedMeta.espanol.description} ]]>`, () => {
     cy.request(feedPath).then(async res => {
       const feed = XMLToDOM(res.body);
       const channelDescription = feed
@@ -27,7 +32,7 @@ describe('Author page RSS feed (Hashnode sourced)', () => {
         .innerHTML.trim();
 
       expect(channelDescription).to.equal(
-        `<![CDATA[ ${commonExpectedMeta.english.description} ]]>`
+        `<![CDATA[ ${commonExpectedMeta.espanol.description} ]]>`
       );
     });
   });
@@ -37,7 +42,7 @@ describe('Author page RSS feed (Hashnode sourced)', () => {
       const feed = XMLToDOM(res.body);
       const channelLink = feed.querySelector('channel link').innerHTML.trim();
 
-      expect(channelLink).to.equal(`${commonExpectedMeta.english.siteUrl}`);
+      expect(channelLink).to.equal(`${commonExpectedMeta.espanol.siteUrl}`);
     });
   });
 
@@ -56,7 +61,7 @@ describe('Author page RSS feed (Hashnode sourced)', () => {
 
       expect(channelImageURL).to.equal(commonExpectedMeta.favicon.png);
       expect(channelImageTitle).to.equal(expectedTagTitle);
-      expect(channelImageLink).to.equal(commonExpectedMeta.english.siteUrl);
+      expect(channelImageLink).to.equal(commonExpectedMeta.espanol.siteUrl);
     });
   });
 
@@ -81,12 +86,12 @@ describe('Author page RSS feed (Hashnode sourced)', () => {
     });
   });
 
-  it('should return 1 articles', () => {
+  it('should return 2 articles', () => {
     cy.request(feedPath).then(async res => {
       const feed = XMLToDOM(res.body);
       const articles = feed.querySelectorAll('item');
 
-      expect([...articles]).to.have.lengthOf(1);
+      expect([...articles]).to.have.lengthOf(2);
     });
   });
 });
