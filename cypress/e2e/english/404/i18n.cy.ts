@@ -2,8 +2,8 @@ const selectors = {
   errorMessage: "[data-test-label='error-message']"
 };
 
+// Tests here should apply to all 404 pages, regardless of the source
 describe('404 i18n', () => {
-  // Tests here should apply to all 404 pages, regardless of the source
   beforeEach(() => {
     cy.visit('/testing-testing-1-2/', { failOnStatusCode: false });
   });

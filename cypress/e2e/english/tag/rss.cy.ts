@@ -2,6 +2,7 @@ const { decodeHTML, XMLToDOM } = require('../../../support/utils/rss');
 const commonExpectedMeta = require('../../../fixtures/common-expected-meta.json');
 const expectedTagTitle = `freeCodeCamp.org - ${commonExpectedMeta.siteName}`;
 const feedPath = '/tag/freecodecamp/rss.xml';
+
 describe('Author page RSS feed (Hashnode sourced)', () => {
   it('should start with a UTF-8 encoding declaration', () => {
     cy.request(feedPath).then(async res => {

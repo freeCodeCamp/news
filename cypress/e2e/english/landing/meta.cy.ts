@@ -1,6 +1,6 @@
 const commonExpectedMeta = require('../../../fixtures/common-expected-meta.json');
 
-describe('Landing metadata', () => {
+describe('Landing metadata (Hashnode sourced)', () => {
   beforeEach(() => {
     cy.visit('/');
   });

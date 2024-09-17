@@ -28,7 +28,7 @@ const pageExpectedJsonLd = {
 };
 let jsonLdObj;
 
-describe('Page structured data (JSON-LD – Hashnode sourced)', () => {
+describe('Page structured data (JSON-LD – Ghost sourced)', () => {
   before(() => {
     // Update baseUrl to include current language
     Cypress.config('baseUrl', 'http://localhost:8080/espanol/news/');

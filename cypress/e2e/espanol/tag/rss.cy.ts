@@ -2,6 +2,7 @@ const { decodeHTML, XMLToDOM } = require('../../../support/utils/rss');
 const commonExpectedMeta = require('../../../fixtures/common-expected-meta.json');
 const expectedTagTitle = `freeCodeCamp - ${commonExpectedMeta.siteName}`;
 const feedPath = '/tag/freecodecamp/rss.xml';
+
 describe('Author page RSS feed (Ghost sourced)', () => {
   before(() => {
     // Update baseUrl to include current language

@@ -1,7 +1,7 @@
-describe('Landing structured data (JSON-LD)', () => {
-  const commonExpectedJsonLd = require('../../../fixtures/common-expected-json-ld.json');
-  let jsonLdObj;
+const commonExpectedJsonLd = require('../../../fixtures/common-expected-json-ld.json');
+let jsonLdObj;
 
+describe('Landing structured data (JSON-LD – Ghost sourced)', () => {
   before(() => {
     // Update baseUrl to include current language
     Cypress.config('baseUrl', 'http://localhost:8080/espanol/news/');

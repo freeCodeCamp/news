@@ -5,8 +5,8 @@ const selectors = {
   postCard: "[data-test-label='post-card']"
 };
 
+// Tests here should apply to all search results pages, which are built dynamically from calls to Algolia
 describe('Search results', () => {
-  // Tests here should apply to all search results pages, which are built dynamically from calls to Algolia
   beforeEach(() => {
     // Note: 11ty's dev server expects a trailing slash
     // immediately after `/search`, before the `query` URL

@@ -3,7 +3,6 @@ const selectors = {
   fullMetaDate: "[data-test-label='post-full-meta-date']",
   featureImage: "[data-test-label='feature-image']",
   authorProfileImage: "[data-test-label='profile-image']",
-  ghostDefaultAvatar: "[data-test-label='avatar']",
   postFullTitle: "[data-test-label='post-full-title']",
   postContent: "[data-test-label='post-content']",
   socialRowCTA: "[data-test-label='social-row-cta']",

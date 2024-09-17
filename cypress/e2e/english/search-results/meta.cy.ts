@@ -1,7 +1,7 @@
 const commonExpectedMeta = require('../../../fixtures/common-expected-meta.json');
 
+// Tests here should apply to search result page meta, regardless of the source
 describe('Landing metadata', () => {
-  // Tests here should apply to search result page meta, regardless of the source
   beforeEach(() => {
     cy.visit('/search/?query=mock%20search%20results');
   });
