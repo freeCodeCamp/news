@@ -102,7 +102,7 @@
     "prettier": "3.3.3",
     "probe-image-size": "7.2.3",
     "shx": "0.3.4",
-    "terser": "5.32.0",
+    "terser": "5.33.0",
     "typescript": "5.5.4"
   },
   "lint-staged": {
