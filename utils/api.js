@@ -10,7 +10,9 @@ const ghostAPI = process.env.DO_NOT_FETCH_FROM_GHOST
   ? null
   : new GhostContentAPI({ url, key, version });
 
-const hashnodeHost = process.env[`${upperLocale}_HASHNODE_HOST`];
+const hashnodeHost = !process.env[`${upperLocale}_HASHNODE_HOST`]
+  ? 'blog.hashnode.dev'
+  : process.env[`${upperLocale}_HASHNODE_HOST`];
 
 module.exports = {
   ghostAPI,
