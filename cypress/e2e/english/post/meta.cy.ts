@@ -2,27 +2,20 @@ const commonExpectedMeta = require('../../../fixtures/common-expected-meta.json'
 const postExpectedMeta = {
   title:
     'How Do Numerical Conversions Work in Computer Systems? Explained With Examples',
-  url: 'http://localhost:8080/news/como-funciona-el-operado-de-signo-de-interrogacion-javascript/',
+  url: 'http://localhost:8080/news/how-do-numerical-conversions-work/',
   image: {
     url: 'https://cdn.hashnode.com/res/hashnode/image/upload/v1715271341530/60608a00-2e63-434e-91e8-c766b171f6f7.png',
-    width: 1000,
-    height: 563
+    width: 1200,
+    height: 670
   },
   excerpt:
-    'Artículo original escrito por: Nishant Kumar [https://www.freecodecamp.org/news/author/nishant-kumar/] Artículo original: How the Question Mark (?) Operator Works in JavaScript [https://www.freecodecamp.org/news/how-the-question-mark-works-in-javascript/] Traducido y adaptado por: Rafael D. Hernandez [/espanol/news/author/rafael/] El operador de signo de interrogación o condicional, representado por a ?, es una de las características más potentes de JavaScript. El operador'
+    'Computers perform complex calculations when carrying out their assigned tasks. At the very core, the calculations boil down to operations like comparisons, assignments, and addition. Have you ever wondered how they are performed under the hood and wh...'
 };
 
 describe('Post metadata (Hashnode sourced)', () => {
-  before(() => {
-    // Update baseUrl to include current language
-    Cypress.config('baseUrl', 'http://localhost:8080/espanol/news/');
-  });
-
   context('General test cases', () => {
     beforeEach(() => {
-      cy.visit(
-        '/como-funciona-el-operado-de-signo-de-interrogacion-javascript/'
-      );
+      cy.visit('/how-do-numerical-conversions-work/');
     });
 
     it('<title>', () => {
@@ -246,7 +239,7 @@ describe('Post metadata (Hashnode sourced)', () => {
 
   context('Other test cases', () => {
     it('<meta> article:modified_time (for post that has **not** been updated)', () => {
-      cy.visit('/no-feature-image/');
+      cy.visit('/hashnode-no-feature-image/');
 
       cy.get('head meta[property="article:modified_time"]').should($metaEl => {
         const modifiedTimeISO = new Date($metaEl.attr('content')).toISOString();
