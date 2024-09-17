@@ -60,12 +60,6 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Login to Docker Hub
-        uses: docker/login-action@e92390c5fb421da1463c202d546fed0ec5c39f20 # v3
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_ACCESS_TOKEN }}
-
       - name: Start Ghost containers
         run: npm run start:containers
 
