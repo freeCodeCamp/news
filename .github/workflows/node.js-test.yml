@@ -45,13 +45,11 @@ jobs:
     env:
       BUILD_LANG: english
 
-      ENGLISH_GHOST_API_URL: ${{ secrets.CI_ENGLISH_GHOST_API_URL }}
-      ENGLISH_GHOST_API_VERSION: ${{ secrets.CI_ENGLISH_GHOST_API_VERSION }}
-      ENGLISH_GHOST_CONTENT_API_KEY: ${{ secrets.CI_ENGLISH_GHOST_CONTENT_API_KEY }}
-
       POSTS_PER_PAGE: ${{ secrets.POSTS_PER_PAGE }}
 
       SITE_DOMAIN: localhost:8080
+
+      DO_NOT_FETCH_FROM_GHOST: true
 
       LOCALE_FOR_UI: english
       LOCALE_FOR_GHOST: english
@@ -67,19 +65,6 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
-
-      - name: Login to Docker Hub
-        uses: docker/login-action@e92390c5fb421da1463c202d546fed0ec5c39f20 # v3
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_ACCESS_TOKEN }}
-
-      - name: Start English Ghost container
-        run: npm run start:containers --service english
-
-      - name: Sleep for 5 seconds
-        run: sleep 5s
-        shell: bash
 
       - name: Build English CI site
         run: npm run build:ci
