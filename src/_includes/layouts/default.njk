@@ -59,6 +59,8 @@
         {% block monetization %}
         {% endblock %}
 
+        {% include "partials/gtm-head.njk" %}
+        
         {# Dynamically load MathJax script #}
         {% block mathjax %}
         {% endblock %}
@@ -133,6 +135,9 @@
     {% else %}
         <body class="home-template">
     {% endif %}
+
+    {% include "partials/gtm-body.njk" %}
+
         <div class="site-wrapper">
             {% include "partials/site-nav.njk" %}
 
