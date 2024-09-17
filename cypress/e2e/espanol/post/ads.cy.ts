@@ -8,9 +8,14 @@ const selectors = {
   }
 };
 
-describe('Ads (Hashnode sourced)', () => {
+describe('Ads (Ghost sourced)', () => {
+  before(() => {
+    // Update baseUrl to include current language
+    Cypress.config('baseUrl', 'http://localhost:8080/espanol/news/');
+  });
+
   beforeEach(() => {
-    cy.visit('/how-do-numerical-conversions-work/');
+    cy.visit('/como-funciona-el-operado-de-signo-de-interrogacion-javascript/');
   });
 
   it('the adsense script should be within the `head` element', () => {
