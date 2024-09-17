@@ -14,17 +14,25 @@ const selectors = {
 };
 
 describe('Landing (Hashnode sourced)', () => {
-  beforeEach(() => {
-    cy.visit('/');
-    loadAllPosts();
-  });
-
   context('General tests', () => {
+    beforeEach(() => {
+      cy.visit('/');
+      loadAllPosts();
+    });
+
     // Tests here should apply to all landing pages, regardless of the source
     it('should render basic components', () => {
       cy.get('nav').should('be.visible');
       cy.get('.banner').should('be.visible');
       cy.get('footer').should('be.visible');
+    });
+
+    it('the fCC logo in the nav should link to the full URL of the landing page', () => {
+      cy.get(selectors.siteNavLogo).should(
+        'have.attr',
+        'href',
+        commonExpectedMeta.english.siteUrl
+      );
     });
 
     // Because all templates readers see use `default.njk` as a base,
@@ -85,15 +93,12 @@ describe('Landing (Hashnode sourced)', () => {
     });
   });
 
-  it('the fCC logo in the nav should link to the full URL of the landing page', () => {
-    cy.get(selectors.siteNavLogo).should(
-      'have.attr',
-      'href',
-      commonExpectedMeta.english.siteUrl
-    );
-  });
-
   context('Feature image', () => {
+    beforeEach(() => {
+      cy.visit('/');
+      loadAllPosts();
+    });
+
     it('each post card should contain a feature image', () => {
       const numberOfPosts = Cypress.$(selectors.postCard).length;
 
@@ -115,6 +120,11 @@ describe('Landing (Hashnode sourced)', () => {
   // Hashnode provides a default image for authors who don't upload a profile picture,
   // so basic tests for profile images are fine
   context('Authors with profile image', () => {
+    beforeEach(() => {
+      cy.visit('/');
+      loadAllPosts();
+    });
+
     it("should show the author's profile image", () => {
       cy.get(selectors.postCard)
         .contains(
@@ -137,6 +147,11 @@ describe('Landing (Hashnode sourced)', () => {
   });
 
   context('freeCodeCamp author', () => {
+    beforeEach(() => {
+      cy.visit('/');
+      loadAllPosts();
+    });
+
     it("posts written by 'freeCodeCamp' should not show the `author-list`, which contain's the author's name and profile image", () => {
       cy.get(selectors.postCard)
         .contains('How Does Recursion Work? Explained with Code Examples')

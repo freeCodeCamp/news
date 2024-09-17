@@ -1,4 +1,5 @@
 const commonExpectedMeta = require('../../../fixtures/common-expected-meta.json');
+
 const selectors = {
   featureImage: "[data-test-label='feature-image']",
   postCard: "[data-test-label='post-card']",
@@ -17,19 +18,25 @@ describe('Landing (Ghost sourced)', () => {
     Cypress.config('baseUrl', 'http://localhost:8080/espanol/news/');
   });
 
-  beforeEach(() => {
-    cy.visit('/');
-  });
+  context('General tests', () => {
+    beforeEach(() => {
+      cy.visit('/');
+    });
 
-  it('the fCC logo in the nav should link to the full URL of the landing page', () => {
-    cy.get(selectors.siteNavLogo).should(
-      'have.attr',
-      'href',
-      commonExpectedMeta.espanol.siteUrl
-    );
+    it('the fCC logo in the nav should link to the full URL of the landing page', () => {
+      cy.get(selectors.siteNavLogo).should(
+        'have.attr',
+        'href',
+        commonExpectedMeta.espanol.siteUrl
+      );
+    });
   });
 
   context('Feature image', () => {
+    beforeEach(() => {
+      cy.visit('/');
+    });
+
     it('each post card should contain a feature image', () => {
       const numberOfPosts = Cypress.$(selectors.postCard).length;
 
@@ -49,6 +56,10 @@ describe('Landing (Ghost sourced)', () => {
   });
 
   context('Authors with profile image', () => {
+    beforeEach(() => {
+      cy.visit('/');
+    });
+
     it("should show the author's profile image", () => {
       cy.get(selectors.postCard)
         .contains(
@@ -72,6 +83,10 @@ describe('Landing (Ghost sourced)', () => {
 
   // Ghost does not provide a default profile image for authors who don't upload one
   context('Authors with no profile image', () => {
+    beforeEach(() => {
+      cy.visit('/');
+    });
+
     it('post cards written by an author with no profile image should show the author SVG', () => {
       cy.get(selectors.postCard)
         .contains('No Author Profile Pic')
@@ -90,6 +105,10 @@ describe('Landing (Ghost sourced)', () => {
   });
 
   context('freeCodeCamp.org author', () => {
+    beforeEach(() => {
+      cy.visit('/');
+    });
+
     it("posts written by 'freeCodeCamp.org' should not show the `author-list`, which contain's the author's name and profile image", () => {
       cy.get(selectors.postCard)
         .contains('Preguntas comunes de soporte técnico – freeCodeCamp FAQ')

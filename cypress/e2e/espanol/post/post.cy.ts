@@ -3,6 +3,8 @@ const selectors = {
   fullMetaDate: "[data-test-label='post-full-meta-date']",
   featureImage: "[data-test-label='feature-image']",
   authorProfileImage: "[data-test-label='profile-image']",
+  authorHeaderNoBio: "[data-test-label='author-header-no-bio']",
+  authorHeaderWithBio: "[data-test-label='author-header-with-bio']",
   ghostDefaultAvatar: "[data-test-label='avatar']",
   postFullTitle: "[data-test-label='post-full-title']",
   postContent: "[data-test-label='post-content']",
@@ -115,6 +117,20 @@ describe('Post (Ghost sourced)', () => {
             'https://cdn.freecodecamp.org/platform/universal/fcc_meta_1920X1080-indigo.png'
           )
         );
+    });
+  });
+
+  context('freeCodeCamp author', () => {
+    beforeEach(() => {
+      cy.visit('/preguntas-comunes-de-soporte-tecnico/');
+    });
+
+    it("posts attributed to the 'freeCodeCamp.org' author account should not show the `author-header-no-bio` under the headline, which contain's the author's name and profile image", () => {
+      cy.get(selectors.authorHeaderNoBio).should('not.exist');
+    });
+
+    it("posts attributed to the 'freeCodeCamp.org' author account should not show the `author-header-with-bio` at the bottom of the post, which contain's the author's name, profile image, and bio", () => {
+      cy.get(selectors.authorHeaderWithBio).should('not.exist');
     });
   });
 
