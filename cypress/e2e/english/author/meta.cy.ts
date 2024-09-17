@@ -7,28 +7,6 @@ const authorExpectedMeta = {
 };
 
 describe('Author page metadata (Hashnode sourced)', () => {
-  context('freeCodeCamp author page', () => {
-    beforeEach(() => {
-      cy.visit('/author/freecodecamp/');
-    });
-
-    it("<meta> og:image should be set to the site's publication cover image when there's no custom banner image", () => {
-      cy.get('head meta[property="og:image"]').should(
-        'have.attr',
-        'content',
-        commonExpectedMeta.publicationCover.url
-      );
-    });
-
-    it("<meta> twitter:image should be set to the site's publication cover image when there's no custom banner image", () => {
-      cy.get('head meta[name="twitter:image"]').should(
-        'have.attr',
-        'content',
-        commonExpectedMeta.publicationCover.url
-      );
-    });
-  });
-
   context("Abbey's author page", () => {
     beforeEach(() => {
       cy.visit('/author/abbeyrenn/');
@@ -94,7 +72,7 @@ describe('Author page metadata (Hashnode sourced)', () => {
       );
     });
 
-    // No custom banner, so falls back to the site's publication cover image
+    // Hashnode doesn't allow custom banners, so this falls back to the site's publication cover image
     it('<meta> og:image', () => {
       cy.get('head meta[property="og:image"]').should(
         'have.attr',
@@ -159,7 +137,7 @@ describe('Author page metadata (Hashnode sourced)', () => {
       );
     });
 
-    // No custom banner, so falls back to the site's publication cover image
+    // Hashnode doesn't allow custom banners, so this falls back to the site's publication cover image
     it('<meta> twitter:image', () => {
       cy.get('head meta[name="twitter:image"]').should(
         'have.attr',
