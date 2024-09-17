@@ -43,8 +43,6 @@ jobs:
         node-version: [18.x]
 
     env:
-      BUILD_LANG: english
-
       POSTS_PER_PAGE: ${{ secrets.POSTS_PER_PAGE }}
 
       SITE_DOMAIN: localhost:8080
@@ -74,6 +72,3 @@ jobs:
 
       - name: Perform Typescript Typecheck
         run: npm run type-check
-
-      - name: Stop Ghost containers
-        run: npm run stop:containers
