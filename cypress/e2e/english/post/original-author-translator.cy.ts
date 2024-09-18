@@ -13,7 +13,7 @@ const selectors = {
   translatorName: 'Kristofer Koishigawa'
 };
 
-describe('Original author / translator feature', () => {
+describe('Original author / translator feature (Hashnode sourced)', () => {
   beforeEach(() => {
     cy.visit(
       '/denny-perez-from-accountant-to-coder-creating-communities-and-inspiring-women-s2-ep-13/'

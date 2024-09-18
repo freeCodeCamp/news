@@ -1,19 +1,19 @@
 const commonExpectedMeta = require('../../../fixtures/common-expected-meta.json');
 
-describe('Landing metadata', () => {
+describe('Landing metadata (Hashnode sourced)', () => {
   beforeEach(() => {
     cy.visit('/');
   });
 
   it('<title>', () => {
-    cy.title().should('eq', commonExpectedMeta.title);
+    cy.title().should('eq', commonExpectedMeta.english.title);
   });
 
   it('<meta> keywords', () => {
     cy.get('head meta[name="keywords"]').should(
       'have.attr',
       'content',
-      commonExpectedMeta.keywords
+      commonExpectedMeta.english.keywords
     );
   });
 
@@ -21,7 +21,7 @@ describe('Landing metadata', () => {
     cy.get('head meta[name="description"]').should(
       'have.attr',
       'content',
-      commonExpectedMeta.description
+      commonExpectedMeta.english.description
     );
   });
 
@@ -29,7 +29,7 @@ describe('Landing metadata', () => {
     cy.get('head link[rel="canonical"]').should(
       'have.attr',
       'href',
-      commonExpectedMeta.siteUrl
+      commonExpectedMeta.english.siteUrl
     );
   });
 
@@ -69,7 +69,7 @@ describe('Landing metadata', () => {
     cy.get('head meta[property="og:description"]').should(
       'have.attr',
       'content',
-      commonExpectedMeta.description
+      commonExpectedMeta.english.description
     );
   });
 
@@ -77,7 +77,7 @@ describe('Landing metadata', () => {
     cy.get('head meta[property="og:url"]').should(
       'have.attr',
       'content',
-      commonExpectedMeta.siteUrl
+      commonExpectedMeta.english.siteUrl
     );
   });
 
@@ -133,7 +133,7 @@ describe('Landing metadata', () => {
     cy.get('head meta[name="twitter:description"]').should(
       'have.attr',
       'content',
-      commonExpectedMeta.description
+      commonExpectedMeta.english.description
     );
   });
 
@@ -141,7 +141,7 @@ describe('Landing metadata', () => {
     cy.get('head meta[name="twitter:url"]').should(
       'have.attr',
       'content',
-      commonExpectedMeta.siteUrl
+      commonExpectedMeta.english.siteUrl
     );
   });
 
@@ -157,7 +157,7 @@ describe('Landing metadata', () => {
     cy.get('head meta[name="twitter:site"]').should(
       'have.attr',
       'content',
-      commonExpectedMeta.twitter.username
+      commonExpectedMeta.english.twitterHandle
     );
   });
 });

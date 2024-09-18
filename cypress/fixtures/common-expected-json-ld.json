@@ -1,27 +1,48 @@
 {
   "@context": "https://schema.org",
   "@type": "WebSite",
-  "publisher": {
-    "@type": "Organization",
-    "name": "freeCodeCamp.org",
-    "url": "http://localhost:8080/news/",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://cdn.freecodecamp.org/platform/universal/fcc_primary.svg",
-      "width": 2100,
-      "height": 240
-    }
-  },
   "image": {
     "@type": "ImageObject",
     "url": "https://cdn.freecodecamp.org/platform/universal/fcc_meta_1920X1080-indigo.png",
     "width": 1920,
     "height": 1080
   },
-  "url": "http://localhost:8080/news/",
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "http://localhost:8080/news/"
+  "english": {
+    "publisher": {
+      "@type": "Organization",
+      "name": "freeCodeCamp.org",
+      "url": "http://localhost:8080/news/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://cdn.freecodecamp.org/platform/universal/fcc_primary.svg",
+        "width": 2100,
+        "height": 240
+      }
+    },
+    "url": "http://localhost:8080/news/",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "http://localhost:8080/news/"
+    },
+    "description": "Browse thousands of programming tutorials written by experts. Learn Web Development, Data Science, DevOps, Security, and get developer career advice."
   },
-  "description": "Browse thousands of programming tutorials written by experts. Learn Web Development, Data Science, DevOps, Security, and get developer career advice."
+  "espanol": {
+    "publisher": {
+      "@type": "Organization",
+      "name": "freeCodeCamp.org",
+      "url": "http://localhost:8080/espanol/news/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://cdn.freecodecamp.org/platform/universal/fcc_primary.svg",
+        "width": 2100,
+        "height": 240
+      }
+    },
+    "url": "http://localhost:8080/espanol/news/",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "http://localhost:8080/espanol/news/"
+    },
+    "description": "Descubre miles de cursos de programación escritos por expertos. Aprende Desarrollo Web, Ciencia de Datos, DevOps, Seguridad y obtén asesoramiento profesional para desarrolladores."
+  }
 }

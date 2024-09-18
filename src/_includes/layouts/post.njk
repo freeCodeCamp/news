@@ -31,16 +31,16 @@ time #}
                     </section>
                     <h1 class="post-full-title" data-test-label="post-full-title">{{ title }}</h1>
                 </header>
-                <div class="post-full-author-header" data-test-label="author-header-no-bio">
-                    {% if not fCCAuthorRegEx.test(post.primary_author.name) %}
+                {% if not fCCAuthorRegEx.test(post.primary_author.name) %}
+                    <div class="post-full-author-header" data-test-label="author-header-no-bio">
                         {% if post.original_post.primary_author %}
                             {{ byline(post.primary_author, false, false, 'translator') }}
                             {{ byline(post.original_post.primary_author, false, false, 'author', post.original_post.locale_i18n) }}
                         {% else %}
                             {{ byline(post.primary_author, false, false) }}
                         {% endif %}
-                    {% endif %}
-                </div>
+                    </div>
+                {% endif %}
                 <figure class="post-full-image">
                     {%
                         featureImage

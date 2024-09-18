@@ -1,18 +1,14 @@
-describe('Tag page structured data (JSON-LD)', () => {
-  const commonExpectedJsonLd = require('../../../fixtures/common-expected-json-ld.json');
-  const tagExpectedJsonLd = {
-    '@type': 'Series',
-    url: 'http://localhost:8080/news/tag/freecodecamp/',
-    name: 'freeCodeCamp',
-    mainEntityOfPage: {
-      '@type': 'WebPage',
-      '@id': 'http://localhost:8080/news/'
-    }
-  };
-  let jsonLdObj;
+const commonExpectedJsonLd = require('../../../fixtures/common-expected-json-ld.json');
+const tagExpectedJsonLd = {
+  '@type': 'Series',
+  url: 'http://localhost:8080/news/tag/freecodecamp/',
+  name: 'freeCodeCamp.org'
+};
+let jsonLdObj;
 
+describe('Tag page structured data (JSON-LD – Hashnode sourced)', () => {
   beforeEach(() => {
-    cy.visit('/tag/freecodecamp/'); // This tag contains a mix of Ghost and Hashnode sourced posts
+    cy.visit('/tag/freecodecamp/');
 
     jsonLdObj = cy
       .get('head script[type="application/ld+json"]')
@@ -29,12 +25,14 @@ describe('Tag page structured data (JSON-LD)', () => {
   });
 
   it('matches the expected publisher values', () => {
-    expect(jsonLdObj.publisher).to.deep.equal(commonExpectedJsonLd.publisher);
+    expect(jsonLdObj.publisher).to.deep.equal(
+      commonExpectedJsonLd.english.publisher
+    );
   });
 
   it('matches the expected mainEntityOfPage values', () => {
     expect(jsonLdObj.mainEntityOfPage).to.deep.equal(
-      commonExpectedJsonLd.mainEntityOfPage
+      commonExpectedJsonLd.english.mainEntityOfPage
     );
   });
 });
