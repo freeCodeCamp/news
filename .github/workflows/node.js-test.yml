@@ -91,3 +91,7 @@ jobs:
 
       - name: Perform Typescript Typecheck
         run: npm run type-check
+
+      - name: Stop Ghost containers
+        if: ${{ matrix.languages == 'espanol' }}
+        run: npm run stop:containers
