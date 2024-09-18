@@ -45,6 +45,9 @@ jobs:
     env:
       POSTS_PER_PAGE: ${{ secrets.POSTS_PER_PAGE }}
 
+      HASHNODE_API_URL: api_url_from_hashnode_dashboard
+      ENGLISH_HASHNODE_HOST: host_from_hashnode_dashboard
+
       SITE_DOMAIN: localhost:8080
 
       DO_NOT_FETCH_FROM_GHOST: true

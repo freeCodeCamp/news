@@ -8,6 +8,7 @@ const {
 const wait = require('../wait');
 
 const fetchFromHashnode = async contentType => {
+  if (!hashnodeHost) return [];
   const fieldName = contentType === 'posts' ? 'posts' : 'staticPages';
 
   const postFieldsFragment = gql`
