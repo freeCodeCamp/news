@@ -2,7 +2,11 @@ const { decodeHTML, XMLToDOM } = require('../../../support/utils/rss');
 const commonExpectedMeta = require('../../../fixtures/common-expected-meta.json');
 const feedPath = '/rss.xml';
 
-describe('Landing RSS feed', async () => {
+describe('Landing RSS feed (Hashnode sourced)', async () => {
+  beforeEach(() => {
+    cy.visit('/');
+  });
+
   it('should start with a UTF-8 encoding declaration', () => {
     cy.request(feedPath).then(async res => {
       expect(res.body.startsWith('<?xml version="1.0" encoding="UTF-8"?>')).to
@@ -21,7 +25,7 @@ describe('Landing RSS feed', async () => {
     });
   });
 
-  it(`should have the channel description <![CDATA[ ${commonExpectedMeta.description} ]]>`, () => {
+  it(`should have the channel description <![CDATA[ ${commonExpectedMeta.english.description} ]]>`, () => {
     cy.request(feedPath).then(async res => {
       const feed = XMLToDOM(res.body);
       const channelDescription = feed
@@ -29,7 +33,7 @@ describe('Landing RSS feed', async () => {
         .innerHTML.trim();
 
       expect(channelDescription).to.equal(
-        `<![CDATA[ ${commonExpectedMeta.description} ]]>`
+        `<![CDATA[ ${commonExpectedMeta.english.description} ]]>`
       );
     });
   });
@@ -39,7 +43,7 @@ describe('Landing RSS feed', async () => {
       const feed = XMLToDOM(res.body);
       const channelLink = feed.querySelector('channel link').innerHTML.trim();
 
-      expect(channelLink).to.equal(`${commonExpectedMeta.siteUrl}`);
+      expect(channelLink).to.equal(`${commonExpectedMeta.english.siteUrl}`);
     });
   });
 
@@ -57,8 +61,8 @@ describe('Landing RSS feed', async () => {
         .innerHTML.trim();
 
       expect(channelImageURL).to.equal(commonExpectedMeta.favicon.png);
-      expect(channelImageTitle).to.equal(commonExpectedMeta.title);
-      expect(channelImageLink).to.equal(commonExpectedMeta.siteUrl);
+      expect(channelImageTitle).to.equal(commonExpectedMeta.english.title);
+      expect(channelImageLink).to.equal(commonExpectedMeta.english.siteUrl);
     });
   });
 

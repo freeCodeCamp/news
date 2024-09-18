@@ -41,20 +41,22 @@ jobs:
     strategy:
       matrix:
         node-version: [18.x]
+        languages: [english, espanol]
 
     env:
-      BUILD_LANG: english
-
-      ENGLISH_GHOST_API_URL: ${{ secrets.CI_ENGLISH_GHOST_API_URL }}
-      ENGLISH_GHOST_API_VERSION: ${{ secrets.CI_ENGLISH_GHOST_API_VERSION }}
-      ENGLISH_GHOST_CONTENT_API_KEY: ${{ secrets.CI_ENGLISH_GHOST_CONTENT_API_KEY }}
-
       POSTS_PER_PAGE: ${{ secrets.POSTS_PER_PAGE }}
+
+      HASHNODE_API_URL: api_url_from_hashnode_dashboard
+      ENGLISH_HASHNODE_HOST: host_from_hashnode_dashboard
+
+      ESPANOL_GHOST_API_URL: ${{ secrets.CI_ESPANOL_GHOST_API_URL }}
+      ESPANOL_GHOST_API_VERSION: ${{ secrets.CI_ESPANOL_GHOST_API_VERSION }}
+      ESPANOL_GHOST_CONTENT_API_KEY: ${{ secrets.CI_ESPANOL_GHOST_CONTENT_API_KEY }}
 
       SITE_DOMAIN: localhost:8080
 
-      LOCALE_FOR_UI: english
-      LOCALE_FOR_GHOST: english
+      LOCALE_FOR_UI: ${{ matrix.languages }}
+      LOCALE_FOR_GHOST: ${{ matrix.languages }}
 
     steps:
       - name: Checkout source code
@@ -68,20 +70,20 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Login to Docker Hub
-        uses: docker/login-action@e92390c5fb421da1463c202d546fed0ec5c39f20 # v3
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_ACCESS_TOKEN }}
+      - name: Set fetch from Ghost environment variable
+        if: ${{ matrix.languages == 'english' }}
+        run: echo "DO_NOT_FETCH_FROM_GHOST=true" >> $GITHUB_ENV
 
-      - name: Start English Ghost container
-        run: npm run start:containers --service english
+      - name: Start Espanol Ghost container
+        if: ${{ matrix.languages == 'espanol' }}
+        run: npm run start:containers --service espanol
 
       - name: Sleep for 5 seconds
+        if: ${{ matrix.languages == 'espanol' }}
         run: sleep 5s
         shell: bash
 
-      - name: Build English CI site
+      - name: Build CI site
         run: npm run build:ci
 
       - name: Run tests
@@ -91,4 +93,5 @@ jobs:
         run: npm run type-check
 
       - name: Stop Ghost containers
+        if: ${{ matrix.languages == 'espanol' }}
         run: npm run stop:containers

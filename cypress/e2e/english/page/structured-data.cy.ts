@@ -1,37 +1,22 @@
-describe('Page structured data (JSON-LD)', () => {
-  const commonExpectedJsonLd = require('../../../fixtures/common-expected-json-ld.json');
-  const pageExpectedJsonLd = {
-    '@type': 'Article',
-    author: {
-      '@type': 'Person',
-      name: 'freeCodeCamp.org',
-      image: {
-        '@type': 'ImageObject',
-        url: 'http://localhost:3010/content/images/2022/02/freecodecamp-org-gravatar.jpeg',
-        width: 250,
-        height: 250
-      },
-      url: 'http://localhost:8080/news/author/freecodecamp/',
-      sameAs: []
-    },
-    headline:
-      'Please check your email for a donation receipt. Forward it to donors@freecodecamp.org.',
-    url: 'http://localhost:8080/news/thank-you-for-donating/',
-    datePublished: '2020-03-16T17:03:46.000Z',
-    dateModified: '2022-12-20T05:28:17.000Z',
-    image: {
-      '@type': 'ImageObject',
-      url: 'https://www.freecodecamp.org/news/content/images/2020/03/fcc-banner.jpg',
-      width: 1500,
-      height: 500
-    },
-    description:
-      'Once you&#x27;ve forwarded this receipt, we will award you with your donor badge on\nyour freeCodeCamp profile. We will also turn off donation prompts for you.\n\nThank you again for supporting our charity.\n\nfreeCodeCamp is a highly-efficient education NGO. This year alone, we&#x27;ve\nprovided million hours of free education to people around the world.\n\nAt our charity&#x27;s current operating budget, every dollar you donate to\nfreeCodeCamp translates into 50 hours worth of technology education.\n\nSome members of t'
-  };
-  let jsonLdObj;
+const commonExpectedJsonLd = require('../../../fixtures/common-expected-json-ld.json');
+const pageExpectedJsonLd = {
+  '@type': 'Article',
+  headline: 'Thank You for Being a Supporter',
+  url: 'http://localhost:8080/news/thank-you-for-being-a-supporter/',
+  image: {
+    '@type': 'ImageObject',
+    url: 'https://cdn.freecodecamp.org/platform/universal/fcc_meta_1920X1080-indigo.png',
+    width: 1920,
+    height: 1080
+  },
+  description:
+    'freeCodeCamp is a highly-efficient education NGO. This year alone, we&#x27;ve provided million hours of free education to people around the world. At our charity&#x27;s current operating budget, every dollar you donate to freeCodeCamp translates into 50 hours worth of technology education. When you donate to freeCodeCamp, you help people learn'
+};
+let jsonLdObj;
 
+describe('Page structured data (JSON-LD – Hashnode sourced)', () => {
   beforeEach(() => {
-    cy.visit('/thank-you-for-donating/');
+    cy.visit('/thank-you-for-being-a-supporter/');
 
     jsonLdObj = cy
       .get('head script[type="application/ld+json"]')
@@ -44,14 +29,14 @@ describe('Page structured data (JSON-LD)', () => {
     expect(jsonLdObj['@context']).to.equal(commonExpectedJsonLd['@context']);
     expect(jsonLdObj['@type']).to.equal(pageExpectedJsonLd['@type']);
     expect(jsonLdObj.url).to.equal(pageExpectedJsonLd.url);
-    expect(jsonLdObj.datePublished).to.equal(pageExpectedJsonLd.datePublished);
-    expect(jsonLdObj.dateModified).to.equal(pageExpectedJsonLd.dateModified);
     expect(jsonLdObj.description).to.equal(pageExpectedJsonLd.description);
     expect(jsonLdObj.headline).to.equal(pageExpectedJsonLd.headline);
   });
 
   it('matches the expected publisher values', () => {
-    expect(jsonLdObj.publisher).to.deep.equal(commonExpectedJsonLd.publisher);
+    expect(jsonLdObj.publisher).to.deep.equal(
+      commonExpectedJsonLd.english.publisher
+    );
   });
 
   it('matches the expected image values', () => {
@@ -60,11 +45,10 @@ describe('Page structured data (JSON-LD)', () => {
 
   it('matches the expected mainEntityOfPage values', () => {
     expect(jsonLdObj.mainEntityOfPage).to.deep.equal(
-      commonExpectedJsonLd.mainEntityOfPage
+      commonExpectedJsonLd.english.mainEntityOfPage
     );
   });
 
-  it('matches the expected author values', () => {
-    expect(jsonLdObj.author).to.deep.equal(pageExpectedJsonLd.author);
-  });
+  // Note: Hashnode sourced pages don't include an author, or published/modified dates,
+  // so those tests are omitted
 });

@@ -9,7 +9,7 @@
   },
   "scripts": {
     "start": "npm run develop",
-    "start:ci:english": "LOCALE_FOR_UI=english LOCALE_FOR_GHOST=english npm run develop:ci",
+    "start:ci:english": "LOCALE_FOR_UI=english DO_NOT_FETCH_FROM_GHOST=true npm run develop:ci",
     "start:ci:chinese": "LOCALE_FOR_UI=chinese LOCALE_FOR_GHOST=chinese npm run develop:ci",
     "start:ci:espanol": "LOCALE_FOR_UI=espanol LOCALE_FOR_GHOST=espanol npm run develop:ci",
     "start:containers": "docker compose -f './docker/ghost/docker-compose.yml' up -d",
@@ -31,7 +31,7 @@
     "build": "cross-env ELEVENTY_ENV=prod NODE_OPTIONS=--max-old-space-size=8192 eleventy",
     "build:ci": "cross-env ELEVENTY_ENV=ci eleventy",
     "postbuild": "node ./config/i18n/generate-serve-config.js",
-    "test": "NODE_OPTIONS=--experimental-vm-modules jest",
+    "test": "cross-env ELEVENTY_ENV=ci NODE_OPTIONS=--experimental-vm-modules jest",
     "lint": "npm-run-all lint:*",
     "lint:code": "eslint . --ext .js --cache",
     "lint:i18n-schema": "node ./config/i18n/schema-validation.js",
@@ -76,7 +76,7 @@
     "cypress": "13.14.2",
     "dayjs": "1.11.13",
     "dotenv": "16.4.5",
-    "eslint": "8.57.0",
+    "eslint": "8.57.1",
     "eslint-config-prettier": "9.1.0",
     "eslint-plugin-cypress": "2.15.2",
     "eslint-plugin-ghost": "3.4.0",
@@ -102,7 +102,7 @@
     "prettier": "3.3.3",
     "probe-image-size": "7.2.3",
     "shx": "0.3.4",
-    "terser": "5.32.0",
+    "terser": "5.33.0",
     "typescript": "5.5.4"
   },
   "lint-staged": {

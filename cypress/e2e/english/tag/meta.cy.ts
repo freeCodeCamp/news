@@ -1,14 +1,14 @@
 const commonExpectedMeta = require('../../../fixtures/common-expected-meta.json');
 const tagExpectedMeta = {
-  title: 'freeCodeCamp - freeCodeCamp.org',
+  title: 'freeCodeCamp.org - freeCodeCamp.org',
   url: 'http://localhost:8080/news/tag/freecodecamp/',
   description:
     'Browse thousands of programming tutorials written by experts. Learn Web Development, Data Science, DevOps, Security, and get developer career advice.'
 };
 
-describe('Tag page metadata', () => {
+describe('Tag page metadata (Hashnode sourced)', () => {
   beforeEach(() => {
-    cy.visit('/tag/freecodecamp/'); // This tag contains a mix of Ghost and Hashnode sourced posts
+    cy.visit('/tag/freecodecamp/');
   });
 
   it('<title>', () => {
@@ -148,7 +148,7 @@ describe('Tag page metadata', () => {
     cy.get('head meta[name="twitter:site"]').should(
       'have.attr',
       'content',
-      commonExpectedMeta.twitter.username
+      commonExpectedMeta.english.twitterHandle
     );
   });
 });

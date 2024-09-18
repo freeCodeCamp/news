@@ -18,10 +18,6 @@ jobs:
     env:
       BUILD_LANG: ${{ matrix.languages }}
 
-      ENGLISH_GHOST_API_URL: ${{ secrets.CI_ENGLISH_GHOST_API_URL }}
-      ENGLISH_GHOST_API_VERSION: ${{ secrets.CI_ENGLISH_GHOST_API_VERSION }}
-      ENGLISH_GHOST_CONTENT_API_KEY: ${{ secrets.CI_ENGLISH_GHOST_CONTENT_API_KEY }}
-
       CHINESE_GHOST_API_URL: ${{ secrets.CI_CHINESE_GHOST_API_URL }}
       CHINESE_GHOST_API_VERSION: ${{ secrets.CI_CHINESE_GHOST_API_VERSION }}
       CHINESE_GHOST_CONTENT_API_KEY: ${{ secrets.CI_CHINESE_GHOST_CONTENT_API_KEY }}
@@ -63,12 +59,6 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
-
-      - name: Login to Docker Hub
-        uses: docker/login-action@e92390c5fb421da1463c202d546fed0ec5c39f20 # v3
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_ACCESS_TOKEN }}
 
       - name: Start Ghost containers
         run: npm run start:containers

@@ -3,6 +3,7 @@ const selectors = {
   errorLink: "[data-test-label='error-link']"
 };
 
+// Tests here should apply to all 404 pages, regardless of the source
 describe('404', () => {
   beforeEach(() => {
     cy.visit('/testing-testing-1-2/', { failOnStatusCode: false });
@@ -18,7 +19,7 @@ describe('404', () => {
     cy.get(selectors.errorLink).should(
       'have.attr',
       'href',
-      commonExpectedMeta.siteUrl
+      commonExpectedMeta.english.siteUrl
     );
   });
 });

@@ -1,9 +1,9 @@
 const { decodeHTML, XMLToDOM } = require('../../../support/utils/rss');
 const commonExpectedMeta = require('../../../fixtures/common-expected-meta.json');
-const expectedTagTitle = `freeCodeCamp - ${commonExpectedMeta.siteName}`;
-const feedPath = '/tag/freecodecamp/rss.xml'; // This tag contains a mix of Ghost and Hashnode sourced posts
+const expectedTagTitle = `freeCodeCamp.org - ${commonExpectedMeta.siteName}`;
+const feedPath = '/tag/freecodecamp/rss.xml';
 
-describe('Author page RSS feed', () => {
+describe('Author page RSS feed (Hashnode sourced)', () => {
   it('should start with a UTF-8 encoding declaration', () => {
     cy.request(feedPath).then(async res => {
       expect(res.body.startsWith('<?xml version="1.0" encoding="UTF-8"?>')).to
@@ -11,7 +11,7 @@ describe('Author page RSS feed', () => {
     });
   });
 
-  it('should have the channel title <![CDATA[ freeCodeCamp - freeCodeCamp.org ]]>', () => {
+  it(`should have the channel title <![CDATA[ ${expectedTagTitle} ]]>`, () => {
     cy.request(feedPath).then(async res => {
       const feed = XMLToDOM(res.body);
       const channelTitle = feed.querySelector('channel title').innerHTML.trim();
@@ -20,7 +20,7 @@ describe('Author page RSS feed', () => {
     });
   });
 
-  it(`should have the channel description <![CDATA[ ${commonExpectedMeta.description} ]]>`, () => {
+  it(`should have the channel description <![CDATA[ ${commonExpectedMeta.english.description} ]]>`, () => {
     cy.request(feedPath).then(async res => {
       const feed = XMLToDOM(res.body);
       const channelDescription = feed
@@ -28,7 +28,7 @@ describe('Author page RSS feed', () => {
         .innerHTML.trim();
 
       expect(channelDescription).to.equal(
-        `<![CDATA[ ${commonExpectedMeta.description} ]]>`
+        `<![CDATA[ ${commonExpectedMeta.english.description} ]]>`
       );
     });
   });
@@ -38,7 +38,7 @@ describe('Author page RSS feed', () => {
       const feed = XMLToDOM(res.body);
       const channelLink = feed.querySelector('channel link').innerHTML.trim();
 
-      expect(channelLink).to.equal(`${commonExpectedMeta.siteUrl}`);
+      expect(channelLink).to.equal(`${commonExpectedMeta.english.siteUrl}`);
     });
   });
 
@@ -57,7 +57,7 @@ describe('Author page RSS feed', () => {
 
       expect(channelImageURL).to.equal(commonExpectedMeta.favicon.png);
       expect(channelImageTitle).to.equal(expectedTagTitle);
-      expect(channelImageLink).to.equal(commonExpectedMeta.siteUrl);
+      expect(channelImageLink).to.equal(commonExpectedMeta.english.siteUrl);
     });
   });
 
@@ -82,12 +82,12 @@ describe('Author page RSS feed', () => {
     });
   });
 
-  it('should return 12 articles', () => {
+  it('should return 1 articles', () => {
     cy.request(feedPath).then(async res => {
       const feed = XMLToDOM(res.body);
       const articles = feed.querySelectorAll('item');
 
-      expect([...articles]).to.have.lengthOf(12);
+      expect([...articles]).to.have.lengthOf(1);
     });
   });
 });

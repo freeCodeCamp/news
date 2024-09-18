@@ -12,7 +12,7 @@ const selectors = {
   translatorName: 'Rafael D. Hernandez'
 };
 
-describe('Original author / translator feature', () => {
+describe('Original author / translator feature (Ghost sourced)', () => {
   before(() => {
     // Update baseUrl to include current language
     Cypress.config('baseUrl', 'http://localhost:8080/espanol/news/');

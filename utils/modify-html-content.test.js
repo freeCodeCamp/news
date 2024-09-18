@@ -1,6 +1,7 @@
 const jsdom = require('jsdom');
 const { JSDOM } = jsdom;
 const modifyHTMLContent = require('./modify-html-content');
+const translate = require('./translate');
 
 const mockHashnodeEmbeds = {
   youtube:
@@ -169,7 +170,7 @@ describe('modifyHTMLContent', () => {
     );
     expect(iframeEl.width).toBe('560');
     expect(iframeEl.height).toBe('315');
-    expect(iframeEl.title).toBe('Embedded content');
+    expect(iframeEl.title).toBe(translate('embed-title'));
 
     // Check if the iframeEl is wrapped in a div with the expected class
     expect(iframeEl.parentElement.tagName).toBe('DIV');

@@ -1,7 +1,7 @@
-describe('Landing structured data (JSON-LD)', () => {
-  const commonExpectedJsonLd = require('../../../fixtures/common-expected-json-ld.json');
-  let jsonLdObj;
+const commonExpectedJsonLd = require('../../../fixtures/common-expected-json-ld.json');
+let jsonLdObj;
 
+describe('Landing structured data (JSON-LD – Hashnode sourced)', () => {
   beforeEach(() => {
     cy.visit('/');
 
@@ -15,12 +15,16 @@ describe('Landing structured data (JSON-LD)', () => {
   it('matches the expected base values', () => {
     expect(jsonLdObj['@context']).to.equal(commonExpectedJsonLd['@context']);
     expect(jsonLdObj['@type']).to.equal(commonExpectedJsonLd['@type']);
-    expect(jsonLdObj.url).to.equal(commonExpectedJsonLd.url);
-    expect(jsonLdObj.description).to.equal(commonExpectedJsonLd.description);
+    expect(jsonLdObj.url).to.equal(commonExpectedJsonLd.english.url);
+    expect(jsonLdObj.description).to.equal(
+      commonExpectedJsonLd.english.description
+    );
   });
 
   it('matches the expected publisher values', () => {
-    expect(jsonLdObj.publisher).to.deep.equal(commonExpectedJsonLd.publisher);
+    expect(jsonLdObj.publisher).to.deep.equal(
+      commonExpectedJsonLd.english.publisher
+    );
   });
 
   it('matches the expected image values', () => {
@@ -29,7 +33,7 @@ describe('Landing structured data (JSON-LD)', () => {
 
   it('matches the expected mainEntityOfPage values', () => {
     expect(jsonLdObj.mainEntityOfPage).to.deep.equal(
-      commonExpectedJsonLd.mainEntityOfPage
+      commonExpectedJsonLd.english.mainEntityOfPage
     );
   });
 });
