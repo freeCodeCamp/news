@@ -158,7 +158,7 @@ describe('Landing metadata', () => {
     cy.get('head meta[name="twitter:site"]').should(
       'have.attr',
       'content',
-      commonExpectedMeta.english.twitterUsername
+      commonExpectedMeta.english.twitterHandle
     );
   });
 });

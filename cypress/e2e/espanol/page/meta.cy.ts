@@ -161,7 +161,7 @@ describe('Page metadata (Ghost sourced)', () => {
     cy.get('head meta[name="twitter:site"]').should(
       'have.attr',
       'content',
-      commonExpectedMeta.espanol.twitterUsername
+      commonExpectedMeta.espanol.twitterHandle
     );
   });
 });
