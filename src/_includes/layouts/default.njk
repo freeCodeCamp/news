@@ -59,6 +59,10 @@
         {% block monetization %}
         {% endblock %}
 
+        {% if secrets.eleventyEnv === 'prod' %}
+            {% include "partials/gtm-head.njk" %}
+        {% endif %}
+        
         {# Dynamically load MathJax script #}
         {% block mathjax %}
         {% endblock %}
@@ -133,6 +137,11 @@
     {% else %}
         <body class="home-template">
     {% endif %}
+
+    {% if secrets.eleventyEnv === 'prod' %}
+        {% include "partials/gtm-body.njk" %}
+    {% endif %}
+
         <div class="site-wrapper">
             {% include "partials/site-nav.njk" %}
 
