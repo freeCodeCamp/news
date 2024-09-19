@@ -98,7 +98,7 @@
     "node-cache": "5.1.2",
     "node-fetch": "2.7.0",
     "npm-run-all2": "6.2.3",
-    "piscina": "4.6.1",
+    "piscina": "4.7.0",
     "prettier": "3.3.3",
     "probe-image-size": "7.2.3",
     "shx": "0.3.4",
