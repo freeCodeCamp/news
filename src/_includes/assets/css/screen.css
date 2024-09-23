@@ -2320,6 +2320,17 @@ a.banner:hover span {
   }
 }
 
+.banner-ad-top {
+  display: none;
+  width: 100%;
+  height: auto;
+  padding: 10px 0px;
+  background: #ebebeb;
+  margin-top: calc(-1 * var(--header-height));
+  justify-content: center;
+  margin-bottom: 3em;
+}
+
 /* 15. Ads
 /* ---------------------------------------------------------- */
 

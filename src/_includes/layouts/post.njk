@@ -15,6 +15,9 @@ time #}
 
 {% block content %}
     <main id="site-main" class="post-template site-main outer">
+        {% if canonicalUrl | shouldCanonicalHaveGAM %}
+            {% include "partials/banner-ad.njk" %}
+        {% endif %}
         <div class="inner {{ "ad-layout" if (adsEnabled) }}">
             <article class="post-full post">
                 <header class="post-full-header">
