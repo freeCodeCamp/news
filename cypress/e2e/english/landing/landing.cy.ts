@@ -61,7 +61,7 @@ describe('Landing (Hashnode sourced)', () => {
     });
 
     it('the scroll button should scroll into view', function () {
-      cy.get(selectors.scrollButton).scrollTo('center');
+      cy.scrollTo('bottom');
       cy.get(selectors.scrollButton).should('be.visible');
     });
 
