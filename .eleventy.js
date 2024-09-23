@@ -100,9 +100,9 @@ module.exports = function (config) {
   // Check if the canonical URL should have Google Ad Manager
   config.addFilter('shouldCanonicalHaveGAM', canonical => {
     // Don't add Google Ad Manager to localhost
-    // if (!canonical || canonical.startsWith('http://localhost:')) {
-    //   return false;
-    // }
+    if (!canonical || canonical.startsWith('http://localhost:')) {
+      return false;
+    }
     return true;
   });
 
