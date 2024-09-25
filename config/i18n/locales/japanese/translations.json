@@ -72,7 +72,7 @@
     "mission-statement": "私たちのミッション: 人々が無料でコーディングを学べるよう支援することです。その実現のため、何千もの動画、記事、インタラクティブなコーディングレッスンを作成し、すべて無料で公開しています。",
     "donation-initiatives": "freeCodeCamp への寄付は教育活動のために用いられ、サーバー、サービス、スタッフなどの費用に充てられます。",
     "donate-text": "{{ <0> }}こちらからご寄付をお願いいたします{{ </0> }}。(場合により税控除可能)",
-    "trending-guides": "人気の記事",
+    "trending-books-and-handbooks": "Trending Books and Handbooks",
     "mobile-app": "アプリ",
     "our-nonprofit": "組織情報",
     "links": {
