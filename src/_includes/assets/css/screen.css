@@ -171,7 +171,6 @@ body {
 /* ---------------------------------------------------------- */
 
 .site-nav {
-  z-index: 300;
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
@@ -2209,7 +2208,6 @@ p.footer-donation a:hover {
 .tags-row > .tag:hover {
   background: var(--gray15);
   color: var(--gray75);
-  color: var(--gray75);
 }
 
 .tags-row a:hover {
@@ -2240,7 +2238,6 @@ p.footer-donation a:hover {
 button.cta-button,
 a.cta-button {
   width: content;
-  text-decoration: none;
   display: inline-block;
   outline: none;
   border: 3px solid var(--gray90);
@@ -2318,6 +2315,17 @@ a.banner:hover span {
     padding: 10px;
     font-size: 17px;
   }
+}
+
+.banner-ad-top {
+  display: none;
+  width: 100%;
+  height: auto;
+  padding: 10px 0px;
+  background: #ebebeb;
+  margin-top: calc(-1 * var(--header-height));
+  justify-content: center;
+  margin-bottom: 3em;
 }
 
 /* 15. Ads

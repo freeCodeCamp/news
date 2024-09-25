@@ -5,6 +5,11 @@ document.addEventListener('DOMContentLoaded', function() {
     var adElements = document.querySelectorAll('.side-bar-ad-slot');
     var sidebar = document.querySelector('.sidebar');
     var isSideBarDisplayed = window.getComputedStyle(sidebar).display !== 'none';
+    var topBannerAd = document.querySelector('.banner-ad-top');
+    var isScreenLarge = window.innerWidth > 900;
+    var testHref = 'https://www.freecodecamp.org/news/are-you-being-micro-managed-manage-your-relationship-with-your-manager-instead-9ad10b28bcda/'
+    var topBannerTestable = window.location.href === testHref && isScreenLarge;
+    
     var counter = 0;
     
     window.googletag = window.googletag || {cmd: []};
@@ -21,6 +26,26 @@ document.addEventListener('DOMContentLoaded', function() {
             // Define side ads
             adElements.forEach(function(adElement) {
                 googletag.defineSlot('/23075930536/post-side', [[292, 30], [240, 400], [300, 75], [216, 54], [250, 360], [300, 50], 'fluid', [300, 31], [120, 20], [300, 250], [120, 30], [180, 150], [200, 446], [168, 42], [200, 200], [160, 600], [120, 90], [125, 125], [240, 133], [120, 60], [1, 1], [120, 240], [220, 90], [216, 36], [250, 250], [168, 28], [234, 60], [120, 600], [300, 600], [88, 31], [300, 100]], adElement.id).addService(googletag.pubads());
+            });
+        }
+
+        if(topBannerTestable){
+            console.log('hell0')
+            // Show the container
+            topBannerAd.style.display = 'flex'; 
+
+            // Define the ad slot with size mapping
+            googletag.cmd.push(function() {
+                var mapping = googletag.sizeMapping()
+                    .addSize([1024, 768], [[970, 90], [728, 90]]) // Large screens: 970x90 or 728x90
+                    .addSize([768, 0], [[468, 60]])               // Medium screens: 468x60
+                    .addSize([0, 0], [[320, 50]])                 // Small screens: 320x50
+                    .build();
+
+                // Define the ad slot
+                googletag.defineSlot('/23075930536/post-top', [[970, 90], [728, 90], [468, 60], [320, 50]], 'banner-ad-top')
+                    .defineSizeMapping(mapping) // Apply size mapping to this slot
+                    .addService(googletag.pubads());
             });
         }
 
