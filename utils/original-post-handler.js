@@ -5,6 +5,7 @@ const { JSDOM } = jsdom;
 const { getCache, setCache } = require('./cache');
 const getImageDimensions = require('./get-image-dimensions');
 const translate = require('./translate');
+const fullEscaper = require('./full-escaper');
 
 const originalPostHandler = async (originalPostFlag, translatedPostTitle) => {
   let hrefValue;
@@ -38,9 +39,9 @@ const originalPostHandler = async (originalPostFlag, translatedPostTitle) => {
       const originalPostDate = document.querySelector(
         '.post-full-meta-date'
       ).dateTime;
-      const originalPostTitle = document
-        .querySelector('.post-full-title')
-        .textContent.trim();
+      const originalPostTitle = fullEscaper(
+        document.querySelector('.post-full-title').textContent.trim()
+      );
       // Get the original author's data
       let originalAuthorObj = {};
       const originalAuthorRelativePath =
