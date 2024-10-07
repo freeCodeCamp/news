@@ -26,7 +26,7 @@ describe('Original author / translator feature (Ghost sourced)', () => {
   });
 
   context(
-    'Ghost sourced translation (Español) <> Ghost sourced original post (English)',
+    'Ghost sourced translation (Español) <> Hashnode sourced original post (English)',
     () => {
       context('Author header without bios', () => {
         it('should contain an author card and a translator card', () => {
@@ -185,7 +185,7 @@ describe('Original author / translator feature (Ghost sourced)', () => {
             .find(selectors.originalArticleLink)
             .then($el => {
               cy.wrap($el).contains(
-                'The #100DaysOfCode Challenge, its history, and why you should try it for 2021'
+                'The #100DaysOfCode Challenge, its history, and why you should try it'
               );
               expect($el.attr('href')).to.deep.equal(
                 'https://www.freecodecamp.org/news/the-crazy-history-of-the-100daysofcode-challenge-and-why-you-should-try-it-for-2018-6c89a76e298d/'
