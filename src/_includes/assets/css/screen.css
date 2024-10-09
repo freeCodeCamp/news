@@ -853,9 +853,15 @@ make sure this only happens on large viewports / desktop-ish devices.
   min-width: 100%;
 }
 
+.post-full-content h1:target,
 .post-full-content h2:target,
-.post-full-content h3:target {
-  scroll-margin-top: calc(var(--header-height) + 0.5em);
+.post-full-content h3:target,
+.post-full-content h4:target,
+.post-full-content h5:target,
+.post-full-content h6:target {
+  scroll-margin-top: calc(
+    var(--header-height) + 44px + 0.75em
+  ); /* 44px height of the banner */
 }
 
 .post-full-content li {
