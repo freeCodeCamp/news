@@ -11,7 +11,11 @@ const pageExpectedJsonLd = {
       height: 250
     },
     url: 'http://localhost:8080/espanol/news/author/freecodecamp/',
-    sameAs: []
+    sameAs: [
+      'https://www.freecodecamp.org',
+      'https://www.facebook.com/freecodecamp',
+      'https://x.com/freecodecamp'
+    ]
   },
   headline: 'Gracias por ser un partidario',
   url: 'http://localhost:8080/espanol/news/gracias-por-ser-un-partidario/',
