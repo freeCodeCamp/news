@@ -4,6 +4,7 @@ const {
   getRoundedTotalRecords
 } = require('../../utils/search-bar-placeholder-number');
 const { currentLocale_i18nISOCode, siteURL } = require('../../config');
+const getTwitterHandle = require('../../utils/get-twitter-handle');
 const translate = require('../../utils/translate');
 
 // Get X / Twitter profile based on links in config/i18n/locales/lang/links.json --
@@ -11,7 +12,7 @@ const translate = require('../../utils/translate');
 // isn't found
 const twitterURL = translate('links:twitter');
 const twitterHandle = twitterURL
-  ? `@${new URL(twitterURL).pathname.split('/').filter(Boolean)[0]}`
+  ? `@${getTwitterHandle(twitterURL)}`
   : '@freecodecamp';
 const logoURL =
   'https://cdn.freecodecamp.org/platform/universal/fcc_primary.svg';

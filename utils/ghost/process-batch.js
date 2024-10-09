@@ -128,7 +128,9 @@ const processBatch = async ({
         tag.path = stripGhostDomain(tag.url);
       });
 
-      // Rename twitter to twitterHandle for easier handling
+      // Ghost API does verification on their end, and only allows links to twitter.com.
+      // Also, they just return the handle as @username, so we can rename it to twitterHandle
+      // for easier handling in the templates.
       obj.primary_author.twitterHandle = obj.primary_author.twitter;
       delete obj.primary_author.twitter;
 

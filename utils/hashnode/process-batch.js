@@ -3,6 +3,7 @@ const modifyHTMLContent = require('../modify-html-content');
 const getImageDimensions = require('../../utils/get-image-dimensions');
 const { stripHTMLTags } = require('../../utils/modify-html-helpers');
 const shortenExcerpt = require('../../utils/shorten-excerpt');
+const getTwitterHandle = require('../get-twitter-handle');
 
 const processBatch = async ({
   batch,
@@ -68,8 +69,10 @@ const processBatch = async ({
             bio: obj.author.bio.text,
             location: obj.author.location,
             website: obj.author.socialMediaLinks.website,
+            // Note: Mutate X / Twitter and Facebook links so they're just the @username handle or
+            // plain username like on Ghost for now.
             twitterHandle: obj.author.socialMediaLinks.twitter
-              ? `@${new URL(obj.author.socialMediaLinks.twitter).pathname.split('/').filter(Boolean)[0]}`
+              ? `@${getTwitterHandle(obj.author.socialMediaLinks.twitter)}`
               : null,
             facebook: obj.author.socialMediaLinks.facebook
               ? obj.author.socialMediaLinks.facebook.replace(
