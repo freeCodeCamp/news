@@ -11,7 +11,7 @@ const postExpectedJsonLd = {
       height: 2150
     },
     url: 'http://localhost:8080/espanol/news/author/rafael/',
-    sameAs: ['https://twitter.com/RafaelDavisH']
+    sameAs: ['https://x.com/RafaelDavisH']
   },
   headline:
     'Cómo funciona el operador de signo de interrogación (?) en JavaScript',
