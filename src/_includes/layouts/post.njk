@@ -165,7 +165,7 @@ time #}
         <meta property="article:author" content="{{ post.primary_author.facebook }}">
     {% endif %}
 
-    {# Twitter Card #}
+    {# X / Twitter Card #}
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="{{ title }}">
     {% if post.excerpt %}
@@ -177,9 +177,9 @@ time #}
     <meta name="twitter:data1" content="{{ post.primary_author.name }}">
     <meta name="twitter:label2" content="Filed under">
     <meta name="twitter:data2" content="{{ post.tags | join(", ", "name") }}">
-    <meta name="twitter:site" content="{{ site.twitter }}">
-    {% if post.primary_author.twitter %}
-        <meta name="twitter:creator" content="{{ post.primary_author.twitter }}">
+    <meta name="twitter:site" content="{{ site.twitterHandle }}">
+    {% if post.primary_author.twitterHandle %}
+        <meta name="twitter:creator" content="{{ post.primary_author.twitterHandle }}">
     {% endif %}
 
     <meta property="og:image:width" content="{{ post.image_dimensions.feature_image.width }}">

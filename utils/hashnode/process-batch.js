@@ -68,15 +68,8 @@ const processBatch = async ({
             bio: obj.author.bio.text,
             location: obj.author.location,
             website: obj.author.socialMediaLinks.website,
-            // Note: Mutate Twitter and Facebook links so they're just the username like
-            // on Ghost for now.
-            // TODO: Simplify social media links and how they're used throughout the build
-            // in the future.
-            twitter: obj.author.socialMediaLinks.twitter
-              ? obj.author.socialMediaLinks.twitter.replace(
-                  'https://twitter.com/',
-                  '@'
-                )
+            twitterHandle: obj.author.socialMediaLinks.twitter
+              ? `@${new URL(obj.author.socialMediaLinks.twitter).pathname.split('/').filter(Boolean)[0]}`
               : null,
             facebook: obj.author.socialMediaLinks.facebook
               ? obj.author.socialMediaLinks.facebook.replace(

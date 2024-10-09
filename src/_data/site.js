@@ -6,13 +6,13 @@ const {
 const { currentLocale_i18nISOCode, siteURL } = require('../../config');
 const translate = require('../../utils/translate');
 
-// Get Twitter profile based on links in config/i18n/locales/lang/links.json --
+// Get X / Twitter profile based on links in config/i18n/locales/lang/links.json --
 // falls back to English Twitter profile if one for the current UI locale
 // isn't found
-const getTwitterProfile = url => url.replace('https://twitter.com/', '@');
 const twitterURL = translate('links:twitter');
-const twitterProfile =
-  twitterURL !== 'twitter' ? getTwitterProfile(twitterURL) : '@freecodecamp';
+const twitterHandle = twitterURL
+  ? `@${new URL(twitterURL).pathname.split('/').filter(Boolean)[0]}`
+  : '@freecodecamp';
 const logoURL =
   'https://cdn.freecodecamp.org/platform/universal/fcc_primary.svg';
 const coverImageURL =
@@ -25,7 +25,8 @@ module.exports = async () => {
     lang: currentLocale_i18nISOCode.toLowerCase(),
     title: 'freeCodeCamp.org',
     facebook: 'https://www.facebook.com/freecodecamp',
-    twitter: twitterProfile,
+    twitterURL,
+    twitterHandle,
     logo: logoURL,
     cover_image: coverImageURL,
     og_image: coverImageURL,

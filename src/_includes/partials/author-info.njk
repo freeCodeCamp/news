@@ -54,10 +54,10 @@
                 {% include "partials/icons/website.njk" %}
             </a>
         {% endif %}
-        {% if author.twitter %}
+        {% if author.twitterHandle %}
             <a
                 class="social-link social-link-tw"
-                href="https://twitter.com/{{ author.twitter | replace("@", "") }}"
+                href="https://x.com/{{ author.twitterHandle | replace("@", "") }}"
                 target="_blank"
                 rel="noopener noreferrer"
             >

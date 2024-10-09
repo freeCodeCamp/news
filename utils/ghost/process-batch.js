@@ -128,6 +128,10 @@ const processBatch = async ({
         tag.path = stripGhostDomain(tag.url);
       });
 
+      // Rename twitter to twitterHandle for easier handling
+      obj.primary_author.twitterHandle = obj.primary_author.twitter;
+      delete obj.primary_author.twitter;
+
       // Log and fix author pages that point to 404 due to a Ghost error
       if (obj.primary_author.url.endsWith('/404/')) {
         errorLogger({ type: 'author', name: obj.primary_author.name });
