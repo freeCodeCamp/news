@@ -71,7 +71,7 @@ const processBatch = async ({
             website: obj.author.socialMediaLinks.website,
             // Note: Mutate X / Twitter and Facebook links so they're just the @username handle or
             // plain username like on Ghost for now.
-            twitterHandle: obj.author.socialMediaLinks.twitter
+            twitter_handle: obj.author.socialMediaLinks.twitter
               ? `@${getTwitterHandle(obj.author.socialMediaLinks.twitter)}`
               : null,
             facebook: obj.author.socialMediaLinks.facebook

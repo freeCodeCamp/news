@@ -129,9 +129,9 @@ const processBatch = async ({
       });
 
       // Ghost API does verification on their end, and only allows links to twitter.com.
-      // Also, they just return the handle as @username, so we can rename it to twitterHandle
+      // Also, they just return the handle as @username, so we can rename it to twitter_handle
       // for easier handling in the templates.
-      obj.primary_author.twitterHandle = obj.primary_author.twitter;
+      obj.primary_author.twitter_handle = obj.primary_author.twitter;
       delete obj.primary_author.twitter;
 
       // Log and fix author pages that point to 404 due to a Ghost error

@@ -177,9 +177,9 @@ time #}
     <meta name="twitter:data1" content="{{ post.primary_author.name }}">
     <meta name="twitter:label2" content="Filed under">
     <meta name="twitter:data2" content="{{ post.tags | join(", ", "name") }}">
-    <meta name="twitter:site" content="{{ site.twitterHandle }}">
-    {% if post.primary_author.twitterHandle %}
-        <meta name="twitter:creator" content="{{ post.primary_author.twitterHandle }}">
+    <meta name="twitter:site" content="{{ site.twitter_handle }}">
+    {% if post.primary_author.twitter_handle %}
+        <meta name="twitter:creator" content="{{ post.primary_author.twitter_handle }}">
     {% endif %}
 
     <meta property="og:image:width" content="{{ post.image_dimensions.feature_image.width }}">

@@ -4,8 +4,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // Use Nunjucks URL encoding here in case titles have any special characters like backticks
   const title = '{{ post.title | urlencode }}'.replace(/&#39;/g, '%27');
   const twitterHandles = {
-    originalPostAuthor: '{{ post.original_post.primary_author.twitterHandle }}',
-    currentPostAuthor: '{{ post.primary_author.twitterHandle }}' // Author or translator depending on context
+    originalPostAuthor:
+      '{{ post.original_post.primary_author.twitter_handle }}',
+    currentPostAuthor: '{{ post.primary_author.twitter_handle }}' // Author or translator depending on context
   };
   const isTranslation = Boolean('{{ post.original_post }}');
   let thanks;

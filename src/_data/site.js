@@ -26,7 +26,7 @@ module.exports = async () => {
     lang: currentLocale_i18nISOCode.toLowerCase(),
     title: 'freeCodeCamp.org',
     facebook: 'https://www.facebook.com/freecodecamp',
-    twitterHandle,
+    twitter_handle: twitterHandle,
     logo: logoURL,
     cover_image: coverImageURL,
     og_image: coverImageURL,
