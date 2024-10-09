@@ -102,8 +102,10 @@ describe('Author page (Hashnode sourced)', () => {
       });
 
       context('An author with a Facebook profile link', () => {
+        // TODO: Usernames / author slugs from Hashnode are not all lowercase by default,
+        // so look into normalizing this in the future and adjust this test
         before(() => {
-          cy.visit('/author/freecodecamp/');
+          cy.visit('/author/freeCodeCamp/');
         });
 
         it('should show a Facebook link and icon', () => {
