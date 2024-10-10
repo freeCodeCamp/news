@@ -102,8 +102,10 @@ describe('Author page (Hashnode sourced)', () => {
       });
 
       context('An author with a Facebook profile link', () => {
-        // TODO: Usernames / author slugs from Hashnode are not all lowercase by default,
-        // so look into normalizing this in the future and adjust this test
+        // TODO: Usernames / author slugs from Hashnode are not all lowercase by default.
+        // This is not a problem on the live site, but the 11ty dev server will 404
+        // unless the casing matches the author's actual Hashnode username. Consider
+        // lowercasing all author slugs when pulling in data from Hashnode.
         before(() => {
           cy.visit('/author/freeCodeCamp/');
         });
