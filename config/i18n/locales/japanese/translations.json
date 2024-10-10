@@ -9,7 +9,7 @@
     "accessible-name": "検索クエリを送信",
     "placeholder": {
       "default": "投稿を検索",
-      "numbered": "{{ roundedTotalRecords }} 件以上の投稿を検索"
+      "numbered": "{{ roundedTotalRecords }} 件以上の投稿から検索"
     },
     "see-results": "{{ searchQuery }} のすべての結果を見る",
     "no-tutorials": "投稿が見つかりませんでした"
