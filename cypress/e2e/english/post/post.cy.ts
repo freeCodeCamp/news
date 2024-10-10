@@ -27,7 +27,7 @@ describe('Post (Hashnode sourced)', () => {
     });
   });
 
-  context('Author with a Twitter handle', () => {
+  context('Author with an X / Twitter profile', () => {
     beforeEach(() => {
       cy.visit('/freecodecamp-press-books-handbooks/');
     });
@@ -36,13 +36,13 @@ describe('Post (Hashnode sourced)', () => {
       cy.get(selectors.socialRowCTA).should('be.visible');
     });
 
-    it('the tweet button should open a Twitter window with the correct message and dimensions', () => {
+    it('the tweet button should open an X / Twitter window with the correct message and dimensions', () => {
       cy.get(selectors.tweetButton)
         .invoke('attr', 'onclick')
         .should('include', 'window.open')
         .should(
           'include',
-          'https://twitter.com/intent/tweet?text=Thank%20you%20%40abbeyrenn%20for%20writing%20this%20helpful%20article.%0A%0AIntroducing%20freeCodeCamp%20Press%20%E2%80%93%20Free%20Books%20for%20Developers%0A%0Ahttp://localhost:8080/news/freecodecamp-press-books-handbooks/'
+          'https://x.com/intent/post?text=Thank%20you%20%40abbeyrenn%20for%20writing%20this%20helpful%20article.%0A%0AIntroducing%20freeCodeCamp%20Press%20%E2%80%93%20Free%20Books%20for%20Developers%0A%0Ahttp://localhost:8080/news/freecodecamp-press-books-handbooks/'
         )
         .should('include', 'share-twitter')
         .should('include', 'width=550, height=235')
@@ -50,7 +50,7 @@ describe('Post (Hashnode sourced)', () => {
     });
   });
 
-  context('Author with no Twitter handle', () => {
+  context('Author with no X / Twitter profile', () => {
     beforeEach(() => {
       cy.visit('/the-c-programming-handbook-for-beginners/');
     });
@@ -59,13 +59,13 @@ describe('Post (Hashnode sourced)', () => {
       cy.get(selectors.socialRowCTA).should('be.visible');
     });
 
-    it('the tweet button should open a Twitter window with the correct message and dimensions', () => {
+    it('the tweet button should open an X / Twitter window with the correct message and dimensions', () => {
       cy.get(selectors.tweetButton)
         .invoke('attr', 'onclick')
         .should('include', 'window.open')
         .should(
           'include',
-          'https://twitter.com/intent/tweet?text=The%20C%20Programming%20Handbook%20for%20Beginners%0A%0Ahttp://localhost:8080/news/the-c-programming-handbook-for-beginners/'
+          'https://x.com/intent/post?text=The%20C%20Programming%20Handbook%20for%20Beginners%0A%0Ahttp://localhost:8080/news/the-c-programming-handbook-for-beginners/'
         )
         .should('include', 'share-twitter')
         .should('include', 'width=550, height=235')

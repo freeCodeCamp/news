@@ -39,15 +39,15 @@
         <meta property="article:author" content="{{ author.facebook }}">
     {% endif %}
 
-    {# Twitter Card #}
+    {# X / Twitter Card #}
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="{{ title }}">
     <meta name="twitter:description" content="{{ author.bio if author.bio else defaultDescription }}">
     <meta name="twitter:url" content="{{ author.path | htmlBaseUrl(site.url) }}">
     <meta name="twitter:image" content="{{ author.cover_image if author.cover_image else site.cover_image }}">
-    <meta name="twitter:site" content="{{ site.twitter }}">
-    {% if author.twitter %}
-        <meta name="twitter:creator" content="{{ author.twitter }}">
+    <meta name="twitter:site" content="{{ site.twitter_handle }}">
+    {% if author.twitter_handle %}
+        <meta name="twitter:creator" content="{{ author.twitter_handle }}">
     {% endif %}
 
     <meta property="og:image:width" content="{{ author.image_dimensions.cover_image.width if author.image_dimensions.cover_image else site.image_dimensions.cover_image.width }}">

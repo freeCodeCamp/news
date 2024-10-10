@@ -20,7 +20,7 @@ const createAuthorObj = primaryAuthor => {
     profile_image,
     image_dimensions,
     website,
-    twitter,
+    twitter_handle,
     facebook,
     path // in `/author/username/` format
   } = primaryAuthor;
@@ -32,7 +32,7 @@ const createAuthorObj = primaryAuthor => {
     sameAs: [
       website ? fullEscaper(website) : null,
       facebook ? `https://www.facebook.com/${facebook}` : null,
-      twitter ? twitter.replace('@', 'https://twitter.com/') : null
+      twitter_handle ? twitter_handle.replace('@', 'https://x.com/') : null
     ].filter(url => url)
   };
 

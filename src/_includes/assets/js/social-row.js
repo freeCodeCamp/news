@@ -4,8 +4,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // Use Nunjucks URL encoding here in case titles have any special characters like backticks
   const title = '{{ post.title | urlencode }}'.replace(/&#39;/g, '%27');
   const twitterHandles = {
-    originalPostAuthor: '{{ post.original_post.primary_author.twitter }}',
-    currentPostAuthor: '{{ post.primary_author.twitter }}' // Author or translator depending on context
+    originalPostAuthor:
+      '{{ post.original_post.primary_author.twitter_handle }}',
+    currentPostAuthor: '{{ post.primary_author.twitter_handle }}' // Author or translator depending on context
   };
   const isTranslation = Boolean('{{ post.original_post }}');
   let thanks;
@@ -21,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
       currentPostAuthor: '{{ post.primary_author.name }}'
     };
 
-    // Use either a Twitter handle or name in the tweet message
+    // Use either an X /Twitter handle or name in the post text
     thanks = encodeURIComponent(`{% t 'social-row.tweets.translation', {
       author: '${
         twitterHandles.originalPostAuthor
@@ -36,15 +37,15 @@ document.addEventListener('DOMContentLoaded', () => {
     } %}`);
   } else if (!isTranslation && twitterHandles.currentPostAuthor) {
     // An original post on a source Ghost instance
-    // Only customize the tweet message if the author has a Twitter handle
+    // Only customize the post text if the author has an X / Twitter handle
     thanks = encodeURIComponent(`{% t 'social-row.tweets.default', {
       author: '${twitterHandles.currentPostAuthor}'
     } %}`);
   }
 
   const twitterIntentStr = thanks
-    ? `https://twitter.com/intent/tweet?text=${thanks}%0A%0A${title}%0A%0A${url}`
-    : `https://twitter.com/intent/tweet?text=${title}%0A%0A${url}`;
+    ? `https://x.com/intent/post?text=${thanks}%0A%0A${title}%0A%0A${url}`
+    : `https://x.com/intent/post?text=${title}%0A%0A${url}`;
 
   const windowOpenStr = `window.open(
     '${twitterIntentStr}',

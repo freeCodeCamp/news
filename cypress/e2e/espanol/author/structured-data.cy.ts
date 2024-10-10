@@ -1,7 +1,7 @@
 const commonExpectedJsonLd = require('../../../fixtures/common-expected-json-ld.json');
 const authorExpectedJsonLd = {
   '@type': 'Person',
-  sameAs: ['https://twitter.com/RafaelDavisH'], // Twitter
+  sameAs: ['https://x.com/RafaelDavisH'], // X / Twitter
   name: 'Rafael D. Hernandez',
   url: 'http://localhost:8080/espanol/news/author/rafael/',
   // Custom banner image

@@ -75,7 +75,7 @@
         <meta property="article:author" content="{{ doc.primary_author.facebook }}">
     {% endif %}
 
-    {# Twitter Card #}
+    {# X / Twitter Card #}
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="{{ title }}">
     {% if doc.excerpt %}
@@ -87,9 +87,9 @@
     <meta name="twitter:data1" content="{{ doc.primary_author.name if doc.primary_author else 'freeCodeCamp.org' }}">
     <meta name="twitter:label2" content="Filed under">
     <meta name="twitter:data2" content="{{ doc.tags | join(", ", "name") }}">
-    <meta name="twitter:site" content="{{ site.twitter }}">
-    {% if doc.primary_author.twitter %}
-        <meta name="twitter:creator" content="{{ doc.primary_author.twitter }}">
+    <meta name="twitter:site" content="{{ site.twitter_handle }}">
+    {% if doc.primary_author.twitter_handle %}
+        <meta name="twitter:creator" content="{{ doc.primary_author.twitter_handle }}">
     {% endif %}
 
     <meta property="og:image:width" content="{{ doc.image_dimensions.feature_image.width }}">

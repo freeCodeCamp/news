@@ -50,18 +50,20 @@
                 href="{{ author.website }}"
                 target="_blank"
                 rel="noopener noreferrer"
+                data-test-label="website-link"
             >
                 {% include "partials/icons/website.njk" %}
             </a>
         {% endif %}
-        {% if author.twitter %}
+        {% if author.twitter_handle %}
             <a
                 class="social-link social-link-tw"
-                href="https://twitter.com/{{ author.twitter | replace("@", "") }}"
+                href="https://x.com/{{ author.twitter_handle | replace("@", "") }}"
                 target="_blank"
                 rel="noopener noreferrer"
+                data-test-label="x-link"
             >
-                {% include "partials/icons/twitter.njk" %}
+                {% include "partials/icons/x.njk" %}
             </a>
         {% endif %}
         {% if author.facebook %}
@@ -70,6 +72,7 @@
                 href="https://facebook.com/{{ author.facebook }}"
                 target="_blank"
                 rel="noopener noreferrer"
+                data-test-label="facebook-link"
             >
                 {% include "partials/icons/facebook.njk" %}
             </a>
@@ -79,6 +82,7 @@
             href="https://feedly.com/i/subscription/feed/{{ author.path + '/rss/' | htmlBaseUrl(site.url) }}"
             target="_blank"
             rel="noopener"
+            data-test-label="rss-link"
         >
             {% include "partials/icons/rss.njk" %}
         </a>

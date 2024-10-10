@@ -11,7 +11,7 @@ const postExpectedJsonLd = {
       height: 500
     },
     url: 'http://localhost:8080/news/author/zaira/',
-    sameAs: ['https://twitter.com/hira_zaira']
+    sameAs: ['https://x.com/hira_zaira']
   },
   headline:
     'How Do Numerical Conversions Work in Computer Systems? Explained With Examples',

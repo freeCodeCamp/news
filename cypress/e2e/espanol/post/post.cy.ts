@@ -37,7 +37,7 @@ describe('Post (Ghost sourced)', () => {
     });
   });
 
-  context('Author with a Twitter handle', () => {
+  context('Author with an X / Twitter profile', () => {
     beforeEach(() => {
       cy.visit(
         '/como-funciona-el-operado-de-signo-de-interrogacion-javascript/'
@@ -48,13 +48,13 @@ describe('Post (Ghost sourced)', () => {
       cy.get(selectors.socialRowCTA).should('be.visible');
     });
 
-    it('the tweet button should open a Twitter window with the correct message and dimensions', () => {
+    it('the tweet button should open an X / Twitter window with the correct message and dimensions', () => {
       cy.get(selectors.tweetButton)
         .invoke('attr', 'onclick')
         .should('include', 'window.open')
         .should(
           'include',
-          'https://twitter.com/intent/tweet?text=Gracias%20%40RafaelDavisH%20por%20escribir%20este%20%C3%BAtil%20art%C3%ADculo.%0A%0AC%C3%B3mo%20funciona%20el%20operador%20de%20signo%20de%20interrogaci%C3%B3n%20(%3F)%20en%20JavaScript%0A%0Ahttp://localhost:8080/espanol/news/como-funciona-el-operado-de-signo-de-interrogacion-javascript/'
+          'https://x.com/intent/post?text=Gracias%20%40RafaelDavisH%20por%20escribir%20este%20%C3%BAtil%20art%C3%ADculo.%0A%0AC%C3%B3mo%20funciona%20el%20operador%20de%20signo%20de%20interrogaci%C3%B3n%20(%3F)%20en%20JavaScript%0A%0Ahttp://localhost:8080/espanol/news/como-funciona-el-operado-de-signo-de-interrogacion-javascript/'
         )
         .should('include', 'share-twitter')
         .should('include', 'width=550, height=235')
@@ -62,7 +62,7 @@ describe('Post (Ghost sourced)', () => {
     });
   });
 
-  context('Author with no Twitter handle', () => {
+  context('Author with no X / Twitter profile', () => {
     beforeEach(() => {
       cy.visit('/ghost-no-author-profile-pic/');
     });
@@ -71,13 +71,13 @@ describe('Post (Ghost sourced)', () => {
       cy.get(selectors.socialRowCTA).should('be.visible');
     });
 
-    it('the tweet button should open a Twitter window with the correct message and dimensions', () => {
+    it('the tweet button should open an X / Twitter window with the correct message and dimensions', () => {
       cy.get(selectors.tweetButton)
         .invoke('attr', 'onclick')
         .should('include', 'window.open')
         .should(
           'include',
-          'https://twitter.com/intent/tweet?text=Ghost%20No%20Author%20Profile%20Pic%0A%0Ahttp://localhost:8080/espanol/news/ghost-no-author-profile-pic/'
+          'https://x.com/intent/post?text=Ghost%20No%20Author%20Profile%20Pic%0A%0Ahttp://localhost:8080/espanol/news/ghost-no-author-profile-pic/'
         )
         .should('include', 'share-twitter')
         .should('include', 'width=550, height=235')

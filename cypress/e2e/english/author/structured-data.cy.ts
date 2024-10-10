@@ -1,7 +1,7 @@
 const commonExpectedJsonLd = require('../../../fixtures/common-expected-json-ld.json');
 const authorExpectedJsonLd = {
   '@type': 'Person',
-  sameAs: ['https://twitter.com/abbeyrenn'], // Twitter
+  sameAs: ['https://x.com/abbeyrenn'], // X / Twitter
   name: 'Abigail Rennemeyer',
   url: 'http://localhost:8080/news/author/abbeyrenn/',
   description:
