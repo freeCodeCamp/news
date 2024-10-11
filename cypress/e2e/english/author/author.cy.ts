@@ -189,11 +189,13 @@ describe('Author page (Hashnode sourced)', () => {
           cy.visit('/author/quincy/');
         });
 
-        // TODO: Links for RSS feeds are currently broken, so fix and test them in
-        // a future PR
         it('should show an RSS link and icon', () => {
           cy.get(selectors.socialMedia.rss.link)
-            // .should('have.attr', 'href', 'https://feedly.com/i/subscription/feed/http://localhost:8080/news/author/quincy/rss/')
+            .should(
+              'have.attr',
+              'href',
+              'https://feedly.com/i/subscription/feed/http://localhost:8080/news/author/quincy/rss/'
+            )
             .find('svg')
             .should('have.attr', 'data-test-label', 'rss-icon');
         });
