@@ -12,6 +12,50 @@ document.addEventListener('DOMContentLoaded', function() {
     
     var counter = 0;
     
+    function prepareAdSlot(elementId) {
+        // Get the element by ID
+        const targetElement = document.getElementById(elementId);
+
+        // Ensure the element exists before proceeding
+        if (!targetElement) {
+            console.error(`Element with ID ${elementId} not found`);
+            return;
+        }
+
+        // Change the display of the immediate next sibling element
+        if (targetElement.nextElementSibling) {
+            targetElement.nextElementSibling.style.display = 'block';
+        } else {
+            console.warn('No immediate sibling element found');
+        }
+
+        // Change the background color of the parent element
+        if (targetElement.parentElement) {
+            targetElement.parentElement.style.backgroundColor = '#ebebeb';
+            
+            // Get the sibling elements
+            const siblingElements = targetElement.parentElement.children;
+
+            for (let i = 0; i < siblingElements.length; i++) {
+            const sibling = siblingElements[i];
+
+            // Skip the banner-ad-top element itself
+            if (sibling === targetElement) continue;
+
+            // Log the sibling or perform any other action
+            console.log('Found sibling:', sibling);
+
+            // Check if display is 'none', then change it to 'block'
+            if (getComputedStyle(sibling).display === 'none') {
+                sibling.style.display = 'block'; 
+            }
+            }
+        } else {
+            console.warn('No parent element found');
+        }
+    }
+
+    
     window.googletag = window.googletag || {cmd: []};
     googletag.cmd.push(function() {
 
@@ -30,7 +74,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         if(topBannerTestable){
-            console.log('hell0')
+            console.log('show banner ad')
             // Show the container
             topBannerAd.style.display = 'flex'; 
 
@@ -60,6 +104,10 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
         googletag.pubads().addEventListener("slotOnload", (event) => {
+            const elementId = event.slot.getSlotElementId();
+            if(elementId === 'banner-ad-top'){
+                prepareAdSlot(elementId);
+            }
             console.log(`Slot ${event.slot.getSlotElementId()} rendered`);
         });
 
