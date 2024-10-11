@@ -132,7 +132,7 @@ module.exports = async () => {
           feature_image: post.feature_image,
           published_at: post.published_at,
           primary_author: post.primary_author,
-          tags: [post.tags[0]], // Only include the first / primary tag
+          tags: [...post.tags], // While only the first tag is shown in post cards on the author page, we show them all in feeds
           image_dimensions: { ...post.image_dimensions },
           original_post: post?.original_post,
           html: post.html
@@ -177,9 +177,9 @@ module.exports = async () => {
           feature_image: post.feature_image,
           published_at: post.published_at,
           primary_author: post.primary_author,
-          tags: [post.tags[0]], // Only include the first / primary tag
+          tags: [...post.tags], // While only the first tag is shown in post cards on the author page, we show them all in feeds
           image_dimensions: { ...post.image_dimensions },
-          original_post: post?.original_post,
+          original_post: post?.original_post ? post.original_post : null,
           html: post.html
         };
       });
@@ -225,8 +225,6 @@ module.exports = async () => {
         // pages show the last 15 posts
         const feedPostLimit = feedObj.path === '/' ? 10 : 15;
         feedObj.posts = feedObj.posts.slice(0, feedPostLimit);
-
-        console.log(feedObj);
 
         return feedObj;
       });

@@ -29,10 +29,11 @@
                 </description>
                 <link>{{ post.path | htmlBaseUrl(site.url) }}</link>
                 <guid isPermaLink="false">{{ post.id }}</guid>
-                <category>
-                    {% set primaryTag = post.tags[0] %}
-                    <![CDATA[ {{ primaryTag.name }} ]]>
-                </category>
+                {% for tag in post.tags %}
+                    <category>
+                        <![CDATA[ {{ tag.name }} ]]>
+                    </category>
+                {% endfor %}
                 <dc:creator>
                     <![CDATA[ {{ post.primary_author.name }} ]]>
                 </dc:creator>
