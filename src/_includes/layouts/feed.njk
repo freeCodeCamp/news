@@ -19,7 +19,7 @@
         </image>
         <generator>Eleventy</generator>
         <lastBuildDate>{% buildDateFormatter site.timezone %}</lastBuildDate>
-        <atom:link href="{{ site.url }}" rel="self" type="application/rss+xml" />
+        <atom:link href="{{ (feed.path + 'rss.xml') | htmlBaseUrl(site.url) }}" rel="self" type="application/rss+xml" />
         <ttl>60</ttl>
         {% for post in feed.posts %}
             <item>
