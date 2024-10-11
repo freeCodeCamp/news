@@ -163,8 +163,8 @@ describe('Author page RSS feed (Hashnode sourced)', () => {
     it(`should have a non-empty content:encoded field`, () => {
       const contentEncoded = targetItem
         .querySelector('encoded')
-        .innerHTML.replace(/\<\!\[CDATA\[/, '')
-        .replace(/\]\]\>/, '')
+        .innerHTML.replace(/<!\[CDATA\[/, '')
+        .replace(/\]\]>/, '')
         .trim();
 
       expect(contentEncoded).to.not.equal('undefined');
