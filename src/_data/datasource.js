@@ -128,7 +128,7 @@ module.exports = async () => {
           title: post.title,
           slug: post.slug,
           path: post.path,
-          url: post.url,
+          excerpt: post.excerpt,
           feature_image: post.feature_image,
           published_at: post.published_at,
           primary_author: post.primary_author,
@@ -173,7 +173,7 @@ module.exports = async () => {
           title: post.title,
           slug: post.slug,
           path: post.path,
-          url: post.url,
+          excerpt: post.excerpt,
           feature_image: post.feature_image,
           published_at: post.published_at,
           primary_author: post.primary_author,
@@ -225,6 +225,8 @@ module.exports = async () => {
         // pages show the last 15 posts
         const feedPostLimit = feedObj.path === '/' ? 10 : 15;
         feedObj.posts = feedObj.posts.slice(0, feedPostLimit);
+
+        console.log(feedObj);
 
         return feedObj;
       });
