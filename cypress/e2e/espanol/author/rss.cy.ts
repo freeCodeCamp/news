@@ -19,15 +19,8 @@ const expected = {
 };
 
 describe('Author page RSS feed (Ghost sourced)', () => {
-  let resBody: string;
-  let feed: {
-    querySelector: (arg0: string) => {
-      (): any;
-      new (): any;
-      innerHTML: string;
-    };
-    querySelectorAll: (arg0: string) => any;
-  };
+  let resBody;
+  let feed;
 
   before(() => {
     // Update baseUrl to include current language

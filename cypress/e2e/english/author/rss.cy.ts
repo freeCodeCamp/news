@@ -21,15 +21,8 @@ const expected = {
 };
 
 describe('Author page RSS feed (Hashnode sourced)', () => {
-  let resBody: string;
-  let feed: {
-    querySelector: (arg0: string) => {
-      (): any;
-      new (): any;
-      innerHTML: string;
-    };
-    querySelectorAll: (arg0: string) => any;
-  };
+  let resBody;
+  let feed;
 
   before(() => {
     cy.request(expected.feedPath).then(async res => {
