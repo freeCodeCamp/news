@@ -154,9 +154,14 @@ describe('Author page RSS feed (Hashnode sourced)', () => {
     });
 
     it(`should have the pubDate ${expected.itemPubDate}`, () => {
-      const pubDate = targetItem.querySelector('pubDate').innerHTML.trim();
+      // Convert both dates to milliseconds for comparison to prevent issues with
+      // server time zone differences
+      const pubDateMs = new Date(
+        targetItem.querySelector('pubDate').innerHTML.trim()
+      ).getTime();
+      const expectedPubDateMs = new Date(expected.itemPubDate).getTime();
 
-      expect(pubDate).to.equal(expected.itemPubDate);
+      expect(pubDateMs).to.equal(expectedPubDateMs);
     });
 
     it('should have a media:content element with the expected attributes', () => {
