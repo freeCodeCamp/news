@@ -2,8 +2,9 @@
 <rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/"
     xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" version="2.0">
     <channel>
+        {% set metaTitle %}{% t 'meta-tags:title' %}{% endset %}
         <title>
-            <![CDATA[ {{ "freeCodeCamp.org" if feed.path === "/" else (feed.name | safe + " - freeCodeCamp.org") }} ]]>
+            <![CDATA[ {{ (metaTitle | safe) if feed.path === "/" else (feed.name | safe + " - freeCodeCamp.org") }} ]]>
         </title>
         <description>
             <![CDATA[ {% t 'meta-tags:description' %} ]]>
@@ -11,13 +12,14 @@
         <link>{{ site.url }}</link>
         <image>
             <url>https://cdn.freecodecamp.org/universal/favicons/favicon.png</url>
-            {% set metaTitle %}{% t 'meta-tags:title' %}{% endset %}
-            <title>{{ (metaTitle | escape) if feed.path === "/" else (feed.name | safe + " - freeCodeCamp.org") }}</title>
+            <title>
+                <![CDATA[ {{ (metaTitle | safe) if feed.path === "/" else (feed.name | safe + " - freeCodeCamp.org") }} ]]>
+            </title>
             <link>{{ site.url }}</link>
         </image>
         <generator>Eleventy</generator>
         <lastBuildDate>{% buildDateFormatter site.timezone %}</lastBuildDate>
-        <atom:link href="{{ site.url }}" rel="self" type="application/rss+xml" />
+        <atom:link href="{{ (feed.path + 'rss.xml') | htmlBaseUrl(site.url) }}" rel="self" type="application/rss+xml" />
         <ttl>60</ttl>
         {% for post in feed.posts %}
             <item>
@@ -28,18 +30,19 @@
                     <![CDATA[ {{ post.excerpt | safe }} ]]>
                 </description>
                 <link>{{ post.path | htmlBaseUrl(site.url) }}</link>
-                <guid isPermaLink="false">{{ post.comment_id }}</guid>
-                <category>
-                    {% set primaryTag = post.tags[0] %}
-                    <![CDATA[ {{ primaryTag.name }} ]]>
-                </category>
+                <guid isPermaLink="false">{{ post.id }}</guid>
+                {% for tag in post.tags %}
+                    <category>
+                        <![CDATA[ {{ tag.name }} ]]>
+                    </category>
+                {% endfor %}
                 <dc:creator>
                     <![CDATA[ {{ post.primary_author.name }} ]]>
                 </dc:creator>
                 <pubDate>{% buildDateFormatter site.timezone, post.published_at %}</pubDate>
                 <media:content url="{{ post.feature_image }}" medium="image" />
                 <content:encoded>
-                    <![CDATA[ {{ (post.excerpt | safe) if feed.path === "/" else (post.html | safe) }} ]]>
+                    <![CDATA[ {{ (post.html | safe) }} ]]>
                 </content:encoded>
             </item>
         {% endfor %}

@@ -79,7 +79,7 @@
         {% endif %}
         <a
             class="social-link social-link-rss"
-            href="https://feedly.com/i/subscription/feed/{{ author.path + '/rss/' | htmlBaseUrl(site.url) }}"
+            href="https://feedly.com/i/subscription/feed/{{ (author.path + '/rss/') | htmlBaseUrl(site.url) }}"
             target="_blank"
             rel="noopener"
             data-test-label="rss-link"
