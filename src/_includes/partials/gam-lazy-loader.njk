@@ -1,13 +1,11 @@
 <script>
 document.addEventListener('DOMContentLoaded', function() {
 
-    console.log('it is running');
     var adElements = document.querySelectorAll('.side-bar-ad-slot');
     var sidebar = document.querySelector('.sidebar');
     var isSideBarDisplayed = window.getComputedStyle(sidebar).display !== 'none';
     var topBannerAd = document.querySelector('.banner-ad-top');
     var isScreenLarge = window.innerWidth > 900;
-    var topBannerTestable = window.location.href === isScreenLarge;
     
     var counter = 0;
     
@@ -72,8 +70,8 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
 
-        if(topBannerTestable){
-            console.log('show banner ad')
+        if(isScreenLarge){
+            console.log('show banner ad');
             // Show the container
             topBannerAd.style.display = 'flex'; 
 
