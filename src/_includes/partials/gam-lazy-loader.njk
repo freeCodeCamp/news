@@ -7,8 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var isSideBarDisplayed = window.getComputedStyle(sidebar).display !== 'none';
     var topBannerAd = document.querySelector('.banner-ad-top');
     var isScreenLarge = window.innerWidth > 900;
-    var testHref = 'https://www.freecodecamp.org/news/are-you-being-micro-managed-manage-your-relationship-with-your-manager-instead-9ad10b28bcda/'
-    var topBannerTestable = window.location.href === testHref && isScreenLarge;
+    var topBannerTestable = window.location.href === isScreenLarge;
     
     var counter = 0;
     
