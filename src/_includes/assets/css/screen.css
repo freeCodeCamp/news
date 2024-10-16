@@ -2328,10 +2328,18 @@ a.banner:hover span {
   width: 100%;
   height: auto;
   padding: 10px 0px;
-  background: #ebebeb;
   margin-top: calc(-1 * var(--header-height));
   justify-content: center;
+  align-items: center;
   margin-bottom: 3em;
+  flex-direction: column;
+}
+
+.banner-ad-top .ad-text {
+  display: none;
+  margin-bottom: 10px;
+  color: var(--gray75);
+  font-size: 0.9em;
 }
 
 /* 15. Ads
