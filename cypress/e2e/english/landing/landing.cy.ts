@@ -10,7 +10,8 @@ const selectors = {
   avatar: "[data-test-label='avatar']",
   siteNavLogo: "[data-test-label='site-nav-logo']",
   postPublishedTime: "[data-test-label='post-published-time']",
-  banner: "[data-test-label='banner']"
+  banner: "[data-test-label='banner']",
+  scrollButton: "[data-test-label='scroll-to-top']"
 };
 
 describe('Landing (Hashnode sourced)', () => {
@@ -53,6 +54,15 @@ describe('Landing (Hashnode sourced)', () => {
       cy.get(selectors.banner)
         .should('have.attr', 'href')
         .should('equal', 'https://www.freecodecamp.org/');
+    });
+
+    it('the scroll button should be initially hidden', function () {
+      cy.get(selectors.scrollButton).should('be.hidden');
+    });
+
+    it('the scroll button should scroll into view', function () {
+      cy.scrollTo('bottom');
+      cy.get(selectors.scrollButton).should('be.visible');
     });
 
     it('the authenticated banner text should tell people to donate', function () {

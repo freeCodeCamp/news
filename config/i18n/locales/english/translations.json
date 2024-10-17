@@ -2,7 +2,8 @@
   "buttons": {
     "forum": "Forum",
     "donate": "Donate",
-    "load-more-articles": "Load More Articles"
+    "load-more-articles": "Load More Articles",
+    "scroll-to-top": "Scroll to Top"
   },
   "search": {
     "label": "Search",
