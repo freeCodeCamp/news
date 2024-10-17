@@ -64,9 +64,8 @@ time #}
                         {% if adsEnabled %}
                             <div class="sidebar">
                                 {% if canonicalUrl | shouldCanonicalHaveGAM %}
-                                    {% for i in range(0, numOfSidebarAds) %}
-                                        {% include "partials/gam-ad-sidebar.njk" %}
-                                      {% endfor %}
+                                    {% set localizedAdText %}{% t 'ad-text' %}{% endset %}
+                                    <div class="ad-text" data-test-label="ad-text" id='ad-text-sidebar'>{{ localizedAdText | upper }}</div>
                                 {% else %}
                                     {% for i in range(0, numOfSidebarAds) %}
                                         {% include "partials/ad.njk" %}
