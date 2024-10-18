@@ -4,13 +4,13 @@
   "banner": {
     "default": "https://www.freecodecamp.org/japanese/",
     "authenticated": "https://www.freecodecamp.org/japanese/donate",
-    "authenticated-donor": "https://www.freecodecamp.org/news/how-to-donate-to-free-code-camp/"
+    "authenticated-donor": "https://www.freecodecamp.org/japanese/news/how-to-donate-to-free-code-camp/"
   },
   "learn-to-code-cta": "https://www.freecodecamp.org/japanese/learn",
   "twitter": "https://twitter.com/freecodecampJA",
   "footer": {
     "about": "https://www.freecodecamp.org/japanese/news/about/",
-    "support": "https://www.freecodecamp.org/news/support/",
+    "support": "https://www.freecodecamp.org/japanese/news/support/",
     "honesty": "https://www.freecodecamp.org/japanese/news/academic-honesty-policy/",
     "coc": "https://www.freecodecamp.org/japanese/news/code-of-conduct/"
   }
