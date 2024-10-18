@@ -61,7 +61,7 @@
         {% if secrets.eleventyEnv === 'prod' %}
             {% include "partials/gtm-head.njk" %}
         {% endif %}
-        
+
         {# Dynamically load MathJax script #}
         {% block mathjax %}
         {% endblock %}
@@ -136,6 +136,8 @@
     {% else %}
         <body class="home-template">
     {% endif %}
+
+    {% include "partials/scroll-button.njk" %}
 
     {% if secrets.eleventyEnv === 'prod' %}
         {% include "partials/gtm-body.njk" %}

@@ -1,0 +1,8 @@
+<button onclick="goToTop()" id="scrollToTop" title="Go to top" data-test-label="scroll-to-top">{% t 'buttons.scroll-to-top' %}</button>
+
+{% block scripts %}
+    {% set js %}
+        {% include "assets/js/scroll-button.js" %}
+    {% endset %}
+    <script>{{ js | jsMin | safe }}</script>
+{% endblock %}
