@@ -1,6 +1,5 @@
-<div class="ad-wrapper" data-test-label="ad-wrapper">
-    {% set localizedAdText %}{% t 'ad-text' %}{% endset %}
-    <div class="ad-text" data-test-label="ad-text">{{ localizedAdText | upper }}</div>
-    <div style='display: block; min-height: 200px; background-color: #ebebeb;' id="gam-ad-bottom">
-    </div>
+
+{% set localizedAdText %}{% t 'ad-text' %}{% endset %}
+<div class="ad-text" data-test-label="ad-text">{{ localizedAdText | upper }}</div>
+<div style='display: block; height: auto' id="gam-ad-bottom">
 </div>
