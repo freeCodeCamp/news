@@ -46,7 +46,7 @@ const originalPostHandler = async (originalPostFlag, translatedPostTitle) => {
       let originalAuthorObj = {};
       const originalAuthorRelativePath =
         document.querySelector('.author-card .author-card-name a')?.href ||
-        `/${postPathSegments.slice(0, postPathSegments.length - 1).join('/')}/author/freecodecamp/`;
+        `/${postPathSegments.slice(0, postPathSegments.length - 1).join('/')}/author/freeCodeCamp/`;
       const originalAuthorSlug = originalAuthorRelativePath
         .split('/')
         .filter(Boolean)
