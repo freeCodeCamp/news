@@ -1,14 +1,9 @@
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-
-    var adElements = document.querySelectorAll('.side-bar-ad-slot');
     var sidebar = document.querySelector('.sidebar');
     var isSideBarDisplayed = window.getComputedStyle(sidebar).display !== 'none';
     var topBannerAd = document.querySelector('.banner-ad-top');
     var isScreenLarge = window.innerWidth > 900;
-    
-    var counter = 0;
-    
     function prepareAdSlot(elementId) {
         // Get the element by ID
         const targetElement = document.getElementById(elementId);
@@ -19,33 +14,40 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
-        // Change the display of the immediate next sibling element
-        if (targetElement.nextElementSibling) {
-            targetElement.nextElementSibling.style.display = 'block';
-        } else {
-            console.warn('No immediate sibling element found');
-        }
-
+        const parentElement = targetElement.parentElement;
         // Change the background color of the parent element
-        if (targetElement.parentElement) {
-            targetElement.parentElement.style.backgroundColor = '#ebebeb';
-            
+
+        if (parentElement) {
+            console.log(elementId)
+
+            if(elementId === 'banner-ad-top' || elementId === 'gam-ad-bottom' ) {
+                parentElement.style.backgroundColor = '#eeeef0';
+                if(getComputedStyle(parentElement).visibility === 'hidden') {
+                    parentElement.style.visibility = 'inherit'; 
+                }
+            }
+
             // Get the sibling elements
-            const siblingElements = targetElement.parentElement.children;
+            const siblingElements = parentElement.children;
 
             for (let i = 0; i < siblingElements.length; i++) {
-            const sibling = siblingElements[i];
+                const sibling = siblingElements[i];
 
-            // Skip the banner-ad-top element itself
-            if (sibling === targetElement) continue;
+                // Skip the banner-ad-top element itself
+                if (sibling === targetElement) continue;
 
-            // Log the sibling or perform any other action
-            console.log('Found sibling:', sibling);
+                // Log the sibling or perform any other action
+                console.log('Found sibling:', sibling);
 
-            // Check if display is 'none', then change it to 'block'
-            if (getComputedStyle(sibling).display === 'none') {
-                sibling.style.display = 'block'; 
-            }
+                // Check visibility
+                if(getComputedStyle(sibling).visibility === 'hidden') {
+                    sibling.style.visibility = 'inherit'; 
+                }
+
+                // Check if display is 'none', then change it to 'block'
+                if (getComputedStyle(sibling).display === 'none') {
+                    sibling.style.display = 'block'; 
+                }
             }
         } else {
             console.warn('No parent element found');
@@ -57,21 +59,38 @@ document.addEventListener('DOMContentLoaded', function() {
     googletag.cmd.push(function() {
 
         if(isSideBarDisplayed){
+            var sidebarHeight = sidebar.offsetHeight;
+            var adTextSideBarHeight = 0;
+            var sideBarAdContainert = 600 + 17;
+        
+            var styles = window.getComputedStyle(sidebar);
+            var avaiableSideAdSpace = sidebarHeight - adTextSideBarHeight - parseFloat(styles.paddingTop) - parseFloat(styles.paddingBottom);
+            var numSideElements = Math.floor(avaiableSideAdSpace / sideBarAdContainert);
+            for (var i = 0; i < numSideElements; i++) {
+                // container element
+                var containerElement = document.createElement('div');
+                containerElement.classList.add('ad-wrapper');
 
-            // Give unique ids to sidebar ad elements 
-            adElements.forEach(function(adElement) {
-                adElement.id = 'side-gam-ad-' + counter;
-                counter++;  // Increment the counter for the next ad element
-            });
+                //text element
+                var textElement = document.createElement('div');
+                textElement.classList.add('ad-text');
+                textElement.innerText = localizedAdText;
 
-            // Define side ads
-            adElements.forEach(function(adElement) {
-                googletag.defineSlot('/23075930536/post-side', [[292, 30], [240, 400], [300, 75], [216, 54], [250, 360], [300, 50], 'fluid', [300, 31], [120, 20], [300, 250], [120, 30], [180, 150], [200, 446], [168, 42], [200, 200], [160, 600], [120, 90], [125, 125], [240, 133], [120, 60], [1, 1], [120, 240], [220, 90], [216, 36], [250, 250], [168, 28], [234, 60], [120, 600], [300, 600], [88, 31], [300, 100]], adElement.id).addService(googletag.pubads());
-            });
+                // ad element
+                var adElement = document.createElement('div');
+                var sideAdElementId = 'side-gam-ad-' + i;
+                adElement.id = sideAdElementId;
+                adElement.classList.add('side-bar-ad-slot');
+
+                // finalize setup
+                containerElement.appendChild(textElement);
+                containerElement.appendChild(adElement);
+                sidebar.appendChild(containerElement);
+                googletag.defineSlot('/23075930536/post-side', [[292, 30], [240, 400], [300, 75], [216, 54], [250, 360], [300, 50], 'fluid', [300, 31], [120, 20], [300, 250], [120, 30], [180, 150], [200, 446], [168, 42], [200, 200], [160, 600], [120, 90], [125, 125], [240, 133], [120, 60], [1, 1], [120, 240], [220, 90], [216, 36], [250, 250], [168, 28], [234, 60], [120, 600], [300, 600], [88, 31], [300, 100]], sideAdElementId).addService(googletag.pubads());
+            }
         }
 
         if(isScreenLarge){
-            console.log('show banner ad');
             // Show the container
             topBannerAd.style.display = 'flex'; 
 
@@ -102,9 +121,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         googletag.pubads().addEventListener("slotOnload", (event) => {
             const elementId = event.slot.getSlotElementId();
-            if(elementId === 'banner-ad-top'){
-                prepareAdSlot(elementId);
-            }
+            prepareAdSlot(elementId);
             console.log(`Slot ${event.slot.getSlotElementId()} rendered`);
         });
 

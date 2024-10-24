@@ -64,9 +64,8 @@ time #}
                         {% if adsEnabled %}
                             <div class="sidebar">
                                 {% if canonicalUrl | shouldCanonicalHaveGAM %}
-                                    {% for i in range(0, numOfSidebarAds) %}
-                                        {% include "partials/gam-ad-sidebar.njk" %}
-                                      {% endfor %}
+                                    {% set localizedAdText %}{% t 'ad-text' %}{% endset %}
+                                    <script>var localizedAdText = "{{ localizedAdText | upper }}";</script>
                                 {% else %}
                                     {% for i in range(0, numOfSidebarAds) %}
                                         {% include "partials/ad.njk" %}
@@ -97,7 +96,7 @@ time #}
                     {% endif %}
                 </section>
                 {% if adsEnabled %}
-                    <div class="banner-ad bottom">
+                    <div class="banner-ad-bottom">
                         {% if canonicalUrl | shouldCanonicalHaveGAM %}
                             {% include "partials/gam-ad-bottom.njk" %}
                         {% else %}

@@ -25,12 +25,6 @@ describe('Ads (Hashnode sourced)', () => {
     cy.get(selectors.ads.wrapper).should('be.visible');
   });
 
-  it('each ad container should contain a visible text disclaimer', () => {
-    cy.get(selectors.ads.wrapper).each($el => {
-      cy.wrap($el).find(selectors.ads.text).should('be.visible');
-    });
-  });
-
   it('each ad container should contain an inner `ins` element', () => {
     cy.get(selectors.ads.wrapper).each($el => {
       cy.wrap($el).find('ins');
