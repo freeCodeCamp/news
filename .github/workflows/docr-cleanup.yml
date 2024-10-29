@@ -38,7 +38,7 @@ jobs:
         run: doctl registry login --expiry-seconds 1200
 
       - name: Delete Images
-        uses: raisedadead/action-docr-cleanup@v1
+        uses: raisedadead/action-docr-cleanup@62b968c928fbb2dbce8b0caf11c0391f0921ea46 # v1
         with:
           repository_name: '${{ matrix.variants }}/news-${{ matrix.repos }}'
           days: '4'
