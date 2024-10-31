@@ -2318,22 +2318,6 @@ a.banner:hover span {
   }
 }
 
-.banner-ad-top {
-  display: none;
-  width: 100%;
-  height: auto;
-  padding: 10px 0px;
-  margin-top: calc(-1 * var(--header-height));
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 3em;
-  flex-direction: column;
-}
-
-.banner-ad-top .ad-text {
-  display: none;
-}
-
 .banner-ad-bottom {
   visibility: hidden;
   padding: 10px 0px;
