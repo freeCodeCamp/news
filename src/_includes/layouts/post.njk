@@ -156,7 +156,7 @@ time #}
     {% for tag in post.tags %}
         <meta property="article:tag" content="{{ tag.name }}">
     {% endfor %}
-    <meta property="article:publisher" content="https://www.facebook.com/freecodecamp">
+    <meta property="article:publisher" content="{{ site.facebook }}">
     {% if post.primary_author.facebook_username %}
         <meta property="article:author" content="{{ post.primary_author.facebook_username }}">
     {% endif %}

@@ -34,7 +34,7 @@
     <meta property="og:description" content="{{ author.bio if author.bio else defaultDescription }}">
     <meta property="og:url" content="{{ author.path | htmlBaseUrl(site.url) }}">
     <meta property="og:image" content="{{ author.cover_image if author.cover_image else site.cover_image }}">
-    <meta property="article:publisher" content="https://www.facebook.com/freecodecamp">
+    <meta property="article:publisher" content="{{ site.facebook }}">
     {% if author.facebook_username %}
         <meta property="article:author" content="{{ author.facebook_username }}">
     {% endif %}
