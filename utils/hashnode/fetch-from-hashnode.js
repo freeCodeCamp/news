@@ -28,6 +28,11 @@ const fetchFromHashnode = async contentType => {
           website
           twitter
           facebook
+          instagram
+          github
+          stackoverflow
+          linkedin
+          youtube
         }
         location
       }

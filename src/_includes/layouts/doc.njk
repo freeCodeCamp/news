@@ -71,8 +71,8 @@
         <meta property="article:tag" content="{{ tag.name }}">
     {% endfor %}
     <meta property="article:publisher" content="https://www.facebook.com/freecodecamp">
-    {% if doc.primary_author.facebook %}
-        <meta property="article:author" content="{{ doc.primary_author.facebook }}">
+    {% if doc.primary_author.facebook_username %}
+        <meta property="article:author" content="{{ doc.primary_author.facebook_username }}">
     {% endif %}
 
     {# X / Twitter Card #}
