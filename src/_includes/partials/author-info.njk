@@ -78,6 +78,28 @@
                     {% include "partials/icons/facebook.njk" %}
                 </a>
             {% endif %}
+            {% if author.instagram %}
+                <a
+                    class="social-link"
+                    href="{{ author.instagram }}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    data-test-label="instagram-link"
+                >
+                    {% include "partials/icons/instagram.njk" %}
+                </a>
+            {% endif %}
+            {% if author.youtube %}
+                <a
+                    class="social-link"
+                    href="{{ author.youtube }}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    data-test-label="youtube-link"
+                >
+                    {% include "partials/icons/youtube.njk" %}
+                </a>
+            {% endif %}
             {% if author.github %}
                 <a
                     class="social-link"
@@ -109,28 +131,6 @@
                     data-test-label="linkedin-link"
                 >
                     {% include "partials/icons/linkedin.njk" %}
-                </a>
-            {% endif %}
-            {% if author.instagram %}
-                <a
-                    class="social-link"
-                    href="{{ author.instagram }}"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    data-test-label="instagram-link"
-                >
-                    {% include "partials/icons/instagram.njk" %}
-                </a>
-            {% endif %}
-            {% if author.youtube %}
-                <a
-                    class="social-link"
-                    href="{{ author.youtube }}"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    data-test-label="youtube-link"
-                >
-                    {% include "partials/icons/youtube.njk" %}
                 </a>
             {% endif %}
             <a
