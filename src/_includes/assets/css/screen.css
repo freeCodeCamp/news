@@ -322,13 +322,11 @@ a.nav-forum {
 }
 
 .social-links {
-  flex-shrink: 0;
   display: flex;
-  align-items: center;
-}
-
-.social-links a:last-of-type {
-  padding-right: 20px;
+  flex-direction: row;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .social-link {
@@ -1867,6 +1865,7 @@ p:has(mjx-container.MathJax) {
   font-family: var(--font-family-sans-serif);
   font-display: swap;
   font-style: italic;
+  flex-wrap: wrap;
 }
 
 .under-header-content .author-location svg {
