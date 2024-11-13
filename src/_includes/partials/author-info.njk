@@ -44,47 +44,104 @@
                 &bull;
             </span>
         </div>
-        {% if author.website %}
+        <div class="social-links">
+            {% if author.website %}
+                <a
+                    class="social-link social-link-wb"
+                    href="{{ author.website }}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    data-test-label="website-link"
+                >
+                    {% include "partials/icons/website.njk" %}
+                </a>
+            {% endif %}
+            {% if author.twitter_handle %}
+                <a
+                    class="social-link social-link-tw"
+                    href="https://x.com/{{ author.twitter_handle | replace("@", "") }}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    data-test-label="x-link"
+                >
+                    {% include "partials/icons/x.njk" %}
+                </a>
+            {% endif %}
+            {% if author.facebook %}
+                <a
+                    class="social-link social-link-fb"
+                    href="{{ author.facebook }}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    data-test-label="facebook-link"
+                >
+                    {% include "partials/icons/facebook.njk" %}
+                </a>
+            {% endif %}
+            {% if author.github %}
+                <a
+                    class="social-link"
+                    href="{{ author.github }}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    data-test-label="github-link"
+                >
+                    {% include "partials/icons/github.njk" %}
+                </a>
+            {% endif %}
+            {% if author.stackoverflow %}
+                <a
+                    class="social-link"
+                    href="{{ author.stackoverflow }}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    data-test-label="stackoverflow-link"
+                >
+                    {% include "partials/icons/stackoverflow.njk" %}
+                </a>
+            {% endif %}
+            {% if author.linkedin %}
+                <a
+                    class="social-link"
+                    href="{{ author.linkedin }}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    data-test-label="linkedin-link"
+                >
+                    {% include "partials/icons/linkedin.njk" %}
+                </a>
+            {% endif %}
+            {% if author.instagram %}
+                <a
+                    class="social-link"
+                    href="{{ author.instagram }}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    data-test-label="instagram-link"
+                >
+                    {% include "partials/icons/instagram.njk" %}
+                </a>
+            {% endif %}
+            {% if author.youtube %}
+                <a
+                    class="social-link"
+                    href="{{ author.youtube }}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    data-test-label="youtube-link"
+                >
+                    {% include "partials/icons/youtube.njk" %}
+                </a>
+            {% endif %}
             <a
-                class="social-link social-link-wb"
-                href="{{ author.website }}"
+                class="social-link social-link-rss"
+                href="https://feedly.com/i/subscription/feed/{{ (author.path + '/rss/') | htmlBaseUrl(site.url) }}"
                 target="_blank"
-                rel="noopener noreferrer"
-                data-test-label="website-link"
+                rel="noopener"
+                data-test-label="rss-link"
             >
-                {% include "partials/icons/website.njk" %}
+                {% include "partials/icons/rss.njk" %}
             </a>
-        {% endif %}
-        {% if author.twitter_handle %}
-            <a
-                class="social-link social-link-tw"
-                href="https://x.com/{{ author.twitter_handle | replace("@", "") }}"
-                target="_blank"
-                rel="noopener noreferrer"
-                data-test-label="x-link"
-            >
-                {% include "partials/icons/x.njk" %}
-            </a>
-        {% endif %}
-        {% if author.facebook %}
-            <a
-                class="social-link social-link-fb"
-                href="{{ author.facebook }}"
-                target="_blank"
-                rel="noopener noreferrer"
-                data-test-label="facebook-link"
-            >
-                {% include "partials/icons/facebook.njk" %}
-            </a>
-        {% endif %}
-        <a
-            class="social-link social-link-rss"
-            href="https://feedly.com/i/subscription/feed/{{ (author.path + '/rss/') | htmlBaseUrl(site.url) }}"
-            target="_blank"
-            rel="noopener"
-            data-test-label="rss-link"
-        >
-            {% include "partials/icons/rss.njk" %}
-        </a>
+        </div>
     </div>
 </div>
