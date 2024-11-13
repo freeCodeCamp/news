@@ -324,7 +324,6 @@ a.nav-forum {
 .social-links {
   display: flex;
   flex-direction: row;
-  display: flex;
   flex-wrap: wrap;
   justify-content: center;
 }
