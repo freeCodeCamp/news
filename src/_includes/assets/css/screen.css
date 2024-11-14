@@ -1127,9 +1127,6 @@ Usage (In Ghost editor):
   font-size: 1.6rem;
   white-space: nowrap;
   vertical-align: top;
-}
-
-.post-full-content table {
   -webkit-overflow-scrolling: touch;
   background:
     radial-gradient(
@@ -1186,6 +1183,11 @@ Usage (In Ghost editor):
 .post-full-content table td {
   padding: 6px 12px;
   border: var(--gray10) 1px solid;
+}
+
+/* Hashnode tables */
+.post-full-content .hn-table {
+  max-width: 100%;
 }
 
 .gist {
