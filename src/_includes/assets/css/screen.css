@@ -1127,9 +1127,6 @@ Usage (In Ghost editor):
   font-size: 1.6rem;
   white-space: nowrap;
   vertical-align: top;
-}
-
-.post-full-content table {
   -webkit-overflow-scrolling: touch;
   background:
     radial-gradient(
