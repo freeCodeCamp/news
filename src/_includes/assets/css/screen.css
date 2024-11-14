@@ -1185,6 +1185,11 @@ Usage (In Ghost editor):
   border: var(--gray10) 1px solid;
 }
 
+/* Hashnode tables */
+.post-full-content .hn-table {
+  max-width: 100%;
+}
+
 .gist {
   width: 100%;
 }
