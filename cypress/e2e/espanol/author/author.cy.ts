@@ -112,7 +112,11 @@ describe('Author page (Ghost sourced)', () => {
 
         it('should show a Facebook link and icon', () => {
           cy.get(selectors.socialMedia.facebook.link)
-            .should('have.attr', 'href', 'https://facebook.com/freecodecamp')
+            .should(
+              'have.attr',
+              'href',
+              'https://www.facebook.com/freecodecamp'
+            )
             .find('svg')
             .should('have.attr', 'data-test-label', 'facebook-icon');
         });

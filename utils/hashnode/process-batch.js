@@ -3,7 +3,7 @@ const modifyHTMLContent = require('../modify-html-content');
 const getImageDimensions = require('../../utils/get-image-dimensions');
 const { stripHTMLTags } = require('../../utils/modify-html-helpers');
 const shortenExcerpt = require('../../utils/shorten-excerpt');
-const getTwitterHandle = require('../get-twitter-handle');
+const getUsername = require('../get-username');
 
 const processBatch = async ({
   batch,
@@ -61,6 +61,19 @@ const processBatch = async ({
         };
 
         if (obj?.author) {
+          const {
+            website,
+            twitter,
+            facebook,
+            instagram,
+            github,
+            stackoverflow,
+            linkedin,
+            youtube
+          } = obj.author.socialMediaLinks;
+          const twitterHandle = twitter ? getUsername(twitter) : null;
+          const facebookUsername = facebook ? getUsername(facebook) : null;
+
           obj.primary_author = {
             id: obj.author.id,
             name: obj.author.name,
@@ -68,18 +81,21 @@ const processBatch = async ({
             path: `/author/${obj.author.username}/`,
             bio: obj.author.bio.text,
             location: obj.author.location,
-            website: obj.author.socialMediaLinks.website,
-            // Note: Mutate X / Twitter and Facebook links so they're just the @username handle or
-            // plain username like on Ghost for now.
-            twitter_handle: obj.author.socialMediaLinks.twitter
-              ? `@${getTwitterHandle(obj.author.socialMediaLinks.twitter)}`
+            website,
+            // Note: Twitter and Facebook links coming from Hashnode should be full URLs.
+            // Mutate twitter.com to x.com links and create separate twitter_handle and
+            // facebook_username fields for use in the templates.
+            twitter_handle: twitterHandle ? `@${twitterHandle}` : null,
+            twitter: twitterHandle ? `https://x.com/${twitterHandle}` : null,
+            facebook_username: facebookUsername,
+            facebook: facebookUsername
+              ? `https://www.facebook.com/${facebookUsername}`
               : null,
-            facebook: obj.author.socialMediaLinks.facebook
-              ? obj.author.socialMediaLinks.facebook.replace(
-                  'https://www.facebook.com/',
-                  ''
-                )
-              : null
+            instagram,
+            github,
+            stackoverflow,
+            linkedin,
+            youtube
           };
 
           if (obj.author.profilePicture) {

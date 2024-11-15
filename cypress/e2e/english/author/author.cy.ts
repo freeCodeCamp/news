@@ -11,14 +11,6 @@ const selectors = {
   authorPostCount: "[data-test-label='author-post-count']",
   bullet: "[data-test-label='bullet']",
   socialMedia: {
-    facebook: {
-      link: "[data-test-label='facebook-link']",
-      icon: "[data-test-label='facebook-icon']"
-    },
-    rss: {
-      link: "[data-test-label='rss-link']",
-      icon: "[data-test-label='rss-icon']"
-    },
     website: {
       link: "[data-test-label='website-link']",
       icon: "[data-test-label='website-icon']"
@@ -26,6 +18,34 @@ const selectors = {
     x: {
       link: "[data-test-label='x-link']",
       icon: "[data-test-label='x-icon']"
+    },
+    facebook: {
+      link: "[data-test-label='facebook-link']",
+      icon: "[data-test-label='facebook-icon']"
+    },
+    github: {
+      link: "[data-test-label='github-link']",
+      icon: "[data-test-label='github-icon']"
+    },
+    stackoverflow: {
+      link: "[data-test-label='stackoverflow-link']",
+      icon: "[data-test-label='stackoverflow-icon']"
+    },
+    linkedin: {
+      link: "[data-test-label='linkedin-link']",
+      icon: "[data-test-label='linkedin-icon']"
+    },
+    instagram: {
+      link: "[data-test-label='instagram-link']",
+      icon: "[data-test-label='instagram-icon']"
+    },
+    youtube: {
+      link: "[data-test-label='youtube-link']",
+      icon: "[data-test-label='youtube-icon']"
+    },
+    rss: {
+      link: "[data-test-label='rss-link']",
+      icon: "[data-test-label='rss-icon']"
     }
   }
 };
@@ -86,35 +106,33 @@ describe('Author page (Hashnode sourced)', () => {
     });
   });
 
+  // TODO: Usernames / author slugs from Hashnode are not all lowercase by default.
+  // For tests that go to the freeCodeCamp author page, we need to use the correct case
+  // for the username, otherwise we'll get a 404. Consider lowercasing all author slugs
+  // when pulling in data from Hashnode.
   context('Social media', () => {
-    // TODO: Add tests for other social media links that Hashnode supports
-    // (GitHub, LinkedIn, Instagram, YouTube, etc.)
-    context('Facebook', () => {
-      context('An author with no Facebook profile link', () => {
+    context('Website', () => {
+      context('Author with no website link', () => {
         before(() => {
-          cy.visit('/author/abbeyrenn/');
+          cy.visit('/author/beaucarnes/');
         });
 
-        it('should not show an X link and icon', () => {
-          cy.get(selectors.socialMedia.facebook.link).should('not.exist');
-          cy.get(selectors.socialMedia.facebook.icon).should('not.exist');
+        it('should not show a website link and icon', () => {
+          cy.get(selectors.socialMedia.website.link).should('not.exist');
+          cy.get(selectors.socialMedia.website.icon).should('not.exist');
         });
       });
 
-      context('An author with a Facebook profile link', () => {
-        // TODO: Usernames / author slugs from Hashnode are not all lowercase by default.
-        // This is not a problem on the live site, but the 11ty dev server will 404
-        // unless the casing matches the author's actual Hashnode username. Consider
-        // lowercasing all author slugs when pulling in data from Hashnode.
+      context('Author with a website link', () => {
         before(() => {
           cy.visit('/author/freeCodeCamp/');
         });
 
-        it('should show a Facebook link and icon', () => {
-          cy.get(selectors.socialMedia.facebook.link)
-            .should('have.attr', 'href', 'https://facebook.com/freecodecamp')
+        it('should show a website link and icon with the expected attributes', () => {
+          cy.get(selectors.socialMedia.website.link)
+            .should('have.attr', 'href', 'https://www.freecodecamp.org/')
             .find('svg')
-            .should('have.attr', 'data-test-label', 'facebook-icon');
+            .should('have.attr', 'data-test-label', 'website-icon');
         });
       });
     });
@@ -136,7 +154,7 @@ describe('Author page (Hashnode sourced)', () => {
           cy.visit('/author/quincy/');
         });
 
-        it('should show an X link and icon', () => {
+        it('should show an X link and icon with the expected attributes', () => {
           cy.get(selectors.socialMedia.x.link)
             .should('have.attr', 'href', 'https://x.com/ossia')
             .find('svg')
@@ -146,59 +164,149 @@ describe('Author page (Hashnode sourced)', () => {
 
       context('Author with an X profile link', () => {
         before(() => {
-          cy.visit('/author/abbeyrenn/');
+          cy.visit('/author/freeCodeCamp/');
         });
 
-        it('should show an X link and icon', () => {
+        it('should show an X link and icon with the expected attributes', () => {
           cy.get(selectors.socialMedia.x.link)
-            .should('have.attr', 'href', 'https://x.com/abbeyrenn')
+            .should('have.attr', 'href', 'https://x.com/freecodecamp')
             .find('svg')
             .should('have.attr', 'data-test-label', 'x-icon');
         });
       });
+    });
 
-      context('Website', () => {
-        context('Author with no website link', () => {
-          before(() => {
-            cy.visit('/author/beaucarnes/');
-          });
-
-          it('should not show a website link and icon', () => {
-            cy.get(selectors.socialMedia.website.link).should('not.exist');
-            cy.get(selectors.socialMedia.website.icon).should('not.exist');
-          });
+    context('Facebook', () => {
+      context('An author with no Facebook profile link', () => {
+        before(() => {
+          cy.visit('/author/beaucarnes/');
         });
 
-        context('Author with a website link', () => {
-          before(() => {
-            cy.visit('/author/quincy/');
-          });
-
-          it('should show a website link and icon', () => {
-            cy.get(selectors.socialMedia.website.link)
-              .should('have.attr', 'href', 'https://www.freecodecamp.org')
-              .find('svg')
-              .should('have.attr', 'data-test-label', 'website-icon');
-          });
+        it('should not show a Facebook link and icon', () => {
+          cy.get(selectors.socialMedia.facebook.link).should('not.exist');
+          cy.get(selectors.socialMedia.facebook.icon).should('not.exist');
         });
       });
 
-      // Note: All authors should have an RSS link and icon
-      context('RSS', () => {
+      context('An author with a Facebook profile link', () => {
         before(() => {
-          cy.visit('/author/quincy/');
+          cy.visit('/author/freeCodeCamp/');
         });
 
-        it('should show an RSS link and icon', () => {
-          cy.get(selectors.socialMedia.rss.link)
+        it('should show a Facebook link and icon with the expected attributes', () => {
+          cy.get(selectors.socialMedia.facebook.link)
             .should(
               'have.attr',
               'href',
-              'https://feedly.com/i/subscription/feed/http://localhost:8080/news/author/quincy/rss/'
+              'https://www.facebook.com/freecodecamp'
             )
             .find('svg')
-            .should('have.attr', 'data-test-label', 'rss-icon');
+            .should('have.attr', 'data-test-label', 'facebook-icon');
         });
+      });
+    });
+
+    context('GitHub', () => {
+      context('An author with no GitHub profile link', () => {
+        before(() => {
+          cy.visit('/author/beaucarnes/');
+        });
+
+        it('should not show a GitHub link and icon', () => {
+          cy.get(selectors.socialMedia.github.link).should('not.exist');
+          cy.get(selectors.socialMedia.github.icon).should('not.exist');
+        });
+      });
+
+      context('An author with a GitHub profile link', () => {
+        before(() => {
+          cy.visit('/author/freeCodeCamp/');
+        });
+
+        it('should show a GitHub link and icon with the expected attributes', () => {
+          cy.get(selectors.socialMedia.github.link)
+            .should('have.attr', 'href', 'https://github.com/freecodecamp')
+            .find('svg')
+            .should('have.attr', 'data-test-label', 'github-icon');
+        });
+      });
+    });
+
+    context('Stack Overflow', () => {
+      context('An author with no Stack Overflow profile link', () => {
+        before(() => {
+          cy.visit('/author/beaucarnes/');
+        });
+
+        it('should not show a Stack Overflow link and icon', () => {
+          cy.get(selectors.socialMedia.stackoverflow.link).should('not.exist');
+          cy.get(selectors.socialMedia.stackoverflow.icon).should('not.exist');
+        });
+      });
+
+      context('An author with a Stack Overflow profile link', () => {
+        before(() => {
+          cy.visit('/author/freeCodeCamp/');
+        });
+
+        it('should show a Stack Overflow link and icon with the expected attributes', () => {
+          cy.get(selectors.socialMedia.stackoverflow.link)
+            .should(
+              'have.attr',
+              'href',
+              'https://stackoverflow.com/users/1373672/quincy-larson' // Note: Using Quincy's SO profile for testing purposes
+            )
+            .find('svg')
+            .should('have.attr', 'data-test-label', 'stackoverflow-icon');
+        });
+      });
+    });
+
+    context('LinkedIn', () => {
+      context('An author with no LinkedIn profile link', () => {
+        before(() => {
+          cy.visit('/author/beaucarnes/');
+        });
+
+        it('should not show a LinkedIn link and icon', () => {
+          cy.get(selectors.socialMedia.linkedin.link).should('not.exist');
+          cy.get(selectors.socialMedia.linkedin.icon).should('not.exist');
+        });
+      });
+
+      context('An author with a LinkedIn profile link', () => {
+        before(() => {
+          cy.visit('/author/freeCodeCamp/');
+        });
+
+        it('should show a LinkedIn link and icon with the expected attributes', () => {
+          cy.get(selectors.socialMedia.linkedin.link)
+            .should(
+              'have.attr',
+              'href',
+              'https://www.linkedin.com/school/free-code-camp/'
+            )
+            .find('svg')
+            .should('have.attr', 'data-test-label', 'linkedin-icon');
+        });
+      });
+    });
+
+    // Note: All authors should have an RSS link and icon
+    context('RSS', () => {
+      before(() => {
+        cy.visit('/author/beaucarnes/');
+      });
+
+      it('should show an RSS link and icon with the expected attributes', () => {
+        cy.get(selectors.socialMedia.rss.link)
+          .should(
+            'have.attr',
+            'href',
+            'https://feedly.com/i/subscription/feed/http://localhost:8080/news/author/beaucarnes/rss/'
+          )
+          .find('svg')
+          .should('have.attr', 'data-test-label', 'rss-icon');
       });
     });
   });
