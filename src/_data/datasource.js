@@ -24,7 +24,7 @@ const piscinaHashnode = new Piscina({
 module.exports = async () => {
   // Chunk raw Ghost posts and pages and process them in batches
   // with a pool of workers to create posts and pages global data
-  const batchSize = 200;
+  const batchSize = 300;
   const allGhostPosts = await fetchFromGhost('posts');
   const allHashnodePosts = await fetchFromHashnode('posts');
   const allGhostPages = await fetchFromGhost('pages');
