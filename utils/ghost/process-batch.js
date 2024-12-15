@@ -192,6 +192,10 @@ const processBatch = async ({
     })
   );
 
+  console.log(
+    `Finished processing Ghost ${contentType} batch ${currBatchNo} of ${totalBatches}...and using ${process.memoryUsage.rss() / 1024 / 1024} MB of memory`
+  );
+
   return batch;
 };
 
