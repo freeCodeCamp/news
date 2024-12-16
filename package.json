@@ -4,8 +4,8 @@
   "description": "Eleventy for https://www.freecodecamp.org/news",
   "main": ".eleventy.js",
   "engines": {
-    "node": ">=18",
-    "npm": ">=8"
+    "node": ">=20",
+    "npm": ">=10"
   },
   "scripts": {
     "start": "npm run develop",
