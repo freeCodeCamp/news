@@ -79,4 +79,7 @@ dist/
 cypress/videos
 cypress/screenshots
 
+# Generated config
+config/i18n/locales/**/trending.json
+
 docker/languages/
