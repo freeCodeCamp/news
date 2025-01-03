@@ -7,13 +7,13 @@ const { currentLocale_i18nISOCode, siteURL } = require('../../config');
 const getUsername = require('../../utils/get-username');
 const translate = require('../../utils/translate');
 
-// Get X / Twitter profile based on links in config/i18n/locales/lang/links.json --
+// Get Bluesky profile based on links in config/i18n/locales/lang/links.json --
 // falls back to English Twitter profile if one for the current UI locale
 // isn't found
-const twitterURL = translate('links:twitter');
-const twitterHandle = twitterURL
-  ? `@${getUsername(twitterURL)}`
-  : '@freecodecamp';
+const blueskyURL = translate('links:bluesky');
+const blueskyHandle = blueskyURL
+  ? `@${getUsername(blueskyURL)}`
+  : '@freecodecamp.bsky.social';
 const logoURL =
   'https://cdn.freecodecamp.org/platform/universal/fcc_primary.svg';
 const coverImageURL =
@@ -27,8 +27,8 @@ module.exports = async () => {
     title: 'freeCodeCamp.org',
     facebook: 'https://www.facebook.com/freecodecamp',
     facebook_username: 'freecodecamp',
-    twitter_handle: twitterHandle,
-    twitter: `https://x.com/${twitterHandle}`,
+    bluesky_handle: blueskyHandle,
+    bluesky: `https://bsky.app/profile/${blueskyHandle}`,
     logo: logoURL,
     cover_image: coverImageURL,
     og_image: coverImageURL,

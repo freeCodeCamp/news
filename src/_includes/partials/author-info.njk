@@ -56,10 +56,10 @@
                     {% include "partials/icons/website.njk" %}
                 </a>
             {% endif %}
-            {% if author.twitter_handle %}
+            {% if author.bluesky_handle %}
                 <a
                     class="social-link social-link-tw"
-                    href="https://x.com/{{ author.twitter_handle | replace("@", "") }}"
+                    href="https://bsky.app/profile/{{ author.blueksy_handle | replace("@", "") }}"
                     target="_blank"
                     rel="noopener noreferrer"
                     data-test-label="x-link"
