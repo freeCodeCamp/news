@@ -105,7 +105,7 @@
     "probe-image-size": "7.2.3",
     "shx": "0.3.4",
     "terser": "5.37.0",
-    "typescript": "5.7.2"
+    "typescript": "5.7.3"
   },
   "lint-staged": {
     "!(*.ts)": "prettier --write --ignore-unknown",
