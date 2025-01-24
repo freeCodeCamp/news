@@ -26,7 +26,8 @@ const selectors = {
       coc: "[data-test-label='coc']",
       privacy: "[data-test-label='privacy']",
       tos: "[data-test-label='tos']",
-      copyright: "[data-test-label='copyright']"
+      copyright: "[data-test-label='copyright']",
+      poweredBy: "[data-test-label='powered-by']"
     }
   }
 };
@@ -157,5 +158,9 @@ describe('Landing i18n (Hashnode sourced)', () => {
       .should('not.equal', 'footer.links.copyright')
       .should('have.attr', 'href')
       .should('equal', 'https://www.freecodecamp.org/news/copyright-policy/');
+    cy.get(selectors.footer.links.poweredBy)
+      .should('not.equal', 'footer.links.powered-by')
+      .should('have.attr', 'href')
+      .should('equal', 'https://hashnode.com/');
   });
 });
