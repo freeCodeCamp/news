@@ -235,6 +235,11 @@
     <div class='footer-bottom'>
         <h2 class="col-header" data-test-label="our-nonprofit">{% t 'footer.our-nonprofit' %}</h2>
         <div class="our-nonprofit">
+             {% if site.lang === 'en' %}
+                <span data-test-label="powered-by">
+                    Publication powered by Hashnode
+                </span>
+            {% endif %}
             <a href="{% t 'links:footer.about' %}" rel="noopener noreferrer" target="_blank" data-test-label="about">
                 {% t 'footer.links.about' %}
             </a>
@@ -267,9 +272,6 @@
             </a>
             <a href="https://www.freecodecamp.org/news/copyright-policy/" rel="noopener noreferrer" target="_blank" data-test-label="copyright">
                 {% t 'footer.links.copyright' %}
-            </a>
-            <a href="https://hashnode.com/" rel="noopener noreferrer" target="_blank" data-test-label="powered-by">
-                {% t 'footer.links.powered-by' %}
             </a>
         </div>
     </div>

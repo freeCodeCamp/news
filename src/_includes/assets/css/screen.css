@@ -2091,8 +2091,10 @@ p.footer-donation a:hover {
   justify-content: center;
 }
 
-.footer-bottom .our-nonprofit a {
+.footer-bottom .our-nonprofit a,
+.footer-bottom .our-nonprofit span {
   padding: 5px 10px;
+  font-size: 14px;
 }
 
 @media (min-width: 500px) {
@@ -2110,7 +2112,8 @@ p.footer-donation a:hover {
     font-size: 16.5;
   }
 
-  .footer-bottom .our-nonprofit a {
+  .footer-bottom .our-nonprofit a,
+  .footer-bottom .our-nonprofit span {
     padding: 5px;
   }
 }
