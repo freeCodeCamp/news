@@ -157,7 +157,7 @@ describe('Landing i18n (Hashnode sourced)', () => {
       .should('not.equal', 'footer.links.copyright')
       .should('have.attr', 'href')
       .should('equal', 'https://www.freecodecamp.org/news/copyright-policy/');
-    cy.get("[data-test-label='powered-by'] span")
+    cy.get("span[data-test-label='powered-by']")
       .invoke('text')
       .should('equal', 'Publication powered by Hashnode');
   });
