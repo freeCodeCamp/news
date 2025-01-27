@@ -235,6 +235,11 @@
     <div class='footer-bottom'>
         <h2 class="col-header" data-test-label="our-nonprofit">{% t 'footer.our-nonprofit' %}</h2>
         <div class="our-nonprofit">
+             {% if site.lang === 'en' %}
+                <span data-test-label="powered-by">
+                    Publication powered by Hashnode
+                </span>
+            {% endif %}
             <a href="{% t 'links:footer.about' %}" rel="noopener noreferrer" target="_blank" data-test-label="about">
                 {% t 'footer.links.about' %}
             </a>
