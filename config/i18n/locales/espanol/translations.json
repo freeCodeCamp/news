@@ -8,15 +8,15 @@
     "label": "Buscar",
     "accessible-name": "Enviar tu consulta de búsqueda",
     "placeholder": {
-      "default": "Search our tutorials",
-      "numbered": "Search {{ roundedTotalRecords }}+ tutorials"
+      "default": "Busca nuestros tutoriales",
+      "numbered": "Busca {{ roundedTotalRecords }}+ tutoriales"
     },
     "see-results": "Ver todos los resultados de {{ searchQuery }}",
     "no-tutorials": "No se encontraron tutoriales"
   },
   "banner": {
     "default": "Aprender a codificar — {{ <0> }}gratis 3,000-horas currículo{{ </0> }}",
-    "authenticated": "Support our charity and our mission. {{ <0> }}Donate to freeCodeCamp.org{{ </0> }}.",
+    "authenticated": "Apoya nuestra organización y misión. {{ <0> }} Dona a freeCodeCamp.org {{ </0> }}.",
     "authenticated-donor": "Gracias por apoyar a freeCodeCamp a través de {{ <0> }}tus donaciones{{ </0> }}."
   },
   "default-bio": "Leer {{ <0> }}más publicaciones{{ </0> }}.",
@@ -36,8 +36,8 @@
   },
   "social-row": {
     "cta": {
-      "tweet-a-thanks": "If you read this far, thank the author to show them you care. {{ <0> }}Say Thanks{{ </0> }}",
-      "tweet-it": "If this article was helpful, {{ <0> }}share it{{ </0> }}."
+      "tweet-a-thanks": "Si has llegado hasta aquí, muéstrale tu agradecimiento al autor. {{ <0> }}Gracias{{ </0> }}",
+      "tweet-it": "Si este artículo fue de ayuda, {{ <0> }}compártelo{{ </0> }}."
     },
     "tweets": {
       "default": "Gracias {{ author }} por escribir este útil artículo.",
@@ -51,7 +51,7 @@
       "translator": "Traductor: {{ name }}"
     },
     "details": {
-      "original-article": "{{ <0> }}Original article:{{ </0> }} {{ title }}"
+      "original-article": "{{ <0> }}Artículo original:{{ </0> }} {{ title }}"
     },
     "locales": {
       "chinese": "Chino",
@@ -62,19 +62,19 @@
       "japanese": "Japonés",
       "korean": "Coreano",
       "portuguese": "Portugués",
-      "ukrainian": "Ukrainian",
+      "ukrainian": "Ucraniano",
       "urdu": "Urdu"
     }
   },
   "embed-title": "Contenido incrustado",
   "footer": {
-    "tax-exempt-status": "freeCodeCamp is a donor-supported tax-exempt 501(c)(3) charity organization (United States Federal Tax Identification Number: 82-0779546)",
-    "mission-statement": "Our mission: to help people learn to code for free. We accomplish this by creating thousands of videos, articles, and interactive coding lessons - all freely available to the public.",
+    "tax-exempt-status": "freeCodeCamp es una organización benéfica 501(c)(3) exenta de impuestos apoyada por donantes (Número de Identificación Fiscal Federal De Los Estados Unidos: 82-0779546)",
+    "mission-statement": "Nuestra misión: ayudar personas a aprender código de forma gratuita. Nosotros logramos esto mediante la creación de miles de videos, artículos y lecciones interactivas de programación, todo disponible gratuitamente para el público. También tenemos más de mil grupos de estudio freeCodeCamp alrededor el mundo.",
     "donation-initiatives": "Las donaciones a freeCodeCamp van dirigidas a nuestras iniciativas educativas y ayudan a pagar servidores, servicios y personal.",
     "donate-text": "Puedes hacer {{ <0> }}una donación deducible de impuestos aquí{{ </0> }}.",
-    "trending-books-and-handbooks": "Trending Books and Handbooks",
-    "mobile-app": "Mobile App",
-    "our-nonprofit": "Our Charity",
+    "trending-books-and-handbooks": "Libros y manuales populares",
+    "mobile-app": "App Móvil",
+    "our-nonprofit": "Nuestra Organización",
     "links": {
       "about": "Acerca de",
       "alumni": "Red de ex-Alumnos",
