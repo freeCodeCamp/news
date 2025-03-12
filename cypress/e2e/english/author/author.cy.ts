@@ -19,6 +19,10 @@ const selectors = {
       link: "[data-test-label='x-link']",
       icon: "[data-test-label='x-icon']"
     },
+    bluesky: {
+      link: "[data-test-label='bluesky-link']",
+      icon: "[data-test-label='bluesky-icon']"
+    },
     facebook: {
       link: "[data-test-label='facebook-link']",
       icon: "[data-test-label='facebook-icon']"
@@ -173,6 +177,8 @@ describe('Author page (Hashnode sourced)', () => {
             .find('svg')
             .should('have.attr', 'data-test-label', 'x-icon');
         });
+
+        //TODO: Add a bluesky test
       });
     });
 
