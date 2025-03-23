@@ -32,8 +32,15 @@ const probeImage = async url => {
 
 const getImageDimensions = async (url, description) => {
   try {
-    if (url.startsWith('data:'))
-      throw new Error('Data URI images are not supported');
+    if (url.startsWith('data:')) {
+      console.warn(`
+        ---------------------------------------------------------------
+        Warning: Skipping data URL for image dimensions in ${description.substring(0, 350)}...
+        ---------------------------------------------------------------
+        `);
+
+      throw new Error('Data URL');
+    }
     let imageDimensions = getCache(url);
     if (imageDimensions) return imageDimensions;
 
