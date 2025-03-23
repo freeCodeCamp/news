@@ -1,55 +1,7 @@
-const fetch = require('node-fetch');
-const { imageSize } = require('image-size');
+const probe = require('probe-image-size');
 const errorLogger = require('./error-logger');
 const { getCache, setCache } = require('./cache');
 const defaultDimensions = { width: 600, height: 400 };
-
-// Minimum required bytes for common image formats (approximate)
-const imageMinBytes = {
-  jpg: 410,
-  png: 33,
-  gif: 14,
-  webp: 30,
-  bmp: 26,
-  default: 256 // Fallback for other image types
-};
-
-const probeImage = async url => {
-  const response = await fetch(url);
-  if (!response.ok)
-    throw new Error(`Failed to fetch image: ${response.statusText}`);
-
-  const chunks = [];
-  let totalLength = 0;
-  const reader = response.body;
-
-  for await (const chunk of reader) {
-    chunks.push(chunk);
-    totalLength += chunk.length;
-
-    try {
-      const buffer = Buffer.concat(chunks, totalLength);
-
-      // Try to detect image format (first few bytes)
-      const { type } = imageSize(buffer);
-      const minBytes = imageMinBytes[type] || imageMinBytes.default;
-
-      // Check buffer length before probing image
-      if (buffer.length < minBytes) continue;
-
-      // Get dimensions
-      const dimensions = imageSize(buffer);
-      if (dimensions.width && dimensions.height) {
-        response.body.destroy(); // Stop downloading
-        return dimensions;
-      }
-    } catch (err) {
-      // Continue reading if more data is needed
-    }
-  }
-
-  throw new Error('Could not determine image size');
-};
 
 const getImageDimensions = async (url, description) => {
   try {
@@ -60,12 +12,19 @@ const getImageDimensions = async (url, description) => {
         ---------------------------------------------------------------
         `);
 
-      throw new Error('Data URL');
+      // throw new Error('Data URL');
+      return defaultDimensions;
     }
     let imageDimensions = getCache(url);
     if (imageDimensions) return imageDimensions;
 
-    const res = await probeImage(url);
+    const res = await probe(url, {
+      open_timeout: 5000,
+      response_timeout: 3000,
+      read_timeout: 3000
+      // rejectUnauthorized: true
+    });
+    // const res = await probe(url);
     imageDimensions = {
       width: res?.width ? res?.width : defaultDimensions.width,
       height: res?.height ? res?.height : defaultDimensions.height
@@ -79,5 +38,45 @@ const getImageDimensions = async (url, description) => {
     return defaultDimensions;
   }
 };
+
+// const getImageDimensions = async (url, description) => {
+//   // try {
+//   //   if (url.startsWith('data:')) {
+//   //     console.warn(`
+//   //       ---------------------------------------------------------------
+//   //       Warning: Skipping data URL for image dimensions in ${description.substring(0, 350)}...
+//   //       ---------------------------------------------------------------
+//   //       `);
+
+//   //     return defaultDimensions;
+//   //   }
+//   //   const res = await probe(url);
+
+//   //   const imageDimensions = {
+//   //     width: res?.width ? res?.width : defaultDimensions.width,
+//   //     height: res?.height ? res?.height : defaultDimensions.height
+//   //   };
+
+//   //   return imageDimensions;
+//   // } catch (err) {
+//   //   errorLogger({ type: 'image', name: description });
+
+//   //   return defaultDimensions;
+//   // }
+
+//   try {
+//     const res = await probe(url);
+//     const imageDimensions = {
+//       width: res?.width ? res?.width : defaultDimensions.width,
+//       height: res?.height ? res?.height : defaultDimensions.height
+//     };
+
+//     return imageDimensions;
+//   } catch (err) {
+//     errorLogger({ type: 'image', name: description });
+
+//     return defaultDimensions;
+//   }
+// };
 
 module.exports = getImageDimensions;
