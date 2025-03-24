@@ -31,9 +31,9 @@ const getImageDimensions = async (url, description) => {
     setCache(url, imageDimensions);
   } catch (err) {
     errorLogger({ type: 'image', name: description });
-  } finally {
-    return imageDimensions;
   }
+
+  return imageDimensions;
 };
 
 module.exports = getImageDimensions;
