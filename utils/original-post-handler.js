@@ -1,5 +1,7 @@
 const { URL } = require('url');
-const fetch = require('node-fetch');
+// const fetch = require('node-fetch');
+const fetch = (...args) =>
+  import('node-fetch').then(({ default: fetch }) => fetch(...args));
 const jsdom = require('jsdom');
 const { JSDOM } = jsdom;
 const { getCache, setCache } = require('./cache');

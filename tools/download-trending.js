@@ -1,6 +1,8 @@
 const { readFileSync, writeFileSync } = require('fs');
 const path = require('path');
-const fetch = require('node-fetch');
+// const fetch = require('node-fetch');
+const fetch = (...args) =>
+  import('node-fetch').then(({ default: fetch }) => fetch(...args));
 const yaml = require('js-yaml');
 
 const { currentLocale_i18n } = require('../config');

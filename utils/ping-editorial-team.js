@@ -1,5 +1,7 @@
 const errorLogger = require('./error-logger');
-const fetch = require('node-fetch');
+// const fetch = require('node-fetch');
+const fetch = (...args) =>
+  import('node-fetch').then(({ default: fetch }) => fetch(...args));
 const {
   chatWebhookKey,
   chatWebhookToken,
