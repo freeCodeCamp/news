@@ -18,7 +18,14 @@ const getImageDimensions = async (url, description) => {
     const cachedDimensions = getCache(url);
     if (cachedDimensions) imageDimensions = cachedDimensions;
 
-    const fetchedImageDimensions = await probe(url);
+    const fetchedImageDimensions = await probe(url, {
+      open_timeout: 5000,
+      response_timeout: 5000,
+      read_timeout: 5000,
+      // Don't follow redirects, which can
+      // cause some localized builds to hang
+      follow_max: 0
+    });
     imageDimensions = {
       width: fetchedImageDimensions?.width
         ? fetchedImageDimensions?.width
