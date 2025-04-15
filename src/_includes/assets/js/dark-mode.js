@@ -14,6 +14,9 @@ document.addEventListener('DOMContentLoaded', () => {
   document
     .getElementById('toggle-dark-mode')
     .addEventListener('click', function () {
+      const currentTheme = localStorage.getItem('theme');
+      const invertedTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      localStorage.setItem('theme', invertedTheme);
       document.body.classList.toggle('dark-mode');
     });
 });

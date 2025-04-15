@@ -1,6 +1,6 @@
 const commonExpectedMeta = require('../../../fixtures/common-expected-meta.json');
 const { loadAllPosts } = require('../../../support/utils/post-cards');
-
+import 'cypress-localstorage-commands';
 const selectors = {
   featureImage: "[data-test-label='feature-image']",
   postCard: "[data-test-label='post-card']",
@@ -59,6 +59,12 @@ describe('Landing (Hashnode sourced)', () => {
       cy.get(selectors.darkModeButton).click();
 
       cy.get('body', { timeout: 1000 }).should('not.have.class', 'dark-mode');
+    });
+
+    it('The theme should be set to dark and update the value in localStorage to dark', function () {
+      visit(false);
+      cy.get(selectors.darkModeButton).click();
+      cy.getLocalStorage('theme').should('equal', 'dark');
     });
 
     // Because all templates readers see use `default.njk` as a base,
