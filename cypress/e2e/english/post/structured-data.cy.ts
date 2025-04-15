@@ -7,8 +7,8 @@ const postExpectedJsonLd = {
     image: {
       '@type': 'ImageObject',
       url: 'https://cdn.hashnode.com/res/hashnode/image/upload/v1725962202907/0bebb292-8980-4c3d-8438-85114f09f6a5.png?w=500&h=500&fit=crop&crop=entropy&auto=compress,format&format=webp',
-      width: 500,
-      height: 500
+      width: 1000,
+      height: 879
     },
     url: 'http://localhost:8080/news/author/zaira/',
     sameAs: ['https://x.com/hira_zaira']

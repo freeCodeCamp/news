@@ -6,25 +6,22 @@ const fetchFromGhost = require('../../utils/ghost/fetch-from-ghost');
 const fetchFromHashnode = require('../../utils/hashnode/fetch-from-hashnode');
 const { postsPerPage, siteURL } = require('../../config');
 const pingEditorialTeam = require('../../utils/ping-editorial-team');
-const idleTimeoutMS = 3600000; // 1 hour
 
 const getUniqueList = (arr, key) => [
   ...new Map(arr.map(item => [item[key], item])).values()
 ];
 
 const piscinaGhost = new Piscina({
-  filename: resolve(__dirname, '../../utils/ghost/process-batch'),
-  idleTimeout: idleTimeoutMS
+  filename: resolve(__dirname, '../../utils/ghost/process-batch')
 });
 const piscinaHashnode = new Piscina({
-  filename: resolve(__dirname, '../../utils/hashnode/process-batch'),
-  idleTimeout: idleTimeoutMS
+  filename: resolve(__dirname, '../../utils/hashnode/process-batch')
 });
 
 module.exports = async () => {
   // Chunk raw Ghost posts and pages and process them in batches
   // with a pool of workers to create posts and pages global data
-  const batchSize = 300;
+  const batchSize = 200;
   const allGhostPosts = await fetchFromGhost('posts');
   const allHashnodePosts = await fetchFromHashnode('posts');
   const allGhostPages = await fetchFromGhost('pages');
