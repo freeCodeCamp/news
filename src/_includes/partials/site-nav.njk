@@ -1,4 +1,4 @@
-<nav class="site-nav nav-padding">
+<nav class="site-nav nav-padding universal-nav">
     <div class="site-nav-left">
         {% include "partials/search-bar.njk" %}
     </div>
@@ -23,6 +23,11 @@
                 target="_blank"
                 data-test-label="donate-button"
             >{% t 'buttons.donate' %}</a>
+            <a
+                class="toggle-button-nav"
+                id="toggle-dark-mode"
+                data-test-label="dark-mode-button"
+            >{% t 'buttons.toggle-dark-mode' %}</a>
         </div>
     </div>
 </nav>

@@ -13,5 +13,12 @@
     "support": "https://www.freecodecamp.org/news/support/",
     "honesty": "https://www.freecodecamp.org/news/academic-honesty-policy/",
     "coc": "https://www.freecodecamp.org/news/code-of-conduct/"
+  },
+  "nav": {
+    "contribute": "https://contribute.freecodecamp.org/#/",
+    "forum": "https://forum.freecodecamp.org/",
+    "learn": "https://www.freecodecamp.org/learn",
+    "news": "https://freecodecamp.org/news/",
+    "podcast": "https://freecodecamp.libsyn.com/"
   }
 }

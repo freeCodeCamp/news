@@ -25,6 +25,7 @@
 
         {# News Theme Styles #}
         <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="{% cacheBuster '/assets/css/global.css' %}" />
+        <link rel="stylesheet" type="text/css" href="{% cacheBuster '/assets/css/variables.css' %}" />
         <link rel="stylesheet" type="text/css" href="{% cacheBuster '/assets/css/screen.css' %}" />
         <link rel="stylesheet" type="text/css" href="{% cacheBuster '/assets/css/search-bar.css' %}" />
 
@@ -47,6 +48,7 @@
             {% include "assets/js/search-bar.js" %}
             {% include "assets/js/client-dayjs.js" %}
             {% include "assets/js/cookie-checker.js" %}
+            {% include "assets/js/dark-mode.js" %}
         {% endset %}
         <script>{{ js | jsMin | safe }}</script>
 
@@ -61,7 +63,7 @@
         {% if secrets.eleventyEnv === 'prod' %}
             {% include "partials/gtm-head.njk" %}
         {% endif %}
-        
+
         {# Dynamically load MathJax script #}
         {% block mathjax %}
         {% endblock %}
