@@ -20,6 +20,11 @@
     "destination": "/news/about"
   },
   {
+    "source": "/build-your-first-python-package",
+    "destination": "/news/how-to-create-and-upload-your-first-python-package-to-pypi",
+    "type": 302
+  },
+  {
     "source": "/nameerror-name-plot_cases_simple-is-not-defined-how-to-fix-this-python-error",
     "destination": "/news/nameerror-name-plot-cases-simple-is-not-defined-how-to-fix-this-python-error",
     "type": 302
