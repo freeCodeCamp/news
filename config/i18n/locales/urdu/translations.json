@@ -8,11 +8,11 @@
     "label": "سرچ کریں",
     "accessible-name": "اپنی search query لکھیں",
     "placeholder": {
-      "default": "متعدد tutorials میں سے search کریں",
-      "numbered": "{{ roundedTotalRecords }}+ tutorials میں سے search کریں"
+      "default": "Search our news articles, tutorials, and books",
+      "numbered": "Search {{ roundedTotalRecords }}+ news articles, tutorials, and books"
     },
     "see-results": "  کے سارے results دیکھیں {{ searchQuery }}",
-    "no-tutorials": "کوئی ٹٹوریل نہیں مل سکا "
+    "no-results": "No results found"
   },
   "banner": {
     "default": "{{ <0> }}کوڈ کرنا سیکھیں 3000 گھنٹوں کا مفت نصاب{{ </0> }}",

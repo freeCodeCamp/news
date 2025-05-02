@@ -8,11 +8,11 @@
     "label": "Buscar",
     "accessible-name": "Envie sua consulta de pesquisa",
     "placeholder": {
-      "default": "Buscar em nossos tutoriais",
-      "numbered": "Buscar em mais de {{ roundedTotalRecords }} tutoriais"
+      "default": "Search our news articles, tutorials, and books",
+      "numbered": "Search {{ roundedTotalRecords }}+ news articles, tutorials, and books"
     },
     "see-results": "Ver todos os resultados para {{ searchQuery }}",
-    "no-tutorials": "Não foram encontrados tutoriais"
+    "no-results": "No results found"
   },
   "banner": {
     "default": "Aprenda a programar — {{ <0> }}currículo gratuito de 3 mil horas{{ </0> }}",

@@ -8,11 +8,11 @@
     "label": "検索",
     "accessible-name": "検索クエリを送信",
     "placeholder": {
-      "default": "投稿を検索",
-      "numbered": "{{ roundedTotalRecords }} 件以上の投稿から検索"
+      "default": "Search our news articles, tutorials, and books",
+      "numbered": "Search {{ roundedTotalRecords }}+ news articles, tutorials, and books"
     },
     "see-results": "{{ searchQuery }} のすべての結果を見る",
-    "no-tutorials": "投稿が見つかりませんでした"
+    "no-results": "No results found"
   },
   "banner": {
     "default": "コーディングを学ぶ — {{ <0> }}約 3,000 時間のカリキュラムが無料{{ </0> }}",
