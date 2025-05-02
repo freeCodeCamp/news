@@ -8,11 +8,11 @@
     "label": "Пошук",
     "accessible-name": "Надіслати пошуковий запит",
     "placeholder": {
-      "default": "Шукати серед публікацій",
-      "numbered": "Шукати серед {{ roundedTotalRecords }}+ публікацій"
+      "default": "Search our news articles, tutorials, and books",
+      "numbered": "Search {{ roundedTotalRecords }}+ news articles, tutorials, and books"
     },
     "see-results": "Переглянути всі результати для {{ searchQuery }}",
-    "no-tutorials": "Не знайдено жодної публікації"
+    "no-results": "No results found"
   },
   "banner": {
     "default": "Навчіться програмувати — {{<0> }}безоплатна навчальна програма на 3 000 годин{{</0> }}",
