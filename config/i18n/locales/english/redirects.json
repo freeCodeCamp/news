@@ -26013,5 +26013,10 @@
     "source": "/65e21a8b0b0c",
     "destination": "/news/zipline-build-a-smart-javascript-calculator-65e21a8b0b0c",
     "type": 302
+  },
+  {
+    "source": "/news/learn-calculus-by-coding-in-python",
+    "destination": "/news/learn-college-calculus-and-implement-with-python",
+    "type": 302
   }
 ]
