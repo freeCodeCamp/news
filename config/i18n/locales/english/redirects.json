@@ -20,6 +20,26 @@
     "destination": "/news/about"
   },
   {
+    "source": "/simple-chatops-with-kafka-grafana-prometheus-and-slack-764ece59e707",
+    "destination": "/news/want-to-make-the-deployment-process-less-scary-build-chatops-in-slack-b2accc72e2a9",
+    "type": 302
+  },
+  {
+    "source": "/764ece59e707",
+    "destination": "/news/want-to-make-the-deployment-process-less-scary-build-chatops-in-slack-b2accc72e2a9",
+    "type": 302
+  },
+  {
+    "source": "/a-blockchain-experiment-with-apache-kafka-97ee0ab6aefc",
+    "destination": "/news/apache-kafka-handbook",
+    "type": 302
+  },
+  {
+    "source": "/97ee0ab6aefc",
+    "destination": "/news/apache-kafka-handbook",
+    "type": 302
+  },
+  {
     "source": "/build-your-first-python-package",
     "destination": "/news/how-to-create-and-upload-your-first-python-package-to-pypi",
     "type": 302
@@ -4467,11 +4487,6 @@
   {
     "source": "/43cf37616570",
     "destination": "/news/a-better-way-to-compare-yourself-43cf37616570",
-    "type": 302
-  },
-  {
-    "source": "/97ee0ab6aefc",
-    "destination": "/news/a-blockchain-experiment-with-apache-kafka-97ee0ab6aefc",
     "type": 302
   },
   {
@@ -20867,11 +20882,6 @@
   {
     "source": "/ee62d94f5804",
     "destination": "/news/simple-chat-application-in-node-js-using-express-mongoose-and-socket-io-ee62d94f5804",
-    "type": 302
-  },
-  {
-    "source": "/764ece59e707",
-    "destination": "/news/simple-chatops-with-kafka-grafana-prometheus-and-slack-764ece59e707",
     "type": 302
   },
   {

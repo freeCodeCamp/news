@@ -8,11 +8,11 @@
     "label": "搜索",
     "accessible-name": "提交您的搜索查询",
     "placeholder": {
-      "default": "搜索我们的教程",
-      "numbered": "搜索 {{ roundedTotalRecords }}+ 教程"
+      "default": "Search our news articles, tutorials, and books",
+      "numbered": "Search {{ roundedTotalRecords }}+ news articles, tutorials, and books"
     },
     "see-results": "查看 {{ searchQuery }} 的所有结果",
-    "no-tutorials": "未找到教程"
+    "no-results": "No results found"
   },
   "banner": {
     "default": "学习编程 — {{ <0> }}3,000 小时免费课程{{ </0> }}",

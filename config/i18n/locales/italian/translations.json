@@ -8,11 +8,11 @@
     "label": "Cerca",
     "accessible-name": "Invia la tua ricerca",
     "placeholder": {
-      "default": "Cerca tra gli articoli",
-      "numbered": "Cerca tra più di {{ roundedTotalRecords }} articoli"
+      "default": "Search our news articles, tutorials, and books",
+      "numbered": "Search {{ roundedTotalRecords }}+ news articles, tutorials, and books"
     },
     "see-results": "Vedi tutti i risultati per {{ searchQuery }}",
-    "no-tutorials": "Nessun articolo trovato"
+    "no-results": "No results found"
   },
   "banner": {
     "default": "{{ <0> }}Contribuisci anche tu a freeCodeCamp!{{ </0> }}",

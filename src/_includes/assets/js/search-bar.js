@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="aa-suggestion footer-suggestion no-hits-footer">
               <div class="algolia-result">
                 <span>
-                  {% t 'search.no-tutorials' %}
+                  {% t 'search.no-results' %}
                 </span>
               </div>
             </div>

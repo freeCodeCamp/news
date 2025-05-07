@@ -8,11 +8,11 @@
     "label": "Buscar",
     "accessible-name": "Enviar tu consulta de búsqueda",
     "placeholder": {
-      "default": "Busca nuestros tutoriales",
-      "numbered": "Busca {{ roundedTotalRecords }}+ tutoriales"
+      "default": "Search our news articles, tutorials, and books",
+      "numbered": "Search {{ roundedTotalRecords }}+ news articles, tutorials, and books"
     },
     "see-results": "Ver todos los resultados de {{ searchQuery }}",
-    "no-tutorials": "No se encontraron tutoriales"
+    "no-results": "No results found"
   },
   "banner": {
     "default": "Aprender a codificar — {{ <0> }}gratis 3,000-horas currículo{{ </0> }}",
