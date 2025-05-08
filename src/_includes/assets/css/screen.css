@@ -34,7 +34,7 @@ on every page through _includes/layouts/default.njk
 /* ---------------------------------------------------------- */
 
 body {
-  background: #fff;
+  background: var(--primary-background);
 }
 
 .img {
@@ -311,7 +311,7 @@ a.nav-forum {
   border-width: 3px;
   border-color: #f1a02a;
   background-image: none;
-  color: var(--theme-color);
+  color: var(--gray90);
   text-decoration: none;
 }
 
@@ -374,7 +374,7 @@ a.nav-forum {
 .rss-button svg {
   margin-bottom: 1px;
   height: 2.1rem;
-  fill: #fff;
+  fill: var(--primary-background);
 }
 
 @media (max-width: 999px) {
@@ -438,7 +438,7 @@ a.nav-forum {
   overflow: hidden;
   margin: 0 20px 50px;
   min-height: 100px;
-  background: #fff center center;
+  background: var(--primary-background) center center;
   background-size: cover;
 }
 
@@ -470,7 +470,7 @@ a.nav-forum {
 
 .post-card-tags a {
   margin-bottom: 1.3rem;
-  color: var(--gray75);
+  color: var(--quaternary-color);
   font-size: 1.5rem;
   line-height: 1.15em;
   font-weight: 500;
@@ -484,7 +484,7 @@ a.nav-forum {
 }
 
 .post-card-title a {
-  color: var(--gray90);
+  color: var(--primary-color);
 }
 
 .post-card-content {
@@ -579,7 +579,7 @@ a.nav-forum {
   margin: 0 -5px;
   width: 34px;
   height: 34px;
-  border: #fff 2px solid;
+  border: var(--primary-background) 2px solid;
 }
 
 .moving-avatar {
@@ -588,7 +588,7 @@ a.nav-forum {
   margin: 0 -6px;
   width: 56px;
   height: 56px;
-  border: #fff 2px solid;
+  border: var(--primary-background) 2px solid;
   transition: all 0.5s cubic-bezier(0.4, 0.01, 0.165, 0.99) 0.7s;
 }
 
@@ -610,7 +610,7 @@ a.nav-forum {
 .reading-time {
   flex-shrink: 0;
   margin-left: 20px;
-  color: var(--gray75);
+  color: var(--quaternary-color);
   font-size: 1.2rem;
   line-height: 20px;
   font-weight: 500;
@@ -718,7 +718,7 @@ make sure this only happens on large viewports / desktop-ish devices.
 .post-template.site-main,
 .page-template.site-main {
   padding-bottom: 4vw;
-  background: #fff;
+  background: var(--primary-background);
 }
 
 .post-full {
@@ -1957,8 +1957,8 @@ p:has(mjx-container.MathJax) {
 /* ---------------------------------------------------------- */
 
 .site-footer {
-  color: var(--gray85);
-  background: var(--gray05);
+  color: var(--secondary-color);
+  background: var(--primary-background);
   line-height: 1.6;
   padding: 40px 15px;
   font-size: 16px;
@@ -1988,7 +1988,7 @@ p:has(mjx-container.MathJax) {
 }
 
 .site-footer a {
-  color: var(--gray85);
+  color: var(--secondary-color);
   text-decoration: none;
   padding: 2px;
 }
@@ -2177,7 +2177,7 @@ p.footer-donation a:hover {
   align-items: center;
   display: flex;
   border: 2px solid #0a0a23;
-  background: #eeeef0;
+  background: var(--secondary-background);
   color: #0a0a23;
 }
 
