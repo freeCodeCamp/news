@@ -7,14 +7,7 @@
     </div>
     <div class="site-nav-right">
         <div class="nav-group">
-            <a
-                class="nav-forum"
-                id="nav-forum"
-                rel="noopener noreferrer"
-                href="{% t 'links:forum' %}"
-                target="_blank"
-                data-test-label="forum-button"
-            >{% t 'buttons.forum' %}</a>
+
             <a
                 class="toggle-button-nav"
                 id="nav-donate"
@@ -23,11 +16,29 @@
                 target="_blank"
                 data-test-label="donate-button"
             >{% t 'buttons.donate' %}</a>
+            <div >
+              <a
+                class="nav-link nav-link-flex"
+                id="nav-forum"
+                rel="noopener noreferrer"
+                href="{% t 'links:forum' %}"
+                target="_blank"
+                data-test-label="forum-button"
+            >{% t 'buttons.forum' %}</a>
+             <a
+                class="nav-link nav-link-flex"
+                id="nav-learn"
+                rel="noopener noreferrer"
+                href="{% t 'links:nav:learn' %}"
+                target="_blank"
+                data-test-label="learn-button"
+            >{% t 'buttons.forum' %}</a>
             <a
-                class="toggle-button-nav"
+                class="nav-link nav-link-flex"
                 id="toggle-dark-mode"
                 data-test-label="dark-mode-button"
             >{% t 'buttons.toggle-dark-mode' %}</a>
+            </div>
         </div>
     </div>
 </nav>
