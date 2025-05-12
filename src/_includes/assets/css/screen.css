@@ -2275,7 +2275,7 @@ a.cta-button {
 a.banner {
   position: fixed;
   top: var(--header-height);
-  background-color: var(--blue-dark);
+  background-color: var(--dark-blue);
   align-items: center;
   justify-content: center;
   font-size: 14px;
