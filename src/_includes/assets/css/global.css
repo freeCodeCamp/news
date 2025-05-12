@@ -272,7 +272,7 @@ html {
 }
 body {
   overflow-x: hidden;
-  color: var(--gray90);
+  color: var(--primary-color);
   font-family: var(--font-family-sans-serif);
   font-size: 1.5rem;
   line-height: 1.6em;
@@ -280,7 +280,7 @@ body {
   font-style: normal;
   letter-spacing: 0;
   text-rendering: optimizeLegibility;
-  background: #fff;
+  background: var(--primary-background);
 
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -291,7 +291,7 @@ body {
 ::selection {
   text-shadow: none;
   background: var(--dark-blue);
-  color: var(--gray00);
+  color: var(--primary-background);
 }
 
 hr {
@@ -302,7 +302,7 @@ hr {
   padding: 0;
   height: 1px;
   border: 0;
-  border-top: 1px solid var(--gray75);
+  border-top: 1px solid var(--quaternary-color);
 }
 
 audio,
@@ -368,7 +368,7 @@ dt {
   float: left;
   margin: 0 20px 0 0;
   width: 120px;
-  color: var(--gray90);
+  color: var(--primary-color);
   font-weight: 500;
   text-align: right;
 }
@@ -381,7 +381,7 @@ dd {
 blockquote {
   margin: 1.5em 0;
   padding: 0 1.6em;
-  border-left: var(--gray10) 0.5em solid;
+  border-left: var(--tertiary-background) 0.5em solid;
 }
 
 blockquote p {
