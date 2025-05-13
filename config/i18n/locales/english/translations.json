@@ -2,7 +2,11 @@
   "buttons": {
     "forum": "Forum",
     "donate": "Donate",
-    "load-more-articles": "Load More Articles"
+    "menu": "Menu",
+    "news": "News",
+    "curriculum": "Curriculum",
+    "load-more-articles": "Load More Articles",
+    "toggle-dark-mode": "Night Mode"
   },
   "search": {
     "label": "Search",
@@ -94,5 +98,8 @@
     "audio": "audio",
     "video": "video"
   },
-  "ad-text": "Advertisement"
+  "ad-text": "Advertisement",
+  "aria": {
+    "opens-new-window": "Opens in new window"
+  }
 }

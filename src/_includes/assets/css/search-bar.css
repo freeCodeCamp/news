@@ -8,8 +8,8 @@
 
 #search-input {
   width: calc(100vw - 75px);
-  color: var(--gray00);
-  background: var(--gray75);
+  color: var(--primary-background);
+  background: var(--quaternary-color);
   border: none;
   margin: 6px 0 0 0px;
   padding: 0 10px 0 30px;
@@ -20,7 +20,7 @@
 }
 
 #search-input::placeholder {
-  color: var(--gray15);
+  color: var(--quaternary-background);
   opacity: 0.8;
 }
 
@@ -45,7 +45,7 @@
 }
 
 .ais-SearchBox-submit:hover {
-  background-color: var(--gray90);
+  background-color: var(--primary-color);
 }
 
 .ais-SearchBox-submitIcon {
@@ -55,7 +55,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  fill: var(--gray15);
+  fill: var(--quaternary-background);
 }
 
 .algolia-autocomplete {
@@ -74,8 +74,8 @@
 
 .algolia-autocomplete .aa-dropdown-menu {
   width: 100%;
-  color: var(--gray00);
-  background: var(--gray75);
+  color: var(--primary-background);
+  background: var(--quaternary-color);
   border-top: none;
   font-weight: 300;
 }
@@ -131,7 +131,7 @@ a:active {
 .algolia-result {
   padding: 5px;
   font-weight: 300;
-  color: var(--gray00);
+  color: var(--primary-background);
 }
 
 .algolia-result span {
@@ -148,13 +148,13 @@ a:active {
 }
 
 .aa-dataset-1 hr {
-  background-color: var(--gray00);
+  background-color: var(--primary-background);
   height: 2px;
   margin: 0;
 }
 
 .footer-suggestion {
-  border-top: 1px solid var(--gray00);
+  border-top: 1px solid var(--primary-background);
   border-bottom: 0.75px solid var(--gray45);
 }
 
@@ -164,13 +164,13 @@ a:active {
 }
 
 .algolia-footer:hover {
-  color: var(--gray00);
+  color: var(--primary-background);
   background-color: var(--dark-blue);
 }
 
 .aa-suggestion.footer-suggestion.no-hits-footer:hover {
   cursor: default;
-  background-color: var(--gray75);
+  background-color: var(--quaternary-color);
 }
 
 /* Button row on search results page */

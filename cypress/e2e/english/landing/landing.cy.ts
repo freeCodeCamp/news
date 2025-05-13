@@ -1,6 +1,6 @@
 const commonExpectedMeta = require('../../../fixtures/common-expected-meta.json');
 const { loadAllPosts } = require('../../../support/utils/post-cards');
-
+import 'cypress-localstorage-commands';
 const selectors = {
   featureImage: "[data-test-label='feature-image']",
   postCard: "[data-test-label='post-card']",
@@ -10,7 +10,8 @@ const selectors = {
   avatar: "[data-test-label='avatar']",
   siteNavLogo: "[data-test-label='site-nav-logo']",
   postPublishedTime: "[data-test-label='post-published-time']",
-  banner: "[data-test-label='banner']"
+  banner: "[data-test-label='banner']",
+  darkModeButton: "[data-test-label='dark-mode-button']"
 };
 
 describe('Landing (Hashnode sourced)', () => {
@@ -33,6 +34,39 @@ describe('Landing (Hashnode sourced)', () => {
         'href',
         commonExpectedMeta.english.siteUrl
       );
+    });
+
+    const visit = darkAppearance =>
+      cy.visit('/', {
+        onBeforeLoad(win) {
+          cy.stub(win, 'matchMedia')
+            .withArgs('(prefers-color-scheme: dark)')
+            .returns({
+              matches: darkAppearance
+            });
+        }
+      });
+
+    it('The dark mode button should be able to change the theme to dark mode from light mode', function () {
+      visit(false);
+      cy.get(selectors.darkModeButton).click();
+
+      cy.get('body', { timeout: 1000 }).should('have.class', 'dark-mode');
+    });
+
+    it('The dark mode button should be able to change the theme to light mode from dark mode', function () {
+      visit(true);
+      cy.get(selectors.darkModeButton).click();
+
+      cy.get('body', { timeout: 1000 }).should('not.have.class', 'dark-mode');
+    });
+
+    it('The theme should be set to dark and update the value in localStorage to dark', function () {
+      visit(false);
+      cy.get(selectors.darkModeButton).click();
+      cy.window().then(win => {
+        expect(win.localStorage.getItem('theme')).to.equal('dark');
+      });
     });
 
     // Because all templates readers see use `default.njk` as a base,
