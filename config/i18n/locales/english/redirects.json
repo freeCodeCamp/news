@@ -20,6 +20,31 @@
     "destination": "/news/about"
   },
   {
+    "source": "/everything-you-need-to-know-about-ng-template-ng-content-ng-container-and-ngtemplateoutlet-4b7b51223691",
+    "destination": "/news/angular-vs-angularjs",
+    "type": 302
+  },
+  {
+    "source": "/4b7b51223691",
+    "destination": "/news/angular-vs-angularjs",
+    "type": 302
+  },
+  {
+    "source": "/angular-ngtemplate-in-depth",
+    "destination": "/news/angular-vs-angularjs",
+    "type": 302
+  },
+  {
+    "source": "/how-to-create-angular-6-custom-elements-web-components-c88814dc6e0a",
+    "destination": "/news/angular-9-for-beginners-components-and-string-interpolation",
+    "type": 302
+  },
+  {
+    "source": "/c88814dc6e0a",
+    "destination": "/news/angular-9-for-beginners-components-and-string-interpolation",
+    "type": 302
+  },
+  {
     "source": "/simple-chatops-with-kafka-grafana-prometheus-and-slack-764ece59e707",
     "destination": "/news/want-to-make-the-deployment-process-less-scary-build-chatops-in-slack-b2accc72e2a9",
     "type": 302
@@ -1147,11 +1172,6 @@
   {
     "source": "/freecodecamps-terms-of-service",
     "destination": "/news/terms-of-service",
-    "type": 302
-  },
-  {
-    "source": "/angular-ngtemplate-in-depth",
-    "destination": "/news/everything-you-need-to-know-about-ng-template-ng-content-ng-container-and-ngtemplateoutlet-4b7b51223691",
     "type": 302
   },
   {
@@ -8767,11 +8787,6 @@
   {
     "source": "/c74d922ea855",
     "destination": "/news/everything-you-need-to-know-about-css-variables-c74d922ea855",
-    "type": 302
-  },
-  {
-    "source": "/4b7b51223691",
-    "destination": "/news/everything-you-need-to-know-about-ng-template-ng-content-ng-container-and-ngtemplateoutlet-4b7b51223691",
     "type": 302
   },
   {
