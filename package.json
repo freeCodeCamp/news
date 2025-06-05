@@ -69,7 +69,7 @@
     "@11ty/eleventy": "2.0.1",
     "@11ty/eleventy-plugin-rss": "1.2.0",
     "@tryghost/content-api": "1.11.26",
-    "@tryghost/helpers": "1.1.94",
+    "@tryghost/helpers": "1.1.95",
     "@types/node": "22.15.12",
     "algoliasearch": "4.24.0",
     "clean-css": "5.3.3",
