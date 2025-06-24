@@ -1,4 +1,4 @@
-const Joi = require('joi');
+import Joi from 'joi';
 
 const schema = Joi.object().keys({
   article0title: Joi.string().required(),
@@ -63,6 +63,5 @@ const schema = Joi.object().keys({
   article29link: Joi.string().uri({ scheme: 'https' }).required()
 });
 
-const trendingSchemaValidator = trendingObj => schema.validate(trendingObj);
-
-module.exports = trendingSchemaValidator;
+export const trendingSchemaValidator = trendingObj =>
+  schema.validate(trendingObj);

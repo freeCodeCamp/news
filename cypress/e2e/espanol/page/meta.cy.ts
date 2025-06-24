@@ -1,4 +1,4 @@
-const commonExpectedMeta = require('../../../fixtures/common-expected-meta.json');
+import commonExpectedMeta from '../../../fixtures/common-expected-meta.json';
 const ghostPageExpectedMeta = {
   title: 'Gracias por ser un partidario',
   url: 'http://localhost:8080/espanol/news/gracias-por-ser-un-partidario/',

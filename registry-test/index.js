@@ -1,7 +1,7 @@
-const http = require('http');
+import { createServer } from 'http';
 const port = 3000;
 
-const server = http.createServer((req, res) => {
+const server = createServer((req, res) => {
   const startTime = Date.now();
 
   res.on('finish', () => {

@@ -1,5 +1,7 @@
-const { URL } = require('url');
-const { siteURL } = require('../config');
-const sitePath = new URL(siteURL).pathname;
+import { URL } from 'url';
 
-module.exports = sitePath;
+import { config } from '../config/index.js';
+
+const { siteURL } = config;
+
+export const sitePath = new URL(siteURL).pathname;

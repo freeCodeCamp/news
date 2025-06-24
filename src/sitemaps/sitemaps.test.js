@@ -1,6 +1,6 @@
-const libxmljs = require('libxmljs');
-const { readFileSync } = require('graceful-fs');
-const { join } = require('path');
+import { parseXml } from 'libxmljs';
+import { readFileSync } from 'fs';
+import { join } from 'path';
 
 const sitemapFilenames = [
   'sitemap.xml',
@@ -9,7 +9,7 @@ const sitemapFilenames = [
   'sitemap-tags.xml',
   'sitemap-authors.xml'
 ];
-const distPath = join(__dirname, '../../dist');
+const distPath = join(import.meta.dirname, '../../dist');
 
 describe('Sitemap tests:', () => {
   describe('Validate sitemaps against schemas', () => {
@@ -20,11 +20,11 @@ describe('Sitemap tests:', () => {
           const schemaFilename =
             sitemapFilename === 'sitemap.xml' ? 'siteindex.xsd' : 'sitemap.xsd';
           const schema = readFileSync(
-            join(__dirname, `./schemas/${schemaFilename}`),
+            join(import.meta.dirname, `./schemas/${schemaFilename}`),
             'utf8'
           );
-          const sitemapDoc = libxmljs.parseXml(sitemap);
-          const schemaDoc = libxmljs.parseXml(schema);
+          const sitemapDoc = parseXml(sitemap);
+          const schemaDoc = parseXml(schema);
           const isValid = sitemapDoc.validate(schemaDoc);
 
           if (!isValid) {
@@ -49,7 +49,7 @@ describe('Sitemap tests:', () => {
           join(distPath, 'sitemap-posts.xml'),
           'utf8'
         );
-        const postsSitemapDoc = libxmljs.parseXml(postsSitemap);
+        const postsSitemapDoc = parseXml(postsSitemap);
         const postURLNodes = postsSitemapDoc
           .root()
           .childNodes()

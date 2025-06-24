@@ -1,24 +1,30 @@
-const Piscina = require('piscina');
-const { chunk, cloneDeep } = require('lodash');
-const { resolve, basename } = require('path');
+import { Piscina } from 'piscina';
+import chunk from 'lodash/chunk.js';
+import cloneDeep from 'lodash/cloneDeep.js';
+import { resolve, basename } from 'path';
 
-const fetchFromGhost = require('../../utils/ghost/fetch-from-ghost');
-const fetchFromHashnode = require('../../utils/hashnode/fetch-from-hashnode');
-const { postsPerPage, siteURL } = require('../../config');
-const pingEditorialTeam = require('../../utils/ping-editorial-team');
+import { fetchFromGhost } from '../../utils/ghost/fetch-from-ghost.js';
+import { fetchFromHashnode } from '../../utils/hashnode/fetch-from-hashnode.js';
+import { pingEditorialTeam } from '../../utils/ping-editorial-team.js';
+import { config } from '../../config/index.js';
+
+const { siteURL, postsPerPage } = config;
 
 const getUniqueList = (arr, key) => [
   ...new Map(arr.map(item => [item[key], item])).values()
 ];
 
 const piscinaGhost = new Piscina({
-  filename: resolve(__dirname, '../../utils/ghost/process-batch')
+  filename: resolve(import.meta.dirname, '../../utils/ghost/process-batch.js')
 });
 const piscinaHashnode = new Piscina({
-  filename: resolve(__dirname, '../../utils/hashnode/process-batch')
+  filename: resolve(
+    import.meta.dirname,
+    '../../utils/hashnode/process-batch.js'
+  )
 });
 
-module.exports = async () => {
+export default async () => {
   // Chunk raw Ghost posts and pages and process them in batches
   // with a pool of workers to create posts and pages global data
   const batchSize = 200;

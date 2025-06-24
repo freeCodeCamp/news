@@ -1,6 +1,6 @@
-const jsdom = require('jsdom');
+import jsdom from 'jsdom';
 const { JSDOM } = jsdom;
-const fitvids = require('./fitvids');
+import fitvids from './fitvids';
 
 const testCases = [
   {

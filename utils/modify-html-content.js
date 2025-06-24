@@ -1,14 +1,16 @@
-const jsdom = require('jsdom');
-const { JSDOM } = jsdom;
-const translate = require('./translate');
-const {
+import jsdom from 'jsdom';
+
+import { translate } from './translate.js';
+import {
   generateHashnodeEmbedMarkup,
   setDefaultAlt
-} = require('./modify-html-helpers');
-const getImageDimensions = require('./get-image-dimensions');
-const fitVids = require('./fitvids');
+} from './modify-html-helpers.js';
+import { getImageDimensions } from './get-image-dimensions.js';
+import { fitVids } from './fitvids.js';
 
-const modifyHTMLContent = async ({ postContent, postTitle, source }) => {
+const { JSDOM } = jsdom;
+
+export const modifyHTMLContent = async ({ postContent, postTitle, source }) => {
   const dom = new JSDOM(postContent);
   const window = dom.window;
   const document = window.document;
@@ -77,5 +79,3 @@ const modifyHTMLContent = async ({ postContent, postTitle, source }) => {
   // is within the new body element it added
   return document.body.innerHTML;
 };
-
-module.exports = modifyHTMLContent;

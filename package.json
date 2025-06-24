@@ -7,6 +7,7 @@
     "node": ">=18",
     "npm": ">=8"
   },
+  "type": "module",
   "scripts": {
     "start": "npm run develop",
     "start:ci:english": "LOCALE_FOR_UI=english DO_NOT_FETCH_FROM_GHOST=true npm run develop:ci",
@@ -66,8 +67,8 @@
     "https://github.com/freeCodeCamp/news/graphs/contributors"
   ],
   "devDependencies": {
-    "@11ty/eleventy": "2.0.1",
-    "@11ty/eleventy-plugin-rss": "1.2.0",
+    "@11ty/eleventy": "3.1.1",
+    "@11ty/eleventy-plugin-rss": "2.0.4",
     "@tryghost/content-api": "1.11.26",
     "@tryghost/helpers": "1.1.95",
     "@types/node": "22.15.12",
@@ -113,5 +114,8 @@
       "bash -c 'npm run type-check'",
       "prettier --write --ignore-unknown"
     ]
+  },
+  "dependencies": {
+    "@11ty/eleventy-upgrade-help": "3.0.1"
   }
 }

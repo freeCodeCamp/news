@@ -1,4 +1,4 @@
-const commonExpectedJsonLd = require('../../../fixtures/common-expected-json-ld.json');
+import commonExpectedJsonLd from '../../../fixtures/common-expected-json-ld.json';
 const authorExpectedJsonLd = {
   '@type': 'Person',
   sameAs: ['https://x.com/abbeyrenn'], // X / Twitter

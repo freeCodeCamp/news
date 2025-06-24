@@ -1,6 +1,4 @@
-const {
-  loadAndCountAllPostCards
-} = require('../../../support/utils/post-cards');
+import { loadAndCountAllPostCards } from '../../../support/utils/post-cards';
 
 const selectors = {
   tagName: "[data-test-label='tag-name']",

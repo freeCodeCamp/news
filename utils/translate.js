@@ -1,7 +1,5 @@
-const i18next = require('../config/i18n/config');
+import i18next from '../config/i18n/config.js';
 
-function translate(key, data) {
+export const translate = (key, data) => {
   return i18next.t(key, { ...data });
-}
-
-module.exports = translate;
+};

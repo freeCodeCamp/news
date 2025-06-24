@@ -1,4 +1,4 @@
-const XMLToDOM = xml => {
+export const XMLToDOM = (xml: string) => {
   const parser = new DOMParser();
 
   return parser.parseFromString(xml, 'application/xml');

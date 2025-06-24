@@ -3,7 +3,7 @@
 const ghostImageRe = /\/content\/images\/\d+\/\d+\//g;
 
 // Handle images from Ghost and from third-parties
-function imageShortcode(
+export const imageShortcode = (
   src,
   classes,
   alt,
@@ -12,7 +12,7 @@ function imageShortcode(
   dimensions,
   testLabel,
   lazyLoad
-) {
+) => {
   const imageUrls = src.match(ghostImageRe)
     ? widths.map(width =>
         src.replace('/content/images/', `/content/images/size/w${width}/`)
@@ -38,10 +38,10 @@ function imageShortcode(
       data-test-label="${testLabel}"
     />
   `;
-}
+};
 
 // Copy images over from Ghost
-function featureImageShortcode(src, alt, sizes, widths, dimensions) {
+export const featureImageShortcode = (src, alt, sizes, widths, dimensions) => {
   const imageUrls = src.match(ghostImageRe)
     ? widths.map(width =>
         src.replace('/content/images/', `/content/images/size/w${width}/`)
@@ -74,9 +74,4 @@ function featureImageShortcode(src, alt, sizes, widths, dimensions) {
       >
     </picture>
   `;
-}
-
-module.exports = {
-  imageShortcode,
-  featureImageShortcode
 };
