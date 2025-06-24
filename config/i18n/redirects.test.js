@@ -1,15 +1,16 @@
-let { locales } = require('../index.js');
-locales = [...locales, 'dothraki'];
+import { locales } from '../index.js';
+import { loadJSON } from '../../utils/load-json.js';
+const testLocales = [...locales, 'dothraki'];
 
-const path = `${__dirname}`;
+const path = `${import.meta.dirname}`;
 
 // To do: Simplify the npm scripts and test the generated serve.json files
 // in the docker directory. Add a test for the first /slug/amp to
 // /news/slug or /lang/news/slug redirect.
 describe('Redirect and rewrite tests:', () => {
-  locales.forEach(lang => {
+  testLocales.forEach(lang => {
     describe(`-- ${lang} --`, () => {
-      const redirects = require(`${path}/locales/${lang}/redirects.json`);
+      const redirects = loadJSON(`${path}/locales/${lang}/redirects.json`);
 
       test('redirects is an array', () => {
         expect(Array.isArray(redirects)).toBe(true);

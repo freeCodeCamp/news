@@ -1,8 +1,9 @@
-const path = require('path');
-const { locales } = require('../index.js');
-const linksSchema = require('./locales/english/links.json');
-const metaTagsSchema = require('./locales/english/meta-tags.json');
-const translationsSchema = require('./locales/english/translations.json');
+import { join } from 'path';
+import { locales } from '../index.js';
+import { loadJSON } from '../../utils/load-json.js';
+import linksSchema from './locales/english/links.json';
+import metaTagsSchema from './locales/english/meta-tags.json';
+import translationsSchema from './locales/english/translations.json';
 
 /**
  * Flattens a nested object structure into a single
@@ -110,11 +111,11 @@ const translationSchemaKeys = Object.keys(flattenAnObject(translationsSchema));
  */
 const translationSchemaValidation = languages => {
   languages.forEach(language => {
-    const filePath = path.join(
-      __dirname,
+    const filePath = join(
+      import.meta.dirname,
       `/locales/${language}/translations.json`
     );
-    const fileJson = require(filePath);
+    const fileJson = loadJSON(filePath);
     const fileKeys = Object.keys(flattenAnObject(fileJson));
     findMissingKeys(
       fileKeys,
@@ -140,11 +141,11 @@ const translationSchemaValidation = languages => {
 
 const metaTagsSchemaValidation = languages => {
   languages.forEach(language => {
-    const filePath = path.join(
-      __dirname,
+    const filePath = join(
+      import.meta.dirname,
       `/locales/${language}/meta-tags.json`
     );
-    const fileJson = require(filePath);
+    const fileJson = loadJSON(filePath);
     const fileKeys = Object.keys(flattenAnObject(fileJson));
     findMissingKeys(fileKeys, metaTagsSchemaKeys, `${language}/meta-tags.json`);
     findExtraneousKeys(
@@ -166,8 +167,11 @@ const metaTagsSchemaValidation = languages => {
 
 const linksSchemaValidation = languages => {
   languages.forEach(language => {
-    const filePath = path.join(__dirname, `/locales/${language}/links.json`);
-    const fileJson = require(filePath);
+    const filePath = join(
+      import.meta.dirname,
+      `/locales/${language}/links.json`
+    );
+    const fileJson = loadJSON(filePath);
     const fileKeys = Object.keys(flattenAnObject(fileJson));
     findMissingKeys(fileKeys, linksSchemaKeys, `${language}/links.json`);
     findExtraneousKeys(fileKeys, linksSchemaKeys, `${language}/links.json`);

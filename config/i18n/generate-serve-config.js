@@ -1,14 +1,18 @@
-const path = require('path');
-const { writeFileSync, mkdirSync } = require('fs');
-const { locales } = require('../index.js');
+import { join } from 'path';
+import { writeFileSync, mkdirSync } from 'fs';
+import { locales } from '../index.js';
+import { loadJSON } from '../../utils/load-json.js';
 
-const source = require('../serve.json');
+import source from '../serve.json';
 locales.push('dothraki');
 
 for (let language of locales) {
   const sourceClone = { ...source };
-  const filePath = path.join(__dirname, `/locales/${language}/redirects.json`);
-  const redirectsArray = require(filePath);
+  const filePath = join(
+    import.meta.dirname,
+    `/locales/${language}/redirects.json`
+  );
+  const redirectsArray = loadJSON(filePath);
 
   sourceClone.redirects = [
     {
@@ -20,12 +24,12 @@ for (let language of locales) {
     ...(redirectsArray.length ? redirectsArray : [])
   ];
 
-  mkdirSync(path.join(__dirname, `../../docker/languages/${language}`), {
+  mkdirSync(join(import.meta.dirname, `../../docker/languages/${language}`), {
     recursive: true
   });
 
   writeFileSync(
-    path.join(__dirname, `../../docker/languages/${language}/serve.json`),
+    join(import.meta.dirname, `../../docker/languages/${language}/serve.json`),
     JSON.stringify(sourceClone, null, 2)
   );
 

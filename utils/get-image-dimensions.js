@@ -1,8 +1,9 @@
-const probe = require('probe-image-size');
-const errorLogger = require('./error-logger');
-const { getCache, setCache } = require('./cache');
+import probe from 'probe-image-size';
 
-const getImageDimensions = async (url, description) => {
+import { errorLogger } from './error-logger.js';
+import { getCache, setCache } from './cache.js';
+
+export const getImageDimensions = async (url, description) => {
   let imageDimensions = { width: 600, height: 400 };
 
   try {
@@ -42,5 +43,3 @@ const getImageDimensions = async (url, description) => {
 
   return imageDimensions;
 };
-
-module.exports = getImageDimensions;

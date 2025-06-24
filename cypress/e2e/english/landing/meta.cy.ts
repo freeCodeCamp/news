@@ -1,4 +1,4 @@
-const commonExpectedMeta = require('../../../fixtures/common-expected-meta.json');
+import commonExpectedMeta from '../../../fixtures/common-expected-meta.json';
 
 describe('Landing metadata (Hashnode sourced)', () => {
   beforeEach(() => {

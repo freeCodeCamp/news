@@ -1,7 +1,7 @@
-const { locales, localeCodes, algoliaIndices } = require('../index.js');
+import { locales, localeCodes, algoliaIndices } from '../index.js';
 
-const fs = require('fs');
-const { setup } = require('jest-json-schema-extended');
+import { existsSync } from 'fs';
+import { setup } from 'jest-json-schema-extended';
 
 setup();
 
@@ -20,7 +20,7 @@ const filesThatShouldExist = [
   }
 ];
 
-const path = `${__dirname}/locales`;
+const path = `${import.meta.dirname}/locales`;
 
 describe('Locale tests:', () => {
   locales.forEach(lang => {
@@ -28,7 +28,7 @@ describe('Locale tests:', () => {
       filesThatShouldExist.forEach(file => {
         // check that each json file exists
         test(`${file.name} file exists`, () => {
-          const exists = fs.existsSync(`${path}/${lang}/${file.name}`);
+          const exists = existsSync(`${path}/${lang}/${file.name}`);
           expect(exists).toBeTruthy();
         });
       });

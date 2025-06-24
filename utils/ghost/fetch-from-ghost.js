@@ -1,7 +1,7 @@
-const { ghostAPI } = require('../api');
-const wait = require('../wait');
+import { ghostAPI } from '../api.js';
+import { wait } from '../wait.js';
 
-const fetchFromGhost = async endpoint => {
+export const fetchFromGhost = async endpoint => {
   let currPage = 1;
   let lastPage = 5;
   let data = [];
@@ -41,5 +41,3 @@ const fetchFromGhost = async endpoint => {
 
   return data;
 };
-
-module.exports = fetchFromGhost;

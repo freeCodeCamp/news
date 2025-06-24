@@ -1,21 +1,25 @@
-const algoliasearch = require('algoliasearch/lite');
-const {
-  algoliaAppId,
-  algoliaAPIKey,
-  algoliaIndex,
-  eleventyEnv
-} = require('../config');
+import algoliasearch from 'algoliasearch/lite.js';
+import { join } from 'path';
 
-const roundDownToNearestHundred = num => Math.floor(num / 100) * 100;
-const convertToLocalizedString = (num, ISOCode) => num.toLocaleString(ISOCode); // Use commas or decimals depending on the locale
+import { loadJSON } from './load-json.js';
+import { config } from '../config/index.js';
 
-const getRoundedTotalRecords = async () => {
+const { algoliaAppId, algoliaAPIKey, algoliaIndex, eleventyEnv } = config;
+// Load mock search hits for testing in CI
+const mockHits = loadJSON(
+  join(import.meta.dirname, '../cypress/fixtures/mock-search-hits.json')
+);
+
+export const roundDownToNearestHundred = num => Math.floor(num / 100) * 100;
+
+export const convertToLocalizedString = (num, ISOCode) =>
+  num.toLocaleString(ISOCode); // Use commas or decimals depending on the locale
+
+export const getRoundedTotalRecords = async () => {
   let totalRecords = 0;
 
   try {
     if (eleventyEnv === 'ci') {
-      const mockHits = require('../cypress/fixtures/mock-search-hits.json');
-
       totalRecords = mockHits.length;
     } else {
       const client = algoliasearch(algoliaAppId, algoliaAPIKey);
@@ -40,10 +44,4 @@ const getRoundedTotalRecords = async () => {
   }
 
   return roundDownToNearestHundred(totalRecords);
-};
-
-module.exports = {
-  roundDownToNearestHundred,
-  convertToLocalizedString,
-  getRoundedTotalRecords
 };

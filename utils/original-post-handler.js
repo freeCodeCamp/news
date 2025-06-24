@@ -1,13 +1,16 @@
-const { URL } = require('url');
-const fetch = require('node-fetch');
-const jsdom = require('jsdom');
+import { URL } from 'url';
+import fetch from 'node-fetch';
+import jsdom from 'jsdom';
 const { JSDOM } = jsdom;
-const { getCache, setCache } = require('./cache');
-const getImageDimensions = require('./get-image-dimensions');
-const translate = require('./translate');
-const fullEscaper = require('./full-escaper');
+import { getCache, setCache } from './cache.js';
+import { getImageDimensions } from './get-image-dimensions.js';
+import { translate } from './translate.js';
+import { fullEscaper } from './full-escaper.js';
 
-const originalPostHandler = async (originalPostFlag, translatedPostTitle) => {
+export const originalPostHandler = async (
+  originalPostFlag,
+  translatedPostTitle
+) => {
   let hrefValue;
   let linkText;
   let originalPostObj = {};
@@ -140,5 +143,3 @@ const originalPostHandler = async (originalPostFlag, translatedPostTitle) => {
     return originalPostObj;
   }
 };
-
-module.exports = originalPostHandler;

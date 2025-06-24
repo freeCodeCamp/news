@@ -1,4 +1,4 @@
-const commonExpectedMeta = require('../../../fixtures/common-expected-meta.json');
+import commonExpectedMeta from '../../../fixtures/common-expected-meta.json';
 const postExpectedMeta = {
   title:
     'Cómo funciona el operador de signo de interrogación (?) en JavaScript',

@@ -1,15 +1,17 @@
-const { readFileSync, writeFileSync } = require('fs');
-const path = require('path');
-const fetch = require('node-fetch');
-const yaml = require('js-yaml');
+import { readFileSync, writeFileSync } from 'fs';
+import { resolve } from 'path';
+import fetch from 'node-fetch';
+import { load } from 'js-yaml';
 
-const { currentLocale_i18n } = require('../config');
-const trendingSchemaValidator = require('./schemas/trending-schema');
+import { trendingSchemaValidator } from './schemas/trending-schema.js';
+import { config } from '../config/index.js';
+
+const { currentLocale_i18n } = config;
 
 const download = async clientLocale => {
   const trendingURL = `https://cdn.freecodecamp.org/universal/trending/${clientLocale}.yaml`;
-  const trendingLocation = path.resolve(
-    __dirname,
+  const trendingLocation = resolve(
+    import.meta.dirname,
     `../config/i18n/locales/${clientLocale}/trending.json`
   );
 
@@ -45,7 +47,7 @@ const download = async clientLocale => {
       }
 
       const data = await res.text();
-      const trendingJSON = JSON.stringify(yaml.load(data));
+      const trendingJSON = JSON.stringify(load(data));
 
       return trendingJSON;
     } catch (err) {

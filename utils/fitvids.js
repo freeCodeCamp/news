@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-const fitVids = window => {
+export const fitVids = window => {
   const document = window.document;
   let count = 0;
 
@@ -84,5 +84,3 @@ const fitVids = window => {
     });
   });
 };
-
-module.exports = fitVids;
