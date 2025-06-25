@@ -105,7 +105,7 @@ export const originalPostHandler = async (
       // Use the title of the original post as link text
       linkText = originalPostTitle;
     }
-  } catch (err) {
+  } catch (_err) {
     console.warn(`
       ---------------------------------------------------------------
       Warning: Unable to fetch the post at

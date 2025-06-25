@@ -28,7 +28,7 @@ export const getRoundedTotalRecords = async () => {
 
       totalRecords = res?.nbHits;
     }
-  } catch (err) {
+  } catch (_err) {
     process.env['FCC_DISABLE_WARNING'] === 'false' &&
       console.warn(`
       ----------------------------------------------------------

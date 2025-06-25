@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 export const fitVids = window => {
   const document = window.document;
   let count = 0;

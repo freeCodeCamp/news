@@ -1,9 +1,11 @@
 import { join } from 'path';
-import { locales } from '../index.js';
+import { config } from '../index.js';
 import { loadJSON } from '../../utils/load-json.js';
-import linksSchema from './locales/english/links.json';
-import metaTagsSchema from './locales/english/meta-tags.json';
-import translationsSchema from './locales/english/translations.json';
+import linksSchema from './locales/english/links.json' with { type: 'json' };
+import metaTagsSchema from './locales/english/meta-tags.json' with { type: 'json' };
+import translationsSchema from './locales/english/translations.json' with { type: 'json' };
+
+const { locales } = config;
 
 /**
  * Flattens a nested object structure into a single
