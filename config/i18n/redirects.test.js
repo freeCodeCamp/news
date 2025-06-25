@@ -1,5 +1,6 @@
-import { locales } from '../index.js';
+import { config } from '../../config/index.js';
 import { loadJSON } from '../../utils/load-json.js';
+const { locales } = config;
 const testLocales = [...locales, 'dothraki'];
 
 const path = `${import.meta.dirname}`;

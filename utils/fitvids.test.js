@@ -1,6 +1,7 @@
 import jsdom from 'jsdom';
 const { JSDOM } = jsdom;
-import fitvids from './fitvids';
+
+import { fitVids } from './fitvids.js';
 
 const testCases = [
   {
@@ -98,7 +99,7 @@ const checkEmbeddedVideos = obj => {
     const dom = new JSDOM(obj.html);
     const window = dom.window;
     const document = window.document;
-    fitvids(window);
+    fitVids(window);
 
     document.querySelectorAll('figure').forEach((figure, i) => {
       const fluidWidthVideoContainer =
@@ -135,7 +136,7 @@ const checkEmbeddedVideos = obj => {
 
       test('the embedded video has the expected attributes and values', () => {
         // Some embedded videos like ones from Bilibili don't have width and height attributes,
-        // so fitvids adds them.
+        // so fitVids adds them.
         expect(typeof parseInt(embeddedVideo.width)).toBe('number');
         expect(typeof parseInt(embeddedVideo.height)).toBe('number');
         expect(embeddedVideo.name).toBe(`fitvid${i}`);
