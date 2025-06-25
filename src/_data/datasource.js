@@ -263,7 +263,10 @@ export default async () => {
 
         // Handle images depending on the type of collection
         let imageKey;
-        if ((type === 'posts' || 'pages' || 'tags') && obj.feature_image)
+        if (
+          (type === 'posts' || type === 'pages' || type === 'tags') &&
+          obj.feature_image
+        )
           imageKey = 'feature_image';
         if (type === 'authors') {
           if (obj.profile_image) imageKey = 'profile_image';

@@ -37,7 +37,7 @@ export const getImageDimensions = async (url, description) => {
     };
 
     setCache(url, imageDimensions);
-  } catch (err) {
+  } catch (_err) {
     errorLogger({ type: 'image', name: description });
   }
 
