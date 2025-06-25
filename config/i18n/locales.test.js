@@ -1,7 +1,8 @@
-import { locales, localeCodes, algoliaIndices } from '../index.js';
-
 import { existsSync } from 'fs';
 import { setup } from 'jest-json-schema-extended';
+
+import { config } from '../index.js';
+const { locales, localeCodes, algoliaIndices } = config;
 
 setup();
 
