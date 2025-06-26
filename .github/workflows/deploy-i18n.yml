@@ -22,7 +22,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        node-version: [18.x]
+        node-version: [22.x]
         languages:
           [chinese, espanol, italian, japanese, korean, portuguese, ukrainian]
         site_tlds: [org]
