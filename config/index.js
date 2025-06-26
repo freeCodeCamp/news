@@ -118,54 +118,6 @@ const getSiteURL = (lang, forOriginalArticle) => {
 
 const siteURL = getSiteURL(lang);
 
-// export default Object.assign(
-//   {},
-//   {
-//     locales,
-//     localeCodes,
-//     algoliaIndices,
-//     getSiteURL,
-//     currentLocale_i18n: localeForUI || 'italian',
-//     currentLocale_i18nISOCode: !localeCodes[localeForUI]
-//       ? localeCodes['italian']
-//       : localeCodes[localeForUI],
-//     currentLocale_ghost: localeForGhost || 'italian',
-//     siteURL,
-//     postsPerPage: postsPerPage || 25,
-//     algoliaAppId:
-//       !algoliaAppId || algoliaAppId === 'app_id_from_algolia_dashboard'
-//         ? ''
-//         : algoliaAppId,
-//     algoliaAPIKey:
-//       !algoliaAPIKey || algoliaAPIKey === 'api_key_from_algolia_dashboard'
-//         ? ''
-//         : algoliaAPIKey,
-//     algoliaIndex: algoliaIndices[localeForUI] || 'news',
-//     adsEnabled: (adsEnabled === 'true' && localeForUI !== 'chinese') || false, // Convert to boolean and exclude Chinese until move to subpath, otherwise default to false
-//     googleAdsenseDataAdClient: !googleAdsenseDataAdClient
-//       ? ''
-//       : googleAdsenseDataAdClient,
-//     googleAdsenseDataAdSlot: !googleAdsenseDataAdSlot
-//       ? ''
-//       : googleAdsenseDataAdSlot,
-//     eleventyEnv: eleventyEnv || 'dev',
-//     hashnodeAPIURL:
-//       !hashnodeAPIURL || hashnodeAPIURL === 'api_url_from_hashnode_dashboard'
-//         ? 'https://gql.hashnode.com'
-//         : hashnodeAPIURL,
-//     chatWebhookKey:
-//       !chatWebhookKey ||
-//       chatWebhookKey === 'chat_webhook_key_from_space_settings'
-//         ? ''
-//         : chatWebhookKey,
-//     chatWebhookToken:
-//       !chatWebhookToken ||
-//       chatWebhookToken === 'chat_webhook_token_from_space_settings'
-//         ? ''
-//         : chatWebhookToken
-//   }
-// );
-
 export const config = {
   locales,
   localeCodes,
