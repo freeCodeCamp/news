@@ -1,7 +1,9 @@
-import { existsSync } from 'fs';
+import gracefulFS from 'graceful-fs';
 import { setup } from 'jest-json-schema-extended';
 
 import { config } from '../index.js';
+
+const { existsSync } = gracefulFS;
 const { locales, localeCodes, algoliaIndices } = config;
 
 setup();

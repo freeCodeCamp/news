@@ -1,7 +1,8 @@
+import gracefulFS from 'graceful-fs';
 import libxmljs from 'libxmljs';
-import { readFileSync } from 'fs';
 import { join } from 'path';
 
+const { readFileSync } = gracefulFS;
 const { parseXml } = libxmljs;
 
 const sitemapFilenames = [

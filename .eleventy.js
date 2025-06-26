@@ -1,4 +1,4 @@
-import { readFileSync, readdirSync, writeFileSync } from 'fs';
+import gracefulFS from 'graceful-fs';
 import { EleventyHtmlBasePlugin } from '@11ty/eleventy';
 import pluginRSS from '@11ty/eleventy-plugin-rss';
 
@@ -12,10 +12,6 @@ import {
   imageShortcode,
   featureImageShortcode
 } from './utils/shortcodes/images.js';
-// import {
-//   cacheBusterShortcode,
-//   manifest
-// } from './utils/shortcodes/cache-buster.js';
 import { cacheBusterShortcode } from './utils/shortcodes/cache-buster.js';
 import { createJSONLDShortcode } from './utils/shortcodes/create-json-ld.js';
 import {
@@ -27,6 +23,8 @@ import {
 } from './utils/shortcodes/dates.js';
 import { sitePath } from './utils/site-path.js';
 import { config } from './config/index.js';
+
+const { readFileSync, readdirSync, writeFileSync } = gracefulFS;
 const { currentLocale_i18n, eleventyEnv } = config;
 
 export default function (config) {

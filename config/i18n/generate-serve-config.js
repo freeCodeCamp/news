@@ -1,9 +1,12 @@
+import gracefulFS from 'graceful-fs';
 import { join } from 'path';
-import { writeFileSync, mkdirSync } from 'fs';
+
 import { locales } from '../index.js';
 import { loadJSON } from '../../utils/load-json.js';
-
 import source from '../serve.json';
+
+const { writeFileSync, mkdirSync } = gracefulFS;
+
 locales.push('dothraki');
 
 for (let language of locales) {

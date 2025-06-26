@@ -1,4 +1,4 @@
-import { readFileSync, writeFileSync } from 'fs';
+import gracefulFS from 'graceful-fs';
 import { resolve } from 'path';
 import fetch from 'node-fetch';
 import { load } from 'js-yaml';
@@ -6,6 +6,7 @@ import { load } from 'js-yaml';
 import { trendingSchemaValidator } from './schemas/trending-schema.js';
 import { config } from '../config/index.js';
 
+const { readFileSync, writeFileSync } = gracefulFS;
 const { currentLocale_i18n } = config;
 
 const download = async clientLocale => {

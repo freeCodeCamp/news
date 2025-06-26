@@ -1,4 +1,6 @@
-import { writeFileSync } from 'fs';
+import gracefulFS from 'graceful-fs';
+
+const { writeFileSync } = gracefulFS;
 const reportedErrors = [];
 
 export const errorLogger = ({ type, name }) => {

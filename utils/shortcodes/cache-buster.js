@@ -1,8 +1,8 @@
-import { readFileSync, writeFileSync, mkdirSync } from 'fs';
+import gracefulFS from 'graceful-fs';
 import md5 from 'md5';
 import { parse, normalize } from 'path';
 
-// export let manifest = {};
+const { readFileSync, writeFileSync, mkdirSync } = gracefulFS;
 let manifest = {};
 
 export const cacheBusterShortcode = filePath => {
