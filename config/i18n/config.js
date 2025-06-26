@@ -1,9 +1,11 @@
 import i18next, { use } from 'i18next';
 import Backend from 'i18next-fs-backend';
-import { readdirSync, lstatSync } from 'fs';
+import gracefulFS from 'graceful-fs';
 import { join } from 'path';
 
 import { config } from '../index.js';
+
+const { readdirSync, lstatSync } = gracefulFS;
 const { currentLocale_i18n, currentLocale_i18nISOCode } = config;
 
 use(Backend).init({
