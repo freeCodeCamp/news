@@ -12,7 +12,10 @@ import {
   imageShortcode,
   featureImageShortcode
 } from './utils/shortcodes/images.js';
-import { cacheBusterShortcode } from './utils/shortcodes/cache-buster.js';
+import {
+  cacheBusterShortcode,
+  manifest
+} from './utils/shortcodes/cache-buster.js';
 import { createJSONLDShortcode } from './utils/shortcodes/create-json-ld.js';
 import {
   publishedDateShortcode,
@@ -34,11 +37,15 @@ export default function (config) {
   // Minify inline JS
   config.addNunjucksAsyncFilter('jsMin', jsMin);
 
-  // // Empty manifest to load new versions of cached files
-  // // for hot reloading
-  // config.on('beforeBuild', () => {
-  //   manifest = {};
-  // });
+  // Empty manifest to load new versions of cached files
+  // (styling, JS, and so on) for hot reloading
+  config.on('beforeBuild', () => {
+    for (const prop in manifest) {
+      if (manifest.hasOwnProperty(prop)) {
+        delete manifest[prop];
+      }
+    }
+  });
 
   config.on('afterBuild', () => {
     // Minify CSS
