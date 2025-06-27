@@ -3,7 +3,7 @@ import md5 from 'md5';
 import { parse, normalize } from 'path';
 
 const { readFileSync, writeFileSync, mkdirSync } = gracefulFS;
-let manifest = {};
+export let manifest = {};
 
 export const cacheBusterShortcode = filePath => {
   // Handle cases where filePath doesn't start with /
