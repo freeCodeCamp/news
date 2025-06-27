@@ -1,4 +1,4 @@
-const commonExpectedJsonLd = require('../../../fixtures/common-expected-json-ld.json');
+import commonExpectedJsonLd from '../../../fixtures/common-expected-json-ld.json';
 const tagExpectedJsonLd = {
   '@type': 'Series',
   url: 'http://localhost:8080/news/tag/freecodecamp/',

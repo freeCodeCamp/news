@@ -1,16 +1,11 @@
-const originalPostHandler = require('../original-post-handler');
-const modifyHTMLContent = require('../modify-html-content');
-const getImageDimensions = require('../../utils/get-image-dimensions');
-const { stripHTMLTags } = require('../../utils/modify-html-helpers');
-const shortenExcerpt = require('../../utils/shorten-excerpt');
-const getUsername = require('../get-username');
+import { originalPostHandler } from '../original-post-handler.js';
+import { modifyHTMLContent } from '../modify-html-content.js';
+import { getImageDimensions } from '../../utils/get-image-dimensions.js';
+import { stripHTMLTags } from '../../utils/modify-html-helpers.js';
+import { shortenExcerpt } from '../../utils/shorten-excerpt.js';
+import { getUsername } from '../get-username.js';
 
-const processBatch = async ({
-  batch,
-  contentType,
-  currBatchNo,
-  totalBatches
-}) => {
+export default async ({ batch, contentType, currBatchNo, totalBatches }) => {
   console.log(
     `Processing Hashnode ${contentType} batch ${currBatchNo} of ${totalBatches}...and using ${process.memoryUsage.rss() / 1024 / 1024} MB of memory`
   );
@@ -154,5 +149,3 @@ const processBatch = async ({
 
   return batch;
 };
-
-module.exports = processBatch;

@@ -1,13 +1,14 @@
-const { gql, request } = require('graphql-request');
-const { hashnodeHost } = require('../api');
-const {
-  eleventyEnv,
-  currentLocale_i18n,
-  hashnodeAPIURL
-} = require('../../config');
-const wait = require('../wait');
+import { gql, request } from 'graphql-request';
+import { join } from 'path';
 
-const fetchFromHashnode = async contentType => {
+import { hashnodeHost } from '../api.js';
+import { wait } from '../wait.js';
+import { loadJSON } from '../load-json.js';
+import { config } from '../../config/index.js';
+
+const { eleventyEnv, currentLocale_i18n, hashnodeAPIURL } = config;
+
+export const fetchFromHashnode = async contentType => {
   if (!hashnodeHost) return [];
   const fieldName = contentType === 'posts' ? 'posts' : 'staticPages';
 
@@ -102,8 +103,11 @@ const fetchFromHashnode = async contentType => {
       try {
         const res =
           eleventyEnv === 'ci' && currentLocale_i18n === 'english'
-            ? require(
-                `../../cypress/fixtures/mock-hashnode-${contentType}.json`
+            ? loadJSON(
+                join(
+                  import.meta.dirname,
+                  `../../cypress/fixtures/mock-hashnode-${contentType}.json`
+                )
               )
             : await request(hashnodeAPIURL, query, {
                 host: hashnodeHost,
@@ -157,5 +161,3 @@ const fetchFromHashnode = async contentType => {
 
   return data;
 };
-
-module.exports = fetchFromHashnode;

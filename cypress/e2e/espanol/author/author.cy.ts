@@ -1,7 +1,7 @@
-const {
+import {
   getPostCards,
   loadAndCountAllPostCards
-} = require('../../../support/utils/post-cards');
+} from '../../../support/utils/post-cards';
 
 const selectors = {
   authorProfileImage: ".under-header-content [data-test-label='profile-image']",

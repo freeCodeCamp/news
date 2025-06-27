@@ -1,4 +1,4 @@
-const commonExpectedJsonLd = require('../../../fixtures/common-expected-json-ld.json');
+import commonExpectedJsonLd from '../../../fixtures/common-expected-json-ld.json';
 let jsonLdObj;
 
 describe('Landing structured data (JSON-LD – Hashnode sourced)', () => {

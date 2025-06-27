@@ -1,5 +1,5 @@
-const commonExpectedMeta = require('../../../fixtures/common-expected-meta.json');
-const { loadAllPosts } = require('../../../support/utils/post-cards');
+import commonExpectedMeta from '../../../fixtures/common-expected-meta.json';
+import { loadAllPosts } from '../../../support/utils/post-cards';
 
 const selectors = {
   featureImage: "[data-test-label='feature-image']",

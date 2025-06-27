@@ -1,12 +1,7 @@
-const NodeCache = require('node-cache');
+import NodeCache from 'node-cache';
 
 const cache = new NodeCache();
 
-const getCache = key => cache.get(key);
+export const getCache = key => cache.get(key);
 
-const setCache = (key, data) => cache.set(key, data);
-
-module.exports = {
-  getCache,
-  setCache
-};
+export const setCache = (key, data) => cache.set(key, data);

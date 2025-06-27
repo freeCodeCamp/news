@@ -1,3 +1,5 @@
+import { config } from '../../config/index.js';
+
 const {
   algoliaAppId,
   algoliaAPIKey,
@@ -7,9 +9,9 @@ const {
   googleAdsenseDataAdClient,
   googleAdsenseDataAdSlot,
   postsPerPage
-} = require('../../config');
+} = config;
 
-module.exports = {
+export default {
   algoliaAppId,
   algoliaAPIKey,
   algoliaIndex,

@@ -1,13 +1,12 @@
-const errorLogger = require('./error-logger');
-const fetch = require('node-fetch');
-const {
-  chatWebhookKey,
-  chatWebhookToken,
-  eleventyEnv,
-  currentLocale_i18n
-} = require('../config');
+import fetch from 'node-fetch';
 
-const pingEditorialTeam = async duplicatesArr => {
+import { errorLogger } from './error-logger.js';
+import { config } from '../config/index.js';
+
+const { chatWebhookKey, chatWebhookToken, eleventyEnv, currentLocale_i18n } =
+  config;
+
+export const pingEditorialTeam = async duplicatesArr => {
   const msg = `Posts / pages with duplicate slugs have been found between Ghost and Hashnode. The following have been removed from the latest build:
 
 ${duplicatesArr.map(obj => `- The ${obj.contentType} titled "${obj.title}" with the slug "/${obj.slug}" on the ${currentLocale_i18n.charAt(0).toUpperCase() + currentLocale_i18n.slice(1)} ${obj.source} publication`).join('\n')}
@@ -49,5 +48,3 @@ ${err}
 `);
   }
 };
-
-module.exports = pingEditorialTeam;

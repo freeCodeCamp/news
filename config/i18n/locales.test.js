@@ -1,7 +1,10 @@
-const { locales, localeCodes, algoliaIndices } = require('../index.js');
+import gracefulFS from 'graceful-fs';
+import { setup } from 'jest-json-schema-extended';
 
-const fs = require('fs');
-const { setup } = require('jest-json-schema-extended');
+import { config } from '../index.js';
+
+const { existsSync } = gracefulFS;
+const { locales, localeCodes, algoliaIndices } = config;
 
 setup();
 
@@ -20,7 +23,7 @@ const filesThatShouldExist = [
   }
 ];
 
-const path = `${__dirname}/locales`;
+const path = `${import.meta.dirname}/locales`;
 
 describe('Locale tests:', () => {
   locales.forEach(lang => {
@@ -28,7 +31,7 @@ describe('Locale tests:', () => {
       filesThatShouldExist.forEach(file => {
         // check that each json file exists
         test(`${file.name} file exists`, () => {
-          const exists = fs.existsSync(`${path}/${lang}/${file.name}`);
+          const exists = existsSync(`${path}/${lang}/${file.name}`);
           expect(exists).toBeTruthy();
         });
       });

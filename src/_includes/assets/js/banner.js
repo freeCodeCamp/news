@@ -26,7 +26,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   } %}`;
   const bannerDonorLink = `{% t 'links:banner.authenticated-donor' %}`;
-  // eslint-disable-next-line no-undef
   if (isAuthenticated) {
     bannerTextNode.innerHTML = isDonor ? bannerDonorText : bannerAuthText;
     bannerAnchor.href = isDonor ? bannerDonorLink : bannerAuthLink;

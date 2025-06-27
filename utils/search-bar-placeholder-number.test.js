@@ -1,7 +1,7 @@
-const {
+import {
   roundDownToNearestHundred,
   convertToLocalizedString
-} = require('./search-bar-placeholder-number');
+} from './search-bar-placeholder-number.js';
 
 describe('Search bar placeholder number tests:', () => {
   describe('Number rounding', () => {

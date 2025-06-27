@@ -1,7 +1,9 @@
-const { defineConfig } = require('cypress');
-const { postsPerPage } = require('./config');
+import { defineConfig } from 'cypress';
 
-module.exports = defineConfig({
+import { config } from './config/index.js';
+const { postsPerPage } = config;
+
+export default defineConfig({
   e2e: {
     baseUrl: 'http://localhost:8080/news/',
     retries: 4

@@ -1,4 +1,4 @@
-const commonExpectedJsonLd = require('../../../fixtures/common-expected-json-ld.json');
+import commonExpectedJsonLd from '../../../fixtures/common-expected-json-ld.json';
 const pageExpectedJsonLd = {
   '@type': 'Article',
   headline: 'Thank You for Being a Supporter',

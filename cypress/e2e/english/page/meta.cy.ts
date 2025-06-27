@@ -1,4 +1,4 @@
-const commonExpectedMeta = require('../../../fixtures/common-expected-meta.json');
+import commonExpectedMeta from '../../../fixtures/common-expected-meta.json';
 const hashnodePageExpectedMeta = {
   title: 'Thank You for Being a Supporter',
   url: 'http://localhost:8080/news/thank-you-for-being-a-supporter/',

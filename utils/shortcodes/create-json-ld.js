@@ -1,6 +1,7 @@
-const fullEscaper = require('../full-escaper');
-const translate = require('../translate');
-const { siteURL } = require('../../config');
+import { fullEscaper } from '../full-escaper.js';
+import { translate } from '../translate.js';
+import { config } from '../../config/index.js';
+const { siteURL } = config;
 
 const createImageObj = (url, imageDimensions) => {
   const width = imageDimensions?.width ? imageDimensions?.width : 1920;
@@ -44,7 +45,7 @@ const createAuthorObj = primaryAuthor => {
   return authorObj;
 };
 
-async function createJSONLDShortcode(type, site, data) {
+export const createJSONLDShortcode = async (type, site, data) => {
   // Main site settings from site object
   const { logo, cover_image, image_dimensions } = site;
   const url = `${siteURL}`;
@@ -152,6 +153,4 @@ async function createJSONLDShortcode(type, site, data) {
 
   return JSON.stringify(returnData, null, '\t'); // Pretty print for testing
   // return JSON.stringify(returnData);
-}
-
-module.exports = createJSONLDShortcode;
+};

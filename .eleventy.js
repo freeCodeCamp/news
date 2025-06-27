@@ -1,28 +1,36 @@
-const { readFileSync, readdirSync, writeFileSync } = require('graceful-fs');
-const { EleventyHtmlBasePlugin } = require('@11ty/eleventy');
-const pluginRSS = require('@11ty/eleventy-plugin-rss');
+import gracefulFS from 'graceful-fs';
+import { EleventyHtmlBasePlugin } from '@11ty/eleventy';
+import pluginRSS from '@11ty/eleventy-plugin-rss';
 
-const cssMin = require('./utils/transforms/css-min');
-const jsMin = require('./utils/transforms/js-min');
-const fullEscaper = require('./utils/full-escaper');
-const translate = require('./utils/translate');
-const {
+import UpgradeHelper from '@11ty/eleventy-upgrade-help';
+
+import cssMin from './utils/transforms/css-min.js';
+import jsMin from './utils/transforms/js-min.js';
+import { fullEscaper } from './utils/full-escaper.js';
+import { translate } from './utils/translate.js';
+import {
   imageShortcode,
   featureImageShortcode
-} = require('./utils/shortcodes/images');
-const cacheBusterShortcode = require('./utils/shortcodes/cache-buster');
-const createJSONLDShortcode = require('./utils/shortcodes/create-json-ld');
-const {
+} from './utils/shortcodes/images.js';
+import {
+  cacheBusterShortcode,
+  manifest
+} from './utils/shortcodes/cache-buster.js';
+import { createJSONLDShortcode } from './utils/shortcodes/create-json-ld.js';
+import {
   publishedDateShortcode,
   timeAgoShortcode,
   buildDateFormatterShortcode,
   fullYearShortcode,
   toISOStringShortcode
-} = require('./utils/shortcodes/dates');
-const { currentLocale_i18n, eleventyEnv } = require('./config');
-const sitePath = require('./utils/site-path');
+} from './utils/shortcodes/dates.js';
+import { sitePath } from './utils/site-path.js';
+import { config } from './config/index.js';
 
-module.exports = function (config) {
+const { readFileSync, readdirSync, writeFileSync } = gracefulFS;
+const { currentLocale_i18n, eleventyEnv } = config;
+
+export default function (config) {
   // Minify inline CSS
   config.addFilter('cssMin', cssMin);
 
@@ -30,9 +38,13 @@ module.exports = function (config) {
   config.addNunjucksAsyncFilter('jsMin', jsMin);
 
   // Empty manifest to load new versions of cached files
-  // for hot reloading
+  // (styling, JS, and so on) for hot reloading
   config.on('beforeBuild', () => {
-    manifest = {};
+    for (const prop in manifest) {
+      if (Object.hasOwn(manifest, prop)) {
+        delete manifest[prop];
+      }
+    }
   });
 
   config.on('afterBuild', () => {
@@ -64,6 +76,8 @@ module.exports = function (config) {
   });
 
   config.addPlugin(pluginRSS);
+
+  config.addPlugin(UpgradeHelper);
 
   config.addNunjucksShortcode('image', imageShortcode);
 
@@ -119,10 +133,7 @@ module.exports = function (config) {
   // Use the new Base plugin to replace the old url filter method
   // so we can deploy in a different directory
   config.addPlugin(EleventyHtmlBasePlugin, {
-    baseHref: sitePath,
-    filters: {
-      base: 'htmlBaseUrl'
-    }
+    baseHref: sitePath
   });
 
   // Eleventy configuration
@@ -138,4 +149,4 @@ module.exports = function (config) {
     markdownTemplateEngine: 'njk',
     pathPrefix: sitePath
   };
-};
+}

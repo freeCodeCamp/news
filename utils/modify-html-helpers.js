@@ -1,9 +1,8 @@
-const getVideoId = (...args) =>
-  import('get-video-id').then(({ default: getVideoId }) => getVideoId(...args));
-const { parse } = require('path');
-const { JSDOM } = require('jsdom');
+import getVideoId from 'get-video-id';
+import { parse } from 'path';
+import { JSDOM } from 'jsdom';
 
-const generateHashnodeEmbedMarkup = async embedURL => {
+export const generateHashnodeEmbedMarkup = async embedURL => {
   try {
     if (
       [/https:\/\/.*\.?youtube\.com\//, /https:\/\/youtu\.be\//].some(pattern =>
@@ -209,20 +208,14 @@ const generateHashnodeEmbedMarkup = async embedURL => {
   }
 };
 
-const setDefaultAlt = el => {
+export const setDefaultAlt = el => {
   const filename = parse(el.src).name;
 
   el.setAttribute('alt', filename);
   return el;
 };
 
-const stripHTMLTags = str => {
+export const stripHTMLTags = str => {
   const dom = new JSDOM(str);
   return dom.window.document.body.textContent || '';
-};
-
-module.exports = {
-  generateHashnodeEmbedMarkup,
-  setDefaultAlt,
-  stripHTMLTags
 };

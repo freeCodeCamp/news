@@ -1,7 +1,8 @@
-const jsdom = require('jsdom');
+import jsdom from 'jsdom';
 const { JSDOM } = jsdom;
-const modifyHTMLContent = require('./modify-html-content');
-const translate = require('./translate');
+
+import { modifyHTMLContent } from './modify-html-content.js';
+import { translate } from './translate.js';
 
 const mockHashnodeEmbeds = {
   youtube:

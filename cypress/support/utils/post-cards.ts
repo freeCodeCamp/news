@@ -6,9 +6,9 @@ const calculateClicks = total => {
   return total <= postsPerPage ? 0 : Math.ceil(total / postsPerPage) - 1;
 };
 
-const getPostCards = () => cy.get('.post-feed').find('.post-card');
+export const getPostCards = () => cy.get('.post-feed').find('.post-card');
 
-const loadAndCountAllPostCards = selector => {
+export const loadAndCountAllPostCards = (selector: string) => {
   cy.get(selector)
     .invoke('text')
     .then(text => {
@@ -28,7 +28,7 @@ const loadAndCountAllPostCards = selector => {
     });
 };
 
-const loadAllPosts = () => {
+export const loadAllPosts = () => {
   cy.get('body').then($el => {
     const loadMoreArticlesButtonIsVisible = $el
       .find("[data-test-label='load-more-articles-button']")

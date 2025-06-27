@@ -1,10 +1,12 @@
-const originalPostHandler = require('../original-post-handler');
-const modifyHTMLContent = require('../modify-html-content');
-const getImageDimensions = require('../../utils/get-image-dimensions');
-const errorLogger = require('../../utils/error-logger');
-const { siteURL } = require('../../config');
-const shortenExcerpt = require('../../utils/shorten-excerpt');
-const { ghostAPIURL } = require('../../utils/api');
+import { originalPostHandler } from '../original-post-handler.js';
+import { modifyHTMLContent } from '../modify-html-content.js';
+import { getImageDimensions } from '../../utils/get-image-dimensions.js';
+import { errorLogger } from '../../utils/error-logger.js';
+import { shortenExcerpt } from '../../utils/shorten-excerpt.js';
+import { ghostAPIURL } from '../../utils/api.js';
+import { config } from '../../config/index.js';
+
+const { siteURL } = config;
 
 // Strip current Ghost domain from URLs
 const stripGhostDomain = url => url.replace(ghostAPIURL, '');
@@ -41,12 +43,7 @@ const removeUnusedKeys = obj => {
   return obj;
 };
 
-const processBatch = async ({
-  batch,
-  contentType,
-  currBatchNo,
-  totalBatches
-}) => {
+export default async ({ batch, contentType, currBatchNo, totalBatches }) => {
   console.log(
     `Processing Ghost ${contentType} batch ${currBatchNo} of ${totalBatches}...and using ${process.memoryUsage.rss() / 1024 / 1024} MB of memory`
   );
@@ -198,5 +195,3 @@ const processBatch = async ({
 
   return batch;
 };
-
-module.exports = processBatch;

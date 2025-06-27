@@ -1,13 +1,13 @@
-const dayjs = require('../dayjs');
+import dayjs from '../dayjs.js';
 
-const publishedDateShortcode = dateStr => dayjs(dateStr).format('LL');
+export const publishedDateShortcode = dateStr => dayjs(dateStr).format('LL');
 
-const timeAgoShortcode = dateStr => dayjs().to(dayjs(dateStr));
+export const timeAgoShortcode = dateStr => dayjs().to(dayjs(dateStr));
 
-const fullYearShortcode = () => dayjs(new Date()).format('YYYY');
+export const fullYearShortcode = () => dayjs(new Date()).format('YYYY');
 
 // Format dates for RSS feed
-const buildDateFormatterShortcode = (timezone, dateStr) => {
+export const buildDateFormatterShortcode = (timezone, dateStr) => {
   const dateObj = dateStr ? new Date(dateStr) : new Date();
   return dayjs(dateObj)
     .tz(timezone)
@@ -15,12 +15,4 @@ const buildDateFormatterShortcode = (timezone, dateStr) => {
     .format('ddd, DD MMM YYYY HH:mm:ss ZZ');
 };
 
-const toISOStringShortcode = dateStr => new Date(dateStr).toISOString();
-
-module.exports = {
-  publishedDateShortcode,
-  timeAgoShortcode,
-  buildDateFormatterShortcode,
-  fullYearShortcode,
-  toISOStringShortcode
-};
+export const toISOStringShortcode = dateStr => new Date(dateStr).toISOString();

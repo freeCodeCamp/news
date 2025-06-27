@@ -1,4 +1,4 @@
-const commonExpectedMeta = require('../../../fixtures/common-expected-meta.json');
+import commonExpectedMeta from '../../../fixtures/common-expected-meta.json';
 const tagExpectedMeta = {
   title: 'freeCodeCamp - freeCodeCamp.org',
   url: 'http://localhost:8080/espanol/news/tag/freecodecamp/',

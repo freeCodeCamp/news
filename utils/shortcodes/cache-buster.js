@@ -1,9 +1,11 @@
-const { readFileSync, writeFileSync, mkdirSync } = require('fs');
-const md5 = require('md5');
-const { parse, normalize } = require('path');
-let manifest = {};
+import gracefulFS from 'graceful-fs';
+import md5 from 'md5';
+import { parse, normalize } from 'path';
 
-function cacheBusterShortcode(filePath) {
+const { readFileSync, writeFileSync, mkdirSync } = gracefulFS;
+export let manifest = {};
+
+export const cacheBusterShortcode = filePath => {
   // Handle cases where filePath doesn't start with /
   filePath = filePath.startsWith('/') ? filePath : `/${filePath}`;
   const { dir, base, name, ext } = parse(filePath);
@@ -29,6 +31,4 @@ function cacheBusterShortcode(filePath) {
 
   // Return final path with hashed filename to the template
   return normalize(hashedRelativeUrl);
-}
-
-module.exports = cacheBusterShortcode;
+};

@@ -1,11 +1,13 @@
-const getImageDimensions = require('../../utils/get-image-dimensions');
-const {
+import { getImageDimensions } from '../../utils/get-image-dimensions.js';
+import {
   convertToLocalizedString,
   getRoundedTotalRecords
-} = require('../../utils/search-bar-placeholder-number');
-const { currentLocale_i18nISOCode, siteURL } = require('../../config');
-const getUsername = require('../../utils/get-username');
-const translate = require('../../utils/translate');
+} from '../../utils/search-bar-placeholder-number.js';
+import { getUsername } from '../../utils/get-username.js';
+import { translate } from '../../utils/translate.js';
+import { config } from '../../config/index.js';
+
+const { currentLocale_i18nISOCode, siteURL } = config;
 
 // Get X / Twitter profile based on links in config/i18n/locales/lang/links.json --
 // falls back to English Twitter profile if one for the current UI locale
@@ -20,7 +22,7 @@ const coverImageURL =
   'https://cdn.freecodecamp.org/platform/universal/fcc_meta_1920X1080-indigo.png';
 const iconURL = 'https://cdn.freecodecamp.org/universal/favicons/favicon.ico';
 
-module.exports = async () => {
+export default async () => {
   const site = {
     url: siteURL,
     lang: currentLocale_i18nISOCode.toLowerCase(),

@@ -1,5 +1,5 @@
-const { XMLToDOM } = require('../../../support/utils/rss');
-const commonExpectedMeta = require('../../../fixtures/common-expected-meta.json');
+import { XMLToDOM } from '../../../support/utils/rss';
+import commonExpectedMeta from '../../../fixtures/common-expected-meta.json';
 
 const expected = {
   feedPath: '/tag/c-programming/rss.xml',
