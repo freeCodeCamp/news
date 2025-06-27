@@ -41,7 +41,7 @@ export default function (config) {
   // (styling, JS, and so on) for hot reloading
   config.on('beforeBuild', () => {
     for (const prop in manifest) {
-      if (manifest.hasOwnProperty(prop)) {
+      if (Object.hasOwn(manifest, prop)) {
         delete manifest[prop];
       }
     }
