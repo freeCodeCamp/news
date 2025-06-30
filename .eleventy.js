@@ -2,8 +2,6 @@ import gracefulFS from 'graceful-fs';
 import { EleventyHtmlBasePlugin } from '@11ty/eleventy';
 import pluginRSS from '@11ty/eleventy-plugin-rss';
 
-import UpgradeHelper from '@11ty/eleventy-upgrade-help';
-
 import cssMin from './utils/transforms/css-min.js';
 import jsMin from './utils/transforms/js-min.js';
 import { fullEscaper } from './utils/full-escaper.js';
@@ -76,8 +74,6 @@ export default function (config) {
   });
 
   config.addPlugin(pluginRSS);
-
-  config.addPlugin(UpgradeHelper);
 
   config.addNunjucksShortcode('image', imageShortcode);
 
