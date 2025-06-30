@@ -67,7 +67,7 @@
     "https://github.com/freeCodeCamp/news/graphs/contributors"
   ],
   "devDependencies": {
-    "@11ty/eleventy": "3.1.1",
+    "@11ty/eleventy": "3.1.2",
     "@11ty/eleventy-plugin-rss": "2.0.4",
     "@eslint/eslintrc": "3.3.1",
     "@eslint/js": "9.29.0",
