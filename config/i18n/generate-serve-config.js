@@ -1,10 +1,11 @@
 import gracefulFS from 'graceful-fs';
 import { join } from 'path';
 
-import { locales } from '../index.js';
+import { config } from '../../config/index.js';
 import { loadJSON } from '../../utils/load-json.js';
-import source from '../serve.json';
+import source from '../serve.json' with { type: 'json' };
 
+const { locales } = config;
 const { writeFileSync, mkdirSync } = gracefulFS;
 
 locales.push('dothraki');
