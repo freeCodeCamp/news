@@ -8,7 +8,7 @@ on:
 jobs:
   cypress-run:
     name: E2E
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     strategy:
       matrix:
         node-version: [22.x]
@@ -41,14 +41,6 @@ jobs:
       LOCALE_FOR_GHOST: ${{ matrix.languages }}
 
     steps:
-      # Remove this step after firefox launches 106 (hopefully it's fixed by then)
-      - name: Downgrade Firefox
-        run: |
-          curl https://ftp.mozilla.org/pub/firefox/releases/103.0/linux-x86_64/en-US/firefox-103.0.tar.bz2 --output firefox-103.0.tar.bz2
-          tar -xjf firefox-103.0.tar.bz2
-          sudo mv firefox /opt/
-          sudo mv /usr/bin/firefox /usr/bin/firefox_old
-          sudo ln -s /opt/firefox/firefox /usr/bin/firefox
       - name: Checkout source files
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
 
