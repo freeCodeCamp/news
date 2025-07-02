@@ -1,4 +1,4 @@
-import algoliasearch from 'algoliasearch/lite.js';
+import { liteClient as algoliasearch } from 'algoliasearch/lite';
 import { join } from 'path';
 
 import { loadJSON } from './load-json.js';
