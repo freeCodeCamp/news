@@ -89,7 +89,7 @@
     "graceful-fs": "4.2.11",
     "graphql-request": "7.2.0",
     "husky": "9.1.7",
-    "i18next": "25.3.1",
+    "i18next": "25.3.2",
     "i18next-fs-backend": "2.6.0",
     "jest": "30.0.4",
     "jest-json-schema-extended": "1.0.1",
