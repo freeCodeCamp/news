@@ -74,7 +74,7 @@
     "@tryghost/content-api": "1.11.28",
     "@tryghost/helpers": "1.1.97",
     "@types/node": "22.16.4",
-    "algoliasearch": "5.32.0",
+    "algoliasearch": "5.33.0",
     "clean-css": "5.3.3",
     "cross-env": "7.0.3",
     "cypress": "14.5.1",
