@@ -6,7 +6,8 @@ import { wait } from '../wait.js';
 import { loadJSON } from '../load-json.js';
 import { config } from '../../config/index.js';
 
-const { eleventyEnv, currentLocale_i18n, hashnodeAPIURL } = config;
+const { eleventyEnv, currentLocale_i18n, hashnodeAPIURL, sharedHostLocales } =
+  config;
 
 export const fetchFromHashnode = async contentType => {
   if (!hashnodeHost) return [];
@@ -73,10 +74,10 @@ export const fetchFromHashnode = async contentType => {
   const query = gql`
     ${postFieldsFragment}
     ${staticPageFieldsFragment}
-    query DataFromPublication($host: String!, $first: Int!, $after: String) {
+    query DataFromPublication($host: String!, $first: Int!, $after: String, ${contentType === 'posts' ? '$filter: PublicationPostConnectionFilter' : ''}) {
       publication(host: $host) {
         id
-        ${fieldName}(first: $first, after: $after) {
+        ${fieldName}(first: $first, after: $after, ${contentType === 'posts' ? 'filter: $filter' : ''}) {
           edges {
             node {
               ...${contentType === 'posts' ? 'PostFields' : 'StaticPageFields'}
@@ -112,8 +113,29 @@ export const fetchFromHashnode = async contentType => {
             : await request(hashnodeAPIURL, query, {
                 host: hashnodeHost,
                 first: 20,
-                after
+                after,
+                filter: {
+                  requiredTagSlugs: sharedHostLocales.includes(
+                    currentLocale_i18n
+                  )
+                    ? [`fcc-${currentLocale_i18n}`]
+                    : []
+                }
               });
+
+        if (!res.publication) {
+          console.warn(`
+            ----------------------------------------------------
+            Warning: Issue fetching from Hashnode publication
+            ----------------------------------------------------
+            No Hashnode publication found for ${currentLocale_i18n}.
+            Check if the publication is down, and if the host
+            is set correctly.
+            ----------------------------------------------------
+          `);
+
+          return [];
+        }
 
         const resData =
           res.publication[fieldName]?.edges.map(({ node }) => node) || [];
