@@ -123,6 +123,20 @@ export const fetchFromHashnode = async contentType => {
                 }
               });
 
+        if (!res.publication) {
+          console.warn(`
+            ----------------------------------------------------
+            Warning: Issue fetching from Hashnode publication
+            ----------------------------------------------------
+            No Hashnode publication found for ${currentLocale_i18n}.
+            Check if the publication is down, and if the host
+            is set correctly.
+            ----------------------------------------------------
+          `);
+
+          return [];
+        }
+
         const resData =
           res.publication[fieldName]?.edges.map(({ node }) => node) || [];
         const pageInfo = res.publication[fieldName]?.pageInfo;
