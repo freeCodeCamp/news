@@ -2,7 +2,7 @@
 
 # Developer News
 
-Welcome to freeCodeCamp's [Developer News][1] codebase — A JAMStack app built with [Hashnode][2], [11ty][3], and lots of love from the community. We use this project to build and deploy multiple instances of our publications in several world languages. All of the services are then distributed globally by our CDN.
+Welcome <Ruslanna> to freeCodeCamp's [Developer News][1] codebase — A JAMStack app built with [Hashnode][2], [11ty][3], and lots of love from the community. We use this project to build and deploy multiple instances of our publications in several world languages. All of the services are then distributed globally by our CDN.
 
 ## Contributing
 
