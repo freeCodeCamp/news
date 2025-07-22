@@ -20,6 +20,11 @@
     "destination": "/news/about"
   },
   {
+    "source": "/author/Ophelia",
+    "destination": "/news/author/CodeHemaa",
+    "type": 302
+  },
+  {
     "source": "/everything-you-need-to-know-about-ng-template-ng-content-ng-container-and-ngtemplateoutlet-4b7b51223691",
     "destination": "/news/angular-vs-angularjs",
     "type": 302
