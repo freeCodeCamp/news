@@ -1,0 +1,23 @@
+{
+  "publication": {
+    "staticPages": {
+      "edges": [
+        {
+          "node": {
+            "id": "6888a7492e762c5f8ce2a652",
+            "slug": "test-hashnode-page",
+            "title": "Test Hashnode Page",
+            "content": {
+              "html": "<p>Testing testing 123</p>\n",
+              "markdown": "Testing testing 123"
+            }
+          }
+        }
+      ],
+      "pageInfo": {
+        "endCursor": "MQ==",
+        "hasNextPage": false
+      }
+    }
+  }
+}

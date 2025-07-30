@@ -1,0 +1,104 @@
+{
+  "publication": {
+    "posts": {
+      "edges": [
+        {
+          "node": {
+            "id": "688888f0fd8cbabd8e491bff",
+            "slug": "aprende-react-en-tu-navegador-freecodecamp-full-stack-curriculum-mid-2025-update",
+            "title": "Aprende React en tu Navegador: freeCodeCamp Full Stack Curriculum Mid-2025 Update",
+            "author": {
+              "id": "5e1ec0f67a1d3fcc59029548",
+              "username": "rafaeldavish",
+              "name": "Rafael D. Hernandez",
+              "bio": {
+                "text": "I'm a web developer passionate about all things JS and ☕ coffee enthusiast based out of the state of Virginia A career changer, who is always seeking to grow as an individual and a professional.\n"
+              },
+              "profilePicture": "https://cdn.hashnode.com/res/hashnode/image/upload/v1579073783609/DK3LzKvGe.jpeg",
+              "socialMediaLinks": {
+                "website": "https://rafaeldavis.dev",
+                "twitter": "",
+                "facebook": "",
+                "instagram": "",
+                "github": "https://github.com/RafaelDavisH",
+                "stackoverflow": "",
+                "linkedin": "",
+                "youtube": ""
+              },
+              "location": ""
+            },
+            "tags": [
+              {
+                "id": "57039f98f950faa9ab7ec552",
+                "name": "freeCodeCamp.org",
+                "slug": "freecodecamp"
+              }
+            ],
+            "coverImage": null,
+            "brief": "¡Hola! La comunidad freeCodeCamp sigue trabajando muy duro en el resto de los cursos de nuestro plan de estudios de full stack.\nSolo han pasado unos meses, pero ya hay muchos estudiantes que van con toda su fuerza a través de estas nuevas lecciones y...",
+            "readTimeInMinutes": 2,
+            "content": {
+              "html": "<p>¡Hola! La comunidad freeCodeCamp sigue trabajando muy duro en el resto de los cursos de nuestro plan de estudios de <a target=\"_blank\" href=\"https://www.freecodecamp.org/learn/full-stack-developer/\">full stack</a>.</p>\n<p>Solo han pasado unos meses, pero ya hay muchos estudiantes que van con toda su fuerza a través de estas nuevas lecciones y desafíos de programación.</p>\n<p>Estoy emocionada de compartir nuestra próxima ola de actualizaciones con todos ustedes.</p>\n<h2 id=\"heading-nuevo-plan-de-estudios\">Nuevo plan de estudios</h2>\n<p><img src=\"https://cdn.hashnode.com/res/hashnode/image/upload/v1753778329224/0d3dc4b9-3c1b-46d1-8eb5-9ce89f08a3b3.webp\" alt class=\"image--center mx-auto\" /></p>\n<p>Acabamos de lanzar tres nuevas secciones del plan de estudios: React Hooks y Estado, Performance y Testing.</p>\n<p>Este nuevo contenido incluye:</p>\n<ul>\n<li><p>50 videos explicativos</p>\n</li>\n<li><p>una docena de talleres y laboratorios</p>\n</li>\n<li><p>tres bloques de repaso nuevos</p>\n</li>\n<li><p>y mucho material para ayudarte a seguir avanzando mientras terminamos el resto del contenido Full Stack.</p>\n</li>\n</ul>\n<p>Algunos proyectos que vas a construir:</p>\n<ul>\n<li><p>un juego completo de Tic Tac Toe</p>\n</li>\n<li><p>un selector de colores</p>\n</li>\n<li><p>y un formulario para aplicar como superhéroe 🦸‍♂️</p>\n</li>\n</ul>\n<h2 id=\"heading-examenes\">Exámenes</h2>\n<p>Sabemos que muchos están esperando los exámenes al final de cada módulo. Ya casi están listos.</p>\n<p>También estamos creando un entorno de examen propio, que busca cuidar tu privacidad y mantener la integridad académica.</p>\n<h2 id=\"heading-que-sigue\">¿Qué sigue?</h2>\n<p>Ahora estamos trabajando en los módulos de CSS Libraries y TypeScript. También vienen módulos de Python.</p>\n<p>En los próximos meses lanzaremos un montón de cosas nuevas.</p>\n<p>Un adelanto de los próximos proyectos:</p>\n<ul>\n<li><p>crea tu propio personaje de RPG</p>\n</li>\n<li><p>un juego de cartas coleccionables</p>\n</li>\n<li><p>un validador de datos médicos</p>\n</li>\n<li><p>y mucho más 🏕️</p>\n</li>\n</ul>\n<h2 id=\"heading-te-gustaria-ayudar\">¿Te gustaría ayudar?</h2>\n<p>Si quieres ser parte del desarrollo del plan Full Stack, tenemos muchas formas de contribuir. Mira los <a target=\"_blank\" href=\"https://github.com/freecodecamp/freecodecamp/issues\">issues abiertos en nuestro repo de GitHub</a>.</p>\n<p>Empieza leyendo <a target=\"_blank\" href=\"https://contribute.freecodecamp.org/intro/\">la guía de bienvenida para contribuidores</a> y <a target=\"_blank\" href=\"https://discord.gg/KVUmVXA\">únete a nuestro Discord si tienes preguntas</a>.</p>\n<p>Nos emociona verte avanzar con todo este contenido nuevo. ¡Sigue creciendo tus habilidades!</p>\n<p>¡Feliz programación! 💜</p>\n"
+            },
+            "seo": {
+              "description": "const fccOriginalPost = \"https://www.freecodecamp.org/news/learn-react-in-your-browser-freecodecamp-full-stack-curriculum-mid-2025-update/\";"
+            },
+            "publishedAt": "2025-06-19T15:00:00.000Z",
+            "updatedAt": "2025-07-29T08:41:46.261Z"
+          }
+        },
+        {
+          "node": {
+            "id": "688c665c730ef830aaffcec7",
+            "slug": "vanessa-aristizabal-s3-ep-8",
+            "title": "Vanessa Aristizabal: Inicios y Triunfos en el Mundo de la Programación | S3 Ep. 8",
+            "author": {
+              "id": "5e1ec0f67a1d3fcc59029548",
+              "username": "rafaeldavish",
+              "name": "Rafael D. Hernandez",
+              "bio": {
+                "text": "I'm a web developer passionate about all things JS and ☕ coffee enthusiast based out of the state of Virginia A career changer, who is always seeking to grow as an individual and a professional.\n"
+              },
+              "profilePicture": "https://cdn.hashnode.com/res/hashnode/image/upload/v1579073783609/DK3LzKvGe.jpeg",
+              "socialMediaLinks": {
+                "website": "https://rafaeldavis.dev",
+                "twitter": "",
+                "facebook": "",
+                "instagram": "",
+                "github": "https://github.com/RafaelDavisH",
+                "stackoverflow": "",
+                "linkedin": "",
+                "youtube": ""
+              },
+              "location": ""
+            },
+            "tags": [
+              {
+                "id": "56744722958ef13879b950d3",
+                "name": "podcast",
+                "slug": "podcast"
+              }
+            ],
+            "coverImage": {
+              "url": "https://cdn.hashnode.com/res/hashnode/image/upload/v1754031666274/fe5fa807-6034-4b59-9326-ed5f5b46f3c3.webp"
+            },
+            "brief": "https://www.youtube.com/watch?v=-hTMGjoRrM8\n \nRafael Hernández entrevista a Vanessa Aristizabal, una destacada desarrolladora de software originaria de Colombia. Vanessa comparte su trayectoria en la industria tecnológica y cómo ha superado desafíos ...",
+            "readTimeInMinutes": 2,
+            "content": {
+              "html": "<div class=\"embed-wrapper\"><div class=\"embed-loading\"><div class=\"loadingRow\"></div><div class=\"loadingRow\"></div></div><a class=\"embed-card\" href=\"https://www.youtube.com/watch?v=-hTMGjoRrM8\">https://www.youtube.com/watch?v=-hTMGjoRrM8</a></div>\n<p> </p>\n<p>Rafael Hernández entrevista a Vanessa Aristizabal, una destacada desarrolladora de software originaria de Colombia. Vanessa comparte su trayectoria en la industria tecnológica y cómo ha superado desafíos como el síndrome de impostor. Desde su infancia, Vanessa ha tenido curiosidad por la tecnología y ha sido motivada por su deseo de estudiar y superar las dificultades. A pesar de enfrentar obstáculos en un entorno dominado por hombres, Vanessa ha logrado destacarse y ser una inspiración para otros. Ella encontró motivación en la situación económica de su familia y se enfocó en conseguir trabajo en el campo del software. También ha incursionado en la creación de contenido a través de charlas, artículos y canales en YouTube y Twitch. En esta parte de la conversación, Vanessa habla sobre su experiencia en la creación de contenido y la importancia del open source. También comparte cómo superó sus miedos y se convirtió en conferencista.  </p>\n<p>⭐️ Enlaces de Vanessa Aristizabal ⭐️<br />🔗 Instagram: https://www.instagram.com/vanessamarelycode/<br />🔗 Github: https://github.com/vanessamarely<br />🔗 X (ex Twitter): https://twitter.com/vanessamarely<br />🔗 YouTube: https://www.youtube.com/@vanessamarely<br />🔗 LinkedIn: https://www.linkedin.com/in/vanessa-marely-aristizabal-angel/<br />🔗 Recursos Frontend: https://github.com/vanessamarely/recursos-frontend</p>\n<hr />\n<p><em>Agradecemos enormemente a todos por sintonizar el Podcast de freeCodeCamp en español. Si consideras útil nuestro contenido, compártelo con tus amigos para ayudar a que más personas lo descubran.</em></p>\n<p><em>También, apreciaríamos mucho si pudieras dejarnos una reseña de cinco estrellas en la plataforma que utilizas para escucharnos. Si deseas apoyarnos aún más, puedes hacerlo visitando</em> <a target=\"_blank\" href=\"https://www.freecodecamp.org/espanol/donate/\"><em>freeCodeCamp.org/espanol/donate</em></a> <em>y realizando una contribución mensual de 5$ o un donativo único.</em></p>\n<p><em>Tu apoyo es invaluable y nos ayuda a continuar brindando recursos educativos de programación de manera gratuita.</em></p>\n<p><em>Muchas gracias y hasta el próximo episodio.</em></p>\n<p><strong>Recursos de freeCodeCamp en español</strong><br />Canal de YouTube: <a target=\"_blank\" href=\"https://www.youtube.com/@freecodecampespanol\"><em>youtube.com/@freecodecampespanol</em></a><br />Currículo de freeCodeCamp en español: <a target=\"_blank\" href=\"https://www.freecodecamp.org/espanol/learn/\"><em>freecodecamp.org/espanol/learn/</em></a><br />Instagram: <a target=\"_blank\" href=\"https://www.instagram.com/freecodecampes/\">https://www.instagram.com/freecodecampes/</a></p>\n"
+            },
+            "seo": {
+              "description": null
+            },
+            "publishedAt": "2024-12-11T15:00:00.000Z",
+            "updatedAt": "2025-08-01T07:03:15.811Z"
+          }
+        }
+      ],
+      "pageInfo": {
+        "endCursor": "NjczNWI3NmY3Nzc5NTQ2ZDYzMDBlNTYwXzIwMjQtMTEtMTRUMDg6NDA6MTUuMzg0Wg==",
+        "hasNextPage": false
+      }
+    }
+  }
+}

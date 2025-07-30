@@ -1,0 +1,11 @@
+{
+  "publication": {
+    "staticPages": {
+      "edges": [],
+      "pageInfo": {
+        "endCursor": null,
+        "hasNextPage": false
+      }
+    }
+  }
+}
