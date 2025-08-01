@@ -102,44 +102,27 @@ export const fetchFromHashnode = async contentType => {
 
     while (retries > 0 && !success) {
       try {
-        let res;
-        if (eleventyEnv === 'ci') {
-          const mockFileDirName = ['english', 'espanol'].includes(
-            currentLocale_i18n
-          )
-            ? currentLocale_i18n
-            : 'shared';
-          res = loadJSON(
-            join(
-              import.meta.dirname,
-              `../../cypress/fixtures/${mockFileDirName}/mock-hashnode-${contentType}.json`
-            )
-          );
-
-          if (
-            contentType === 'posts' &&
-            sharedHostLocales.includes(currentLocale_i18n)
-          ) {
-            res.publication.posts.edges = res.publication.posts.edges.filter(
-              obj => {
-                return obj.node.tags.some(
-                  tag => tag.slug === `fcc-${currentLocale_i18n}`
-                );
-              }
-            );
-          }
-        } else {
-          res = await request(hashnodeAPIURL, query, {
-            host: hashnodeHost,
-            first: 20,
-            after,
-            filter: {
-              requiredTagSlugs: sharedHostLocales.includes(currentLocale_i18n)
-                ? [`fcc-${currentLocale_i18n}`]
-                : []
-            }
-          });
-        }
+        const res =
+          eleventyEnv === 'ci' &&
+          ['english', 'espanol'].includes(currentLocale_i18n)
+            ? loadJSON(
+                join(
+                  import.meta.dirname,
+                  `../../cypress/fixtures/${currentLocale_i18n}/mock-hashnode-${contentType}.json`
+                )
+              )
+            : await request(hashnodeAPIURL, query, {
+                host: hashnodeHost,
+                first: 20,
+                after,
+                filter: {
+                  requiredTagSlugs: sharedHostLocales.includes(
+                    currentLocale_i18n
+                  )
+                    ? [`fcc-${currentLocale_i18n}`]
+                    : []
+                }
+              });
 
         if (!res.publication) {
           console.warn(`
