@@ -4,51 +4,6 @@
       "edges": [
         {
           "node": {
-            "id": "688888f0fd8cbabd8e491bff",
-            "slug": "aprende-react-en-tu-navegador-freecodecamp-full-stack-curriculum-mid-2025-update",
-            "title": "Aprende React en tu Navegador: freeCodeCamp Full Stack Curriculum Mid-2025 Update",
-            "author": {
-              "id": "5e1ec0f67a1d3fcc59029548",
-              "username": "rafaeldavish",
-              "name": "Rafael D. Hernandez",
-              "bio": {
-                "text": "I'm a web developer passionate about all things JS and ☕ coffee enthusiast based out of the state of Virginia A career changer, who is always seeking to grow as an individual and a professional.\n"
-              },
-              "profilePicture": "https://cdn.hashnode.com/res/hashnode/image/upload/v1579073783609/DK3LzKvGe.jpeg",
-              "socialMediaLinks": {
-                "website": "https://rafaeldavis.dev",
-                "twitter": "",
-                "facebook": "",
-                "instagram": "",
-                "github": "https://github.com/RafaelDavisH",
-                "stackoverflow": "",
-                "linkedin": "",
-                "youtube": ""
-              },
-              "location": ""
-            },
-            "tags": [
-              {
-                "id": "57039f98f950faa9ab7ec552",
-                "name": "freeCodeCamp.org",
-                "slug": "freecodecamp"
-              }
-            ],
-            "coverImage": null,
-            "brief": "¡Hola! La comunidad freeCodeCamp sigue trabajando muy duro en el resto de los cursos de nuestro plan de estudios de full stack.\nSolo han pasado unos meses, pero ya hay muchos estudiantes que van con toda su fuerza a través de estas nuevas lecciones y...",
-            "readTimeInMinutes": 2,
-            "content": {
-              "html": "<p>¡Hola! La comunidad freeCodeCamp sigue trabajando muy duro en el resto de los cursos de nuestro plan de estudios de <a target=\"_blank\" href=\"https://www.freecodecamp.org/learn/full-stack-developer/\">full stack</a>.</p>\n<p>Solo han pasado unos meses, pero ya hay muchos estudiantes que van con toda su fuerza a través de estas nuevas lecciones y desafíos de programación.</p>\n<p>Estoy emocionada de compartir nuestra próxima ola de actualizaciones con todos ustedes.</p>\n<h2 id=\"heading-nuevo-plan-de-estudios\">Nuevo plan de estudios</h2>\n<p><img src=\"https://cdn.hashnode.com/res/hashnode/image/upload/v1753778329224/0d3dc4b9-3c1b-46d1-8eb5-9ce89f08a3b3.webp\" alt class=\"image--center mx-auto\" /></p>\n<p>Acabamos de lanzar tres nuevas secciones del plan de estudios: React Hooks y Estado, Performance y Testing.</p>\n<p>Este nuevo contenido incluye:</p>\n<ul>\n<li><p>50 videos explicativos</p>\n</li>\n<li><p>una docena de talleres y laboratorios</p>\n</li>\n<li><p>tres bloques de repaso nuevos</p>\n</li>\n<li><p>y mucho material para ayudarte a seguir avanzando mientras terminamos el resto del contenido Full Stack.</p>\n</li>\n</ul>\n<p>Algunos proyectos que vas a construir:</p>\n<ul>\n<li><p>un juego completo de Tic Tac Toe</p>\n</li>\n<li><p>un selector de colores</p>\n</li>\n<li><p>y un formulario para aplicar como superhéroe 🦸‍♂️</p>\n</li>\n</ul>\n<h2 id=\"heading-examenes\">Exámenes</h2>\n<p>Sabemos que muchos están esperando los exámenes al final de cada módulo. Ya casi están listos.</p>\n<p>También estamos creando un entorno de examen propio, que busca cuidar tu privacidad y mantener la integridad académica.</p>\n<h2 id=\"heading-que-sigue\">¿Qué sigue?</h2>\n<p>Ahora estamos trabajando en los módulos de CSS Libraries y TypeScript. También vienen módulos de Python.</p>\n<p>En los próximos meses lanzaremos un montón de cosas nuevas.</p>\n<p>Un adelanto de los próximos proyectos:</p>\n<ul>\n<li><p>crea tu propio personaje de RPG</p>\n</li>\n<li><p>un juego de cartas coleccionables</p>\n</li>\n<li><p>un validador de datos médicos</p>\n</li>\n<li><p>y mucho más 🏕️</p>\n</li>\n</ul>\n<h2 id=\"heading-te-gustaria-ayudar\">¿Te gustaría ayudar?</h2>\n<p>Si quieres ser parte del desarrollo del plan Full Stack, tenemos muchas formas de contribuir. Mira los <a target=\"_blank\" href=\"https://github.com/freecodecamp/freecodecamp/issues\">issues abiertos en nuestro repo de GitHub</a>.</p>\n<p>Empieza leyendo <a target=\"_blank\" href=\"https://contribute.freecodecamp.org/intro/\">la guía de bienvenida para contribuidores</a> y <a target=\"_blank\" href=\"https://discord.gg/KVUmVXA\">únete a nuestro Discord si tienes preguntas</a>.</p>\n<p>Nos emociona verte avanzar con todo este contenido nuevo. ¡Sigue creciendo tus habilidades!</p>\n<p>¡Feliz programación! 💜</p>\n"
-            },
-            "seo": {
-              "description": "const fccOriginalPost = \"https://www.freecodecamp.org/news/learn-react-in-your-browser-freecodecamp-full-stack-curriculum-mid-2025-update/\";"
-            },
-            "publishedAt": "2025-06-19T15:00:00.000Z",
-            "updatedAt": "2025-07-29T08:41:46.261Z"
-          }
-        },
-        {
-          "node": {
             "id": "688c665c730ef830aaffcec7",
             "slug": "vanessa-aristizabal-s3-ep-8",
             "title": "Vanessa Aristizabal: Inicios y Triunfos en el Mundo de la Programación | S3 Ep. 8",
@@ -92,6 +47,53 @@
             },
             "publishedAt": "2024-12-11T15:00:00.000Z",
             "updatedAt": "2025-08-01T07:03:15.811Z"
+          }
+        },
+        {
+          "node": {
+            "id": "688888f0fd8cbabd8e491bff",
+            "slug": "como-aprender-a-programar-y-conseguir-un-trabajo-de-desarrollador-en-2023-libro-completo",
+            "title": "Cómo aprender a programar y conseguir un trabajo de desarrollador [Libro completo]",
+            "author": {
+              "id": "5e1ec0f67a1d3fcc59029548",
+              "username": "rafaeldavish",
+              "name": "Rafael D. Hernandez",
+              "bio": {
+                "text": "I'm a web developer passionate about all things JS and ☕ coffee enthusiast based out of the state of Virginia A career changer, who is always seeking to grow as an individual and a professional.\n"
+              },
+              "profilePicture": "https://cdn.hashnode.com/res/hashnode/image/upload/v1579073783609/DK3LzKvGe.jpeg",
+              "socialMediaLinks": {
+                "website": "https://rafaeldavis.dev",
+                "twitter": "",
+                "facebook": "",
+                "instagram": "",
+                "github": "https://github.com/RafaelDavisH",
+                "stackoverflow": "",
+                "linkedin": "",
+                "youtube": ""
+              },
+              "location": ""
+            },
+            "tags": [
+              {
+                "id": "688c8e150d3c250aff169a0a",
+                "name": "aprende a programar",
+                "slug": "aprende-a-programar"
+              }
+            ],
+            "coverImage": {
+              "url": "https://cdn.hashnode.com/res/hashnode/image/upload/v1754041870035/8ac5c190-b4dc-42fd-8434-7d54aaccfd49.webp"
+            },
+            "brief": "Si quieres aprender a programar y conseguir un trabajo como desarrollador, estás en el lugar correcto. Este libro te mostrará cómo.\nY sí, este es el libro completo – gratis – aquí mismo en esta página de freeCodeCamp.\nAdemás, he grabado una versión c...",
+            "readTimeInMinutes": 1,
+            "content": {
+              "html": "<p>Si quieres aprender a programar y conseguir un trabajo como desarrollador, estás en el lugar correcto. Este libro te mostrará cómo.</p>\n<p>Y sí, este es el libro completo – gratis – aquí mismo en esta página de freeCodeCamp.</p>\n<p>Además, he grabado una versión completa en audiolibro GRATIS de este libro, que publiqué como el episodio #100 del Podcast de freeCodeCamp. Puedes buscarlo en tu reproductor de podcasts favorito. Asegúrate de suscribirte. También lo he incrustado a continuación para tu conveniencia.</p>\n<p>Hace unos años, una de las 5 grandes editoriales de libros de la ciudad de Nueva York me contactó acerca de un contrato para un libro. Me reuní con ellos, pero no tenía tiempo para escribir un libro.</p>\n<p>Bueno, finalmente tuve tiempo. Y decidí simplemente publicar este libro gratis, aquí mismo en freeCodeCamp.</p>\n<p>La información quiere ser gratis, ¿verdad? 🙂</p>\n<p>…</p>\n"
+            },
+            "seo": {
+              "description": "const fccOriginalPost = \"https://www.freecodecamp.org/news/learn-to-code-book/\";"
+            },
+            "publishedAt": "2024-10-08T15:00:00.000Z",
+            "updatedAt": "2025-08-01T09:51:17.451Z"
           }
         }
       ],

@@ -17,7 +17,7 @@ const expected = {
   itemPubDate: 'Mon, 23 Sep 2024 18:54:00 +0900'
 };
 
-describe('Landing page RSS feed (Ghost sourced)', () => {
+describe('Landing page RSS feed', () => {
   let resBody;
   let feed;
 

@@ -1,6 +1,6 @@
 import commonExpectedMeta from '../../../fixtures/common-expected-meta.json';
 
-describe('Landing metadata (Ghost sourced)', () => {
+describe('Landing metadata', () => {
   before(() => {
     // Update baseUrl to include current language
     Cypress.config('baseUrl', 'http://localhost:8080/espanol/news/');
