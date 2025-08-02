@@ -28,6 +28,8 @@ jobs:
 
       HASHNODE_API_URL: api_url_from_hashnode_dashboard
       ENGLISH_HASHNODE_HOST: host_from_hashnode_dashboard
+      CHINESE_HASHNODE_HOST: host_from_hashnode_dashboard
+      ESPANOL_HASHNODE_HOST: host_from_hashnode_dashboard
 
       ADS_ENABLED: true
       GOOGLE_ADSENSE_DATA_AD_CLIENT: ca-pub-1234567890
