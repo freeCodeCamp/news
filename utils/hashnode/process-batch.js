@@ -4,6 +4,9 @@ import { getImageDimensions } from '../../utils/get-image-dimensions.js';
 import { stripHTMLTags } from '../../utils/modify-html-helpers.js';
 import { shortenExcerpt } from '../../utils/shorten-excerpt.js';
 import { getUsername } from '../get-username.js';
+import { config } from '../../config/index.js';
+
+const { currentLocale_i18n } = config;
 
 export default async ({ batch, contentType, currBatchNo, totalBatches }) => {
   console.log(
@@ -106,13 +109,15 @@ export default async ({ batch, contentType, currBatchNo, totalBatches }) => {
           delete obj.author;
         }
 
-        obj.tags = obj.tags.map(tag => {
-          tag.path = `/tag/${tag.slug}/`;
-          // TODO: Setting all tags as public for now. Have to decide how we'll
-          // handle private tags.
-          tag.visibility = 'public';
-          return tag;
-        });
+        obj.tags = obj.tags
+          .map(tag => {
+            tag.path = `/tag/${tag.slug}/`;
+            // TODO: Setting all tags as public for now. Have to decide how we'll
+            // handle private tags.
+            tag.visibility = 'public';
+            return tag;
+          })
+          .filter(tag => tag.slug !== `fcc-${currentLocale_i18n}`); // Filter out locale-specific tags
 
         obj.published_at = obj.publishedAt;
         obj.updated_at = obj.updatedAt ? obj.updatedAt : obj.publishedAt;
