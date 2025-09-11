@@ -1,7 +1,7 @@
 import commonExpectedJsonLd from '../../../fixtures/common-expected-json-ld.json';
 let jsonLdObj;
 
-describe('Landing structured data (JSON-LD – Ghost sourced)', () => {
+describe('Landing structured data (JSON-LD)', () => {
   before(() => {
     // Update baseUrl to include current language
     Cypress.config('baseUrl', 'http://localhost:8080/espanol/news/');
