@@ -1,98 +1,98 @@
 {
   "buttons": {
-    "forum": "Forum",
-    "donate": "Donate",
-    "load-more-articles": "Load More Articles"
+    "forum": "포럼",
+    "donate": "기부하기",
+    "load-more-articles": "더 많은 기사들 불러오기"
   },
   "search": {
-    "label": "Search",
-    "accessible-name": "Submit your search query",
+    "label": "검색",
+    "accessible-name": "검색 쿼리를 제출하세요",
     "placeholder": {
-      "default": "Search our news articles, tutorials, and books",
-      "numbered": "Search {{ roundedTotalRecords }}+ news articles, tutorials, and books"
+      "default": "뉴스 기사, 튜토리얼, 서적 검색",
+      "numbered": "{{ roundedTotalRecords }} 건의 뉴스 기사, 튜토리얼, 서적을 검색"
     },
-    "see-results": "See all results for {{ searchQuery }}",
-    "no-results": "No results found"
+    "see-results": "{{ searchQuery }} 의 모든 결과 보기",
+    "no-results": "해당 결과가 없습니다"
   },
   "banner": {
-    "default": "Learn to code — {{ <0> }}free 3,000-hour curriculum{{ </0> }}",
-    "authenticated": "Support our charity and our mission. {{ <0> }}Donate to freeCodeCamp.org{{ </0> }}.",
-    "authenticated-donor": "Thank you for supporting freeCodeCamp through {{ <0> }}your donations{{ </0> }}."
+    "default": "코드 배우기 — {{ <0> }}3000시간 무료 커리큘럼{{ </0> }}",
+    "authenticated": "저희의 자선 단체 및 사명을 지원하세요. {{ <0> }}freeCodeCamp.org에 기부하기{{ </0> }}.",
+    "authenticated-donor": "freeCodeCamp에 {{ <0> }}당신의 기부{{ </0> }}를 통해 지원해주셔서 감사합니다."
   },
-  "default-bio": "Read {{ <0> }}more posts{{ </0> }}.",
+  "default-bio": "{{ <0> }}더 많은 게시글{{ </0> }} 읽기.",
   "author": {
-    "no-posts": "No posts",
-    "one-post": "1 post",
-    "multiple-posts": "{{ postCount }} posts"
+    "no-posts": "게시글 없음",
+    "one-post": "게시글 1개",
+    "multiple-posts": "게시글 {{ postCount }}개"
   },
   "tag": {
-    "no-posts": "A collection of posts",
-    "one-post": "A collection of 1 post",
-    "multiple-posts": "A collection of {{ postCount }} posts"
+    "no-posts": "게시글 모음",
+    "one-post": "게시글 1개 모음",
+    "multiple-posts": "게시글 {{ postCount }}개 모음"
   },
   "404": {
-    "page-not-found": "Page not found",
-    "go-to-front-page": "Go to the front page"
+    "page-not-found": "페이지를 찾을 수 없습니다",
+    "go-to-front-page": "앞 페이지로 이동"
   },
   "social-row": {
     "cta": {
-      "tweet-a-thanks": "If you read this far, thank the author to show them you care. {{ <0> }}Say Thanks{{ </0> }}",
-      "tweet-it": "If this article was helpful, {{ <0> }}share it{{ </0> }}."
+      "tweet-a-thanks": "여기까지 읽으셨다면, 저자에게 감사의 인사를 보내 관심을 보여주세요. {{ <0> }}감사의 인사 보내기{{ </0> }}",
+      "tweet-it": "이 기사가 도움이 되셨다면, {{ <0> }}공유하세요{{ </0> }}."
     },
     "tweets": {
-      "default": "Thank you {{ author }} for writing this helpful article.",
-      "translation": "Thank you {{ author }} for writing this helpful article, and {{ translator }} for translating it."
+      "default": "{{ author }}의 유용한 기사 작성에 감사드립니다.",
+      "translation": "{{ author }}의 유용한 기사 작성과, {{ translator }}의 번역에 감사드립니다."
     }
   },
-  "learn-to-code-cta": "Learn to code for free. freeCodeCamp's open source curriculum has helped more than 40,000 people get jobs as developers. {{ <0> }}Get started{{ </0> }}",
+  "learn-to-code-cta": "무료로 코드를 배워보세요. freeCodeCamp의 오픈 소스 커리큘럼을 통해 40,000명 이상이 개발자로 취업했습니다. {{ <0> }}시작하기{{ </0> }}",
   "original-author-translator": {
     "roles": {
-      "author": "Author: {{ name }} ({{ locale }})",
-      "translator": "Translator: {{ name }}"
+      "author": "저자: {{ name }} ({{ locale }})",
+      "translator": "번역자: {{ name }}"
     },
     "details": {
-      "original-article": "{{ <0> }}Original article:{{ </0> }} {{ title }}"
+      "original-article": "{{ <0> }}기사 원문:{{ </0> }} {{ title }}"
     },
     "locales": {
-      "chinese": "Chinese",
-      "english": "English",
-      "espanol": "Spanish",
-      "french": "French",
-      "italian": "Italian",
-      "japanese": "Japanese",
-      "korean": "Korean",
-      "portuguese": "Portuguese",
-      "ukrainian": "Ukrainian",
-      "urdu": "Urdu"
+      "chinese": "중국어",
+      "english": "영어",
+      "espanol": "스페인어",
+      "french": "프랑스어",
+      "italian": "이탈리아어",
+      "japanese": "일본어",
+      "korean": "한국어",
+      "portuguese": "포르투갈어",
+      "ukrainian": "우크라이나어",
+      "urdu": "우르두어"
     }
   },
-  "embed-title": "Embedded content",
+  "embed-title": "포함된 컨텐츠",
   "footer": {
-    "tax-exempt-status": "freeCodeCamp is a donor-supported tax-exempt 501(c)(3) charity organization (United States Federal Tax Identification Number: 82-0779546)",
-    "mission-statement": "Our mission: to help people learn to code for free. We accomplish this by creating thousands of videos, articles, and interactive coding lessons - all freely available to the public.",
-    "donation-initiatives": "Donations to freeCodeCamp go toward our education initiatives, and help pay for servers, services, and staff.",
-    "donate-text": "You can {{ <0> }}make a tax-deductible donation here{{ </0> }}.",
-    "trending-books-and-handbooks": "Trending Books and Handbooks",
-    "mobile-app": "Mobile App",
-    "our-nonprofit": "Our Charity",
+    "tax-exempt-status": "freeCodeCamp는 기부자들의 후원으로 운영되는,\n세금이 면제되는 501(c)(3) 자선/비영리 단체입니다.\n(미국 연방 세금 식별번호: 82-0779546)",
+    "mission-statement": "우리의 사명: 사람들이 무료로 코드를 배울 수 있도록 돕는 것입니다. 이를 위해 수천 개의 비디오, 아티클, 상호작용형 코딩 강의를 만들고 있습니다 - 모두 대중에게 무료로 제공됩니다.",
+    "donation-initiatives": "freeCodeCamp 에 후원하여 교육을 개설하고, 서버, 서비스 비용과 스태프 임금 등을 지불할 수 있도록 도와주세요.",
+    "donate-text": "이곳에서 {{ <0> }}세금 감면 기부{{ </0> }}가 가능합니다.",
+    "trending-books-and-handbooks": "인기 도서 및 핸드북",
+    "mobile-app": "모바일 앱",
+    "our-nonprofit": "저희의 비영리",
     "links": {
-      "about": "About",
-      "alumni": "Alumni Network",
-      "open-source": "Open Source",
-      "shop": "Shop",
-      "support": "Support",
-      "sponsors": "Sponsors",
-      "honesty": "Academic Honesty",
-      "coc": "Code of Conduct",
-      "privacy": "Privacy Policy",
-      "tos": "Terms of Service",
-      "copyright": "Copyright Policy"
+      "about": "더 보기",
+      "alumni": "졸업생 네트워크",
+      "open-source": "오픈 소스",
+      "shop": "상점",
+      "support": "지원",
+      "sponsors": "스폰서들",
+      "honesty": "학문적 정직성",
+      "coc": "행동 강령",
+      "privacy": "개인정보 보호정책",
+      "tos": "이용 약관",
+      "copyright": "저작권 정책"
     }
   },
   "fallback": {
-    "message": "Your browser doesn't support HTML5 {{ element }}.",
-    "audio": "audio",
-    "video": "video"
+    "message": "당신의 브라우저가 HTML5의 {{ element }} 을 지원하지 않습니다.",
+    "audio": "음성",
+    "video": "비디오"
   },
-  "ad-text": "Advertisement"
+  "ad-text": "광고"
 }
