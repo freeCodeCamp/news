@@ -59,6 +59,11 @@ const algoliaIndices = {
   ukrainian: 'news-uk'
 };
 
+/* These locales are on the same headless Hashnode instance,
+ * and require special filtering when fetching from Hashnode.
+ */
+const sharedHostLocales = ['italian', 'japanese', 'korean', 'ukrainian'];
+
 const {
   LOCALE_FOR_UI: localeForUI,
   LOCALE_FOR_GHOST: localeForGhost,
@@ -159,5 +164,6 @@ export const config = {
     !chatWebhookToken ||
     chatWebhookToken === 'chat_webhook_token_from_space_settings'
       ? ''
-      : chatWebhookToken
+      : chatWebhookToken,
+  sharedHostLocales
 };

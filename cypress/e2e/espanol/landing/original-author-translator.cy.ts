@@ -1,7 +1,11 @@
 const selectors = {
   postCard: "[data-test-label='post-card']",
-  translatedArticleTitle:
-    'El Desafío #100DaysOfCode, su historia y por qué debes hacerlo para el 2021',
+  translatedArticleTitles: {
+    ghost:
+      'El Desafío #100DaysOfCode, su historia y por qué debes hacerlo para el 2021',
+    hashnode:
+      'Cómo aprender a programar y conseguir un trabajo de desarrollador [Libro completo]'
+  },
   authorList: "[data-test-label='author-list']",
   authorListItem: "[data-test-label='author-list-item']",
   translatorListItem: "[data-test-label='translator-list-item']",
@@ -12,7 +16,7 @@ const selectors = {
   translatorName: 'Rafael D. Hernandez'
 };
 
-describe('Original author / translator feature (Ghost sourced)', () => {
+describe('Original author / translator feature', () => {
   before(() => {
     // Update baseUrl to include current language
     Cypress.config('baseUrl', 'http://localhost:8080/espanol/news/');
@@ -22,132 +26,281 @@ describe('Original author / translator feature (Ghost sourced)', () => {
     cy.visit('/');
   });
 
-  it('the author list should contain an author list item and a translator list item', () => {
-    cy.get(selectors.postCard)
-      .contains(selectors.translatedArticleTitle)
-      .parentsUntil('article')
-      .find(selectors.authorList)
-      .then($el => {
-        cy.wrap($el).find(selectors.authorListItem);
-        cy.wrap($el).find(selectors.translatorListItem);
-      });
+  context('Ghost sourced', () => {
+    it('the author list should contain an author list item and a translator list item', () => {
+      cy.get(selectors.postCard)
+        .contains(selectors.translatedArticleTitles.ghost)
+        .parentsUntil('article')
+        .find(selectors.authorList)
+        .then($el => {
+          cy.wrap($el).find(selectors.authorListItem);
+          cy.wrap($el).find(selectors.translatorListItem);
+        });
+    });
+
+    it('the author list item should have profile image, profile link, and post published time elements', () => {
+      cy.get(selectors.postCard)
+        .contains(selectors.translatedArticleTitles.ghost)
+        .parentsUntil('article')
+        .find(selectors.authorListItem)
+        .then($el => {
+          cy.wrap($el).find(selectors.profileImage);
+          cy.wrap($el).find(selectors.profileLink);
+          cy.wrap($el).find(selectors.postPublishedTime);
+        });
+    });
+
+    it("the author list item's profile image should be wrapped in an anchor that points to the author's page", () => {
+      cy.get(selectors.postCard)
+        .contains(selectors.translatedArticleTitles.ghost)
+        .parentsUntil('article')
+        .find(selectors.authorListItem)
+        .find(selectors.profileImage)
+        .parent()
+        .then($el => {
+          expect($el.attr('href')).to.deep.equal(
+            'https://www.freecodecamp.org/news/author/quincy/' // TODO: Figure out a way to uncouple this from live data on Hashnode
+          );
+        });
+    });
+
+    it("the author list item's profile link should contain the author's name and the locale of the original article", () => {
+      cy.get(selectors.postCard)
+        .contains(selectors.translatedArticleTitles.ghost)
+        .parentsUntil('article')
+        .find(selectors.authorListItem)
+        .find(selectors.profileLink)
+        .contains(`${selectors.authorName}`);
+    });
+
+    it("the author list item's profile link should be a full URL that points to the original author's page", () => {
+      cy.get(selectors.postCard)
+        .contains(selectors.translatedArticleTitles.ghost)
+        .parentsUntil('article')
+        .find(selectors.authorListItem)
+        .find(selectors.profileLink)
+        .then($el => {
+          expect($el.attr('href')).to.deep.equal(
+            'https://www.freecodecamp.org/news/author/quincy/' // TODO: Figure out a way to uncouple this from live data on Hashnode
+          );
+        });
+    });
+
+    it("the author list item's post published time should convert to the expected UTC string", () => {
+      cy.get(selectors.postCard)
+        .contains(selectors.translatedArticleTitles.ghost)
+        .parentsUntil('article')
+        .find(selectors.authorListItem)
+        .find(selectors.postPublishedTime)
+        .then($el => {
+          const publishedTimeUTC = new Date($el.attr('datetime')).toUTCString();
+
+          expect(publishedTimeUTC).to.deep.equal(
+            'Wed, 09 Dec 2020 16:20:00 GMT'
+          );
+        });
+    });
+
+    it('the translator list item should have profile image, profile link, and post published time elements', () => {
+      cy.get(selectors.postCard)
+        .contains(selectors.translatedArticleTitles.ghost)
+        .parentsUntil('article')
+        .find(selectors.translatorListItem)
+        .then($el => {
+          cy.wrap($el).find(selectors.profileImage);
+          cy.wrap($el).find(selectors.profileLink);
+          cy.wrap($el).find(selectors.postPublishedTime);
+        });
+    });
+
+    it("the translator list item's profile image should be wrapped in an anchor that points to a relative URL of the translator's page on the current news instance", () => {
+      cy.get(selectors.postCard)
+        .contains(selectors.translatedArticleTitles.ghost)
+        .parentsUntil('article')
+        .find(selectors.translatorListItem)
+        .find(selectors.profileImage)
+        .parent()
+        .then($el => {
+          expect($el.attr('href')).to.deep.equal(
+            '/espanol/news/author/rafael/'
+          );
+        });
+    });
+
+    it("the translator list item's profile link should contain the author's name and the locale of the original article", () => {
+      cy.get(selectors.postCard)
+        .contains(selectors.translatedArticleTitles.ghost)
+        .parentsUntil('article')
+        .find(selectors.translatorListItem)
+        .find(selectors.profileLink)
+        .contains(selectors.translatorName);
+    });
+
+    it("the translator list item's profile link should be a relative URL of the translator's page on the current News instance", () => {
+      cy.get(selectors.postCard)
+        .contains(selectors.translatedArticleTitles.ghost)
+        .parentsUntil('article')
+        .find(selectors.translatorListItem)
+        .find(selectors.profileLink)
+        .then($el => {
+          expect($el.attr('href')).to.deep.equal(
+            '/espanol/news/author/rafael/'
+          );
+        });
+    });
+
+    it("the translator list item's post published time should convert to the expected UTC string", () => {
+      cy.get(selectors.postCard)
+        .contains(selectors.translatedArticleTitles.ghost)
+        .parentsUntil('article')
+        .find(selectors.translatorListItem)
+        .find(selectors.postPublishedTime)
+        .then($el => {
+          const publishedTimeUTC = new Date($el.attr('datetime')).toUTCString();
+
+          expect(publishedTimeUTC).to.deep.equal(
+            'Sun, 16 Jan 2022 22:46:14 GMT'
+          );
+        });
+    });
   });
 
-  it('the author list item should have profile image, profile link, and post published time elements', () => {
-    cy.get(selectors.postCard)
-      .contains(selectors.translatedArticleTitle)
-      .parentsUntil('article')
-      .find(selectors.authorListItem)
-      .then($el => {
-        cy.wrap($el).find(selectors.profileImage);
-        cy.wrap($el).find(selectors.profileLink);
-        cy.wrap($el).find(selectors.postPublishedTime);
-      });
-  });
+  context('Hashnode sourced', () => {
+    it('the author list should contain an author list item and a translator list item', () => {
+      cy.get(selectors.postCard)
+        .contains(selectors.translatedArticleTitles.hashnode)
+        .parentsUntil('article')
+        .find(selectors.authorList)
+        .then($el => {
+          cy.wrap($el).find(selectors.authorListItem);
+          cy.wrap($el).find(selectors.translatorListItem);
+        });
+    });
 
-  it("the author list item's profile image should be wrapped in an anchor that points to the author's page", () => {
-    cy.get(selectors.postCard)
-      .contains(selectors.translatedArticleTitle)
-      .parentsUntil('article')
-      .find(selectors.authorListItem)
-      .find(selectors.profileImage)
-      .parent()
-      .then($el => {
-        expect($el.attr('href')).to.deep.equal(
-          'https://www.freecodecamp.org/news/author/quincy/' // TODO: Figure out a way to uncouple this from live data on Hashnode
-        );
-      });
-  });
+    it('the author list item should have profile image, profile link, and post published time elements', () => {
+      cy.get(selectors.postCard)
+        .contains(selectors.translatedArticleTitles.hashnode)
+        .parentsUntil('article')
+        .find(selectors.authorListItem)
+        .then($el => {
+          cy.wrap($el).find(selectors.profileImage);
+          cy.wrap($el).find(selectors.profileLink);
+          cy.wrap($el).find(selectors.postPublishedTime);
+        });
+    });
 
-  it("the author list item's profile link should contain the author's name and the locale of the original article", () => {
-    cy.get(selectors.postCard)
-      .contains(selectors.translatedArticleTitle)
-      .parentsUntil('article')
-      .find(selectors.authorListItem)
-      .find(selectors.profileLink)
-      .contains(`${selectors.authorName}`);
-  });
+    it("the author list item's profile image should be wrapped in an anchor that points to the author's page", () => {
+      cy.get(selectors.postCard)
+        .contains(selectors.translatedArticleTitles.hashnode)
+        .parentsUntil('article')
+        .find(selectors.authorListItem)
+        .find(selectors.profileImage)
+        .parent()
+        .then($el => {
+          expect($el.attr('href')).to.deep.equal(
+            'https://www.freecodecamp.org/news/author/quincy/' // TODO: Figure out a way to uncouple this from live data on Hashnode
+          );
+        });
+    });
 
-  it("the author list item's profile link should be a full URL that points to the original author's page", () => {
-    cy.get(selectors.postCard)
-      .contains(selectors.translatedArticleTitle)
-      .parentsUntil('article')
-      .find(selectors.authorListItem)
-      .find(selectors.profileLink)
-      .then($el => {
-        expect($el.attr('href')).to.deep.equal(
-          'https://www.freecodecamp.org/news/author/quincy/' // TODO: Figure out a way to uncouple this from live data on Hashnode
-        );
-      });
-  });
+    it("the author list item's profile link should contain the author's name and the locale of the original article", () => {
+      cy.get(selectors.postCard)
+        .contains(selectors.translatedArticleTitles.hashnode)
+        .parentsUntil('article')
+        .find(selectors.authorListItem)
+        .find(selectors.profileLink)
+        .contains(`${selectors.authorName}`);
+    });
 
-  it("the author list item's post published time should convert to the expected UTC string", () => {
-    cy.get(selectors.postCard)
-      .contains(selectors.translatedArticleTitle)
-      .parentsUntil('article')
-      .find(selectors.authorListItem)
-      .find(selectors.postPublishedTime)
-      .then($el => {
-        const publishedTimeUTC = new Date($el.attr('datetime')).toUTCString();
+    it("the author list item's profile link should be a full URL that points to the original author's page", () => {
+      cy.get(selectors.postCard)
+        .contains(selectors.translatedArticleTitles.hashnode)
+        .parentsUntil('article')
+        .find(selectors.authorListItem)
+        .find(selectors.profileLink)
+        .then($el => {
+          expect($el.attr('href')).to.deep.equal(
+            'https://www.freecodecamp.org/news/author/quincy/' // TODO: Figure out a way to uncouple this from live data on Hashnode
+          );
+        });
+    });
 
-        expect(publishedTimeUTC).to.deep.equal('Wed, 09 Dec 2020 16:20:00 GMT');
-      });
-  });
+    it("the author list item's post published time should convert to the expected UTC string", () => {
+      cy.get(selectors.postCard)
+        .contains(selectors.translatedArticleTitles.hashnode)
+        .parentsUntil('article')
+        .find(selectors.authorListItem)
+        .find(selectors.postPublishedTime)
+        .then($el => {
+          const publishedTimeUTC = new Date($el.attr('datetime')).toUTCString();
 
-  it('the translator list item should have profile image, profile link, and post published time elements', () => {
-    cy.get(selectors.postCard)
-      .contains(selectors.translatedArticleTitle)
-      .parentsUntil('article')
-      .find(selectors.translatorListItem)
-      .then($el => {
-        cy.wrap($el).find(selectors.profileImage);
-        cy.wrap($el).find(selectors.profileLink);
-        cy.wrap($el).find(selectors.postPublishedTime);
-      });
-  });
+          expect(publishedTimeUTC).to.deep.equal(
+            'Thu, 11 Jul 2024 23:52:00 GMT'
+          );
+        });
+    });
 
-  it("the translator list item's profile image should be wrapped in an anchor that points to a relative URL of the translator's page on the current news instance", () => {
-    cy.get(selectors.postCard)
-      .contains(selectors.translatedArticleTitle)
-      .parentsUntil('article')
-      .find(selectors.translatorListItem)
-      .find(selectors.profileImage)
-      .parent()
-      .then($el => {
-        expect($el.attr('href')).to.deep.equal('/espanol/news/author/rafael/');
-      });
-  });
+    it('the translator list item should have profile image, profile link, and post published time elements', () => {
+      cy.get(selectors.postCard)
+        .contains(selectors.translatedArticleTitles.hashnode)
+        .parentsUntil('article')
+        .find(selectors.translatorListItem)
+        .then($el => {
+          cy.wrap($el).find(selectors.profileImage);
+          cy.wrap($el).find(selectors.profileLink);
+          cy.wrap($el).find(selectors.postPublishedTime);
+        });
+    });
 
-  it("the translator list item's profile link should contain the author's name and the locale of the original article", () => {
-    cy.get(selectors.postCard)
-      .contains(selectors.translatedArticleTitle)
-      .parentsUntil('article')
-      .find(selectors.translatorListItem)
-      .find(selectors.profileLink)
-      .contains(selectors.translatorName);
-  });
+    it("the translator list item's profile image should be wrapped in an anchor that points to a relative URL of the translator's page on the current news instance", () => {
+      cy.get(selectors.postCard)
+        .contains(selectors.translatedArticleTitles.hashnode)
+        .parentsUntil('article')
+        .find(selectors.translatorListItem)
+        .find(selectors.profileImage)
+        .parent()
+        .then($el => {
+          expect($el.attr('href')).to.deep.equal(
+            '/espanol/news/author/rafaeldavish/'
+          );
+        });
+    });
 
-  it("the translator list item's profile link should be a relative URL of the translator's page on the current News instance", () => {
-    cy.get(selectors.postCard)
-      .contains(selectors.translatedArticleTitle)
-      .parentsUntil('article')
-      .find(selectors.translatorListItem)
-      .find(selectors.profileLink)
-      .then($el => {
-        expect($el.attr('href')).to.deep.equal('/espanol/news/author/rafael/');
-      });
-  });
+    it("the translator list item's profile link should contain the author's name and the locale of the original article", () => {
+      cy.get(selectors.postCard)
+        .contains(selectors.translatedArticleTitles.hashnode)
+        .parentsUntil('article')
+        .find(selectors.translatorListItem)
+        .find(selectors.profileLink)
+        .contains(selectors.translatorName);
+    });
 
-  it("the translator list item's post published time should convert to the expected UTC string", () => {
-    cy.get(selectors.postCard)
-      .contains(selectors.translatedArticleTitle)
-      .parentsUntil('article')
-      .find(selectors.translatorListItem)
-      .find(selectors.postPublishedTime)
-      .then($el => {
-        const publishedTimeUTC = new Date($el.attr('datetime')).toUTCString();
+    it("the translator list item's profile link should be a relative URL of the translator's page on the current News instance", () => {
+      cy.get(selectors.postCard)
+        .contains(selectors.translatedArticleTitles.hashnode)
+        .parentsUntil('article')
+        .find(selectors.translatorListItem)
+        .find(selectors.profileLink)
+        .then($el => {
+          expect($el.attr('href')).to.deep.equal(
+            '/espanol/news/author/rafaeldavish/'
+          );
+        });
+    });
 
-        expect(publishedTimeUTC).to.deep.equal('Sun, 16 Jan 2022 22:46:14 GMT');
-      });
+    it("the translator list item's post published time should convert to the expected UTC string", () => {
+      cy.get(selectors.postCard)
+        .contains(selectors.translatedArticleTitles.hashnode)
+        .parentsUntil('article')
+        .find(selectors.translatorListItem)
+        .find(selectors.postPublishedTime)
+        .then($el => {
+          const publishedTimeUTC = new Date($el.attr('datetime')).toUTCString();
+
+          expect(publishedTimeUTC).to.deep.equal(
+            'Tue, 08 Oct 2024 15:00:00 GMT'
+          );
+        });
+    });
   });
 });
