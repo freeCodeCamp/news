@@ -16,6 +16,7 @@ const selectors = {
     trendingGuideLinks:
       "[data-test-label='trending-guides'] .trending-guides-articles a",
     links: {
+      poweredBy: "[data-test-label='powered-by']",
       about: "[data-test-label='about']",
       alumni: "[data-test-label='alumni']",
       openSource: "[data-test-label='open-source']",
@@ -157,9 +158,9 @@ describe('Landing i18n (Hashnode sourced)', () => {
       .should('not.equal', 'footer.links.copyright')
       .should('have.attr', 'href')
       .should('equal', 'https://www.freecodecamp.org/news/copyright-policy/');
-    cy.get("span[data-test-label='powered-by']").should(
-      'contain.text',
-      'Publication powered by Hashnode'
-    );
+    cy.get(selectors.footer.links.poweredBy)
+      .should('not.equal', 'footer.links.powered-by')
+      .should('have.attr', 'href')
+      .should('equal', 'https://hashnode.com/');
   });
 });
