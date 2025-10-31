@@ -8,11 +8,11 @@
     "label": "Buscar",
     "accessible-name": "Envie sua consulta de pesquisa",
     "placeholder": {
-      "default": "Search our news articles, tutorials, and books",
-      "numbered": "Search {{ roundedTotalRecords }}+ news articles, tutorials, and books"
+      "default": "Pesquisar em nossos artigos de notícias, tutoriais e livros",
+      "numbered": "Pesquise em mais de {{ roundedTotalRecords }} artigos, tutoriais e livros"
     },
     "see-results": "Ver todos os resultados para {{ searchQuery }}",
-    "no-results": "No results found"
+    "no-results": "Nenhum resultado encontrado"
   },
   "banner": {
     "default": "Aprenda a programar — {{ <0> }}currículo gratuito de 3 mil horas{{ </0> }}",
@@ -76,6 +76,7 @@
     "mobile-app": "Aplicativo móvel",
     "our-nonprofit": "Nossa instituição",
     "links": {
+      "powered-by": "Publicação fornecida por Hashnode",
       "about": "Sobre",
       "alumni": "Rede de ex-alunos",
       "open-source": "Código aberto",
