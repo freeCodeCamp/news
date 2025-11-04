@@ -51,6 +51,18 @@ body {
   text-indent: -9999px;
 }
 
+.sr-only {
+  clip: rect(0, 0, 0, 0);
+  border-width: 0;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
 /* 2. Layout - Page building blocks
 /* ---------------------------------------------------------- */
 
@@ -169,6 +181,93 @@ body {
 
 /* 5. Site Navigation
 /* ---------------------------------------------------------- */
+
+.exposed-button-nav {
+  color: var(--gray-00);
+  background-color: var(--theme-color);
+}
+
+.display-menu {
+  -ms-overflow-style: none;
+  display: block !important;
+  max-height: calc(
+    100vh - var(--header-height) - var(--header-sub-element-size)
+  );
+  overflow-y: auto;
+  scrollbar-width: none;
+  text-align: left;
+  top: calc(var(--header-height) + var(--header-sub-element-size));
+}
+
+@media (min-width: 980px) {
+  .display-menu {
+    max-height: calc(100vh - var(--header-height));
+    top: var(--header-height);
+  }
+}
+
+.universal-nav {
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  align-items: center;
+  background-color: var(--theme-color);
+  color: var(--gray-00);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  font-size: 18px;
+  height: var(--header-height);
+  justify-content: space-between;
+  padding: 0 5px;
+}
+
+.nav-link {
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  background-color: var(--gray-90);
+  border: none;
+  color: var(--gray-00);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 100%;
+  min-height: var(--header-sub-element-size);
+  padding: 2px 15px 0;
+  white-space: normal;
+  width: 100%;
+}
+
+.nav-link-flex {
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  justify-content: space-between;
+}
+
+.nav-list {
+  -ms-flex-pack: end;
+  background-color: var(--theme-color);
+  display: none;
+  list-style: none;
+  padding: 0;
+  position: absolute;
+  right: 0;
+  width: 100%;
+  z-index: var(--z-index-site-header);
+  -webkit-box-pack: end;
+  justify-content: flex-end;
+}
+
+@media (min-width: 980px) {
+  .nav-list {
+    max-width: 15rem;
+  }
+}
 
 .site-nav {
   display: flex;
