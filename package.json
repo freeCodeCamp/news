@@ -87,7 +87,7 @@
     "get-video-id": "4.1.7",
     "globals": "16.5.0",
     "graceful-fs": "4.2.11",
-    "graphql-request": "7.3.1",
+    "graphql-request": "7.3.2",
     "husky": "9.1.7",
     "i18next": "25.6.1",
     "i18next-fs-backend": "2.6.0",
