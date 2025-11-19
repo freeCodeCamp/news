@@ -72,7 +72,7 @@
     "@eslint/eslintrc": "3.3.1",
     "@eslint/js": "9.39.1",
     "@tryghost/content-api": "1.12.2",
-    "@tryghost/helpers": "1.1.97",
+    "@tryghost/helpers": "1.1.99",
     "@types/node": "22.19.1",
     "algoliasearch": "5.44.0",
     "clean-css": "5.3.3",
