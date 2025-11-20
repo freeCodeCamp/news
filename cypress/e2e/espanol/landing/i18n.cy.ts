@@ -31,7 +31,7 @@ const selectors = {
   }
 };
 
-describe('Landing i18n (Ghost sourced)', () => {
+describe('Landing i18n', () => {
   before(() => {
     // Update baseUrl to include current language
     Cypress.config('baseUrl', 'http://localhost:8080/espanol/news/');
