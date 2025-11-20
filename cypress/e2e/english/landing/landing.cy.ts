@@ -10,7 +10,9 @@ const selectors = {
   avatar: "[data-test-label='avatar']",
   siteNavLogo: "[data-test-label='site-nav-logo']",
   postPublishedTime: "[data-test-label='post-published-time']",
-  banner: "[data-test-label='banner']"
+  banner: "[data-test-label='banner']",
+  dropDownMenu: "[data-test-label='header-menu']",
+  toggleDropDownMenuButton: "[data-test-label='header-menu-button']"
 };
 
 describe('Landing (Hashnode sourced)', () => {
@@ -90,6 +92,28 @@ describe('Landing (Hashnode sourced)', () => {
           'equal',
           'https://www.freecodecamp.org/news/how-to-donate-to-free-code-camp/'
         );
+    });
+  });
+
+  context('Toggle menu button', () => {
+    beforeEach(() => {
+      cy.visit('/');
+      loadAllPosts();
+    });
+
+    it('When the page is first loaded, the dropdown menu should not have the `display-menu` class', () => {
+      cy.get(selectors.dropDownMenu).should('not.have.class', 'display-menu');
+    });
+
+    it("When the toggle menu dropdown button is hit and the menu is not visible, it should get the 'display-menu' class", () => {
+      cy.get(selectors.toggleDropDownMenuButton).click();
+      cy.get(selectors.dropDownMenu).should('have.class', 'display-menu');
+    });
+
+    it("When the toggle menu dropdown button is hit twice and the menu is not visible, it should not have the 'display-menu' class", () => {
+      cy.get(selectors.toggleDropDownMenuButton).click();
+      cy.get(selectors.toggleDropDownMenuButton).click();
+      cy.get(selectors.dropDownMenu).should('not.have.class', 'display-menu');
     });
   });
 
