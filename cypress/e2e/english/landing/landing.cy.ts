@@ -103,17 +103,32 @@ describe('Landing (Hashnode sourced)', () => {
 
     it('When the page is first loaded, the dropdown menu should not have the `display-menu` class', () => {
       cy.get(selectors.dropDownMenu).should('not.have.class', 'display-menu');
+      cy.get(selectors.toggleDropDownMenuButton).should(
+        'have.attr',
+        'aria-expanded',
+        false
+      );
     });
 
     it("When the toggle menu dropdown button is hit and the menu is not visible, it should get the 'display-menu' class", () => {
       cy.get(selectors.toggleDropDownMenuButton).click();
       cy.get(selectors.dropDownMenu).should('have.class', 'display-menu');
+      cy.get(selectors.toggleDropDownMenuButton).should(
+        'have.attr',
+        'aria-expanded',
+        true
+      );
     });
 
     it("When the toggle menu dropdown button is hit twice and the menu is not visible, it should not have the 'display-menu' class", () => {
       cy.get(selectors.toggleDropDownMenuButton).click();
       cy.get(selectors.toggleDropDownMenuButton).click();
       cy.get(selectors.dropDownMenu).should('not.have.class', 'display-menu');
+      cy.get(selectors.toggleDropDownMenuButton).should(
+        'have.attr',
+        'aria-expanded',
+        false
+      );
     });
   });
 
