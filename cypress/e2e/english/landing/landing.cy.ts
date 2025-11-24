@@ -106,8 +106,9 @@ describe('Landing (Hashnode sourced)', () => {
       cy.get(selectors.toggleDropDownMenuButton).should(
         'have.attr',
         'aria-expanded',
-        false
+        'false'
       );
+      cy.get(selectors.dropDownMenu).should('have.css', 'display', 'none');
     });
 
     it("When the toggle menu dropdown button is hit and the menu is not visible, it should get the 'display-menu' class", () => {
@@ -116,8 +117,9 @@ describe('Landing (Hashnode sourced)', () => {
       cy.get(selectors.toggleDropDownMenuButton).should(
         'have.attr',
         'aria-expanded',
-        true
+        'true'
       );
+      cy.get(selectors.dropDownMenu).should('have.css', 'display', 'block');
     });
 
     it("When the toggle menu dropdown button is hit twice and the menu is not visible, it should not have the 'display-menu' class", () => {
@@ -127,8 +129,9 @@ describe('Landing (Hashnode sourced)', () => {
       cy.get(selectors.toggleDropDownMenuButton).should(
         'have.attr',
         'aria-expanded',
-        false
+        'false'
       );
+      cy.get(selectors.dropDownMenu).should('have.css', 'display', 'none');
     });
   });
 
