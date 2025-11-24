@@ -183,7 +183,7 @@ body {
 /* ---------------------------------------------------------- */
 
 .exposed-button-nav {
-  color: var(--gray-00);
+  color: var(--gray00);
   background-color: var(--theme-color);
 }
 
@@ -213,7 +213,7 @@ body {
   -ms-flex-pack: justify;
   align-items: center;
   background-color: var(--theme-color);
-  color: var(--gray-00);
+  color: var(--gray00);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -227,9 +227,9 @@ body {
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  background-color: var(--gray-90);
+  background-color: var(--gray90);
   border: none;
-  color: var(--gray-00);
+  color: var(--gray00);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -238,6 +238,15 @@ body {
   padding: 2px 15px 0;
   white-space: normal;
   width: 100%;
+}
+
+.nav-link:focus-visible,
+.nav-link:not([aria-disabled='true']):hover {
+  background-color: var(--gray10);
+  color: var(--gray90);
+  cursor: pointer;
+  outline-color: transparent !important;
+  text-decoration: none;
 }
 
 .nav-link-flex {
