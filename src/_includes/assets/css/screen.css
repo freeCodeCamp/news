@@ -185,10 +185,21 @@ body {
 .exposed-button-nav {
   color: var(--gray00);
   background-color: var(--theme-color);
+  height: var(--header-element-size);
+  min-width: var(--header-element-size);
+  padding: 0 4px;
+  border: 1px solid var(--gray00);
+  align-items: center;
+}
+
+@media (min-width: 980px) {
+  .display-menu {
+    max-height: calc(100vh - var(--header-height));
+    top: var(--header-height);
+  }
 }
 
 .display-menu {
-  -ms-overflow-style: none;
   display: block !important;
   max-height: calc(
     100vh - var(--header-height) - var(--header-sub-element-size)
@@ -199,11 +210,12 @@ body {
   top: calc(var(--header-height) + var(--header-sub-element-size));
 }
 
-@media (min-width: 980px) {
-  .display-menu {
-    max-height: calc(100vh - var(--header-height));
-    top: var(--header-height);
-  }
+ol,
+ul {
+  -webkit-padding-start: 40px;
+  margin-bottom: 10px;
+  margin-top: 0;
+  padding-inline-start: 40px;
 }
 
 .universal-nav {
@@ -258,8 +270,13 @@ body {
   justify-content: space-between;
 }
 
+@media (min-width: 980px) {
+  .nav-list {
+    max-width: 15rem;
+  }
+}
+
 .nav-list {
-  -ms-flex-pack: end;
   background-color: var(--theme-color);
   display: none;
   list-style: none;
@@ -268,14 +285,7 @@ body {
   right: 0;
   width: 100%;
   z-index: var(--z-index-site-header);
-  -webkit-box-pack: end;
   justify-content: flex-end;
-}
-
-@media (min-width: 980px) {
-  .nav-list {
-    max-width: 15rem;
-  }
 }
 
 .site-nav {
@@ -427,6 +437,8 @@ a.nav-forum {
   background-image: none;
   box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.3);
   text-decoration: none;
+  background-color: var(--gray10);
+  color: var(--gray90);
 }
 
 .social-links {
