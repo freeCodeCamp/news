@@ -192,6 +192,22 @@ body {
   align-items: center;
 }
 
+.exposed-button-nav:is(
+  :hover,
+  :hover:focus,
+  [aria-expanded='true'],
+  [aria-expanded='true']:hover
+),
+.lang-button-nav:is(
+  :hover,
+  :hover:focus,
+  [aria-expanded='true'],
+  [aria-expanded='false'].force-show
+) {
+  background-color: var(--gray00);
+  color: var(--theme-color);
+}
+
 @media (min-width: 980px) {
   .display-menu {
     max-height: calc(100vh - var(--header-height));
