@@ -195,7 +195,7 @@ body {
 
 @media (min-width: 601px) {
   .exposed-button-nav {
-    padding-inline: 12px;
+    padding-inline: 16px;
   }
 }
 
@@ -224,6 +224,7 @@ body {
   scrollbar-width: none;
   text-align: left;
   top: var(--header-height);
+  margin: 0px;
 }
 
 @media (min-width: 980px) {
@@ -255,7 +256,7 @@ ul {
   font-size: 18px;
   height: var(--header-height);
   justify-content: space-between;
-  padding: 0 5px;
+  padding: 0 10px;
 }
 
 .nav-link {
@@ -272,7 +273,9 @@ ul {
   min-height: var(--header-sub-element-size);
   padding: 2px 15px 0;
   white-space: normal;
+  margin: 0px;
   width: 100%;
+  cursor: pointer;
 }
 
 .nav-link:focus-visible,
@@ -309,6 +312,13 @@ ul {
   width: 100%;
   z-index: var(--z-index-site-header);
   justify-content: flex-end;
+  cursor: pointer;
+}
+
+.nav-list li {
+  cursor: pointer;
+  margin: 0px;
+  padding: 0px;
 }
 
 .site-nav {
@@ -363,6 +373,9 @@ The knock-on effect of this is ugly browser-scroll bars at the bottom, so 80px o
   line-height: 1em;
   font-weight: bold;
   letter-spacing: -0.5px;
+  width: fit-content;
+  max-width: 210px;
+  margin-right: 10px;
 }
 
 .site-nav-logo:hover {
@@ -432,11 +445,11 @@ a.nav-forum {
 }
 
 .toggle-button-nav {
-  padding: 0 14px;
+  padding: 0 4px;
   outline: none;
   cursor: pointer;
   margin-right: 5px;
-  margin-left: auto;
+  margin-left: 10px;
   height: 30px;
   line-height: 24px;
   /* centers the text for all browser font sizes */
@@ -445,6 +458,12 @@ a.nav-forum {
   background-image: linear-gradient(#fecc4c, #ffac33);
   border: 3px solid #feac32;
   color: var(--theme-color);
+}
+
+@media (min-width: 601px) {
+  .toggle-button-nav {
+    padding: 0 16px;
+  }
 }
 
 .toggle-button-nav:hover,
