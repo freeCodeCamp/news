@@ -1,4 +1,4 @@
-<nav class="site-nav nav-padding">
+<nav class="site-nav nav-padding universal-nav">
     <div class="site-nav-left">
         {% include "partials/search-bar.njk" %}
     </div>
@@ -7,14 +7,28 @@
     </div>
     <div class="site-nav-right">
         <div class="nav-group">
-            <a
-                class="nav-forum"
-                id="nav-forum"
-                rel="noopener noreferrer"
-                href="{% t 'links:forum' %}"
-                target="_blank"
-                data-test-label="forum-button"
-            >{% t 'buttons.forum' %}</a>
+            <button aria-expanded="false" class="exposed-button-nav" id="toggle-button-nav" data-test-label="header-menu-button">
+              <span class="sr-only">{% t 'buttons.menu' %}</span></span>
+              <span class="menu-btn-text">{% t 'buttons.menu' %}</span>
+            </button>
+            <ul id="menu-dropdown" class="nav-list" aria-labelledby="toggle-button-nav" data-test-label="header-menu">
+                <li><a
+                  class="nav-link nav-link-flex"
+                  id="nav-forum"
+                  rel="noopener noreferrer"
+                  href="{% t 'links:forum' %}"
+                  target="_blank"
+                  data-test-label="forum-button"
+              >{% t 'buttons.forum' %}</a></li>
+              <li><a
+                  class="nav-link nav-link-flex"
+                  id="nav-learn"
+                  rel="noopener noreferrer"
+                  href="{% t 'links:nav:learn' %}"
+                  target="_blank"
+                  data-test-label="learn-button"
+              >{% t 'buttons.learn' %}</a></li>
+            </ul>
             <a
                 class="toggle-button-nav"
                 id="nav-donate"
@@ -22,7 +36,8 @@
                 href="{% t 'links:donate' %}"
                 target="_blank"
                 data-test-label="donate-button"
-            >{% t 'buttons.donate' %}</a>
+          >{% t 'buttons.donate' %}</a>
         </div>
+
     </div>
 </nav>

@@ -51,6 +51,18 @@ body {
   text-indent: -9999px;
 }
 
+.sr-only {
+  clip: rect(0, 0, 0, 0);
+  border-width: 0;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
 /* 2. Layout - Page building blocks
 /* ---------------------------------------------------------- */
 
@@ -170,6 +182,145 @@ body {
 /* 5. Site Navigation
 /* ---------------------------------------------------------- */
 
+.exposed-button-nav {
+  color: var(--gray00);
+  background-color: var(--theme-color);
+  height: var(--header-element-size);
+  padding: 0 4px;
+  align-items: center;
+  min-width: var(--header-element-size);
+  border: 1px solid var(--gray00);
+  font-size: 18px;
+}
+
+@media (min-width: 601px) {
+  .exposed-button-nav {
+    padding-inline: 16px;
+  }
+}
+
+.exposed-button-nav:is(
+  :hover,
+  :hover:focus,
+  [aria-expanded='true'],
+  [aria-expanded='true']:hover
+),
+.lang-button-nav:is(
+  :hover,
+  :hover:focus,
+  [aria-expanded='true'],
+  [aria-expanded='false'].force-show
+) {
+  background-color: var(--gray00);
+  color: var(--theme-color);
+}
+
+.display-menu {
+  display: block !important;
+  max-height: calc(
+    100vh - var(--header-height) - var(--header-sub-element-size)
+  );
+  overflow-y: auto;
+  scrollbar-width: none;
+  text-align: left;
+  top: var(--header-height);
+  margin: 0px;
+}
+
+@media (min-width: 980px) {
+  .display-menu {
+    max-height: calc(100vh - var(--header-height));
+    top: var(--header-height);
+  }
+}
+
+ol,
+ul {
+  -webkit-padding-start: 40px;
+  margin-bottom: 10px;
+  margin-top: 0;
+  padding-inline-start: 40px;
+}
+
+.universal-nav {
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  align-items: center;
+  background-color: var(--theme-color);
+  color: var(--gray00);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  font-size: 18px;
+  height: var(--header-height);
+  justify-content: space-between;
+  padding: 0 10px;
+}
+
+.nav-link {
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  background-color: var(--gray90);
+  border: none;
+  color: var(--gray00);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 100%;
+  min-height: var(--header-sub-element-size);
+  padding: 2px 15px 0;
+  white-space: normal;
+  margin: 0px;
+  width: 100%;
+  cursor: pointer;
+}
+
+.nav-link:focus-visible,
+.nav-link:not([aria-disabled='true']):hover {
+  background-color: var(--gray10);
+  color: var(--gray90);
+  cursor: pointer;
+  outline-color: transparent !important;
+  text-decoration: none;
+}
+
+.nav-link-flex {
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  justify-content: space-between;
+}
+
+@media (min-width: 980px) {
+  .nav-list {
+    max-width: 15em;
+  }
+}
+
+.nav-list {
+  background-color: var(--theme-color);
+  display: none;
+  list-style: none;
+  padding: 0;
+  position: absolute;
+  right: 0;
+  width: 100%;
+  z-index: var(--z-index-site-header);
+  justify-content: flex-end;
+  cursor: pointer;
+}
+
+.nav-list li {
+  cursor: pointer;
+  margin: 0px;
+  padding: 0px;
+}
+
 .site-nav {
   display: flex;
   justify-content: space-between;
@@ -222,6 +373,9 @@ The knock-on effect of this is ugly browser-scroll bars at the bottom, so 80px o
   line-height: 1em;
   font-weight: bold;
   letter-spacing: -0.5px;
+  width: fit-content;
+  max-width: 210px;
+  margin-right: 10px;
 }
 
 .site-nav-logo:hover {
@@ -275,6 +429,8 @@ a.nav-forum:hover,
 
 .nav-group {
   margin-left: auto;
+  justify-content: flex-end;
+  gap: 10px;
 }
 
 a.nav-forum {
@@ -289,11 +445,11 @@ a.nav-forum {
 }
 
 .toggle-button-nav {
-  padding: 0 14px;
+  padding: 0 4px;
   outline: none;
   cursor: pointer;
   margin-right: 5px;
-  margin-left: auto;
+  margin-left: 10px;
   height: 30px;
   line-height: 24px;
   /* centers the text for all browser font sizes */
@@ -302,6 +458,12 @@ a.nav-forum {
   background-image: linear-gradient(#fecc4c, #ffac33);
   border: 3px solid #feac32;
   color: var(--theme-color);
+}
+
+@media (min-width: 601px) {
+  .toggle-button-nav {
+    padding: 0 16px;
+  }
 }
 
 .toggle-button-nav:hover,
@@ -319,6 +481,8 @@ a.nav-forum {
   background-image: none;
   box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.3);
   text-decoration: none;
+  background-color: var(--gray10);
+  color: var(--gray90);
 }
 
 .social-links {

@@ -47,6 +47,7 @@
             {% include "assets/js/search-bar.js" %}
             {% include "assets/js/client-dayjs.js" %}
             {% include "assets/js/cookie-checker.js" %}
+            {% include "assets/js/toggle-menu-button.js" %}
         {% endset %}
         <script>{{ js | jsMin | safe }}</script>
 
@@ -61,7 +62,7 @@
         {% if secrets.eleventyEnv === 'prod' %}
             {% include "partials/gtm-head.njk" %}
         {% endif %}
-        
+
         {# Dynamically load MathJax script #}
         {% block mathjax %}
         {% endblock %}
