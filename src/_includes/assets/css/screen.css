@@ -223,7 +223,7 @@ body {
   overflow-y: auto;
   scrollbar-width: none;
   text-align: left;
-  top: calc(var(--header-height) + var(--header-sub-element-size));
+  top: var(--header-height);
 }
 
 @media (min-width: 980px) {
@@ -295,7 +295,7 @@ ul {
 
 @media (min-width: 980px) {
   .nav-list {
-    max-width: 15rem;
+    max-width: 15em;
   }
 }
 
