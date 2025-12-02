@@ -34,7 +34,7 @@ on every page through _includes/layouts/default.njk
 /* ---------------------------------------------------------- */
 
 body {
-  background: #fff;
+  background: var(--gray00);
 }
 
 .img {
@@ -114,7 +114,7 @@ body {
 .site-header {
   position: fixed;
   z-index: 1000;
-  color: #fff;
+  color: var(--gray00);
   width: 100%;
   background: var(--theme-color);
   font-family: var(--font-family-sans-serif);
@@ -333,7 +333,7 @@ ul {
   background: var(--theme-color);
   position: fixed;
   z-index: 1000;
-  color: #fff;
+  color: var(--gray00);
   width: 100%;
 }
 
@@ -368,7 +368,7 @@ The knock-on effect of this is ugly browser-scroll bars at the bottom, so 80px o
   flex-shrink: 0;
   display: block;
   margin: 0 5px;
-  color: #fff;
+  color: var(--gray00);
   font-size: 1.7rem;
   line-height: 1em;
   font-weight: bold;
@@ -409,7 +409,7 @@ a.nav-forum,
 .nav li a {
   margin: 0;
   padding: 7px 15px;
-  color: #fff;
+  color: var(--gray00);
   opacity: 1;
 }
 
@@ -498,7 +498,7 @@ a.nav-forum {
   align-items: center;
   margin: 0;
   padding: 10px;
-  color: #fff;
+  color: var(--gray00);
   opacity: 0.8;
 }
 
@@ -508,7 +508,7 @@ a.nav-forum {
 
 .social-link svg {
   height: 1.8rem;
-  fill: #fff;
+  fill: var(--gray00);
 }
 
 .social-link-fb svg {
@@ -520,7 +520,7 @@ a.nav-forum {
 }
 
 .social-link-wb svg path {
-  stroke: #fff;
+  stroke: var(--gray00);
 }
 
 .social-link-rss svg {
@@ -538,7 +538,7 @@ a.nav-forum {
 .rss-button svg {
   margin-bottom: 1px;
   height: 2.1rem;
-  fill: #fff;
+  fill: var(--gray00);
 }
 
 @media (max-width: 999px) {
@@ -602,7 +602,7 @@ a.nav-forum {
   overflow: hidden;
   margin: 0 20px 50px;
   min-height: 100px;
-  background: #fff center center;
+  background: var(--gray00) center center;
   background-size: cover;
 }
 
@@ -743,7 +743,7 @@ a.nav-forum {
   margin: 0 -5px;
   width: 34px;
   height: 34px;
-  border: #fff 2px solid;
+  border: var(--gray00) 2px solid;
 }
 
 .moving-avatar {
@@ -752,7 +752,7 @@ a.nav-forum {
   margin: 0 -6px;
   width: 56px;
   height: 56px;
-  border: #fff 2px solid;
+  border: var(--gray00) 2px solid;
   transition: all 0.5s cubic-bezier(0.4, 0.01, 0.165, 0.99) 0.7s;
 }
 
@@ -882,7 +882,7 @@ make sure this only happens on large viewports / desktop-ish devices.
 .post-template.site-main,
 .page-template.site-main {
   padding-bottom: 4vw;
-  background: #fff;
+  background: var(--gray00);
 }
 
 .post-full {
@@ -963,7 +963,7 @@ make sure this only happens on large viewports / desktop-ish devices.
   font-display: swap;
   font-size: 2.2rem;
   line-height: 1.6em;
-  background: #fff;
+  background: var(--gray00);
 }
 
 @media (max-width: 500px) {
@@ -1154,7 +1154,7 @@ Usage (In Ghost editor):
   width: 1px;
   height: 30px;
   background: var(--gray15);
-  box-shadow: #fff 0 0 0 5px;
+  box-shadow: var(--gray00) 0 0 0 5px;
   transform: rotate(45deg);
 }
 
@@ -1521,7 +1521,7 @@ pre.runkit-element {
   margin-left: -12px;
   width: 0;
   height: 0;
-  border-top: 12px solid #fff;
+  border-top: 12px solid var(--gray00);
   border-right: 12px solid transparent;
   border-left: 12px solid transparent;
 }
@@ -1537,7 +1537,7 @@ pre.runkit-element {
   flex-direction: column;
   align-items: center;
   padding: 30px 20px 20px;
-  color: #fff;
+  color: var(--gray00);
   background: var(--gray85);
 }
 
@@ -1627,7 +1627,7 @@ pre.runkit-element {
 .read-next-card-header-title {
   margin: 0;
   padding: 0 20px;
-  color: #fff;
+  color: var(--gray00);
   font-size: 3rem;
   line-height: 1.2em;
   letter-spacing: 1px;
@@ -2038,7 +2038,7 @@ p:has(mjx-container.MathJax) {
 
 .under-header-content .author-location svg {
   height: 1.9rem;
-  stroke: #fff;
+  stroke: var(--gray00);
 }
 
 .under-header-content .bull {
@@ -2340,14 +2340,14 @@ p.footer-donation a:hover {
   justify-content: center;
   align-items: center;
   display: flex;
-  border: 2px solid #0a0a23;
-  background: #eeeef0;
-  color: #0a0a23;
+  border: 2px solid var(--gray90);
+  background: var(--gray05);
+  color: var(--gray90);
 }
 
 #readMoreBtn:hover {
-  background: #0a0a23;
-  color: #eeeef0;
+  background: var(--gray90);
+  color: var(--gray05);
 }
 
 /* 12. Tags
