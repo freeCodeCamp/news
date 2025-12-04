@@ -2,7 +2,9 @@
   "buttons": {
     "forum": "Форум",
     "donate": "Підтримати",
-    "load-more-articles": "Завантажити більше публікацій"
+    "load-more-articles": "Завантажити більше публікацій",
+    "menu": "Menu",
+    "learn": "Curriculum"
   },
   "search": {
     "label": "Пошук",

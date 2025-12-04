@@ -2,7 +2,9 @@
   "buttons": {
     "forum": "论坛",
     "donate": "捐款",
-    "load-more-articles": "加载更多文章"
+    "load-more-articles": "加载更多文章",
+    "menu": "Menu",
+    "learn": "Curriculum"
   },
   "search": {
     "label": "搜索",
