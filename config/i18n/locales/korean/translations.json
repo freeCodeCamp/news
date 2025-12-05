@@ -2,7 +2,9 @@
   "buttons": {
     "forum": "포럼",
     "donate": "기부하기",
-    "load-more-articles": "더 많은 기사들 불러오기"
+    "load-more-articles": "더 많은 기사들 불러오기",
+    "menu": "Menu",
+    "learn": "Curriculum"
   },
   "search": {
     "label": "검색",

@@ -2,7 +2,9 @@
   "buttons": {
     "forum": "フォーラム",
     "donate": "寄付",
-    "load-more-articles": "もっと見る"
+    "load-more-articles": "もっと見る",
+    "menu": "Menu",
+    "learn": "Curriculum"
   },
   "search": {
     "label": "検索",

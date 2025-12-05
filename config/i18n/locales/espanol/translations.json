@@ -2,7 +2,9 @@
   "buttons": {
     "forum": "Foro",
     "donate": "Donar",
-    "load-more-articles": "Cargar más Artículos"
+    "load-more-articles": "Cargar más Artículos",
+    "menu": "Menu",
+    "learn": "Curriculum"
   },
   "search": {
     "label": "Buscar",
