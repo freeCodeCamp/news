@@ -1,0 +1,28 @@
+/* Variables
+/* ---------------------------------------------------------- */
+
+:root {
+  /* Colours */
+  --dark-blue: #002ead;
+  --theme-color: #0a0a23;
+  --gray90: #0a0a23;
+  --gray85: #1b1b32;
+  --gray80: #2a2a40;
+  --gray75: #3b3b4f;
+  --gray45: #858591;
+  --gray15: #d0d0d5;
+  --gray10: #dfdfe2;
+  --gray05: #eeeef0;
+  --gray00: #fff;
+  --header-height: 38px;
+  /* Font */
+  --font-family-sans-serif: 'Lato', sans-serif;
+  --header-element-size: 28px;
+  --header-sub-element-size: 45px;
+  --z-index-site-header: 200;
+}
+
+/* Japanese Font */
+:root:lang(ja) {
+  --font-family-sans-serif: 'Lato', 'Noto Sans JP', sans-serif;
+}
