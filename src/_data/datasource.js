@@ -326,7 +326,9 @@ export default async () => {
       const sitemapObj = {
         loc: `${siteURL}${obj.path}`
       };
-      if (obj.entries[0].lastmod) sitemapObj.lastmod = obj.entries[0].lastmod;
+      // Set lastmod to the most recent entry's lastmod date, and handle
+      // cases where an entry might not exist, like a publication without tags
+      if (obj.entries[0]?.lastmod) sitemapObj.lastmod = obj.entries[0]?.lastmod;
 
       return sitemapObj;
     })
