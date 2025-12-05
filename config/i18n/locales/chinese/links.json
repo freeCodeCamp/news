@@ -1,12 +1,12 @@
 {
   "forum": "https://forum.freecodecamp.org/c/chinese/533",
+  "learn": "https://www.freecodecamp.org/chinese/learn",
   "donate": "https://www.freecodecamp.org/chinese/donate",
   "banner": {
     "default": "https://www.freecodecamp.org/chinese/",
     "authenticated": "https://www.freecodecamp.org/chinese/donate",
     "authenticated-donor": "https://www.freecodecamp.org/chinese/news/how-to-donate-to-free-code-camp/"
   },
-  "learn-to-code-cta": "https://www.freecodecamp.org/chinese/learn/",
   "twitter": "https://twitter.com/freeCodeCampZH",
   "footer": {
     "about": "https://www.freecodecamp.org/chinese/news/about/",
