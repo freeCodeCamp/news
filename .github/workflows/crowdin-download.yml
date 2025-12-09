@@ -57,35 +57,6 @@ jobs:
           # Uncomment below to debug
           # dryrun_action: true
 
-        ##### Download French #####
-      - name: Crowdin Download French Translations
-        uses: crowdin/github-action@master
-        # options: https://github.com/crowdin/github-action/blob/master/action.yml
-        with:
-          # uploads
-          upload_sources: false
-          upload_translations: false
-          auto_approve_imported: false
-          import_eq_suggestions: false
-
-          # downloads
-          download_translations: true
-          download_language: fr
-          skip_untranslated_files: false
-          export_only_approved: true
-
-          push_translations: false
-
-          # pull-request
-          create_pull_request: false
-
-          # global options
-          config: './crowdin-config.yml'
-          base_url: ${{ secrets.CROWDIN_BASE_URL_FCC }}
-
-          # Uncomment below to debug
-          # dryrun_action: true
-
         ##### Download Italian #####
       - name: Crowdin Download Italian Translations
         uses: crowdin/github-action@master
@@ -245,35 +216,6 @@ jobs:
           # downloads
           download_translations: true
           download_language: uk
-          skip_untranslated_files: false
-          export_only_approved: true
-
-          push_translations: false
-
-          # pull-request
-          create_pull_request: false
-
-          # global options
-          config: './crowdin-config.yml'
-          base_url: ${{ secrets.CROWDIN_BASE_URL_FCC }}
-
-          # Uncomment below to debug
-          # dryrun_action: true
-
-        ##### Download Urdu #####
-      - name: Crowdin Download Urdu Translations
-        uses: crowdin/github-action@master
-        # options: https://github.com/crowdin/github-action/blob/master/action.yml
-        with:
-          # uploads
-          upload_sources: false
-          upload_translations: false
-          auto_approve_imported: false
-          import_eq_suggestions: false
-
-          # downloads
-          download_translations: true
-          download_language: ur
           skip_untranslated_files: false
           export_only_approved: true
 
