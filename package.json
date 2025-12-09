@@ -69,7 +69,7 @@
   "devDependencies": {
     "@11ty/eleventy": "3.1.2",
     "@11ty/eleventy-plugin-rss": "2.0.4",
-    "@eslint/eslintrc": "3.3.1",
+    "@eslint/eslintrc": "3.3.3",
     "@eslint/js": "9.39.1",
     "@tryghost/content-api": "1.12.2",
     "@tryghost/helpers": "1.1.99",
