@@ -59,13 +59,11 @@
       "chinese": "中国語",
       "english": "英語",
       "espanol": "スペイン語",
-      "french": "フランス語",
       "italian": "イタリア語",
       "japanese": "日本語",
       "korean": "韓国語",
       "portuguese": "ポルトガル語",
-      "ukrainian": "ウクライナ語",
-      "urdu": "ウルドゥー語"
+      "ukrainian": "ウクライナ語"
     }
   },
   "embed-title": "埋め込みコンテンツ",
