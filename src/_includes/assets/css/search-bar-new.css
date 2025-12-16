@@ -5,14 +5,14 @@
   width: 100%;
 }
 
-@media (min-width: 980px) {
+/* @media (min-width: 980px) {
   .fcc_searchBar {
     border: 0;
     height: auto;
     max-width: 500px;
     padding: 0;
   }
-}
+} */
 
 .fcc_searchBar strong,
 .fcc_searchBar a:hover {
@@ -38,11 +38,8 @@
   padding-block: 0;
   padding-inline-start: 5px;
   font-size: 18px;
-  border: none;
   display: inline-block;
   height: var(--header-element-size);
-  color: var(--gray00);
-  color: red;
 }
 
 .ais-SearchBox-submit,
@@ -50,56 +47,20 @@
   height: var(--header-element-size);
   width: 26px;
   background-color: var(--gray75);
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  z-index: 100;
+}
+
+.ais-SearchBox-submit {
+  grid-area: submit;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.ais-SearchBox-submit {
-  grid-area: submit;
-}
-
 .ais-SearchBox-reset {
   grid-area: reset;
-  margin-inline-start: 10px;
-  display: none; /* Hide reset button by default */
-}
-
-/* Display the reset button when user types a query / placeholder is not visible */
-.ais-SearchBox-input:not(:placeholder-shown) ~ .ais-SearchBox-reset {
   display: flex;
-}
-
-.ais-SearchBox-submitIcon path,
-.ais-SearchBox-resetIcon path {
-  fill: var(--gray15);
-}
-
-.ais-SearchBox-submitIcon {
-  width: 14px;
-  height: 14px;
-}
-
-.ais-SearchBox-resetIcon {
-  width: 12px;
-  height: 12px;
-}
-
-.ais-SearchBox-input::-webkit-input-placeholder {
-  color: var(--gray15);
-}
-.ais-SearchBox-input::-moz-placeholder {
-  color: var(--gray15);
-}
-.ais-SearchBox-input:-ms-input-placeholder {
-  color: var(--gray15);
-}
-.ais-SearchBox-input:-moz-placeholder {
-  color: var(--gray15);
+  align-items: center;
+  justify-content: center;
 }
 
 .ais-SearchBox-form button:hover {
@@ -117,29 +78,6 @@
   z-index: 100;
   background-color: var(--gray75);
   color: var(--gray00);
-}
-
-/* Dropdown */
-.algolia-autocomplete {
-  width: 100% !important;
-  left: 0 !important;
-}
-
-.algolia-autocomplete .aa-input,
-.algolia-autocomplete .aa-hint {
-  width: 100%;
-}
-
-.algolia-autocomplete .aa-hint {
-  color: #999;
-}
-
-.algolia-autocomplete .aa-dropdown-menu {
-  width: 100%;
-  color: var(--gray00);
-  background: var(--gray75);
-  border-top: none;
-  font-weight: 300;
 }
 
 .algolia-autocomplete .aa-dropdown-menu .aa-suggestion {
@@ -235,62 +173,16 @@ a:active {
   background-color: var(--gray75);
 }
 
-/* Button row on search results page */
-.read-more-row {
-  display: flex;
-  width: 100%;
-  flex-direction: row;
-  align-content: center;
-  justify-content: center;
-  padding-bottom: 2vw;
-  padding-top: 2vw;
-}
-
-#readMoreBtn {
-  width: 50%;
-  min-height: 40px;
-  text-align: center;
-  vertical-align: middle;
-  outline: none;
-  justify-content: center;
-  align-items: center;
-  display: flex;
-  border: 2px solid var(--gray90);
-  background: var(--gray05);
-  color: var(--gray90);
-}
-
-#readMoreBtn:hover {
-  background: var(--gray90);
-  color: var(--gray05);
-}
-
-/* Show default colors if disabled */
-.disabled:hover {
-  background: var(--gray05);
-  color: var(--gray90);
-}
-
-.display-search form {
-  display: flex;
-  position: absolute;
-  top: var(--header-height);
-  padding: 0px;
-  left: 15px;
-}
-
-/* RTL layout */
-.rtl-layout .ais-SearchBox-input {
-  padding: 0 30px 0 10px;
-}
-
 @media (min-width: 980px) {
-  .rtl-layout .ais-SearchBox-submit {
-    left: auto;
-    right: 30px;
+  .ais-SearchBox-input {
+    width: 100%;
+    max-width: 100%;
   }
-}
 
-.rtl-layout input {
-  direction: RTL;
+  .fcc_searchBar .ais-Hits {
+    top: auto;
+    width: 100%;
+    max-width: 100%;
+    left: 0px;
+  }
 }
