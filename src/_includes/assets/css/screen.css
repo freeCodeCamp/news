@@ -34,7 +34,7 @@ on every page through _includes/layouts/default.njk
 /* ---------------------------------------------------------- */
 
 body {
-  background: var(--gray00);
+  background: var(--primary-background);
 }
 
 .img {
@@ -127,7 +127,7 @@ body {
 }
 
 .under-header-content {
-  background-color: var(--gray85);
+  background-color: var(--secondary-color);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -602,7 +602,7 @@ a.nav-forum {
   overflow: hidden;
   margin: 0 20px 50px;
   min-height: 100px;
-  background: var(--gray00) center center;
+  background: var(--primary-background) center center;
   background-size: cover;
 }
 
@@ -617,7 +617,7 @@ a.nav-forum {
 .post-card-image {
   width: 100%;
   height: 200px;
-  background: var(--gray15) no-repeat center center;
+  background: var(--quaternary-background) no-repeat center center;
   object-fit: cover;
 }
 
@@ -625,7 +625,7 @@ a.nav-forum {
   position: relative;
   display: block;
   padding: 5px 0 0;
-  color: var(--gray90);
+  color: var(--primary-color);
 }
 
 .post-card-content-link:hover {
@@ -634,7 +634,7 @@ a.nav-forum {
 
 .post-card-tags a {
   margin-bottom: 1.3rem;
-  color: var(--gray75);
+  color: var(--quaternary-color);
   font-size: 1.5rem;
   line-height: 1.15em;
   font-weight: 500;
@@ -648,7 +648,7 @@ a.nav-forum {
 }
 
 .post-card-title a {
-  color: var(--gray90);
+  color: var(--primary-color);
 }
 
 .post-card-content {
@@ -672,7 +672,7 @@ a.nav-forum {
   display: block;
   width: 100%;
   height: 100%;
-  background: var(--gray15);
+  background: var(--quaternary-background);
   object-fit: cover;
 }
 
@@ -743,7 +743,7 @@ a.nav-forum {
   margin: 0 -5px;
   width: 34px;
   height: 34px;
-  border: var(--gray00) 2px solid;
+  border: var(--primary-background) 2px solid;
 }
 
 .moving-avatar {
@@ -752,7 +752,7 @@ a.nav-forum {
   margin: 0 -6px;
   width: 56px;
   height: 56px;
-  border: var(--gray00) 2px solid;
+  border: var(--primary-background) 2px solid;
   transition: all 0.5s cubic-bezier(0.4, 0.01, 0.165, 0.99) 0.7s;
 }
 
@@ -774,7 +774,7 @@ a.nav-forum {
 .reading-time {
   flex-shrink: 0;
   margin-left: 20px;
-  color: var(--gray75);
+  color: var(--quaternary-color);
   font-size: 1.2rem;
   line-height: 20px;
   font-weight: 500;
@@ -785,7 +785,7 @@ a.nav-forum {
 
 .meta-item-single {
   flex-shrink: 0;
-  color: var(--gray75);
+  color: var(--quaternary-color);
   font-size: 1.2rem;
   line-height: 33px;
   font-weight: 500;
@@ -882,7 +882,7 @@ make sure this only happens on large viewports / desktop-ish devices.
 .post-template.site-main,
 .page-template.site-main {
   padding-bottom: 4vw;
-  background: var(--gray00);
+  background: var(--primary-background);
 }
 
 .post-full {
@@ -905,7 +905,7 @@ make sure this only happens on large viewports / desktop-ish devices.
 
 .post-full-meta {
   display: flex;
-  color: var(--gray75);
+  color: var(--quaternary-color);
   font-size: 1.4rem;
   font-weight: 600;
   text-transform: uppercase;
@@ -917,12 +917,12 @@ make sure this only happens on large viewports / desktop-ish devices.
 }
 
 .post-full-meta-date {
-  color: var(--gray75);
+  color: var(--quaternary-color);
 }
 
 .post-full-title {
   margin: 0;
-  color: var(--gray90);
+  color: var(--primary-color);
 }
 
 .date-divider {
@@ -931,7 +931,7 @@ make sure this only happens on large viewports / desktop-ish devices.
 }
 
 .post-full-image {
-  background: var(--gray15) center center;
+  background: var(--quaternary-background) center center;
   overflow: hidden;
 }
 
@@ -963,7 +963,7 @@ make sure this only happens on large viewports / desktop-ish devices.
   font-display: swap;
   font-size: 2.2rem;
   line-height: 1.6em;
-  background: var(--gray00);
+  background: var(--primary-background);
 }
 
 @media (max-width: 500px) {
@@ -1029,7 +1029,7 @@ make sure this only happens on large viewports / desktop-ish devices.
 }
 
 .post-full-content a {
-  color: var(--gray90);
+  color: var(--primary-color);
   word-break: break-word;
   text-decoration: underline;
 }
@@ -1040,7 +1040,7 @@ make sure this only happens on large viewports / desktop-ish devices.
 
 .post-full-content strong,
 .post-full-content em {
-  color: var(--gray85);
+  color: var(--secondary-color);
 }
 
 .post-full-content small {
@@ -1110,7 +1110,7 @@ Usage (In Ghost editor):
   font-size: 0.8em;
   line-height: 1em;
   font-weight: 400 !important;
-  background: var(--gray15);
+  background: var(--quaternary-background);
 }
 
 .post-full-content p code {
@@ -1122,10 +1122,10 @@ Usage (In Ghost editor):
   margin: 1.5em 0 3em;
   padding: 20px;
   max-width: 100%;
-  color: var(--gray85);
+  color: var(--secondary-color);
   font-size: 1.4rem;
   line-height: 1.5em;
-  background: var(--gray05);
+  background: var(--secondary-background);
 }
 
 .post-full-content pre code {
@@ -1141,7 +1141,7 @@ Usage (In Ghost editor):
 
 .post-full-content hr {
   margin: 4vw 0;
-  border-top: 1px solid var(--gray15);
+  border-top: 1px solid var(--quaternary-background);
 }
 
 .post-full-content hr:after {
@@ -1153,8 +1153,8 @@ Usage (In Ghost editor):
   margin-left: -10px;
   width: 1px;
   height: 30px;
-  background: var(--gray15);
-  box-shadow: var(--gray00) 0 0 0 5px;
+  background: var(--quaternary-background);
+  box-shadow: var(--primary-background) 0 0 0 5px;
   transform: rotate(45deg);
 }
 
@@ -1164,7 +1164,7 @@ Usage (In Ghost editor):
 .post-full-content h4,
 .post-full-content h5,
 .post-full-content h6 {
-  color: var(--gray85);
+  color: var(--secondary-color);
   font-family:
     -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
     Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
@@ -1333,19 +1333,19 @@ Usage (In Ghost editor):
 }
 
 .post-full-content table th {
-  color: var(--gray85);
+  color: var(--secondary-color);
   font-size: 1.2rem;
   font-weight: 700;
   letter-spacing: 0.2px;
   text-align: left;
   text-transform: uppercase;
-  background-color: var(--gray10);
+  background-color: var(--tertiary-background);
 }
 
 .post-full-content table th,
 .post-full-content table td {
   padding: 6px 12px;
-  border: var(--gray10) 1px solid;
+  border: var(--tertiary-background) 1px solid;
 }
 
 /* Hashnode tables */
@@ -1394,7 +1394,7 @@ pre.runkit-element {
 }
 
 .author-card-name a {
-  color: var(--gray85);
+  color: var(--secondary-color);
   font-weight: 700;
 }
 
@@ -1423,7 +1423,7 @@ pre.runkit-element {
 
 .author-card-content p {
   margin: 0;
-  color: var(--gray75);
+  color: var(--quaternary-color);
   line-height: 1.3em;
   font-size: 1.5rem;
 }
@@ -1436,8 +1436,8 @@ pre.runkit-element {
 .author-card-button {
   display: block;
   padding: 9px 16px;
-  border: var(--gray75) 1px solid;
-  color: var(--gray75);
+  border: var(--quaternary-color) 1px solid;
+  color: var(--quaternary-color);
   font-size: 1.2rem;
   line-height: 1;
   font-weight: 500;
@@ -1463,7 +1463,7 @@ pre.runkit-element {
   flex-direction: column;
   align-items: center;
   padding-top: 40px;
-  border-top: var(--gray15) 1px solid;
+  border-top: var(--quaternary-background) 1px solid;
 }
 
 .post-full-authors-content {
@@ -1472,7 +1472,7 @@ pre.runkit-element {
 
 .post-full-authors-content p {
   margin-bottom: 0;
-  color: var(--gray90);
+  color: var(--primary-color);
   font-size: 1.4rem;
   letter-spacing: 0.2px;
   text-align: center;
@@ -1481,7 +1481,7 @@ pre.runkit-element {
 
 .post-full-authors-content a {
   display: inline-block;
-  color: var(--gray85);
+  color: var(--secondary-color);
   font-size: 1.4rem;
   font-weight: 600;
   text-transform: uppercase;
@@ -1521,7 +1521,7 @@ pre.runkit-element {
   margin-left: -12px;
   width: 0;
   height: 0;
-  border-top: 12px solid var(--gray00);
+  border-top: 12px solid var(--primary-background);
   border-right: 12px solid transparent;
   border-left: 12px solid transparent;
 }
@@ -1537,8 +1537,8 @@ pre.runkit-element {
   flex-direction: column;
   align-items: center;
   padding: 30px 20px 20px;
-  color: var(--gray00);
-  background: var(--gray85);
+  color: var(--primary-background);
+  background: var(--secondary-color);
 }
 
 .author-card .basic-info span {
@@ -1595,8 +1595,8 @@ pre.runkit-element {
   overflow: hidden;
   margin: 0 20px 50px;
   padding: 25px;
-  color: var(--gray85);
-  background: var(--gray85) center center;
+  color: var(--secondary-color);
+  background: var(--secondary-color) center center;
   background-size: cover;
 }
 
@@ -1608,7 +1608,7 @@ pre.runkit-element {
   bottom: 0;
   left: 0;
   display: block;
-  background: var(--gray05);
+  background: var(--secondary-background);
 }
 
 .read-next-card-header {
@@ -1627,14 +1627,14 @@ pre.runkit-element {
 .read-next-card-header-title {
   margin: 0;
   padding: 0 20px;
-  color: var(--gray00);
+  color: var(--primary-background);
   font-size: 3rem;
   line-height: 1.2em;
   letter-spacing: 1px;
 }
 
 .read-next-card-header-title a {
-  color: var(--gray85);
+  color: var(--secondary-color);
   font-weight: 300;
   text-decoration: none;
 }
@@ -1672,8 +1672,8 @@ pre.runkit-element {
 .read-next-card-content li a {
   display: block;
   padding: 20px 0;
-  border-bottom: var(--gray10) 1px solid;
-  color: var(--gray85);
+  border-bottom: var(--tertiary-background) 1px solid;
+  color: var(--secondary-color);
   font-weight: 500;
   font-size: 18px;
   transition: opacity 0.3s ease;
@@ -1694,7 +1694,7 @@ pre.runkit-element {
 }
 
 .read-next-card-footer a {
-  color: var(--gray80);
+  color: var(--tertiary-color);
 }
 
 /* 7.3. Koenig Styles
@@ -1855,7 +1855,7 @@ pre.runkit-element {
 }
 
 .kg-bookmark-card {
-  background: var(--gray00);
+  background: var(--primary-background);
   width: 100%;
 }
 
@@ -1864,7 +1864,7 @@ pre.runkit-element {
 }
 
 .kg-bookmark-card {
-  background: var(--gray00);
+  background: var(--primary-background);
   width: 100%;
 }
 
@@ -1878,7 +1878,7 @@ pre.runkit-element {
     -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
     Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   font-display: swap;
-  color: var(--gray90);
+  color: var(--primary-color);
   text-decoration: none;
   min-height: 148px;
   box-shadow:
@@ -1900,7 +1900,7 @@ pre.runkit-element {
   font-size: 1.6rem;
   line-height: 1.5em;
   font-weight: 600;
-  color: var(--gray90);
+  color: var(--primary-color);
 }
 
 .post-full-content .kg-bookmark-container:hover .kg-bookmark-title {
@@ -1911,7 +1911,7 @@ pre.runkit-element {
   display: -webkit-box;
   font-size: 1.5rem;
   line-height: 1.5em;
-  color: var(--gray75);
+  color: var(--quaternary-color);
   font-weight: 400;
   margin-top: 12px;
   max-height: 48px;
@@ -1941,7 +1941,7 @@ pre.runkit-element {
   align-items: center;
   font-size: 1.5rem;
   font-weight: 400;
-  color: var(--gray75);
+  color: var(--quaternary-color);
   margin-top: 14px;
   flex-wrap: wrap;
 }
@@ -2008,7 +2008,7 @@ p:has(mjx-container.MathJax) {
   margin: 0 0 20px;
   width: 150px;
   height: 150px;
-  box-shadow: 0 0 0 6px var(--gray75);
+  box-shadow: 0 0 0 6px var(--quaternary-color);
 }
 
 .under-header-content .author-bio {
@@ -2038,7 +2038,7 @@ p:has(mjx-container.MathJax) {
 
 .under-header-content .author-location svg {
   height: 1.9rem;
-  stroke: var(--gray00);
+  stroke: var(--primary-background);
 }
 
 .under-header-content .bull {
@@ -2095,7 +2095,7 @@ p:has(mjx-container.MathJax) {
 
 .error-description {
   margin: 0;
-  color: var(--gray75);
+  color: var(--quaternary-color);
   font-size: 3rem;
   line-height: 1.3em;
   font-weight: 400;
@@ -2121,8 +2121,8 @@ p:has(mjx-container.MathJax) {
 /* ---------------------------------------------------------- */
 
 .site-footer {
-  color: var(--gray85);
-  background: var(--gray05);
+  color: var(--secondary-color);
+  background: var(--secondary-background);
   line-height: 1.6;
   padding: 40px 15px;
   font-size: 16px;
@@ -2152,7 +2152,7 @@ p:has(mjx-container.MathJax) {
 }
 
 .site-footer a {
-  color: var(--gray85);
+  color: var(--secondary-color);
   text-decoration: none;
   padding: 2px;
 }
@@ -2314,7 +2314,7 @@ p.footer-donation a:hover {
   .our-nonprofit {
     border-top: 1px;
     border-top-style: solid;
-    border-top-color: var(--gray15);
+    border-top-color: var(--quaternary-background);
   }
 }
 
@@ -2340,14 +2340,14 @@ p.footer-donation a:hover {
   justify-content: center;
   align-items: center;
   display: flex;
-  border: 2px solid var(--gray90);
-  background: var(--gray05);
-  color: var(--gray90);
+  border: 2px solid var(--primary-color);
+  background: var(--secondary-background);
+  color: var(--primary-color);
 }
 
 #readMoreBtn:hover {
-  background: var(--gray90);
-  color: var(--gray05);
+  background: var(--primary-color);
+  color: var(--secondary-background);
 }
 
 /* 12. Tags
@@ -2369,16 +2369,16 @@ p.footer-donation a:hover {
 .tags-row > .tag {
   display: block;
   margin: 0 5px;
-  background: var(--gray75);
-  color: var(--gray15);
+  background: var(--quaternary-color);
+  color: var(--quaternary-background);
   padding: 3px 4px 4px;
   letter-spacing: 0.5px;
   margin-bottom: 8px;
 }
 
 .tags-row > .tag:hover {
-  background: var(--gray15);
-  color: var(--gray75);
+  background: var(--quaternary-background);
+  color: var(--quaternary-color);
 }
 
 .tags-row a:hover {
@@ -2411,16 +2411,16 @@ a.cta-button {
   width: content;
   display: inline-block;
   outline: none;
-  border: 3px solid var(--gray90);
-  background: var(--gray10);
-  color: var(--gray90);
+  border: 3px solid var(--primary-color);
+  background: var(--tertiary-background);
+  color: var(--primary-color);
   text-decoration: none;
   padding: 0 20px;
 }
 
 .cta-button:hover {
-  background: var(--gray90);
-  color: var(--gray10);
+  background: var(--primary-color);
+  color: var(--tertiary-background);
 }
 
 @media (min-width: 700px) {
@@ -2514,7 +2514,7 @@ a.banner:hover span {
 
 .ad-text {
   font-size: 1.4rem;
-  color: var(--gray75);
+  color: var(--quaternary-color);
   text-align: center;
   line-height: normal;
 }
