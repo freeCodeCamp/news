@@ -1,0 +1,18 @@
+function loadDarkModePreference() {
+  const theme = localStorage.getItem('theme');
+  if (
+    window.matchMedia('(prefers-color-scheme: dark)')?.matches ||
+    theme == 'dark'
+  ) {
+    document.body.classList.add('dark-mode');
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  loadDarkModePreference();
+  document
+    .getElementById('toggle-dark-mode')
+    .addEventListener('click', function () {
+      document.body.classList.toggle('dark-mode');
+    });
+});
