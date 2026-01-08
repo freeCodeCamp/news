@@ -4,7 +4,8 @@
     "donate": "Donate",
     "load-more-articles": "Load More Articles",
     "menu": "Menu",
-    "learn": "Curriculum"
+    "learn": "Curriculum",
+    "toggle-dark-mode": "Night Mode"
   },
   "search": {
     "label": "Search",
