@@ -51,6 +51,7 @@ describe('Landing (Hashnode sourced)', () => {
 
     it('The dark mode button should be able to change the theme to dark mode from light mode', function () {
       visit(false);
+      cy.get(selectors.toggleDropDownMenuButton).click();
       cy.get(selectors.darkModeButton).click();
 
       cy.get('body', { timeout: 1000 }).should('have.class', 'dark-mode');
@@ -58,17 +59,21 @@ describe('Landing (Hashnode sourced)', () => {
 
     it('The dark mode button should be able to change the theme to light mode from dark mode', function () {
       visit(true);
+      cy.get(selectors.toggleDropDownMenuButton).click();
       cy.get(selectors.darkModeButton).click();
 
       cy.get('body', { timeout: 1000 }).should('not.have.class', 'dark-mode');
     });
 
     it('The theme should be set to dark and update the value in localStorage to dark', function () {
-      visit(false);
+      cy.clearLocalStorage();
+      cy.clearCookies();
+      cy.get(selectors.toggleDropDownMenuButton).click();
       cy.get(selectors.darkModeButton).click();
       cy.window().then(win => {
         expect(win.localStorage.getItem('theme')).to.equal('dark');
       });
+      visit(false);
     });
 
     // Because all templates readers see use `default.njk` as a base,

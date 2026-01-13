@@ -18,8 +18,7 @@
                   rel="noopener noreferrer"
                   href="{% t 'links:forum' %}"
                   target="_blank"
-                  data-test-label="forum-button"
-              >{% t 'buttons.forum' %}</a></li>
+                  data-test-label="forum-button" >{% t 'buttons.forum' %}</a></li>
               <li><a
                   class="nav-link nav-link-flex"
                   id="nav-learn"
@@ -28,6 +27,11 @@
                   target="_blank"
                   data-test-label="learn-button"
               >{% t 'buttons.learn' %}</a></li>
+            <li><a
+                class="nav-link nav-link-flex"
+                id="toggle-dark-mode"
+                data-test-label="dark-mode-button">
+            {% t 'buttons.toggle-dark-mode' %}</a></li>
             </ul>
             <a
                 class="toggle-button-nav"
@@ -35,13 +39,9 @@
                 rel="noopener noreferrer"
                 href="{% t 'links:donate' %}"
                 target="_blank"
-                data-test-label="donate-button"
-          >{% t 'buttons.donate' %}</a>
-          <li
-              class="nav-link nav-link-flex"
-              id="toggle-dark-mode"
-              data-test-label="dark-mode-button"
-          >{% t 'buttons.toggle-dark-mode' %}</li>
+                data-test-label="donate-button">
+                {% t 'buttons.donate' %}
+            </a>
         </div>
 
     </div>
