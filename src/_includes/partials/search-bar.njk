@@ -8,19 +8,4 @@
     {% endif %}
 {% endset %}
 
-<div class="fcc_searchBar" data-test-label="search-bar">
-    <div class="fcc_search_wrapper">
-        <div class="ais-SearchBox">
-            <form action class="ais-SearchBox-form" id="search-form" novalidate role="search">
-                <input class="ais-SearchBox-input" id="search-input" aria-label="Search" autocomplete="off" autocorrect="off" autocapitalize="off" placeholder="Search 12,200+ news articles, tutorials, and books" spellcheck="false" maxlength="512" type="search" />
-                <button class="ais-SearchBox-submit" type="submit" title="Submit search terms">
-                    {% include "partials/icons/magnifying-glass.njk" %}
-                </button>
-                <button class="ais-SearchBox-reset" type="reset" title="Clear search terms">
-                    {% include "partials/icons/reset-icon.njk" %}
-                </button>
-            </form>
-        </div>
-        <div id="dropdown-container"></div>
-    </div>
-</div>
+<div class="fcc_search_container" data-test-label="fcc_search_container"></div>
