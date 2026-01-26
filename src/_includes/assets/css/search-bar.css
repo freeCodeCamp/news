@@ -1,16 +1,16 @@
-.fcc_search_container {
+.fcc-search-container {
   border-bottom: 0.0625rem solid var(--gray45);
   height: var(--header-sub-element-height);
   padding: 6px 15px;
   width: 100%;
 }
 
-.fcc_search_container mark,
-.fcc_search_container a:hover {
+.fcc-search-container mark,
+.fcc-search-container a:hover {
   color: var(--gray00);
 }
 
-.fcc_search_container .aa-Form {
+.fcc-search-container .aa-Form {
   align-content: center;
   display: grid;
   gap: 0.25em;
@@ -213,19 +213,19 @@
   font-size: 18px;
 }
 
-.algolia-footer {
+.aa-SourceFooter {
   font-weight: bold;
   padding: 6.5px 8px 8px;
 }
 
-.algolia-footer:hover {
+.aa-SourceFooter:hover {
   color: var(--gray00);
   background-color: var(--dark-blue);
 }
 
-.aa-suggestion.footer-suggestion.no-hits-footer:hover {
-  cursor: default;
-  background-color: var(--gray75);
+/* Hide footer when there are no search results */
+.aa-Source:has(.aa-SourceNoResults) .aa-SourceFooter {
+  display: none;
 }
 
 /* Button row on search results page */
@@ -260,16 +260,21 @@
 
 /* Hide full nav search bar and display
 dropdown search bar by default */
-.site-nav-left .fcc_search_container {
+.site-nav-left .fcc-search-container {
   display: none;
 }
 
-.site-nav-right .nav-list .fcc_search_container {
+.site-nav-right .nav-list .fcc-search-container {
   display: block;
 }
 
+/* Hide search dropdown in right nav mobile dropdown */
+#nav-right-search-container .aa-Panel {
+  display: none;
+}
+
 @media (min-width: 980px) {
-  .fcc_search_container {
+  .fcc-search-container {
     border: 0;
     height: auto;
     max-width: 500px;
@@ -278,20 +283,20 @@ dropdown search bar by default */
 
   /* Display full nav search bar and
   hide dropdown search bar */
-  .site-nav-left .fcc_search_container {
+  .site-nav-left .fcc-search-container {
     display: block;
   }
 
-  .site-nav-right .nav-list .fcc_search_container {
+  .site-nav-right .nav-list .fcc-search-container {
     display: none;
   }
 
-  .fcc_search_container .aa-Panel {
+  .fcc-search-container .aa-Panel {
     left: 0;
     top: auto !important; /* Override default spacing */
   }
 
-  .fcc_search_container .aa-Panel .aa-List {
+  .fcc-search-container .aa-Panel .aa-List {
     max-width: 100%;
     width: 100%;
   }
