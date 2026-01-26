@@ -139,24 +139,18 @@
   flex-direction: column;
 }
 
-/* Remove default styling for links */
 .aa-Panel .aa-ItemLink {
+  color: var(--gray00);
+  display: block;
+  padding: 5px;
+  font-size: 17px;
   text-decoration: none;
 }
 
-.aa-Panel .aa-ItemLink:visited {
-  text-decoration: none;
-}
-
-.aa-Panel .aa-ItemLink:hover {
-  text-decoration: none;
-}
-
-.aa-Panel .aa-ItemLink:focus {
-  text-decoration: none;
-}
-
+/* Remove default styling for links */
+.aa-Panel .aa-ItemLink:visited,
 .aa-Panel .aa-ItemLink:hover,
+.aa-Panel .aa-ItemLink:focus,
 .aa-Panel .aa-ItemLink:active {
   text-decoration: none;
 }
@@ -181,13 +175,6 @@
 
 .aa-Panel .aa-List .aa-Item[aria-selected='true'] {
   background-color: var(--dark-blue);
-}
-
-.aa-Panel .aa-ItemLink {
-  color: var(--gray00);
-  display: block;
-  padding: 5px;
-  font-size: 17px;
 }
 
 .aa-Panel .aa-List .aa-Item mark {
