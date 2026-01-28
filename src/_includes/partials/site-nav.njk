@@ -1,6 +1,6 @@
 <nav class="site-nav nav-padding universal-nav">
     <div class="site-nav-left">
-        {% include "partials/search-bar.njk" %}
+        <div id="nav-left-search-container" class="fcc-search-container" data-test-label="fcc-search-container"></div>
     </div>
     <div class="site-nav-middle">
         <a class="site-nav-logo" href="{{ site.url }}" data-test-label="site-nav-logo"><img src="{{ site.logo }}" alt="{{ site.title }}" /></a>
@@ -12,6 +12,9 @@
               <span class="menu-btn-text">{% t 'buttons.menu' %}</span>
             </button>
             <ul id="menu-dropdown" class="nav-list" aria-labelledby="toggle-button-nav" data-test-label="header-menu">
+                <li>
+                    <div id="nav-right-search-container" class="fcc-search-container" data-test-label="fcc-search-container"></div>
+                </li>
                 <li><a
                   class="nav-link nav-link-flex"
                   id="nav-forum"

@@ -1,118 +1,159 @@
-document.addEventListener('DOMContentLoaded', () => {
-  const screenWidth = window.screen.width;
-  const screenHeight = window.screen.height;
-  const hitsToRender = screenWidth >= 767 && screenHeight >= 768 ? 8 : 5;
-  const searchForm = document.getElementById('search-form');
-  const input = document.getElementById('search-input');
-  const dropdownContainer = document.getElementById('dropdown-container');
-  let searchQuery, hitSelected, hits;
+document.addEventListener('DOMContentLoaded', async () => {
+  const { liteClient } = window['algoliasearch/lite'];
+  const { autocomplete, getAlgoliaResults } =
+    window['@algolia/autocomplete-js'];
 
-  input.addEventListener('input', e => {
-    searchQuery = e.target.value;
-  });
+  const searchClient = liteClient(
+    '{{ secrets.algoliaAppId }}',
+    '{{ secrets.algoliaAPIKey }}'
+  );
 
-  // Prevent form from being submitted with magnifying
-  // glass or enter when there is no query or hits
-  searchForm.addEventListener('submit', e => {
-    e.preventDefault();
+  const DEBOUNCE_MS = 200;
+  const STALL_THRESHOLD_MS = 500;
+  const hitsToRender =
+    window.screen.width >= 767 && window.screen.height >= 768 ? 8 : 5;
 
-    submitSearch();
-  });
+  const debouncePromise = (fn, time) => {
+    let timer = undefined;
 
-  // eslint-disable-next-line no-undef
-  const search = autocomplete(
-    '#search-input',
-    {
-      hint: false,
-      keyboardShortcuts: ['s', 191],
-      openOnFocus: true,
-      appendTo: dropdownContainer,
-      debug: true // allow tabbing through results
-    },
-    [
-      {
-        // eslint-disable-next-line no-undef
-        source: autocomplete.sources.hits(index, { hitsPerPage: hitsToRender }),
-        debounce: 250,
-        templates: {
-          suggestion: suggestion => {
-            hits = true;
-            return `
-            <a href="${suggestion.url}">
-              <div class="algolia-result">
-                <span>${suggestion._highlightResult.title.value}</span>
-              </div>
-            </a>
-          `;
-          },
-          empty: () => {
-            hits = false;
-            return `
-            <div class="aa-suggestion footer-suggestion no-hits-footer">
-              <div class="algolia-result">
-                <span>
-                  {% t 'search.no-results' %}
-                </span>
-              </div>
-            </div>
-          `;
-          },
-          footer: query => {
-            if (!query.isEmpty) {
-              return `
-              <div class="aa-suggestion footer-suggestion">
-                <a id="algolia-footer-selector" href="{{ '/search?query=${searchQuery}' | htmlBaseUrl(site.url) }}">
-                  <div class="algolia-result algolia-footer">
-                    {% t 'search.see-results', { searchQuery: '${searchQuery}' } %}
+    return (...args) => {
+      if (timer) {
+        clearTimeout(timer); // Clear the timeout first if it's already defined
+      }
+
+      return new Promise(resolve => {
+        timer = setTimeout(() => resolve(fn(...args)), time);
+      });
+    };
+  };
+
+  const debounced = debouncePromise(
+    items => Promise.resolve(items),
+    DEBOUNCE_MS
+  );
+
+  const loadAutocomplete = selector => {
+    return autocomplete({
+      container: selector,
+      panelContainer: selector,
+      stallThreshold: STALL_THRESHOLD_MS,
+      detachedMediaQuery: 'none', // Disable detached mode for mobile views
+      debug: true, // Allow tabbing through results
+      placeholder:
+        Number(`{{ site.roundedTotalRecords }}`) < 100
+          ? `{%- t 'search.placeholder.default' -%}`
+          : `{%- t 'search.placeholder.numbered', {
+            roundedTotalRecords: site.roundedTotalRecordsLocalizedString
+        } -%}`,
+      getSources() {
+        return debounced([
+          {
+            sourceId: 'links',
+            // Get URLs to enable keyboard navigation
+            // and selection
+            getItemUrl({ item }) {
+              return item.url;
+            },
+            getItems({ query }) {
+              return getAlgoliaResults({
+                searchClient,
+                queries: [
+                  {
+                    indexName: 'news',
+                    params: {
+                      query,
+                      hitsPerPage: hitsToRender
+                    }
+                  }
+                ]
+              });
+            },
+            templates: {
+              item({ item, components, html }) {
+                return html`<a class="aa-ItemLink" href=${item.url}>
+                  <div class="aa-ItemContent">
+                    <div class="aa-ItemContentBody">
+                      <div class="aa-ItemContentTitle">
+                        ${components.Highlight({
+                          hit: item,
+                          attribute: 'title',
+                          tagName: 'mark'
+                        })}
+                      </div>
+                    </div>
                   </div>
-                </a>
-              </div>
-            `;
+                </a>`;
+              },
+              footer({ state, html }) {
+                const currQuery = state?.query;
+                const hitsArr = state?.collections[0]?.items;
+                if (hitsArr.length) {
+                  return html`<a
+                    class="aa-ItemLink"
+                    href="{{ '/search?query=${currQuery}' | htmlBaseUrl(site.url) }}"
+                    ><div class="aa-ItemContent">
+                      {% t 'search.see-results', { searchQuery: '${currQuery}' }
+                      %}
+                    </div></a
+                  >`;
+                }
+              },
+              noResults() {
+                return "{% t 'search.no-results' %}";
+              }
             }
           }
-        }
+        ]);
       }
-    ]
-  ).on('autocomplete:selected', (event, suggestion, dataset, context) => {
-    // If article is selected, set to URL of the article.
-    // If footer is selected, set to search results path
-    hitSelected = suggestion
-      ? suggestion.url
-      : `{{ '/search?query=${searchQuery}' | htmlBaseUrl(site.url) }}`;
+    });
+  };
 
-    // Let browser handle click, and do not go to selection on tab key press
-    if (
-      context.selectionMethod === 'click' ||
-      context.selectionMethod === 'tabKey'
-    ) {
-      return;
-    }
+  const leftNavAlgoliaInstance = loadAutocomplete('#nav-left-search-container');
+  loadAutocomplete('#nav-right-search-container');
+  const searchBarEls = document.querySelectorAll('.fcc-search-container');
 
-    // Go to selected article or footer path
-    if (hits) {
-      window.location.assign(hitSelected);
+  // Shortcuts for focusing on search input
+  document.addEventListener('keydown', e => {
+    // Ignore if user is typing in an input or textarea
+    const isTyping =
+      e.target instanceof HTMLInputElement ||
+      e.target instanceof HTMLTextAreaElement ||
+      e.target.isContentEditable;
+
+    if (isTyping) return;
+
+    if (e.key === '/' || e.key === 's') {
+      e.preventDefault();
+      searchBarEls.forEach(el => {
+        if (el.checkVisibility()) {
+          el.querySelector('input').focus();
+        }
+      });
     }
   });
 
-  // Go to highlighted hit or search for current query
-  // when magnifying glass or enter is pressed
-  function submitSearch() {
-    hitSelected = document.getElementsByClassName('aa-cursor')[0];
+  // Handle redirect to search page when form is
+  // submitted via enter or magnifying glass
+  searchBarEls.forEach(el => {
+    el.addEventListener('submit', e => {
+      e.preventDefault();
 
-    if (hitSelected && searchQuery) {
-      const articleUrl = hitSelected.querySelector('a').href;
-      window.location.assign(articleUrl);
-    } else if (!hitSelected && searchQuery && hits) {
+      const query = el.querySelector('input').value.trim();
+      const hitsList = el.querySelector('.aa-List');
+      if (!query || !hitsList) return;
+
       window.location.assign(
-        `{{ '/search?query=${searchQuery}' | htmlBaseUrl(site.url) }}`
+        `{{ '/search?query=${query}' | htmlBaseUrl(site.url) }}`
       );
-    }
-  }
+    });
+  });
 
-  // close dropbar when clicking off
+  // Close left search bar dropdown when clicking off
   document.addEventListener('click', e => {
-    if (e.target !== input) {
-      search.autocomplete.close();
+    if (
+      e.target !== document.querySelector('#nav-left-search-container .aa-Form')
+    ) {
+      leftNavAlgoliaInstance.setIsOpen(false);
     }
   });
 });

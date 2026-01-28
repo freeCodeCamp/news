@@ -1,4 +1,4 @@
-import { liteClient as algoliasearch } from 'algoliasearch/lite';
+import { algoliasearch } from 'algoliasearch';
 import { join } from 'path';
 
 import { loadJSON } from './load-json.js';
@@ -23,8 +23,7 @@ export const getRoundedTotalRecords = async () => {
       totalRecords = mockHits.length;
     } else {
       const client = algoliasearch(algoliaAppId, algoliaAPIKey);
-      const index = client.initIndex(algoliaIndex);
-      const res = await index.search('');
+      const res = await client.searchSingleIndex({ indexName: algoliaIndex });
 
       totalRecords = res?.nbHits;
     }

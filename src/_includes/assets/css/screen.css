@@ -256,7 +256,7 @@ ul {
   font-size: 18px;
   height: var(--header-height);
   justify-content: space-between;
-  padding: 0 10px;
+  padding: 0 15px;
 }
 
 .nav-link {
@@ -354,6 +354,7 @@ ul {
   height: 100%;
   display: flex;
   justify-content: flex-start;
+  align-items: center;
 }
 
 /* Site Nav Hack Explanation (above):
@@ -560,15 +561,15 @@ a.nav-forum {
   }
 }
 
-@media (min-width: 1000px) {
+@media (min-width: 980px) {
   .site-nav-middle {
-    flex: 1 0 20%;
+    flex: 1 0 33%;
     margin-right: 0;
   }
 
   .site-nav-left {
     display: flex;
-    flex: 1 0 35%;
+    flex: 1 0 33%;
     margin-left: 0;
   }
 
@@ -578,7 +579,7 @@ a.nav-forum {
   }
 
   .site-nav-right {
-    flex: 1 0 35%;
+    flex: 1 0 33%;
     margin-left: auto;
   }
 }

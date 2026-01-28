@@ -1,176 +1,218 @@
-.site-nav-left form {
-  display: none;
-  align-items: flex-start;
-  margin: 0px;
-  padding: 0px 10px;
-  height: auto;
+.fcc-search-container {
+  border-bottom: 0.0625rem solid var(--gray45);
+  height: var(--header-sub-element-height);
+  padding: 6px 15px;
+  width: 100%;
 }
 
-#search-input {
-  width: calc(100vw - 75px);
+.fcc-search-container mark,
+.fcc-search-container a:hover {
   color: var(--gray00);
-  background: var(--gray75);
-  border: none;
-  margin: 6px 0 0 0px;
-  padding: 0 10px 0 30px;
+}
+
+.fcc-search-container .aa-Form {
+  align-content: center;
+  display: grid;
+  gap: 0.25em;
+  grid-template-areas: 'submit input clear';
+  grid-template-columns: 26px auto 36px;
+  margin-bottom: 0;
+  background-color: var(--gray75);
+}
+
+.aa-Input {
+  grid-area: input;
+  padding-block: 0;
+  padding-inline-start: 5px;
   font-size: 18px;
-  height: 26px;
-  border-radius: 0px;
+  border: none;
   display: inline-block;
+  height: var(--header-element-size);
+  background-color: var(--gray75);
+  color: var(--gray00);
+  width: 100%;
 }
 
-#search-input::placeholder {
-  color: var(--gray15);
-  opacity: 0.8;
+.aa-InputWrapperPrefix,
+.aa-InputWrapperSuffix {
+  background-color: var(--gray75);
 }
 
-.ais-SearchBox-submit {
-  position: absolute;
-  left: 0.5rem;
-  top: 24%;
-  width: 20px;
-  height: 20px;
-  margin: 0;
-  border: 0;
-  border-radius: 0;
-  background: none;
-  padding: 0;
-  vertical-align: middle;
-  text-align: center;
-  font-size: inherit;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+.aa-SubmitButton,
+.aa-ClearButton {
+  height: var(--header-element-size);
+  width: 26px;
+  background-color: var(--gray75);
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.ais-SearchBox-submit:hover {
-  background-color: var(--gray90);
+.aa-SubmitButton {
+  grid-area: submit;
 }
 
-.ais-SearchBox-submitIcon {
-  position: absolute;
-  width: 14px;
-  height: 14px;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+.aa-ClearButton {
+  grid-area: clear;
+  margin-inline-start: 10px;
+  display: none; /* Hide reset button by default */
+}
+
+/* Display the reset button when user types a query / placeholder is not visible */
+.aa-Form:has(.aa-Input:not(:placeholder-shown)) .aa-ClearButton {
+  display: flex;
+}
+
+.aa-SubmitIcon path,
+.aa-ClearIcon path {
   fill: var(--gray15);
 }
 
-.algolia-autocomplete {
-  position: relative;
+.aa-SubmitIcon {
+  width: 14px;
+  height: 14px;
+}
+
+.aa-ClearIcon {
+  width: 12px;
+  height: 12px;
+}
+
+.aa-Input::-webkit-input-placeholder {
+  color: var(--gray15);
+  font-weight: lighter;
+}
+
+.aa-Input::-moz-placeholder {
+  color: var(--gray15);
+  font-weight: lighter;
+}
+
+.aa-Input:-ms-input-placeholder {
+  color: var(--gray15);
+  font-weight: lighter;
+}
+
+.aa-Form button:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+:is(.aa-Form button:hover) :is(.aa-SubmitIcon, .aa-ClearIcon) path {
+  fill: var(--gray00);
+}
+
+.aa-Input,
+.aa-Panel {
+  z-index: 100;
+  background-color: var(--gray75);
+  color: var(--gray00);
+}
+
+/* Dropdown */
+.aa-Panel {
+  position: absolute;
+  width: 100%;
+  top: auto;
+  left: 0;
+  right: 0;
+}
+
+.aa-Panel,
+.aa-Panel .aa-Item {
   width: 100%;
 }
 
-.algolia-autocomplete .aa-input,
-.algolia-autocomplete .aa-hint {
-  width: 100%;
-}
-
-.algolia-autocomplete .aa-hint {
-  color: #999;
-}
-
-.algolia-autocomplete .aa-dropdown-menu {
+.aa-Panel .aa-List {
   width: 100%;
   color: var(--gray00);
   background: var(--gray75);
   border-top: none;
   font-weight: 300;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
 }
 
-.algolia-autocomplete .aa-dropdown-menu .aa-suggestion {
-  padding: 5px 0;
-  border-bottom: 0.75px solid var(--gray45);
-  cursor: pointer;
-}
-
-.algolia-autocomplete
-  .aa-dropdown-menu
-  .aa-suggestions
-  .aa-suggestion:first-of-type {
-  border-top: 0.75px solid var(--gray45);
-}
-
-.algolia-autocomplete
-  .aa-dropdown-menu
-  .aa-suggestions
-  .aa-suggestion:last-of-type {
-  border-bottom: none;
-}
-
-.algolia-autocomplete .aa-dropdown-menu .aa-suggestion.aa-cursor {
-  background-color: var(--dark-blue);
-}
-
-.algolia-autocomplete .aa-dropdown-menu .aa-suggestion em {
-  font-weight: bold;
-  font-style: normal;
-}
-
-/* Remove default styling for hits */
-.aa-dataset-1 a {
+.aa-Panel .aa-ItemLink {
+  color: var(--gray00);
+  display: block;
+  padding: 5px;
+  font-size: 17px;
   text-decoration: none;
 }
-.aa-dataset-1 a:visited {
-  text-decoration: none;
-}
-.aa-dataset-1 a:hover {
-  text-decoration: none;
-}
-.aa-dataset-1 a:focus {
-  text-decoration: none;
-}
-.aa-dataset-1 a:hover,
-a:active {
+
+/* Remove default styling for links */
+.aa-Panel .aa-ItemLink:visited,
+.aa-Panel .aa-ItemLink:hover,
+.aa-Panel .aa-ItemLink:focus,
+.aa-Panel .aa-ItemLink:active {
   text-decoration: none;
 }
 
 /* Style search bar hits */
-.algolia-result {
-  padding: 5px;
-  font-weight: 300;
-  color: var(--gray00);
-}
-
-.algolia-result span {
-  font-size: 17px;
-}
-
-.algolia-result em {
-  font-weight: 400;
-}
-
-.aa-dropdown-menu {
-  max-height: 85vh;
-  overflow: auto;
-}
-
-.aa-dataset-1 hr {
-  background-color: var(--gray00);
-  height: 2px;
-  margin: 0;
-}
-
-.footer-suggestion {
-  border-top: 1px solid var(--gray00);
+.aa-Panel .aa-List .aa-Item {
   border-bottom: 0.75px solid var(--gray45);
+  margin: 0;
+  padding: 5px 0;
+  width: 100%;
+  cursor: pointer;
 }
 
-.algolia-footer {
+.aa-Panel .aa-List .aa-Item:first-of-type,
+.aa-Panel .aa-SourceNoResults {
+  border-top: 0.75px solid var(--gray45);
+}
+
+.aa-Panel .aa-List .aa-Item:last-of-type {
+  border-bottom: none;
+}
+
+.aa-Panel .aa-List .aa-Item[aria-selected='true'] {
+  background-color: var(--dark-blue);
+}
+
+.aa-Panel .aa-List .aa-Item mark {
+  font-weight: bold;
+  font-style: normal;
+  background-color: transparent;
+}
+
+.aa-Panel .aa-SourceNoResults {
+  margin: 0;
+  padding: 10px 5px;
+  width: 100%;
+  font-size: 18px;
+  font-weight: 300;
+}
+
+.aa-Panel .aa-SourceFooter:not(:empty) {
+  border-top: 1px solid var(--gray00);
+  padding: 5px 0;
+}
+
+.aa-Panel .aa-SourceFooter .aa-ItemLink {
+  font-size: 18px;
+}
+
+.aa-SourceFooter {
   font-weight: bold;
   padding: 6.5px 8px 8px;
 }
 
-.algolia-footer:hover {
+.aa-SourceFooter:hover {
   color: var(--gray00);
   background-color: var(--dark-blue);
 }
 
-.aa-suggestion.footer-suggestion.no-hits-footer:hover {
-  cursor: default;
-  background-color: var(--gray75);
+/* Hide footer when there are no search results */
+.aa-Source:has(.aa-SourceNoResults) .aa-SourceFooter {
+  display: none;
 }
 
 /* Button row on search results page */
@@ -203,64 +245,46 @@ a:active {
   color: var(--gray05);
 }
 
-/* Show default colors if disabled */
-.disabled:hover {
-  background: var(--gray05);
-  color: var(--gray90);
+/* Hide full nav search bar and display
+dropdown search bar by default */
+.site-nav-left .fcc-search-container {
+  display: none;
 }
 
-.display-search form {
-  display: flex;
-  position: absolute;
-  top: var(--header-height);
-  padding: 0px;
-  left: 15px;
+.site-nav-right .nav-list .fcc-search-container {
+  display: block;
 }
 
-.fcc_sr_only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  border: 0;
+/* Hide search dropdown in right nav mobile dropdown */
+#nav-right-search-container .aa-Panel {
+  display: none;
 }
 
-@media (min-width: 1000px) {
-  .site-nav-left form {
-    display: flex;
-  }
-  #search-input {
-    width: 30vw;
+@media (min-width: 980px) {
+  .fcc-search-container {
+    border: 0;
+    height: auto;
     max-width: 500px;
-    display: inherit;
+    padding: 0;
   }
-  .display-search form {
-    display: flex;
-    position: absolute;
-    left: 15px;
-    top: 0;
-    padding: 0px;
-  }
-  .ais-SearchBox-submit {
-    left: 30px;
-  }
-}
 
-/* RTL layout */
-.rtl-layout #search-input {
-  padding: 0 30px 0 10px;
-}
-
-@media (min-width: 1000px) {
-  .rtl-layout .ais-SearchBox-submit {
-    left: auto;
-    right: 30px;
+  /* Display full nav search bar and
+  hide dropdown search bar */
+  .site-nav-left .fcc-search-container {
+    display: block;
   }
-}
 
-.rtl-layout input {
-  direction: RTL;
+  .site-nav-right .nav-list .fcc-search-container {
+    display: none;
+  }
+
+  .fcc-search-container .aa-Panel {
+    left: 0;
+    top: auto !important; /* Override default spacing */
+  }
+
+  .fcc-search-container .aa-Panel .aa-List {
+    max-width: 100%;
+    width: 100%;
+  }
 }
