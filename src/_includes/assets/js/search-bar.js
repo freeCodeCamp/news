@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 searchClient,
                 queries: [
                   {
-                    indexName: 'news',
+                    indexName: '{{ secrets.algoliaIndex }}',
                     params: {
                       query,
                       hitsPerPage: hitsToRender
