@@ -1,4 +1,10 @@
 document.addEventListener('DOMContentLoaded', async () => {
+  const { liteClient } = window['algoliasearch/lite'];
+
+  const searchClient = liteClient(
+    '{{ secrets.algoliaAppId }}',
+    '{{ secrets.algoliaAPIKey }}'
+  );
   const urlParams = new URLSearchParams(window.location.search);
   const queryStr = urlParams.get('query') || '';
   const postFeed = document.querySelector('.post-feed');
@@ -18,16 +24,18 @@ document.addEventListener('DOMContentLoaded', async () => {
         return mockHits;
       }
 
-      // eslint-disable-next-line no-undef
-      return index
-        .search({
+      const response = await searchClient.search([
+        {
+          indexName: '{{ secrets.algoliaIndex }}',
           query: queryStr,
-          hitsPerPage: postsPerPage,
-          page: pageNo
-        })
-        .then(({ hits } = {}) => {
-          return hits;
-        });
+          params: {
+            hitsPerPage: postsPerPage,
+            page: pageNo
+          }
+        }
+      ]);
+
+      return response?.results[0]?.hits;
     } catch (err) {
       console.log(err);
       err.debugData ? console.log(err.debugData) : '';
