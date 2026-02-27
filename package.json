@@ -105,7 +105,7 @@
     "node-gyp": "11.5.0",
     "npm-run-all2": "8.0.4",
     "piscina": "5.1.4",
-    "prettier": "3.7.1",
+    "prettier": "3.8.1",
     "probe-image-size": "7.2.3",
     "shx": "0.4.0",
     "terser": "5.44.1",
