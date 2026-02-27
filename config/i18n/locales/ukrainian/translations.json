@@ -3,18 +3,18 @@
     "forum": "Форум",
     "donate": "Підтримати",
     "load-more-articles": "Завантажити більше публікацій",
-    "menu": "Menu",
-    "learn": "Curriculum"
+    "menu": "Меню",
+    "learn": "Навчальна програма"
   },
   "search": {
     "label": "Пошук",
     "accessible-name": "Надіслати пошуковий запит",
     "placeholder": {
-      "default": "Search our news articles, tutorials, and books",
-      "numbered": "Search {{ roundedTotalRecords }}+ news articles, tutorials, and books"
+      "default": "Шукати серед статей, підручників і книг",
+      "numbered": "Шукати серед {{ roundedTotalRecords }}+ статей, підручників і книг"
     },
     "see-results": "Переглянути всі результати для {{ searchQuery }}",
-    "no-results": "No results found"
+    "no-results": "Нічого не знайдено"
   },
   "banner": {
     "default": "Навчіться програмувати — {{<0> }}безоплатна навчальна програма на 3 000 годин{{</0> }}",
@@ -76,7 +76,7 @@
     "mobile-app": "Мобільний застосунок",
     "our-nonprofit": "Наша організація",
     "links": {
-      "powered-by": "Publication powered by Hashnode",
+      "powered-by": "Публікація від Hashnode",
       "about": "Про нас",
       "alumni": "Спільнота випускників",
       "open-source": "Відкритий вихідний код",
