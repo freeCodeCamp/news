@@ -14,21 +14,21 @@ export const modifyHTMLContent = async ({ postContent, postTitle, source }) => {
   const dom = new JSDOM(postContent);
   const window = dom.window;
   const document = window.document;
-  const hashnodeEmbedAnchorEls = [
-    ...document.querySelectorAll('div.embed-wrapper a.embed-card')
-  ];
+  const hashnodeEmbedAnchorEls = [...document.querySelectorAll('a.embed-card')];
 
-  await Promise.all(
-    hashnodeEmbedAnchorEls.map(async anchorEl => {
-      const embedWrapper = anchorEl.parentElement;
-      const embedURL = anchorEl.href;
-      const embedMarkup = await generateHashnodeEmbedMarkup(embedURL);
+  if (source === 'Hashnode' && hashnodeEmbedAnchorEls.length) {
+    await Promise.all(
+      hashnodeEmbedAnchorEls.map(async anchorEl => {
+        const embedWrapper = anchorEl.parentElement;
+        const embedURL = anchorEl.href;
+        const embedMarkup = await generateHashnodeEmbedMarkup(embedURL);
 
-      if (embedMarkup) {
-        embedWrapper.innerHTML = embedMarkup;
-      }
-    })
-  );
+        if (embedMarkup) {
+          embedWrapper.innerHTML = embedMarkup;
+        }
+      })
+    );
+  }
 
   const embeds = [...document.getElementsByTagName('embed')];
   const images = [...document.getElementsByTagName('img')];
