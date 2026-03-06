@@ -17,7 +17,7 @@ const mockHashnodeEmbeds = {
   iframeInHTMLBlock:
     '<iframe width="560" height="315" src="https://www.youtube.com/embed/N1pYdEAU9mk?si=BapivyRfMfD99MTc"></iframe>',
   embedNoWrapper:
-    '<a class="embed-card" href="https://youtu.be/0WjfKQdfeMU">https://youtu.be/0WjfKQdfeMU</a>'
+    '<p><a class="embed-card" href="https://youtu.be/0WjfKQdfeMU">https://youtu.be/0WjfKQdfeMU</a></p>'
 };
 
 describe('modifyHTMLContent', () => {
