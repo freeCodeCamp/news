@@ -14,21 +14,30 @@ export const modifyHTMLContent = async ({ postContent, postTitle, source }) => {
   const dom = new JSDOM(postContent);
   const window = dom.window;
   const document = window.document;
-  const hashnodeEmbedAnchorEls = [
-    ...document.querySelectorAll('div.embed-wrapper a.embed-card')
-  ];
+  const hashnodeEmbedAnchorEls = [...document.querySelectorAll('a.embed-card')];
 
-  await Promise.all(
-    hashnodeEmbedAnchorEls.map(async anchorEl => {
-      const embedWrapper = anchorEl.parentElement;
-      const embedURL = anchorEl.href;
-      const embedMarkup = await generateHashnodeEmbedMarkup(embedURL);
+  if (source === 'Hashnode' && hashnodeEmbedAnchorEls.length) {
+    await Promise.all(
+      hashnodeEmbedAnchorEls.map(async anchorEl => {
+        const embedWrapper = anchorEl?.parentElement;
+        const embedURL = anchorEl.href;
+        const embedMarkup = await generateHashnodeEmbedMarkup(embedURL);
 
-      if (embedMarkup) {
-        embedWrapper.innerHTML = embedMarkup;
-      }
-    })
-  );
+        // Leave existing wrappers intact for existing embeds,
+        // but for new embeds wrapped in a simple p tag, replace the p tag
+        // with the iframe embed markup to wrap in a div.embed-wrapper later
+        if (embedMarkup) {
+          if (embedWrapper?.classList.contains('embed-wrapper')) {
+            embedWrapper.innerHTML = embedMarkup;
+          } else {
+            embedWrapper.replaceWith(
+              ...new JSDOM(embedMarkup).window.document.body.childNodes
+            );
+          }
+        }
+      })
+    );
+  }
 
   const embeds = [...document.getElementsByTagName('embed')];
   const images = [...document.getElementsByTagName('img')];
@@ -56,7 +65,8 @@ export const modifyHTMLContent = async ({ postContent, postTitle, source }) => {
     iframes.map(async iframe => {
       if (!iframe.title) iframe.setAttribute('title', translate('embed-title'));
       // For iframes on Hashnode that were copy and pasted into an HTML block,
-      // wrap them in a div similar to how Hashnode does for links in embed blocks
+      // or iframes we generate for supported embeds, wrap them in a div similar
+      // to how Hashnode does for links in embed blocks
       if (
         source === 'Hashnode' &&
         !['embed-wrapper', 'giphy-wrapper'].some(className =>
@@ -73,6 +83,8 @@ export const modifyHTMLContent = async ({ postContent, postTitle, source }) => {
       iframe.setAttribute('loading', 'lazy');
     })
   );
+
+  console.log(document.body.innerHTML);
 
   // The jsdom parser wraps the incomplete HTML from the Ghost
   // API with HTML, head, and body elements, so return whatever
