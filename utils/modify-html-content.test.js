@@ -15,7 +15,9 @@ const mockHashnodeEmbeds = {
   githubGist:
     '<div class="gist-block embed-wrapper" data-gist-show-loading="false" data-id="539dbbd01ebfd36fd8a671124d290f5a"><div class="embed-loading"><div class="loadingRow"></div><div class="loadingRow"></div></div><a href="https://gist.github.com/scissorsneedfoodtoo/539dbbd01ebfd36fd8a671124d290f5a" class="embed-card">https://gist.github.com/scissorsneedfoodtoo/539dbbd01ebfd36fd8a671124d290f5a</a></div>',
   iframeInHTMLBlock:
-    '<iframe width="560" height="315" src="https://www.youtube.com/embed/N1pYdEAU9mk?si=BapivyRfMfD99MTc"></iframe>'
+    '<iframe width="560" height="315" src="https://www.youtube.com/embed/N1pYdEAU9mk?si=BapivyRfMfD99MTc"></iframe>',
+  embedNoWrapper:
+    '<a class="embed-card" href="https://youtu.be/0WjfKQdfeMU">https://youtu.be/0WjfKQdfeMU</a>'
 };
 
 describe('modifyHTMLContent', () => {
@@ -172,6 +174,38 @@ describe('modifyHTMLContent', () => {
     expect(iframeEl.width).toBe('560');
     expect(iframeEl.height).toBe('315');
     expect(iframeEl.title).toBe(translate('embed-title'));
+
+    // Check if the iframeEl is wrapped in a div with the expected class
+    expect(iframeEl.parentElement.tagName).toBe('DIV');
+    expect(iframeEl.parentElement.classList).toContain('embed-wrapper');
+  });
+
+  it('embeds with no wrapper should return the expected modified HTML', async () => {
+    const modifiedHTML = await modifyHTMLContent({
+      postContent: mockHashnodeEmbeds.embedNoWrapper,
+      postTitle: 'Test Post',
+      source: 'Hashnode'
+    });
+    const dom = new JSDOM(modifiedHTML);
+    const document = dom.window.document;
+    const iframeEl = document.querySelector('iframe');
+
+    expect(iframeEl).toBeTruthy();
+    expect(iframeEl.src).toBe('https://www.youtube.com/embed/0WjfKQdfeMU');
+    expect(iframeEl.width).toBe('560');
+    expect(iframeEl.height).toBe('315');
+    expect(iframeEl.title).toBe('YouTube video player');
+    expect(iframeEl.getAttribute('style')).toBe(
+      'aspect-ratio: 16 / 9; width: 100%; height: auto;'
+    );
+    expect(iframeEl.getAttribute('allow')).toBe(
+      'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
+    );
+    expect(iframeEl.getAttribute('referrerpolicy')).toBe(
+      'strict-origin-when-cross-origin'
+    );
+    expect(iframeEl.getAttribute('allowfullscreen')).toBe('');
+    expect(iframeEl.getAttribute('loading')).toBe('lazy');
 
     // Check if the iframeEl is wrapped in a div with the expected class
     expect(iframeEl.parentElement.tagName).toBe('DIV');
