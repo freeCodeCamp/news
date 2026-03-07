@@ -329,7 +329,6 @@ ul {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  /* overflow-y: auto; */
   font-size: 1.2em;
   font-family: var(--font-family-sans-serif);
   font-display: swap;
@@ -399,9 +398,6 @@ The knock-on effect of this is ugly browser-scroll bars at the bottom, so 80px o
   margin: 0 0 0 -12px;
   padding: 0;
   list-style: none;
-}
-
-.nav {
   height: 38px;
 }
 
@@ -810,13 +806,6 @@ html.dark-mode .moving-avatar {
   text-transform: uppercase;
 }
 
-.post-meta-item-group {
-  height: 29px;
-  background: pink;
-  display: flex;
-  flex-direction: column;
-}
-
 /* Special Styling for home page grid (below):
 
 The first post in the list is styled to be bigger than the others and take over
@@ -1152,19 +1141,37 @@ Usage (In Ghost editor):
   font-size: 1.4rem;
   line-height: 1.5em;
   background: var(--secondary-background);
+  scrollbar-width: thin;
+  scrollbar-color: var(--quaternary-color) transparent;
+}
+
+.post-full-content pre::-webkit-scrollbar {
+  height: 6px;
+}
+
+.post-full-content pre::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.post-full-content pre::-webkit-scrollbar-thumb {
+  background: var(--quaternary-color);
+  border-radius: 3px;
 }
 
 html.dark-mode .post-full-content pre {
   background: var(--primary-background);
 }
 
-.post-full-content pre[class*='language-'],
-.post-full-content pre[class*='language-'] code,
 .post-full-content pre code {
   padding: 0;
   font-size: inherit;
   line-height: inherit;
   background: transparent;
+}
+
+.post-full-content pre[class*='language-'],
+.post-full-content pre[class*='language-'] code,
+.post-full-content pre code {
   text-shadow: none;
 }
 
@@ -1924,17 +1931,8 @@ html.dark-mode .read-next-card-header-title {
   margin-top: 0;
 }
 
-.kg-bookmark-card {
-  background: var(--primary-background);
-  width: 100%;
-}
-
 html.dark-mode .kg-bookmark-card {
   background: var(--secondary-background);
-}
-
-.kg-card + .kg-bookmark-card {
-  margin-top: 0;
 }
 
 .post-full-content .kg-bookmark-container {
@@ -2331,7 +2329,7 @@ p.footer-donation a:hover {
 
 @media (min-width: 500px) {
   .footer-col {
-    font-size: 15;
+    font-size: 15px;
   }
 
   .mobile-app-container {
@@ -2341,7 +2339,7 @@ p.footer-donation a:hover {
 
 @media (min-width: 800px) {
   .footer-col {
-    font-size: 16.5;
+    font-size: 16.5px;
   }
 
   .footer-bottom .our-nonprofit a,
@@ -2461,15 +2459,6 @@ p.footer-donation a:hover {
 .donation-row h4 {
   margin: 0 0 1.5em;
 }
-
-/* a.donation-cta {
-    display: flex;
-    align-items: flex-start;
-    justify-items: center;
-    text-decoration: none;
-    flex-direction: column;
-    margin-bottom: 1.5em;
-} */
 
 button.cta-button,
 a.cta-button {
@@ -2670,9 +2659,6 @@ a.banner:hover span {
 @media (max-width: 999px) {
   .rtl-layout .site-nav-middle {
     margin-left: auto;
-  }
-
-  .rtl-layout .site-nav-middle {
     margin-right: 0;
   }
 }
@@ -2703,7 +2689,6 @@ a.banner:hover span {
 /* ---------------------------------------------------------- */
 
 .post-full-content .embed-wrapper {
-  /* margin: 1.5em 0 3em; */
   margin-top: 1.25em;
   margin-bottom: 1.25em;
 }
