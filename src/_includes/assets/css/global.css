@@ -289,6 +289,10 @@ body {
   color: var(--primary-background);
 }
 
+html.dark-mode ::selection {
+  color: var(--primary-color);
+}
+
 hr {
   position: relative;
   display: block;

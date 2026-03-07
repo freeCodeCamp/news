@@ -27,7 +27,7 @@
   --font-family-sans-serif: 'Lato', 'Noto Sans JP', sans-serif;
 }
 
-body {
+html {
   --primary-color: var(--gray90);
   --secondary-color: var(--gray85);
   --tertiary-color: var(--gray80);
@@ -38,7 +38,7 @@ body {
   --primary-background: var(--gray00);
 }
 
-body.dark-mode {
+html.dark-mode {
   --primary-color: var(--gray00);
   --secondary-color: var(--gray05);
   --tertiary-color: var(--gray10);
