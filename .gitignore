@@ -83,3 +83,6 @@ cypress/screenshots
 config/i18n/locales/**/trending.json
 
 docker/languages/
+
+# Turborepo
+.turbo

@@ -1,15 +1,33 @@
 import { gql, request } from 'graphql-request';
-import { join } from 'path';
+import { join, resolve } from 'path';
 
 import { hashnodeHost } from '../api.js';
 import { wait } from '../wait.js';
 import { loadJSON } from '../load-json.js';
+import { readCache, writeCache } from '../disk-cache.js';
 import { config } from '../../config/index.js';
 
 const { eleventyEnv, currentLocale_i18n, hashnodeAPIURL } = config;
 
+const CACHE_TTL = 12 * 60 * 60 * 1000;
+
 export const fetchFromHashnode = async contentType => {
   if (!hashnodeHost) return [];
+
+  const cacheFilePath = resolve(
+    import.meta.dirname,
+    '../../.cache',
+    `hashnode-${contentType}.json`
+  );
+
+  if (eleventyEnv !== 'ci') {
+    const cached = readCache(cacheFilePath, CACHE_TTL);
+    if (cached) {
+      console.log(`Using cached Hashnode ${contentType} data`);
+      return cached;
+    }
+  }
+
   const fieldName = contentType === 'posts' ? 'posts' : 'staticPages';
 
   const postFieldsFragment = gql`
@@ -157,6 +175,10 @@ export const fetchFromHashnode = async contentType => {
     }
 
     await wait(200);
+  }
+
+  if (eleventyEnv !== 'ci' && data.length > 0) {
+    writeCache(cacheFilePath, data);
   }
 
   return data;
