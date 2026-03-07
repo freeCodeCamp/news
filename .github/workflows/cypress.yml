@@ -44,21 +44,25 @@ jobs:
       - name: Checkout source files
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
 
+      - name: Install pnpm
+        uses: pnpm/action-setup@a7487c7e89a18df4991f7f222e4898a00d66ddda # v4
+
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: ${{ matrix.node-version }}
+          cache: 'pnpm'
 
       - name: Install dependencies
-        run: npm ci
+        run: pnpm install --frozen-lockfile
 
       - name: Start Ghost containers
-        run: npm run start:containers
+        run: pnpm run start:containers
 
       - name: Start CI server and run Cypress
-        uses: cypress-io/github-action@v6
+        uses: cypress-io/github-action@f790eee7a50d9505912f50c2095510be7de06aa7 # v6.10.9
         with:
-          start: npm run start:ci:${{ matrix.languages }}
+          start: pnpm run start:ci:${{ matrix.languages }}
           wait-on: http://localhost:8080
           wait-on-timeout: 1200
           browser: ${{ matrix.browsers }}
@@ -66,4 +70,4 @@ jobs:
           spec: cypress/e2e/${{ matrix.languages }}/**/*
 
       - name: Stop Ghost containers
-        run: npm run stop:containers
+        run: pnpm run stop:containers

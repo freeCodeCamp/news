@@ -19,19 +19,23 @@ jobs:
       - name: Checkout source code
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
 
+      - name: Install pnpm
+        uses: pnpm/action-setup@a7487c7e89a18df4991f7f222e4898a00d66ddda # v4
+
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: ${{ matrix.node-version }}
+          cache: 'pnpm'
 
       - name: Set environment variables
         run: cp sample.env .env
 
       - name: Install dependencies
-        run: npm ci
+        run: pnpm install --frozen-lockfile
 
       - name: Lint source files
-        run: npm run lint
+        run: pnpm run lint
 
   test:
     name: Test
@@ -62,13 +66,17 @@ jobs:
       - name: Checkout source code
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
 
+      - name: Install pnpm
+        uses: pnpm/action-setup@a7487c7e89a18df4991f7f222e4898a00d66ddda # v4
+
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: ${{ matrix.node-version }}
+          cache: 'pnpm'
 
       - name: Install dependencies
-        run: npm ci
+        run: pnpm install --frozen-lockfile
 
       - name: Set fetch from Ghost environment variable
         if: ${{ matrix.languages == 'english' }}
@@ -76,7 +84,7 @@ jobs:
 
       - name: Start Espanol Ghost container
         if: ${{ matrix.languages == 'espanol' }}
-        run: npm run start:containers --service espanol
+        run: pnpm run start:containers -- espanol
 
       - name: Sleep for 5 seconds
         if: ${{ matrix.languages == 'espanol' }}
@@ -84,14 +92,14 @@ jobs:
         shell: bash
 
       - name: Build CI site
-        run: npm run build:ci
+        run: pnpm run build:ci
 
       - name: Run tests
-        run: npm run test
+        run: pnpm run test
 
       - name: Perform Typescript Typecheck
-        run: npm run type-check
+        run: pnpm run type-check
 
       - name: Stop Ghost containers
         if: ${{ matrix.languages == 'espanol' }}
-        run: npm run stop:containers
+        run: pnpm run stop:containers

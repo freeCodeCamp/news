@@ -1,5 +1,5 @@
 FROM node:22-alpine
-RUN npm install -g --progress=false serve
+RUN corepack enable pnpm && pnpm add -g serve
 
 ARG BUILD_LANGUAGE
 
