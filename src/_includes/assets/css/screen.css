@@ -37,6 +37,10 @@ body {
   background: var(--primary-background);
 }
 
+html.dark-mode body {
+  background: var(--secondary-background);
+}
+
 .img {
   display: block;
   width: 100%;
@@ -136,7 +140,7 @@ body {
   margin-top: calc(var(--header-height) * 2);
   min-height: 200px;
   text-align: center;
-  color: white;
+  color: var(--primary-background);
 }
 
 .site-title {
@@ -416,7 +420,7 @@ a.nav-forum,
 
 a.nav-forum:hover,
 .nav li a:hover {
-  background: white;
+  background: var(--primary-background);
   color: var(--theme-color);
   text-decoration: none;
 }
@@ -607,6 +611,10 @@ a.nav-forum {
   background-size: cover;
 }
 
+html.dark-mode .post-card {
+  background-color: var(--secondary-background);
+}
+
 .post-card-image-link,
 .no-feature-image-offsetter {
   position: relative;
@@ -747,6 +755,10 @@ a.nav-forum {
   border: var(--primary-background) 2px solid;
 }
 
+html.dark-mode .static-avatar {
+  border-color: var(--secondary-background);
+}
+
 .moving-avatar {
   display: block;
   overflow: hidden;
@@ -755,6 +767,10 @@ a.nav-forum {
   height: 56px;
   border: var(--primary-background) 2px solid;
   transition: all 0.5s cubic-bezier(0.4, 0.01, 0.165, 0.99) 0.7s;
+}
+
+html.dark-mode .moving-avatar {
+  border-color: var(--secondary-background);
 }
 
 @media (min-width: 800px) {
@@ -886,6 +902,11 @@ make sure this only happens on large viewports / desktop-ish devices.
   background: var(--primary-background);
 }
 
+html.dark-mode .post-template.site-main,
+html.dark-mode .page-template.site-main {
+  background: var(--secondary-background);
+}
+
 .post-full {
   position: relative;
   z-index: 50;
@@ -965,6 +986,10 @@ make sure this only happens on large viewports / desktop-ish devices.
   font-size: 2.2rem;
   line-height: 1.6em;
   background: var(--primary-background);
+}
+
+html.dark-mode .post-full-content {
+  background: var(--secondary-background);
 }
 
 @media (max-width: 500px) {
@@ -1129,11 +1154,18 @@ Usage (In Ghost editor):
   background: var(--secondary-background);
 }
 
+html.dark-mode .post-full-content pre {
+  background: var(--primary-background);
+}
+
+.post-full-content pre[class*='language-'],
+.post-full-content pre[class*='language-'] code,
 .post-full-content pre code {
   padding: 0;
   font-size: inherit;
   line-height: inherit;
   background: transparent;
+  text-shadow: none;
 }
 
 .post-full-content pre code :not(span) {
@@ -1157,6 +1189,10 @@ Usage (In Ghost editor):
   background: var(--quaternary-background);
   box-shadow: var(--primary-background) 0 0 0 5px;
   transform: rotate(45deg);
+}
+
+html.dark-mode .post-full-content hr:after {
+  box-shadow: var(--secondary-background) 0 0 0 5px;
 }
 
 .post-full-content h1,
@@ -1333,6 +1369,22 @@ Usage (In Ghost editor):
   background-repeat: no-repeat;
 }
 
+html.dark-mode .post-full-content table td:first-child {
+  background-image: linear-gradient(
+    to right,
+    var(--secondary-background) 50%,
+    transparent 100%
+  );
+}
+
+html.dark-mode .post-full-content table td:last-child {
+  background-image: linear-gradient(
+    to left,
+    var(--secondary-background) 50%,
+    transparent 100%
+  );
+}
+
 .post-full-content table th {
   color: var(--secondary-color);
   font-size: 1.2rem;
@@ -1503,7 +1555,7 @@ pre.runkit-element {
   width: 320px;
   font-size: 1.4rem;
   letter-spacing: 0.2px;
-  background: white;
+  background: var(--primary-background);
   box-shadow:
     rgba(39, 44, 49, 0.08) 0 12px 26px,
     rgba(39, 44, 49, 0.03) 1px 3px 8px;
@@ -1525,6 +1577,10 @@ pre.runkit-element {
   border-top: 12px solid var(--primary-background);
   border-right: 12px solid transparent;
   border-left: 12px solid transparent;
+}
+
+html.dark-mode .author-list-item .author-card:before {
+  border-top-color: var(--secondary-background);
 }
 
 .author-list-item .author-card.hovered {
@@ -1632,6 +1688,10 @@ pre.runkit-element {
   font-size: 3rem;
   line-height: 1.2em;
   letter-spacing: 1px;
+}
+
+html.dark-mode .read-next-card-header-title {
+  color: var(--primary-color);
 }
 
 .read-next-card-header-title a {
@@ -1867,6 +1927,10 @@ pre.runkit-element {
 .kg-bookmark-card {
   background: var(--primary-background);
   width: 100%;
+}
+
+html.dark-mode .kg-bookmark-card {
+  background: var(--secondary-background);
 }
 
 .kg-card + .kg-bookmark-card {
