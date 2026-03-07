@@ -12,6 +12,15 @@
         <meta name="HandheldFriendly" content="True" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+        <script>
+            (function() {
+                var theme = localStorage.getItem('theme');
+                if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                    document.documentElement.classList.add('dark-mode');
+                }
+            })();
+        </script>
+
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,400&family=Roboto+Mono:wght@400;700&display=swap">
@@ -48,6 +57,7 @@
             {% include "assets/js/client-dayjs.js" %}
             {% include "assets/js/cookie-checker.js" %}
             {% include "assets/js/toggle-menu-button.js" %}
+            {% include "assets/js/dark-mode.js" %}
         {% endset %}
         <script>{{ js | jsMin | safe }}</script>
 
