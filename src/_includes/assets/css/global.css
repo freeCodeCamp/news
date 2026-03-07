@@ -1,6 +1,5 @@
 /* Fonts
 /*------------------------------------------------------------*/
-/*@import url("https://fonts.googleapis.com/css?family=Lato:400,400i,700|Roboto+Mono:400,700");*/
 
 /* Reset
 /* ---------------------------------------------------------- */
@@ -244,10 +243,6 @@ legend {
 }
 textarea {
   overflow: auto;
-}
-table {
-  border-spacing: 0;
-  border-collapse: collapse;
 }
 td,
 th {

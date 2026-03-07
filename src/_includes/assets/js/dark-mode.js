@@ -1,13 +1,13 @@
 document.addEventListener('DOMContentLoaded', () => {
   const toggleButton = document.getElementById('toggle-dark-mode');
+  const prismLight = document.getElementById('prism-theme-light');
+  const prismDark = document.getElementById('prism-theme-dark');
   const isDark = document.documentElement.classList.contains('dark-mode');
   toggleButton.setAttribute('aria-pressed', String(isDark));
 
   toggleButton.addEventListener('click', function () {
     document.documentElement.classList.toggle('dark-mode');
-    var isDarkNow = document.documentElement.classList.contains('dark-mode');
-    var prismLight = document.getElementById('prism-theme-light');
-    var prismDark = document.getElementById('prism-theme-dark');
+    const isDarkNow = document.documentElement.classList.contains('dark-mode');
     if (isDarkNow) {
       localStorage.setItem('theme', 'dark');
       this.setAttribute('aria-pressed', 'true');
