@@ -42,12 +42,10 @@ export default async () => {
         totalBatches: arr.length
       })
     )
-  )
-    .then(arr => {
-      console.log('Finished processing all Ghost posts');
-      return arr.flat();
-    })
-    .catch(err => console.error(err));
+  ).then(arr => {
+    console.log('Finished processing all Ghost posts');
+    return arr.flat();
+  });
   const hashnodePosts = await Promise.all(
     chunk(allHashnodePosts, batchSize).map((batch, i, arr) =>
       piscinaHashnode.run({
@@ -57,12 +55,10 @@ export default async () => {
         totalBatches: arr.length
       })
     )
-  )
-    .then(arr => {
-      console.log('Finished processing all Hashnode posts');
-      return arr.flat();
-    })
-    .catch(err => console.error(err));
+  ).then(arr => {
+    console.log('Finished processing all Hashnode posts');
+    return arr.flat();
+  });
 
   const ghostPages = await Promise.all(
     chunk(allGhostPages, batchSize).map((batch, i, arr) =>
@@ -73,12 +69,10 @@ export default async () => {
         totalBatches: arr.length
       })
     )
-  )
-    .then(arr => {
-      console.log('Finished processing all Ghost pages');
-      return arr.flat();
-    })
-    .catch(err => console.error(err));
+  ).then(arr => {
+    console.log('Finished processing all Ghost pages');
+    return arr.flat();
+  });
   const hashnodePages = await Promise.all(
     chunk(allHashnodePages, batchSize).map((batch, i, arr) =>
       piscinaHashnode.run({
