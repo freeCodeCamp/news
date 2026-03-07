@@ -7,7 +7,7 @@ const envPath = resolve(
   eleventyEnv === 'ci' ? '../.env.ci' : '../.env'
 );
 const envFileName = eleventyEnv === 'ci' ? '.env.ci' : '.env';
-const { error } = dotenv.config({ path: envPath });
+const { error } = dotenv.config({ path: envPath, quiet: true });
 
 if (error) {
   process.env['FCC_DISABLE_WARNING'] === 'false' &&
