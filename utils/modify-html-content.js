@@ -84,8 +84,6 @@ export const modifyHTMLContent = async ({ postContent, postTitle, source }) => {
     })
   );
 
-  console.log(document.body.innerHTML);
-
   // The jsdom parser wraps the incomplete HTML from the Ghost
   // API with HTML, head, and body elements, so return whatever
   // is within the new body element it added
