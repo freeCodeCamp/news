@@ -54,7 +54,7 @@ describe('Landing (Hashnode sourced)', () => {
       cy.get(selectors.toggleDropDownMenuButton).click();
       cy.get(selectors.darkModeButton).click();
 
-      cy.get('body', { timeout: 1000 }).should('have.class', 'dark-mode');
+      cy.get('html', { timeout: 1000 }).should('have.class', 'dark-mode');
     });
 
     it('The dark mode button should be able to change the theme to light mode from dark mode', function () {
@@ -62,7 +62,7 @@ describe('Landing (Hashnode sourced)', () => {
       cy.get(selectors.toggleDropDownMenuButton).click();
       cy.get(selectors.darkModeButton).click();
 
-      cy.get('body', { timeout: 1000 }).should('not.have.class', 'dark-mode');
+      cy.get('html', { timeout: 1000 }).should('not.have.class', 'dark-mode');
     });
 
     it('The theme should be set to dark and update the value in localStorage to dark', function () {
