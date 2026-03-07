@@ -1,0 +1,48 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "globalDependencies": ["pnpm-lock.yaml"],
+  "tasks": {
+    "fetch:data": {
+      "cache": false
+    },
+    "build": {
+      "dependsOn": ["fetch:data"],
+      "inputs": [
+        "src/**",
+        "utils/**",
+        "config/**",
+        ".eleventy.js",
+        "package.json",
+        ".cache/**"
+      ],
+      "outputs": ["dist/**", "docker/languages/**"],
+      "env": [
+        "ELEVENTY_ENV",
+        "BUILD_LANG",
+        "LOCALE_FOR_UI",
+        "LOCALE_FOR_GHOST",
+        "SITE_DOMAIN",
+        "POSTS_PER_PAGE",
+        "ADS_ENABLED",
+        "DO_NOT_FETCH_FROM_GHOST",
+        "HASHNODE_API_URL"
+      ]
+    },
+    "lint:code": {
+      "outputs": []
+    },
+    "lint:pretty": {
+      "outputs": []
+    },
+    "lint:i18n-schema": {
+      "outputs": []
+    },
+    "test": {
+      "outputs": [],
+      "env": ["ELEVENTY_ENV"]
+    },
+    "type-check": {
+      "outputs": []
+    }
+  }
+}

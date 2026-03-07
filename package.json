@@ -25,11 +25,12 @@
     "cypress:run:espanol": "pnpm run cypress -- run --spec 'cypress/e2e/espanol/**/*'",
     "cypress:watch": "pnpm run cypress -- open",
     "dev": "pnpm run develop",
+    "fetch:data": "node scripts/fetch-data.js",
     "predevelop": "pnpm run clean && node ./tools/download-trending.js",
     "develop": "cross-env ELEVENTY_ENV=dev NODE_OPTIONS=--max-old-space-size=8192 eleventy --serve",
     "predevelop:ci": "pnpm run clean && node ./tools/download-trending.js",
     "develop:ci": "cross-env ELEVENTY_ENV=ci NODE_OPTIONS=--max-old-space-size=8192 eleventy --serve",
-    "prebuild": "pnpm run clean && node ./tools/download-trending.js",
+    "prebuild": "pnpm run clean",
     "build": "cross-env ELEVENTY_ENV=prod NODE_OPTIONS=--max-old-space-size=8192 eleventy",
     "build:ci": "cross-env ELEVENTY_ENV=ci eleventy",
     "postbuild": "node ./config/i18n/generate-serve-config.js",
@@ -109,6 +110,7 @@
     "probe-image-size": "7.2.3",
     "shx": "0.4.0",
     "terser": "5.44.1",
+    "turbo": "^2.8.14",
     "typescript": "5.9.3"
   },
   "pnpm": {
