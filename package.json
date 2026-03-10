@@ -103,7 +103,7 @@
     "md5": "2.3.0",
     "node-cache": "5.1.2",
     "node-fetch": "3.3.2",
-    "node-gyp": "11.5.0",
+    "node-gyp": "12.2.0",
     "piscina": "5.1.4",
     "prettier": "3.7.1",
     "probe-image-size": "7.2.3",
