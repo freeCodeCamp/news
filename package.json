@@ -86,7 +86,7 @@
     "eslint-plugin-cypress": "5.2.0",
     "eslint-utils": "3.0.0",
     "get-video-id": "4.1.7",
-    "globals": "16.5.0",
+    "globals": "17.4.0",
     "graceful-fs": "4.2.11",
     "graphql-request": "7.4.0",
     "husky": "9.1.7",
