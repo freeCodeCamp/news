@@ -75,8 +75,8 @@ importers:
         specifier: 9.1.7
         version: 9.1.7
       i18next:
-        specifier: 25.6.3
-        version: 25.6.3(typescript@5.9.3)
+        specifier: 25.8.13
+        version: 25.8.13(typescript@5.9.3)
       i18next-fs-backend:
         specifier: 2.6.1
         version: 2.6.1
@@ -2058,8 +2058,8 @@ packages:
   i18next-fs-backend@2.6.1:
     resolution: {integrity: sha512-eYWTX7QT7kJ0sZyCPK6x1q+R63zvNKv2D6UdbMf15A8vNb2ZLyw4NNNZxPFwXlIv/U+oUtg8SakW6ZgJZcoqHQ==}
 
-  i18next@25.6.3:
-    resolution: {integrity: sha512-AEQvoPDljhp67a1+NsnG/Wb1Nh6YoSvtrmeEd24sfGn3uujCtXCF3cXpr7ulhMywKNFF7p3TX1u2j7y+caLOJg==}
+  i18next@25.8.13:
+    resolution: {integrity: sha512-E0vzjBY1yM+nsFrtgkjLhST2NBkirkvOVoQa0MSldhsuZ3jUge7ZNpuwG0Cfc74zwo5ZwRzg3uOgT+McBn32iA==}
     peerDependencies:
       typescript: ^5
     peerDependenciesMeta:
@@ -5802,7 +5802,7 @@ snapshots:
 
   i18next-fs-backend@2.6.1: {}
 
-  i18next@25.6.3(typescript@5.9.3):
+  i18next@25.8.13(typescript@5.9.3):
     dependencies:
       '@babel/runtime': 7.28.6
     optionalDependencies:
