@@ -54,8 +54,8 @@ importers:
         specifier: 10.1.8
         version: 10.1.8(eslint@9.39.3)
       eslint-plugin-cypress:
-        specifier: 5.2.0
-        version: 5.2.0(eslint@9.39.3)
+        specifier: 6.1.0
+        version: 6.1.0(eslint@9.39.3)
       eslint-utils:
         specifier: 3.0.0
         version: 3.0.0(eslint@9.39.3)
@@ -1635,8 +1635,8 @@ packages:
     peerDependencies:
       eslint: '>=7.0.0'
 
-  eslint-plugin-cypress@5.2.0:
-    resolution: {integrity: sha512-vuCUBQloUSILxtJrUWV39vNIQPlbg0L7cTunEAzvaUzv9LFZZym+KFLH18n9j2cZuFPdlxOqTubCvg5se0DyGw==}
+  eslint-plugin-cypress@6.1.0:
+    resolution: {integrity: sha512-B8sxtNpINDxFkmsu1qKYjg70VsP8SGneEXgLcZMk1bUZcW08S+JyaiMdof1x6dmt02FgOD7YkT4wOaOD5HotJw==}
     peerDependencies:
       eslint: '>=9'
 
@@ -5325,10 +5325,10 @@ snapshots:
     dependencies:
       eslint: 9.39.3
 
-  eslint-plugin-cypress@5.2.0(eslint@9.39.3):
+  eslint-plugin-cypress@6.1.0(eslint@9.39.3):
     dependencies:
       eslint: 9.39.3
-      globals: 16.5.0
+      globals: 17.4.0
 
   eslint-scope@8.4.0:
     dependencies:
