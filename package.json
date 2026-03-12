@@ -108,7 +108,7 @@
     "prettier": "3.8.1",
     "probe-image-size": "7.2.3",
     "shx": "0.4.0",
-    "terser": "5.44.1",
+    "terser": "5.46.0",
     "typescript": "5.9.3"
   },
   "pnpm": {
