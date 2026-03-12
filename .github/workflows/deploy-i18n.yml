@@ -2,6 +2,12 @@ name: i18n - Build and Deploy
 
 on:
   workflow_dispatch:
+    inputs:
+      bust_cache:
+        description: 'Force fresh API fetch (bypass disk cache)'
+        required: false
+        type: boolean
+        default: false
   schedule:
     # Here are the times for the cron:
     #
@@ -29,6 +35,7 @@ jobs:
 
     env:
       BUILD_LANG: ${{ matrix.languages }}
+      BUST_CACHE: ${{ inputs.bust_cache }}
 
       ALGOLIA_API_KEY: ${{ secrets.ALGOLIA_API_KEY }}
       ALGOLIA_APP_ID: ${{ secrets.ALGOLIA_APP_ID }}
@@ -88,8 +95,16 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Restore Turbo cache
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          path: node_modules/.cache/turbo
+          key: turbo-${{ matrix.languages }}-${{ github.sha }}
+          restore-keys: |
+            turbo-${{ matrix.languages }}-
+
       - name: Build site
-        run: pnpm run build
+        run: pnpm turbo run build
         env:
           NODE_ENV: production
 

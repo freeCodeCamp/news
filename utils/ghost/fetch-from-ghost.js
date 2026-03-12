@@ -1,5 +1,9 @@
+import { resolve } from 'path';
 import { ghostAPI } from '../api.js';
+import { readCache, writeCache } from '../disk-cache.js';
 import { wait } from '../wait.js';
+
+const CACHE_TTL = 12 * 60 * 60 * 1000;
 
 export const fetchFromGhost = async endpoint => {
   let currPage = 1;
@@ -16,6 +20,17 @@ export const fetchFromGhost = async endpoint => {
       'DO_NOT_FETCH_FROM_GHOST is active. This is likely because Ghost is not available for this environment.'
     );
     return [];
+  }
+
+  const cacheFilePath = resolve(
+    import.meta.dirname,
+    '../../.cache',
+    `ghost-${endpoint}.json`
+  );
+  const cached = readCache(cacheFilePath, CACHE_TTL);
+  if (cached) {
+    console.log(`Using cached Ghost ${endpoint} data`);
+    return cached;
   }
 
   while (currPage && currPage <= lastPage) {
@@ -37,6 +52,10 @@ export const fetchFromGhost = async endpoint => {
 
     ghostRes.forEach(obj => data.push(obj));
     await wait(200);
+  }
+
+  if (data.length > 0) {
+    writeCache(cacheFilePath, data);
   }
 
   return data;
