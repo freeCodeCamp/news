@@ -39,7 +39,7 @@ describe('Sitemap tests:', () => {
           expect(isValid).toBeTruthy();
         } catch (err) {
           // Throw error again to fail test if a sitemap cannot be parsed correctly
-          throw new Error(err);
+          throw new Error(err, { cause: err });
         }
       });
     });
