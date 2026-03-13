@@ -39,8 +39,8 @@ importers:
         specifier: 10.1.0
         version: 10.1.0
       cypress:
-        specifier: 14.5.4
-        version: 14.5.4
+        specifier: 15.11.0
+        version: 15.11.0
       dayjs:
         specifier: 1.11.19
         version: 1.11.19
@@ -871,6 +871,9 @@ packages:
   '@types/stack-utils@2.0.3':
     resolution: {integrity: sha512-9aEbYZ3TbYMznPdcdr3SmIrLXwC/AKZXQeCf9Pgao5CKb8CyHuEX5jzWPTkvregvhRJHcpRO6BFoGW9ycaOkYw==}
 
+  '@types/tmp@0.2.6':
+    resolution: {integrity: sha512-chhaNf2oKHlRkDGt+tiKE2Z5aJ6qalm7Z9rlLdBwmOiAAf09YQvvoLXjWK4HWPF1xU/fqvMgfNfpVoBscA/tKA==}
+
   '@types/yargs-parser@21.0.3':
     resolution: {integrity: sha512-I4q9QU9MQv4oEOz4tAHJtNz1cwuLxn2F3xcc2iV5WdqLPpUnj30aUuxt1mAxYTG+oe8CZMV/+6rU4S4gRDzqtQ==}
 
@@ -1115,9 +1118,6 @@ packages:
     resolution: {integrity: sha512-Z7tMw1ytTXt5jqMcOP+OQteU1VuNK9Y02uuJtKQ1Sv69jXQKKg5cibLwGJow8yzZP+eAc18EmLGPal0bp36rvQ==}
     engines: {node: '>=8'}
 
-  async@3.2.6:
-    resolution: {integrity: sha512-htCUDlxyyCLMgaM3xXg0C0LW2xqfuQ6p05pCEIsXuyQ+a1koYKTuBMzRNwmybfLgvJDMd0r1LTn4+E0Ti6C2AA==}
-
   asynckit@0.4.0:
     resolution: {integrity: sha512-Oei9OH4tRh0YqU3GxhX79dM/mwVgvbZJaSNaRk+bshkj0S5cfHcgYakreBjrHwatXKbz+IoIdYLxrKim2MjW0Q==}
 
@@ -1275,10 +1275,6 @@ packages:
   charenc@0.0.2:
     resolution: {integrity: sha512-yrLQ/yVUFXkzg7EDQsPieE/53+0RlaWTs+wBrvW36cyilJ2SaDWfl4Yj7MtLTXleV9uEKefbAGUPv2/iWSooRA==}
 
-  check-more-types@2.24.0:
-    resolution: {integrity: sha512-Pj779qHxV2tuapviy1bSZNEL1maXr13bPYpsvSDB68HlYcYuhlDrmGd63i0JHMCLKzc7rUSNIrpdJlhVlNwrxA==}
-    engines: {node: '>= 0.8.0'}
-
   chokidar@3.6.0:
     resolution: {integrity: sha512-7VT13fmjotKpGipCW9JEQAusEPE+Ei8nl6/g4FBAmIm0GOOLMua9NDDo/DWp0ZAxCr3cPq5ZpBqmPAQgDda2Pw==}
     engines: {node: '>= 8.10.0'}
@@ -1418,9 +1414,9 @@ packages:
     resolution: {integrity: sha512-2z+rWdzbbSZv6/rhtvzvqeZQHrBaqgogqt85sqFNbabZOuFbCVFb8kPeEtZjiKkbrm395irpNKiYeFeLiQnFPg==}
     engines: {node: '>=18'}
 
-  cypress@14.5.4:
-    resolution: {integrity: sha512-0Dhm4qc9VatOcI1GiFGVt8osgpPdqJLHzRwcAB5MSD/CAAts3oybvPUPawHyvJZUd8osADqZe/xzMsZ8sDTjXw==}
-    engines: {node: ^18.0.0 || ^20.0.0 || >=22.0.0}
+  cypress@15.11.0:
+    resolution: {integrity: sha512-NXDE6/fqZuzh1Zr53nyhCCa4lcANNTYWQNP9fJO+tzD3qVTDaTUni5xXMuigYjMujQ7CRiT9RkJJONmPQSsDFw==}
+    engines: {node: ^20.1.0 || ^22.0.0 || >=24.0.0}
     hasBin: true
 
   dashdash@1.14.1:
@@ -1930,9 +1926,6 @@ packages:
   get-video-id@4.1.7:
     resolution: {integrity: sha512-bYHXe3BTbFbiViuNFyfFnZPnSDVWBu5N06p35LW7dD/ul4O1sdPSs3Brw8U/m5JlQUnkj3tht3luSz0k05vEYg==}
     engines: {node: '>=16'}
-
-  getos@3.2.1:
-    resolution: {integrity: sha512-U56CfOK17OKgTVqozZjUKNdkfEv6jk5WISBJ8SHoagjE6L69zOwl3Z+O8myjY9MEW3i2HPWQBt/LTbCgcC973Q==}
 
   getpass@0.1.7:
     resolution: {integrity: sha512-0fzj9JxOLfJ+XGLhR8ze3unN0KZCgZwiSSDz168VERjK8Wl8kVSdcu2kspd4s4wtAa1y/qrVRiAA0WclVsu0ng==}
@@ -2469,10 +2462,6 @@ packages:
   kleur@4.1.5:
     resolution: {integrity: sha512-o+NO+8WrRiQEE4/7nwRJhN1HWpVmJm511pBHUxPLtp0BUISzlBplORYSmTclCnJvQq2tKu/sgl3xVpkc7ZWuQQ==}
     engines: {node: '>=6'}
-
-  lazy-ass@1.6.0:
-    resolution: {integrity: sha512-cc8oEVoctTvsFZ/Oje/kGnHbpWHYBe8IAJe4C0QNc3t8uM/0Y8+erSz/7Y1ALuXTEZTMvxXwO6YbX1ey3ujiZw==}
-    engines: {node: '> 0.8'}
 
   leven@3.1.0:
     resolution: {integrity: sha512-qsda+H8jTaUaN/x5vzW2rzc+8Rw4TAQ/4KjB46IwK5VH+IlVeeeje/EoZRpiXvIqjFgK84QffqPztGI3VBLG1A==}
@@ -3351,6 +3340,12 @@ packages:
     resolution: {integrity: sha512-Bh7QjT8/SuKUIfObSXNHNSK6WHo6J1tHCqJsuaFDP7gP0fkzSfTxI8y85JrppZ0h8l0maIgc2tfuZQ6/t3GtnQ==}
     engines: {node: ^14.18.0 || >=16.0.0}
 
+  systeminformation@5.31.4:
+    resolution: {integrity: sha512-lZppDyQx91VdS5zJvAyGkmwe+Mq6xY978BDUG2wRkWE+jkmUF5ti8cvOovFQoN5bvSFKCXVkyKEaU5ec3SJiRg==}
+    engines: {node: '>=8.0.0'}
+    os: [darwin, linux, win32, freebsd, openbsd, netbsd, sunos, android]
+    hasBin: true
+
   tar@6.2.1:
     resolution: {integrity: sha512-DZ4yORTwrbTj/7MZYq2w+/ZFdI6OZ/f9SFHR+71gIVUZhOQPHzVCLpvRnPgyaMpfWxxk/4ONva3GQSyNIKRv6A==}
     engines: {node: '>=10'}
@@ -3419,6 +3414,9 @@ packages:
   tree-kill@1.2.2:
     resolution: {integrity: sha512-L0Orpi8qGpRG//Nd+H90vFB+3iHnue1zSSGmNOOCh1GLJ7rUKVwV2HvijphGQS2UmhUZewS9VgvxYIdgr+fG1A==}
     hasBin: true
+
+  tslib@1.14.1:
+    resolution: {integrity: sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==}
 
   tslib@2.8.1:
     resolution: {integrity: sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w==}
@@ -4615,6 +4613,8 @@ snapshots:
 
   '@types/stack-utils@2.0.3': {}
 
+  '@types/tmp@0.2.6': {}
+
   '@types/yargs-parser@21.0.3': {}
 
   '@types/yargs@15.0.20':
@@ -4806,8 +4806,6 @@ snapshots:
 
   astral-regex@2.0.0: {}
 
-  async@3.2.6: {}
-
   asynckit@0.4.0: {}
 
   at-least-node@1.0.0: {}
@@ -4992,8 +4990,6 @@ snapshots:
 
   charenc@0.0.2: {}
 
-  check-more-types@2.24.0: {}
-
   chokidar@3.6.0:
     dependencies:
       anymatch: 3.1.3
@@ -5119,19 +5115,19 @@ snapshots:
       '@asamuzakjp/css-color': 3.2.0
       rrweb-cssom: 0.8.0
 
-  cypress@14.5.4:
+  cypress@15.11.0:
     dependencies:
       '@cypress/request': 3.0.10
       '@cypress/xvfb': 1.2.4(supports-color@8.1.1)
       '@types/sinonjs__fake-timers': 8.1.1
       '@types/sizzle': 2.3.10
+      '@types/tmp': 0.2.6
       arch: 2.2.0
       blob-util: 2.0.2
       bluebird: 3.7.2
       buffer: 5.7.1
       cachedir: 2.4.0
       chalk: 4.1.2
-      check-more-types: 2.24.0
       ci-info: 4.4.0
       cli-cursor: 3.1.0
       cli-table3: 0.6.1
@@ -5146,10 +5142,8 @@ snapshots:
       extract-zip: 2.0.1(supports-color@8.1.1)
       figures: 3.2.0
       fs-extra: 9.1.0
-      getos: 3.2.1
       hasha: 5.2.2
       is-installed-globally: 0.4.0
-      lazy-ass: 1.6.0
       listr2: 3.14.0(enquirer@2.4.1)
       lodash: 4.17.23
       log-symbols: 4.1.0
@@ -5159,10 +5153,11 @@ snapshots:
       process: 0.11.10
       proxy-from-env: 1.0.0
       request-progress: 3.0.0
-      semver: 7.7.4
       supports-color: 8.1.1
+      systeminformation: 5.31.4
       tmp: 0.2.5
       tree-kill: 1.2.2
+      tslib: 1.14.1
       untildify: 4.0.0
       yauzl: 2.10.0
 
@@ -5664,10 +5659,6 @@ snapshots:
   get-video-id@4.1.7:
     dependencies:
       '@babel/runtime': 7.28.6
-
-  getos@3.2.1:
-    dependencies:
-      async: 3.2.6
 
   getpass@0.1.7:
     dependencies:
@@ -6388,8 +6379,6 @@ snapshots:
   kind-of@6.0.3: {}
 
   kleur@4.1.5: {}
-
-  lazy-ass@1.6.0: {}
 
   leven@3.1.0: {}
 
@@ -7257,6 +7246,8 @@ snapshots:
     dependencies:
       '@pkgr/core': 0.2.9
 
+  systeminformation@5.31.4: {}
+
   tar@6.2.1:
     dependencies:
       chownr: 2.0.0
@@ -7325,6 +7316,8 @@ snapshots:
       punycode: 2.3.1
 
   tree-kill@1.2.2: {}
+
+  tslib@1.14.1: {}
 
   tslib@2.8.1: {}
 
