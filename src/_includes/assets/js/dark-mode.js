@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
   const toggleButton = document.getElementById('toggle-dark-mode');
+  const onIcon = toggleButton.querySelector('i');
   const prismLight = document.getElementById('prism-theme-light');
   const prismDark = document.getElementById('prism-theme-dark');
   const isDark = document.documentElement.classList.contains('dark-mode');
@@ -13,11 +14,13 @@ document.addEventListener('DOMContentLoaded', () => {
       this.setAttribute('aria-pressed', 'true');
       if (prismLight) prismLight.disabled = true;
       if (prismDark) prismDark.disabled = false;
+      onIcon.classList.replace('fa-square', 'fa-square-check');
     } else {
       localStorage.setItem('theme', 'light');
       this.setAttribute('aria-pressed', 'false');
       if (prismLight) prismLight.disabled = false;
       if (prismDark) prismDark.disabled = true;
+      onIcon.classList.replace('fa-square-check', 'fa-square');
     }
   });
 });
