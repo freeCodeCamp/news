@@ -25,6 +25,16 @@
     "type": 302
   },
   {
+    "source": "/serverless-rag-pipeline-on-aws",
+    "destination": "/news/how-to-build-a-serverless-rag-pipeline-on-aws-that-scales-to-zero",
+    "type": 302
+  },
+  {
+    "source": "/how-to-build-an-llm-market-copilot-mvp-with-langchain-apis-and-streamlit",
+    "destination": "/news/build-an-llm-market-copilot-with-langchain",
+    "type": 302
+  },
+  {
     "source": "/everything-you-need-to-know-about-ng-template-ng-content-ng-container-and-ngtemplateoutlet-4b7b51223691",
     "destination": "/news/angular-vs-angularjs",
     "type": 302
