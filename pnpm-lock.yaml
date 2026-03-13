@@ -6,6 +6,10 @@ settings:
 
 importers:
   .:
+    dependencies:
+      '@fortawesome/free-solid-svg-icons':
+        specifier: ^7.2.0
+        version: 7.2.0
     devDependencies:
       '@11ty/eleventy':
         specifier: 3.1.2
@@ -726,6 +730,20 @@ packages:
         integrity: sha512-43/qtrDUokr7LJqoF2c3+RInu/t4zfrpYdoSDfYyhg52rwLV6TnOvdG4fXm7IkSB3wErkcmJS9iEhjVtOSEjjA==
       }
     engines: { node: ^18.18.0 || ^20.9.0 || >=21.1.0 }
+
+  '@fortawesome/fontawesome-common-types@7.2.0':
+    resolution:
+      {
+        integrity: sha512-IpR0bER9FY25p+e7BmFH25MZKEwFHTfRAfhOyJubgiDnoJNsSvJ7nigLraHtp4VOG/cy8D7uiV0dLkHOne5Fhw==
+      }
+    engines: { node: '>=6' }
+
+  '@fortawesome/free-solid-svg-icons@7.2.0':
+    resolution:
+      {
+        integrity: sha512-YTVITFGN0/24PxzXrwqCgnyd7njDuzp5ZvaCx5nq/jg55kUYd94Nj8UTchBdBofi/L0nwRfjGOg0E41d2u9T1w==
+      }
+    engines: { node: '>=6' }
 
   '@graphql-typed-document-node/core@3.2.0':
     resolution:
@@ -6722,6 +6740,12 @@ snapshots:
     dependencies:
       '@eslint/core': 0.17.0
       levn: 0.4.1
+
+  '@fortawesome/fontawesome-common-types@7.2.0': {}
+
+  '@fortawesome/free-solid-svg-icons@7.2.0':
+    dependencies:
+      '@fortawesome/fontawesome-common-types': 7.2.0
 
   '@graphql-typed-document-node/core@3.2.0(graphql@16.13.1)':
     dependencies:

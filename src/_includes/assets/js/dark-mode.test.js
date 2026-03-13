@@ -2,13 +2,13 @@
  * @jest-environment jsdom
  */
 
-import { jest } from '@jest/globals';
+import { expect, jest } from '@jest/globals';
 
 function setupDOM({ isDark = false, hasPrismElements = true } = {}) {
   document.documentElement.className = isDark ? 'dark-mode' : '';
 
   document.body.innerHTML = `
-    <button id="toggle-dark-mode" aria-pressed="false"></button>
+    <button id="toggle-dark-mode" aria-pressed="false"><i class="${isDark ? 'fa-square-check' : 'fa-square'}"></i></button>
     ${
       hasPrismElements
         ? `<link id="prism-theme-light" rel="stylesheet" />
@@ -22,6 +22,7 @@ function loadDarkModeScript() {
   // Re-import the module fresh each time
   const script = document.createElement('script');
   const toggleButton = document.getElementById('toggle-dark-mode');
+  const onIcon = toggleButton.querySelector('i');
   const prismLight = document.getElementById('prism-theme-light');
   const prismDark = document.getElementById('prism-theme-dark');
   const isDark = document.documentElement.classList.contains('dark-mode');
@@ -35,11 +36,13 @@ function loadDarkModeScript() {
       this.setAttribute('aria-pressed', 'true');
       if (prismLight) prismLight.disabled = true;
       if (prismDark) prismDark.disabled = false;
+      onIcon.classList.replace('fa-square', 'fa-square-check');
     } else {
       localStorage.setItem('theme', 'light');
       this.setAttribute('aria-pressed', 'false');
       if (prismLight) prismLight.disabled = false;
       if (prismDark) prismDark.disabled = true;
+      onIcon.classList.replace('fa-square-check', 'fa-square');
     }
   });
 }
@@ -84,6 +87,24 @@ describe('dark-mode.js toggle handler', () => {
       const button = document.getElementById('toggle-dark-mode');
       expect(button.getAttribute('aria-pressed')).toBe('true');
     });
+
+    it('icon should be "fa-square-check" when page loads in dark mode', () => {
+      setupDOM({ isDark: true });
+      loadDarkModeScript();
+
+      const button = document.getElementById('toggle-dark-mode');
+      const icon = button.querySelector('i');
+      expect(icon.classList.contains('fa-square-check')).toBe(true);
+    });
+
+    it('icon should be "fa-square" when page loads in light mode', () => {
+      setupDOM({ isDark: false });
+      loadDarkModeScript();
+
+      const button = document.getElementById('toggle-dark-mode');
+      const icon = button.querySelector('i');
+      expect(icon.classList.contains('fa-square')).toBe(true);
+    });
   });
 
   describe('toggling to dark mode', () => {
@@ -120,6 +141,13 @@ describe('dark-mode.js toggle handler', () => {
       document.getElementById('toggle-dark-mode').click();
       const prismDark = document.getElementById('prism-theme-dark');
       expect(prismDark.disabled).toBe(false);
+    });
+
+    it('icon should be set to "fa-square-check"', () => {
+      const button = document.getElementById('toggle-dark-mode');
+      button.click();
+      const icon = button.querySelector('i');
+      expect(icon.classList.contains('fa-square-check')).toBe(true);
     });
   });
 
@@ -158,6 +186,13 @@ describe('dark-mode.js toggle handler', () => {
       const prismDark = document.getElementById('prism-theme-dark');
       expect(prismDark.disabled).toBe(true);
     });
+
+    it('icon should be set to "fa-square"', () => {
+      const button = document.getElementById('toggle-dark-mode');
+      button.click();
+      const icon = button.querySelector('i');
+      expect(icon.classList.contains('fa-square')).toBe(true);
+    });
   });
 
   describe('double toggle (round-trip)', () => {
@@ -166,12 +201,14 @@ describe('dark-mode.js toggle handler', () => {
       loadDarkModeScript();
 
       const button = document.getElementById('toggle-dark-mode');
+      const icon = button.querySelector('i');
       button.click();
       button.click();
 
       expect(document.documentElement.classList.contains('dark-mode')).toBe(
         false
       );
+      expect(icon.classList.contains('fa-square')).toBe(true);
       expect(button.getAttribute('aria-pressed')).toBe('false');
       expect(localStorage.setItem).toHaveBeenLastCalledWith('theme', 'light');
     });
@@ -181,12 +218,14 @@ describe('dark-mode.js toggle handler', () => {
       loadDarkModeScript();
 
       const button = document.getElementById('toggle-dark-mode');
+      const icon = button.querySelector('i');
       button.click();
       button.click();
 
       expect(document.documentElement.classList.contains('dark-mode')).toBe(
         true
       );
+      expect(icon.classList.contains('fa-square-check')).toBe(true);
       expect(button.getAttribute('aria-pressed')).toBe('true');
       expect(localStorage.setItem).toHaveBeenLastCalledWith('theme', 'dark');
     });
