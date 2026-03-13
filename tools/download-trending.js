@@ -53,7 +53,7 @@ const download = async clientLocale => {
       return trendingJSON;
     } catch (err) {
       if (process.env.FREECODECAMP_NODE_ENV === 'production') {
-        throw new Error(err.message);
+        throw new Error(err.message, { cause: err });
       }
 
       return loadLocalTrendingJSON();
