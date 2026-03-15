@@ -8,7 +8,7 @@
     <div class="site-nav-right">
         <div class="nav-group">
             <button aria-expanded="false" class="exposed-button-nav" id="toggle-button-nav" data-test-label="header-menu-button">
-              <span class="sr-only">{% t 'buttons.menu' %}</span></span>
+              <span class="sr-only">{% t 'buttons.menu' %}</span>
               <span class="menu-btn-text">{% t 'buttons.menu' %}</span>
             </button>
             <ul id="menu-dropdown" class="nav-list" aria-labelledby="toggle-button-nav" data-test-label="header-menu">
@@ -21,8 +21,7 @@
                   rel="noopener noreferrer"
                   href="{% t 'links:forum' %}"
                   target="_blank"
-                  data-test-label="forum-button"
-              >{% t 'buttons.forum' %}</a></li>
+                  data-test-label="forum-button" >{% t 'buttons.forum' %}</a></li>
               <li><a
                   class="nav-link nav-link-flex"
                   id="nav-learn"
@@ -31,6 +30,12 @@
                   target="_blank"
                   data-test-label="learn-button"
               >{% t 'buttons.learn' %}</a></li>
+            <li><button
+                class="nav-link nav-link-flex"
+                id="toggle-dark-mode"
+                aria-pressed="false"
+                data-test-label="dark-mode-button">
+            <span>{% t 'buttons.toggle-dark-mode' %}</span><i class="fa-regular fa-square-check"></i></button></li>
             </ul>
             <a
                 class="toggle-button-nav"

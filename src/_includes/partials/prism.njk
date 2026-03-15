@@ -1,4 +1,5 @@
 <link
+  id="prism-theme-light"
   rel="preload"
   as="style"
   onload="this.onload=null;this.rel='stylesheet'"
@@ -10,6 +11,31 @@
     href="https://cdn.freecodecamp.org/news-assets/prism/1.29.0/themes/prism.min.css"
   />
 </noscript>
+<link
+  id="prism-theme-dark"
+  rel="preload"
+  as="style"
+  onload="this.onload=null;this.rel='stylesheet'"
+  href="https://cdn.freecodecamp.org/news-assets/prism/1.29.0/themes/prism-dark.min.css"
+/>
+<noscript>
+  <link
+    rel="stylesheet"
+    href="https://cdn.freecodecamp.org/news-assets/prism/1.29.0/themes/prism-dark.min.css"
+  />
+</noscript>
+<script>
+  (function() {
+    var isDark = document.documentElement.classList.contains('dark-mode');
+    var light = document.getElementById('prism-theme-light');
+    var dark = document.getElementById('prism-theme-dark');
+    if (isDark) {
+      light.disabled = true;
+    } else {
+      dark.disabled = true;
+    }
+  })();
+</script>
 <link
   rel="preload"
   as="style"
