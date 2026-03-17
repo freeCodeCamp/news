@@ -82,7 +82,7 @@
     "dotenv": "17.3.1",
     "eslint": "10.0.2",
     "eslint-config-prettier": "10.1.8",
-    "eslint-plugin-cypress": "6.1.0",
+    "eslint-plugin-cypress": "6.2.0",
     "eslint-utils": "3.0.0",
     "get-video-id": "4.1.7",
     "globals": "17.4.0",
