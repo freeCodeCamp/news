@@ -25,6 +25,11 @@
     "type": 302
   },
   {
+    "source": "/build-portfolio-website-react",
+    "destination": "/news/how-to-build-a-simple-portfolio-blog-with-nextjs",
+    "type": 302
+  },
+  {
     "source": "/serverless-rag-pipeline-on-aws",
     "destination": "/news/how-to-build-a-serverless-rag-pipeline-on-aws-that-scales-to-zero",
     "type": 302
