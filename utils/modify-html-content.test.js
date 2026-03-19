@@ -20,195 +20,248 @@ const mockHashnodeEmbeds = {
     '<p><a class="embed-card" href="https://youtu.be/0WjfKQdfeMU">https://youtu.be/0WjfKQdfeMU</a></p>'
 };
 
+const mockHeadings = {
+  withNoId: '<h2>The Typical Workflow</h2>',
+  withExistingId: '<h2 id="my-personal-workflow">My Personal Workflow</h2>',
+  withNestedElements:
+    '<h2><strong>Bold and <em>Emphasized</em> Text</strong></h2>'
+};
+
 describe('modifyHTMLContent', () => {
-  it('common embeds like YouTube should return the expected modified HTML', async () => {
-    const modifiedHTML = await modifyHTMLContent({
-      postContent: mockHashnodeEmbeds.youtube,
-      postTitle: 'Test Post',
-      source: 'Hashnode'
+  describe('Hashnode embeds', () => {
+    it('common embeds like YouTube should return the expected modified HTML', async () => {
+      const modifiedHTML = await modifyHTMLContent({
+        postContent: mockHashnodeEmbeds.youtube,
+        postTitle: 'Test Post',
+        source: 'Hashnode'
+      });
+      const dom = new JSDOM(modifiedHTML);
+      const document = dom.window.document;
+      const iframeEl = document.querySelector('iframe');
+
+      expect(iframeEl).toBeTruthy();
+      expect(iframeEl.src).toBe('https://www.youtube.com/embed/KZe0C0Qq4p0');
+      expect(iframeEl.width).toBe('560');
+      expect(iframeEl.height).toBe('315');
+      expect(iframeEl.title).toBe('YouTube video player');
+      expect(iframeEl.getAttribute('style')).toBe(
+        'aspect-ratio: 16 / 9; width: 100%; height: auto;'
+      );
+      expect(iframeEl.getAttribute('allow')).toBe(
+        'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
+      );
+      expect(iframeEl.getAttribute('referrerpolicy')).toBe(
+        'strict-origin-when-cross-origin'
+      );
+      expect(iframeEl.getAttribute('allowfullscreen')).toBe('');
+      expect(iframeEl.getAttribute('loading')).toBe('lazy');
+
+      // Check if the iframeEl is wrapped in a div with the expected class
+      expect(iframeEl.parentElement.tagName).toBe('DIV');
+      expect(iframeEl.parentElement.classList).toContain('embed-wrapper');
     });
-    const dom = new JSDOM(modifiedHTML);
-    const document = dom.window.document;
-    const iframeEl = document.querySelector('iframe');
 
-    expect(iframeEl).toBeTruthy();
-    expect(iframeEl.src).toBe('https://www.youtube.com/embed/KZe0C0Qq4p0');
-    expect(iframeEl.width).toBe('560');
-    expect(iframeEl.height).toBe('315');
-    expect(iframeEl.title).toBe('YouTube video player');
-    expect(iframeEl.getAttribute('style')).toBe(
-      'aspect-ratio: 16 / 9; width: 100%; height: auto;'
-    );
-    expect(iframeEl.getAttribute('allow')).toBe(
-      'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
-    );
-    expect(iframeEl.getAttribute('referrerpolicy')).toBe(
-      'strict-origin-when-cross-origin'
-    );
-    expect(iframeEl.getAttribute('allowfullscreen')).toBe('');
-    expect(iframeEl.getAttribute('loading')).toBe('lazy');
+    it('Giphy embeds should return the expected modified HTML', async () => {
+      const modifiedHTML = await modifyHTMLContent({
+        postContent: mockHashnodeEmbeds.giphy,
+        postTitle: 'Test Post',
+        source: 'Hashnode'
+      });
+      const dom = new JSDOM(modifiedHTML);
+      const document = dom.window.document;
+      const iframeEl = document.querySelector('iframe');
 
-    // Check if the iframeEl is wrapped in a div with the expected class
-    expect(iframeEl.parentElement.tagName).toBe('DIV');
-    expect(iframeEl.parentElement.classList).toContain('embed-wrapper');
+      expect(iframeEl).toBeTruthy();
+      expect(iframeEl.src).toBe('https://giphy.com/embed/VbnUQpnihPSIgIXuZv');
+      expect(iframeEl.width).toBe('100%');
+      expect(iframeEl.height).toBe('100%');
+      expect(iframeEl.title).toBe('Giphy embed');
+      expect(iframeEl.getAttribute('style')).toBe('position: absolute');
+      expect(iframeEl.getAttribute('allowfullscreen')).toBe('');
+
+      // Check if the iframeEl is wrapped in a divs with the expected classes
+      expect(iframeEl.parentElement.tagName).toBe('DIV');
+      expect(iframeEl.parentElement.classList).toContain('giphy-wrapper');
+      expect(iframeEl.parentElement.getAttribute('style')).toBe(
+        'width: 100%; height: 0; padding-bottom: 125%; position: relative;'
+      );
+      expect(iframeEl.parentElement.parentElement.tagName).toBe('DIV');
+      expect(iframeEl.parentElement.parentElement.classList).toContain(
+        'embed-wrapper'
+      );
+    });
+
+    it('Twitter embeds should return the expected modified HTML', async () => {
+      const modifiedHTML = await modifyHTMLContent({
+        postContent: mockHashnodeEmbeds.twitter,
+        postTitle: 'Test Post',
+        source: 'Hashnode'
+      });
+      const dom = new JSDOM(modifiedHTML);
+      const document = dom.window.document;
+      const blockquoteEl = document.querySelector('blockquote');
+      const scriptEl = document.querySelector('script');
+
+      expect(blockquoteEl).toBeTruthy();
+      expect(blockquoteEl.classList).toContain('twitter-tweet');
+      expect(blockquoteEl.children.length).toBe(1);
+      expect(blockquoteEl.querySelector('a').href).toBe(
+        'https://twitter.com/freeCodeCamp/status/1780642881054609864'
+      );
+      expect(scriptEl).toBeTruthy();
+      expect(scriptEl.src).toBe('https://platform.twitter.com/widgets.js');
+      expect(scriptEl.getAttribute('defer')).toBe('');
+
+      // Check if the blockquoteEl is wrapped in a div with the expected class
+      expect(blockquoteEl.parentElement.tagName).toBe('DIV');
+      expect(blockquoteEl.parentElement.classList).toContain('embed-wrapper');
+    });
+
+    it('X embeds should return the expected modified HTML', async () => {
+      const modifiedHTML = await modifyHTMLContent({
+        postContent: mockHashnodeEmbeds.x,
+        postTitle: 'Test Post',
+        source: 'Hashnode'
+      });
+      const dom = new JSDOM(modifiedHTML);
+      const document = dom.window.document;
+      const blockquoteEl = document.querySelector('blockquote');
+      const scriptEl = document.querySelector('script');
+
+      expect(blockquoteEl).toBeTruthy();
+      expect(blockquoteEl.classList).toContain('twitter-tweet');
+      expect(blockquoteEl.children.length).toBe(1);
+      expect(blockquoteEl.querySelector('a').href).not.toContain('x.com');
+      expect(blockquoteEl.querySelector('a').href).toBe(
+        'https://twitter.com/freeCodeCamp/status/1793688847299018852'
+      );
+      expect(scriptEl).toBeTruthy();
+      expect(scriptEl.src).toBe('https://platform.twitter.com/widgets.js');
+      expect(scriptEl.getAttribute('defer')).toBe('');
+
+      // Check if the blockquoteEl is wrapped in a div with the expected class
+      expect(blockquoteEl.parentElement.tagName).toBe('DIV');
+      expect(blockquoteEl.parentElement.classList).toContain('embed-wrapper');
+    });
+
+    it('GitHub Gist embeds should return the expected modified HTML', async () => {
+      const modifiedHTML = await modifyHTMLContent({
+        postContent: mockHashnodeEmbeds.githubGist,
+        postTitle: 'Test Post',
+        source: 'Hashnode'
+      });
+      const dom = new JSDOM(modifiedHTML);
+      const document = dom.window.document;
+      const scriptEl = document.querySelector('script');
+
+      expect(scriptEl).toBeTruthy();
+      expect(scriptEl.src).toBe(
+        'https://gist.github.com/scissorsneedfoodtoo/539dbbd01ebfd36fd8a671124d290f5a.js'
+      );
+
+      // Check if the scriptEl is wrapped in a div with the expected class
+      expect(scriptEl.parentElement.tagName).toBe('DIV');
+      expect(scriptEl.parentElement.classList).toContain('gist-block'); // This gets added by the gist-embed package
+      expect(scriptEl.parentElement.classList).toContain('embed-wrapper');
+    });
+
+    it('iframes in HTML blocks should return the expected modified HTML', async () => {
+      const modifiedHTML = await modifyHTMLContent({
+        postContent: mockHashnodeEmbeds.iframeInHTMLBlock,
+        postTitle: 'Test Post',
+        source: 'Hashnode'
+      });
+      const dom = new JSDOM(modifiedHTML);
+      const document = dom.window.document;
+      const iframeEl = document.querySelector('iframe');
+
+      expect(iframeEl).toBeTruthy();
+      expect(iframeEl.src).toBe(
+        'https://www.youtube.com/embed/N1pYdEAU9mk?si=BapivyRfMfD99MTc'
+      );
+      expect(iframeEl.width).toBe('560');
+      expect(iframeEl.height).toBe('315');
+      expect(iframeEl.title).toBe(translate('embed-title'));
+
+      // Check if the iframeEl is wrapped in a div with the expected class
+      expect(iframeEl.parentElement.tagName).toBe('DIV');
+      expect(iframeEl.parentElement.classList).toContain('embed-wrapper');
+    });
+
+    it('embeds with no wrapper should return the expected modified HTML', async () => {
+      const modifiedHTML = await modifyHTMLContent({
+        postContent: mockHashnodeEmbeds.embedNoWrapper,
+        postTitle: 'Test Post',
+        source: 'Hashnode'
+      });
+      const dom = new JSDOM(modifiedHTML);
+      const document = dom.window.document;
+      const iframeEl = document.querySelector('iframe');
+
+      expect(iframeEl).toBeTruthy();
+      expect(iframeEl.src).toBe('https://www.youtube.com/embed/0WjfKQdfeMU');
+      expect(iframeEl.width).toBe('560');
+      expect(iframeEl.height).toBe('315');
+      expect(iframeEl.title).toBe('YouTube video player');
+      expect(iframeEl.getAttribute('style')).toBe(
+        'aspect-ratio: 16 / 9; width: 100%; height: auto;'
+      );
+      expect(iframeEl.getAttribute('allow')).toBe(
+        'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
+      );
+      expect(iframeEl.getAttribute('referrerpolicy')).toBe(
+        'strict-origin-when-cross-origin'
+      );
+      expect(iframeEl.getAttribute('allowfullscreen')).toBe('');
+      expect(iframeEl.getAttribute('loading')).toBe('lazy');
+
+      // Check if the iframeEl is wrapped in a div with the expected class
+      expect(iframeEl.parentElement.tagName).toBe('DIV');
+      expect(iframeEl.parentElement.classList).toContain('embed-wrapper');
+    });
   });
 
-  it('Giphy embeds should return the expected modified HTML', async () => {
-    const modifiedHTML = await modifyHTMLContent({
-      postContent: mockHashnodeEmbeds.giphy,
-      postTitle: 'Test Post',
-      source: 'Hashnode'
+  describe('Hashnode headings', () => {
+    it('Headings with no id should have an id generated', async () => {
+      const modifiedHTML = await modifyHTMLContent({
+        postContent: mockHeadings.withNoId,
+        postTitle: 'Test Post',
+        source: 'Hashnode'
+      });
+      const dom = new JSDOM(modifiedHTML);
+      const document = dom.window.document;
+      const headingEl = document.querySelector('h2');
+
+      expect(headingEl).toBeTruthy();
+      expect(headingEl.id).toBe('heading-the-typical-workflow');
     });
-    const dom = new JSDOM(modifiedHTML);
-    const document = dom.window.document;
-    const iframeEl = document.querySelector('iframe');
 
-    expect(iframeEl).toBeTruthy();
-    expect(iframeEl.src).toBe('https://giphy.com/embed/VbnUQpnihPSIgIXuZv');
-    expect(iframeEl.width).toBe('100%');
-    expect(iframeEl.height).toBe('100%');
-    expect(iframeEl.title).toBe('Giphy embed');
-    expect(iframeEl.getAttribute('style')).toBe('position: absolute');
-    expect(iframeEl.getAttribute('allowfullscreen')).toBe('');
+    it('Headings with existing ids should keep their original id', async () => {
+      const modifiedHTML = await modifyHTMLContent({
+        postContent: mockHeadings.withExistingId,
+        postTitle: 'Test Post',
+        source: 'Hashnode'
+      });
+      const dom = new JSDOM(modifiedHTML);
+      const document = dom.window.document;
+      const headingEl = document.querySelector('h2');
 
-    // Check if the iframeEl is wrapped in a divs with the expected classes
-    expect(iframeEl.parentElement.tagName).toBe('DIV');
-    expect(iframeEl.parentElement.classList).toContain('giphy-wrapper');
-    expect(iframeEl.parentElement.getAttribute('style')).toBe(
-      'width: 100%; height: 0; padding-bottom: 125%; position: relative;'
-    );
-    expect(iframeEl.parentElement.parentElement.tagName).toBe('DIV');
-    expect(iframeEl.parentElement.parentElement.classList).toContain(
-      'embed-wrapper'
-    );
-  });
-
-  it('Twitter embeds should return the expected modified HTML', async () => {
-    const modifiedHTML = await modifyHTMLContent({
-      postContent: mockHashnodeEmbeds.twitter,
-      postTitle: 'Test Post',
-      source: 'Hashnode'
+      expect(headingEl).toBeTruthy();
+      expect(headingEl.id).toBe('my-personal-workflow');
     });
-    const dom = new JSDOM(modifiedHTML);
-    const document = dom.window.document;
-    const blockquoteEl = document.querySelector('blockquote');
-    const scriptEl = document.querySelector('script');
 
-    expect(blockquoteEl).toBeTruthy();
-    expect(blockquoteEl.classList).toContain('twitter-tweet');
-    expect(blockquoteEl.children.length).toBe(1);
-    expect(blockquoteEl.querySelector('a').href).toBe(
-      'https://twitter.com/freeCodeCamp/status/1780642881054609864'
-    );
-    expect(scriptEl).toBeTruthy();
-    expect(scriptEl.src).toBe('https://platform.twitter.com/widgets.js');
-    expect(scriptEl.getAttribute('defer')).toBe('');
+    it('Headings with nested elements should have ids generated based on the full text content', async () => {
+      const modifiedHTML = await modifyHTMLContent({
+        postContent: mockHeadings.withNestedElements,
+        postTitle: 'Test Post',
+        source: 'Hashnode'
+      });
+      const dom = new JSDOM(modifiedHTML);
+      const document = dom.window.document;
+      const headingEl = document.querySelector('h2');
 
-    // Check if the blockquoteEl is wrapped in a div with the expected class
-    expect(blockquoteEl.parentElement.tagName).toBe('DIV');
-    expect(blockquoteEl.parentElement.classList).toContain('embed-wrapper');
-  });
-
-  it('X embeds should return the expected modified HTML', async () => {
-    const modifiedHTML = await modifyHTMLContent({
-      postContent: mockHashnodeEmbeds.x,
-      postTitle: 'Test Post',
-      source: 'Hashnode'
+      expect(headingEl).toBeTruthy();
+      expect(headingEl.id).toBe('heading-bold-and-emphasized-text');
     });
-    const dom = new JSDOM(modifiedHTML);
-    const document = dom.window.document;
-    const blockquoteEl = document.querySelector('blockquote');
-    const scriptEl = document.querySelector('script');
-
-    expect(blockquoteEl).toBeTruthy();
-    expect(blockquoteEl.classList).toContain('twitter-tweet');
-    expect(blockquoteEl.children.length).toBe(1);
-    expect(blockquoteEl.querySelector('a').href).not.toContain('x.com');
-    expect(blockquoteEl.querySelector('a').href).toBe(
-      'https://twitter.com/freeCodeCamp/status/1793688847299018852'
-    );
-    expect(scriptEl).toBeTruthy();
-    expect(scriptEl.src).toBe('https://platform.twitter.com/widgets.js');
-    expect(scriptEl.getAttribute('defer')).toBe('');
-
-    // Check if the blockquoteEl is wrapped in a div with the expected class
-    expect(blockquoteEl.parentElement.tagName).toBe('DIV');
-    expect(blockquoteEl.parentElement.classList).toContain('embed-wrapper');
-  });
-
-  it('GitHub Gist embeds should return the expected modified HTML', async () => {
-    const modifiedHTML = await modifyHTMLContent({
-      postContent: mockHashnodeEmbeds.githubGist,
-      postTitle: 'Test Post',
-      source: 'Hashnode'
-    });
-    const dom = new JSDOM(modifiedHTML);
-    const document = dom.window.document;
-    const scriptEl = document.querySelector('script');
-
-    expect(scriptEl).toBeTruthy();
-    expect(scriptEl.src).toBe(
-      'https://gist.github.com/scissorsneedfoodtoo/539dbbd01ebfd36fd8a671124d290f5a.js'
-    );
-
-    // Check if the scriptEl is wrapped in a div with the expected class
-    expect(scriptEl.parentElement.tagName).toBe('DIV');
-    expect(scriptEl.parentElement.classList).toContain('gist-block'); // This gets added by the gist-embed package
-    expect(scriptEl.parentElement.classList).toContain('embed-wrapper');
-  });
-
-  it('iframes in HTML blocks should return the expected modified HTML', async () => {
-    const modifiedHTML = await modifyHTMLContent({
-      postContent: mockHashnodeEmbeds.iframeInHTMLBlock,
-      postTitle: 'Test Post',
-      source: 'Hashnode'
-    });
-    const dom = new JSDOM(modifiedHTML);
-    const document = dom.window.document;
-    const iframeEl = document.querySelector('iframe');
-
-    expect(iframeEl).toBeTruthy();
-    expect(iframeEl.src).toBe(
-      'https://www.youtube.com/embed/N1pYdEAU9mk?si=BapivyRfMfD99MTc'
-    );
-    expect(iframeEl.width).toBe('560');
-    expect(iframeEl.height).toBe('315');
-    expect(iframeEl.title).toBe(translate('embed-title'));
-
-    // Check if the iframeEl is wrapped in a div with the expected class
-    expect(iframeEl.parentElement.tagName).toBe('DIV');
-    expect(iframeEl.parentElement.classList).toContain('embed-wrapper');
-  });
-
-  it('embeds with no wrapper should return the expected modified HTML', async () => {
-    const modifiedHTML = await modifyHTMLContent({
-      postContent: mockHashnodeEmbeds.embedNoWrapper,
-      postTitle: 'Test Post',
-      source: 'Hashnode'
-    });
-    const dom = new JSDOM(modifiedHTML);
-    const document = dom.window.document;
-    const iframeEl = document.querySelector('iframe');
-
-    expect(iframeEl).toBeTruthy();
-    expect(iframeEl.src).toBe('https://www.youtube.com/embed/0WjfKQdfeMU');
-    expect(iframeEl.width).toBe('560');
-    expect(iframeEl.height).toBe('315');
-    expect(iframeEl.title).toBe('YouTube video player');
-    expect(iframeEl.getAttribute('style')).toBe(
-      'aspect-ratio: 16 / 9; width: 100%; height: auto;'
-    );
-    expect(iframeEl.getAttribute('allow')).toBe(
-      'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
-    );
-    expect(iframeEl.getAttribute('referrerpolicy')).toBe(
-      'strict-origin-when-cross-origin'
-    );
-    expect(iframeEl.getAttribute('allowfullscreen')).toBe('');
-    expect(iframeEl.getAttribute('loading')).toBe('lazy');
-
-    // Check if the iframeEl is wrapped in a div with the expected class
-    expect(iframeEl.parentElement.tagName).toBe('DIV');
-    expect(iframeEl.parentElement.classList).toContain('embed-wrapper');
   });
 });
