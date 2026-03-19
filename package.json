@@ -106,7 +106,9 @@
     "piscina": "5.1.4",
     "prettier": "3.8.1",
     "probe-image-size": "7.2.3",
+    "sanitize-html": "2.17.2",
     "shx": "0.4.0",
+    "slug": "11.0.1",
     "terser": "5.46.0",
     "typescript": "5.9.3"
   },
