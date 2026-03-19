@@ -1,6 +1,8 @@
 import getVideoId from 'get-video-id';
 import { parse } from 'path';
 import { JSDOM } from 'jsdom';
+import sanitizeHtml from 'sanitize-html';
+import slug from 'slug';
 
 export const generateHashnodeEmbedMarkup = async embedURL => {
   try {
@@ -219,3 +221,13 @@ export const stripHTMLTags = str => {
   const dom = new JSDOM(str);
   return dom.window.document.body.textContent || '';
 };
+
+export class HeadingSlugger {
+  static sanitizeSlug(str) {
+    return slug(sanitizeHtml(str, { allowedTags: [] }), { lower: true });
+  }
+
+  getSlug(str) {
+    return HeadingSlugger.sanitizeSlug(str);
+  }
+}

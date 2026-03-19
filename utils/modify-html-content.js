@@ -3,7 +3,8 @@ import jsdom from 'jsdom';
 import { translate } from './translate.js';
 import {
   generateHashnodeEmbedMarkup,
-  setDefaultAlt
+  setDefaultAlt,
+  HeadingSlugger
 } from './modify-html-helpers.js';
 import { getImageDimensions } from './get-image-dimensions.js';
 import { fitVids } from './fitvids.js';
@@ -16,27 +17,42 @@ export const modifyHTMLContent = async ({ postContent, postTitle, source }) => {
   const document = window.document;
   const hashnodeEmbedAnchorEls = [...document.querySelectorAll('a.embed-card')];
 
-  if (source === 'Hashnode' && hashnodeEmbedAnchorEls.length) {
-    await Promise.all(
-      hashnodeEmbedAnchorEls.map(async anchorEl => {
-        const embedWrapper = anchorEl?.parentElement;
-        const embedURL = anchorEl.href;
-        const embedMarkup = await generateHashnodeEmbedMarkup(embedURL);
+  if (source === 'Hashnode') {
+    if (hashnodeEmbedAnchorEls.length) {
+      await Promise.all(
+        hashnodeEmbedAnchorEls.map(async anchorEl => {
+          const embedWrapper = anchorEl?.parentElement;
+          const embedURL = anchorEl.href;
+          const embedMarkup = await generateHashnodeEmbedMarkup(embedURL);
 
-        // Leave existing wrappers intact for existing embeds,
-        // but for new embeds wrapped in a simple p tag, replace the p tag
-        // with the iframe embed markup to wrap in a div.embed-wrapper later
-        if (embedMarkup) {
-          if (embedWrapper?.classList.contains('embed-wrapper')) {
-            embedWrapper.innerHTML = embedMarkup;
-          } else {
-            embedWrapper.replaceWith(
-              ...new JSDOM(embedMarkup).window.document.body.childNodes
-            );
+          // Leave existing wrappers intact for existing embeds,
+          // but for new embeds wrapped in a simple p tag, replace the p tag
+          // with the iframe embed markup to wrap in a div.embed-wrapper later
+          if (embedMarkup) {
+            if (embedWrapper?.classList.contains('embed-wrapper')) {
+              embedWrapper.innerHTML = embedMarkup;
+            } else {
+              embedWrapper.replaceWith(
+                ...new JSDOM(embedMarkup).window.document.body.childNodes
+              );
+            }
           }
-        }
-      })
-    );
+        })
+      );
+    }
+
+    // Generate ids for headings that don't have them for anchor linking
+    const slugger = new HeadingSlugger();
+    ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'].forEach(tag => {
+      const headings = document.querySelectorAll(tag);
+      [...headings]
+        .filter(heading => !heading.hasAttribute('id'))
+        .forEach(heading => {
+          const textContent = heading.textContent || '';
+          const slug = slugger.getSlug(textContent);
+          heading.setAttribute('id', `heading-${slug}`);
+        });
+    });
   }
 
   const embeds = [...document.getElementsByTagName('embed')];
