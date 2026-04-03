@@ -25,6 +25,11 @@
     "type": 302
   },
   {
+    "source": "/ai-tools-for-developers-openclaw-github-copilot-claude-code-coderabbit-gemini-cli",
+    "destination": "/news/ai-tools-for-developers",
+    "type": 302
+  },
+  {
     "source": "/build-portfolio-website-react",
     "destination": "/news/how-to-build-a-simple-portfolio-blog-with-nextjs",
     "type": 302
