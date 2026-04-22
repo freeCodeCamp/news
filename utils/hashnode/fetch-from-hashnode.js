@@ -71,8 +71,7 @@ export const fetchFromHashnode = async contentType => {
   `;
 
   const query = gql`
-    ${postFieldsFragment}
-    ${staticPageFieldsFragment}
+    ${contentType === 'posts' ? postFieldsFragment : staticPageFieldsFragment}
     query DataFromPublication($host: String!, $first: Int!, $after: String) {
       publication(host: $host) {
         id
