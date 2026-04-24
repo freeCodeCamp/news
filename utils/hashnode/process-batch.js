@@ -74,7 +74,7 @@ export default async ({ batch, contentType, currBatchNo, totalBatches }) => {
             name: obj.author.name,
             slug: obj.author.username,
             path: `/author/${obj.author.username}/`,
-            bio: obj.author.bio.text,
+            bio: obj.author.bio?.text,
             location: obj.author.location,
             website,
             // Note: Twitter and Facebook links coming from Hashnode should be full URLs.
