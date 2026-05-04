@@ -18,6 +18,17 @@
                 {% t 'tag.multiple-posts', { postCount: postCount } %}
             {% endif %}
         </h2>
+        <div class="social-links">
+            <a
+                class="social-link social-link-rss"
+                href="{{ (tag.path + '/rss/') | htmlBaseUrl(site.url) }}"
+                target="_blank"
+                rel="noopener"
+                data-test-label="rss-link"
+            >
+                {% include "partials/icons/rss.njk" %}
+            </a>
+        </div>
 
         <div class="tags-row">
             {% for tag in popularTags %}
