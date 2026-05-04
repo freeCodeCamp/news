@@ -303,7 +303,7 @@ describe('Author page (Hashnode sourced)', () => {
           .should(
             'have.attr',
             'href',
-            'https://feedly.com/i/subscription/feed/http://localhost:8080/news/author/beaucarnes/rss/'
+            'http://localhost:8080/news/author/beaucarnes/rss/'
           )
           .find('svg')
           .should('have.attr', 'data-test-label', 'rss-icon');
