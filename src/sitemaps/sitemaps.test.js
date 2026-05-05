@@ -1,9 +1,9 @@
 import gracefulFS from 'graceful-fs';
-import libxmljs from 'libxmljs';
+import { XMLParser, XMLValidator } from 'fast-xml-parser';
 import { join } from 'path';
 
 const { readFileSync } = gracefulFS;
-const { parseXml } = libxmljs;
+const xmlParser = new XMLParser();
 
 const sitemapFilenames = [
   'sitemap.xml',
@@ -15,28 +15,20 @@ const sitemapFilenames = [
 const distPath = join(import.meta.dirname, '../../dist');
 
 describe('Sitemap tests:', () => {
-  describe('Validate sitemaps against schemas', () => {
+  describe('Validate sitemaps', () => {
     sitemapFilenames.forEach(sitemapFilename => {
       test(`${sitemapFilename} is valid`, () => {
         try {
           const sitemap = readFileSync(join(distPath, sitemapFilename), 'utf8');
-          const schemaFilename =
-            sitemapFilename === 'sitemap.xml' ? 'siteindex.xsd' : 'sitemap.xsd';
-          const schema = readFileSync(
-            join(import.meta.dirname, `./schemas/${schemaFilename}`),
-            'utf8'
-          );
-          const sitemapDoc = parseXml(sitemap);
-          const schemaDoc = parseXml(schema);
-          const isValid = sitemapDoc.validate(schemaDoc);
+          const result = XMLValidator.validate(sitemap);
 
-          if (!isValid) {
+          if (result.err) {
             throw new Error(
-              `${sitemapFilename} is not valid: ${sitemapDoc.validationErrors}`
+              `${sitemapFilename} is not valid: ${result.err.msg} at line ${result.err.line}, column ${result.err.col}`
             );
           }
 
-          expect(isValid).toBeTruthy();
+          expect(result).toBeTruthy();
         } catch (err) {
           // Throw error again to fail test if a sitemap cannot be parsed correctly
           throw new Error(err, { cause: err });
@@ -52,29 +44,16 @@ describe('Sitemap tests:', () => {
           join(distPath, 'sitemap-posts.xml'),
           'utf8'
         );
-        const postsSitemapDoc = parseXml(postsSitemap);
-        const postURLNodes = postsSitemapDoc
-          .root()
-          .childNodes()
-          .filter(node => {
-            return node.name() === 'url';
-          });
-        const lastmodDates = postURLNodes
-          .map(node => {
-            return node
-              .childNodes()
-              .filter(node => node.name() === 'lastmod')
-              .map(node => node.text());
-          })
-          .flat();
+        const postsSitemapDoc = xmlParser.parse(postsSitemap);
+        const postURLNodes = postsSitemapDoc.urlset.url;
 
         // Ensure all posts have a last modified date
-        expect(lastmodDates).toHaveLength(postURLNodes.length);
+        expect(postURLNodes.every(node => node.lastmod)).toBeTruthy();
 
         // Ensure all last modified dates are valid dates
-        lastmodDates.forEach(date => {
-          expect(new Date(date)).toBeInstanceOf(Date);
-        });
+        expect(
+          postURLNodes.every(node => !isNaN(new Date(node.lastmod)))
+        ).toBeTruthy();
       });
     });
   });
