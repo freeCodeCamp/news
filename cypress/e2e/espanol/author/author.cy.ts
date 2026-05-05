@@ -180,11 +180,13 @@ describe('Author page (Ghost sourced)', () => {
           cy.visit('/author/rafael/');
         });
 
-        // TODO: Links for RSS feeds are currently broken, so fix and test them in
-        // a future PR
         it('should show an RSS link and icon', () => {
           cy.get(selectors.socialMedia.rss.link)
-            // .should('have.attr', 'href', 'https://feedly.com/i/subscription/feed/http://localhost:8080/news/author/rafael/rss/')
+            .should(
+              'have.attr',
+              'href',
+              'http://localhost:8080/espanol/news/author/rafael/rss/'
+            )
             .find('svg')
             .should('have.attr', 'data-test-label', 'rss-icon');
         });
