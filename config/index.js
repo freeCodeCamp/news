@@ -149,7 +149,7 @@ export const config = {
   eleventyEnv: eleventyEnv || 'dev',
   hashnodeAPIURL:
     !hashnodeAPIURL || hashnodeAPIURL === 'api_url_from_hashnode_dashboard'
-      ? 'https://gql.hashnode.com'
+      ? 'https://gql-beta.hashnode.com/'
       : hashnodeAPIURL,
   chatWebhookKey:
     !chatWebhookKey || chatWebhookKey === 'chat_webhook_key_from_space_settings'
