@@ -148,7 +148,9 @@ export const config = {
     : googleAdsenseDataAdSlot,
   eleventyEnv: eleventyEnv || 'dev',
   hashnodeAPIURL:
-    !hashnodeAPIURL || hashnodeAPIURL === 'api_url_from_hashnode_dashboard'
+    !hashnodeAPIURL ||
+    hashnodeAPIURL === 'api_url_from_hashnode_dashboard' ||
+    hashnodeAPIURL.startsWith('https://gql.hashnode.com') // Check to prevent old API URL from being used
       ? 'https://gql-beta.hashnode.com/'
       : hashnodeAPIURL,
   chatWebhookKey:
