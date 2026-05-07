@@ -50,7 +50,6 @@ jobs:
     env:
       POSTS_PER_PAGE: ${{ secrets.POSTS_PER_PAGE }}
 
-      HASHNODE_API_URL: api_url_from_hashnode_dashboard
       ENGLISH_HASHNODE_HOST: host_from_hashnode_dashboard
 
       ESPANOL_GHOST_API_URL: ${{ secrets.CI_ESPANOL_GHOST_API_URL }}
