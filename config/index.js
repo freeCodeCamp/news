@@ -69,7 +69,6 @@ const {
   ADS_ENABLED: adsEnabled,
   GOOGLE_ADSENSE_DATA_AD_CLIENT: googleAdsenseDataAdClient,
   GOOGLE_ADSENSE_DATA_AD_SLOT: googleAdsenseDataAdSlot,
-  HASHNODE_API_URL: hashnodeAPIURL,
   CHAT_WEBHOOK_KEY: chatWebhookKey,
   CHAT_WEBHOOK_TOKEN: chatWebhookToken
 } = process.env;
@@ -147,10 +146,6 @@ export const config = {
     ? ''
     : googleAdsenseDataAdSlot,
   eleventyEnv: eleventyEnv || 'dev',
-  hashnodeAPIURL:
-    !hashnodeAPIURL || hashnodeAPIURL === 'api_url_from_hashnode_dashboard'
-      ? 'https://gql.hashnode.com'
-      : hashnodeAPIURL,
   chatWebhookKey:
     !chatWebhookKey || chatWebhookKey === 'chat_webhook_key_from_space_settings'
       ? ''

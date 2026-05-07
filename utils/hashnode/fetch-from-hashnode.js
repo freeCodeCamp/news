@@ -6,7 +6,8 @@ import { wait } from '../wait.js';
 import { loadJSON } from '../load-json.js';
 import { config } from '../../config/index.js';
 
-const { eleventyEnv, currentLocale_i18n, hashnodeAPIURL } = config;
+const { eleventyEnv, currentLocale_i18n } = config;
+const hashnodeAPIURL = 'https://gql-beta.hashnode.com/';
 
 export const fetchFromHashnode = async contentType => {
   if (!hashnodeHost) return [];
