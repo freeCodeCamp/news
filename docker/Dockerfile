@@ -1,6 +1,6 @@
 FROM node:22-alpine
 ENV PNPM_HOME="/pnpm"
-ENV PATH="$PNPM_HOME:$PATH"
+ENV PATH="$PNPM_HOME/bin:$PATH"
 RUN corepack enable pnpm && pnpm add -g serve
 
 ARG BUILD_LANGUAGE
