@@ -13,7 +13,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [22.x]
+        node-version: [24.x]
 
     steps:
       - name: Checkout source code
@@ -44,7 +44,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [22.x]
+        node-version: [24.x]
         languages: [english, espanol]
 
     env:
