@@ -1290,7 +1290,7 @@ html.dark-mode .post-full-content hr:after {
 }
 
 .footnote-backref {
-  color: var(--dark-blue) !important;
+  color: var(--link-color) !important;
   font-size: 1.2rem;
   font-weight: bold;
   text-decoration: none !important;
@@ -1505,8 +1505,8 @@ pre.runkit-element {
 }
 
 .author-card-button:hover {
-  border-color: var(--dark-blue);
-  color: var(--dark-blue);
+  border-color: var(--link-color);
+  color: var(--link-color);
   text-decoration: none;
 }
 

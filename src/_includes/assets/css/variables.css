@@ -4,6 +4,7 @@
 :root {
   /* Colours */
   --dark-blue: #002ead;
+  --light-blue: #809fff;
   --theme-color: #0a0a23;
   --gray90: #0a0a23;
   --gray85: #1b1b32;
@@ -37,6 +38,7 @@ html {
   --tertiary-background: var(--gray10);
   --secondary-background: var(--gray05);
   --primary-background: var(--gray00);
+  --link-color: var(--dark-blue);
 }
 
 html.dark-mode {
@@ -49,4 +51,5 @@ html.dark-mode {
   --tertiary-background: var(--gray80);
   --secondary-background: var(--gray85);
   --primary-background: var(--gray90);
+  --link-color: var(--light-blue);
 }

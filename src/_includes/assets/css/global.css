@@ -403,7 +403,7 @@ blockquote cite a {
 }
 
 a {
-  color: var(--dark-blue);
+  color: var(--link-color);
   text-decoration: none;
   cursor: pointer;
 }
