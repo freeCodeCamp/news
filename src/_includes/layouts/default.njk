@@ -26,13 +26,14 @@
         {# News Theme Styles #}
         <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="{% cacheBuster '/assets/css/global.css' %}" />
         <link rel="stylesheet" type="text/css" href="{% cacheBuster '/assets/css/variables.css' %}" />
+        <link rel="stylesheet" type="text/css" href="{% cacheBuster '/assets/css/print.css' %}" />
         <link rel="stylesheet" type="text/css" href="{% cacheBuster '/assets/css/screen.css' %}" />
         <link rel="stylesheet" type="text/css" href="{% cacheBuster '/assets/css/search-bar.css' %}" />
 
         {# Algolia search assets #}
         <script defer src="https://cdn.freecodecamp.org/news-assets/algolia/algoliasearch/5.46.3/lite/browser.umd.js"></script>
         <script defer src="https://cdn.freecodecamp.org/news-assets/algolia/autocomplete/1.19.4/index.production.min.js"></script>
-        
+
         {# Day.js and plugins for localization and formatting #}
         <script defer src="https://cdn.freecodecamp.org/news-assets/dayjs/1.10.4/dayjs.min.js"></script>
         <script defer src="https://cdn.freecodecamp.org/news-assets/dayjs/1.10.4/localizedFormat.min.js"></script>

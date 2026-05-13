@@ -1,0 +1,13 @@
+@media print {
+  .site-nav {
+    display: none;
+  }
+
+  .banner {
+    display: none;
+  }
+
+  footer {
+    display: none;
+  }
+}
