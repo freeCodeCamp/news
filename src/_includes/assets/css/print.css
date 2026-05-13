@@ -10,4 +10,8 @@
   footer {
     display: none;
   }
+
+  body {
+    margin-top: 0;
+  }
 }
