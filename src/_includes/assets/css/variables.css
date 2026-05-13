@@ -28,6 +28,7 @@
 }
 
 html {
+  color-scheme: light;
   --primary-color: var(--gray90);
   --secondary-color: var(--gray85);
   --tertiary-color: var(--gray80);
@@ -39,6 +40,7 @@ html {
 }
 
 html.dark-mode {
+  color-scheme: dark;
   --primary-color: var(--gray00);
   --secondary-color: var(--gray05);
   --tertiary-color: var(--gray10);

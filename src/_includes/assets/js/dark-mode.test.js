@@ -2,13 +2,46 @@
  * @jest-environment jsdom
  */
 
-import { expect, jest } from '@jest/globals';
+import { readFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+import { dirname, resolve } from 'node:path';
+import {
+  afterEach,
+  beforeEach,
+  describe,
+  expect,
+  it,
+  jest
+} from '@jest/globals';
 
-function setupDOM({ isDark = false, hasPrismElements = true } = {}) {
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const scriptSource = readFileSync(resolve(__dirname, 'dark-mode.js'), 'utf8');
+
+// dark-mode.js wraps everything in document.addEventListener('DOMContentLoaded', () => { ... }).
+// Tests run the inner body directly so they exercise the real production code.
+const bodyMatch = scriptSource.match(
+  /document\.addEventListener\('DOMContentLoaded',\s*\(\)\s*=>\s*\{([\s\S]*)\}\);\s*$/
+);
+if (!bodyMatch) {
+  throw new Error(
+    'Could not extract DOMContentLoaded body from dark-mode.js — has the wrapper shape changed?'
+  );
+}
+const runInit = new Function(bodyMatch[1]);
+
+function setupDOM({
+  isDark = false,
+  hasPrismElements = true,
+  hasToggleButton = true,
+  initialIconClass = isDark ? 'fa-square-check' : 'fa-square'
+} = {}) {
   document.documentElement.className = isDark ? 'dark-mode' : '';
-
   document.body.innerHTML = `
-    <button id="toggle-dark-mode" aria-pressed="false"><i class="${isDark ? 'fa-square-check' : 'fa-square'}"></i></button>
+    ${
+      hasToggleButton
+        ? `<button id="toggle-dark-mode" aria-pressed="false"><i class="${initialIconClass}"></i></button>`
+        : ''
+    }
     ${
       hasPrismElements
         ? `<link id="prism-theme-light" rel="stylesheet" />
@@ -16,35 +49,6 @@ function setupDOM({ isDark = false, hasPrismElements = true } = {}) {
         : ''
     }
   `;
-}
-
-function loadDarkModeScript() {
-  // Re-import the module fresh each time
-  const script = document.createElement('script');
-  const toggleButton = document.getElementById('toggle-dark-mode');
-  const onIcon = toggleButton.querySelector('i');
-  const prismLight = document.getElementById('prism-theme-light');
-  const prismDark = document.getElementById('prism-theme-dark');
-  const isDark = document.documentElement.classList.contains('dark-mode');
-  toggleButton.setAttribute('aria-pressed', String(isDark));
-
-  toggleButton.addEventListener('click', function () {
-    document.documentElement.classList.toggle('dark-mode');
-    const isDarkNow = document.documentElement.classList.contains('dark-mode');
-    if (isDarkNow) {
-      localStorage.setItem('theme', 'dark');
-      this.setAttribute('aria-pressed', 'true');
-      if (prismLight) prismLight.disabled = true;
-      if (prismDark) prismDark.disabled = false;
-      onIcon.classList.replace('fa-square', 'fa-square-check');
-    } else {
-      localStorage.setItem('theme', 'light');
-      this.setAttribute('aria-pressed', 'false');
-      if (prismLight) prismLight.disabled = false;
-      if (prismDark) prismDark.disabled = true;
-      onIcon.classList.replace('fa-square-check', 'fa-square');
-    }
-  });
 }
 
 const localStorageMock = (() => {
@@ -62,247 +66,281 @@ const localStorageMock = (() => {
     })
   };
 })();
-
 Object.defineProperty(window, 'localStorage', { value: localStorageMock });
+
+let mqListeners;
+let mqMatches;
+
+function installMatchMediaMock({ matches = false } = {}) {
+  mqMatches = matches;
+  mqListeners = new Set();
+  window.matchMedia = jest.fn().mockImplementation(query => ({
+    media: query,
+    get matches() {
+      return mqMatches;
+    },
+    addEventListener: (event, cb) => {
+      if (event === 'change') mqListeners.add(cb);
+    },
+    removeEventListener: (event, cb) => {
+      if (event === 'change') mqListeners.delete(cb);
+    },
+    addListener: cb => mqListeners.add(cb),
+    removeListener: cb => mqListeners.delete(cb)
+  }));
+}
+
+function emitSystemPrefChange(matches) {
+  mqMatches = matches;
+  for (const cb of mqListeners) cb({ matches });
+}
 
 beforeEach(() => {
   localStorageMock.clear();
   jest.clearAllMocks();
+  installMatchMediaMock({ matches: false });
 });
 
-describe('dark-mode.js toggle handler', () => {
-  describe('initialization', () => {
-    it('should set aria-pressed to "false" when page loads in light mode', () => {
-      setupDOM({ isDark: false });
-      loadDarkModeScript();
+afterEach(() => {
+  document.documentElement.className = '';
+  document.body.innerHTML = '';
+});
 
-      const button = document.getElementById('toggle-dark-mode');
-      expect(button.getAttribute('aria-pressed')).toBe('false');
-    });
-
-    it('should set aria-pressed to "true" when page loads in dark mode', () => {
-      setupDOM({ isDark: true });
-      loadDarkModeScript();
-
-      const button = document.getElementById('toggle-dark-mode');
-      expect(button.getAttribute('aria-pressed')).toBe('true');
-    });
-
-    it('icon should be "fa-square-check" when page loads in dark mode', () => {
-      setupDOM({ isDark: true });
-      loadDarkModeScript();
-
-      const button = document.getElementById('toggle-dark-mode');
-      const icon = button.querySelector('i');
-      expect(icon.classList.contains('fa-square-check')).toBe(true);
-    });
-
-    it('icon should be "fa-square" when page loads in light mode', () => {
-      setupDOM({ isDark: false });
-      loadDarkModeScript();
-
-      const button = document.getElementById('toggle-dark-mode');
-      const icon = button.querySelector('i');
-      expect(icon.classList.contains('fa-square')).toBe(true);
-    });
+describe('dark-mode.js initialization', () => {
+  it('sets aria-pressed="false" when html lacks dark-mode class', () => {
+    setupDOM({ isDark: false });
+    runInit();
+    expect(
+      document.getElementById('toggle-dark-mode').getAttribute('aria-pressed')
+    ).toBe('false');
   });
 
-  describe('toggling to dark mode', () => {
-    beforeEach(() => {
-      setupDOM({ isDark: false });
-      loadDarkModeScript();
-    });
-
-    it('should add dark-mode class to documentElement', () => {
-      document.getElementById('toggle-dark-mode').click();
-      expect(document.documentElement.classList.contains('dark-mode')).toBe(
-        true
-      );
-    });
-
-    it('should set localStorage theme to "dark"', () => {
-      document.getElementById('toggle-dark-mode').click();
-      expect(localStorage.setItem).toHaveBeenCalledWith('theme', 'dark');
-    });
-
-    it('should set aria-pressed to "true"', () => {
-      const button = document.getElementById('toggle-dark-mode');
-      button.click();
-      expect(button.getAttribute('aria-pressed')).toBe('true');
-    });
-
-    it('should disable light Prism theme', () => {
-      document.getElementById('toggle-dark-mode').click();
-      const prismLight = document.getElementById('prism-theme-light');
-      expect(prismLight.disabled).toBe(true);
-    });
-
-    it('should enable dark Prism theme', () => {
-      document.getElementById('toggle-dark-mode').click();
-      const prismDark = document.getElementById('prism-theme-dark');
-      expect(prismDark.disabled).toBe(false);
-    });
-
-    it('icon should be set to "fa-square-check"', () => {
-      const button = document.getElementById('toggle-dark-mode');
-      button.click();
-      const icon = button.querySelector('i');
-      expect(icon.classList.contains('fa-square-check')).toBe(true);
-    });
+  it('sets aria-pressed="true" when html has dark-mode class', () => {
+    setupDOM({ isDark: true });
+    runInit();
+    expect(
+      document.getElementById('toggle-dark-mode').getAttribute('aria-pressed')
+    ).toBe('true');
   });
 
-  describe('toggling to light mode', () => {
-    beforeEach(() => {
-      setupDOM({ isDark: true });
-      loadDarkModeScript();
-    });
-
-    it('should remove dark-mode class from documentElement', () => {
-      document.getElementById('toggle-dark-mode').click();
-      expect(document.documentElement.classList.contains('dark-mode')).toBe(
-        false
-      );
-    });
-
-    it('should set localStorage theme to "light"', () => {
-      document.getElementById('toggle-dark-mode').click();
-      expect(localStorage.setItem).toHaveBeenCalledWith('theme', 'light');
-    });
-
-    it('should set aria-pressed to "false"', () => {
-      const button = document.getElementById('toggle-dark-mode');
-      button.click();
-      expect(button.getAttribute('aria-pressed')).toBe('false');
-    });
-
-    it('should enable light Prism theme', () => {
-      document.getElementById('toggle-dark-mode').click();
-      const prismLight = document.getElementById('prism-theme-light');
-      expect(prismLight.disabled).toBe(false);
-    });
-
-    it('should disable dark Prism theme', () => {
-      document.getElementById('toggle-dark-mode').click();
-      const prismDark = document.getElementById('prism-theme-dark');
-      expect(prismDark.disabled).toBe(true);
-    });
-
-    it('icon should be set to "fa-square"', () => {
-      const button = document.getElementById('toggle-dark-mode');
-      button.click();
-      const icon = button.querySelector('i');
-      expect(icon.classList.contains('fa-square')).toBe(true);
-    });
+  it('reconciles a stale fa-square-check icon to fa-square in light mode', () => {
+    // Simulates SSR template that always renders fa-square-check while user is in light mode.
+    setupDOM({ isDark: false, initialIconClass: 'fa-square-check' });
+    runInit();
+    const icon = document.querySelector('#toggle-dark-mode i');
+    expect(icon.classList.contains('fa-square')).toBe(true);
+    expect(icon.classList.contains('fa-square-check')).toBe(false);
   });
 
-  describe('double toggle (round-trip)', () => {
-    it('should return to light mode after toggling twice from light', () => {
-      setupDOM({ isDark: false });
-      loadDarkModeScript();
-
-      const button = document.getElementById('toggle-dark-mode');
-      const icon = button.querySelector('i');
-      button.click();
-      button.click();
-
-      expect(document.documentElement.classList.contains('dark-mode')).toBe(
-        false
-      );
-      expect(icon.classList.contains('fa-square')).toBe(true);
-      expect(button.getAttribute('aria-pressed')).toBe('false');
-      expect(localStorage.setItem).toHaveBeenLastCalledWith('theme', 'light');
-    });
-
-    it('should return to dark mode after toggling twice from dark', () => {
-      setupDOM({ isDark: true });
-      loadDarkModeScript();
-
-      const button = document.getElementById('toggle-dark-mode');
-      const icon = button.querySelector('i');
-      button.click();
-      button.click();
-
-      expect(document.documentElement.classList.contains('dark-mode')).toBe(
-        true
-      );
-      expect(icon.classList.contains('fa-square-check')).toBe(true);
-      expect(button.getAttribute('aria-pressed')).toBe('true');
-      expect(localStorage.setItem).toHaveBeenLastCalledWith('theme', 'dark');
-    });
+  it('reconciles a stale fa-square icon to fa-square-check in dark mode', () => {
+    setupDOM({ isDark: true, initialIconClass: 'fa-square' });
+    runInit();
+    const icon = document.querySelector('#toggle-dark-mode i');
+    expect(icon.classList.contains('fa-square-check')).toBe(true);
+    expect(icon.classList.contains('fa-square')).toBe(false);
   });
 
-  describe('without Prism elements', () => {
-    it('should not throw when Prism link elements are absent', () => {
-      setupDOM({ isDark: false, hasPrismElements: false });
-      loadDarkModeScript();
+  it('reconciles Prism stylesheet disabled flags on init for dark mode', () => {
+    setupDOM({ isDark: true });
+    runInit();
+    expect(document.getElementById('prism-theme-light').disabled).toBe(true);
+    expect(document.getElementById('prism-theme-dark').disabled).toBe(false);
+  });
 
-      expect(() => {
-        document.getElementById('toggle-dark-mode').click();
-      }).not.toThrow();
-    });
+  it('reconciles Prism stylesheet disabled flags on init for light mode', () => {
+    setupDOM({ isDark: false });
+    runInit();
+    expect(document.getElementById('prism-theme-light').disabled).toBe(false);
+    expect(document.getElementById('prism-theme-dark').disabled).toBe(true);
+  });
 
-    it('should still toggle dark-mode class without Prism elements', () => {
-      setupDOM({ isDark: false, hasPrismElements: false });
-      loadDarkModeScript();
-
-      document.getElementById('toggle-dark-mode').click();
-      expect(document.documentElement.classList.contains('dark-mode')).toBe(
-        true
-      );
-    });
-
-    it('should still update localStorage without Prism elements', () => {
-      setupDOM({ isDark: false, hasPrismElements: false });
-      loadDarkModeScript();
-
-      document.getElementById('toggle-dark-mode').click();
-      expect(localStorage.setItem).toHaveBeenCalledWith('theme', 'dark');
-    });
+  it('returns early without throwing when toggle button is missing', () => {
+    setupDOM({ hasToggleButton: false });
+    expect(() => runInit()).not.toThrow();
   });
 });
 
-describe('FOUC prevention script', () => {
+describe('dark-mode.js toggle click — light to dark', () => {
+  beforeEach(() => {
+    setupDOM({ isDark: false });
+    runInit();
+    document.getElementById('toggle-dark-mode').click();
+  });
+
+  it('adds dark-mode class to documentElement', () => {
+    expect(document.documentElement.classList.contains('dark-mode')).toBe(true);
+  });
+
+  it('persists "dark" in localStorage', () => {
+    expect(localStorage.setItem).toHaveBeenCalledWith('theme', 'dark');
+  });
+
+  it('updates aria-pressed to "true"', () => {
+    expect(
+      document.getElementById('toggle-dark-mode').getAttribute('aria-pressed')
+    ).toBe('true');
+  });
+
+  it('disables the light Prism stylesheet', () => {
+    expect(document.getElementById('prism-theme-light').disabled).toBe(true);
+  });
+
+  it('enables the dark Prism stylesheet', () => {
+    expect(document.getElementById('prism-theme-dark').disabled).toBe(false);
+  });
+
+  it('shows fa-square-check icon', () => {
+    const icon = document.querySelector('#toggle-dark-mode i');
+    expect(icon.classList.contains('fa-square-check')).toBe(true);
+    expect(icon.classList.contains('fa-square')).toBe(false);
+  });
+});
+
+describe('dark-mode.js toggle click — dark to light', () => {
+  beforeEach(() => {
+    setupDOM({ isDark: true });
+    runInit();
+    document.getElementById('toggle-dark-mode').click();
+  });
+
+  it('removes dark-mode class from documentElement', () => {
+    expect(document.documentElement.classList.contains('dark-mode')).toBe(
+      false
+    );
+  });
+
+  it('persists "light" in localStorage', () => {
+    expect(localStorage.setItem).toHaveBeenCalledWith('theme', 'light');
+  });
+
+  it('updates aria-pressed to "false"', () => {
+    expect(
+      document.getElementById('toggle-dark-mode').getAttribute('aria-pressed')
+    ).toBe('false');
+  });
+
+  it('enables the light Prism stylesheet', () => {
+    expect(document.getElementById('prism-theme-light').disabled).toBe(false);
+  });
+
+  it('disables the dark Prism stylesheet', () => {
+    expect(document.getElementById('prism-theme-dark').disabled).toBe(true);
+  });
+
+  it('shows fa-square icon', () => {
+    const icon = document.querySelector('#toggle-dark-mode i');
+    expect(icon.classList.contains('fa-square')).toBe(true);
+    expect(icon.classList.contains('fa-square-check')).toBe(false);
+  });
+});
+
+describe('dark-mode.js round-trip toggle', () => {
+  it('returns to light state after two clicks starting from light', () => {
+    setupDOM({ isDark: false });
+    runInit();
+    const button = document.getElementById('toggle-dark-mode');
+    button.click();
+    button.click();
+    expect(document.documentElement.classList.contains('dark-mode')).toBe(
+      false
+    );
+    expect(button.getAttribute('aria-pressed')).toBe('false');
+    expect(localStorage.setItem).toHaveBeenLastCalledWith('theme', 'light');
+  });
+
+  it('returns to dark state after two clicks starting from dark', () => {
+    setupDOM({ isDark: true });
+    runInit();
+    const button = document.getElementById('toggle-dark-mode');
+    button.click();
+    button.click();
+    expect(document.documentElement.classList.contains('dark-mode')).toBe(true);
+    expect(button.getAttribute('aria-pressed')).toBe('true');
+    expect(localStorage.setItem).toHaveBeenLastCalledWith('theme', 'dark');
+  });
+});
+
+describe('dark-mode.js without Prism elements', () => {
+  it('does not throw when prism link elements are absent', () => {
+    setupDOM({ isDark: false, hasPrismElements: false });
+    runInit();
+    expect(() =>
+      document.getElementById('toggle-dark-mode').click()
+    ).not.toThrow();
+  });
+
+  it('still toggles dark-mode without prism elements', () => {
+    setupDOM({ isDark: false, hasPrismElements: false });
+    runInit();
+    document.getElementById('toggle-dark-mode').click();
+    expect(document.documentElement.classList.contains('dark-mode')).toBe(true);
+  });
+});
+
+describe('dark-mode.js OS preference change', () => {
+  it('flips to dark when OS pref becomes dark and no user choice is persisted', () => {
+    setupDOM({ isDark: false });
+    runInit();
+    emitSystemPrefChange(true);
+    expect(document.documentElement.classList.contains('dark-mode')).toBe(true);
+    expect(
+      document.getElementById('toggle-dark-mode').getAttribute('aria-pressed')
+    ).toBe('true');
+  });
+
+  it('flips back to light when OS pref becomes light and no user choice is persisted', () => {
+    setupDOM({ isDark: true });
+    runInit();
+    emitSystemPrefChange(false);
+    expect(document.documentElement.classList.contains('dark-mode')).toBe(
+      false
+    );
+  });
+
+  it('does not persist the OS-driven change to localStorage', () => {
+    setupDOM({ isDark: false });
+    runInit();
+    emitSystemPrefChange(true);
+    expect(localStorage.setItem).not.toHaveBeenCalled();
+  });
+
+  it('ignores OS pref changes once the user has clicked the toggle', () => {
+    setupDOM({ isDark: false });
+    runInit();
+    document.getElementById('toggle-dark-mode').click(); // persists 'theme=dark'
+    const stateBefore =
+      document.documentElement.classList.contains('dark-mode');
+    emitSystemPrefChange(false);
+    expect(document.documentElement.classList.contains('dark-mode')).toBe(
+      stateBefore
+    );
+  });
+});
+
+describe('FOUC prevention script (mirrored from default.njk)', () => {
   function simulateFOUCScript(theme, prefersDark) {
-    // Reset html class
     document.documentElement.className = '';
-
-    // Simulate the inline script from default.njk
     if (theme === 'dark' || (!theme && prefersDark)) {
       document.documentElement.classList.add('dark-mode');
     }
   }
 
-  it('should add dark-mode class when localStorage theme is "dark"', () => {
+  it('adds dark-mode class when localStorage theme is "dark"', () => {
     simulateFOUCScript('dark', false);
     expect(document.documentElement.classList.contains('dark-mode')).toBe(true);
   });
 
-  it('should not add dark-mode class when localStorage theme is "light"', () => {
-    simulateFOUCScript('light', false);
+  it('does not add dark-mode class when localStorage theme is "light"', () => {
+    simulateFOUCScript('light', true);
     expect(document.documentElement.classList.contains('dark-mode')).toBe(
       false
     );
   });
 
-  it('should add dark-mode class when no localStorage and system prefers dark', () => {
+  it('falls back to system preference when no localStorage theme is set', () => {
     simulateFOUCScript(null, true);
     expect(document.documentElement.classList.contains('dark-mode')).toBe(true);
-  });
-
-  it('should not add dark-mode class when no localStorage and system prefers light', () => {
     simulateFOUCScript(null, false);
-    expect(document.documentElement.classList.contains('dark-mode')).toBe(
-      false
-    );
-  });
-
-  it('should prioritize localStorage "dark" over system preference light', () => {
-    simulateFOUCScript('dark', false);
-    expect(document.documentElement.classList.contains('dark-mode')).toBe(true);
-  });
-
-  it('should prioritize localStorage "light" over system preference dark', () => {
-    simulateFOUCScript('light', true);
     expect(document.documentElement.classList.contains('dark-mode')).toBe(
       false
     );

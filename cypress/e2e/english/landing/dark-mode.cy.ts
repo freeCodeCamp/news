@@ -9,12 +9,60 @@ const selectors = {
 
 const postUrl = '/how-do-numerical-conversions-work/';
 
+interface MockMediaQueryList {
+  media: string;
+  matches: boolean;
+  addEventListener: (
+    event: 'change',
+    cb: (e: { matches: boolean }) => void
+  ) => void;
+  removeEventListener: (
+    event: 'change',
+    cb: (e: { matches: boolean }) => void
+  ) => void;
+  addListener: (cb: (e: { matches: boolean }) => void) => void;
+  removeListener: (cb: (e: { matches: boolean }) => void) => void;
+}
+
+type WinWithMqRegistry = Cypress.AUTWindow & {
+  __mqListeners?: Set<(e: { matches: boolean }) => void>;
+  __mqMatches?: boolean;
+};
+
+const installMatchMediaStub = (
+  win: WinWithMqRegistry,
+  darkAppearance: boolean
+) => {
+  win.__mqListeners = new Set();
+  win.__mqMatches = darkAppearance;
+  const mql: MockMediaQueryList = {
+    media: '(prefers-color-scheme: dark)',
+    get matches() {
+      return win.__mqMatches as boolean;
+    },
+    addEventListener: (event, cb) => {
+      if (event === 'change') win.__mqListeners!.add(cb);
+    },
+    removeEventListener: (event, cb) => {
+      if (event === 'change') win.__mqListeners!.delete(cb);
+    },
+    addListener: cb => win.__mqListeners!.add(cb),
+    removeListener: cb => win.__mqListeners!.delete(cb)
+  };
+  cy.stub(win, 'matchMedia')
+    .withArgs('(prefers-color-scheme: dark)')
+    .returns(mql);
+};
+
+const emitSystemPrefChange = (win: WinWithMqRegistry, matches: boolean) => {
+  win.__mqMatches = matches;
+  win.__mqListeners?.forEach(cb => cb({ matches }));
+};
+
 const visitWithPreference = (darkAppearance: boolean, url = '/') =>
   cy.visit(url, {
     onBeforeLoad(win) {
-      cy.stub(win, 'matchMedia')
-        .withArgs('(prefers-color-scheme: dark)')
-        .returns({ matches: darkAppearance });
+      installMatchMediaStub(win as WinWithMqRegistry, darkAppearance);
     }
   });
 
@@ -168,9 +216,7 @@ describe('Dark Mode', () => {
       cy.visit('/', {
         onBeforeLoad(win) {
           win.localStorage.setItem('theme', 'light');
-          cy.stub(win, 'matchMedia')
-            .withArgs('(prefers-color-scheme: dark)')
-            .returns({ matches: true });
+          installMatchMediaStub(win as WinWithMqRegistry, true);
         }
       });
       cy.get('html').should('not.have.class', 'dark-mode');
@@ -180,12 +226,92 @@ describe('Dark Mode', () => {
       cy.visit('/', {
         onBeforeLoad(win) {
           win.localStorage.setItem('theme', 'dark');
-          cy.stub(win, 'matchMedia')
-            .withArgs('(prefers-color-scheme: dark)')
-            .returns({ matches: false });
+          installMatchMediaStub(win as WinWithMqRegistry, false);
         }
       });
       cy.get('html').should('have.class', 'dark-mode');
+    });
+  });
+
+  context('OS preference change at runtime', () => {
+    beforeEach(() => {
+      cy.clearLocalStorage();
+    });
+
+    it('flips to dark mode when system pref changes to dark and no user choice is persisted', () => {
+      visitWithPreference(false);
+      cy.get('html').should('not.have.class', 'dark-mode');
+      cy.window().then(win =>
+        emitSystemPrefChange(win as WinWithMqRegistry, true)
+      );
+      cy.get('html').should('have.class', 'dark-mode');
+      cy.window().then(win => {
+        // OS-driven change must not write to localStorage.
+        expect(win.localStorage.getItem('theme')).to.equal(null);
+      });
+    });
+
+    it('flips back to light mode when system pref changes to light and no user choice is persisted', () => {
+      visitWithPreference(true);
+      cy.get('html').should('have.class', 'dark-mode');
+      cy.window().then(win =>
+        emitSystemPrefChange(win as WinWithMqRegistry, false)
+      );
+      cy.get('html').should('not.have.class', 'dark-mode');
+    });
+
+    it('ignores system pref changes once the user has explicitly toggled', () => {
+      visitWithPreference(false);
+      loadAllPosts();
+      openMenuAndToggleDarkMode();
+      cy.get('html').should('have.class', 'dark-mode');
+      cy.window().then(win =>
+        emitSystemPrefChange(win as WinWithMqRegistry, false)
+      );
+      cy.get('html').should('have.class', 'dark-mode');
+    });
+  });
+
+  context('Initial icon state reconciliation', () => {
+    beforeEach(() => {
+      cy.clearLocalStorage();
+    });
+
+    it('shows fa-square icon on first paint in light mode', () => {
+      visitWithPreference(false);
+      cy.get(`${selectors.darkModeButton} i`).should('have.class', 'fa-square');
+      cy.get(`${selectors.darkModeButton} i`).should(
+        'not.have.class',
+        'fa-square-check'
+      );
+    });
+
+    it('shows fa-square-check icon on first paint in dark mode', () => {
+      visitWithPreference(true);
+      cy.get(`${selectors.darkModeButton} i`).should(
+        'have.class',
+        'fa-square-check'
+      );
+      cy.get(`${selectors.darkModeButton} i`).should(
+        'not.have.class',
+        'fa-square'
+      );
+    });
+  });
+
+  context('color-scheme CSS property', () => {
+    beforeEach(() => {
+      cy.clearLocalStorage();
+    });
+
+    it('sets color-scheme: light on <html> in light mode', () => {
+      visitWithPreference(false);
+      cy.get('html').should('have.css', 'color-scheme', 'light');
+    });
+
+    it('sets color-scheme: dark on <html> in dark mode', () => {
+      visitWithPreference(true);
+      cy.get('html').should('have.css', 'color-scheme', 'dark');
     });
   });
 
