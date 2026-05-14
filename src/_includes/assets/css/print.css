@@ -14,4 +14,8 @@
   body {
     margin-top: 0;
   }
+
+  .embed-wrapper {
+    display: none;
+  }
 }
