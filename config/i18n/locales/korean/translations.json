@@ -4,7 +4,8 @@
     "donate": "기부하기",
     "load-more-articles": "더 많은 기사들 불러오기",
     "menu": "Menu",
-    "learn": "Curriculum"
+    "learn": "Curriculum",
+    "toggle-dark-mode": "Night Mode"
   },
   "search": {
     "label": "검색",

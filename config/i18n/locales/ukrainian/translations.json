@@ -4,7 +4,8 @@
     "donate": "Підтримати",
     "load-more-articles": "Завантажити більше публікацій",
     "menu": "Меню",
-    "learn": "Навчальна програма"
+    "learn": "Навчальна програма",
+    "toggle-dark-mode": "Night Mode"
   },
   "search": {
     "label": "Пошук",
