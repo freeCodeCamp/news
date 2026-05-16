@@ -15,7 +15,7 @@
     margin-top: 0;
   }
 
-  .embed-wrapper {
+  iframe {
     display: none;
   }
 }
