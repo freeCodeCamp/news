@@ -4,7 +4,10 @@ import cloneDeep from 'lodash/cloneDeep.js';
 import { resolve, basename } from 'path';
 
 import { fetchFromGhost } from '../../utils/ghost/fetch-from-ghost.js';
-import { fetchFromHashnode } from '../../utils/hashnode/fetch-from-hashnode.js';
+import {
+  fetchFromHashnodePages,
+  countHashnodeStaticPages
+} from '../../utils/hashnode/fetch-from-hashnode.js';
 import { pingEditorialTeam } from '../../utils/ping-editorial-team.js';
 import { config } from '../../config/index.js';
 
@@ -24,14 +27,65 @@ const piscinaHashnode = new Piscina({
   )
 });
 
+// Stream Hashnode pages straight into Piscina dispatch as they arrive.
+// Avoids buffering the full raw corpus (with full HTML bodies) in main-thread
+// memory. Each dispatched batch is structured-cloned to the worker; the
+// main-thread reference is dropped right after via splice().
+const streamHashnodeToPiscina = async (
+  contentType,
+  piscina,
+  batchSize,
+  preCount = null
+) => {
+  const promises = [];
+  let buf = [];
+  let batchNo = 0;
+  // Posts: derived from PostConnection.totalDocuments on the first page.
+  // StaticPages: derived from preCount (countHashnodeStaticPages) — connection
+  // type exposes no totalDocuments scalar.
+  let totalBatches = preCount != null ? Math.ceil(preCount / batchSize) : null;
+  const dispatch = batch => {
+    batchNo++;
+    promises.push(
+      piscina.run({
+        batch,
+        contentType,
+        currBatchNo: batchNo,
+        totalBatches
+      })
+    );
+  };
+  for await (const { nodes, totalDocuments } of fetchFromHashnodePages(
+    contentType
+  )) {
+    if (totalBatches === null && totalDocuments != null) {
+      totalBatches = Math.ceil(totalDocuments / batchSize);
+    }
+    buf.push(...nodes);
+    while (buf.length >= batchSize) dispatch(buf.splice(0, batchSize));
+  }
+  if (buf.length) dispatch(buf);
+  return promises;
+};
+
 export default async () => {
   // Chunk raw Ghost posts and pages and process them in batches
   // with a pool of workers to create posts and pages global data
   const batchSize = 200;
   const allGhostPosts = await fetchFromGhost('posts');
-  const allHashnodePosts = await fetchFromHashnode('posts');
+  const hashnodePostPromises = await streamHashnodeToPiscina(
+    'posts',
+    piscinaHashnode,
+    batchSize
+  );
   const allGhostPages = await fetchFromGhost('pages');
-  const allHashnodePages = await fetchFromHashnode('pages');
+  const hashnodeStaticPagesCount = await countHashnodeStaticPages();
+  const hashnodePagePromises = await streamHashnodeToPiscina(
+    'pages',
+    piscinaHashnode,
+    batchSize,
+    hashnodeStaticPagesCount
+  );
 
   const ghostPosts = await Promise.all(
     chunk(allGhostPosts, batchSize).map((batch, i, arr) =>
@@ -46,16 +100,7 @@ export default async () => {
     console.log('Finished processing all Ghost posts');
     return arr.flat();
   });
-  const hashnodePosts = await Promise.all(
-    chunk(allHashnodePosts, batchSize).map((batch, i, arr) =>
-      piscinaHashnode.run({
-        batch,
-        contentType: 'posts',
-        currBatchNo: Number(i) + 1,
-        totalBatches: arr.length
-      })
-    )
-  ).then(arr => {
+  const hashnodePosts = await Promise.all(hashnodePostPromises).then(arr => {
     console.log('Finished processing all Hashnode posts');
     return arr.flat();
   });
@@ -73,16 +118,7 @@ export default async () => {
     console.log('Finished processing all Ghost pages');
     return arr.flat();
   });
-  const hashnodePages = await Promise.all(
-    chunk(allHashnodePages, batchSize).map((batch, i, arr) =>
-      piscinaHashnode.run({
-        batch,
-        contentType: 'pages',
-        currBatchNo: Number(i) + 1,
-        totalBatches: arr.length
-      })
-    )
-  ).then(arr => {
+  const hashnodePages = await Promise.all(hashnodePagePromises).then(arr => {
     console.log('Finished processing all Hashnode pages');
     return arr.flat();
   });

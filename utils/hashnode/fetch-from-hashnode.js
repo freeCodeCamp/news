@@ -8,8 +8,8 @@ import { config } from '../../config/index.js';
 
 const { eleventyEnv, currentLocale_i18n, hashnodeAPIURL } = config;
 
-export const fetchFromHashnode = async contentType => {
-  if (!hashnodeHost) return [];
+export async function* fetchFromHashnodePages(contentType) {
+  if (!hashnodeHost) return;
   const fieldName = contentType === 'posts' ? 'posts' : 'staticPages';
 
   const postFieldsFragment = gql`
@@ -76,6 +76,7 @@ export const fetchFromHashnode = async contentType => {
       publication(host: $host) {
         id
         ${fieldName}(first: $first, after: $after) {
+          ${contentType === 'posts' ? 'totalDocuments' : ''}
           edges {
             node {
               ...${contentType === 'posts' ? 'PostFields' : 'StaticPageFields'}
@@ -90,7 +91,6 @@ export const fetchFromHashnode = async contentType => {
     }
   `;
 
-  const data = [];
   let after = '';
   let hasNextPage = true;
 
@@ -117,6 +117,8 @@ export const fetchFromHashnode = async contentType => {
         const resData =
           res.publication[fieldName]?.edges.map(({ node }) => node) || [];
         const pageInfo = res.publication[fieldName]?.pageInfo;
+        const totalDocuments =
+          res.publication[fieldName]?.totalDocuments ?? null;
 
         if (resData.length > 0)
           console.log(
@@ -134,7 +136,7 @@ export const fetchFromHashnode = async contentType => {
           pageInfo.hasNextPage &&
           !process.env.HASHNODE_DEBUG_MODE_FIRST_PAGE_ONLY;
 
-        data.push(...resData);
+        if (resData.length > 0) yield { nodes: resData, totalDocuments };
 
         success = true;
       } catch (error) {
@@ -163,6 +165,75 @@ export const fetchFromHashnode = async contentType => {
 
     await wait(200);
   }
+}
 
-  return data;
+export const fetchFromHashnode = async contentType => {
+  const all = [];
+  for await (const { nodes } of fetchFromHashnodePages(contentType)) {
+    all.push(...nodes);
+  }
+  return all;
+};
+
+// StaticPageConnection lacks totalDocuments (verified via introspection against
+// gql-beta.hashnode.com 2026-05-18). Walk pageInfo with a minimal selection
+// (id only) to count edges. Volume is tiny — a handful of pages — so the extra
+// round trips are cheap and let workers log "batch N of M" instead of "of ?".
+export const countHashnodeStaticPages = async () => {
+  if (!hashnodeHost) return null;
+
+  if (eleventyEnv === 'ci' && currentLocale_i18n === 'english') {
+    const fixture = loadJSON(
+      join(
+        import.meta.dirname,
+        '../../cypress/fixtures/mock-hashnode-pages.json'
+      )
+    );
+    return fixture.publication?.staticPages?.edges?.length ?? 0;
+  }
+
+  const query = gql`
+    query CountStaticPages($host: String!, $first: Int!, $after: String) {
+      publication(host: $host) {
+        staticPages(first: $first, after: $after) {
+          edges {
+            node {
+              id
+            }
+          }
+          pageInfo {
+            endCursor
+            hasNextPage
+          }
+        }
+      }
+    }
+  `;
+
+  let count = 0;
+  let after = '';
+  let hasNextPage = true;
+  try {
+    while (hasNextPage) {
+      const res = await request(hashnodeAPIURL, query, {
+        host: hashnodeHost,
+        first: 20,
+        after
+      });
+      const conn = res.publication?.staticPages;
+      if (!conn) break;
+      count += conn.edges.length;
+      after = conn.pageInfo.endCursor;
+      hasNextPage = conn.pageInfo.hasNextPage;
+    }
+    return count;
+  } catch (error) {
+    // Fail-soft: the count is only used to display "batch N of M" in worker
+    // logs. A transient probe failure must not crash a 25-minute build. Workers
+    // fall back to "batch N of ?" when null.
+    console.warn(
+      `countHashnodeStaticPages probe failed (${error.response?.status || error.code || error.message}); workers will log "of ?".`
+    );
+    return null;
+  }
 };
