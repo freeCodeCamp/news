@@ -138,14 +138,20 @@ export const fetchFromHashnode = async contentType => {
 
         success = true;
       } catch (error) {
-        if (error.message.includes('ECONNRESET') && retries > 1) {
+        const status = error.response?.status;
+        const isTransient =
+          status >= 500 ||
+          error.message.includes('ECONNRESET') ||
+          error.message.includes('ETIMEDOUT') ||
+          error.message.includes('ECONNREFUSED');
+        if (isTransient && retries > 1) {
           console.log(
-            `Connection reset error. Retrying... (${retries - 1} attempts left)`
+            `Transient error (${status || error.code || 'network'}). Retrying... (${retries - 1} attempts left)`
           );
           retries--;
-          await wait(10000); // Wait for 10 seconds before retrying
+          await wait(60000); // 60s aligns with Cloudflare retry_after hint on 502s
         } else {
-          throw error; // If it's not a connection reset or no more retries, rethrow the error
+          throw error; // Non-transient, or retries exhausted
         }
       }
     }

@@ -72,7 +72,13 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Build site
-        run: pnpm run build
+        run: |
+          pnpm run build || {
+            echo "::warning::Build failed after in-app retries exhausted. Waiting 2 minutes before final job-level retry..."
+            sleep 120
+            echo "::notice::Retrying build site step..."
+            pnpm run build
+          }
         env:
           NODE_ENV: production
 
