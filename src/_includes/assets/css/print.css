@@ -1,0 +1,21 @@
+@media print {
+  .site-nav {
+    display: none;
+  }
+
+  .banner {
+    display: none;
+  }
+
+  footer {
+    display: none;
+  }
+
+  body {
+    margin-top: 0;
+  }
+
+  iframe {
+    display: none;
+  }
+}
