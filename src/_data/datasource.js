@@ -27,10 +27,8 @@ const piscinaHashnode = new Piscina({
   )
 });
 
-// Stream Hashnode pages straight into Piscina dispatch as they arrive.
-// Avoids buffering the full raw corpus (with full HTML bodies) in main-thread
-// memory. Each dispatched batch is structured-cloned to the worker; the
-// main-thread reference is dropped right after via splice().
+// Stream straight into Piscina to avoid buffering 13k post bodies in
+// main-thread memory.
 const streamHashnodeToPiscina = async (
   contentType,
   piscina,
@@ -40,9 +38,6 @@ const streamHashnodeToPiscina = async (
   const promises = [];
   let buf = [];
   let batchNo = 0;
-  // Posts: derived from PostConnection.totalDocuments on the first page.
-  // StaticPages: derived from preCount (countHashnodeStaticPages) — connection
-  // type exposes no totalDocuments scalar.
   let totalBatches = preCount != null ? Math.ceil(preCount / batchSize) : null;
   const dispatch = batch => {
     batchNo++;
@@ -69,8 +64,6 @@ const streamHashnodeToPiscina = async (
 };
 
 export default async () => {
-  // Chunk raw Ghost posts and pages and process them in batches
-  // with a pool of workers to create posts and pages global data
   const batchSize = 200;
   const allGhostPosts = await fetchFromGhost('posts');
   const hashnodePostPromises = await streamHashnodeToPiscina(

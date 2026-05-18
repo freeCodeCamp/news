@@ -175,10 +175,6 @@ export const fetchFromHashnode = async contentType => {
   return all;
 };
 
-// StaticPageConnection lacks totalDocuments (verified via introspection against
-// gql-beta.hashnode.com 2026-05-18). Walk pageInfo with a minimal selection
-// (id only) to count edges. Volume is tiny — a handful of pages — so the extra
-// round trips are cheap and let workers log "batch N of M" instead of "of ?".
 export const countHashnodeStaticPages = async () => {
   if (!hashnodeHost) return null;
 
@@ -228,9 +224,7 @@ export const countHashnodeStaticPages = async () => {
     }
     return count;
   } catch (error) {
-    // Fail-soft: the count is only used to display "batch N of M" in worker
-    // logs. A transient probe failure must not crash a 25-minute build. Workers
-    // fall back to "batch N of ?" when null.
+    // Fail-soft: probe is cosmetic; null falls back to "of ?" in worker logs.
     console.warn(
       `countHashnodeStaticPages probe failed (${error.response?.status || error.code || error.message}); workers will log "of ?".`
     );
