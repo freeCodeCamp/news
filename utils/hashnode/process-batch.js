@@ -6,8 +6,9 @@ import { shortenExcerpt } from '../../utils/shorten-excerpt.js';
 import { getUsername } from '../get-username.js';
 
 export default async ({ batch, contentType, currBatchNo, totalBatches }) => {
+  const totalLabel = totalBatches ?? '?';
   console.log(
-    `Processing Hashnode ${contentType} batch ${currBatchNo} of ${totalBatches}...and using ${process.memoryUsage.rss() / 1024 / 1024} MB of memory`
+    `Processing Hashnode ${contentType} batch ${currBatchNo} of ${totalLabel}...and using ${process.memoryUsage.rss() / 1024 / 1024} MB of memory`
   );
 
   await Promise.all(
@@ -144,7 +145,7 @@ export default async ({ batch, contentType, currBatchNo, totalBatches }) => {
   );
 
   console.log(
-    `Finished processing Hashnode ${contentType} batch ${currBatchNo} of ${totalBatches}...and using ${process.memoryUsage.rss() / 1024 / 1024} MB of memory`
+    `Finished processing Hashnode ${contentType} batch ${currBatchNo} of ${totalLabel}...and using ${process.memoryUsage.rss() / 1024 / 1024} MB of memory`
   );
 
   return batch;

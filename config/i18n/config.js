@@ -12,6 +12,7 @@ use(Backend).init({
   lng: currentLocale_i18nISOCode,
   fallbackLng: 'en',
   initImmediate: false,
+  showSupportNotice: false,
   preload: readdirSync(join(import.meta.dirname, './locales')).filter(
     fileName => {
       const joinedPath = join(join(import.meta.dirname, './locales'), fileName);
