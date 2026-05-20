@@ -25,6 +25,11 @@
     "type": 302
   },
   {
+    "source": "/learn-to-build-automated-workflows-with-manis-ai",
+    "destination": "/news/learn-to-build-automated-workflows-with-manus-ai",
+    "type": 302
+  },
+  {
     "source": "/ai-tools-for-developers-openclaw-github-copilot-claude-code-coderabbit-gemini-cli",
     "destination": "/news/ai-tools-for-developers",
     "type": 302
