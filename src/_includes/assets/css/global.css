@@ -281,11 +281,7 @@ body {
 ::selection {
   text-shadow: none;
   background: var(--selection-color);
-  color: var(--primary-background);
-}
-
-html.dark-mode ::selection {
-  color: var(--primary-color);
+  color: var(--gray00);
 }
 
 hr {
