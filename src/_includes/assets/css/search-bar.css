@@ -173,7 +173,7 @@
   border-bottom: none;
 }
 
-.aa-Panel .aa-List .aa-Item:hover {
+.aa-Panel .aa-List .aa-Item[aria-selected='true'] {
   background-color: var(--selection-color);
 }
 

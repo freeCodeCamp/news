@@ -280,7 +280,7 @@ body {
 
 ::selection {
   text-shadow: none;
-  background: var(--dark-blue);
+  background: var(--selection-color);
   color: var(--primary-background);
 }
 
