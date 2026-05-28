@@ -280,12 +280,8 @@ body {
 
 ::selection {
   text-shadow: none;
-  background: var(--dark-blue);
-  color: var(--primary-background);
-}
-
-html.dark-mode ::selection {
-  color: var(--primary-color);
+  background: var(--selection-color);
+  color: var(--gray00);
 }
 
 hr {

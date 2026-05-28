@@ -6,6 +6,8 @@
   --dark-blue: #002ead;
   --light-blue: #809fff;
   --theme-color: #0a0a23;
+  --blue-light-translucent: rgba(153, 201, 255, 0.3);
+  --blue-dark-translucent: rgba(0, 46, 173, 0.3);
   --gray90: #0a0a23;
   --gray85: #1b1b32;
   --gray80: #2a2a40;
@@ -39,6 +41,7 @@ html {
   --secondary-background: var(--gray05);
   --primary-background: var(--gray00);
   --link-color: var(--dark-blue);
+  --selection-color: var(--blue-dark-translucent);
 }
 
 html.dark-mode {
@@ -52,4 +55,5 @@ html.dark-mode {
   --secondary-background: var(--gray85);
   --primary-background: var(--gray90);
   --link-color: var(--light-blue);
+  --selection-color: var(--blue-light-translucent);
 }
