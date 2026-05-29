@@ -3,7 +3,8 @@
   .banner,
   .sidebar,
   .social-row,
-  .learn-cta-row {
+  .learn-cta-row,
+  footer {
     display: none !important;
   }
 
