@@ -4,7 +4,8 @@
   .sidebar,
   .social-row,
   .learn-cta-row,
-  footer {
+  footer,
+  iframe {
     display: none !important;
   }
 
@@ -13,6 +14,11 @@
   video {
     position: static !important;
     padding-top: 0 !important;
+  }
+
+  main,
+  body {
+    margin-top: 0 !important;
   }
 
   .embed-wrapper::after,
