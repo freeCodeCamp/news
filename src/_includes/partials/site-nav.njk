@@ -7,6 +7,24 @@
     </div>
     <div class="site-nav-right">
         <div class="nav-group">
+            <button data-test-label="header-toggle-lang-button" id="toggle-lang-button" class="lang-button-nav"
+            title="Change Language"
+             aria-label="Change Language" aria-controls="nav-lang-list" aria-expanded="false">
+
+            </button>
+            <ul data-test-label="header-lang-list" id="nav-lang-list" class="nav-list" aria-labelledby="toggle-lang-button">
+              <li><button data-test-label="header-lang-list-option" class="nav-link nav-lang-list-option" data-value="english" aria-current="true" lang="en-US">English</button></li>
+              <li><button data-test-label="header-lang-list-option" class="nav-link nav-lang-list-option" data-value="espanol" lang="es-419">Español</button></li>
+                <li><button data-test-label="header-lang-list-option" class="nav-link nav-lang-list-option" data-value="chinese" lang="zh">中文（简体字）</button></li>
+                <li><button data-test-label="header-lang-list-option" class="nav-link nav-lang-list-option" data-value="chinese-traditional" lang="zh-Hant">中文（繁體字）</button></li>
+                <li><button data-test-label="header-lang-list-option" class="nav-link nav-lang-list-option" data-value="italian" lang="it">Italiano</button></li>
+                <li><button data-test-label="header-lang-list-option" class="nav-link nav-lang-list-option" data-value="portuguese" lang="pt-BR">Português</button></li>
+                <li><button data-test-label="header-lang-list-option" class="nav-link nav-lang-list-option" data-value="ukrainian" lang="uk">Українська</button></li>
+                <li><button data-test-label="header-lang-list-option" class="nav-link nav-lang-list-option" data-value="japanese" lang="ja">日本語</button></li>
+                <li><button data-test-label="header-lang-list-option" class="nav-link nav-lang-list-option" data-value="german" lang="de">Deutsch</button></li>
+                <li><button data-test-label="header-lang-list-option" class="nav-link nav-lang-list-option" data-value="swahili" lang="sw">Swahili</button></li>
+                <li><button data-test-label="header-lang-list-option" class="nav-link nav-lang-list-option" data-value="korean" lang="ko">한국어</button>
+            </li></ul>
             <button aria-expanded="false" class="exposed-button-nav" id="toggle-button-nav" data-test-label="header-menu-button">
               <span class="sr-only">{% t 'buttons.menu' %}</span>
               <span class="menu-btn-text">{% t 'buttons.menu' %}</span>
