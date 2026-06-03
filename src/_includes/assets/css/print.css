@@ -1,0 +1,38 @@
+@media print {
+  .site-nav,
+  .banner,
+  .sidebar,
+  .social-row,
+  .learn-cta-row,
+  footer,
+  iframe {
+    display: none !important;
+  }
+
+  .embed-wrapper,
+  .fluid-width-video-wrapper,
+  video {
+    position: static !important;
+    padding-top: 0 !important;
+  }
+
+  main,
+  body {
+    margin-top: 0 !important;
+  }
+
+  .embed-wrapper::after,
+  .fluid-width-video-wrapper::after,
+  video::after {
+    content: '[Embedded content]';
+    display: block;
+    width: 50%;
+    margin: 20px auto;
+    padding: 15px;
+    border: 1px dashed #ccc;
+    background: #f9f9f9;
+    color: #555;
+    font-size: 14pt;
+    text-align: center;
+  }
+}
