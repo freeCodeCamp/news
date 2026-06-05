@@ -278,6 +278,11 @@ body {
   font-feature-settings: 'liga1' on;
 }
 
+html.dark-mode body {
+  color: var(--secondary-color);
+  background: var(--secondary-background);
+}
+
 ::selection {
   text-shadow: none;
   background: var(--selection-color);
@@ -361,6 +366,10 @@ dt {
   color: var(--primary-color);
   font-weight: 500;
   text-align: right;
+}
+
+html.dark-mode dt {
+  color: var(--secondary-color);
 }
 
 dd {
