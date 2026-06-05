@@ -2196,6 +2196,11 @@ p:has(mjx-container.MathJax) {
   font-size: 16px;
 }
 
+html.dark-mode .site-footer {
+  background: var(--tertiary-background);
+  color: var(--tertiary-color);
+}
+
 .footer-top {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(30.5em, 1fr));
@@ -2223,6 +2228,10 @@ p:has(mjx-container.MathJax) {
   color: var(--secondary-color);
   text-decoration: none;
   padding: 2px;
+}
+
+html.dark-mode .site-footer a {
+  color: var(--tertiary-color);
 }
 
 .site-footer a:hover {
