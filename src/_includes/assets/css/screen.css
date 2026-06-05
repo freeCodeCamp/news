@@ -143,6 +143,11 @@ html.dark-mode body {
   color: var(--primary-background);
 }
 
+html.dark-mode .under-header-content {
+  background-color: var(--primary-background);
+  color: var(--secondary-color);
+}
+
 .site-title {
   z-index: 10;
   margin: 0;
