@@ -143,6 +143,11 @@ html.dark-mode body {
   color: var(--primary-background);
 }
 
+html.dark-mode .under-header-content {
+  background-color: var(--primary-background);
+  color: var(--secondary-color);
+}
+
 .site-title {
   z-index: 10;
   margin: 0;
@@ -633,6 +638,10 @@ html.dark-mode .post-card {
   color: var(--primary-color);
 }
 
+html.dark-mode .post-card-content-link {
+  color: var(--secondary-color);
+}
+
 .post-card-content-link:hover {
   text-decoration: none;
 }
@@ -654,6 +663,10 @@ html.dark-mode .post-card {
 
 .post-card-title a {
   color: var(--primary-color);
+}
+
+html.dark-mode .post-card-title a {
+  color: var(--secondary-color);
 }
 
 .post-card-content {
@@ -936,6 +949,10 @@ html.dark-mode .page-template.site-main {
   color: var(--primary-color);
 }
 
+html.dark-mode .post-full-title {
+  color: var(--secondary-color);
+}
+
 .date-divider {
   display: inline-block;
   margin: 0 6px 1px;
@@ -1047,6 +1064,10 @@ html.dark-mode .post-full-content {
   color: var(--primary-color);
   word-break: break-word;
   text-decoration: underline;
+}
+
+html.dark-mode .post-full-content a {
+  color: var(--secondary-color);
 }
 
 .post-full-content a:hover {
@@ -1539,6 +1560,10 @@ pre.runkit-element {
   text-transform: uppercase;
 }
 
+html.dark-mode .post-full-authors-content p {
+  color: var(--secondary-color);
+}
+
 .post-full-authors-content a {
   display: inline-block;
   color: var(--secondary-color);
@@ -1698,7 +1723,7 @@ html.dark-mode .author-list-item .author-card:before {
 }
 
 html.dark-mode .read-next-card-header-title {
-  color: var(--primary-color);
+  color: var(--secondary-color);
 }
 
 .read-next-card-header-title a {
@@ -1950,6 +1975,10 @@ html.dark-mode .kg-bookmark-card {
   border-radius: 3px;
 }
 
+html.dark-mode .post-full-content .kg-bookmark-container {
+  color: var(--secondary-color);
+}
+
 .kg-bookmark-content {
   display: flex;
   flex-direction: column;
@@ -1964,6 +1993,10 @@ html.dark-mode .kg-bookmark-card {
   line-height: 1.5em;
   font-weight: 600;
   color: var(--primary-color);
+}
+
+html.dark-mode .kg-bookmark-title {
+  color: var(--secondary-color);
 }
 
 .post-full-content .kg-bookmark-container:hover .kg-bookmark-title {
@@ -2191,6 +2224,11 @@ p:has(mjx-container.MathJax) {
   font-size: 16px;
 }
 
+html.dark-mode .site-footer {
+  background: var(--tertiary-background);
+  color: var(--tertiary-color);
+}
+
 .footer-top {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(30.5em, 1fr));
@@ -2218,6 +2256,10 @@ p:has(mjx-container.MathJax) {
   color: var(--secondary-color);
   text-decoration: none;
   padding: 2px;
+}
+
+html.dark-mode .site-footer a {
+  color: var(--tertiary-color);
 }
 
 .site-footer a:hover {
@@ -2408,9 +2450,20 @@ p.footer-donation a:hover {
   color: var(--primary-color);
 }
 
+html.dark-mode #readMoreBtn {
+  border: 2px solid var(--secondary-color);
+  background: var(--tertiary-background);
+  color: var(--secondary-color);
+}
+
 #readMoreBtn:hover {
   background: var(--primary-color);
   color: var(--secondary-background);
+}
+
+html.dark-mode #readMoreBtn:hover {
+  background: var(--secondary-color);
+  color: var(--primary-background);
 }
 
 /* 12. Tags
@@ -2472,9 +2525,21 @@ a.cta-button {
   padding: 0 20px;
 }
 
+html.dark-mode button.cta-button,
+html.dark-mode a.cta-button {
+  border: 3px solid var(--secondary-color);
+  background: var(--quaternary-background);
+  color: var(--secondary-color);
+}
+
 .cta-button:hover {
   background: var(--primary-color);
   color: var(--tertiary-background);
+}
+
+html.dark-mode .cta-button:hover {
+  background: var(--secondary-color);
+  color: var(--quaternary-background);
 }
 
 @media (min-width: 700px) {
