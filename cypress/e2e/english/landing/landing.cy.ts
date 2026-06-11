@@ -1,7 +1,7 @@
 import commonExpectedMeta from '../../../fixtures/common-expected-meta.json';
 import { loadAllPosts } from '../../../support/utils/post-cards';
 
-import { config } from "../../../../config/index";
+import { config } from '../../../../config/index';
 
 const { locales, localeCodes } = config;
 
@@ -20,7 +20,7 @@ const selectors = {
   darkModeButton: "[data-test-label='dark-mode-button']",
   toggleLangButton: "[data-test-label='header-toggle-lang-button']",
   languageList: "[data-test-label='header-lang-list']",
-  languageButton: "[data-test-label='header-lang-list-option']",
+  languageButton: "[data-test-label='header-lang-list-option']"
 };
 
 describe('Landing (Hashnode sourced)', () => {
@@ -141,24 +141,22 @@ describe('Landing (Hashnode sourced)', () => {
     });
   });
 
-  context("Language button", () =>
-    {
-      it('Clicking the "Change Language" button should open the language list', () =>
-      {
-        cy.get(selectors.toggleLangButton ).should("be.visible")
-        cy.get(selectors.toggleLangButton ).click();
-        cy.get(selectors.languageList).should("be.visible")
-      })
+  context('Language button', () => {
+    it('Clicking the "Change Language" button should open the language list', () => {
+      cy.get(selectors.toggleLangButton).should('be.visible');
+      cy.get(selectors.toggleLangButton).click();
+      cy.get(selectors.languageList).should('be.visible');
+    });
 
-      it('The language list should contain a button for each available language', () =>
-      {
-        cy.get(selectors.toggleLangButton ).should("be.visible")
-        cy.get(selectors.toggleLangButton ).click();
-        cy.get(selectors.languageList).should("be.visible");
-        cy.get(selectors.languageList).children().should('have.length', locales.length)
-      })
-
-  })
+    it('The language list should contain a button for each available language', () => {
+      cy.get(selectors.toggleLangButton).should('be.visible');
+      cy.get(selectors.toggleLangButton).click();
+      cy.get(selectors.languageList).should('be.visible');
+      cy.get(selectors.languageList)
+        .children()
+        .should('have.length', locales.length);
+    });
+  });
 
   context('Toggle menu button', () => {
     beforeEach(() => {
