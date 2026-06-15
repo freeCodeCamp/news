@@ -1,4 +1,18 @@
 document.addEventListener('DOMContentLoaded', () => {
+  const Languages = {
+    English: 'english',
+    Espanol: 'espanol',
+    Chinese: 'chinese',
+    ChineseTraditional: 'chinese-traditional',
+    Italian: 'italian',
+    Portuguese: 'portuguese',
+    Ukrainian: 'ukrainian',
+    Japanese: 'japanese',
+    German: 'german',
+    Swahili: 'swahili',
+    Korean: 'korean'
+  };
+
   document
     .getElementById('toggle-lang-button')
     .addEventListener('click', function () {
@@ -12,7 +26,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const createLanguageRedirect = ({ lang }) => {
     const pathArray = window?.location?.pathname?.split('/');
     const path = pathArray
-      .filter(item => (item !== lang ? item : ''))
+      .filter(item =>
+        item !== lang && !Object.values(Languages).includes(item) ? item : ''
+      )
       .join('/');
 
     const hostTail = window?.location?.host;
