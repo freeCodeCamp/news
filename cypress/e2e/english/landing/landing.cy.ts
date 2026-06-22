@@ -1,10 +1,6 @@
 import commonExpectedMeta from '../../../fixtures/common-expected-meta.json';
 import { loadAllPosts } from '../../../support/utils/post-cards';
 
-import { config } from '../../../../config/index';
-
-const { locales, localeCodes } = config;
-
 const selectors = {
   featureImage: "[data-test-label='feature-image']",
   postCard: "[data-test-label='post-card']",
@@ -149,12 +145,14 @@ describe('Landing (Hashnode sourced)', () => {
     });
 
     it('The language list should contain a button for each available language', () => {
-      cy.get(selectors.toggleLangButton).should('be.visible');
-      cy.get(selectors.toggleLangButton).click();
-      cy.get(selectors.languageList).should('be.visible');
-      cy.get(selectors.languageList)
-        .children()
-        .should('have.length', locales.length);
+      cy.env(['locales']).then(({ locales }) => {
+        cy.get(selectors.toggleLangButton).should('be.visible');
+        cy.get(selectors.toggleLangButton).click();
+        cy.get(selectors.languageList).should('be.visible');
+        cy.get(selectors.languageList)
+          .children()
+          .should('have.length', locales.length);
+      });
     });
   });
 

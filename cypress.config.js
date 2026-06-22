@@ -1,7 +1,7 @@
 import { defineConfig } from 'cypress';
 
 import { config } from './config/index.js';
-const { postsPerPage } = config;
+const { postsPerPage, locales } = config;
 
 export default defineConfig({
   e2e: {
@@ -9,6 +9,7 @@ export default defineConfig({
     retries: 4
   },
   env: {
-    postsPerPage
+    postsPerPage,
+    locales
   }
 });

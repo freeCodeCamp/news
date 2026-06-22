@@ -23,14 +23,14 @@ if (error) {
 }
 
 const locales = [
-  'chinese',
   'english',
   'espanol',
+  'chinese',
   'italian',
-  'japanese',
-  'korean',
   'portuguese',
-  'ukrainian'
+  'ukrainian',
+  'japanese',
+  'korean'
 ];
 
 /* These strings set the i18next language. It needs to be the two character
@@ -38,25 +38,38 @@ const locales = [
  * Use a 639-1 code here https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
  */
 const localeCodes = {
-  chinese: 'zh',
   english: 'en',
   espanol: 'es',
+  chinese: 'zh',
   italian: 'it',
-  japanese: 'ja',
-  korean: 'ko',
   portuguese: 'pt-BR',
-  ukrainian: 'uk'
+  ukrainian: 'uk',
+  japanese: 'ja',
+  korean: 'ko'
 };
 
 const algoliaIndices = {
-  chinese: 'news-zh',
   english: 'news',
   espanol: 'news-es',
+  chinese: 'news-zh',
   italian: 'news-it',
-  japanese: 'news-ja',
-  korean: 'news-ko',
   portuguese: 'news-pt-br',
-  ukrainian: 'news-uk'
+  ukrainian: 'news-uk',
+  japanese: 'news-ja',
+  korean: 'news-ko'
+};
+
+// Native display names for each built locale, used by the language switcher
+// in the nav. Keys must stay in sync with the `locales` array above.
+const langNames = {
+  english: 'English',
+  espanol: 'Español',
+  chinese: '中文（简体字）',
+  italian: 'Italiano',
+  portuguese: 'Português',
+  ukrainian: 'Українська',
+  japanese: '日本語',
+  korean: '한국어'
 };
 
 const {
@@ -122,6 +135,7 @@ export const config = {
   locales,
   localeCodes,
   algoliaIndices,
+  langNames,
   getSiteURL,
   currentLocale_i18n: localeForUI || 'italian',
   currentLocale_i18nISOCode: !localeCodes[localeForUI]
