@@ -208,44 +208,56 @@ html.dark-mode .under-header-content {
   }
 }
 
+.lang-button-nav[aria-expanded='true'] + .nav-list {
+  -ms-overflow-style: none;
+  display: block;
+  max-height: calc(100vh - var(--header-height));
+  overflow-y: auto;
+  scrollbar-width: none;
+  top: calc(var(--header-height));
+}
+
+.lang-button-nav[aria-expanded='true'] + .nav-list::-webkit-scrollbar {
+  display: none;
+}
+
+.exposed-button-nav:is(
+  :hover,
+  :hover:focus,
+  [aria-expanded='true'],
+  [aria-expanded='true']:hover
+),
+.lang-button-nav:is(
+  :hover,
+  :hover:focus,
+  [aria-expanded='true'],
+  [aria-expanded='false'].force-show
+) {
+  background-color: var(--gray00);
+  color: var(--theme-color);
+}
+
+.lang-button-nav:is(
+  :hover,
+  :hover:focus,
+  [aria-expanded='true'],
+  [aria-expanded='false'].force-show
+) {
+  fill: var(--gray00);
+}
+
 .exposed-button-nav,
 .lang-button-nav {
+  align-items: center;
   background-color: var(--theme-color);
   border: 1px solid var(--gray00);
   color: var(--gray00);
+  display: flex;
   font-size: 18px;
-}
-
-.exposed-button-nav:is(
-  :hover,
-  :hover:focus,
-  [aria-expanded='true'],
-  [aria-expanded='true']:hover
-),
-.lang-button-nav:is(
-  :hover,
-  :hover:focus,
-  [aria-expanded='true'],
-  [aria-expanded='false'].force-show
-) {
-  background-color: var(--gray00);
-  color: var(--theme-color);
-}
-
-.exposed-button-nav:is(
-  :hover,
-  :hover:focus,
-  [aria-expanded='true'],
-  [aria-expanded='true']:hover
-),
-.lang-button-nav:is(
-  :hover,
-  :hover:focus,
-  [aria-expanded='true'],
-  [aria-expanded='false'].force-show
-) {
-  background-color: var(--gray00);
-  color: var(--theme-color);
+  height: var(--header-element-size);
+  justify-content: center;
+  min-width: var(--header-element-size);
+  padding: 0 4px;
 }
 
 .display-menu {
@@ -455,6 +467,8 @@ a.nav-forum:hover,
   display: flex;
   align-items: center;
   height: 38px;
+  justify-content: flex-end;
+  gap: 10px;
 }
 
 .nav-group {
@@ -478,8 +492,6 @@ a.nav-forum {
   padding: 0 4px;
   outline: none;
   cursor: pointer;
-  margin-right: 5px;
-  margin-left: 10px;
   height: 30px;
   line-height: 24px;
   /* centers the text for all browser font sizes */
@@ -1083,9 +1095,8 @@ html.dark-mode .post-full-content {
 .post-full-content h4:target,
 .post-full-content h5:target,
 .post-full-content h6:target {
-  scroll-margin-top: calc(
-    var(--header-height) + 44px + 0.75em
-  ); /* 44px height of the banner */
+  scroll-margin-top: calc(var(--header-height) + 44px + 0.75em);
+  /* 44px height of the banner */
 }
 
 .post-full-content li {
@@ -2614,6 +2625,7 @@ a.banner {
     opacity: 0;
     height: 0;
   }
+
   to {
     opacity: 1;
     height: auto;

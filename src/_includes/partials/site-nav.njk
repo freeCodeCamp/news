@@ -6,64 +6,61 @@
         <a class="site-nav-logo" href="{{ site.url }}" data-test-label="site-nav-logo"><img src="{{ site.logo }}" alt="{{ site.title }}" /></a>
     </div>
     <div class="site-nav-right">
-        <div class="nav-group">
-            <button data-test-label="header-toggle-lang-button" id="toggle-lang-button" class="lang-button-nav"
-            title={% t 'buttons.change-language' %}
-             aria-label={% t 'buttons.change-language' %} aria-controls="nav-lang-list" aria-expanded="false">
-      {% include "partials/icons/globe.njk" %}
-            </button>
-              <ul data-test-label="header-lang-list" id="nav-lang-list" class="nav-list" aria-labelledby="toggle-lang-button">
-              {% for language in languages %}
-                <li>
-                    <a
-                        data-test-label="header-lang-list-option"
-                        class="nav-link nav-lang-list-option"
-                        href="{{ language.baseURL }}"
-                        hreflang="{{ language.htmlLang }}"
-                        lang="{{ language.htmlLang }}"{% if language.isCurrent %} aria-current="true"{% endif %}
-                    >{{ language.label }}</a>
-                </li>
-              {% endfor %}
-            </ul>
-            <button aria-expanded="false" class="exposed-button-nav" id="toggle-button-nav" data-test-label="header-menu-button">
-              <span class="sr-only">{% t 'buttons.menu' %}</span>
-              <span class="menu-btn-text">{% t 'buttons.menu' %}</span>
-            </button>
-            <ul id="menu-dropdown" class="nav-list" aria-labelledby="toggle-button-nav" data-test-label="header-menu">
-                <li>
-                    <div id="nav-right-search-container" class="fcc-search-container" data-test-label="fcc-search-container"></div>
-                </li>
-                <li><a
-                  class="nav-link nav-link-flex"
-                  id="nav-forum"
-                  rel="noopener noreferrer"
-                  href="{% t 'links:forum' %}"
-                  target="_blank"
-                  data-test-label="forum-button" >{% t 'buttons.forum' %}</a></li>
-              <li><a
-                  class="nav-link nav-link-flex"
-                  id="nav-learn"
-                  rel="noopener noreferrer"
-                  href="{% t 'links:learn' %}"
-                  target="_blank"
-                  data-test-label="learn-button"
-              >{% t 'buttons.learn' %}</a></li>
-            <li><button
+        <button data-test-label="header-toggle-lang-button" id="toggle-lang-button" class="lang-button-nav"
+        title={% t 'buttons.change-language' %}
+            aria-label={% t 'buttons.change-language' %} aria-controls="nav-lang-list" aria-expanded="false">
+    {% include "partials/icons/globe.njk" %}
+        </button>
+            <ul data-test-label="header-lang-list" id="nav-lang-list" class="nav-list" aria-labelledby="toggle-lang-button">
+            {% for language in languages %}
+            <li>
+                <a
+                    data-test-label="header-lang-list-option"
+                    class="nav-link nav-lang-list-option"
+                    href="{{ language.baseURL }}"
+                    hreflang="{{ language.htmlLang }}"
+                    lang="{{ language.htmlLang }}"{% if language.isCurrent %} aria-current="true"{% endif %}
+                >{{ language.label }}</a>
+            </li>
+            {% endfor %}
+        </ul>
+        <button aria-expanded="false" class="exposed-button-nav" id="toggle-button-nav" data-test-label="header-menu-button">
+            <span class="sr-only">{% t 'buttons.menu' %}</span>
+            <span class="menu-btn-text">{% t 'buttons.menu' %}</span>
+        </button>
+        <ul id="menu-dropdown" class="nav-list" aria-labelledby="toggle-button-nav" data-test-label="header-menu">
+            <li>
+                <div id="nav-right-search-container" class="fcc-search-container" data-test-label="fcc-search-container"></div>
+            </li>
+            <li><a
                 class="nav-link nav-link-flex"
-                id="toggle-dark-mode"
-                aria-pressed="false"
-                data-test-label="dark-mode-button">
-            <span>{% t 'buttons.toggle-dark-mode' %}</span><i class="fa-regular fa-square-check"></i></button></li>
-            </ul>
-            <a
-                class="toggle-button-nav"
-                id="nav-donate"
+                id="nav-forum"
                 rel="noopener noreferrer"
-                href="{% t 'links:donate' %}"
+                href="{% t 'links:forum' %}"
                 target="_blank"
-                data-test-label="donate-button"
-          >{% t 'buttons.donate' %}</a>
-        </div>
-
+                data-test-label="forum-button" >{% t 'buttons.forum' %}</a></li>
+            <li><a
+                class="nav-link nav-link-flex"
+                id="nav-learn"
+                rel="noopener noreferrer"
+                href="{% t 'links:learn' %}"
+                target="_blank"
+                data-test-label="learn-button"
+            >{% t 'buttons.learn' %}</a></li>
+        <li><button
+            class="nav-link nav-link-flex"
+            id="toggle-dark-mode"
+            aria-pressed="false"
+            data-test-label="dark-mode-button">
+        <span>{% t 'buttons.toggle-dark-mode' %}</span><i class="fa-regular fa-square-check"></i></button></li>
+        </ul>
+        <a
+            class="toggle-button-nav"
+            id="nav-donate"
+            rel="noopener noreferrer"
+            href="{% t 'links:donate' %}"
+            target="_blank"
+            data-test-label="donate-button"
+        >{% t 'buttons.donate' %}</a>
     </div>
 </nav>
