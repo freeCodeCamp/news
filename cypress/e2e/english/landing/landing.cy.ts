@@ -138,6 +138,10 @@ describe('Landing (Hashnode sourced)', () => {
   });
 
   context('Language button', () => {
+    beforeEach(() => {
+      cy.visit('/');
+    });
+
     it('Clicking the "Change Language" button should open the language list', () => {
       cy.get(selectors.toggleLangButton).should('be.visible');
       cy.get(selectors.toggleLangButton).click();
