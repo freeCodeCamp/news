@@ -78,7 +78,7 @@
     "clean-css": "5.3.3",
     "cross-env": "10.1.0",
     "cypress": "15.11.0",
-    "dayjs": "1.11.19",
+    "dayjs": "1.11.21",
     "dotenv": "17.4.2",
     "eslint": "10.0.2",
     "eslint-config-prettier": "10.1.8",
