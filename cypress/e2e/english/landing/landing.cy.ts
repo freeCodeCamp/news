@@ -13,7 +13,10 @@ const selectors = {
   banner: "[data-test-label='banner']",
   dropDownMenu: "[data-test-label='header-menu']",
   toggleDropDownMenuButton: "[data-test-label='header-menu-button']",
-  darkModeButton: "[data-test-label='dark-mode-button']"
+  darkModeButton: "[data-test-label='dark-mode-button']",
+  toggleLangButton: "[data-test-label='header-toggle-lang-button']",
+  languageList: "[data-test-label='header-lang-list']",
+  languageButton: "[data-test-label='header-lang-list-option']"
 };
 
 describe('Landing (Hashnode sourced)', () => {
@@ -131,6 +134,29 @@ describe('Landing (Hashnode sourced)', () => {
           'equal',
           'https://www.freecodecamp.org/news/how-to-donate-to-free-code-camp/'
         );
+    });
+  });
+
+  context('Language button', () => {
+    beforeEach(() => {
+      cy.visit('/');
+    });
+
+    it('Clicking the "Change Language" button should open the language list', () => {
+      cy.get(selectors.toggleLangButton).should('be.visible');
+      cy.get(selectors.toggleLangButton).click();
+      cy.get(selectors.languageList).should('be.visible');
+    });
+
+    it('The language list should contain a button for each available language', () => {
+      cy.env(['locales']).then(({ locales }) => {
+        cy.get(selectors.toggleLangButton).should('be.visible');
+        cy.get(selectors.toggleLangButton).click();
+        cy.get(selectors.languageList).should('be.visible');
+        cy.get(selectors.languageList)
+          .children()
+          .should('have.length', locales.length);
+      });
     });
   });
 
