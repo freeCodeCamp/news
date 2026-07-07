@@ -5,7 +5,8 @@
     "load-more-articles": "もっと見る",
     "menu": "Menu",
     "learn": "Curriculum",
-    "toggle-dark-mode": "Night Mode"
+    "toggle-dark-mode": "Night Mode",
+    "change-language": "Language"
   },
   "search": {
     "label": "検索",

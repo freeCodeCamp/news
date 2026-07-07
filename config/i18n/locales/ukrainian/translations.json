@@ -5,7 +5,8 @@
     "load-more-articles": "Завантажити більше публікацій",
     "menu": "Меню",
     "learn": "Навчальна програма",
-    "toggle-dark-mode": "Night Mode"
+    "toggle-dark-mode": "Night Mode",
+    "change-language": "Language"
   },
   "search": {
     "label": "Пошук",
