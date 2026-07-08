@@ -6,24 +6,30 @@
         <a class="site-nav-logo" href="{{ site.url }}" data-test-label="site-nav-logo"><img src="{{ site.logo }}" alt="{{ site.title }}" /></a>
     </div>
     <div class="site-nav-right">
-        <button data-test-label="header-toggle-lang-button" id="toggle-lang-button" class="lang-button-nav"
-        title={% t 'buttons.change-language' %}
-            aria-label={% t 'buttons.change-language' %} aria-controls="nav-lang-list" aria-expanded="false">
-    {% include "partials/icons/globe.njk" %}
+        <button
+            data-test-label="header-toggle-lang-button"
+            id="toggle-lang-button"
+            class="lang-button-nav"
+            title={% t 'buttons.change-language' %}
+            aria-label={% t 'buttons.change-language' %}
+            aria-controls="nav-lang-list"
+            aria-expanded="false"
+        >
+            {% include "partials/icons/globe.njk" %}
         </button>
             <ul data-test-label="header-lang-list" id="nav-lang-list" class="nav-list" aria-labelledby="toggle-lang-button">
-            {% for language in languages %}
-            <li>
-                <a
-                    data-test-label="header-lang-list-option"
-                    class="nav-link nav-lang-list-option"
-                    href="{{ language.baseURL }}"
-                    hreflang="{{ language.htmlLang }}"
-                    lang="{{ language.htmlLang }}"{% if language.isCurrent %} aria-current="true"{% endif %}
-                >{{ language.label }}</a>
-            </li>
-            {% endfor %}
-        </ul>
+                {% for language in languages %}
+                    <li>
+                        <a
+                            data-test-label="header-lang-list-option"
+                            class="nav-link nav-lang-list-option"
+                            href="{{ language.baseURL }}"
+                            hreflang="{{ language.htmlLang }}"
+                            lang="{{ language.htmlLang }}"{% if language.isCurrent %} aria-current="true"{% endif %}
+                        >{{ language.label }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
         <button aria-expanded="false" class="exposed-button-nav" id="toggle-button-nav" data-test-label="header-menu-button">
             <span class="sr-only">{% t 'buttons.menu' %}</span>
             <span class="menu-btn-text">{% t 'buttons.menu' %}</span>
