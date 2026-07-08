@@ -12,12 +12,12 @@
             class="lang-button-nav"
             title={% t 'buttons.change-language' %}
             aria-label={% t 'buttons.change-language' %}
-            aria-controls="nav-lang-list"
+            aria-controls="lang-dropdown"
             aria-expanded="false"
         >
             {% include "partials/icons/globe.njk" %}
         </button>
-            <ul data-test-label="header-lang-list" id="nav-lang-list" class="nav-list" aria-labelledby="toggle-lang-button">
+            <ul data-test-label="header-lang-list" id="lang-dropdown" class="nav-list" aria-labelledby="toggle-lang-button">
                 {% for language in languages %}
                     <li>
                         <a
@@ -30,11 +30,11 @@
                     </li>
                 {% endfor %}
             </ul>
-        <button aria-expanded="false" class="exposed-button-nav" id="toggle-button-nav" data-test-label="header-menu-button">
+        <button aria-expanded="false" class="exposed-button-nav" id="toggle-menu-button" data-test-label="header-menu-button">
             <span class="sr-only">{% t 'buttons.menu' %}</span>
             <span class="menu-btn-text">{% t 'buttons.menu' %}</span>
         </button>
-        <ul id="menu-dropdown" class="nav-list" aria-labelledby="toggle-button-nav" data-test-label="header-menu">
+        <ul id="menu-dropdown" class="nav-list" aria-labelledby="toggle-menu-button" data-test-label="header-menu">
             <li>
                 <div id="nav-right-search-container" class="fcc-search-container" data-test-label="fcc-search-container"></div>
             </li>
