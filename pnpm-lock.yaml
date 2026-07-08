@@ -7,10 +7,6 @@ settings:
 importers:
 
   .:
-    dependencies:
-      '@fortawesome/free-solid-svg-icons':
-        specifier: ^7.2.0
-        version: 7.3.0
     devDependencies:
       '@11ty/eleventy':
         specifier: 3.1.2
@@ -24,6 +20,9 @@ importers:
       '@eslint/js':
         specifier: 10.0.1
         version: 10.0.1(eslint@10.6.0)
+      '@fortawesome/free-solid-svg-icons':
+        specifier: 7.3.0
+        version: 7.3.0
       '@tryghost/content-api':
         specifier: 1.12.2
         version: 1.12.2
