@@ -44,10 +44,17 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Close any open dropdown when pressing the Escape key
+  // Close any open dropdown when pressing the Escape key, returning focus to
+  // its toggle button so keyboard users don't lose their place
   document.addEventListener('keydown', event => {
-    if (event.key === 'Escape') {
-      dropdowns.forEach(closeDropdown);
+    if (event.key !== 'Escape') {
+      return;
     }
+    dropdowns.forEach(dropdown => {
+      if (dropdown.menu.classList.contains('display-menu')) {
+        closeDropdown(dropdown);
+        dropdown.button.focus();
+      }
+    });
   });
 });
