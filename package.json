@@ -86,7 +86,7 @@
     "eslint-utils": "3.0.0",
     "fast-xml-parser": "5.9.3",
     "get-video-id": "4.2.0",
-    "globals": "17.4.0",
+    "globals": "17.7.0",
     "graceful-fs": "4.2.11",
     "graphql-request": "7.4.0",
     "husky": "9.1.7",
