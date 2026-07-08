@@ -10,8 +10,8 @@
             data-test-label="header-toggle-lang-button"
             id="toggle-lang-button"
             class="lang-button-nav"
-            title={% t 'buttons.change-language' %}
-            aria-label={% t 'buttons.change-language' %}
+            title="{% t 'buttons.change-language' %}"
+            aria-label="{% t 'buttons.change-language' %}"
             aria-controls="lang-dropdown"
             aria-expanded="false"
         >
@@ -30,9 +30,9 @@
                     </li>
                 {% endfor %}
             </ul>
-        <button aria-expanded="false" class="menu-button-nav" id="toggle-menu-button" data-test-label="header-menu-button">
-            <span class="sr-only">{% t 'buttons.menu' %}</span>
+        <button aria-expanded="false" class="menu-button-nav" id="toggle-menu-button" data-test-label="header-menu-button" aria-label="{% t 'buttons.menu' %}">
             <span class="menu-btn-text">{% t 'buttons.menu' %}</span>
+            <i class="fa-solid fa-bars menu-btn-icon" aria-hidden="true"></i>
         </button>
         <ul id="menu-dropdown" class="nav-list" aria-labelledby="toggle-menu-button" data-test-label="header-menu">
             <li>
