@@ -5,7 +5,8 @@
     "load-more-articles": "Carica altri articoli",
     "menu": "Menu",
     "learn": "Curriculum",
-    "toggle-dark-mode": "Night Mode"
+    "toggle-dark-mode": "Night Mode",
+    "change-language": "Language"
   },
   "search": {
     "label": "Cerca",
