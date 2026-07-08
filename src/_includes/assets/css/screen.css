@@ -202,9 +202,25 @@ html.dark-mode .under-header-content {
   font-size: 18px;
 }
 
+.menu-btn-text {
+  display: none;
+}
+
+.menu-btn-icon {
+  display: inline-block;
+}
+
 @media (min-width: 601px) {
   .menu-button-nav {
     padding-inline: 16px;
+  }
+
+  .menu-btn-text {
+    display: inline;
+  }
+
+  .menu-btn-icon {
+    display: none;
   }
 }
 
