@@ -104,7 +104,7 @@
     "node-cache": "5.1.2",
     "node-fetch": "3.3.2",
     "piscina": "5.1.4",
-    "prettier": "3.8.1",
+    "prettier": "3.9.4",
     "probe-image-size": "7.2.3",
     "sanitize-html": "2.17.2",
     "shx": "0.4.0",
