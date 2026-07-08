@@ -44,6 +44,25 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  // Close a dropdown once keyboard focus leaves it
+  document.addEventListener('focusout', event => {
+    const nextFocused = event.relatedTarget;
+    // relatedTarget is null when focus leaves the document/window
+    // leave the dropdown open and let the click handler cover mouse users
+    if (!nextFocused) {
+      return;
+    }
+    dropdowns.forEach(dropdown => {
+      if (
+        dropdown.menu.classList.contains('display-menu') &&
+        !dropdown.button.contains(nextFocused) &&
+        !dropdown.menu.contains(nextFocused)
+      ) {
+        closeDropdown(dropdown);
+      }
+    });
+  });
+
   // Close any open dropdown when pressing the Escape key, returning focus to
   // its toggle button so keyboard users don't lose their place
   document.addEventListener('keydown', event => {
