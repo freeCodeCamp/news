@@ -67,8 +67,8 @@ importers:
         specifier: 5.9.3
         version: 5.9.3
       get-video-id:
-        specifier: 4.1.7
-        version: 4.1.7
+        specifier: 4.2.0
+        version: 4.2.0
       globals:
         specifier: 17.4.0
         version: 17.4.0
@@ -1906,9 +1906,9 @@ packages:
     resolution: {integrity: sha512-ts6Wi+2j3jQjqi70w5AlN8DFnkSwC+MqmxEzdEALB2qXZYV3X/b1CTfgPLGJNMeAWxdPfU8FO1ms3NUfaHCPYg==}
     engines: {node: '>=10'}
 
-  get-video-id@4.1.7:
-    resolution: {integrity: sha512-bYHXe3BTbFbiViuNFyfFnZPnSDVWBu5N06p35LW7dD/ul4O1sdPSs3Brw8U/m5JlQUnkj3tht3luSz0k05vEYg==}
-    engines: {node: '>=16'}
+  get-video-id@4.2.0:
+    resolution: {integrity: sha512-jRGMts6wFqruMF85oEHY0aLqdn9Eo/AL/VVEwxJk8SWY5nNJDOK4fj1WUPO9/+CnhexZh2l3sZ4S+qGIJJJ8YA==}
+    engines: {node: ^20.19.0 || >=22.0.0}
 
   getpass@0.1.7:
     resolution: {integrity: sha512-0fzj9JxOLfJ+XGLhR8ze3unN0KZCgZwiSSDz168VERjK8Wl8kVSdcu2kspd4s4wtAa1y/qrVRiAA0WclVsu0ng==}
@@ -5437,9 +5437,7 @@ snapshots:
 
   get-stream@6.0.1: {}
 
-  get-video-id@4.1.7:
-    dependencies:
-      '@babel/runtime': 7.29.7
+  get-video-id@4.2.0: {}
 
   getpass@0.1.7:
     dependencies:
