@@ -69,14 +69,16 @@ describe('Landing (Hashnode sourced)', () => {
     });
 
     it('The theme should be set to dark and update the value in localStorage to dark', function () {
+      // Load in light mode regardless of the OS/browser color-scheme so the
+      // toggle deterministically turns dark mode *on*
       cy.clearLocalStorage();
       cy.clearCookies();
+      visit(false);
       cy.get(selectors.toggleDropDownMenuButton).click();
       cy.get(selectors.darkModeButton).click();
       cy.window().then(win => {
         expect(win.localStorage.getItem('theme')).to.equal('dark');
       });
-      visit(false);
     });
 
     // Because all templates readers see use `default.njk` as a base,

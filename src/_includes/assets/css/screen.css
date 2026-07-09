@@ -191,7 +191,7 @@ html.dark-mode .under-header-content {
 /* 5. Site Navigation
 /* ---------------------------------------------------------- */
 
-.exposed-button-nav {
+.menu-button-nav {
   color: var(--gray00);
   background-color: var(--theme-color);
   height: var(--header-element-size);
@@ -202,9 +202,25 @@ html.dark-mode .under-header-content {
   font-size: 18px;
 }
 
+.menu-btn-text {
+  display: none;
+}
+
+.menu-btn-icon {
+  display: inline-block;
+}
+
 @media (min-width: 601px) {
-  .exposed-button-nav {
+  .menu-button-nav {
     padding-inline: 16px;
+  }
+
+  .menu-btn-text {
+    display: inline;
+  }
+
+  .menu-btn-icon {
+    display: none;
   }
 }
 
@@ -221,7 +237,7 @@ html.dark-mode .under-header-content {
   display: none;
 }
 
-.exposed-button-nav:is(
+.menu-button-nav:is(
   :hover,
   :hover:focus,
   [aria-expanded='true'],
@@ -246,7 +262,7 @@ html.dark-mode .under-header-content {
   fill: var(--gray00);
 }
 
-.exposed-button-nav,
+.menu-button-nav,
 .lang-button-nav {
   align-items: center;
   background-color: var(--theme-color);
@@ -488,7 +504,7 @@ a.nav-forum {
   }
 }
 
-.toggle-button-nav {
+.donate-button-nav {
   padding: 0 4px;
   outline: none;
   cursor: pointer;
@@ -503,14 +519,14 @@ a.nav-forum {
 }
 
 @media (min-width: 601px) {
-  .toggle-button-nav {
+  .donate-button-nav {
     padding: 0 16px;
   }
 }
 
-.toggle-button-nav:hover,
-.toggle-button-nav:focus,
-.toggle-button-nav:active:hover {
+.donate-button-nav:hover,
+.donate-button-nav:focus,
+.donate-button-nav:active:hover {
   background-color: #fecc4c;
   border-width: 3px;
   border-color: #f1a02a;
@@ -519,7 +535,7 @@ a.nav-forum {
   text-decoration: none;
 }
 
-.toggle-button-nav:active {
+.donate-button-nav:active {
   background-image: none;
   box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.3);
   text-decoration: none;
@@ -2783,7 +2799,7 @@ a.banner:hover span {
   align-items: center;
 }
 
-.rtl-layout .toggle-button-nav {
+.rtl-layout .donate-button-nav {
   margin-right: auto;
   margin-left: 5px;
 }
