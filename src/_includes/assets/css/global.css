@@ -478,3 +478,6 @@ h6 {
   font-size: 1.4rem;
   font-weight: 500;
 }
+
+/* Import Context Reader styles */
+@import 'context-reader.css';
