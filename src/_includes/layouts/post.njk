@@ -205,27 +205,11 @@ time #}
         console.warn('Context Reader failed to initialize:', err);
       });
 
-      // Listen for toggle button clicks
-      document.addEventListener('DOMContentLoaded', () => {
-        const toggleBtn = document.getElementById('context-reader-toggle');
-        if (toggleBtn) {
-          toggleBtn.addEventListener('click', () => {
-            if (contextReader.isEnabled()) {
-              contextReader.disable();
-              toggleBtn.setAttribute('aria-pressed', 'false');
-              toggleBtn.querySelector('.toggle-state').textContent = 'OFF';
-            } else {
-              contextReader.enable();
-              toggleBtn.setAttribute('aria-pressed', 'true');
-              toggleBtn.querySelector('.toggle-state').textContent = 'ON';
-            }
-          });
-
-          // Set initial button state
-          if (contextReader.isEnabled()) {
-            toggleBtn.setAttribute('aria-pressed', 'true');
-            toggleBtn.querySelector('.toggle-state').textContent = 'ON';
-          }
+      document.addEventListener('context-reader:toggle', event => {
+        if (event.detail.enabled) {
+          contextReader.enable();
+        } else {
+          contextReader.disable();
         }
       });
 

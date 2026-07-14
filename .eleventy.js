@@ -14,6 +14,7 @@ import {
   cacheBusterShortcode,
   manifest
 } from './utils/shortcodes/cache-buster.js';
+import { buildContextReaderAssets } from './utils/context-reader-assets.js';
 import { createJSONLDShortcode } from './utils/shortcodes/create-json-ld.js';
 import {
   publishedDateShortcode,
@@ -71,6 +72,8 @@ export default function (config) {
       './dist/assets/translated-locales.json',
       JSON.stringify(translatedLocales)
     );
+
+    buildContextReaderAssets();
   });
 
   config.addPlugin(pluginRSS);

@@ -316,15 +316,15 @@ export default async () => {
   ];
 
   // Add custom object for the landing page to the beginning of the pages sitemap collection entries array
-  const landingPageEntry = {
-    loc: `${siteURL}`
-  };
-  // Published pages aren't shown on the landing page, so use the most recently updated post
-  // for lastmod (if available)
-  if (sitemaps[1].entries[0]?.lastmod) {
-    landingPageEntry.lastmod = sitemaps[1].entries[0].lastmod;
-  }
-  sitemaps[0].entries = [landingPageEntry, ...sitemaps[0].entries];
+  sitemaps[0].entries = [
+    {
+      loc: `${siteURL}`,
+      // Published pages aren't shown on the landing page, so use the most recently updated post
+      // for lastmod
+      lastmod: sitemaps[1].entries[0].lastmod
+    },
+    ...sitemaps[0].entries
+  ];
 
   // Sort sitemap entries
   sitemaps.forEach(sitemap =>
