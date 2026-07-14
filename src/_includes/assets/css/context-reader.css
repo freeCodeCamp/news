@@ -1,0 +1,68 @@
+/* Context Reader Feature Styles */
+/* Uses freeCodeCamp Command-line Chic design system */
+
+:root {
+  --cr-primary: #0a66c2;
+  --cr-text: #1a1a1a;
+  --cr-bg: #ffffff;
+  --cr-border: #e0e0e0;
+  --cr-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  --cr-z-popup: 10000;
+  --cr-z-panel: 9999;
+  --cr-radius: 8px;
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --cr-text: #e0e0e0;
+    --cr-bg: #1a1a1a;
+    --cr-border: #333;
+  }
+}
+
+/* Highlight interactive text when feature is enabled */
+article p:has(+ [data-context-reader-enabled='true']),
+article li:has(+ [data-context-reader-enabled='true']) {
+  cursor: text;
+}
+
+/* Selected text styling */
+::selection {
+  background-color: rgba(10, 102, 194, 0.2);
+}
+
+/* Accessibility: Focus visible on interactive elements */
+#context-reader-popup:focus-visible,
+#context-reader-side-panel:focus-visible {
+  outline: 2px solid var(--cr-primary);
+  outline-offset: 2px;
+}
+
+/* Ensure popup and panel don't break layout */
+#context-reader-popup,
+#context-reader-side-panel {
+  box-sizing: border-box;
+}
+
+#context-reader-popup *,
+#context-reader-side-panel * {
+  box-sizing: border-box;
+}
+
+/* Print styles: hide context reader UI when printing */
+@media print {
+  #context-reader-popup,
+  #context-reader-side-panel {
+    display: none !important;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-color-scheme: dark) {
+  #context-reader-popup,
+  #context-reader-side-panel {
+    animation: none !important;
+    transition: none !important;
+  }
+}
