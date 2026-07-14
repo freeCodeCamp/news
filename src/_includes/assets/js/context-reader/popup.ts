@@ -16,99 +16,136 @@ export class PopupComponent {
     return `
       :host {
         all: initial;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       }
+
       .popup {
-        --color-primary: #0a0a23;
-        --color-text: #1b1b32;
-        --color-bg: #ffffff;
-        --color-border: #d0d0d5;
-        --color-shadow: rgba(0, 0, 0, 0.15);
+        /* FCC Command-line Chic - Dark Mode (Primary) */
+        --bg-primary: #0a0a23;
+        --bg-secondary: #1b1b32;
+        --text-primary: #f5f6f7;
+        --text-bright: #ffffff;
+        --text-muted: #858591;
+        --border-color: #3b3b4f;
+        --accent-blue: #99c9ff;
+        --accent-yellow: #f1be32;
+        --accent-red: #ffadad;
+        --focus-ring: #198eee;
+
         position: fixed;
         z-index: 10000;
-        max-width: 320px;
-        background: var(--color-bg);
-        border: 1px solid var(--color-border);
-        border-radius: 8px;
-        padding: 16px;
-        box-shadow: 0 4px 16px var(--color-shadow);
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-        font-size: 14px;
-        color: var(--color-text);
+        max-width: 360px;
+        background: var(--bg-secondary);
+        border: 1px solid var(--border-color);
+        border-radius: 4px;
+        padding: 20px;
+        font-size: 18px;
+        line-height: 1.5;
+        color: var(--text-primary);
       }
-      @media (prefers-color-scheme: dark) {
+
+      @media (prefers-color-scheme: light) {
         .popup {
-          --color-primary: #99c9ff;
-          --color-text: #dfdfe2;
-          --color-bg: #1b1b32;
-          --color-border: #3b3b4f;
-          --color-shadow: rgba(0, 0, 0, 0.4);
+          --bg-primary: #ffffff;
+          --bg-secondary: #f5f6f7;
+          --text-primary: #0a0a23;
+          --text-bright: #0a0a23;
+          --text-muted: #3b3b4f;
+          --border-color: #858591;
+          --accent-blue: #002ead;
+          --accent-yellow: #4d3800;
+          --accent-red: #850000;
         }
       }
+
       .close-btn {
         position: absolute;
-        top: 8px;
-        right: 8px;
+        top: 12px;
+        right: 12px;
         background: none;
         border: none;
         cursor: pointer;
-        font-size: 16px;
-        color: var(--color-text);
-        padding: 4px 8px;
+        font-size: 18px;
+        color: var(--text-muted);
+        padding: 4px;
         border-radius: 4px;
-        line-height: 1;
+        transition: color 0.2s;
       }
+
       .close-btn:hover {
-        background: var(--color-border);
+        color: var(--text-primary);
       }
-      .close-btn:active {
-        opacity: 0.7;
+
+      .close-btn:focus-visible {
+        outline: 2px solid var(--focus-ring);
+        outline-offset: 2px;
       }
+
       .loading {
         display: none;
         padding: 8px 0;
-        color: var(--color-text);
-        opacity: 0.7;
+        color: var(--text-muted);
+        font-size: 16px;
       }
+
       .result {
         display: none;
-        padding-top: 4px;
+        padding-top: 0;
       }
+
       .error {
         display: none;
         padding: 8px 0;
-        color: #d93025;
+        color: var(--accent-red);
+        font-size: 16px;
       }
+
       .word-entry {
         font-weight: 700;
-        font-size: 16px;
-        margin-bottom: 4px;
+        font-size: 20px;
+        color: var(--accent-blue);
+        margin-bottom: 8px;
       }
+
       .translation {
-        font-size: 14px;
-        margin-bottom: 4px;
+        font-size: 18px;
+        color: var(--text-primary);
+        margin-bottom: 8px;
       }
+
       .definition {
-        font-size: 13px;
-        opacity: 0.8;
-        margin-bottom: 4px;
+        font-size: 16px;
+        color: var(--text-muted);
+        margin-bottom: 8px;
+        line-height: 1.5;
       }
+
       .save-btn {
-        margin-top: 12px;
-        background: var(--color-primary);
-        color: #ffffff;
+        margin-top: 16px;
+        width: 100%;
+        background: var(--accent-yellow);
+        color: var(--bg-primary);
         border: none;
         border-radius: 4px;
-        padding: 6px 14px;
+        padding: 10px 16px;
         cursor: pointer;
-        font-size: 13px;
+        font-size: 16px;
         font-weight: 600;
         display: block;
+        transition: opacity 0.2s;
       }
+
       .save-btn:hover {
         opacity: 0.9;
       }
+
+      .save-btn:focus-visible {
+        outline: 2px solid var(--focus-ring);
+        outline-offset: 2px;
+      }
+
       .save-btn:active {
-        opacity: 0.7;
+        opacity: 0.8;
       }
     `;
   }

@@ -1,0 +1,88 @@
+5d35509 feat: add TypeScript types for context-reader module
+ .superpowers/sdd/progress.md                    |  7 +++
+ src/_includes/assets/js/context-reader/types.ts | 63 +++++++++++++++++++++++++
+ 2 files changed, 70 insertions(+)
+
+=== FULL DIFF ===
+diff --git a/.superpowers/sdd/progress.md b/.superpowers/sdd/progress.md
+new file mode 100644
+index 0000000..6a8e049
+--- /dev/null
++++ b/.superpowers/sdd/progress.md
+@@ -0,0 +1,7 @@
++# Context Reader Implementation Progress
++
++## Task Summary
++
++15 tasks total for Context Reader feature implementation
++
++## Completed Tasks
+diff --git a/src/_includes/assets/js/context-reader/types.ts b/src/_includes/assets/js/context-reader/types.ts
+new file mode 100644
+index 0000000..507b38e
+--- /dev/null
++++ b/src/_includes/assets/js/context-reader/types.ts
+@@ -0,0 +1,63 @@
++// src/_includes/assets/js/context-reader/types.ts
++
++export interface SavedWord {
++  id: string;
++  word: string;
++  translation: string;
++  sourceLanguage: 'en' | 'es';
++  targetLanguage: 'en' | 'es';
++  contextSentence: string;
++  articleUrl: string;
++  articleTitle: string;
++  savedAt: string;
++}
++
++export interface DictionaryEntry {
++  word: string;
++  phonetic?: string;
++  meanings: Array<{
++    partOfSpeech: string;
++    definitions: Array<{
++      definition: string;
++      example?: string;
++      synonyms?: string[];
++    }>;
++  }>;
++}
++
++export interface LookupResult {
++  word: string;
++  translation: string;
++  pronunciation?: string;
++  meanings: DictionaryEntry[];
++  exampleSentence?: string;
++  sourceLanguage: 'en' | 'es';
++  targetLanguage: 'en' | 'es';
++}
++
++export interface TranslationRequest {
++  text: string;
++  sourceLang: 'en' | 'es';
++  targetLang: 'en' | 'es';
++  context?: string;
++}
++
++export interface TranslationResponse {
++  translatedText: string;
++  detectedSourceLanguage?: string;
++}
++
++export interface PopupState {
++  visible: boolean;
++  word: string;
++  position: { x: number; y: number };
++  result?: LookupResult;
++  loading: boolean;
++  error?: string;
++}
++
++export interface ContextReaderConfig {
++  enabled: boolean;
++  nativeLanguage: 'en' | 'es';
++  learningLanguage: 'en' | 'es';
++}

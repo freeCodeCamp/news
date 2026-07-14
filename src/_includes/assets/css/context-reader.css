@@ -1,23 +1,53 @@
 /* Context Reader Feature Styles */
-/* Uses freeCodeCamp Command-line Chic design system */
+/* Follows freeCodeCamp Command-line Chic design system */
+/* Dark-first, high-contrast, terminal-grade information density */
 
 :root {
-  --cr-primary: #0a66c2;
-  --cr-text: #1a1a1a;
-  --cr-bg: #ffffff;
-  --cr-border: #e0e0e0;
-  --cr-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  /* FCC Gray Scale - Dark Mode (Primary) */
+  --cr-bg-primary: #0a0a23; /* Deepest background */
+  --cr-bg-secondary: #1b1b32; /* Secondary background */
+  --cr-bg-tertiary: #2a2a40; /* Surface / editor */
+  --cr-border: #3b3b4f; /* Borders / subtle (7:1 contrast) */
+  --cr-text-muted: #858591; /* Muted text */
+  --cr-text-subtle: #d0d0d5; /* Subtle foreground */
+  --cr-text-secondary: #dfdfe2; /* Secondary foreground */
+  --cr-text-primary: #f5f6f7; /* Bright foreground (18px+) */
+  --cr-text-bright: #ffffff; /* Primary foreground */
+
+  /* FCC Accent Colors - Dark Mode */
+  --cr-accent-blue: #99c9ff; /* Interactive, links */
+  --cr-accent-yellow: #f1be32; /* CTAs, buttons, emphasis */
+  --cr-accent-green: #acd157; /* Success, completion */
+  --cr-accent-red: #ffadad; /* Errors, danger */
+
+  /* Z-index */
   --cr-z-popup: 10000;
   --cr-z-panel: 9999;
-  --cr-radius: 8px;
+
+  /* Layout */
+  --cr-radius: 4px;
+  --cr-focus-ring: #198eee; /* Blue-mid focus outline */
+  --cr-font-size: 18px; /* Base font size (non-negotiable) */
+  --cr-line-height: 1.5; /* Generous line height */
 }
 
-/* Dark mode support */
-@media (prefers-color-scheme: dark) {
+/* Light Mode Support */
+@media (prefers-color-scheme: light) {
   :root {
-    --cr-text: #e0e0e0;
-    --cr-bg: #1a1a1a;
-    --cr-border: #333;
+    --cr-bg-primary: #ffffff;
+    --cr-bg-secondary: #f5f6f7;
+    --cr-bg-tertiary: #dfdfe2;
+    --cr-border: #858591;
+    --cr-text-muted: #3b3b4f;
+    --cr-text-subtle: #1b1b32;
+    --cr-text-secondary: #0a0a23;
+    --cr-text-primary: #0a0a23;
+    --cr-text-bright: #0a0a23;
+
+    --cr-accent-blue: #002ead;
+    --cr-accent-yellow: #4d3800;
+    --cr-accent-green: #00471b;
+    --cr-accent-red: #850000;
   }
 }
 
@@ -27,15 +57,18 @@ article li:has(+ [data-context-reader-enabled='true']) {
   cursor: text;
 }
 
-/* Selected text styling */
+/* Selected text styling - uses accent blue */
 ::selection {
-  background-color: rgba(10, 102, 194, 0.2);
+  background-color: var(--cr-accent-blue);
+  color: var(--cr-bg-primary);
 }
 
 /* Accessibility: Focus visible on interactive elements */
+/* 7:1 contrast ratio, 2px solid outline */
 #context-reader-popup:focus-visible,
-#context-reader-side-panel:focus-visible {
-  outline: 2px solid var(--cr-primary);
+#context-reader-side-panel:focus-visible,
+.context-reader-toggle:focus-visible {
+  outline: 2px solid var(--cr-focus-ring);
   outline-offset: 2px;
 }
 

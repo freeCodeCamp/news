@@ -1,7 +1,8 @@
 name = "context-reader-worker"
-type = "javascript"
-main = "src/translator.ts"
+main = "workers/src/translator.ts"
+
+[env.development]
+vars = { DEEPL_API_KEY = "" }
 
 [env.production]
-route = "api.example.com/api/context-reader/*"
-vars = { DEEPL_API_KEY = "your-key-here" }
+vars = { DEEPL_API_KEY = "" }

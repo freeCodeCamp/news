@@ -197,7 +197,7 @@ time #}
 
       // Initialize Context Reader when DOM is ready
       const contextReader = new ContextReader(
-        '/api/context-reader/translate', // Cloudflare Worker URL
+        'https://context-reader-worker-production.context-reader.workers.dev', // Cloudflare Worker URL
         '' // API key will be added by server
       );
 

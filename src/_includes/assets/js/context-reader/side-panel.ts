@@ -19,168 +19,226 @@ export class SidePanelComponent {
     return `
       :host {
         all: initial;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       }
+
       .panel {
-        --color-primary: #0a0a23;
-        --color-text: #1b1b32;
-        --color-bg: #ffffff;
-        --color-border: #d0d0d5;
-        --color-shadow: rgba(0, 0, 0, 0.15);
-        --color-card-bg: #f9f9f9;
+        /* FCC Command-line Chic - Dark Mode (Primary) */
+        --bg-primary: #0a0a23;
+        --bg-secondary: #1b1b32;
+        --bg-tertiary: #2a2a40;
+        --text-primary: #f5f6f7;
+        --text-bright: #ffffff;
+        --text-muted: #858591;
+        --border-color: #3b3b4f;
+        --accent-blue: #99c9ff;
+        --accent-yellow: #f1be32;
+        --accent-red: #ffadad;
+        --focus-ring: #198eee;
+
         position: fixed;
         right: 0;
         top: 0;
-        width: 350px;
+        width: 380px;
         height: 100vh;
-        background: var(--color-bg);
-        border-left: 1px solid var(--color-border);
-        box-shadow: -4px 0 16px var(--color-shadow);
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-        font-size: 14px;
-        color: var(--color-text);
-        z-index: 10001;
+        background: var(--bg-secondary);
+        border-left: 1px solid var(--border-color);
+        font-size: 18px;
+        line-height: 1.5;
+        color: var(--text-primary);
+        z-index: 9999;
         display: flex;
         flex-direction: column;
         overflow: hidden;
       }
-      @media (prefers-color-scheme: dark) {
+
+      @media (prefers-color-scheme: light) {
         .panel {
-          --color-primary: #99c9ff;
-          --color-text: #dfdfe2;
-          --color-bg: #1b1b32;
-          --color-border: #3b3b4f;
-          --color-shadow: rgba(0, 0, 0, 0.4);
-          --color-card-bg: #2a2a3f;
+          --bg-primary: #ffffff;
+          --bg-secondary: #f5f6f7;
+          --bg-tertiary: #dfdfe2;
+          --text-primary: #0a0a23;
+          --text-bright: #0a0a23;
+          --text-muted: #3b3b4f;
+          --border-color: #858591;
+          --accent-blue: #002ead;
+          --accent-yellow: #4d3800;
+          --accent-red: #850000;
         }
       }
+
       .panel-header {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 16px;
-        border-bottom: 1px solid var(--color-border);
+        padding: 20px;
+        border-bottom: 1px solid var(--border-color);
         flex-shrink: 0;
       }
+
       .panel-header h2 {
         margin: 0;
-        font-size: 18px;
+        font-size: 22px;
         font-weight: 700;
-        color: var(--color-text);
+        color: var(--text-primary);
       }
+
       .close-btn {
         background: none;
         border: none;
         cursor: pointer;
-        font-size: 18px;
-        color: var(--color-text);
-        padding: 4px 8px;
+        font-size: 20px;
+        color: var(--text-muted);
+        padding: 4px;
         border-radius: 4px;
-        line-height: 1;
+        transition: color 0.2s;
       }
+
       .close-btn:hover {
-        background: var(--color-border);
+        color: var(--text-primary);
       }
+
+      .close-btn:focus-visible {
+        outline: 2px solid var(--focus-ring);
+        outline-offset: 2px;
+      }
+
       .panel-controls {
         display: flex;
-        align-items: center;
-        gap: 8px;
-        padding: 12px 16px;
-        border-bottom: 1px solid var(--color-border);
+        flex-direction: column;
+        gap: 12px;
+        padding: 16px 20px;
+        border-bottom: 1px solid var(--border-color);
         flex-shrink: 0;
       }
+
       .export-btn {
-        background: var(--color-primary);
-        color: #ffffff;
+        background: var(--accent-yellow);
+        color: var(--bg-primary);
         border: none;
         border-radius: 4px;
-        padding: 6px 12px;
+        padding: 10px 16px;
         cursor: pointer;
-        font-size: 13px;
+        font-size: 16px;
         font-weight: 600;
         white-space: nowrap;
+        transition: opacity 0.2s;
       }
+
       .export-btn:hover {
         opacity: 0.9;
       }
-      .search-input {
-        flex: 1;
-        border: 1px solid var(--color-border);
-        border-radius: 4px;
-        padding: 6px 10px;
-        font-size: 13px;
-        background: var(--color-bg);
-        color: var(--color-text);
+
+      .export-btn:focus-visible {
+        outline: 2px solid var(--focus-ring);
+        outline-offset: 2px;
       }
+
+      .search-input {
+        border: 1px solid var(--border-color);
+        border-radius: 4px;
+        padding: 10px 14px;
+        font-size: 16px;
+        background: var(--bg-tertiary);
+        color: var(--text-primary);
+      }
+
+      .search-input::placeholder {
+        color: var(--text-muted);
+      }
+
+      .search-input:focus {
+        outline: 2px solid var(--focus-ring);
+        outline-offset: -2px;
+      }
+
       .words-list {
         flex: 1;
         overflow-y: auto;
-        padding: 12px 16px;
+        padding: 16px 20px;
         display: flex;
         flex-direction: column;
-        gap: 10px;
+        gap: 12px;
       }
+
       .empty-state {
         display: none;
         text-align: center;
-        padding: 40px 16px;
-        color: var(--color-text);
-        opacity: 0.6;
-        font-size: 14px;
+        padding: 40px 20px;
+        color: var(--text-muted);
+        font-size: 16px;
+        line-height: 1.5;
       }
+
       .word-item {
-        background: var(--color-card-bg);
-        border: 1px solid var(--color-border);
-        border-radius: 6px;
-        padding: 12px;
+        background: var(--bg-tertiary);
+        border: 1px solid var(--border-color);
+        border-radius: 4px;
+        padding: 14px;
         position: relative;
       }
+
       .word-item-word {
         font-weight: 700;
-        font-size: 16px;
-        margin-bottom: 2px;
-      }
-      .word-item-translation {
-        font-size: 14px;
+        font-size: 18px;
+        color: var(--accent-blue);
         margin-bottom: 4px;
-        color: var(--color-primary);
       }
-      .word-item-context {
-        font-size: 12px;
-        opacity: 0.75;
-        font-style: italic;
+
+      .word-item-translation {
+        font-size: 16px;
+        color: var(--text-primary);
         margin-bottom: 6px;
       }
+
+      .word-item-context {
+        font-size: 14px;
+        color: var(--text-muted);
+        font-style: italic;
+        margin-bottom: 8px;
+        line-height: 1.4;
+      }
+
       .word-item-footer {
-        font-size: 11px;
-        opacity: 0.6;
+        font-size: 14px;
+        color: var(--text-muted);
         display: flex;
         justify-content: space-between;
         align-items: center;
+        gap: 8px;
       }
+
       .word-item-footer a {
-        color: var(--color-primary);
+        color: var(--accent-blue);
         text-decoration: none;
+        transition: opacity 0.2s;
       }
+
       .word-item-footer a:hover {
-        text-decoration: underline;
+        opacity: 0.8;
       }
+
       .delete-btn {
         position: absolute;
-        top: 8px;
-        right: 8px;
+        top: 12px;
+        right: 12px;
         background: none;
         border: none;
         cursor: pointer;
-        font-size: 14px;
-        color: var(--color-text);
-        opacity: 0.5;
-        padding: 2px 6px;
-        border-radius: 3px;
-        line-height: 1;
+        font-size: 16px;
+        color: var(--accent-red);
+        padding: 4px;
+        border-radius: 4px;
+        transition: opacity 0.2s;
       }
+
       .delete-btn:hover {
-        background: var(--color-border);
-        opacity: 1;
+        opacity: 0.8;
+      }
+
+      .delete-btn:focus-visible {
+        outline: 2px solid var(--focus-ring);
+        outline-offset: 2px;
       }
     `;
   }
