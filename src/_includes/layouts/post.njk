@@ -190,3 +190,50 @@ time #}
 {% block datasourceInfo %}
   <meta name="x-fcc-source" data-test-label="x-fcc-source" content="{{ post.source }}">
 {% endblock %}
+
+{% block scripts %}
+    <script type="module">
+      import { ContextReader } from '/assets/js/context-reader/context-reader.js';
+
+      // Initialize Context Reader when DOM is ready
+      const contextReader = new ContextReader(
+        '/api/context-reader/translate', // Cloudflare Worker URL
+        '' // API key will be added by server
+      );
+
+      contextReader.initialize().catch(err => {
+        console.warn('Context Reader failed to initialize:', err);
+      });
+
+      // Listen for toggle button clicks
+      document.addEventListener('DOMContentLoaded', () => {
+        const toggleBtn = document.getElementById('context-reader-toggle');
+        if (toggleBtn) {
+          toggleBtn.addEventListener('click', () => {
+            if (contextReader.isEnabled()) {
+              contextReader.disable();
+              toggleBtn.setAttribute('aria-pressed', 'false');
+              toggleBtn.querySelector('.toggle-state').textContent = 'OFF';
+            } else {
+              contextReader.enable();
+              toggleBtn.setAttribute('aria-pressed', 'true');
+              toggleBtn.querySelector('.toggle-state').textContent = 'ON';
+            }
+          });
+
+          // Set initial button state
+          if (contextReader.isEnabled()) {
+            toggleBtn.setAttribute('aria-pressed', 'true');
+            toggleBtn.querySelector('.toggle-state').textContent = 'ON';
+          }
+        }
+      });
+
+      // Listen for side panel toggle from keyboard shortcut
+      document.addEventListener('keydown', (e) => {
+        if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'V') {
+          contextReader.toggleSidePanel();
+        }
+      });
+    </script>
+{% endblock %}
