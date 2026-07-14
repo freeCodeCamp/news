@@ -1,3 +1,35 @@
+<style>
+.context-reader-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: 1px solid var(--cr-border, #e0e0e0);
+  border-radius: 4px;
+  padding: 6px 12px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--cr-text, #1a1a1a);
+  transition: all 0.2s;
+}
+
+.context-reader-toggle:hover {
+  background: var(--cr-bg, #ffffff);
+  border-color: var(--cr-primary, #0a66c2);
+}
+
+.context-reader-toggle[aria-pressed="true"] {
+  background: var(--cr-primary, #0a66c2);
+  color: white;
+  border-color: var(--cr-primary, #0a66c2);
+}
+
+.toggle-state {
+  font-size: 12px;
+  font-weight: 600;
+}
+</style>
 <nav class="site-nav nav-padding universal-nav">
     <div class="site-nav-left">
         <div id="nav-left-search-container" class="fcc-search-container" data-test-label="fcc-search-container"></div>
@@ -59,6 +91,17 @@
             aria-pressed="false"
             data-test-label="dark-mode-button">
         <span>{% t 'buttons.toggle-dark-mode' %}</span><i class="fa-regular fa-square-check" aria-hidden="true"></i></button></li>
+            <li>
+                <button
+                    id="context-reader-toggle"
+                    class="context-reader-toggle"
+                    aria-label="Toggle Context Reader mode"
+                    aria-pressed="false"
+                >
+                    <span class="toggle-label">Context Reader</span>
+                    <span class="toggle-state" aria-live="polite">OFF</span>
+                </button>
+            </li>
         </ul>
         <a
             class="donate-button-nav"
