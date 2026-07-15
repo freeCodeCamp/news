@@ -1,6 +1,6 @@
 import { DeepLService } from './services/deepl-service';
 import { DictionaryService } from './services/dictionary-service';
-import { TranslationRequest, DictionaryRequest, Env } from './types';
+import type { TranslationRequest, DictionaryRequest, Env } from './types';
 
 const CORS_HEADERS = {
   'Access-Control-Allow-Origin': '*',
@@ -88,6 +88,15 @@ export default {
                 error: 'Missing required fields: text, sourceLang, targetLang'
               }),
               400
+            );
+          }
+
+          if (!env.DEEPL_API_KEY) {
+            return corsResponse(
+              JSON.stringify({
+                error: 'DEEPL_API_KEY is not configured'
+              }),
+              503
             );
           }
 

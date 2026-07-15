@@ -193,11 +193,11 @@ time #}
 
 {% block scripts %}
     <script type="module">
-      import { ContextReader } from '/assets/js/context-reader/context-reader.js';
+      import { ContextReader } from '{{ contextReaderModulePath }}';
 
       // Initialize Context Reader when DOM is ready
       const contextReader = new ContextReader(
-        'https://context-reader-worker-production.context-reader.workers.dev', // Cloudflare Worker URL
+        'https://context-reader-worker.context-reader.workers.dev', // Cloudflare Worker URL
         '' // API key will be added by server
       );
 
@@ -207,10 +207,15 @@ time #}
 
       document.addEventListener('context-reader:toggle', event => {
         if (event.detail.enabled) {
+          contextReader.refreshLanguageSettings();
           contextReader.enable();
         } else {
           contextReader.disable();
         }
+      });
+
+      document.addEventListener('context-reader:language-change', () => {
+        contextReader.refreshLanguageSettings();
       });
 
       // Listen for side panel toggle from keyboard shortcut

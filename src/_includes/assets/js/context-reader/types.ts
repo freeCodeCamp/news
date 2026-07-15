@@ -1,11 +1,13 @@
 // src/_includes/assets/js/context-reader/types.ts
 
+export type ContextReaderLanguage = 'en' | 'es' | 'pt' | 'it' | 'fr';
+
 export interface SavedWord {
   id: string;
   word: string;
   translation: string;
-  sourceLanguage: 'en' | 'es';
-  targetLanguage: 'en' | 'es';
+  sourceLanguage: ContextReaderLanguage;
+  targetLanguage: ContextReaderLanguage;
   contextSentence: string;
   articleUrl: string;
   articleTitle: string;
@@ -31,14 +33,14 @@ export interface LookupResult {
   pronunciation?: string;
   meanings: DictionaryEntry[];
   exampleSentence?: string;
-  sourceLanguage: 'en' | 'es';
-  targetLanguage: 'en' | 'es';
+  sourceLanguage: ContextReaderLanguage;
+  targetLanguage: ContextReaderLanguage;
 }
 
 export interface TranslationRequest {
   text: string;
-  sourceLang: 'en' | 'es';
-  targetLang: 'en' | 'es';
+  sourceLang: ContextReaderLanguage;
+  targetLang: ContextReaderLanguage;
   context?: string;
 }
 
@@ -58,6 +60,6 @@ export interface PopupState {
 
 export interface ContextReaderConfig {
   enabled: boolean;
-  nativeLanguage: 'en' | 'es';
-  learningLanguage: 'en' | 'es';
+  nativeLanguage: ContextReaderLanguage;
+  learningLanguage: ContextReaderLanguage;
 }

@@ -4,7 +4,8 @@ import type {
   TranslationRequest,
   TranslationResponse,
   LookupResult,
-  DictionaryEntry
+  DictionaryEntry,
+  ContextReaderLanguage
 } from './types.js';
 
 export class TranslatorService {
@@ -35,9 +36,16 @@ export class TranslatorService {
     });
 
     if (!response.ok) {
-      throw new Error(
-        `Translation request failed with status ${response.status}`
-      );
+      let message = `Translation request failed with status ${response.status}`;
+      try {
+        const errorBody = (await response.json()) as { error?: string };
+        if (errorBody.error) {
+          message = errorBody.error;
+        }
+      } catch {
+        // Keep the status-based fallback if the Worker returns a non-JSON error.
+      }
+      throw new Error(message);
     }
 
     return response.json() as Promise<TranslationResponse>;
@@ -45,11 +53,11 @@ export class TranslatorService {
 
   async getDictionary(
     word: string,
-    lang: 'en' | 'es'
+    lang: ContextReaderLanguage
   ): Promise<DictionaryEntry[]> {
     try {
       if (lang === 'en') {
-        const url = `https://api.dictionaryapi.dev/api/v2/entries/english/${word}`;
+        const url = `https://api.dictionaryapi.dev/api/v2/entries/en/${encodeURIComponent(word)}`;
         const response = await fetch(url);
         if (!response.ok || response.status === 404) {
           return [];
@@ -62,7 +70,7 @@ export class TranslatorService {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${this.apiKey}`
           },
-          body: JSON.stringify({ action: 'dictionary', word, lang: 'es' })
+          body: JSON.stringify({ action: 'dictionary', word, lang })
         });
         if (!response.ok) {
           return [];
@@ -76,9 +84,9 @@ export class TranslatorService {
 
   async lookup(
     word: string,
-    _contextSentence: string,
-    sourceLang: 'en' | 'es',
-    targetLang: 'en' | 'es'
+    contextSentence: string,
+    sourceLang: ContextReaderLanguage,
+    targetLang: ContextReaderLanguage
   ): Promise<LookupResult> {
     const cacheKey = `${word}-${sourceLang}-${targetLang}`;
     const cached = this.cache.get(cacheKey);
@@ -87,7 +95,12 @@ export class TranslatorService {
     }
 
     const [translationResponse, dictionaryEntries] = await Promise.all([
-      this.translate({ text: word, sourceLang, targetLang }),
+      this.translate({
+        text: word,
+        sourceLang,
+        targetLang,
+        context: contextSentence
+      }),
       this.getDictionary(word, sourceLang)
     ]);
 

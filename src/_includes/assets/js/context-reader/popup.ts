@@ -7,6 +7,7 @@ export class PopupComponent {
   private shadowRoot: ShadowRoot | null = null;
   private visible: boolean = false;
   private currentResult: LookupResult | null = null;
+  private boundOutsideClickHandler: ((event: MouseEvent) => void) | null = null;
 
   constructor() {
     this.createShadowDOM();
@@ -16,16 +17,18 @@ export class PopupComponent {
     return `
       :host {
         all: initial;
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        font-family: 'Roboto Mono', Menlo, Consolas, monospace;
       }
 
       .popup {
         /* FCC Command-line Chic - Dark Mode (Primary) */
         --bg-primary: #0a0a23;
         --bg-secondary: #1b1b32;
+        --bg-tertiary: #2a2a40;
         --text-primary: #f5f6f7;
         --text-bright: #ffffff;
         --text-muted: #858591;
+        --text-subtle: #d0d0d5;
         --border-color: #3b3b4f;
         --accent-blue: #99c9ff;
         --accent-yellow: #f1be32;
@@ -34,11 +37,16 @@ export class PopupComponent {
 
         position: fixed;
         z-index: 10000;
-        max-width: 360px;
-        background: var(--bg-secondary);
+        right: 32px;
+        bottom: 32px;
+        width: min(376px, calc(100vw - 32px));
+        max-height: min(560px, calc(100vh - 64px));
+        overflow-y: auto;
+        background: var(--bg-primary);
         border: 1px solid var(--border-color);
         border-radius: 4px;
-        padding: 20px;
+        box-shadow: 0 16px 48px rgba(10, 10, 35, 0.35);
+        padding: 24px 20px 20px;
         font-size: 18px;
         line-height: 1.5;
         color: var(--text-primary);
@@ -51,6 +59,7 @@ export class PopupComponent {
           --text-primary: #0a0a23;
           --text-bright: #0a0a23;
           --text-muted: #3b3b4f;
+          --text-subtle: #1b1b32;
           --border-color: #858591;
           --accent-blue: #002ead;
           --accent-yellow: #4d3800;
@@ -60,12 +69,13 @@ export class PopupComponent {
 
       .close-btn {
         position: absolute;
-        top: 12px;
-        right: 12px;
+        top: 14px;
+        right: 14px;
         background: none;
         border: none;
         cursor: pointer;
-        font-size: 18px;
+        font-size: 28px;
+        line-height: 1;
         color: var(--text-muted);
         padding: 4px;
         border-radius: 4px;
@@ -102,21 +112,60 @@ export class PopupComponent {
 
       .word-entry {
         font-weight: 700;
-        font-size: 20px;
+        font-size: 30px;
         color: var(--accent-blue);
-        margin-bottom: 8px;
+        line-height: 1.2;
+        margin-bottom: 4px;
+        padding-right: 40px;
+      }
+
+      .pronunciation {
+        color: var(--text-muted);
+        font-size: 16px;
+        font-style: italic;
+        margin-bottom: 18px;
       }
 
       .translation {
-        font-size: 18px;
+        font-size: 22px;
+        font-weight: 700;
         color: var(--text-primary);
-        margin-bottom: 8px;
+        margin-bottom: 18px;
+      }
+
+      .part-of-speech {
+        color: var(--text-muted);
+        font-size: 14px;
+        letter-spacing: 0;
+        margin-bottom: 14px;
+        text-transform: uppercase;
+      }
+
+      .definitions {
+        border-bottom: 1px solid var(--border-color);
+        margin-bottom: 16px;
+        padding-bottom: 16px;
       }
 
       .definition {
+        color: var(--text-subtle);
+        display: grid;
         font-size: 16px;
+        gap: 12px;
+        grid-template-columns: 28px 1fr;
+        line-height: 1.55;
+        margin-bottom: 14px;
+      }
+
+      .definition-number {
+        color: var(--accent-blue);
+        font-weight: 700;
+      }
+
+      .example {
         color: var(--text-muted);
-        margin-bottom: 8px;
+        font-size: 16px;
+        font-style: italic;
         line-height: 1.5;
       }
 
@@ -133,6 +182,14 @@ export class PopupComponent {
         font-weight: 600;
         display: block;
         transition: opacity 0.2s;
+      }
+
+      @media (max-width: 500px) {
+        .popup {
+          right: 16px;
+          bottom: 16px;
+          width: calc(100vw - 32px);
+        }
       }
 
       .save-btn:hover {
@@ -201,6 +258,17 @@ export class PopupComponent {
     });
   }
 
+  private handleOutsideClick(event: MouseEvent): void {
+    if (!this.visible || !this.container) return;
+
+    const eventPath = event.composedPath();
+    if (eventPath.includes(this.container)) {
+      return;
+    }
+
+    this.hide();
+  }
+
   show(word: string, position: { x: number; y: number }): void {
     if (!this.container || !this.shadowRoot) return;
 
@@ -208,10 +276,19 @@ export class PopupComponent {
       document.body.appendChild(this.container);
     }
 
+    if (!this.boundOutsideClickHandler) {
+      this.boundOutsideClickHandler = (event: MouseEvent) => {
+        this.handleOutsideClick(event);
+      };
+    }
+    document.addEventListener('click', this.boundOutsideClickHandler, true);
+
     const popupDiv = this.shadowRoot.querySelector('.popup') as HTMLElement;
     if (popupDiv) {
-      popupDiv.style.left = `${position.x + 10}px`;
-      popupDiv.style.top = `${position.y + 10}px`;
+      popupDiv.style.left = '';
+      popupDiv.style.top = '';
+      popupDiv.style.right = '32px';
+      popupDiv.style.bottom = '32px';
     }
 
     const loadingDiv = this.shadowRoot.querySelector('.loading') as HTMLElement;
@@ -226,6 +303,13 @@ export class PopupComponent {
   }
 
   hide(): void {
+    if (this.boundOutsideClickHandler) {
+      document.removeEventListener(
+        'click',
+        this.boundOutsideClickHandler,
+        true
+      );
+    }
     if (this.container && this.container.parentNode) {
       this.container.parentNode.removeChild(this.container);
     }
@@ -243,22 +327,54 @@ export class PopupComponent {
     if (loadingDiv) loadingDiv.style.display = 'none';
 
     if (resultDiv) {
-      const wordEntry = `<div class="word-entry">${result.word}</div>`;
-      const translation = `<div class="translation">→ ${result.translation}</div>`;
-      const pronunciation = result.pronunciation
-        ? `<div class="definition">${result.pronunciation}</div>`
+      const firstEntry = result.meanings[0];
+      const firstMeaning = firstEntry?.meanings[0];
+      const definitions = firstMeaning?.definitions.slice(0, 2) ?? [];
+      const example = definitions.find(definition => definition.example);
+      const pronunciation = result.pronunciation ?? firstEntry?.phonetic ?? '';
+
+      const wordEntry = `<div class="word-entry">${this.escapeHtml(result.word)}</div>`;
+      const pronunciationMarkup = pronunciation
+        ? `<div class="pronunciation">${this.escapeHtml(pronunciation)}</div>`
         : '';
-      const firstDefinition =
-        result.meanings.length > 0 &&
-        result.meanings[0].meanings.length > 0 &&
-        result.meanings[0].meanings[0].definitions.length > 0
-          ? `<div class="definition">${result.meanings[0].meanings[0].definitions[0].definition}</div>`
+      const translation = `<div class="translation">→ ${this.escapeHtml(result.translation)}</div>`;
+      const partOfSpeech = firstMeaning?.partOfSpeech
+        ? `<div class="part-of-speech">${this.escapeHtml(firstMeaning.partOfSpeech.toUpperCase())}</div>`
+        : '';
+      const definitionMarkup =
+        definitions.length > 0
+          ? `<div class="definitions">${definitions
+              .map(
+                (definition, index) => `
+                  <div class="definition">
+                    <span class="definition-number">${index + 1}.</span>
+                    <span>${this.escapeHtml(definition.definition)}</span>
+                  </div>`
+              )
+              .join('')}</div>`
           : '';
+      const exampleMarkup = example?.example
+        ? `<div class="example">${this.escapeHtml(example.example)}</div>`
+        : '';
 
       resultDiv.innerHTML =
-        wordEntry + translation + pronunciation + firstDefinition;
+        wordEntry +
+        pronunciationMarkup +
+        partOfSpeech +
+        translation +
+        definitionMarkup +
+        exampleMarkup;
       resultDiv.style.display = 'block';
     }
+  }
+
+  private escapeHtml(value: string): string {
+    return value
+      .replaceAll('&', '&amp;')
+      .replaceAll('<', '&lt;')
+      .replaceAll('>', '&gt;')
+      .replaceAll('"', '&quot;')
+      .replaceAll("'", '&#039;');
   }
 
   updateError(message: string): void {

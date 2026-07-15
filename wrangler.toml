@@ -1,8 +1,2 @@
 name = "context-reader-worker"
 main = "workers/src/translator.ts"
-
-[env.development]
-vars = { DEEPL_API_KEY = "" }
-
-[env.production]
-vars = { DEEPL_API_KEY = "" }

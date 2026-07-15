@@ -1,8 +1,8 @@
-import { TranslationResponse } from '../types';
+import type { TranslationResponse } from '../types';
 
 export class DeepLService {
   private apiKey: string;
-  private apiUrl = 'https://api-free.deepl.com/v1/translate';
+  private apiUrl = 'https://api-free.deepl.com/v2/translate';
 
   constructor(apiKey: string) {
     this.apiKey = apiKey;
@@ -14,23 +14,20 @@ export class DeepLService {
     targetLang: string,
     context?: string
   ): Promise<TranslationResponse> {
-    const params = new URLSearchParams({
-      auth_key: this.apiKey,
-      text,
+    const body = {
+      text: [text],
       source_lang: sourceLang.toUpperCase(),
-      target_lang: targetLang.toUpperCase()
-    });
-
-    if (context) {
-      params.append('context', context);
-    }
+      target_lang: targetLang.toUpperCase(),
+      ...(context !== undefined ? { context } : {})
+    };
 
     const response = await fetch(this.apiUrl, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
+        Authorization: `DeepL-Auth-Key ${this.apiKey}`,
+        'Content-Type': 'application/json'
       },
-      body: params.toString()
+      body: JSON.stringify(body)
     });
 
     if (!response.ok) {

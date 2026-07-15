@@ -136,7 +136,11 @@ The client detects the article language from, in priority order:
 
 ### Configuration
 
-The Cloudflare Worker requires a DeepL API key. Copy `sample.env` to `.env` and fill in the values. Then add the same values to `wrangler.toml` for the production deployment.
+The Cloudflare Worker requires a DeepL API key. For deployed Workers, set it as a Wrangler secret instead of committing it to `wrangler.toml`:
+
+```bash
+npx wrangler secret put DEEPL_API_KEY
+```
 
 Environment variables used by the worker:
 
@@ -184,6 +188,9 @@ pnpm run build
 The Cloudflare Worker lives in `workers/` and is deployed separately with Wrangler:
 
 ```bash
+# Configure the DeepL secret once per deployed Worker
+npx wrangler secret put DEEPL_API_KEY
+
 # Deploy the worker
 npx wrangler deploy
 ```
@@ -192,11 +199,7 @@ The worker entry point is configured in `wrangler.toml`:
 
 ```toml
 name = "context-reader-worker"
-main = "src/translator.ts"
-
-[env.production]
-route = "api.example.com/api/context-reader/*"
-vars = { DEEPL_API_KEY = "your-key-here" }
+main = "workers/src/translator.ts"
 ```
 
 ### Testing

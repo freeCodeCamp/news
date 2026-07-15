@@ -80,7 +80,7 @@ describe('TranslatorService', () => {
     expect(result).toHaveLength(1);
     expect(result[0].word).toBe('hello');
     expect(global.fetch).toHaveBeenCalledWith(
-      'https://api.dictionaryapi.dev/api/v2/entries/english/hello'
+      'https://api.dictionaryapi.dev/api/v2/entries/en/hello'
     );
   });
 
@@ -125,15 +125,54 @@ describe('TranslatorService', () => {
     expect(result.targetLanguage).toBe('es');
   });
 
+  test('passes sentence context to translation requests during lookup', async () => {
+    const mockTranslationResponse = {
+      translatedText: 'idioma',
+      detectedSourceLanguage: 'en'
+    };
+    (global.fetch as jest.MockedFunction<typeof fetch>)
+      .mockResolvedValueOnce({
+        ok: true,
+        json: async () => mockTranslationResponse
+      } as Response)
+      .mockResolvedValueOnce({
+        ok: true,
+        status: 200,
+        json: async () => []
+      } as Response);
+
+    await service.lookup(
+      'language',
+      'The concept applies to every programming language.',
+      'en',
+      'es'
+    );
+
+    expect(global.fetch).toHaveBeenNthCalledWith(
+      1,
+      WORKER_URL,
+      expect.objectContaining({
+        body: JSON.stringify({
+          action: 'translate',
+          text: 'language',
+          sourceLang: 'en',
+          targetLang: 'es',
+          context: 'The concept applies to every programming language.'
+        })
+      })
+    );
+  });
+
   test('handles translation errors gracefully', async () => {
     (global.fetch as jest.MockedFunction<typeof fetch>).mockResolvedValueOnce({
       ok: false,
-      status: 500
+      status: 503,
+      json: async () => ({ error: 'DEEPL_API_KEY is not configured' })
     } as Response);
 
     await expect(
       service.translate({ text: 'hello', sourceLang: 'en', targetLang: 'es' })
-    ).rejects.toThrow();
+    ).rejects.toThrow('DEEPL_API_KEY is not configured');
   });
 });
 

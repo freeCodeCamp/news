@@ -3,7 +3,7 @@
  */
 
 import { IDBFactory } from 'fake-indexeddb';
-import { describe, test, expect, beforeEach } from '@jest/globals';
+import { describe, test, expect, beforeEach, jest } from '@jest/globals';
 import { ContextReader } from './context-reader.js';
 
 // Polyfill structuredClone for jsdom environments that don't include it
@@ -68,5 +68,52 @@ describe('ContextReader', () => {
     await contextReader.initialize();
     contextReader.enable();
     expect(localStorage.getItem('contextReader:enabled')).toBe('true');
+  });
+
+  test('uses English as learning language and native language as translation target', async () => {
+    localStorage.setItem('contextReader:nativeLanguage', 'es');
+    const contextReader = new ContextReader(
+      'https://worker.example.com',
+      'test-api-key'
+    );
+    await contextReader.initialize();
+
+    const lookup = jest
+      .spyOn(
+        contextReader['translator'] as unknown as {
+          lookup: (
+            word: string,
+            contextSentence: string,
+            sourceLang: 'en' | 'es',
+            targetLang: 'en' | 'es'
+          ) => Promise<unknown>;
+        },
+        'lookup'
+      )
+      .mockResolvedValue({
+        word: 'understanding',
+        translation: 'comprensión',
+        meanings: [],
+        sourceLanguage: 'en',
+        targetLanguage: 'es'
+      });
+
+    document.body.innerHTML = `
+      <article>
+        <p>You need a good understanding before learning recursion.</p>
+      </article>
+    `;
+
+    await contextReader['handleWordSelection'](
+      'understanding',
+      new DOMRect(0, 0, 10, 10)
+    );
+
+    expect(lookup).toHaveBeenCalledWith(
+      'understanding',
+      'You need a good understanding before learning recursion.',
+      'en',
+      'es'
+    );
   });
 });

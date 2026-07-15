@@ -8,7 +8,10 @@ import {
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { afterEach, describe, expect, it } from '@jest/globals';
-import { buildContextReaderAssets } from './context-reader-assets.js';
+import {
+  buildContextReaderAssets,
+  getContextReaderModulePath
+} from './context-reader-assets.js';
 
 let tempDir;
 
@@ -39,6 +42,14 @@ describe('buildContextReaderAssets', () => {
     expect(compiled).toContain('export const result = value;');
     expect(readFileSync(join(outputDir, 'dependency.js'), 'utf8')).toContain(
       'export const value = 1;'
+    );
+  });
+});
+
+describe('getContextReaderModulePath', () => {
+  it('returns a module URL under the configured site path', () => {
+    expect(getContextReaderModulePath('/news/')).toBe(
+      '/news/assets/js/context-reader/context-reader.js'
     );
   });
 });

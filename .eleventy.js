@@ -14,7 +14,10 @@ import {
   cacheBusterShortcode,
   manifest
 } from './utils/shortcodes/cache-buster.js';
-import { buildContextReaderAssets } from './utils/context-reader-assets.js';
+import {
+  buildContextReaderAssets,
+  getContextReaderModulePath
+} from './utils/context-reader-assets.js';
 import { createJSONLDShortcode } from './utils/shortcodes/create-json-ld.js';
 import {
   publishedDateShortcode,
@@ -103,6 +106,11 @@ export default function (config) {
   config.addNunjucksShortcode('fullYear', fullYearShortcode);
 
   config.addNunjucksShortcode('toISOString', toISOStringShortcode);
+
+  config.addGlobalData(
+    'contextReaderModulePath',
+    getContextReaderModulePath(sitePath)
+  );
 
   // Check for next page before showing 'Load More Articles' button
   config.addFilter('nextPageExists', href => {

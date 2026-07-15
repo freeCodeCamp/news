@@ -1,6 +1,11 @@
 // src/_includes/assets/js/context-reader/context-reader.ts
 
-import type { SavedWord, ContextReaderConfig, LookupResult } from './types.js';
+import type {
+  SavedWord,
+  ContextReaderConfig,
+  ContextReaderLanguage,
+  LookupResult
+} from './types.js';
 import { StorageManager } from './storage.js';
 import { TranslatorService } from './translator.js';
 import { PopupComponent } from './popup.js';
@@ -8,6 +13,8 @@ import { SidePanelComponent } from './side-panel.js';
 import { extractSentence, detectLanguage, getSelectedWord } from './utils.js';
 
 const STORAGE_KEY = 'contextReader:enabled';
+const NATIVE_LANGUAGE_KEY = 'contextReader:nativeLanguage';
+const LEARNING_LANGUAGE_KEY = 'contextReader:learningLanguage';
 
 export class ContextReader {
   private storage: StorageManager;
@@ -17,7 +24,7 @@ export class ContextReader {
   private initialized: boolean = false;
   private enabled: boolean = false;
   private config: ContextReaderConfig;
-  private pageLanguage: 'en' | 'es' = 'en';
+  private pageLanguage: ContextReaderLanguage = 'en';
 
   // Keep a reference so we can remove the listener on disable
   private boundDblClickHandler: ((event: Event) => void) | null = null;
@@ -29,15 +36,15 @@ export class ContextReader {
     this.sidePanel = new SidePanelComponent(this.storage);
     this.config = {
       enabled: false,
-      nativeLanguage: 'en',
-      learningLanguage: 'es'
+      nativeLanguage: 'es',
+      learningLanguage: 'en'
     };
   }
 
   async initialize(): Promise<void> {
     try {
       await this.storage.init();
-      this.pageLanguage = detectLanguage(document);
+      this.refreshLanguageSettings();
 
       const storedEnabled = localStorage.getItem(STORAGE_KEY);
       if (storedEnabled === 'true') {
@@ -49,6 +56,17 @@ export class ContextReader {
     } catch (error) {
       throw error;
     }
+  }
+
+  refreshLanguageSettings(): void {
+    this.config.nativeLanguage =
+      (localStorage.getItem(
+        NATIVE_LANGUAGE_KEY
+      ) as ContextReaderLanguage | null) ?? 'es';
+    this.config.learningLanguage = 'en';
+    localStorage.setItem(LEARNING_LANGUAGE_KEY, 'en');
+    this.pageLanguage =
+      this.config.learningLanguage ?? detectLanguage(document);
   }
 
   private setupEventListeners(): void {
@@ -83,8 +101,8 @@ export class ContextReader {
     word: string,
     rect: DOMRect
   ): Promise<void> {
-    const sourceLang = this.pageLanguage;
-    const targetLang: 'en' | 'es' = sourceLang === 'en' ? 'es' : 'en';
+    const sourceLang = this.config.learningLanguage;
+    const targetLang = this.config.nativeLanguage;
 
     this.popup.show(word, { x: rect.left, y: rect.bottom });
 
@@ -127,8 +145,8 @@ export class ContextReader {
   private async handleSaveWord(
     word: string,
     translation: string,
-    sourceLanguage: 'en' | 'es',
-    targetLanguage: 'en' | 'es',
+    sourceLanguage: ContextReaderLanguage,
+    targetLanguage: ContextReaderLanguage,
     contextSentence: string
   ): Promise<void> {
     const savedWord: SavedWord = {

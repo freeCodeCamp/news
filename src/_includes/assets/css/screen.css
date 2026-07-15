@@ -430,6 +430,68 @@ ul {
   color: var(--gray00);
 }
 
+.context-reader-settings {
+  background-color: var(--gray90);
+  border-top: 1px solid var(--gray75);
+  color: var(--gray00);
+  padding: 18px 15px 20px;
+}
+
+.context-reader-settings[hidden] {
+  display: none;
+}
+
+.context-reader-settings-label {
+  display: block;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.4;
+  margin-bottom: 8px;
+}
+
+.context-reader-settings-select {
+  appearance: none;
+  background-color: var(--gray80);
+  border: 1px solid var(--gray75);
+  border-radius: 4px;
+  color: var(--gray00);
+  font-family: var(--font-family-sans-serif);
+  font-size: 18px;
+  line-height: 1.4;
+  margin-bottom: 18px;
+  padding: 12px 40px 12px 12px;
+  width: 100%;
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--gray00) 50%),
+    linear-gradient(135deg, var(--gray00) 50%, transparent 50%);
+  background-position:
+    calc(100% - 20px) 50%,
+    calc(100% - 12px) 50%;
+  background-size:
+    8px 8px,
+    8px 8px;
+  background-repeat: no-repeat;
+}
+
+.context-reader-settings-value {
+  background-color: var(--gray80);
+  border: 1px solid var(--gray75);
+  border-radius: 4px;
+  color: var(--gray00);
+  display: block;
+  font-family: var(--font-family-sans-serif);
+  font-size: 18px;
+  line-height: 1.4;
+  margin-bottom: 18px;
+  padding: 12px;
+  width: 100%;
+}
+
+.context-reader-settings-select:focus-visible {
+  outline: 2px solid #198eee;
+  outline-offset: 2px;
+}
+
 @media (min-width: 980px) {
   .nav-list {
     max-width: 15em;
