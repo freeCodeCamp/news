@@ -7,7 +7,7 @@
     "node": ">=24",
     "pnpm": ">=10"
   },
-  "packageManager": "pnpm@10.34.4",
+  "packageManager": "pnpm@11.11.0",
   "type": "module",
   "scripts": {
     "start": "pnpm run develop",
