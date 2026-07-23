@@ -85,7 +85,7 @@
     "eslint-config-prettier": "10.1.8",
     "eslint-plugin-cypress": "6.4.2",
     "eslint-utils": "3.0.0",
-    "fast-xml-parser": "5.9.3",
+    "fast-xml-parser": "5.10.1",
     "get-video-id": "4.2.0",
     "globals": "17.7.0",
     "graceful-fs": "4.2.11",
