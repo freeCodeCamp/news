@@ -19,7 +19,7 @@
     "no-results": "No results found"
   },
   "banner": {
-    "default": "Learn to code — {{ <0> }}free 3,000-hour curriculum{{ </0> }}",
+    "default": "Learn Software Engineering Fundamentals – {{ <0> }}Try Our FREE Curriculum{{ </0> }}",
     "authenticated": "Support our charity and our mission. {{ <0> }}Donate to freeCodeCamp.org{{ </0> }}.",
     "authenticated-donor": "Thank you for supporting freeCodeCamp through {{ <0> }}your donations{{ </0> }}."
   },
