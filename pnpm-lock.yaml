@@ -27,8 +27,8 @@ importers:
         specifier: 1.12.2
         version: 1.12.2
       '@tryghost/helpers':
-        specifier: 1.1.99
-        version: 1.1.99
+        specifier: 1.1.106
+        version: 1.1.106
       '@types/node':
         specifier: 24.13.2
         version: 24.13.2
@@ -848,8 +848,8 @@ packages:
   '@tryghost/content-api@1.12.2':
     resolution: {integrity: sha512-KcheOLdF0gnt6G3l1khGSP2Dp6FTRoYhiiUtV42O4TLopkL+qhD5HEAbzfbba1Pxi9iKQXRflgh2tZkejMgR7w==}
 
-  '@tryghost/helpers@1.1.99':
-    resolution: {integrity: sha512-+sZf7uT5YvdSoLqppQ+QqDl2Y6SX/NSc0/rjHwlWIY+u1UjMRbitCZv1qB5/mrrNxfWNEC1nISAmAZ3yuQVMYA==}
+  '@tryghost/helpers@1.1.106':
+    resolution: {integrity: sha512-Yjrb/VLvRqgtMsiKXvuSRoVvAm2HJ6SJakdo25va4sU9sA7yXBSWWHkukE8q27Ty9R2fE5jEEWziIhrZy+Tkog==}
 
   '@tybys/wasm-util@0.10.3':
     resolution: {integrity: sha512-F3fo1MYrRJYL3zER0OUOmkutjr1Vp23m7OsSgp7nq4SP6OqX6C/56XFIPAl5bt3zaBRjmW7SGz3u/6LwFpYcOg==}
@@ -4301,7 +4301,7 @@ snapshots:
       - debug
       - supports-color
 
-  '@tryghost/helpers@1.1.99':
+  '@tryghost/helpers@1.1.106':
     dependencies:
       lodash-es: 4.18.1
 
