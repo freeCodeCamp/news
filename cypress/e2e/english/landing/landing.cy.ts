@@ -91,7 +91,7 @@ describe('Landing (Hashnode sourced)', () => {
 
     it('the default banner text should be default if not authenticated', function () {
       cy.get(selectors.banner).contains(
-        'Learn to code — free 3,000-hour curriculum'
+        'Learn Software Engineering Fundamentals – Try Our FREE Curriculum'
       );
     });
 
