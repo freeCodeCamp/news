@@ -74,7 +74,7 @@
     "@fortawesome/free-solid-svg-icons": "7.3.0",
     "@tryghost/content-api": "1.12.2",
     "@tryghost/helpers": "1.1.99",
-    "@types/node": "24.13.2",
+    "@types/node": "24.13.3",
     "algoliasearch": "5.55.2",
     "clean-css": "5.3.3",
     "cross-env": "10.1.0",
