@@ -105,8 +105,8 @@ importers:
         specifier: 26.1.0
         version: 26.1.0
       lint-staged:
-        specifier: 17.0.8
-        version: 17.0.8
+        specifier: 17.3.0
+        version: 17.3.0
       lodash:
         specifier: 4.18.1
         version: 4.18.1
@@ -2424,8 +2424,8 @@ packages:
   linkify-it@5.0.2:
     resolution: {integrity: sha512-ONTm2jCMAVZjgQa/Fy1kScXsuOoF5NPTsoFBdE1KVIZ2vAh/r9+Bqo+0jINCBYnavTPQZz38QzFTme79ENoN3Q==}
 
-  lint-staged@17.0.8:
-    resolution: {integrity: sha512-B2P/d+jVW0UXOQ0MVMLrB/9ydA1P+zz6jYfdrbbEd9ur3S2rcbduFWKiUCC02Sm5hbC8nrm7y24WuYMG54HfxA==}
+  lint-staged@17.3.0:
+    resolution: {integrity: sha512-woZS3vNe3UKqBaLPvbLOtKRY4tLANpWQhom12MGWqC8Mh1lCOO+WgSwmX2amjJAqTY9BkXYW87fCUH5H9Ph6xw==}
     engines: {node: '>=22.22.1'}
     hasBin: true
 
@@ -2436,10 +2436,6 @@ packages:
 
   list-to-array@1.1.0:
     resolution: {integrity: sha512-+dAZZ2mM+/m+vY9ezfoueVvrgnHIGi5FvgSymbIgJOFwiznWyA59mav95L+Mc6xPtL3s9gm5eNTlNtxJLbNM1g==}
-
-  listr2@10.2.2:
-    resolution: {integrity: sha512-JtNtbZj8q5BnDMR7trpwvwk3RIrANtIVzEUm8w7amp6xelLgyuq+4WZoTH913XaQAoH/cNdYhaNzBPA2U3xbDw==}
-    engines: {node: '>=22.13.0'}
 
   listr2@9.0.5:
     resolution: {integrity: sha512-ME4Fb83LgEgwNw96RKNvKV4VTLuXfoKudAmm2lP8Kk87KaMK0/Xrx/aAkMWmT8mDb+3MlFDspfbCs7adjRxA2g==}
@@ -3315,10 +3311,6 @@ packages:
   word-wrap@1.2.5:
     resolution: {integrity: sha512-BN22B5eaMMI9UMtjrGd5g5eCYPpCPDUy0FJXbYsaT5zYxjFOckS53SQDE3pWkVoWpHXVb3BrYcEN4Twa55B5cA==}
     engines: {node: '>=0.10.0'}
-
-  wrap-ansi@10.0.0:
-    resolution: {integrity: sha512-SGcvg80f0wUy2/fXES19feHMz8E0JoXv2uNgHOu4Dgi2OrCy1lqwFYEJz1BLbDI0exjPMe/ZdzZ/YpGECBG/aQ==}
-    engines: {node: '>=20'}
 
   wrap-ansi@7.0.0:
     resolution: {integrity: sha512-YVGIj2kamLSTxw6NsZjoBxfSwsn0ycdesmc4p+Q21c5zPuZ1pl+NfxVdxPtdHvmNVOQ6XSYG4AUtyt/Fi7D16Q==}
@@ -6067,9 +6059,8 @@ snapshots:
     dependencies:
       uc.micro: 2.1.0
 
-  lint-staged@17.0.8:
+  lint-staged@17.3.0:
     dependencies:
-      listr2: 10.2.2
       picomatch: 4.0.5
       string-argv: 0.3.2
       tinyexec: 1.2.4
@@ -6081,14 +6072,6 @@ snapshots:
       commander: 10.0.1
 
   list-to-array@1.1.0: {}
-
-  listr2@10.2.2:
-    dependencies:
-      cli-truncate: 5.2.0
-      eventemitter3: 5.0.4
-      log-update: 6.1.0
-      rfdc: 1.4.1
-      wrap-ansi: 10.0.0
 
   listr2@9.0.5:
     dependencies:
@@ -6912,12 +6895,6 @@ snapshots:
       isexe: 2.0.0
 
   word-wrap@1.2.5: {}
-
-  wrap-ansi@10.0.0:
-    dependencies:
-      ansi-styles: 6.2.3
-      string-width: 8.2.1
-      strip-ansi: 7.2.0
 
   wrap-ansi@7.0.0:
     dependencies:
