@@ -19,7 +19,7 @@
     "no-results": "No results found"
   },
   "banner": {
-    "default": "学习编程 — {{ <0> }}3,000 小时免费课程{{ </0> }}",
+    "default": "Learn Software Engineering Fundamentals – {{ <0> }}Try Our FREE Curriculum{{ </0> }}",
     "authenticated": "支持我们的慈善组织和我们的使命。{{ <0> }}捐款给 freeCodeCamp.org{{ </0> }}。",
     "authenticated-donor": "谢谢你{{ <0> }}捐款{{ </0> }}支持 freeCodeCamp。"
   },

@@ -19,7 +19,7 @@
     "no-results": "No results found"
   },
   "banner": {
-    "default": "{{ <0> }}Contribuisci anche tu a freeCodeCamp!{{ </0> }}",
+    "default": "Learn Software Engineering Fundamentals – {{ <0> }}Try Our FREE Curriculum{{ </0> }}",
     "authenticated": "Supporta la nostra charity e la nostra missione. {{ <0> }}Dona a freeCodeCamp.org{{ </0> }}.",
     "authenticated-donor": "Grazie per supportare freeCodeCamp con le {{ <0> }}tue donazioni{{ </0> }}."
   },
