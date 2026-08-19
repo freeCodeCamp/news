@@ -19,7 +19,7 @@
     "no-results": "해당 결과가 없습니다"
   },
   "banner": {
-    "default": "코드 배우기 — {{ <0> }}3000시간 무료 커리큘럼{{ </0> }}",
+    "default": "Learn Software Engineering Fundamentals – {{ <0> }}Try Our FREE Curriculum{{ </0> }}",
     "authenticated": "저희의 자선 단체 및 사명을 지원하세요. {{ <0> }}freeCodeCamp.org에 기부하기{{ </0> }}.",
     "authenticated-donor": "freeCodeCamp에 {{ <0> }}당신의 기부{{ </0> }}를 통해 지원해주셔서 감사합니다."
   },

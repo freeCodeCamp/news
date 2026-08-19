@@ -19,7 +19,7 @@
     "no-results": "Нічого не знайдено"
   },
   "banner": {
-    "default": "Навчіться програмувати — {{<0> }}безоплатна навчальна програма на 3 000 годин{{</0> }}",
+    "default": "Learn Software Engineering Fundamentals – {{ <0> }}Try Our FREE Curriculum{{ </0> }}",
     "authenticated": "Підтримайте нашу неприбуткову організацію та нашу місію. {{ <0> }}Зробіть внесок у freeCodeCamp.org{{ </0> }}.",
     "authenticated-donor": "Дякуємо за підтримку freeCodeCamp через {{ <0> }}ваші внески{{ </0> }}."
   },
