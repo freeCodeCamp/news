@@ -4,9 +4,15 @@ import { join } from 'path';
 import { hashnodeHost } from '../api.js';
 import { wait } from '../wait.js';
 import { loadJSON } from '../load-json.js';
+import { annotate } from '../gh-annotations.js';
+import { describeNetworkError } from '../network-error.js';
+import { withNetworkRetry } from '../retry-network.js';
 import { config } from '../../config/index.js';
 
 const { eleventyEnv, currentLocale_i18n, hashnodeAPIURL } = config;
+
+const SOURCE_FILE = 'utils/hashnode/fetch-from-hashnode.js';
+const HASHNODE_TARGET = `${hashnodeAPIURL} (publication host "${hashnodeHost}")`;
 
 export async function* fetchFromHashnodePages(contentType) {
   if (!hashnodeHost) return;
@@ -95,73 +101,66 @@ export async function* fetchFromHashnodePages(contentType) {
   let hasNextPage = true;
 
   while (hasNextPage) {
-    let retries = 3;
-    let success = false;
+    const pageLabel = after
+      ? `the page after cursor "${after}"`
+      : 'the first page';
 
-    while (retries > 0 && !success) {
-      try {
-        const res =
-          eleventyEnv === 'ci' && currentLocale_i18n === 'english'
-            ? loadJSON(
-                join(
-                  import.meta.dirname,
-                  `../../cypress/fixtures/mock-hashnode-${contentType}.json`
-                )
+    const res = await withNetworkRetry(
+      () =>
+        eleventyEnv === 'ci' && currentLocale_i18n === 'english'
+          ? loadJSON(
+              join(
+                import.meta.dirname,
+                `../../cypress/fixtures/mock-hashnode-${contentType}.json`
               )
-            : await request(hashnodeAPIURL, query, {
-                host: hashnodeHost,
-                first: 20,
-                after
-              });
-
-        const resData =
-          res.publication[fieldName]?.edges.map(({ node }) => node) || [];
-        const pageInfo = res.publication[fieldName]?.pageInfo;
-        const totalDocuments =
-          res.publication[fieldName]?.totalDocuments ?? null;
-
-        if (resData.length > 0)
-          console.log(
-            `Fetched Hashnode ${contentType} ${pageInfo.endCursor}... and using ${process.memoryUsage.rss() / 1024 / 1024} MB of memory`
-          );
-
-        after = pageInfo.endCursor;
-        if (process.env.HASHNODE_DEBUG_MODE_FIRST_PAGE_ONLY) {
-          console.log(
-            'HASHNODE_DEBUG_MODE_FIRST_PAGE_ONLY is active. Fetching only the first page.'
-          );
-        }
-
-        hasNextPage =
-          pageInfo.hasNextPage &&
-          !process.env.HASHNODE_DEBUG_MODE_FIRST_PAGE_ONLY;
-
-        if (resData.length > 0) yield { nodes: resData, totalDocuments };
-
-        success = true;
-      } catch (error) {
-        const status = error.response?.status;
-        const isTransient =
-          status >= 500 ||
-          error.message.includes('ECONNRESET') ||
-          error.message.includes('ETIMEDOUT') ||
-          error.message.includes('ECONNREFUSED');
-        if (isTransient && retries > 1) {
-          console.log(
-            `Transient error (${status || error.code || 'network'}). Retrying... (${retries - 1} attempts left)`
-          );
-          retries--;
-          await wait(60000); // 60s aligns with Cloudflare retry_after hint on 502s
-        } else {
-          throw error; // Non-transient, or retries exhausted
-        }
+            )
+          : request(hashnodeAPIURL, query, {
+              host: hashnodeHost,
+              first: 20,
+              after
+            }),
+      {
+        label: `Hashnode ${contentType} fetch`,
+        target: `${pageLabel} from ${HASHNODE_TARGET}`,
+        file: SOURCE_FILE
       }
+    );
+
+    const connection = res.publication?.[fieldName];
+    const pageInfo = connection?.pageInfo;
+
+    if (!pageInfo) {
+      const summary = `Hashnode ${contentType} fetch returned no usable "${fieldName}" connection on ${pageLabel} from ${HASHNODE_TARGET}. Check that the publication host exists and that the API schema is unchanged.`;
+
+      annotate({
+        level: 'error',
+        title: `Hashnode ${contentType} fetch returned no data`,
+        file: SOURCE_FILE,
+        message: summary
+      });
+
+      throw new Error(summary);
     }
 
-    if (!success) {
-      console.error('Failed to fetch data after multiple retries');
-      break;
+    const resData = connection.edges?.map(({ node }) => node) || [];
+    const totalDocuments = connection.totalDocuments ?? null;
+
+    if (resData.length > 0)
+      console.log(
+        `Fetched Hashnode ${contentType} ${pageInfo.endCursor}... and using ${process.memoryUsage.rss() / 1024 / 1024} MB of memory`
+      );
+
+    after = pageInfo.endCursor;
+    if (process.env.HASHNODE_DEBUG_MODE_FIRST_PAGE_ONLY) {
+      console.log(
+        'HASHNODE_DEBUG_MODE_FIRST_PAGE_ONLY is active. Fetching only the first page.'
+      );
     }
+
+    hasNextPage =
+      pageInfo.hasNextPage && !process.env.HASHNODE_DEBUG_MODE_FIRST_PAGE_ONLY;
+
+    if (resData.length > 0) yield { nodes: resData, totalDocuments };
 
     await wait(200);
   }
@@ -225,9 +224,12 @@ export const countHashnodeStaticPages = async () => {
     return count;
   } catch (error) {
     // Fail-soft: probe is cosmetic; null falls back to "of ?" in worker logs.
-    console.warn(
-      `countHashnodeStaticPages probe failed (${error.response?.status || error.code || error.message}); workers will log "of ?".`
-    );
+    annotate({
+      level: 'warning',
+      title: 'Hashnode static page count probe failed',
+      file: SOURCE_FILE,
+      message: `Could not count Hashnode static pages from ${HASHNODE_TARGET}. ${describeNetworkError(error)}. The build continues and worker logs show "batch N of ?".`
+    });
     return null;
   }
 };
