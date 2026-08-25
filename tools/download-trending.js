@@ -4,6 +4,8 @@ import fetch from 'node-fetch';
 import { load } from 'js-yaml';
 
 import { trendingSchemaValidator } from './schemas/trending-schema.js';
+import { annotate } from '../utils/gh-annotations.js';
+import { describeNetworkError } from '../utils/network-error.js';
 import { config } from '../config/index.js';
 
 const { readFileSync, writeFileSync } = gracefulFS;
@@ -52,9 +54,24 @@ const download = async clientLocale => {
 
       return trendingJSON;
     } catch (err) {
+      const summary = `Unable to download the ${clientLocale} trending YAML from ${trendingURL}. ${describeNetworkError(err)}`;
+
       if (process.env.FREECODECAMP_NODE_ENV === 'production') {
-        throw new Error(err.message, { cause: err });
+        annotate({
+          level: 'error',
+          title: 'Trending download failed',
+          file: 'tools/download-trending.js',
+          message: summary
+        });
+        throw new Error(summary, { cause: err });
       }
+
+      annotate({
+        level: 'warning',
+        title: 'Trending download failed',
+        file: 'tools/download-trending.js',
+        message: `${summary}. Falling back to the committed ${trendingLocation}.`
+      });
 
       return loadLocalTrendingJSON();
     }
