@@ -72,15 +72,22 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Build site
+        id: build
         run: |
-          pnpm run build || {
+          set -o pipefail
+          pnpm run build 2>&1 | tee build.log || {
+            node ./tools/ci/annotate-build-log.js build.log "Build site (${{ matrix.languages }}, attempt 1 of 2)" warning || true
             echo "::warning::Build failed after in-app retries exhausted. Waiting 2 minutes before final job-level retry..."
             sleep 120
             echo "::notice::Retrying build site step..."
-            pnpm run build
+            pnpm run build 2>&1 | tee build.log
           }
         env:
           NODE_ENV: production
+
+      - name: Annotate build failure
+        if: failure() && steps.build.outcome == 'failure'
+        run: node ./tools/ci/annotate-build-log.js build.log "Build site (${{ matrix.languages }})"
 
       - name: Create a tagname
         id: tagname
