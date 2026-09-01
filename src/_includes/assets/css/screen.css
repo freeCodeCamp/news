@@ -1166,6 +1166,27 @@ html.dark-mode .post-full-content a {
   }
 }
 
+/* Add background color for transparent images (logos, diagrams, line art)
+in dark mode. The selectors ending in ? or # catch URLs with a query string
+or hash after the extension. */
+html.dark-mode .post-full-content img[src$='.png' i],
+html.dark-mode .post-full-content img[src*='.png?' i],
+html.dark-mode .post-full-content img[src*='.png#' i],
+html.dark-mode .post-full-content img[src$='.svg' i],
+html.dark-mode .post-full-content img[src*='.svg?' i],
+html.dark-mode .post-full-content img[src*='.svg#' i] {
+  background-color: var(--gray00);
+}
+
+/* SVGs are always line art that often go to the edges of their containers,
+so give them some extra padding in dark mode. This isn't as safe for PNGs, which
+can be transparent screenshots. */
+html.dark-mode .post-full-content img[src$='.svg' i],
+html.dark-mode .post-full-content img[src*='.svg?' i],
+html.dark-mode .post-full-content img[src*='.svg#' i] {
+  padding: 0.5em;
+}
+
 /* Image captions
 
 Usage (In Ghost editor):
