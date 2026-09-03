@@ -21,7 +21,7 @@ const MAX_POSTS_PER_RUN = 3000;
 
 const SOURCE_FILE = 'tools/fetch-class-central.js';
 
-const run = async () => {
+export const run = async () => {
   if (currentLocale_i18n !== 'english') {
     console.log(
       'Class Central related courses only fetched for the English locale. Skipping.'
@@ -117,5 +117,3 @@ const run = async () => {
     `Done. Fetched courses for ${succeeded} post(s), ${failed} failed and will be retried later.`
   );
 };
-
-await run();

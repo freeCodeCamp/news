@@ -10,7 +10,7 @@ const { doObjectStorageKeyId, doObjectStorageSecret } = config;
 
 const SPACES_BUCKET = 'freecodecamp-news-class-central';
 const SPACES_REGION = 'nyc3';
-const CACHE_KEY = 'course-cache.json';
+const CACHE_KEY = 'related-courses-cache.json';
 
 let client;
 const getClient = () => {
