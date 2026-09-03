@@ -4,6 +4,8 @@ import Joi from 'joi';
 const cacheEntrySchema = Joi.object().keys({
   contentHash: Joi.string().required(),
   fetchedAt: Joi.string().isoDate().required(),
+  slug: Joi.string().required(),
+  title: Joi.string().required(),
   courses: Joi.array().items(Joi.object().unknown(true)).required(),
   subjects: Joi.array().items(Joi.object().unknown(true)).required()
 });

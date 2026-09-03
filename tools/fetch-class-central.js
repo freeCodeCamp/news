@@ -48,7 +48,13 @@ const run = async () => {
       if (cached && cached.contentHash === contentHash && isFresh(cached))
         return null;
 
-      return { id: post.id, slug: post.slug, content, contentHash };
+      return {
+        id: post.id,
+        slug: post.slug,
+        title: post.title,
+        content,
+        contentHash
+      };
     })
     .filter(Boolean)
     .slice(0, MAX_POSTS_PER_RUN);
@@ -73,6 +79,8 @@ const run = async () => {
       cache.posts[post.id] = {
         contentHash: post.contentHash,
         fetchedAt: new Date().toISOString(),
+        slug: post.slug,
+        title: post.title,
         courses,
         subjects
       };
