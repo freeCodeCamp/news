@@ -29,8 +29,6 @@ const getClient = () => {
   return client;
 };
 
-const EMPTY_CACHE = { posts: {} };
-
 // Returns an empty cache if the object doesn't exist yet (first run)
 export const loadCache = async () => {
   try {
@@ -44,7 +42,7 @@ export const loadCache = async () => {
 
     return JSON.parse(body);
   } catch (error) {
-    if (error.name === 'NoSuchKey') return structuredClone(EMPTY_CACHE);
+    if (error.name === 'NoSuchKey') return { posts: {} };
     throw error;
   }
 };

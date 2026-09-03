@@ -28,7 +28,7 @@ export const prepareContentForClassCentral = post => {
   const tailBudget = MAX_CONTENT_LENGTH - headBudget;
 
   const head = trimToLastTag(html.slice(0, headBudget));
-  const tail = trimToFirstTag(html.slice(html.length - tailBudget));
+  const tail = trimToFirstTag(html.slice(-tailBudget));
 
   return `${head}\n${tail}`;
 };

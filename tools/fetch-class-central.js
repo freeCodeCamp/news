@@ -45,8 +45,7 @@ const run = async () => {
 
       const contentHash = hashContent(content);
       const cached = cache.posts[post.id];
-      if (cached && cached.contentHash === contentHash && isFresh(cached))
-        return null;
+      if (cached?.contentHash === contentHash && isFresh(cached)) return null;
 
       return {
         id: post.id,
@@ -73,25 +72,10 @@ const run = async () => {
   let succeeded = 0;
   let failed = 0;
 
-  await fetchRelatedCoursesForPosts(postsToFetch, {
-    onResult: async (post, { courses, subjects }) => {
-      // Note: Response stored raw - trim once the UI settles on which fields it needs
-      cache.posts[post.id] = {
-        contentHash: post.contentHash,
-        fetchedAt: new Date().toISOString(),
-        slug: post.slug,
-        title: post.title,
-        courses,
-        subjects
-      };
-
-      succeeded++;
-      if (succeeded % CHECKPOINT_EVERY === 0) {
-        console.log(`Checkpointing after ${succeeded} posts...`);
-        await saveCache(cache);
-      }
-    },
-    onError: (post, error) => {
+  for await (const { post, courseData, error } of fetchRelatedCoursesForPosts(
+    postsToFetch
+  )) {
+    if (error) {
       failed++;
       annotate({
         level: 'warning',
@@ -99,8 +83,27 @@ const run = async () => {
         file: SOURCE_FILE,
         message: `Post "${post.slug}" will be retried on the next run: ${error.message}`
       });
+      continue;
     }
-  });
+
+    const { courses, subjects } = courseData;
+
+    // Note: Response stored raw - trim once the UI settles on which fields it needs
+    cache.posts[post.id] = {
+      contentHash: post.contentHash,
+      fetchedAt: new Date().toISOString(),
+      slug: post.slug,
+      title: post.title,
+      courses,
+      subjects
+    };
+
+    succeeded++;
+    if (succeeded % CHECKPOINT_EVERY === 0) {
+      console.log(`Checkpointing after ${succeeded} posts...`);
+      await saveCache(cache);
+    }
+  }
 
   const { error: validationError } = validateClassCentralCache(cache);
   if (validationError) {

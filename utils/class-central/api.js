@@ -11,7 +11,7 @@ const CLASS_CENTRAL_API_URL = 'https://www.classcentral.com/api/v3/related';
 const SOURCE_FILE = 'utils/class-central/api.js';
 
 // Class Central allows 60 requests/minute
-export const CLASS_CENTRAL_THROTTLE_MS = 1100;
+const CLASS_CENTRAL_THROTTLE_MS = 1100;
 
 export const fetchRelatedCourses = async content => {
   const res = await withNetworkRetry(
@@ -45,20 +45,18 @@ export const fetchRelatedCourses = async content => {
   };
 };
 
-// A failed post is reported via onError and skipped, not retried here, and
-// the next run picks it up
-export const fetchRelatedCoursesForPosts = async (
-  postsToFetch,
-  { onResult, onError }
-) => {
+// Fetches one post at a time, throttled to Class Central's rate limit. A post
+// whose fetch fails is yielded with an `error` and skipped, not retried here -
+// the next run picks it up.
+export async function* fetchRelatedCoursesForPosts(postsToFetch) {
   for (const post of postsToFetch) {
     try {
       const courseData = await fetchRelatedCourses(post.content);
-      onResult(post, courseData);
+      yield { post, courseData };
     } catch (error) {
-      onError(post, error);
+      yield { post, error };
     }
 
     await wait(CLASS_CENTRAL_THROTTLE_MS);
   }
-};
+}
