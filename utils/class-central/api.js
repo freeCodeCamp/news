@@ -48,15 +48,15 @@ export const fetchRelatedCourses = async content => {
 // A failed post is reported via onError and skipped, not retried here, and
 // the next run picks it up
 export const fetchRelatedCoursesForAll = async (
-  entries,
+  postsToFetch,
   { onResult, onError }
 ) => {
-  for (const entry of entries) {
+  for (const post of postsToFetch) {
     try {
-      const result = await fetchRelatedCourses(entry.content);
-      onResult(entry, result);
+      const courseData = await fetchRelatedCourses(post.content);
+      onResult(post, courseData);
     } catch (error) {
-      onError(entry, error);
+      onError(post, error);
     }
 
     await wait(CLASS_CENTRAL_THROTTLE_MS);

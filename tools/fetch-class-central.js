@@ -1,4 +1,4 @@
-import { fetchFromHashnodePages } from '../utils/hashnode/fetch-from-hashnode.js';
+import { fetchFromHashnode } from '../utils/hashnode/fetch-from-hashnode.js';
 import {
   getRelatedCoursesContent,
   hashContent
@@ -17,19 +17,9 @@ const { currentLocale_i18n } = config;
 const CHECKPOINT_EVERY = 25;
 
 // Caps how long a single run can take, and the rest is picked up next run
-const MAX_FETCHES_PER_RUN = 3000;
+const MAX_POSTS_PER_RUN = 3000;
 
 const SOURCE_FILE = 'tools/fetch-class-central.js';
-
-const getAllPosts = async () => {
-  const posts = [];
-
-  for await (const { nodes } of fetchFromHashnodePages('posts')) {
-    posts.push(...nodes);
-  }
-
-  return posts;
-};
 
 const run = async () => {
   if (currentLocale_i18n !== 'english') {
@@ -39,7 +29,7 @@ const run = async () => {
     return;
   }
 
-  const posts = await getAllPosts();
+  const posts = await fetchFromHashnode('posts');
   const cache = await loadCache();
 
   // Drop entries for posts that no longer exist
@@ -48,7 +38,7 @@ const run = async () => {
     if (!currentIds.has(id)) delete cache.posts[id];
   });
 
-  const work = posts
+  const postsToFetch = posts
     .map(post => {
       const content = getRelatedCoursesContent(post);
       if (!content) return null;
@@ -61,9 +51,9 @@ const run = async () => {
       return { id: post.id, slug: post.slug, content, contentHash };
     })
     .filter(Boolean)
-    .slice(0, MAX_FETCHES_PER_RUN);
+    .slice(0, MAX_POSTS_PER_RUN);
 
-  if (!work.length) {
+  if (!postsToFetch.length) {
     console.log(
       'Every post already has up-to-date course data. Nothing to do.'
     );
@@ -71,35 +61,35 @@ const run = async () => {
   }
 
   console.log(
-    `Fetching Class Central data for ${work.length} post(s) (of ${posts.length} total)...`
+    `Fetching Class Central data for ${postsToFetch.length} post(s) (of ${posts.length} total)...`
   );
 
-  let processed = 0;
+  let succeeded = 0;
   let failed = 0;
 
-  await fetchRelatedCoursesForAll(work, {
-    onResult: async (entry, { courses, subjects }) => {
+  await fetchRelatedCoursesForAll(postsToFetch, {
+    onResult: async (post, { courses, subjects }) => {
       // Note: Response stored raw - trim once the UI settles on which fields it needs
-      cache.posts[entry.id] = {
-        contentHash: entry.contentHash,
+      cache.posts[post.id] = {
+        contentHash: post.contentHash,
         fetchedAt: new Date().toISOString(),
         courses,
         subjects
       };
 
-      processed++;
-      if (processed % CHECKPOINT_EVERY === 0) {
-        console.log(`Checkpointing after ${processed} posts...`);
+      succeeded++;
+      if (succeeded % CHECKPOINT_EVERY === 0) {
+        console.log(`Checkpointing after ${succeeded} posts...`);
         await saveCache(cache);
       }
     },
-    onError: (entry, error) => {
+    onError: (post, error) => {
       failed++;
       annotate({
         level: 'warning',
         title: 'Class Central fetch failed for a post',
         file: SOURCE_FILE,
-        message: `Post "${entry.slug}" will be retried on the next run: ${error.message}`
+        message: `Post "${post.slug}" will be retried on the next run: ${error.message}`
       });
     }
   });
@@ -113,7 +103,7 @@ const run = async () => {
 
   await saveCache(cache);
   console.log(
-    `Done. Fetched courses for ${processed} post(s), ${failed} failed and will be retried later.`
+    `Done. Fetched courses for ${succeeded} post(s), ${failed} failed and will be retried later.`
   );
 };
 
