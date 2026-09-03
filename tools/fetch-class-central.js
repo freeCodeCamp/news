@@ -1,12 +1,12 @@
 import { fetchFromHashnode } from '../utils/hashnode/fetch-from-hashnode.js';
 import {
-  getRelatedCoursesContent,
+  prepareContentForClassCentral,
   hashContent
 } from '../utils/class-central/content.js';
-import { fetchRelatedCoursesForAll } from '../utils/class-central/api.js';
+import { fetchRelatedCoursesForPosts } from '../utils/class-central/api.js';
 import { loadCache, saveCache } from '../utils/class-central/store.js';
 import { isFresh } from '../utils/class-central/freshness.js';
-import { classCentralSchemaValidator } from './schemas/class-central-schema.js';
+import { validateClassCentralCache } from './schemas/class-central-schema.js';
 import { annotate } from '../utils/gh-annotations.js';
 import { config } from '../config/index.js';
 
@@ -40,7 +40,7 @@ const run = async () => {
 
   const postsToFetch = posts
     .map(post => {
-      const content = getRelatedCoursesContent(post);
+      const content = prepareContentForClassCentral(post);
       if (!content) return null;
 
       const contentHash = hashContent(content);
@@ -73,7 +73,7 @@ const run = async () => {
   let succeeded = 0;
   let failed = 0;
 
-  await fetchRelatedCoursesForAll(postsToFetch, {
+  await fetchRelatedCoursesForPosts(postsToFetch, {
     onResult: async (post, { courses, subjects }) => {
       // Note: Response stored raw - trim once the UI settles on which fields it needs
       cache.posts[post.id] = {
@@ -102,7 +102,7 @@ const run = async () => {
     }
   });
 
-  const { error: validationError } = classCentralSchemaValidator(cache);
+  const { error: validationError } = validateClassCentralCache(cache);
   if (validationError) {
     throw new Error(
       `Class Central cache failed schema validation, refusing to save: ${validationError.message}`

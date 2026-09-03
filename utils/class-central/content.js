@@ -18,7 +18,7 @@ const trimToFirstTag = html => {
   return cutoff === -1 ? html : html.slice(cutoff);
 };
 
-export const getRelatedCoursesContent = post => {
+export const prepareContentForClassCentral = post => {
   const html = (post?.content?.html || '').trim();
 
   if (html.length < MIN_CONTENT_LENGTH) return null;

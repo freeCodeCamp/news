@@ -14,4 +14,4 @@ const schema = Joi.object().keys({
   posts: Joi.object().pattern(Joi.string(), cacheEntrySchema).required()
 });
 
-export const classCentralSchemaValidator = cache => schema.validate(cache);
+export const validateClassCentralCache = cache => schema.validate(cache);

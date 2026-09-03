@@ -47,7 +47,7 @@ export const fetchRelatedCourses = async content => {
 
 // A failed post is reported via onError and skipped, not retried here, and
 // the next run picks it up
-export const fetchRelatedCoursesForAll = async (
+export const fetchRelatedCoursesForPosts = async (
   postsToFetch,
   { onResult, onError }
 ) => {
