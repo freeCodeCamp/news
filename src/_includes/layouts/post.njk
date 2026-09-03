@@ -1,5 +1,6 @@
 {% extends 'layouts/default.njk' %}
 {% from "partials/byline.njk" import byline %}
+{% from "partials/class-central-ad.njk" import classCentralCourseAd %}
 
 {% set title = post.title %}
 {% set canonicalUrl = post.path | htmlBaseUrl(site.url) %}
@@ -60,6 +61,11 @@ time #}
                         </section>
                         {% if adsEnabled %}
                             <div class="sidebar">
+                                {# Class Central data is English-only, and the ad copy is hardcoded English #}
+                                {% set relatedCourses = classCentralCourses[post.id] %}
+                                {% if site.lang === "en" and relatedCourses.courses | length %}
+                                    {{ classCentralCourseAd(relatedCourses) }}
+                                {% endif %}
                                 {% if canonicalUrl | shouldCanonicalHaveGAM %}
                                     {% set localizedAdText %}{% t 'ad-text' %}{% endset %}
                                     <script>var localizedAdText = "{{ localizedAdText | upper }}";</script>

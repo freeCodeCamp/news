@@ -1,0 +1,72 @@
+{% macro classCentralCourseAd(ccData) %}
+    {% set topSubject = ccData.subjects[0] %}
+    {% set adLabel %}{% t 'ad-text' %}{% endset %}
+    <div class="partner-courses" data-test-label="class-central-course-ad">
+        <p class="partner-courses-label">Recommended courses from our partners</p>
+        <div class="partner-courses-card">
+            <div class="partner-courses-disclosure">
+                <span class="partner-courses-disclosure-label">{{ adLabel | upper }}</span>
+                <span class="partner-courses-disclosure-source">Class Central</span>
+            </div>
+
+            {% for course in ccData.courses %}
+                {% if loop.index0 < 4 %}
+                    <a
+                        class="partner-courses-course"
+                        href="{{ course.url.go }}"
+                        rel="sponsored noopener noreferrer"
+                        target="_blank"
+                    >
+                        {% if course.imageUrl %}
+                            <span class="partner-courses-thumbnail">
+                                <img src="{{ course.imageUrl }}" alt="" loading="lazy">
+                            </span>
+                        {% endif %}
+                        <span class="partner-courses-provider">On {{ course.provider.name }}</span>
+                        <span class="partner-courses-title">{{ course.name }}</span>
+                        {% if course.instructorName %}
+                            <span class="partner-courses-instructor">{{ course.instructorName }}</span>
+                        {% endif %}
+                        <span class="partner-courses-stats">
+                            {% if course.rating.provider.average %}
+                                <span class="partner-courses-stat partner-courses-rating">
+                                    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2.5l2.9 6.4 6.9.7-5.2 4.7 1.5 6.8L12 17.6l-6.1 3.5 1.5-6.8-5.2-4.7 6.9-.7z"/></svg>
+                                    {{ course.rating.provider.average | round(1) }}
+                                    {%- if course.ratingCount %} <span class="partner-courses-rating-count">({{ course.ratingCount }})</span>{% endif %}
+                                </span>
+                            {% endif %}
+                            {% if course.effortShort %}
+                                <span class="partner-courses-stat">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3" stroke-linecap="round"/></svg>
+                                    {{ course.effortShort }}
+                                </span>
+                            {% endif %}
+                            {% if course.level %}
+                                <span class="partner-courses-stat">{{ course.level | capitalize }}</span>
+                            {% endif %}
+                            {% if course.certificate %}
+                                <span class="partner-courses-stat">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="5"/><path d="M8.5 12.5 7 21l5-2.5L17 21l-1.5-8.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                                    Certificate
+                                </span>
+                            {% endif %}
+                        </span>
+                        <span class="partner-courses-cta">
+                            View course
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M9 6l6 6-6 6"/></svg>
+                        </span>
+                    </a>
+                {% endif %}
+            {% endfor %}
+
+            {% if topSubject %}
+                <a
+                    class="partner-courses-more"
+                    href="{{ topSubject.url }}"
+                    rel="sponsored noopener noreferrer"
+                    target="_blank"
+                ><span>More {{ topSubject.name }} courses on Class Central &rarr;</span></a>
+            {% endif %}
+        </div>
+    </div>
+{% endmacro %}

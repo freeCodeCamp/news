@@ -2734,6 +2734,198 @@ a.banner:hover span {
   visibility: hidden;
 }
 
+/* Class Central sponsored course recommendations (top of post sidebar) */
+.partner-courses {
+  width: 100%;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.partner-courses-label {
+  margin: 0 0 10px;
+  font-size: 1.3rem;
+  font-weight: 500;
+  line-height: 1.3;
+  text-align: center;
+  color: var(--quaternary-color);
+}
+
+.partner-courses-card {
+  overflow: hidden;
+  border: 1px solid var(--quaternary-background);
+  border-radius: 8px;
+  background-color: var(--secondary-background);
+  box-shadow:
+    0 1px 2px rgba(10, 10, 35, 0.04),
+    0 6px 20px rgba(10, 10, 35, 0.06);
+}
+
+.partner-courses-disclosure {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px 8px;
+}
+
+.partner-courses-disclosure-label {
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--quaternary-color);
+}
+
+.partner-courses-disclosure-source {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--secondary-color);
+}
+
+.partner-courses .partner-courses-course,
+.partner-courses .partner-courses-more {
+  text-decoration: none;
+}
+
+.partner-courses .partner-courses-course:hover .partner-courses-title,
+.partner-courses .partner-courses-more:hover {
+  text-decoration: underline;
+}
+
+.partner-courses-course {
+  display: block;
+  padding: 12px 14px 16px;
+  color: var(--primary-color);
+  transition: background-color 0.15s ease;
+}
+
+.partner-courses-course + .partner-courses-course {
+  border-top: 1px solid var(--quaternary-background);
+}
+
+.partner-courses-course:hover {
+  background-color: var(--tertiary-background);
+}
+
+.partner-courses-course:focus-visible {
+  outline: 2px solid var(--link-color);
+  outline-offset: -2px;
+}
+
+.partner-courses-thumbnail {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  margin-bottom: 10px;
+  border-radius: 6px;
+  background-color: var(--quaternary-background);
+}
+
+.partner-courses .partner-courses-thumbnail img {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  max-width: none;
+  object-fit: cover;
+}
+
+.partner-courses-provider {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--link-color);
+}
+
+.partner-courses-title {
+  display: -webkit-box;
+  overflow: hidden;
+  margin-bottom: 4px;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  font-size: 1.6rem;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--primary-color);
+}
+
+.partner-courses-instructor {
+  display: block;
+  overflow: hidden;
+  margin-bottom: 10px;
+  font-size: 1.25rem;
+  line-height: 1.3;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: var(--secondary-color);
+}
+
+.partner-courses-stats {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 12px;
+  margin-bottom: 12px;
+  font-family: 'Roboto Mono', ui-monospace, monospace;
+  font-size: 1.15rem;
+  color: var(--secondary-color);
+}
+
+.partner-courses-stat {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.partner-courses-stat svg {
+  flex-shrink: 0;
+  width: 13px;
+  height: 13px;
+}
+
+.partner-courses-rating svg {
+  color: var(--link-color);
+}
+
+.partner-courses-rating-count {
+  color: var(--quaternary-color);
+}
+
+.partner-courses-cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  width: 100%;
+  margin-top: 12px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  background-color: var(--link-color);
+  color: var(--primary-background);
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.partner-courses-cta svg {
+  width: 13px;
+  height: 13px;
+}
+
+.partner-courses-more {
+  display: block;
+  padding: 12px 14px;
+  border-top: 1px solid var(--quaternary-background);
+  font-size: 1.3rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.partner-courses .partner-courses-more span {
+  color: var(--link-color);
+}
+
 .ad-layout .post-full-content img,
 .ad-layout .post-full-content video {
   max-width: 100%;
