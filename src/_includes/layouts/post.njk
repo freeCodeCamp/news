@@ -1,6 +1,6 @@
 {% extends 'layouts/default.njk' %}
 {% from "partials/byline.njk" import byline %}
-{% from "partials/class-central-ad.njk" import classCentralCourseAd %}
+{% from "partials/class-central-ad.njk" import classCentralCourseAd, classCentralCourseBanner %}
 
 {% set title = post.title %}
 {% set canonicalUrl = post.path | htmlBaseUrl(site.url) %}
@@ -13,6 +13,9 @@
 reading time if reading time <= 4 mins. Else, add 1 ad for every 1 min of reading
 time #}
 {% set numOfSidebarAds = (((post.reading_time / 2) if post.reading_time <= 4 else (post.reading_time)) + 2) | round(0, 'floor') %}
+{# Class Central data is English-only and the ad copy is hardcoded English, so
+the rail and bottom banner only render when site.lang is "en". #}
+{% set relatedCourses = classCentralCourses[post.id] %}
 
 {% block content %}
     <main id="site-main" class="post-template site-main outer">
@@ -61,8 +64,6 @@ time #}
                         </section>
                         {% if adsEnabled %}
                             <div class="sidebar">
-                                {# Class Central data is English-only, and the ad copy is hardcoded English #}
-                                {% set relatedCourses = classCentralCourses[post.id] %}
                                 {% if site.lang === "en" and relatedCourses.courses | length %}
                                     {{ classCentralCourseAd(relatedCourses) }}
                                 {% endif %}
@@ -99,13 +100,18 @@ time #}
                     {% endif %}
                 </section>
                 {% if adsEnabled %}
-                    <div class="banner-ad-bottom">
-                        {% if canonicalUrl | shouldCanonicalHaveGAM %}
-                            {% include "partials/gam-ad-bottom.njk" %}
-                        {% else %}
-                            {% include "partials/ad.njk" %}
-                        {% endif %}
-                    </div>
+                    {% if site.lang === "en" and relatedCourses.courses | length %}
+                        {# Show the Class Central banner instead of a Google ad #}
+                        {{ classCentralCourseBanner(relatedCourses) }}
+                    {% else %}
+                        <div class="banner-ad-bottom">
+                            {% if canonicalUrl | shouldCanonicalHaveGAM %}
+                                {% include "partials/gam-ad-bottom.njk" %}
+                            {% else %}
+                                {% include "partials/ad.njk" %}
+                            {% endif %}
+                        </div>
+                    {% endif %}
                 {% endif %}
             </article>
         </div>
