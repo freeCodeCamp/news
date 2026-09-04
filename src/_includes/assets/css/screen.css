@@ -2734,11 +2734,35 @@ a.banner:hover span {
   visibility: hidden;
 }
 
-/* Class Central sponsored course recommendations (top of post sidebar) */
+/* Class Central sponsored course recommendations.
+   `.partner-courses-rail` is the sidebar column, `.partner-courses-banner` the
+   wide horizontal band that replaces the bottom Google ad */
 .partner-courses {
   width: 100%;
-  margin-bottom: 20px;
   text-align: left;
+}
+
+.partner-courses-rail {
+  margin-bottom: 20px;
+}
+
+.partner-courses-banner {
+  margin: 30px 0 10px;
+}
+
+/* Hide the "Recommended courses from our partners" text above the bottom banner*/
+.partner-courses-banner .partner-courses-label {
+  display: none;
+}
+
+.partner-courses-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.partner-courses-list li {
+  margin: 0;
 }
 
 .partner-courses-label {
@@ -2797,7 +2821,7 @@ a.banner:hover span {
   transition: background-color 0.15s ease;
 }
 
-.partner-courses-course + .partner-courses-course {
+.partner-courses-rail .partner-courses-list li + li {
   border-top: 1px solid var(--quaternary-background);
 }
 
@@ -2929,6 +2953,66 @@ a.banner:hover span {
 .partner-courses-more:focus-visible {
   outline: 2px solid var(--link-color);
   outline-offset: -2px;
+}
+
+/* Display up to four compact course cards in a row in the banner */
+.partner-courses-banner .partner-courses-list {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.partner-courses-banner .partner-courses-list li {
+  display: flex;
+}
+
+.partner-courses-banner .partner-courses-list li + li {
+  border-left: 1px solid var(--quaternary-background);
+}
+
+.partner-courses-banner .partner-courses-course {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+.partner-courses-banner .partner-courses-thumbnail {
+  flex-shrink: 0;
+}
+
+.partner-courses-banner .partner-courses-title {
+  -webkit-line-clamp: 2;
+}
+
+/* Bottom-align the CTA so buttons line up across the row */
+.partner-courses-banner .partner-courses-cta {
+  margin-top: auto;
+}
+
+/* Tablet: two columns. */
+@media (max-width: 999px) {
+  .partner-courses-banner .partner-courses-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .partner-courses-banner .partner-courses-list li:nth-child(odd) {
+    border-left: 0;
+  }
+
+  .partner-courses-banner .partner-courses-list li:nth-child(n + 3) {
+    border-top: 1px solid var(--quaternary-background);
+  }
+}
+
+/* Mobile: single stacked column. */
+@media (max-width: 650px) {
+  .partner-courses-banner .partner-courses-list {
+    grid-template-columns: 1fr;
+  }
+
+  .partner-courses-banner .partner-courses-list li + li {
+    border-top: 1px solid var(--quaternary-background);
+    border-left: 0;
+  }
 }
 
 .ad-layout .post-full-content img,
