@@ -31,14 +31,15 @@
                             {% if course.rating.provider.average %}
                                 <span class="partner-courses-stat partner-courses-rating">
                                     <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2.5l2.9 6.4 6.9.7-5.2 4.7 1.5 6.8L12 17.6l-6.1 3.5 1.5-6.8-5.2-4.7 6.9-.7z"/></svg>
-                                    {{ course.rating.provider.average | round(1) }}
-                                    {%- if course.ratingCount %} <span class="partner-courses-rating-count">({{ course.ratingCount }})</span>{% endif %}
+                                    {{ course.rating.provider.average | round(1) }}<span class="sr-only"> out of 5 stars</span>
+                                    {%- if course.ratingCount %} <span class="partner-courses-rating-count" aria-hidden="true">({{ course.ratingCount }})</span><span class="sr-only"> from {{ course.ratingCount }} ratings</span>{% endif %}
                                 </span>
                             {% endif %}
                             {% if course.effortShort %}
                                 <span class="partner-courses-stat">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3" stroke-linecap="round"/></svg>
-                                    {{ course.effortShort }}
+                                    <span aria-hidden="true">{{ course.effortShort }}</span>
+                                    <span class="sr-only">{{ course.effort }}</span>
                                 </span>
                             {% endif %}
                             {% if course.level %}
@@ -55,6 +56,7 @@
                             View course
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M9 6l6 6-6 6"/></svg>
                         </span>
+                        <span class="sr-only">(opens in a new tab)</span>
                     </a>
                 {% endif %}
             {% endfor %}
@@ -65,7 +67,7 @@
                     href="{{ topSubject.url }}"
                     rel="sponsored noopener noreferrer"
                     target="_blank"
-                ><span>More {{ topSubject.name }} courses on Class Central &rarr;</span></a>
+                ><span>More {{ topSubject.name }} courses on Class Central <span aria-hidden="true">&rarr;</span></span><span class="sr-only">(opens in a new tab)</span></a>
             {% endif %}
         </div>
     </div>

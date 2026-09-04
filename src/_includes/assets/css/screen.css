@@ -2926,6 +2926,11 @@ a.banner:hover span {
   color: var(--link-color);
 }
 
+.partner-courses-more:focus-visible {
+  outline: 2px solid var(--link-color);
+  outline-offset: -2px;
+}
+
 .ad-layout .post-full-content img,
 .ad-layout .post-full-content video {
   max-width: 100%;
