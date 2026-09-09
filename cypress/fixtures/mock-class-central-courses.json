@@ -1,745 +1,310 @@
 {
   "posts": {
     "66e1f8b2fd5bd0f4a063f328": {
-      "contentHash": "mockhash66e1f8b2fd5bd0f4a063f32800000000000000000000000000000000",
       "fetchedAt": "2026-01-01T00:00:00.000Z",
       "slug": "learn-music-production-for-beginners",
       "title": "Learn Music Production for Beginners",
       "courses": [
         {
-          "id": 900001,
           "name": "Mock Music Production Masterclass",
-          "slug": "mock-music-production-masterclass",
-          "format": "course",
-          "credential": null,
-          "description": "Mock description for \"Mock Music Production Masterclass\". Placeholder copy used only so the fixture mirrors the real cache shape.",
-          "summary": "Mock summary for \"Mock Music Production Masterclass\".",
           "url": {
-            "course": "https://example.com/course/mock-music-production-masterclass",
             "go": "https://example.com/go/mock-music-production-masterclass"
           },
           "imageUrl": "https://example.com/img/courses/mock-music-production-masterclass.jpg",
           "instructors": "Instructor A • 10,000+ Students",
           "level": "beginner",
-          "available": true,
-          "availability": "Self-Paced",
-          "free": false,
-          "price": "Paid Course",
           "certificate": true,
           "effort": "1 day 6 hours 36 minutes",
           "rating": {
-            "classCentral": null,
             "provider": {
               "average": 4.38889,
               "count": 8495
             }
           },
-          "language": {
-            "name": "English",
-            "slug": "english"
-          },
           "provider": {
-            "name": "CourseHub",
-            "code": "coursehub",
-            "logo": {
-              "horizontal": "https://example.com/img/providers/coursehub-hz.png",
-              "square": "https://example.com/img/providers/coursehub-sq.png"
-            }
-          },
-          "institutions": [],
-          "subjects": [
-            {
-              "name": "Sample Subject",
-              "slug": "sample-subject"
-            }
-          ]
+            "name": "CourseHub"
+          }
         },
         {
-          "id": 900002,
           "name": "Mock Mixing and Mastering, Start to Finish",
-          "slug": "mock-mixing-and-mastering",
-          "format": "course",
-          "credential": null,
-          "description": "Mock description for \"Mock Mixing and Mastering, Start to Finish\". Placeholder copy used only so the fixture mirrors the real cache shape.",
-          "summary": "Mock summary for \"Mock Mixing and Mastering, Start to Finish\".",
           "url": {
-            "course": "https://example.com/course/mock-mixing-and-mastering",
             "go": "https://example.com/go/mock-mixing-and-mastering"
           },
           "imageUrl": "https://example.com/img/courses/mock-mixing-and-mastering.jpg",
           "instructors": "Instructor B",
           "level": "beginner",
-          "available": true,
-          "availability": "Self-Paced",
-          "free": false,
-          "price": "Paid Course",
           "certificate": false,
           "effort": "13 hours",
           "rating": {
-            "classCentral": null,
             "provider": {
               "average": 4.79167,
               "count": 6
             }
           },
-          "language": {
-            "name": "English",
-            "slug": "english"
-          },
           "provider": {
-            "name": "SkillForge",
-            "code": "skillforge",
-            "logo": {
-              "horizontal": "https://example.com/img/providers/skillforge-hz.png",
-              "square": "https://example.com/img/providers/skillforge-sq.png"
-            }
-          },
-          "institutions": [],
-          "subjects": [
-            {
-              "name": "Sample Subject",
-              "slug": "sample-subject"
-            }
-          ]
+            "name": "SkillForge"
+          }
         },
         {
-          "id": 900003,
           "name": "Mock Songwriting for Producers",
-          "slug": "mock-songwriting-for-producers",
-          "format": "course",
-          "credential": null,
-          "description": "Mock description for \"Mock Songwriting for Producers\". Placeholder copy used only so the fixture mirrors the real cache shape.",
-          "summary": "Mock summary for \"Mock Songwriting for Producers\".",
           "url": {
-            "course": "https://example.com/course/mock-songwriting-for-producers",
             "go": "https://example.com/go/mock-songwriting-for-producers"
           },
           "imageUrl": "https://example.com/img/courses/mock-songwriting-for-producers.jpg",
           "instructors": "Instructor C",
           "level": "intermediate",
-          "available": true,
-          "availability": "Self-Paced",
-          "free": false,
-          "price": "Paid Course",
           "certificate": true,
           "effort": "6 weeks, 2 hours a week",
           "rating": {
-            "classCentral": null,
             "provider": {
               "average": 4.0625,
               "count": 4
             }
           },
-          "language": {
-            "name": "English",
-            "slug": "english"
-          },
           "provider": {
-            "name": "OpenLearn",
-            "code": "openlearn",
-            "logo": {
-              "horizontal": "https://example.com/img/providers/openlearn-hz.png",
-              "square": "https://example.com/img/providers/openlearn-sq.png"
-            }
-          },
-          "institutions": [],
-          "subjects": [
-            {
-              "name": "Sample Subject",
-              "slug": "sample-subject"
-            }
-          ]
+            "name": "OpenLearn"
+          }
         },
         {
-          "id": 900004,
           "name": "Mock Beat Making in an Afternoon",
-          "slug": "mock-beat-making-in-an-afternoon",
-          "format": "course",
-          "credential": null,
-          "description": "Mock description for \"Mock Beat Making in an Afternoon\". Placeholder copy used only so the fixture mirrors the real cache shape.",
-          "summary": "Mock summary for \"Mock Beat Making in an Afternoon\".",
           "url": {
-            "course": "https://example.com/course/mock-beat-making-in-an-afternoon",
             "go": "https://example.com/go/mock-beat-making-in-an-afternoon"
           },
           "imageUrl": "https://example.com/img/courses/mock-beat-making-in-an-afternoon.jpg",
           "instructors": "",
           "level": "beginner",
-          "available": true,
-          "availability": "Self-Paced",
-          "free": false,
-          "price": "Paid Course",
           "certificate": false,
           "effort": "45 minutes",
           "rating": {
-            "classCentral": null,
             "provider": null
           },
-          "language": {
-            "name": "English",
-            "slug": "english"
-          },
           "provider": {
-            "name": "BrightPath",
-            "code": "brightpath",
-            "logo": {
-              "horizontal": "https://example.com/img/providers/brightpath-hz.png",
-              "square": "https://example.com/img/providers/brightpath-sq.png"
-            }
-          },
-          "institutions": [],
-          "subjects": [
-            {
-              "name": "Sample Subject",
-              "slug": "sample-subject"
-            }
-          ]
-        },
-        {
-          "id": 900005,
-          "name": "Mock Advanced Sound Design (hidden past the 4-course cap)",
-          "slug": "mock-advanced-sound-design",
-          "format": "course",
-          "credential": null,
-          "description": "Mock description for \"Mock Advanced Sound Design (hidden past the 4-course cap)\". Placeholder copy used only so the fixture mirrors the real cache shape.",
-          "summary": "Mock summary for \"Mock Advanced Sound Design (hidden past the 4-course cap)\".",
-          "url": {
-            "course": "https://example.com/course/mock-advanced-sound-design",
-            "go": "https://example.com/go/mock-advanced-sound-design"
-          },
-          "imageUrl": "https://example.com/img/courses/mock-advanced-sound-design.jpg",
-          "instructors": "Instructor D",
-          "level": "",
-          "available": true,
-          "availability": "Self-Paced",
-          "free": false,
-          "price": "Paid Course",
-          "certificate": true,
-          "effort": "",
-          "rating": {
-            "classCentral": null,
-            "provider": {
-              "average": 4.2,
-              "count": 55
-            }
-          },
-          "language": {
-            "name": "English",
-            "slug": "english"
-          },
-          "provider": {
-            "name": "EduStream",
-            "code": "edustream",
-            "logo": {
-              "horizontal": "https://example.com/img/providers/edustream-hz.png",
-              "square": "https://example.com/img/providers/edustream-sq.png"
-            }
-          },
-          "institutions": [],
-          "subjects": [
-            {
-              "name": "Sample Subject",
-              "slug": "sample-subject"
-            }
-          ]
+            "name": "BrightPath"
+          }
         }
       ],
       "subjects": [
         {
           "name": "Music Production",
-          "slug": "music-production",
-          "courseCount": 2138,
           "url": "https://example.com/subject/music-production"
         },
         {
           "name": "Mixing & Mastering",
-          "slug": "audio-mixing",
-          "courseCount": 764,
           "url": "https://example.com/subject/audio-mixing"
         }
       ]
     },
     "66e093d482502b33f0f6b7ce": {
-      "contentHash": "mockhash66e093d482502b33f0f6b7ce00000000000000000000000000000000",
       "fetchedAt": "2026-01-01T00:00:00.000Z",
       "slug": "pass-the-azure-ai-engineer-associate-certification-ai-102",
       "title": "Pass the Azure AI Engineer Associate Certification (AI-102)",
       "courses": [
         {
-          "id": 900101,
           "name": "Mock AI Engineer Exam Prep",
-          "slug": "mock-ai-engineer-exam-prep",
-          "format": "course",
-          "credential": null,
-          "description": "Mock description for \"Mock AI Engineer Exam Prep\". Placeholder copy used only so the fixture mirrors the real cache shape.",
-          "summary": "Mock summary for \"Mock AI Engineer Exam Prep\".",
           "url": {
-            "course": "https://example.com/course/mock-ai-engineer-exam-prep",
             "go": "https://example.com/go/mock-ai-engineer-exam-prep"
           },
           "imageUrl": "https://example.com/img/courses/mock-ai-engineer-exam-prep.jpg",
           "instructors": "Instructor E • 250,000+ Students",
           "level": "beginner",
-          "available": true,
-          "availability": "Self-Paced",
-          "free": false,
-          "price": "Paid Course",
           "certificate": true,
           "effort": "15 hours 20 minutes",
           "rating": {
-            "classCentral": null,
             "provider": {
               "average": 4.45952,
               "count": 5880
             }
           },
-          "language": {
-            "name": "English",
-            "slug": "english"
-          },
           "provider": {
-            "name": "CourseHub",
-            "code": "coursehub",
-            "logo": {
-              "horizontal": "https://example.com/img/providers/coursehub-hz.png",
-              "square": "https://example.com/img/providers/coursehub-sq.png"
-            }
-          },
-          "institutions": [],
-          "subjects": [
-            {
-              "name": "Sample Subject",
-              "slug": "sample-subject"
-            }
-          ]
+            "name": "CourseHub"
+          }
         },
         {
-          "id": 900102,
           "name": "Mock Building AI Apps and Agents",
-          "slug": "mock-building-ai-apps-and-agents",
-          "format": "course",
-          "credential": null,
-          "description": "Mock description for \"Mock Building AI Apps and Agents\". Placeholder copy used only so the fixture mirrors the real cache shape.",
-          "summary": "Mock summary for \"Mock Building AI Apps and Agents\".",
           "url": {
-            "course": "https://example.com/course/mock-building-ai-apps-and-agents",
             "go": "https://example.com/go/mock-building-ai-apps-and-agents"
           },
           "imageUrl": "https://example.com/img/courses/mock-building-ai-apps-and-agents.jpg",
           "instructors": "Instructor C",
           "level": "intermediate",
-          "available": true,
-          "availability": "Self-Paced",
-          "free": false,
-          "price": "Paid Course",
           "certificate": true,
           "effort": "21 hours 9 minutes",
           "rating": {
-            "classCentral": null,
             "provider": {
               "average": 4.49533,
               "count": 1446
             }
           },
-          "language": {
-            "name": "English",
-            "slug": "english"
-          },
           "provider": {
-            "name": "OpenLearn",
-            "code": "openlearn",
-            "logo": {
-              "horizontal": "https://example.com/img/providers/openlearn-hz.png",
-              "square": "https://example.com/img/providers/openlearn-sq.png"
-            }
-          },
-          "institutions": [],
-          "subjects": [
-            {
-              "name": "Sample Subject",
-              "slug": "sample-subject"
-            }
-          ]
+            "name": "OpenLearn"
+          }
         },
         {
-          "id": 900103,
           "name": "Mock Cloud AI Services Deep Dive",
-          "slug": "mock-cloud-ai-services-deep-dive",
-          "format": "course",
-          "credential": null,
-          "description": "Mock description for \"Mock Cloud AI Services Deep Dive\". Placeholder copy used only so the fixture mirrors the real cache shape.",
-          "summary": "Mock summary for \"Mock Cloud AI Services Deep Dive\".",
           "url": {
-            "course": "https://example.com/course/mock-cloud-ai-services-deep-dive",
             "go": "https://example.com/go/mock-cloud-ai-services-deep-dive"
           },
           "imageUrl": "https://example.com/img/courses/mock-cloud-ai-services-deep-dive.jpg",
           "instructors": "Instructor B",
           "level": "intermediate",
-          "available": true,
-          "availability": "Self-Paced",
-          "free": false,
-          "price": "Paid Course",
           "certificate": true,
           "effort": "10 weeks, 1 hour a week",
           "rating": {
-            "classCentral": null,
             "provider": null
           },
-          "language": {
-            "name": "English",
-            "slug": "english"
-          },
           "provider": {
-            "name": "BrightPath",
-            "code": "brightpath",
-            "logo": {
-              "horizontal": "https://example.com/img/providers/brightpath-hz.png",
-              "square": "https://example.com/img/providers/brightpath-sq.png"
-            }
-          },
-          "institutions": [],
-          "subjects": [
-            {
-              "name": "Sample Subject",
-              "slug": "sample-subject"
-            }
-          ]
+            "name": "BrightPath"
+          }
         },
         {
-          "id": 900104,
           "name": "Mock AI Engineer Professional Certificate",
-          "slug": "mock-ai-engineer-professional-certificate",
-          "format": "credential",
-          "credential": "professional-certificate",
-          "description": "Mock description for \"Mock AI Engineer Professional Certificate\". Placeholder copy used only so the fixture mirrors the real cache shape.",
-          "summary": "Mock summary for \"Mock AI Engineer Professional Certificate\".",
           "url": {
-            "course": "https://example.com/course/mock-ai-engineer-professional-certificate",
             "go": "https://example.com/go/mock-ai-engineer-professional-certificate"
           },
           "imageUrl": "https://example.com/img/courses/mock-ai-engineer-professional-certificate.jpg",
           "instructors": "",
           "level": "intermediate",
-          "available": true,
-          "availability": "Self-Paced",
-          "free": false,
-          "price": "$190.00",
           "certificate": true,
           "effort": "6 weeks, 2-3 hours a week",
           "rating": {
-            "classCentral": null,
             "provider": {
               "average": 4.6,
               "count": 320
             }
           },
-          "language": {
-            "name": "English",
-            "slug": "english"
-          },
           "provider": {
-            "name": "EduStream",
-            "code": "edustream",
-            "logo": {
-              "horizontal": "https://example.com/img/providers/edustream-hz.png",
-              "square": "https://example.com/img/providers/edustream-sq.png"
-            }
-          },
-          "institutions": [
-            {
-              "name": "Mock Institute of Technology",
-              "slug": "mock-institute-of-technology",
-              "logo": {
-                "horizontal": "https://example.com/img/institutions/mock-hz.png",
-                "square": "https://example.com/img/institutions/mock-sq.png"
-              }
-            }
-          ],
-          "subjects": [
-            {
-              "name": "Sample Subject",
-              "slug": "sample-subject"
-            }
-          ]
+            "name": "EduStream"
+          }
         }
       ],
       "subjects": [
         {
           "name": "Artificial Intelligence",
-          "slug": "ai",
-          "courseCount": 1900,
           "url": "https://example.com/subject/ai"
         },
         {
           "name": "Microsoft Azure",
-          "slug": "microsoft-azure",
-          "courseCount": 540,
           "url": "https://example.com/subject/microsoft-azure"
         }
       ]
     },
     "66db21dc4fe490d5a33e959d": {
-      "contentHash": "mockhash66db21dc4fe490d5a33e959d00000000000000000000000000000000",
       "fetchedAt": "2026-01-01T00:00:00.000Z",
       "slug": "surviving-40-years-in-tech-jack-herrington-podcast-140",
       "title": "Surviving 40 years in the software industry [Interview with Jack Herrington Podcast #140]",
       "courses": [
         {
-          "id": 900201,
           "name": "Mock Career Longevity in Software",
-          "slug": "mock-career-longevity-in-software",
-          "format": "course",
-          "credential": null,
-          "description": "Mock description for \"Mock Career Longevity in Software\". Placeholder copy used only so the fixture mirrors the real cache shape.",
-          "summary": "Mock summary for \"Mock Career Longevity in Software\".",
           "url": {
-            "course": "https://example.com/course/mock-career-longevity-in-software",
             "go": "https://example.com/go/mock-career-longevity-in-software"
           },
           "imageUrl": "https://example.com/img/courses/mock-career-longevity-in-software.jpg",
           "instructors": "Instructor A",
           "level": "beginner",
-          "available": true,
-          "availability": "Self-Paced",
-          "free": false,
-          "price": "Paid Course",
           "certificate": false,
           "effort": "1 hour 23 minutes",
           "rating": {
-            "classCentral": null,
             "provider": {
               "average": 4.67391,
               "count": 23
             }
           },
-          "language": {
-            "name": "English",
-            "slug": "english"
-          },
           "provider": {
-            "name": "SkillForge",
-            "code": "skillforge",
-            "logo": {
-              "horizontal": "https://example.com/img/providers/skillforge-hz.png",
-              "square": "https://example.com/img/providers/skillforge-sq.png"
-            }
-          },
-          "institutions": [],
-          "subjects": [
-            {
-              "name": "Sample Subject",
-              "slug": "sample-subject"
-            }
-          ]
+            "name": "SkillForge"
+          }
         },
         {
-          "id": 900202,
           "name": "Mock Staff Engineer Communication Skills",
-          "slug": "mock-staff-engineer-communication-skills",
-          "format": "course",
-          "credential": null,
-          "description": "Mock description for \"Mock Staff Engineer Communication Skills\". Placeholder copy used only so the fixture mirrors the real cache shape.",
-          "summary": "Mock summary for \"Mock Staff Engineer Communication Skills\".",
           "url": {
-            "course": "https://example.com/course/mock-staff-engineer-communication-skills",
             "go": "https://example.com/go/mock-staff-engineer-communication-skills"
           },
           "imageUrl": "https://example.com/img/courses/mock-staff-engineer-communication-skills.jpg",
           "instructors": "Instructor C",
           "level": "intermediate",
-          "available": true,
-          "availability": "Self-Paced",
-          "free": false,
-          "price": "Paid Course",
           "certificate": true,
           "effort": "5 hours",
           "rating": {
-            "classCentral": null,
             "provider": {
               "average": 4.5,
               "count": 812
             }
           },
-          "language": {
-            "name": "English",
-            "slug": "english"
-          },
           "provider": {
-            "name": "CourseHub",
-            "code": "coursehub",
-            "logo": {
-              "horizontal": "https://example.com/img/providers/coursehub-hz.png",
-              "square": "https://example.com/img/providers/coursehub-sq.png"
-            }
-          },
-          "institutions": [],
-          "subjects": [
-            {
-              "name": "Sample Subject",
-              "slug": "sample-subject"
-            }
-          ]
+            "name": "CourseHub"
+          }
         },
         {
-          "id": 900203,
           "name": "Mock Refactoring Legacy Systems",
-          "slug": "mock-refactoring-legacy-systems",
-          "format": "course",
-          "credential": null,
-          "description": "Mock description for \"Mock Refactoring Legacy Systems\". Placeholder copy used only so the fixture mirrors the real cache shape.",
-          "summary": "Mock summary for \"Mock Refactoring Legacy Systems\".",
           "url": {
-            "course": "https://example.com/course/mock-refactoring-legacy-systems",
             "go": "https://example.com/go/mock-refactoring-legacy-systems"
           },
           "imageUrl": "https://example.com/img/courses/mock-refactoring-legacy-systems.jpg",
           "instructors": "Instructor D",
           "level": "advanced",
-          "available": true,
-          "availability": "Self-Paced",
-          "free": false,
-          "price": "Paid Course",
           "certificate": true,
           "effort": "8 hours 45 minutes",
           "rating": {
-            "classCentral": null,
             "provider": {
               "average": 4.72,
               "count": 341
             }
           },
-          "language": {
-            "name": "English",
-            "slug": "english"
-          },
           "provider": {
-            "name": "OpenLearn",
-            "code": "openlearn",
-            "logo": {
-              "horizontal": "https://example.com/img/providers/openlearn-hz.png",
-              "square": "https://example.com/img/providers/openlearn-sq.png"
-            }
-          },
-          "institutions": [],
-          "subjects": [
-            {
-              "name": "Sample Subject",
-              "slug": "sample-subject"
-            }
-          ]
+            "name": "OpenLearn"
+          }
         }
       ],
       "subjects": [
         {
           "name": "Software Engineering",
-          "slug": "software-engineering",
-          "courseCount": 3100,
           "url": "https://example.com/subject/software-engineering"
         }
       ]
     },
     "66d4608b230dff016690584b": {
-      "contentHash": "mockhash66d4608b230dff016690584b00000000000000000000000000000000",
       "fetchedAt": "2026-01-01T00:00:00.000Z",
       "slug": "what-is-recursion",
       "title": "How Does Recursion Work? Explained with Code Examples",
       "courses": [
         {
-          "id": 900301,
           "name": "Mock Data Structures and Algorithms",
-          "slug": "mock-data-structures-and-algorithms",
-          "format": "course",
-          "credential": null,
-          "description": "Mock description for \"Mock Data Structures and Algorithms\". Placeholder copy used only so the fixture mirrors the real cache shape.",
-          "summary": "Mock summary for \"Mock Data Structures and Algorithms\".",
           "url": {
-            "course": "https://example.com/course/mock-data-structures-and-algorithms",
             "go": "https://example.com/go/mock-data-structures-and-algorithms"
           },
           "imageUrl": "https://example.com/img/courses/mock-data-structures-and-algorithms.jpg",
           "instructors": "Instructor B",
           "level": "beginner",
-          "available": true,
-          "availability": "Self-Paced",
-          "free": false,
-          "price": "Paid Course",
           "certificate": true,
           "effort": "30 hours",
           "rating": {
-            "classCentral": null,
             "provider": {
               "average": 4.6,
               "count": 15234
             }
           },
-          "language": {
-            "name": "English",
-            "slug": "english"
-          },
           "provider": {
-            "name": "CourseHub",
-            "code": "coursehub",
-            "logo": {
-              "horizontal": "https://example.com/img/providers/coursehub-hz.png",
-              "square": "https://example.com/img/providers/coursehub-sq.png"
-            }
-          },
-          "institutions": [],
-          "subjects": [
-            {
-              "name": "Sample Subject",
-              "slug": "sample-subject"
-            }
-          ]
+            "name": "CourseHub"
+          }
         },
         {
-          "id": 900302,
           "name": "Mock Recursion and Backtracking",
-          "slug": "mock-recursion-and-backtracking",
-          "format": "course",
-          "credential": null,
-          "description": "Mock description for \"Mock Recursion and Backtracking\". Placeholder copy used only so the fixture mirrors the real cache shape.",
-          "summary": "Mock summary for \"Mock Recursion and Backtracking\".",
           "url": {
-            "course": "https://example.com/course/mock-recursion-and-backtracking",
             "go": "https://example.com/go/mock-recursion-and-backtracking"
           },
           "imageUrl": "https://example.com/img/courses/mock-recursion-and-backtracking.jpg",
           "instructors": "Instructor E",
           "level": "intermediate",
-          "available": true,
-          "availability": "Self-Paced",
-          "free": false,
-          "price": "Paid Course",
           "certificate": false,
           "effort": "3 hours 15 minutes",
           "rating": {
-            "classCentral": null,
             "provider": {
               "average": 4.41,
               "count": 98
             }
           },
-          "language": {
-            "name": "English",
-            "slug": "english"
-          },
           "provider": {
-            "name": "BrightPath",
-            "code": "brightpath",
-            "logo": {
-              "horizontal": "https://example.com/img/providers/brightpath-hz.png",
-              "square": "https://example.com/img/providers/brightpath-sq.png"
-            }
-          },
-          "institutions": [],
-          "subjects": [
-            {
-              "name": "Sample Subject",
-              "slug": "sample-subject"
-            }
-          ]
+            "name": "BrightPath"
+          }
         }
       ],
       "subjects": []
