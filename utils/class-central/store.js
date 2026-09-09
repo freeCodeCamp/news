@@ -1,8 +1,4 @@
-import {
-  S3Client,
-  GetObjectCommand,
-  PutObjectCommand
-} from '@aws-sdk/client-s3';
+import { S3Client, GetObjectCommand } from '@aws-sdk/client-s3';
 
 import { config } from '../../config/index.js';
 
@@ -29,7 +25,9 @@ const getClient = () => {
   return client;
 };
 
-// Returns an empty cache if the object doesn't exist yet (first run)
+// The cache is fetched and written to object storage by a separate service;
+// the build only reads it here. Returns an empty cache if the object doesn't
+// exist yet (first run).
 export const loadCache = async () => {
   try {
     const res = await getClient().send(
@@ -45,16 +43,4 @@ export const loadCache = async () => {
     if (error.name === 'NoSuchKey') return { posts: {} };
     throw error;
   }
-};
-
-export const saveCache = async cache => {
-  await getClient().send(
-    new PutObjectCommand({
-      Bucket: SPACES_BUCKET,
-      Key: CACHE_KEY,
-      Body: JSON.stringify(cache),
-      ContentType: 'application/json',
-      ACL: 'private'
-    })
-  );
 };

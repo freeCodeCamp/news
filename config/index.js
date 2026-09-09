@@ -85,7 +85,6 @@ const {
   HASHNODE_API_URL: hashnodeAPIURL,
   CHAT_WEBHOOK_KEY: chatWebhookKey,
   CHAT_WEBHOOK_TOKEN: chatWebhookToken,
-  CLASS_CENTRAL_API_KEY: classCentralAPIKey,
   DO_OBJECT_STORAGE_KEY_ID: doObjectStorageKeyId,
   DO_OBJECT_STORAGE_SECRET: doObjectStorageSecret
 } = process.env;
@@ -177,11 +176,6 @@ export const config = {
     chatWebhookToken === 'chat_webhook_token_from_space_settings'
       ? ''
       : chatWebhookToken,
-  classCentralAPIKey:
-    !classCentralAPIKey ||
-    classCentralAPIKey === 'api_key_from_class_central_dashboard'
-      ? ''
-      : classCentralAPIKey,
   doObjectStorageKeyId:
     !doObjectStorageKeyId || doObjectStorageKeyId === 'key_id_from_do_dashboard'
       ? ''
