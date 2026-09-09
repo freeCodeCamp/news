@@ -1213,6 +1213,12 @@ Usage (In Ghost editor):
   border-left: var(--dark-blue) 3px solid;
 }
 
+/* Keep blockquote children from stretching blockquote elements
+while making sure images don't stretch */
+.post-full-content blockquote > * {
+  max-width: 100%;
+}
+
 .post-full-content blockquote p {
   margin: 0 0 1em;
   color: inherit;
