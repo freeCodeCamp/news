@@ -264,4 +264,50 @@ describe('modifyHTMLContent', () => {
       expect(headingEl.id).toBe('heading-bold-and-emphasized-text');
     });
   });
+
+  describe('Body images', () => {
+    // A URL that fails to resolve so getImageDimensions falls back without a
+    // network round trip.
+    const src = 'http://127.0.0.1:1/image.png';
+
+    it('strips the inline margin Hashnode adds, keeping other inline styles', async () => {
+      const modifiedHTML = await modifyHTMLContent({
+        postContent: `<img src="${src}" alt="A chart" style="width: 300px; margin: 0 auto">`,
+        postTitle: 'Test Post',
+        source: 'Hashnode'
+      });
+      const dom = new JSDOM(modifiedHTML);
+      const imageEl = dom.window.document.querySelector('img');
+
+      expect(imageEl.style.margin).toBe('');
+      expect(imageEl.style.marginLeft).toBe('');
+      expect(imageEl.style.width).toBe('300px');
+    });
+
+    it('drops the style attribute entirely when only an inline margin was set', async () => {
+      const modifiedHTML = await modifyHTMLContent({
+        postContent: `<img src="${src}" alt="A chart" style="display:block;margin:0 auto">`,
+        postTitle: 'Test Post',
+        source: 'Hashnode'
+      });
+      const dom = new JSDOM(modifiedHTML);
+      const imageEl = dom.window.document.querySelector('img');
+
+      expect(imageEl.style.margin).toBe('');
+      expect(imageEl.getAttribute('style')).toBe('display: block;');
+    });
+
+    it('is a no-op for images without an inline margin (e.g. Ghost)', async () => {
+      const modifiedHTML = await modifyHTMLContent({
+        postContent: `<figure class="kg-card kg-image-card"><img src="${src}" alt="A chart"></figure>`,
+        postTitle: 'Test Post',
+        source: 'Ghost'
+      });
+      const dom = new JSDOM(modifiedHTML);
+      const imageEl = dom.window.document.querySelector('img');
+
+      expect(imageEl.hasAttribute('style')).toBe(false);
+      expect(imageEl.closest('figure').classList).toContain('kg-image-card');
+    });
+  });
 });

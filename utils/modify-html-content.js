@@ -76,6 +76,19 @@ export const modifyHTMLContent = async ({ postContent, postTitle, source }) => {
       if (!image.alt) setDefaultAlt(image);
 
       image.setAttribute('loading', 'lazy');
+
+      // Strip inline margins from Hashnode so the stylesheet controls image spacing
+      // (Ghost images have no inline margin)
+      for (const property of [
+        'margin',
+        'margin-top',
+        'margin-right',
+        'margin-bottom',
+        'margin-left'
+      ]) {
+        image.style.removeProperty(property);
+      }
+      if (!image.getAttribute('style')?.trim()) image.removeAttribute('style');
     }),
 
     iframes.map(async iframe => {
