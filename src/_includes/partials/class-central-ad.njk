@@ -27,7 +27,7 @@
     >
         {% if course.imageUrl %}
             <span class="partner-courses-thumbnail">
-                <img src="{{ course.imageUrl }}" alt="" loading="lazy">
+                <img src="{{ course.imageUrl }}" alt="" loading="lazy" decoding="async">
             </span>
         {% endif %}
         <span class="partner-courses-provider">On {{ course.provider.name }}</span>
@@ -72,10 +72,8 @@
 {% macro _courseList(ccData) %}
     {% set topSubject = ccData.subjects[0] %}
     <ul class="partner-courses-list" role="list">
-        {% for course in ccData.courses %}
-            {% if loop.index0 < 4 %}
-                <li>{{ _courseCard(course) }}</li>
-            {% endif %}
+        {% for course in ccData.courses.slice(0, 4) %}
+            <li>{{ _courseCard(course) }}</li>
         {% endfor %}
     </ul>
     {% if topSubject %}

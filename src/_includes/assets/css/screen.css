@@ -2875,6 +2875,7 @@ a.banner:hover span {
   margin-bottom: 4px;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
+  line-clamp: 3;
   font-size: 1.6rem;
   font-weight: 700;
   line-height: 1.3;
@@ -3005,6 +3006,7 @@ a.banner:hover span {
 
 .partner-courses-banner .partner-courses-title {
   -webkit-line-clamp: 2;
+  line-clamp: 2;
 }
 
 /* Bottom-align the CTA so buttons line up across a row */
