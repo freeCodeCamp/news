@@ -2734,12 +2734,7 @@ a.banner:hover span {
   visibility: hidden;
 }
 
-/* Adjust image and video widths when ads are enabled */
-/* Ghost editor images */
-.ad-layout .post-full-content .kg-image-card img,
-/* Markdown images */
-.ad-layout .post-full-content p img,
-/* HTML video */
+.ad-layout .post-full-content img,
 .ad-layout .post-full-content video {
   max-width: 100%;
 }
