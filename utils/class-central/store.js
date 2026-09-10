@@ -25,9 +25,9 @@ const getClient = () => {
   return client;
 };
 
-// The cache is fetched and written to object storage by a separate service;
-// the build only reads it here. Returns an empty cache if the object doesn't
-// exist yet (first run).
+// The cache is fetched and written to object storage by a separate service,
+// and the build only reads it here. Returns an empty cache if the object doesn't
+// exist yet (first run)
 export const loadCache = async () => {
   try {
     const res = await getClient().send(
