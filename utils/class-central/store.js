@@ -40,7 +40,8 @@ export const loadCache = async () => {
 
     return JSON.parse(body);
   } catch (error) {
-    if (error.name === 'NoSuchKey') return { posts: {} };
+    if (error.name === 'NoSuchKey')
+      return { posts: {}, courses: {}, subjects: {} };
     throw error;
   }
 };

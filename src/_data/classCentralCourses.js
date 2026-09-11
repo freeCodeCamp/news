@@ -11,20 +11,24 @@ import { config } from '../../config/index.js';
 
 const { currentLocale_i18n, eleventyEnv, doObjectStorageKeyId } = config;
 
-// Add the display-ready fields the sponsored course ad template needs, without
-// touching the raw cache shape.
-const withDisplayFields = posts =>
+// Posts reference courses by id and subjects by slug to keep the cache small.
+// Look them up here and add the display-ready fields the sponsored course ad templates.
+const resolvePosts = ({ posts, courses, subjects }) =>
   Object.fromEntries(
     Object.entries(posts).map(([id, entry]) => [
       id,
       {
         ...entry,
-        courses: entry.courses.map(course => ({
-          ...course,
-          effortShort: abbreviateEffort(course.effort),
-          instructorName: cleanInstructor(course.instructors),
-          ratingCount: formatCount(course.rating?.provider?.count)
-        }))
+        courses: entry.courseIds.map(courseId => {
+          const course = courses[courseId];
+          return {
+            ...course,
+            effortShort: abbreviateEffort(course.effort),
+            instructorName: cleanInstructor(course.instructors),
+            ratingCount: formatCount(course.rating?.provider?.count)
+          };
+        }),
+        subjects: entry.subjectSlugs.map(slug => subjects[slug])
       }
     ])
   );
@@ -42,14 +46,14 @@ export default async () => {
         '../../cypress/fixtures/mock-class-central-courses.json'
       )
     );
-    return withDisplayFields(cache.posts);
+    return resolvePosts(cache);
   }
 
   if (!doObjectStorageKeyId) return {};
 
   try {
     const cache = await loadCache();
-    return withDisplayFields(cache.posts);
+    return resolvePosts(cache);
   } catch (error) {
     console.warn(
       `Class Central course cache unavailable, sponsored courses will not be shown this build: ${error.message}`
