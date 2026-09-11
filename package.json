@@ -69,6 +69,7 @@
   "devDependencies": {
     "@11ty/eleventy": "3.1.2",
     "@11ty/eleventy-plugin-rss": "2.0.4",
+    "@aws-sdk/client-s3": "3.1124.0",
     "@eslint/eslintrc": "3.3.5",
     "@eslint/js": "10.0.1",
     "@fortawesome/free-solid-svg-icons": "7.3.0",
