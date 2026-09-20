@@ -24,8 +24,8 @@ importers:
         specifier: 7.3.0
         version: 7.3.0
       '@tryghost/content-api':
-        specifier: 1.12.2
-        version: 1.12.2
+        specifier: 1.12.11
+        version: 1.12.11
       '@tryghost/helpers':
         specifier: 1.1.99
         version: 1.1.99
@@ -845,8 +845,8 @@ packages:
   '@standard-schema/spec@1.1.0':
     resolution: {integrity: sha512-l2aFy5jALhniG5HgqrD6jXLi/rUWrKvqN/qJx6yoJsgKhblVd+iqqU4RCXavm/jPityDo5TCvKMnpjKnOriy0w==}
 
-  '@tryghost/content-api@1.12.2':
-    resolution: {integrity: sha512-KcheOLdF0gnt6G3l1khGSP2Dp6FTRoYhiiUtV42O4TLopkL+qhD5HEAbzfbba1Pxi9iKQXRflgh2tZkejMgR7w==}
+  '@tryghost/content-api@1.12.11':
+    resolution: {integrity: sha512-KH4hMmkhNsY5elmsdStiwkYhNrgsmmFwdwEcFosgYmKhR4DqhB3uqxhc0tI6Jj1yDLOZdfSzjRuqHKha1hyQhA==}
 
   '@tryghost/helpers@1.1.99':
     resolution: {integrity: sha512-+sZf7uT5YvdSoLqppQ+QqDl2Y6SX/NSc0/rjHwlWIY+u1UjMRbitCZv1qB5/mrrNxfWNEC1nISAmAZ3yuQVMYA==}
@@ -1136,8 +1136,8 @@ packages:
   aws4@1.13.2:
     resolution: {integrity: sha512-lHe62zvbTB5eEABUVi/AwVh0ZKY9rMMDhmm+eeyuuUQbQ3+J+fONVQOZyj+DdrvD4BY33uYniyRJ4UJIaSKAfw==}
 
-  axios@1.18.1:
-    resolution: {integrity: sha512-3nTvFlvpn9Zu/RkHUqtc7/+al4UpRW5az71ap5zccp6e8RAYEzhMTecX8Dz1wWDYrPpUoB1HAQEGEAEvUr7S9g==}
+  axios@1.20.0:
+    resolution: {integrity: sha512-r8aOh8j9cGKpgQAqpzrUHnSIc6a59Y3Xf/cv8sy1DrHCkZHzQGEuoq1tARk6qSyDdtQGSDgpb9kFlruzPvrgwg==}
 
   babel-jest@30.3.0:
     resolution: {integrity: sha512-gRpauEU2KRrCox5Z296aeVHR4jQ98BCnu0IO332D/xpHNOsIH/bgSRk9k6GbKIbBw8vFeN6ctuu6tV8WOyVfYQ==}
@@ -4294,9 +4294,9 @@ snapshots:
 
   '@standard-schema/spec@1.1.0': {}
 
-  '@tryghost/content-api@1.12.2':
+  '@tryghost/content-api@1.12.11':
     dependencies:
-      axios: 1.18.1
+      axios: 1.20.0
     transitivePeerDependencies:
       - debug
       - supports-color
@@ -4544,7 +4544,7 @@ snapshots:
 
   aws4@1.13.2: {}
 
-  axios@1.18.1:
+  axios@1.20.0:
     dependencies:
       follow-redirects: 1.16.0
       form-data: 4.0.6
