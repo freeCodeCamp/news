@@ -2791,8 +2791,9 @@ a.banner:hover span {
   padding: 10px 14px 8px;
 }
 
-/* Divide the disclosure row from the first course card in the sidebar rail */
-.partner-courses-rail .partner-courses-disclosure {
+/* Divide the disclosure row from the course cards below it */
+.partner-courses-rail .partner-courses-disclosure,
+.partner-courses-banner .partner-courses-disclosure {
   padding-bottom: 10px;
   border-bottom: 1px solid var(--quaternary-background);
 }
