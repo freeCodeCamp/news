@@ -8,12 +8,20 @@
                                          ad slot
 #}
 
-{# Advertisement / source disclosure row #}
+{# Logo / advertisement disclosure row #}
 {% macro _disclosure() %}
     {% set adLabel %}{% t 'ad-text' %}{% endset %}
     <div class="partner-courses-disclosure">
+        <a
+            class="partner-courses-logo-link"
+            href="https://www.classcentral.com/"
+            rel="sponsored noopener noreferrer"
+            target="_blank"
+        >
+            {% include "partials/icons/class-central-logo.njk" %}
+            <span class="sr-only">(opens in a new tab)</span>
+        </a>
         <span class="partner-courses-disclosure-label">{{ adLabel | upper }}</span>
-        <span class="partner-courses-disclosure-source">Class Central</span>
     </div>
 {% endmacro %}
 

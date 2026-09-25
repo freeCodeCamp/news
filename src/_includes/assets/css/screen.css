@@ -2797,17 +2797,29 @@ a.banner:hover span {
   border-bottom: 1px solid var(--quaternary-background);
 }
 
-.partner-courses-disclosure-label {
-  font-size: 1.1rem;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  color: var(--quaternary-color);
+.partner-courses-logo-link {
+  display: inline-flex;
+  flex-shrink: 0;
 }
 
-.partner-courses-disclosure-source {
+.partner-courses-logo-link:focus-visible {
+  outline: 2px solid var(--link-color);
+  outline-offset: 2px;
+}
+
+.partner-courses-logo {
+  color: #0e203a; /* Class Central navy */
+}
+
+html.dark-mode .partner-courses-logo {
+  color: var(--gray00);
+}
+
+.partner-courses-disclosure-label {
   font-size: 1.1rem;
-  font-weight: 700;
-  color: var(--secondary-color);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--quaternary-color);
 }
 
 .partner-courses .partner-courses-course,
