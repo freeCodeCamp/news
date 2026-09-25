@@ -3011,6 +3011,8 @@ html.dark-mode .partner-courses-logo {
   display: flex;
   flex: 1;
   flex-direction: column;
+  /* Fix image and card dimensions for courses with long instructor lists */
+  min-width: 0;
 }
 
 .partner-courses-banner .partner-courses-thumbnail {
