@@ -1,7 +1,7 @@
 {#
     Class Central sponsored course recommendations.
 
-    Two public macros for vertical ads in the sidebar and bottom banner ads:
+    Two macros for vertical ads in the sidebar and bottom banner ads:
 
       classCentralCourseAd(ccData)     - narrow vertical rail, top of the sidebar
       classCentralCourseBanner(ccData) - wide horizontal band, above the bottom
@@ -9,7 +9,7 @@
 #}
 
 {# Logo / advertisement disclosure row #}
-{% macro _disclosure() %}
+{% macro disclosure() %}
     {% set adLabel %}{% t 'ad-text' %}{% endset %}
     <div class="partner-courses-disclosure">
         <a
@@ -26,7 +26,7 @@
 {% endmacro %}
 
 {# Single course card for both layouts #}
-{% macro _courseCard(course) %}
+{% macro courseCard(course) %}
     <a
         class="partner-courses-course"
         href="{{ course.url.go }}"
@@ -77,11 +77,11 @@
 {% endmacro %}
 
 {# Up to four course cards in a list and footer link #}
-{% macro _courseList(ccData) %}
+{% macro courseList(ccData) %}
     {% set topSubject = ccData.subjects[0] %}
     <ul class="partner-courses-list" role="list">
         {% for course in ccData.courses.slice(0, 4) %}
-            <li>{{ _courseCard(course) }}</li>
+            <li>{{ courseCard(course) }}</li>
         {% endfor %}
     </ul>
     {% if topSubject %}
@@ -95,7 +95,7 @@
 {% endmacro %}
 
 {# Outer container for both vertical and horizontal banner ad types #}
-{% macro _shell(ccData, variant) %}
+{% macro shell(ccData, variant) %}
     <section
         class="partner-courses partner-courses-{{ variant }}"
         aria-labelledby="partner-courses-label-{{ variant }}"
@@ -103,11 +103,11 @@
     >
         <p class="partner-courses-label" id="partner-courses-label-{{ variant }}">Recommended courses from our partners</p>
         <div class="partner-courses-card">
-            {{ _disclosure() }}
-            {{ _courseList(ccData) }}
+            {{ disclosure() }}
+            {{ courseList(ccData) }}
         </div>
     </section>
 {% endmacro %}
 
-{% macro classCentralCourseAd(ccData) %}{{ _shell(ccData, "rail") }}{% endmacro %}
-{% macro classCentralCourseBanner(ccData) %}{{ _shell(ccData, "banner") }}{% endmacro %}
+{% macro classCentralCourseAd(ccData) %}{{ shell(ccData, "rail") }}{% endmacro %}
+{% macro classCentralCourseBanner(ccData) %}{{ shell(ccData, "banner") }}{% endmacro %}
