@@ -46,6 +46,9 @@ jobs:
       HASHNODE_API_URL: ${{ secrets.HASHNODE_API_URL }}
       ENGLISH_HASHNODE_HOST: ${{ secrets.ENGLISH_HASHNODE_HOST }}
 
+      DO_OBJECT_STORAGE_KEY_ID: ${{ secrets.DO_OBJECT_STORAGE_KEY_ID }}
+      DO_OBJECT_STORAGE_SECRET: ${{ secrets.DO_OBJECT_STORAGE_SECRET }}
+
       POSTS_PER_PAGE: ${{ secrets.POSTS_PER_PAGE }}
 
       SITE_DOMAIN: freecodecamp.${{ matrix.site_tlds }}
