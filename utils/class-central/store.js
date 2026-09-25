@@ -15,6 +15,11 @@ const getClient = () => {
       endpoint: `https://${SPACES_REGION}.digitaloceanspaces.com`,
       region: 'us-east-1',
       forcePathStyle: false,
+      requestHandler: {
+        connectionTimeout: 5_000,
+        requestTimeout: 10_000,
+        throwOnRequestTimeout: true
+      },
       credentials: {
         accessKeyId: doObjectStorageKeyId,
         secretAccessKey: doObjectStorageSecret
