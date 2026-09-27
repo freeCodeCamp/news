@@ -84,7 +84,9 @@ const {
   GOOGLE_ADSENSE_DATA_AD_SLOT: googleAdsenseDataAdSlot,
   HASHNODE_API_URL: hashnodeAPIURL,
   CHAT_WEBHOOK_KEY: chatWebhookKey,
-  CHAT_WEBHOOK_TOKEN: chatWebhookToken
+  CHAT_WEBHOOK_TOKEN: chatWebhookToken,
+  DO_OBJECT_STORAGE_KEY_ID: doObjectStorageKeyId,
+  DO_OBJECT_STORAGE_SECRET: doObjectStorageSecret
 } = process.env;
 
 // Validations
@@ -173,5 +175,14 @@ export const config = {
     !chatWebhookToken ||
     chatWebhookToken === 'chat_webhook_token_from_space_settings'
       ? ''
-      : chatWebhookToken
+      : chatWebhookToken,
+  doObjectStorageKeyId:
+    !doObjectStorageKeyId || doObjectStorageKeyId === 'key_id_from_do_dashboard'
+      ? ''
+      : doObjectStorageKeyId,
+  doObjectStorageSecret:
+    !doObjectStorageSecret ||
+    doObjectStorageSecret === 'secret_from_do_dashboard'
+      ? ''
+      : doObjectStorageSecret
 };
