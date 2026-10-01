@@ -157,22 +157,10 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - name: Post the failure to Google Chat
-        env:
-          GOOGLE_CHAT_WEBHOOK: ${{ secrets.GOOGLE_CHAT_WEBHOOK }}
-          TEXT: |
-            🔴 news · ${{ github.workflow }} · FAILED
-
-            build   ${{ needs.build.result }}
-            deploy  ${{ needs.deploy.result }}
-
-            ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
-        run: |
-          if [ -z "$GOOGLE_CHAT_WEBHOOK" ]; then
-            echo "::warning::GOOGLE_CHAT_WEBHOOK is not set, the failure was not posted"
-            exit 0
-          fi
-          jq -n --arg text "$TEXT" '{text: $text}' |
-            curl -fsS --max-time 30 --retry 2 -X POST \
-              -H 'Content-Type: application/json; charset=UTF-8' \
-              --data-binary @- "$GOOGLE_CHAT_WEBHOOK" >/dev/null ||
-            echo "::warning::Google Chat rejected the failure post"
+        uses: freeCodeCamp/infra/.github/actions/notify-chat@766f6e4b9e16e91f4df1a7fe68cc60d6808e278d
+        with:
+          webhook: ${{ secrets.GOOGLE_CHAT_WEBHOOK }}
+          status: fail
+          source: news
+          subject: ${{ github.workflow }}
+          summary: 'FAILED: build ${{ needs.build.result }}, deploy ${{ needs.deploy.result }}'
