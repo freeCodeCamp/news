@@ -98,12 +98,12 @@ jobs:
       - name: Create a tagname
         id: tagname
         run: |
-          echo "tagname=$(git rev-parse --short HEAD)-$(date +%Y%m%d)-$(date +%H%M)" >> $GITHUB_ENV
+          echo "tagname=$(git rev-parse --short HEAD)-$(date +%Y%m%d)-$(date +%H%M)" >> "$GITHUB_ENV"
 
       - name: Build & Tag Images
         run: |
           docker build . \
-          --tag registry.digitalocean.com/${{ secrets.DOCR_NAME }}/${{ matrix.site_tlds }}/news-${{ matrix.languages }}:$tagname \
+          --tag registry.digitalocean.com/${{ secrets.DOCR_NAME }}/${{ matrix.site_tlds }}/news-${{ matrix.languages }}:"$tagname" \
           --tag registry.digitalocean.com/${{ secrets.DOCR_NAME }}/${{ matrix.site_tlds }}/news-${{ matrix.languages }}:latest \
           --build-arg BUILD_LANGUAGE=${{ matrix.languages }} \
           --file docker/Dockerfile
@@ -118,7 +118,7 @@ jobs:
 
       - name: Push image to DigitalOcean Container Registry
         run: |
-          docker push registry.digitalocean.com/${{ secrets.DOCR_NAME }}/${{ matrix.site_tlds }}/news-${{ matrix.languages }}:$tagname
+          docker push registry.digitalocean.com/${{ secrets.DOCR_NAME }}/${{ matrix.site_tlds }}/news-${{ matrix.languages }}:"$tagname"
           docker push registry.digitalocean.com/${{ secrets.DOCR_NAME }}/${{ matrix.site_tlds }}/news-${{ matrix.languages }}:latest
 
       # - name: Clean up Self-hosted setup
