@@ -102,8 +102,8 @@ importers:
         specifier: 18.2.3
         version: 18.2.3
       js-yaml:
-        specifier: 5.2.0
-        version: 5.2.0
+        specifier: 5.4.2
+        version: 5.4.2
       jsdom:
         specifier: 26.1.0
         version: 26.1.0
@@ -932,6 +932,7 @@ packages:
   '@smithy/node-http-handler@4.12.0':
     resolution: {integrity: sha512-0mq1pHadfyXCYCqm2cNpbjNIT+fbaUpNxewZb/YNr2L0IrEVMOb8gM/Fl4K6XvHCW3uSNDFwPl/+iKm0bx9jYg==}
     engines: {node: '>=18.0.0'}
+    deprecated: Depreacted due to a memory leak issue https://github.com/smithy-lang/smithy-typescript/issues/2258
 
   '@smithy/signature-v4@5.7.3':
     resolution: {integrity: sha512-7ImGm+FkHRLcBaRttIAMZ6bzJZWb2cJGoYjq46F2UjycujWzrL9GEN9h4w7eQyXJYnltrUhxbbieBAIRrdqpow==}
@@ -2443,8 +2444,8 @@ packages:
     resolution: {integrity: sha512-1td788aAnnZ5qs7V2QIRl1owjtYpbKt749Y3xauqQgwIIGF/xXWz1wMTEBx5O3LK3lXLVuqXPdPxj2BoFHaW9Q==}
     hasBin: true
 
-  js-yaml@5.2.0:
-    resolution: {integrity: sha512-YeLUMlvR4Ou1B119LIaM0r65JvbOBooJDc9yEu0dClb/uSC5P4FrLU8OCCz/HXWvtPoIrR0dRzABTjo1sTN9Bw==}
+  js-yaml@5.4.2:
+    resolution: {integrity: sha512-m+aqu+LwO1O6sIopafj8HUVl5aawITwZQe/yHpMCKjaWBaA/d07B/QdMb3529REftiU+RMMHL3Vlsw3hON7vWg==}
     hasBin: true
 
   jsbn@0.1.1:
@@ -6280,7 +6281,7 @@ snapshots:
     dependencies:
       argparse: 2.0.1
 
-  js-yaml@5.2.0:
+  js-yaml@5.4.2:
     dependencies:
       argparse: 2.0.1
 
