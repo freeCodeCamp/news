@@ -157,7 +157,7 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - name: Post the failure to Google Chat
-        uses: freeCodeCamp/infra/.github/actions/notify-chat@6b8b1b2a2fa5f769701aaf1771ee2ab931c534e6
+        uses: freeCodeCamp/infra/.github/actions/notify-chat@027d913d6f38ea37cfdac93e31805a274dd35b3c
         with:
           webhook: ${{ secrets.GOOGLE_CHAT_WEBHOOK }}
           status: fail
