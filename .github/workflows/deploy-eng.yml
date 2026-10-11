@@ -152,15 +152,51 @@ jobs:
   notify:
     name: Notify
     needs: [build, deploy]
-    if: ${{ failure() }}
-    permissions: {}
+    if: ${{ always() }}
+    permissions:
+      actions: read
     runs-on: ubuntu-24.04
     steps:
-      - name: Post the failure to Google Chat
+      - name: Find the result to report
+        id: report
+        env:
+          GH_TOKEN: ${{ github.token }}
+          BUILD: ${{ needs.build.result }}
+          DEPLOY: ${{ needs.deploy.result }}
+        run: |
+          bad='failure|cancelled|timed_out|startup_failure'
+          if [ "$BUILD" = success ] && [ "$DEPLOY" = success ]; then
+            if [ "$GITHUB_RUN_ATTEMPT" -gt 1 ]; then
+              last=$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID/attempts/$((GITHUB_RUN_ATTEMPT - 1))" \
+                --jq '.conclusion // ""' || true)
+            else
+              last=$(gh api "repos/$GITHUB_REPOSITORY/actions/workflows/deploy-eng.yml/runs?branch=$GITHUB_REF_NAME&status=completed&per_page=1" \
+                --jq '.workflow_runs[0].conclusion // ""' || true)
+            fi
+            if printf '%s\n' "$last" | grep -Eqx "$bad"; then
+              echo 'status=ok' >>"$GITHUB_OUTPUT"
+              echo "summary=recovered: build and deploy succeeded, the last run is $last" >>"$GITHUB_OUTPUT"
+            fi
+            exit 0
+          fi
+          details=$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID/attempts/$GITHUB_RUN_ATTEMPT/jobs" |
+            jq -r --arg bad "^($bad)\$" '.jobs[] | select((.conclusion // "") | test($bad))
+              | "\(.name): \([.steps[] | select((.conclusion // "") | test($bad)) | .name] | join(", "))"' || true)
+          {
+            echo 'status=fail'
+            echo "summary=FAILED: build $BUILD, deploy $DEPLOY"
+            echo 'details<<EOF'
+            printf '%s\n' "$details"
+            echo 'EOF'
+          } >>"$GITHUB_OUTPUT"
+
+      - name: Post to Google Chat
+        if: steps.report.outputs.status != ''
         uses: freeCodeCamp/infra/.github/actions/notify-chat@027d913d6f38ea37cfdac93e31805a274dd35b3c
         with:
           webhook: ${{ secrets.GOOGLE_CHAT_WEBHOOK }}
-          status: fail
+          status: ${{ steps.report.outputs.status }}
           source: news
           subject: ${{ github.workflow }}
-          summary: 'FAILED: build ${{ needs.build.result }}, deploy ${{ needs.deploy.result }}'
+          summary: ${{ steps.report.outputs.summary }}
+          details: ${{ steps.report.outputs.details }}
