@@ -1,7 +1,18 @@
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     var sidebar = document.querySelector('.sidebar');
+    var postContent = document.querySelector('.post-content');
     var isSideBarDisplayed = window.getComputedStyle(sidebar).display !== 'none';
+
+    // Cap the sidebar height so it can never render taller than the main content
+    function capSidebarHeight() {
+        if (!isSideBarDisplayed || !postContent) return;
+        sidebar.style.maxHeight = postContent.offsetHeight + 'px';
+        sidebar.style.overflow = 'hidden';
+    }
+    capSidebarHeight();
+    window.addEventListener('load', capSidebarHeight);
+
     function prepareAdSlot(elementId) {
         // Get the element by ID
         const targetElement = document.getElementById(elementId);
@@ -60,9 +71,16 @@ document.addEventListener('DOMContentLoaded', function() {
             var sidebarHeight = sidebar.offsetHeight;
             var adTextSideBarHeight = 0;
             var sideBarAdContainert = 600 + 17;
-        
+
+            // Since the sidebar contains content from multiple sources,
+            // account for its height so ads can fill leftover space
+            var existingContentHeight = 0;
+            for (var j = 0; j < sidebar.children.length; j++) {
+                existingContentHeight += sidebar.children[j].offsetHeight;
+            }
+
             var styles = window.getComputedStyle(sidebar);
-            var avaiableSideAdSpace = sidebarHeight - adTextSideBarHeight - parseFloat(styles.paddingTop) - parseFloat(styles.paddingBottom);
+            var avaiableSideAdSpace = sidebarHeight - adTextSideBarHeight - existingContentHeight - parseFloat(styles.paddingTop) - parseFloat(styles.paddingBottom);
             var numSideElements = Math.floor(avaiableSideAdSpace / sideBarAdContainert);
             for (var i = 0; i < numSideElements; i++) {
                 // container element
