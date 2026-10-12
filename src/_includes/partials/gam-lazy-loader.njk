@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if(isSideBarDisplayed){
             var sidebarHeight = sidebar.offsetHeight;
             var adTextSideBarHeight = 0;
-            var sideBarAdContainert = 600 + 17;
+            var sideBarAdContainer = 600 + 17;
 
             // Since the sidebar contains content from multiple sources,
             // account for its height so ads can fill leftover space
@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             var styles = window.getComputedStyle(sidebar);
             var avaiableSideAdSpace = sidebarHeight - adTextSideBarHeight - existingContentHeight - parseFloat(styles.paddingTop) - parseFloat(styles.paddingBottom);
-            var numSideElements = Math.floor(avaiableSideAdSpace / sideBarAdContainert);
+            var numSideElements = Math.floor(avaiableSideAdSpace / sideBarAdContainer);
             for (var i = 0; i < numSideElements; i++) {
                 // container element
                 var containerElement = document.createElement('div');
