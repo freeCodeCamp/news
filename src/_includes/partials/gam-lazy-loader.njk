@@ -110,7 +110,9 @@ document.addEventListener('DOMContentLoaded', function() {
         googletag.defineSlot('/23075930536/post-bottom', ['fluid'], 'gam-ad-bottom').addService(googletag.pubads());
 
         // Enable lazy loading with default settings.
-        googletag.pubads().enableLazyLoad();
+        googletag.setConfig({
+            lazyLoad: {},
+        });
 
         googletag.pubads().addEventListener("slotRequested", (event) => {
             console.log(`Slot ${event.slot.getSlotElementId()} fetched`);
