@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if(isSideBarDisplayed){
             var sidebarHeight = sidebar.offsetHeight;
             var adTextSideBarHeight = 0;
-            var sideBarAdContainert = 600 + 17;
+            var sideBarAdContainer = 600 + 17;
 
             // Since the sidebar contains content from multiple sources,
             // account for its height so ads can fill leftover space
@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             var styles = window.getComputedStyle(sidebar);
             var avaiableSideAdSpace = sidebarHeight - adTextSideBarHeight - existingContentHeight - parseFloat(styles.paddingTop) - parseFloat(styles.paddingBottom);
-            var numSideElements = Math.floor(avaiableSideAdSpace / sideBarAdContainert);
+            var numSideElements = Math.floor(avaiableSideAdSpace / sideBarAdContainer);
             for (var i = 0; i < numSideElements; i++) {
                 // container element
                 var containerElement = document.createElement('div');
@@ -106,11 +106,16 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
 
-        // Define bottom ad
-        googletag.defineSlot('/23075930536/post-bottom', ['fluid'], 'gam-ad-bottom').addService(googletag.pubads());
+        // Define the bottom ad when it should exist (no Class Central banner)
+        var hasBottomAd = !!document.getElementById('gam-ad-bottom');
+        if (hasBottomAd) {
+            googletag.defineSlot('/23075930536/post-bottom', ['fluid'], 'gam-ad-bottom').addService(googletag.pubads());
+        }
 
         // Enable lazy loading with default settings.
-        googletag.pubads().enableLazyLoad();
+        googletag.setConfig({
+            lazyLoad: {},
+        });
 
         googletag.pubads().addEventListener("slotRequested", (event) => {
             console.log(`Slot ${event.slot.getSlotElementId()} fetched`);
@@ -125,10 +130,12 @@ document.addEventListener('DOMContentLoaded', function() {
         googletag.pubads().enableSingleRequest();
         googletag.enableServices();
 
-
-        // Trigger lazy loading
-        googletag.display('gam-ad-bottom');
-
+        // Since SRA is enabled, call display() on the first ad slot to lazily load
+        // all ads on the page
+        var slots = googletag.pubads().getSlots();
+        if (slots.length) {
+            googletag.display(slots[0]);
+        }
     });
 });
 </script>
