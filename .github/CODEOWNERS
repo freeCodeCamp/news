@@ -13,21 +13,11 @@
 
 * @freecodecamp/dev-team
 
-# --- Owned by none (negate rule above) ---
-
-package.json
-package-lock.json
-
 # -------------------------------------------------
 # All files in the root are owned by dev team
 # -------------------------------------------------
 
 /* @freecodecamp/dev-team
-
-# --- Owned by none (negate rule above) ---
-
-/package.json
-/package-lock.json
 
 # -------------------------------------------------
 # Exception for i18n PRs
@@ -40,3 +30,6 @@ package-lock.json
 # doesn't support negation?
 # -------------------------------------------------
 /config/i18n/locales/english/*.json @freecodecamp/dev-team
+
+package.json @freecodecamp/package-approvers
+pnpm-lock.yaml @freecodecamp/package-approvers
