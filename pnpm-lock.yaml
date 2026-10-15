@@ -72,8 +72,8 @@ importers:
         specifier: 4.2.0
         version: 4.2.0
       globals:
-        specifier: 17.7.0
-        version: 17.7.0
+        specifier: 17.13.0
+        version: 17.13.0
       graceful-fs:
         specifier: 4.2.11
         version: 4.2.11
@@ -2005,8 +2005,8 @@ packages:
     resolution: {integrity: sha512-oahGvuMGQlPw/ivIYBjVSrWAfWLBeku5tpPE2fOPLi+WHffIWbuh2tCjhyQhTBPMf5E9jDEH4FOmTYgYwbKwtQ==}
     engines: {node: '>=18'}
 
-  globals@17.7.0:
-    resolution: {integrity: sha512-Czmyns5dUsq4seFBR/Kdydhmo8y9kC79hiSkPn0YcGtNnYWnrgt0vjrSjx9tspoDGWm2CMarffRuLjM4xUz8xg==}
+  globals@17.13.0:
+    resolution: {integrity: sha512-RwMTC61u7hrG3ZJMkZQOK4JLJrKS8QtoTii63EmWvFXHqycY9FObBJQCbsLxSO8kjKhWE5kV1GC+Vb1g3RI0Zg==}
     engines: {node: '>=18'}
 
   gopd@1.2.0:
@@ -5323,7 +5323,7 @@ snapshots:
   eslint-plugin-cypress@6.4.2(eslint@10.6.0):
     dependencies:
       eslint: 10.6.0
-      globals: 17.7.0
+      globals: 17.13.0
 
   eslint-scope@9.1.2:
     dependencies:
@@ -5670,7 +5670,7 @@ snapshots:
 
   globals@14.0.0: {}
 
-  globals@17.7.0: {}
+  globals@17.13.0: {}
 
   gopd@1.2.0: {}
 
