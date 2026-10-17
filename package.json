@@ -93,7 +93,7 @@
     "graphql-request": "7.4.0",
     "husky": "9.1.7",
     "i18next": "25.10.10",
-    "i18next-fs-backend": "2.6.6",
+    "i18next-fs-backend": "2.6.8",
     "jest": "30.5.2",
     "jest-environment-jsdom": "30.5.2",
     "jest-json-schema-extended": "1.0.1",
