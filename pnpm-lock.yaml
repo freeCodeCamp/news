@@ -27,8 +27,8 @@ importers:
         specifier: 7.3.1
         version: 7.3.1
       '@tryghost/content-api':
-        specifier: 1.12.12
-        version: 1.12.12
+        specifier: 1.12.13
+        version: 1.12.13
       '@tryghost/helpers':
         specifier: 1.1.108
         version: 1.1.108
@@ -1038,8 +1038,8 @@ packages:
   '@standard-schema/spec@1.1.0':
     resolution: {integrity: sha512-l2aFy5jALhniG5HgqrD6jXLi/rUWrKvqN/qJx6yoJsgKhblVd+iqqU4RCXavm/jPityDo5TCvKMnpjKnOriy0w==}
 
-  '@tryghost/content-api@1.12.12':
-    resolution: {integrity: sha512-fcyHcVIBDaXdpmR5fteYygqavJGDHuOK0SZv6Z7Uymp8K8XdndQMqShbJ5MptQjwiBBQMHvk/l3VtNNLosd+Ng==}
+  '@tryghost/content-api@1.12.13':
+    resolution: {integrity: sha512-/8YHCXqI+oDpRXzTWFvnkyWi72Wab2uJA5xAAPi5EJkmOReqlzGub2S9c5FCC/BMestXmDyOsG2nHq2uUBO8cA==}
 
   '@tryghost/helpers@1.1.108':
     resolution: {integrity: sha512-DQfHspm7plLREg4rgKwkEz8AqU5D7xTciCeuMSKQssb2Dtys4OJi9y/EU1Cmzb5KEtF33GMmVvgdBOm4T2wcAw==}
@@ -4774,7 +4774,7 @@ snapshots:
 
   '@standard-schema/spec@1.1.0': {}
 
-  '@tryghost/content-api@1.12.12':
+  '@tryghost/content-api@1.12.13':
     dependencies:
       axios: 1.20.0
     transitivePeerDependencies:
