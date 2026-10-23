@@ -97,7 +97,7 @@
     "jest": "30.5.2",
     "jest-environment-jsdom": "30.5.2",
     "jest-json-schema-extended": "1.0.1",
-    "joi": "18.2.9",
+    "joi": "18.3.0",
     "js-yaml": "5.5.0",
     "jsdom": "26.1.0",
     "lint-staged": "17.6.0",
