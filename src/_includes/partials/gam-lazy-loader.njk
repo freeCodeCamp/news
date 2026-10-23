@@ -68,42 +68,45 @@ document.addEventListener('DOMContentLoaded', function() {
     googletag.cmd.push(function() {
 
         if(isSideBarDisplayed){
-            var sidebarHeight = sidebar.offsetHeight;
-            var adTextSideBarHeight = 0;
             var sideBarAdContainer = 600 + 17;
+            var sideAdIndex = 0;
 
-            // Since the sidebar contains content from multiple sources,
-            // account for its height so ads can fill leftover space
-            var existingContentHeight = 0;
-            for (var j = 0; j < sidebar.children.length; j++) {
-                existingContentHeight += sidebar.children[j].offsetHeight;
-            }
+            // Measure every segment which start with CC courses before adding Google ads
+            // so they don't affect each other
+            var segments = Array.prototype.slice.call(sidebar.querySelectorAll('.sidebar-segment'));
+            var segmentAdCounts = segments.map(function(segment) {
+                var existingContentHeight = 0;
+                for (var j = 0; j < segment.children.length; j++) {
+                    existingContentHeight += segment.children[j].offsetHeight;
+                }
+                var avaiableSideAdSpace = segment.offsetHeight - existingContentHeight;
+                return Math.max(0, Math.floor(avaiableSideAdSpace / sideBarAdContainer));
+            });
 
-            var styles = window.getComputedStyle(sidebar);
-            var avaiableSideAdSpace = sidebarHeight - adTextSideBarHeight - existingContentHeight - parseFloat(styles.paddingTop) - parseFloat(styles.paddingBottom);
-            var numSideElements = Math.floor(avaiableSideAdSpace / sideBarAdContainer);
-            for (var i = 0; i < numSideElements; i++) {
-                // container element
-                var containerElement = document.createElement('div');
-                containerElement.classList.add('ad-wrapper');
+            segments.forEach(function(segment, segmentIndex) {
+                for (var i = 0; i < segmentAdCounts[segmentIndex]; i++) {
+                    // container element
+                    var containerElement = document.createElement('div');
+                    containerElement.classList.add('ad-wrapper');
 
-                //text element
-                var textElement = document.createElement('div');
-                textElement.classList.add('ad-text');
-                textElement.innerText = localizedAdText;
+                    // text element
+                    var textElement = document.createElement('div');
+                    textElement.classList.add('ad-text');
+                    textElement.innerText = localizedAdText;
 
-                // ad element
-                var adElement = document.createElement('div');
-                var sideAdElementId = 'side-gam-ad-' + i;
-                adElement.id = sideAdElementId;
-                adElement.classList.add('side-bar-ad-slot');
+                    // ad element
+                    var adElement = document.createElement('div');
+                    var sideAdElementId = 'side-gam-ad-' + sideAdIndex++;
+                    adElement.id = sideAdElementId;
+                    adElement.classList.add('side-bar-ad-slot');
 
-                // finalize setup
-                containerElement.appendChild(textElement);
-                containerElement.appendChild(adElement);
-                sidebar.appendChild(containerElement);
-                googletag.defineSlot('/23075930536/post-side', [[292, 30], [240, 400], [300, 75], [216, 54], [250, 360], [300, 50], 'fluid', [300, 31], [120, 20], [300, 250], [120, 30], [180, 150], [200, 446], [168, 42], [200, 200], [160, 600], [120, 90], [125, 125], [240, 133], [120, 60], [1, 1], [120, 240], [220, 90], [216, 36], [250, 250], [168, 28], [234, 60], [120, 600], [300, 600], [88, 31], [300, 100]], sideAdElementId).addService(googletag.pubads());
-            }
+                    // finalize setup
+                    containerElement.appendChild(textElement);
+                    containerElement.appendChild(adElement);
+                    segment.appendChild(containerElement);
+                    googletag.defineSlot('/23075930536/post-side', [[292, 30], [240, 400], [300, 75], [216, 54], [250, 360], [300, 50], 'fluid', [300, 31], [120, 20], [300, 250], [120, 30], [180, 150], [200, 446], [168, 42], [200, 200], [160, 600], [120, 90], [125, 125], [240, 133], [120, 60], [1, 1], [120, 240], [220, 90], [216, 36], [250, 250], [168, 28], [234, 60], [120, 600], [300, 600], [88, 31], [300, 100]], sideAdElementId).addService(googletag.pubads());
+                }
+            });
         }
 
         // Define the bottom ad when it should exist (no Class Central banner)
