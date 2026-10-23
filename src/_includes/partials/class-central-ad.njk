@@ -3,9 +3,8 @@
 
     Two macros for vertical ads in the sidebar and bottom banner ads:
 
-      classCentralCourseAd(ccData)     - narrow vertical rail, top of the sidebar
-      classCentralCourseBanner(ccData) - wide horizontal band, above the bottom
-                                         ad slot
+      classCentralCourseAd(ccData, courses, index, total) - sidebar rail, one per segment
+      classCentralCourseBanner(ccData)                    - wide band above the bottom ad slot
 #}
 
 {# Logo / advertisement disclosure row #}
@@ -77,10 +76,10 @@
 {% endmacro %}
 
 {# Up to four course cards in a list and footer link #}
-{% macro courseList(ccData) %}
+{% macro courseList(ccData, courses) %}
     {% set topSubject = ccData.subjects[0] %}
     <ul class="partner-courses-list" role="list">
-        {% for course in ccData.courses.slice(0, 4) %}
+        {% for course in courses %}
             <li>{{ courseCard(course) }}</li>
         {% endfor %}
     </ul>
@@ -95,19 +94,20 @@
 {% endmacro %}
 
 {# Outer container for both vertical and horizontal banner ad types #}
-{% macro shell(ccData, variant) %}
+{# labelSuffix gives each section a unique landmark name for screen readers #}
+{% macro shell(ccData, variant, courses, labelId, labelSuffix) %}
     <section
         class="partner-courses partner-courses-{{ variant }}"
-        aria-labelledby="partner-courses-label-{{ variant }}"
+        aria-labelledby="partner-courses-label-{{ labelId }}"
         data-test-label="class-central-course-{{ variant }}"
     >
-        <p class="partner-courses-label" id="partner-courses-label-{{ variant }}">Recommended courses from our partners</p>
+        <p class="partner-courses-label" id="partner-courses-label-{{ labelId }}">Recommended courses from our partners{% if labelSuffix %}<span class="sr-only"> ({{ labelSuffix }})</span>{% endif %}</p>
         <div class="partner-courses-card">
             {{ disclosure() }}
-            {{ courseList(ccData) }}
+            {{ courseList(ccData, courses) }}
         </div>
     </section>
 {% endmacro %}
 
-{% macro classCentralCourseAd(ccData) %}{{ shell(ccData, "rail") }}{% endmacro %}
-{% macro classCentralCourseBanner(ccData) %}{{ shell(ccData, "banner") }}{% endmacro %}
+{% macro classCentralCourseAd(ccData, courses, index, total) %}{{ shell(ccData, "rail", courses, "rail-" ~ index, "sidebar, " ~ index ~ " of " ~ total if total > 1 else "sidebar") }}{% endmacro %}
+{% macro classCentralCourseBanner(ccData) %}{{ shell(ccData, "banner", ccData.courses.slice(0, 4), "banner") }}{% endmacro %}
