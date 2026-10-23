@@ -13,13 +13,13 @@
 the rail and bottom banner only render when site.lang is "en". #}
 {% set relatedCourses = classCentralCourses[post.id] %}
 {% set showClassCentralCourses = site.lang === "en" and relatedCourses.courses | length %}
+{# Split the sidebar into one equal-height segment per rail, with ads filling the rest of each segment #}
+{% set classCentralRails = (relatedCourses | classCentralRails(post.reading_time)) if showClassCentralCourses else [] %}
+{% set numOfSidebarSegments = (classCentralRails | length) or 1 %}
 {# Include 2 ads by default for all articles. Then add 1 ad for every 2 mins of
 reading time if reading time <= 4 mins. Else, add 1 ad for every 1 min of reading
-time. Subtract 1 when the Class Central rail is showing, since it already fills
-the sidebar's first slot with sponsored course cards - without this, short posts
-end up with the full rail *and* the full ad count stacked on top of each other.
-(The unconditional +2 baseline means this can never drop below 1.) #}
-{% set numOfSidebarAds = ((((post.reading_time / 2) if post.reading_time <= 4 else (post.reading_time)) + 2) | round(0, 'floor')) - (1 if showClassCentralCourses else 0) %}
+time. Subtract 1 ad per Class Central rail, and split the rest between segments. #}
+{% set numOfSidebarAds = ((((post.reading_time / 2) if post.reading_time <= 4 else (post.reading_time)) + 2) | round(0, 'floor')) - (classCentralRails | length) %}
 
 {% block content %}
     <main id="site-main" class="post-template site-main outer">
@@ -68,17 +68,23 @@ end up with the full rail *and* the full ad count stacked on top of each other.
                         </section>
                         {% if adsEnabled %}
                             <div class="sidebar">
-                                {% if showClassCentralCourses %}
-                                    {{ classCentralCourseAd(relatedCourses) }}
-                                {% endif %}
                                 {% if canonicalUrl | shouldCanonicalHaveGAM %}
                                     {% set localizedAdText %}{% t 'ad-text' %}{% endset %}
                                     <script>var localizedAdText = "{{ localizedAdText | upper }}";</script>
-                                {% else %}
-                                    {% for i in range(0, numOfSidebarAds) %}
-                                        {% include "partials/ad.njk" %}
-                                    {% endfor %}
                                 {% endif %}
+                                {% for segment in range(0, numOfSidebarSegments) %}
+                                    <div class="sidebar-segment" data-test-label="sidebar-segment">
+                                        {% if classCentralRails[segment] %}
+                                            {{ classCentralCourseAd(relatedCourses, classCentralRails[segment], loop.index, loop.length) }}
+                                        {% endif %}
+                                        {% if not (canonicalUrl | shouldCanonicalHaveGAM) %}
+                                            {% set numOfSegmentAds = (numOfSidebarAds // numOfSidebarSegments) + (1 if loop.index0 < numOfSidebarAds % numOfSidebarSegments else 0) %}
+                                            {% for i in range(0, numOfSegmentAds) %}
+                                                {% include "partials/ad.njk" %}
+                                            {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                {% endfor %}
                             </div>
                         {% endif %}
                     </div>

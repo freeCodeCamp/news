@@ -3097,6 +3097,16 @@ html.dark-mode .partner-courses-logo {
     align-items: center;
     padding: 0 10px 10px;
   }
+
+  /* Equal-height sidebar sections, each with an optional Class Central rail and ads */
+  .ad-layout .sidebar-segment {
+    display: flex;
+    flex: 1 1 0;
+    width: 100%;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  }
 }
 
 /* 16. RTL layout

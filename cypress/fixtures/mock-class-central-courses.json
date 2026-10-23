@@ -5,29 +5,51 @@
       "fetchedAt": "2026-01-01T00:00:00.000Z",
       "slug": "learn-music-production-for-beginners",
       "title": "Learn Music Production for Beginners",
-      "courseIds": [100001, 100002, 100003, 100004],
+      "courseIds": [
+        100001, 100002, 100003, 100004, 100014, 100015, 100016, 100017, 100018,
+        100019
+      ],
       "subjectSlugs": ["music-production", "audio-mixing"]
     },
     "66e093d482502b33f0f6b7ce": {
       "fetchedAt": "2026-01-01T00:00:00.000Z",
       "slug": "pass-the-azure-ai-engineer-associate-certification-ai-102",
       "title": "Pass the Azure AI Engineer Associate Certification (AI-102)",
-      "courseIds": [100005, 100006, 100007, 100008],
+      "courseIds": [
+        100005, 100006, 100007, 100008, 100020, 100021, 100022, 100023, 100024,
+        100025
+      ],
       "subjectSlugs": ["ai", "microsoft-azure"]
     },
     "66db21dc4fe490d5a33e959d": {
       "fetchedAt": "2026-01-01T00:00:00.000Z",
       "slug": "surviving-40-years-in-tech-jack-herrington-podcast-140",
       "title": "Surviving 40 years in the software industry [Interview with Jack Herrington Podcast #140]",
-      "courseIds": [100009, 100010, 100011],
+      "courseIds": [
+        100009, 100010, 100011, 100026, 100027, 100028, 100029, 100030, 100031,
+        100032
+      ],
       "subjectSlugs": ["software-engineering"]
     },
     "66d4608b230dff016690584b": {
       "fetchedAt": "2026-01-01T00:00:00.000Z",
       "slug": "what-is-recursion",
       "title": "How Does Recursion Work? Explained with Code Examples",
-      "courseIds": [100012, 100013],
+      "courseIds": [
+        100012, 100013, 100033, 100034, 100035, 100036, 100037, 100038, 100039,
+        100040
+      ],
       "subjectSlugs": []
+    },
+    "66b1e4bf0938e6258a76bbdd": {
+      "fetchedAt": "2026-01-01T00:00:00.000Z",
+      "slug": "the-c-programming-handbook-for-beginners",
+      "title": "The C Programming Handbook for Beginners",
+      "courseIds": [
+        100041, 100042, 100043, 100044, 100045, 100046, 100047, 100048, 100049,
+        100050
+      ],
+      "subjectSlugs": ["c-programming"]
     }
   },
   "courses": {
@@ -202,6 +224,498 @@
       "effort": "3 hours 15 minutes",
       "rating": { "provider": { "average": 4.41, "count": 98 } },
       "provider": { "name": "BrightPath" }
+    },
+    "100014": {
+      "id": 100014,
+      "name": "Mock Synthesis and Sound Design Basics",
+      "url": {
+        "go": "https://example.com/go/mock-synthesis-and-sound-design-basics"
+      },
+      "imageUrl": "https://example.com/img/courses/mock-synthesis-and-sound-design-basics.jpg",
+      "instructors": "Instructor D",
+      "level": "beginner",
+      "certificate": true,
+      "effort": "4 weeks, 3 hours a week",
+      "rating": { "provider": { "average": 4.5625, "count": 16 } },
+      "provider": { "name": "EduStream" }
+    },
+    "100015": {
+      "id": 100015,
+      "name": "Mock Make Your First Electronic Track",
+      "url": {
+        "go": "https://example.com/go/mock-make-your-first-electronic-track"
+      },
+      "imageUrl": "https://example.com/img/courses/mock-make-your-first-electronic-track.jpg",
+      "instructors": "Instructor A",
+      "level": "beginner",
+      "certificate": false,
+      "effort": "3 hours 6 minutes",
+      "rating": { "provider": { "average": 4.49, "count": 1749 } },
+      "provider": { "name": "CourseHub" }
+    },
+    "100016": {
+      "id": 100016,
+      "name": "Mock Complete Electronic Music Production",
+      "url": {
+        "go": "https://example.com/go/mock-complete-electronic-music-production"
+      },
+      "imageUrl": "https://example.com/img/courses/mock-complete-electronic-music-production.jpg",
+      "instructors": "Instructor E",
+      "level": "beginner",
+      "certificate": true,
+      "effort": "11 hours 55 minutes",
+      "rating": { "provider": { "average": 4.47, "count": 3034 } },
+      "provider": { "name": "CourseHub" }
+    },
+    "100017": {
+      "id": 100017,
+      "name": "Mock Digital Audio Workstation Fundamentals",
+      "url": {
+        "go": "https://example.com/go/mock-digital-audio-workstation-fundamentals"
+      },
+      "imageUrl": "https://example.com/img/courses/mock-digital-audio-workstation-fundamentals.jpg",
+      "instructors": "Instructor B, Instructor C and Mock Music Academy",
+      "level": "beginner",
+      "certificate": true,
+      "effort": "1 day 1 hour 15 minutes",
+      "rating": { "provider": { "average": 4.61275, "count": 5250 } },
+      "provider": { "name": "SkillForge" }
+    },
+    "100018": {
+      "id": 100018,
+      "name": "Mock Melodies and Chords for Intermediate Producers",
+      "url": {
+        "go": "https://example.com/go/mock-melodies-and-chords-for-intermediate-producers"
+      },
+      "imageUrl": "https://example.com/img/courses/mock-melodies-and-chords-for-intermediate-producers.jpg",
+      "instructors": "Instructor C",
+      "level": "intermediate",
+      "certificate": false,
+      "effort": "48 minutes",
+      "rating": { "provider": { "average": 3.90625, "count": 251 } },
+      "provider": { "name": "OpenLearn" }
+    },
+    "100019": {
+      "id": 100019,
+      "name": "Mock Write Music in Any Genre",
+      "url": { "go": "https://example.com/go/mock-write-music-in-any-genre" },
+      "imageUrl": "https://example.com/img/courses/mock-write-music-in-any-genre.jpg",
+      "instructors": "OpenLearn",
+      "level": "beginner",
+      "certificate": true,
+      "effort": "7 weeks, 1 hour a week",
+      "rating": { "provider": null },
+      "provider": { "name": "BrightPath" }
+    },
+    "100020": {
+      "id": 100020,
+      "name": "Mock Cognitive and Knowledge Services",
+      "url": {
+        "go": "https://example.com/go/mock-cognitive-and-knowledge-services"
+      },
+      "imageUrl": "https://example.com/img/courses/mock-cognitive-and-knowledge-services.jpg",
+      "instructors": "Mock Cloud Co.",
+      "level": "intermediate",
+      "certificate": true,
+      "effort": "9 weeks, 1 hour a week",
+      "rating": { "provider": null },
+      "provider": { "name": "EduStream" }
+    },
+    "100021": {
+      "id": 100021,
+      "name": "Mock Cognitive and Knowledge Services",
+      "url": {
+        "go": "https://example.com/go/mock-cognitive-and-knowledge-services-100021"
+      },
+      "imageUrl": "https://example.com/img/courses/mock-cognitive-and-knowledge-services-100021.jpg",
+      "instructors": "Mock Cloud Co.",
+      "level": "intermediate",
+      "certificate": true,
+      "effort": "9 weeks, 1 hour a week",
+      "rating": { "provider": null },
+      "provider": { "name": "BrightPath" }
+    },
+    "100022": {
+      "id": 100022,
+      "name": "Mock AI Fundamentals Exam Guide",
+      "url": { "go": "https://example.com/go/mock-ai-fundamentals-exam-guide" },
+      "imageUrl": "https://example.com/img/courses/mock-ai-fundamentals-exam-guide.jpg",
+      "instructors": "Mock Publisher - Course Instructors",
+      "level": "beginner",
+      "certificate": true,
+      "effort": "11 weeks, 1 hour a week",
+      "rating": { "provider": null },
+      "provider": { "name": "EduStream" }
+    },
+    "100023": {
+      "id": 100023,
+      "name": "Mock AI Apps and Agents Developer Associate",
+      "url": {
+        "go": "https://example.com/go/mock-ai-apps-and-agents-developer-associate"
+      },
+      "imageUrl": "https://example.com/img/courses/mock-ai-apps-and-agents-developer-associate.jpg",
+      "instructors": "Instructor D",
+      "level": "beginner",
+      "certificate": true,
+      "effort": "17 hours 17 minutes",
+      "rating": { "provider": { "average": 4.55657, "count": 2744 } },
+      "provider": { "name": "CourseHub" }
+    },
+    "100024": {
+      "id": 100024,
+      "name": "Mock AI Fundamentals",
+      "url": { "go": "https://example.com/go/mock-ai-fundamentals" },
+      "imageUrl": "https://example.com/img/courses/mock-ai-fundamentals.jpg",
+      "instructors": "Instructor A",
+      "level": "beginner",
+      "certificate": true,
+      "effort": "4 weeks, 3-6 hours a week",
+      "rating": { "provider": null },
+      "provider": { "name": "OpenLearn" }
+    },
+    "100025": {
+      "id": 100025,
+      "name": "Mock AI Fundamentals: Build and Deploy AI",
+      "url": {
+        "go": "https://example.com/go/mock-ai-fundamentals-build-and-deploy-ai"
+      },
+      "imageUrl": "https://example.com/img/courses/mock-ai-fundamentals-build-and-deploy-ai.jpg",
+      "instructors": "",
+      "level": "beginner",
+      "certificate": true,
+      "effort": "1 week, 3-4 hours a week",
+      "rating": { "provider": { "average": 4.4, "count": 5 } },
+      "provider": { "name": "OpenLearn" }
+    },
+    "100026": {
+      "id": 100026,
+      "name": "Mock Mentoring Junior Developers",
+      "url": {
+        "go": "https://example.com/go/mock-mentoring-junior-developers"
+      },
+      "imageUrl": "https://example.com/img/courses/mock-mentoring-junior-developers.jpg",
+      "instructors": "Instructor E",
+      "level": "beginner",
+      "certificate": false,
+      "effort": "1 hour 27 minutes",
+      "rating": { "provider": { "average": 4.72222, "count": 9 } },
+      "provider": { "name": "SkillForge" }
+    },
+    "100027": {
+      "id": 100027,
+      "name": "Mock Building Side Projects That Last",
+      "url": {
+        "go": "https://example.com/go/mock-building-side-projects-that-last"
+      },
+      "imageUrl": "https://example.com/img/courses/mock-building-side-projects-that-last.jpg",
+      "instructors": "Instructor B",
+      "level": "intermediate",
+      "certificate": false,
+      "effort": "2 hours 29 minutes",
+      "rating": { "provider": { "average": 3.75, "count": 3 } },
+      "provider": { "name": "SkillForge" }
+    },
+    "100028": {
+      "id": 100028,
+      "name": "Mock Public Speaking for Engineers",
+      "url": {
+        "go": "https://example.com/go/mock-public-speaking-for-engineers"
+      },
+      "imageUrl": "https://example.com/img/courses/mock-public-speaking-for-engineers.jpg",
+      "instructors": "Instructor D",
+      "level": "intermediate",
+      "certificate": false,
+      "effort": "32 minutes",
+      "rating": { "provider": { "average": 3.82353, "count": 17 } },
+      "provider": { "name": "SkillForge" }
+    },
+    "100029": {
+      "id": 100029,
+      "name": "Mock Start a Developer Podcast",
+      "url": { "go": "https://example.com/go/mock-start-a-developer-podcast" },
+      "imageUrl": "https://example.com/img/courses/mock-start-a-developer-podcast.jpg",
+      "instructors": "Instructor A",
+      "level": "beginner",
+      "certificate": false,
+      "effort": "1 hour 26 minutes",
+      "rating": { "provider": { "average": 4.60938, "count": 32 } },
+      "provider": { "name": "SkillForge" }
+    },
+    "100030": {
+      "id": 100030,
+      "name": "Mock Healthy Habits for Desk Workers",
+      "url": {
+        "go": "https://example.com/go/mock-healthy-habits-for-desk-workers"
+      },
+      "imageUrl": "https://example.com/img/courses/mock-healthy-habits-for-desk-workers.jpg",
+      "instructors": "Instructor B, Instructor C, and Instructor D",
+      "level": "beginner",
+      "certificate": true,
+      "effort": "5 weeks, 2 hours a week",
+      "rating": { "provider": { "average": 4.59426, "count": 1846 } },
+      "provider": { "name": "EduStream" }
+    },
+    "100031": {
+      "id": 100031,
+      "name": "Mock Technical Writing 2026: Docs That Get Read",
+      "url": {
+        "go": "https://example.com/go/mock-technical-writing-2026-docs-that-get-read"
+      },
+      "imageUrl": "https://example.com/img/courses/mock-technical-writing-2026-docs-that-get-read.jpg",
+      "instructors": "Instructor E",
+      "level": "beginner",
+      "certificate": true,
+      "effort": "13 hours 34 minutes",
+      "rating": { "provider": { "average": 4.56, "count": 4130 } },
+      "provider": { "name": "CourseHub" }
+    },
+    "100032": {
+      "id": 100032,
+      "name": "Mock Technical Writing 2026: Docs That Get Read",
+      "url": {
+        "go": "https://example.com/go/mock-technical-writing-2026-docs-that-get-read-100032"
+      },
+      "imageUrl": "https://example.com/img/courses/mock-technical-writing-2026-docs-that-get-read-100032.jpg",
+      "instructors": "Instructor E",
+      "level": "beginner",
+      "certificate": true,
+      "effort": "10 hours 48 minutes",
+      "rating": { "provider": null },
+      "provider": { "name": "EduStream" }
+    },
+    "100033": {
+      "id": 100033,
+      "name": "Mock Build a Guessing Game from Scratch",
+      "url": {
+        "go": "https://example.com/go/mock-build-a-guessing-game-from-scratch"
+      },
+      "imageUrl": "https://example.com/img/courses/mock-build-a-guessing-game-from-scratch.jpg",
+      "instructors": "Instructor C",
+      "level": "beginner",
+      "certificate": true,
+      "effort": "1 hour 55 minutes",
+      "rating": { "provider": { "average": 4.64, "count": 125 } },
+      "provider": { "name": "EduStream" }
+    },
+    "100034": {
+      "id": 100034,
+      "name": "Mock Programming for Beginners",
+      "url": { "go": "https://example.com/go/mock-programming-for-beginners" },
+      "imageUrl": "https://example.com/img/courses/mock-programming-for-beginners.jpg",
+      "instructors": "Instructor D | 900,000+ Students and Mock Coding Faculty",
+      "level": "beginner",
+      "certificate": true,
+      "effort": "11 hours 45 minutes",
+      "rating": { "provider": { "average": 4.37, "count": 2927 } },
+      "provider": { "name": "CourseHub" }
+    },
+    "100035": {
+      "id": 100035,
+      "name": "Mock Complete Coding for Beginners (2026)",
+      "url": {
+        "go": "https://example.com/go/mock-complete-coding-for-beginners-2026"
+      },
+      "imageUrl": "https://example.com/img/courses/mock-complete-coding-for-beginners-2026.jpg",
+      "instructors": "Instructor A and Mock Academy • over 2.7 million students worldwide!",
+      "level": "beginner",
+      "certificate": true,
+      "effort": "16 hours 1 minute",
+      "rating": { "provider": { "average": 4.48462, "count": 2514 } },
+      "provider": { "name": "CourseHub" }
+    },
+    "100036": {
+      "id": 100036,
+      "name": "Mock Learn to Program",
+      "url": { "go": "https://example.com/go/mock-learn-to-program" },
+      "imageUrl": "https://example.com/img/courses/mock-learn-to-program.jpg",
+      "instructors": "Instructor B",
+      "level": "beginner",
+      "certificate": true,
+      "effort": "6 weeks, 1 hour a week",
+      "rating": { "provider": null },
+      "provider": { "name": "EduStream" }
+    },
+    "100037": {
+      "id": 100037,
+      "name": "Mock Complete Programming for Beginners 2026",
+      "url": {
+        "go": "https://example.com/go/mock-complete-programming-for-beginners-2026"
+      },
+      "imageUrl": "https://example.com/img/courses/mock-complete-programming-for-beginners-2026.jpg",
+      "instructors": "Instructor E",
+      "level": "beginner",
+      "certificate": false,
+      "effort": "1 hour 57 minutes",
+      "rating": { "provider": { "average": 4.47917, "count": 12 } },
+      "provider": { "name": "SkillForge" }
+    },
+    "100038": {
+      "id": 100038,
+      "name": "Mock Programming in Three Weeks",
+      "url": { "go": "https://example.com/go/mock-programming-in-three-weeks" },
+      "imageUrl": "https://example.com/img/courses/mock-programming-in-three-weeks.jpg",
+      "instructors": "Instructor C",
+      "level": "beginner",
+      "certificate": false,
+      "effort": "19 hours 30 minutes",
+      "rating": { "provider": { "average": 4.46, "count": 127 } },
+      "provider": { "name": "SkillForge" }
+    },
+    "100039": {
+      "id": 100039,
+      "name": "Mock Introduction to Functional Languages",
+      "url": {
+        "go": "https://example.com/go/mock-introduction-to-functional-languages"
+      },
+      "imageUrl": "https://example.com/img/courses/mock-introduction-to-functional-languages.jpg",
+      "instructors": "",
+      "level": "beginner",
+      "certificate": true,
+      "effort": "2 weeks, 2-4 hours a week",
+      "rating": { "provider": null },
+      "provider": { "name": "OpenLearn" }
+    },
+    "100040": {
+      "id": 100040,
+      "name": "Mock Functional Programming Patterns",
+      "url": {
+        "go": "https://example.com/go/mock-functional-programming-patterns"
+      },
+      "imageUrl": "https://example.com/img/courses/mock-functional-programming-patterns.jpg",
+      "instructors": "",
+      "level": "intermediate",
+      "certificate": true,
+      "effort": "5 weeks, 2-4 hours a week",
+      "rating": { "provider": null },
+      "provider": { "name": "OpenLearn" }
+    },
+    "100041": {
+      "id": 100041,
+      "name": "Mock C Programming from Zero",
+      "url": { "go": "https://example.com/go/mock-c-programming-from-zero" },
+      "imageUrl": "https://example.com/img/courses/mock-c-programming-from-zero.jpg",
+      "instructors": "Instructor A • 120,000+ Students",
+      "level": "beginner",
+      "certificate": true,
+      "effort": "2 days 32 minutes",
+      "rating": { "provider": { "average": 4.63492, "count": 4191 } },
+      "provider": { "name": "CourseHub" }
+    },
+    "100042": {
+      "id": 100042,
+      "name": "Mock Pointers and Memory in C",
+      "url": { "go": "https://example.com/go/mock-pointers-and-memory-in-c" },
+      "imageUrl": "https://example.com/img/courses/mock-pointers-and-memory-in-c.jpg",
+      "instructors": "Instructor B",
+      "level": "intermediate",
+      "certificate": true,
+      "effort": "9 hours 35 minutes",
+      "rating": { "provider": { "average": 3.94737, "count": 19 } },
+      "provider": { "name": "SkillForge" }
+    },
+    "100043": {
+      "id": 100043,
+      "name": "Mock Systems Programming Fundamentals",
+      "url": {
+        "go": "https://example.com/go/mock-systems-programming-fundamentals"
+      },
+      "imageUrl": "https://example.com/img/courses/mock-systems-programming-fundamentals.jpg",
+      "instructors": "",
+      "level": "intermediate",
+      "certificate": true,
+      "effort": "9 weeks, 1-4 hours a week",
+      "rating": { "provider": null },
+      "provider": { "name": "OpenLearn" }
+    },
+    "100044": {
+      "id": 100044,
+      "name": "Mock Data Structures in C",
+      "url": { "go": "https://example.com/go/mock-data-structures-in-c" },
+      "imageUrl": "https://example.com/img/courses/mock-data-structures-in-c.jpg",
+      "instructors": "Instructor C : 45,000+ Students and Instructor D",
+      "level": "beginner",
+      "certificate": true,
+      "effort": "21 hours 9 minutes",
+      "rating": { "provider": { "average": 4.49533, "count": 1446 } },
+      "provider": { "name": "CourseHub" }
+    },
+    "100045": {
+      "id": 100045,
+      "name": "Mock Embedded C for Microcontrollers",
+      "url": {
+        "go": "https://example.com/go/mock-embedded-c-for-microcontrollers"
+      },
+      "imageUrl": "https://example.com/img/courses/mock-embedded-c-for-microcontrollers.jpg",
+      "instructors": "Instructor E",
+      "level": "intermediate",
+      "certificate": false,
+      "effort": "4 hours 58 minutes",
+      "rating": { "provider": { "average": 4.79167, "count": 6 } },
+      "provider": { "name": "SkillForge" }
+    },
+    "100046": {
+      "id": 100046,
+      "name": "Mock Debugging C Programs",
+      "url": { "go": "https://example.com/go/mock-debugging-c-programs" },
+      "imageUrl": "https://example.com/img/courses/mock-debugging-c-programs.jpg",
+      "instructors": "Instructor A",
+      "level": "beginner",
+      "certificate": false,
+      "effort": "53 minutes",
+      "rating": { "provider": { "average": 4.0625, "count": 4 } },
+      "provider": { "name": "SkillForge" }
+    },
+    "100047": {
+      "id": 100047,
+      "name": "Mock Introduction to Operating Systems",
+      "url": {
+        "go": "https://example.com/go/mock-introduction-to-operating-systems"
+      },
+      "imageUrl": "https://example.com/img/courses/mock-introduction-to-operating-systems.jpg",
+      "instructors": " Mock University",
+      "level": "beginner",
+      "certificate": true,
+      "effort": "6 weeks, 2-3 hours a week",
+      "rating": { "provider": null },
+      "provider": { "name": "EduStream" }
+    },
+    "100048": {
+      "id": 100048,
+      "name": "Mock Compilers and Build Tools",
+      "url": { "go": "https://example.com/go/mock-compilers-and-build-tools" },
+      "imageUrl": "https://example.com/img/courses/mock-compilers-and-build-tools.jpg",
+      "instructors": "Instructor D",
+      "level": "intermediate",
+      "certificate": true,
+      "effort": "1 hour 53 minutes",
+      "rating": { "provider": { "average": 4.45704, "count": 2223 } },
+      "provider": { "name": "EduStream" }
+    },
+    "100049": {
+      "id": 100049,
+      "name": "Mock Writing a Shell in C",
+      "url": { "go": "https://example.com/go/mock-writing-a-shell-in-c" },
+      "imageUrl": "https://example.com/img/courses/mock-writing-a-shell-in-c.jpg",
+      "instructors": "Instructor B",
+      "level": "intermediate",
+      "certificate": true,
+      "effort": "15 hours 20 minutes",
+      "rating": { "provider": { "average": 4.45952, "count": 5880 } },
+      "provider": { "name": "CourseHub" }
+    },
+    "100050": {
+      "id": 100050,
+      "name": "Mock Concurrency with Threads in C",
+      "url": {
+        "go": "https://example.com/go/mock-concurrency-with-threads-in-c"
+      },
+      "imageUrl": "https://example.com/img/courses/mock-concurrency-with-threads-in-c.jpg",
+      "instructors": "Instructor C",
+      "level": "intermediate",
+      "certificate": true,
+      "effort": "3 weeks, 2 hours a week",
+      "rating": { "provider": { "average": 4.5, "count": 812 } },
+      "provider": { "name": "BrightPath" }
     }
   },
   "subjects": {
@@ -229,6 +743,11 @@
       "slug": "software-engineering",
       "name": "Software Engineering",
       "url": "https://example.com/subject/software-engineering"
+    },
+    "c-programming": {
+      "slug": "c-programming",
+      "name": "C Programming",
+      "url": "https://example.com/subject/c-programming"
     }
   }
 }
