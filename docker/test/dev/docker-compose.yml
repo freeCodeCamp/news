@@ -13,5 +13,7 @@ services:
     build:
       context: ../../../
       dockerfile: ./docker/Dockerfile
+      args:
+        BUILD_LANGUAGE: english
     ports:
       - '3000:3000'
