@@ -45,17 +45,13 @@ jobs:
     strategy:
       matrix:
         node-version: [24.x]
-        languages: [english, espanol]
+        languages: [english]
 
     env:
       POSTS_PER_PAGE: ${{ secrets.POSTS_PER_PAGE }}
 
       HASHNODE_API_URL: api_url_from_hashnode_dashboard
       ENGLISH_HASHNODE_HOST: host_from_hashnode_dashboard
-
-      ESPANOL_GHOST_API_URL: ${{ secrets.CI_ESPANOL_GHOST_API_URL }}
-      ESPANOL_GHOST_API_VERSION: ${{ secrets.CI_ESPANOL_GHOST_API_VERSION }}
-      ESPANOL_GHOST_CONTENT_API_KEY: ${{ secrets.CI_ESPANOL_GHOST_CONTENT_API_KEY }}
 
       SITE_DOMAIN: localhost:8080
 
@@ -79,17 +75,7 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Set fetch from Ghost environment variable
-        if: ${{ matrix.languages == 'english' }}
-        run: echo "DO_NOT_FETCH_FROM_GHOST=true" >> $GITHUB_ENV
-
-      - name: Start Espanol Ghost container
-        if: ${{ matrix.languages == 'espanol' }}
-        run: pnpm run start:containers -- espanol
-
-      - name: Sleep for 5 seconds
-        if: ${{ matrix.languages == 'espanol' }}
-        run: sleep 5s
-        shell: bash
+        run: echo "DO_NOT_FETCH_FROM_GHOST=true" >> "$GITHUB_ENV"
 
       - name: Build CI site
         run: pnpm run build:ci
@@ -99,7 +85,3 @@ jobs:
 
       - name: Perform Typescript Typecheck
         run: pnpm run type-check
-
-      - name: Stop Ghost containers
-        if: ${{ matrix.languages == 'espanol' }}
-        run: pnpm run stop:containers
