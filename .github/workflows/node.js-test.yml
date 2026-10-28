@@ -11,6 +11,9 @@ jobs:
     name: Lint
     runs-on: ubuntu-26.04
 
+    env:
+      VALIDATE_ALL_LOCALES: 'false'
+
     strategy:
       matrix:
         node-version: [24.x]
@@ -57,6 +60,7 @@ jobs:
 
       LOCALE_FOR_UI: ${{ matrix.languages }}
       LOCALE_FOR_GHOST: ${{ matrix.languages }}
+      VALIDATE_ALL_LOCALES: 'false'
 
     steps:
       - name: Checkout source code
