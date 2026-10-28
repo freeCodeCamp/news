@@ -8,26 +8,6 @@ jobs:
   remove:
     name: Delete Old Images
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        repos:
-          - english
-          - chinese
-          - espanol
-          - italian
-          - japanese
-          - korean
-          - portuguese
-          - ukrainian
-        variants:
-          # - dev
-          - org
-        # Exclude the following combinations
-        exclude:
-          - repos: english
-            variants: dev
-
     steps:
       - name: Install doctl
         uses: digitalocean/action-doctl@v2
@@ -40,5 +20,5 @@ jobs:
       - name: Delete Images
         uses: raisedadead/action-docr-cleanup@1c7d87369bccfdf5da03a9ae3b00eacc3f2a9b51 # v1
         with:
-          repository_name: '${{ matrix.variants }}/news-${{ matrix.repos }}'
+          repository_name: 'org/news-english'
           days: '4'
