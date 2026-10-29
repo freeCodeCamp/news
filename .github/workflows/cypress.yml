@@ -13,19 +13,9 @@ jobs:
       matrix:
         node-version: [24.x]
         browsers: [chrome, firefox]
-        languages: [english, chinese, espanol]
+        languages: [english]
 
     env:
-      BUILD_LANG: ${{ matrix.languages }}
-
-      CHINESE_GHOST_API_URL: ${{ secrets.CI_CHINESE_GHOST_API_URL }}
-      CHINESE_GHOST_API_VERSION: ${{ secrets.CI_CHINESE_GHOST_API_VERSION }}
-      CHINESE_GHOST_CONTENT_API_KEY: ${{ secrets.CI_CHINESE_GHOST_CONTENT_API_KEY }}
-
-      ESPANOL_GHOST_API_URL: ${{ secrets.CI_ESPANOL_GHOST_API_URL }}
-      ESPANOL_GHOST_API_VERSION: ${{ secrets.CI_ESPANOL_GHOST_API_VERSION }}
-      ESPANOL_GHOST_CONTENT_API_KEY: ${{ secrets.CI_ESPANOL_GHOST_CONTENT_API_KEY }}
-
       HASHNODE_API_URL: api_url_from_hashnode_dashboard
       ENGLISH_HASHNODE_HOST: host_from_hashnode_dashboard
 
@@ -56,9 +46,6 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Start Ghost containers
-        run: pnpm run start:containers
-
       - name: Start CI server and run Cypress
         uses: cypress-io/github-action@c541a95ea92d9239347a2355f2e895cd4b3f8060 # v7.4.6
         with:
@@ -68,6 +55,3 @@ jobs:
           browser: ${{ matrix.browsers }}
           headless: true
           spec: cypress/e2e/${{ matrix.languages }}/**/*
-
-      - name: Stop Ghost containers
-        run: pnpm run stop:containers

@@ -18,14 +18,9 @@ Happy Contributing!
 
 We use GHA to build the news sites. Workflows are in the `.github/workflows` directory.
 
-### Build Schedules
+### Build Schedule
 
-New builds to the `/news` sites are triggered according to the schedule below:
-
-| Language     | Schedule (UTC)                                                                    |
-| :----------- | :-------------------------------------------------------------------------------- |
-| English      | Every 3 Hours - except between UTC 00:00 - UTC 06:00 on Wed & Sat for maintenance |
-| Others(i18n) | Every 6 Hours - except between UTC 00:00 - UTC 06:00 on Wed & Sat for maintenance |
+New English builds are triggered every three hours, except between UTC 00:00 and UTC 06:00 on Wednesday and Saturday for maintenance. Localized production builds are retired; reduced localized checks run weekly to preserve restoration readiness.
 
 > [!Important]
 > Once a build is triggered, it can take up to an hour to complete and cascade to all regions in the world.
@@ -36,12 +31,9 @@ We deploy the news sites on a private [Docker Swarm cluster](https://github.com/
 
 ### Deployment Status
 
-You can click on the badges below to go to the dashboards detailing the status of the latest deployments. If you see something is not right, wait for a few hours. Our team is usually on top of these with automated alerts.
+You can click the badge below to see the latest English deployment. If something is not right, wait for a few hours. Our team is usually on top of failures through automated alerts.
 
-| Language     | Status (Click to see details)                                     |
-| :----------- | :---------------------------------------------------------------- |
-| English      | [![Deployment status][7]][8] 👈 Yes – you can click these things! |
-| Others(i18n) | [![Deployment status][9]][10]                                     |
+[![English deployment status][7]][8]
 
 ## Frequently Asked Questions
 
@@ -76,5 +68,3 @@ Copyright (c) 2021 freeCodeCamp.org - Released under the
 [6]: https://chat.freecodecamp.org
 [7]: https://github.com/freeCodeCamp/news/actions/workflows/deploy-eng.yml/badge.svg
 [8]: https://github.com/freeCodeCamp/news/actions/workflows/deploy-eng.yml
-[9]: https://github.com/freeCodeCamp/news/actions/workflows/deploy-i18n.yml/badge.svg
-[10]: https://github.com/freeCodeCamp/news/actions/workflows/deploy-i18n.yml

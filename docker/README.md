@@ -16,9 +16,9 @@ This directory contains the Dockerfile to build out the image for the publicatio
 
 ### For the `dev` directory
 
-- Ensure the `.env` file is set up correctly. You have to build the `Italian` version of the site.
-- Run `docker-compose up -d` to stand up the prod-like development instance of `/italian/news`.
-- Visit `http://localhost/italian/news` to see the site.
+- Ensure the `.env` file is set up correctly. The development stack builds the English version of the site.
+- Run `docker compose up -d` to stand up the prod-like development instance of `/news`.
+- Visit `http://localhost/news` to see the site.
 
 ### For the `prd` directory
 
@@ -26,5 +26,5 @@ This directory contains the Dockerfile to build out the image for the publicatio
 - Authenticate to the docker registry (`doctl registry login`)
 - Pull the image from the registry (`docker pull registry.digitalocean.com/registry-name/image-name:latest`)
 - Update the image in the `.env` file in the `prd` directory - this file is unrelated to the root env config, and is used for providing keys to the docker setup. You can copy the sample .env file (`cp .env.sample .env`)
-- Run `docker-compose up -d` to stand up the prod-like instance of `/news`.
+- Run `docker compose up -d` to stand up the prod-like instance of `/news`.
 - Visit `http://localhost/news` to see the site.

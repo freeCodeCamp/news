@@ -4,7 +4,9 @@ import { setup } from 'jest-json-schema-extended';
 import { config } from '../index.js';
 
 const { existsSync } = gracefulFS;
-const { locales, localeCodes, algoliaIndices } = config;
+const { locales, localeCodes, algoliaIndices, currentLocale_i18n } = config;
+const testLocales =
+  process.env.VALIDATE_ALL_LOCALES === 'false' ? [currentLocale_i18n] : locales;
 
 setup();
 
@@ -26,7 +28,7 @@ const filesThatShouldExist = [
 const path = `${import.meta.dirname}/locales`;
 
 describe('Locale tests:', () => {
-  locales.forEach(lang => {
+  testLocales.forEach(lang => {
     describe(`-- ${lang} --`, () => {
       filesThatShouldExist.forEach(file => {
         // check that each json file exists

@@ -1,0 +1,132 @@
+name: i18n - Weekly Tests
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 6 * * 0'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: i18n-weekly
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: Test (${{ matrix.languages }})
+    runs-on: ubuntu-26.04
+    strategy:
+      matrix:
+        node-version: [24.x]
+        languages: [espanol]
+
+    env:
+      POSTS_PER_PAGE: 25
+      ESPANOL_GHOST_API_URL: ${{ secrets.CI_ESPANOL_GHOST_API_URL }}
+      ESPANOL_GHOST_API_VERSION: ${{ secrets.CI_ESPANOL_GHOST_API_VERSION }}
+      ESPANOL_GHOST_CONTENT_API_KEY: ${{ secrets.CI_ESPANOL_GHOST_CONTENT_API_KEY }}
+      SITE_DOMAIN: localhost:8080
+      LOCALE_FOR_UI: ${{ matrix.languages }}
+      LOCALE_FOR_GHOST: ${{ matrix.languages }}
+      VALIDATE_ALL_LOCALES: 'true'
+
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@0977fd99725f1db4007ccb2928dbb4e90d06cc86 # v6
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Start Espanol Ghost container
+        run: pnpm run start:containers -- espanol
+
+      - name: Wait for Ghost
+        run: |
+          timeout 60 sh -c 'until wget -qO- http://localhost:3030/ >/dev/null 2>&1; do sleep 2; done'
+
+      - name: Validate localized schemas
+        run: pnpm run lint:i18n-schema
+
+      - name: Build CI site
+        run: pnpm run build:ci
+
+      - name: Run tests
+        run: pnpm run test
+
+      - name: Stop Ghost containers
+        if: always()
+        run: pnpm run stop:containers
+
+  cypress:
+    name: E2E (${{ matrix.languages }}, chrome)
+    runs-on: ubuntu-26.04
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version: [24.x]
+        languages: [chinese, espanol]
+
+    env:
+      CHINESE_GHOST_API_URL: ${{ secrets.CI_CHINESE_GHOST_API_URL }}
+      CHINESE_GHOST_API_VERSION: ${{ secrets.CI_CHINESE_GHOST_API_VERSION }}
+      CHINESE_GHOST_CONTENT_API_KEY: ${{ secrets.CI_CHINESE_GHOST_CONTENT_API_KEY }}
+      ESPANOL_GHOST_API_URL: ${{ secrets.CI_ESPANOL_GHOST_API_URL }}
+      ESPANOL_GHOST_API_VERSION: ${{ secrets.CI_ESPANOL_GHOST_API_VERSION }}
+      ESPANOL_GHOST_CONTENT_API_KEY: ${{ secrets.CI_ESPANOL_GHOST_CONTENT_API_KEY }}
+      HASHNODE_API_URL: api_url_from_hashnode_dashboard
+      ENGLISH_HASHNODE_HOST: host_from_hashnode_dashboard
+      ADS_ENABLED: true
+      GOOGLE_ADSENSE_DATA_AD_CLIENT: ca-pub-1234567890
+      GOOGLE_ADSENSE_DATA_AD_SLOT: 1234567890
+      POSTS_PER_PAGE: 25
+      SITE_DOMAIN: localhost:8080
+      LOCALE_FOR_UI: ${{ matrix.languages }}
+      LOCALE_FOR_GHOST: ${{ matrix.languages }}
+
+    steps:
+      - name: Checkout source files
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@0977fd99725f1db4007ccb2928dbb4e90d06cc86 # v6
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Start Ghost container
+        run: pnpm run start:containers -- ${{ matrix.languages }}
+
+      - name: Wait for Ghost
+        run: |
+          if [ "${{ matrix.languages }}" = chinese ]; then port=3020; else port=3030; fi
+          timeout 60 sh -c "until wget -qO- http://localhost:$port/ >/dev/null 2>&1; do sleep 2; done"
+
+      - name: Start CI server and run Cypress
+        uses: cypress-io/github-action@c541a95ea92d9239347a2355f2e895cd4b3f8060 # v7.4.6
+        with:
+          start: pnpm run start:ci:${{ matrix.languages }}
+          wait-on: http://localhost:8080
+          wait-on-timeout: 1200
+          browser: chrome
+          headless: true
+          spec: cypress/e2e/${{ matrix.languages }}/**/*
+
+      - name: Stop Ghost containers
+        if: always()
+        run: pnpm run stop:containers
