@@ -4,10 +4,10 @@
   "description": "Eleventy for https://www.freecodecamp.org/news",
   "main": ".eleventy.js",
   "engines": {
-    "node": ">=24",
-    "pnpm": ">=10"
+    "node": ">=26",
+    "pnpm": ">=12"
   },
-  "packageManager": "pnpm@10.34.9",
+  "packageManager": "pnpm@12.17.0",
   "type": "module",
   "scripts": {
     "start": "pnpm run develop",
@@ -75,7 +75,7 @@
     "@fortawesome/free-solid-svg-icons": "7.3.1",
     "@tryghost/content-api": "1.12.13",
     "@tryghost/helpers": "1.1.109",
-    "@types/node": "24.19.2",
+    "@types/node": "26.6.6",
     "algoliasearch": "5.60.0",
     "clean-css": "5.3.3",
     "cross-env": "10.1.0",
@@ -113,12 +113,6 @@
     "slug": "11.0.1",
     "terser": "5.51.2",
     "typescript": "5.9.3"
-  },
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "cypress",
-      "unrs-resolver"
-    ]
   },
   "lint-staged": {
     "!(*.ts)": "prettier --write --ignore-unknown",

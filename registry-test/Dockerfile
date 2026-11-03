@@ -1,4 +1,4 @@
-FROM node:24-alpine
+FROM node:26-alpine
 
 ARG BUILD_ID
 ENV BUILD_ID=${BUILD_ID}

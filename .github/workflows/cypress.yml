@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-26.04
     strategy:
       matrix:
-        node-version: [24.x]
+        node-version: [26.x]
         browsers: [chrome, firefox]
         languages: [english, chinese, espanol]
 

@@ -1,0 +1,7 @@
+allowBuilds:
+  '@parcel/watcher': false
+  cypress: true
+  unrs-resolver: true
+
+engineStrict: true
+sideEffectsCache: false
