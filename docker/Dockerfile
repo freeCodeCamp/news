@@ -1,7 +1,7 @@
-FROM node:24-alpine
+FROM node:26-alpine
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME/bin:$PATH"
-RUN corepack enable pnpm && pnpm add -g serve
+RUN npm install -g pnpm@12.17.0 && pnpm add -g serve@14.2.6
 
 ARG BUILD_LANGUAGE
 

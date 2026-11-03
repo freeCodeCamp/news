@@ -14,6 +14,23 @@ Happy Contributing!
 
 ## Builds and Deployments
 
+### Toolchain
+
+Use Node.js 26 (`nvm install && nvm use`) and the exact pnpm version pinned
+in `package.json`:
+
+```sh
+npm install --global pnpm@12.17.0
+pnpm install --frozen-lockfile
+```
+
+Node.js 26 does not bundle Corepack. pnpm settings live in
+`pnpm-workspace.yaml`, including the dependency build-script policy.
+Cypress and `unrs-resolver` may run their install scripts; `@parcel/watcher`
+uses its prebuilt optional dependency without running its source-build script.
+Review any new dependency build scripts explicitly rather than disabling
+strict build checks.
+
 ### Build
 
 We use GHA to build the news sites. Workflows are in the `.github/workflows` directory.
