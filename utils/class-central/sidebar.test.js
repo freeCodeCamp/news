@@ -89,8 +89,8 @@ describe('Class Central sidebar:', () => {
     test('Swaps one ad for each rail', () => {
       const segments = getSidebarSegments(ccData, 12);
 
-      expect(segments).toHaveLength(2);
-      expect(sumAds(segments)).toBe(getSidebarAdCount(12) - 2);
+      expect(segments).toHaveLength(3);
+      expect(sumAds(segments)).toBe(getSidebarAdCount(12) - 3);
       segments.forEach(({ courses }) => expect(courses).toHaveLength(4));
     });
 

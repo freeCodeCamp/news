@@ -1,7 +1,7 @@
 // Lay out Class Central course rails and Google ads in the post sidebar
 
-// One rail per 5 minutes of reading time, leaving room for ads between rails
-export const READING_MINUTES_PER_RAIL = 5;
+// One rail per 4 minutes of reading time, leaving room for ads between rails
+export const READING_MINUTES_PER_RAIL = 4;
 export const COURSES_PER_RAIL = 4;
 
 export const getRailCount = readingTime =>
