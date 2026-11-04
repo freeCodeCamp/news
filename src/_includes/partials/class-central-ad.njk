@@ -4,7 +4,7 @@
     Two macros for vertical ads in the sidebar and bottom banner ads:
 
       classCentralCourseAd(ccData, courses, index, total) - sidebar rail, one per segment
-      classCentralCourseBanner(ccData)                    - wide band above the bottom ad slot
+      classCentralCourseBanner(ccData, courses)           - wide band above the bottom ad slot
 #}
 
 {# Logo / advertisement disclosure row #}
@@ -110,4 +110,4 @@
 {% endmacro %}
 
 {% macro classCentralCourseAd(ccData, courses, index, total) %}{{ shell(ccData, "rail", courses, "rail-" ~ index, "sidebar, " ~ index ~ " of " ~ total if total > 1 else "sidebar") }}{% endmacro %}
-{% macro classCentralCourseBanner(ccData) %}{{ shell(ccData, "banner", ccData.courses.slice(0, 4), "banner") }}{% endmacro %}
+{% macro classCentralCourseBanner(ccData, courses) %}{{ shell(ccData, "banner", courses, "banner") }}{% endmacro %}
