@@ -23,7 +23,7 @@ import {
   toISOStringShortcode
 } from './utils/shortcodes/dates.js';
 import { sitePath } from './utils/site-path.js';
-import { getRailCourses } from './utils/class-central/rails.js';
+import { getSidebarSegments } from './utils/class-central/sidebar.js';
 import { config } from './config/index.js';
 
 const { readFileSync, readdirSync, writeFileSync } = gracefulFS;
@@ -117,8 +117,8 @@ export default function (config) {
     return true;
   });
 
-  // Split Class Central courses into sidebar rails
-  config.addFilter('classCentralRails', getRailCourses);
+  // Lay out Class Central course rails and ads in the post sidebar
+  config.addFilter('sidebarSegments', getSidebarSegments);
 
   // Don't ignore the same files ignored in the git repo
   config.setUseGitIgnore(false);
