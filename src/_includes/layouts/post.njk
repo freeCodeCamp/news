@@ -13,7 +13,8 @@
 since the ad copy is hardcoded English #}
 {% set relatedCourses = classCentralCourses[post.id] %}
 {% set sidebarSegments = relatedCourses | sidebarSegments(post.reading_time) %}
-{% set bannerCourses = relatedCourses | classCentralBannerCourses %}
+{# Class Central ranks the courses, so the banner shows the first rail's top picks #}
+{% set bannerCourses = sidebarSegments[0].courses %}
 
 {% block content %}
     <main id="site-main" class="post-template site-main outer">
@@ -103,7 +104,7 @@ since the ad copy is hardcoded English #}
                     {% endif %}
                 </section>
                 {% if adsEnabled %}
-                    {% if bannerCourses | length %}
+                    {% if bannerCourses %}
                         {# Show the Class Central banner instead of a Google ad #}
                         {{ classCentralCourseBanner(relatedCourses, bannerCourses) }}
                     {% else %}

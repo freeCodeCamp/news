@@ -45,6 +45,3 @@ export const getSidebarSegments = (ccData, readingTime) => {
       Math.floor(adCount / segmentCount) + (i < adCount % segmentCount ? 1 : 0)
   }));
 };
-
-export const getBannerCourses = ccData =>
-  ccData?.courses?.slice(0, COURSES_PER_RAIL) ?? [];

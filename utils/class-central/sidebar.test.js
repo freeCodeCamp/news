@@ -1,5 +1,4 @@
 import {
-  getBannerCourses,
   getRailCount,
   getRailCourses,
   getSidebarAdCount,
@@ -99,23 +98,6 @@ describe('Class Central sidebar:', () => {
       expect(
         getSidebarSegments(ccData, 15).map(({ adCount }) => adCount)
       ).toEqual([5, 5, 4]);
-    });
-  });
-
-  describe('getBannerCourses', () => {
-    test('Shows up to four courses', () => {
-      expect(getBannerCourses({ courses: ['a', 'b', 'c', 'd', 'e'] })).toEqual([
-        'a',
-        'b',
-        'c',
-        'd'
-      ]);
-      expect(getBannerCourses({ courses: ['a'] })).toEqual(['a']);
-    });
-
-    test('Returns no courses without Class Central data', () => {
-      expect(getBannerCourses(undefined)).toEqual([]);
-      expect(getBannerCourses({})).toEqual([]);
     });
   });
 });
