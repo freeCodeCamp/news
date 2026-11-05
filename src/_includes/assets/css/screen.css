@@ -3095,7 +3095,7 @@ html.dark-mode .partner-courses-logo {
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    padding: 0 10px 10px;
+    padding: 0 0 10px;
   }
 
   /* Equal-height sidebar sections, each with an optional Class Central rail and ads */
