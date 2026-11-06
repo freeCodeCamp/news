@@ -187,7 +187,10 @@ const linksSchemaValidation = languages => {
   });
 };
 
-const translatedLangs = locales.filter(x => x !== 'english');
+const translatedLangs =
+  process.env.VALIDATE_ALL_LOCALES === 'false'
+    ? []
+    : locales.filter(locale => locale !== 'english');
 
 linksSchemaValidation(translatedLangs);
 metaTagsSchemaValidation(translatedLangs);
