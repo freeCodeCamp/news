@@ -60,7 +60,7 @@ jobs:
         run: pnpm run start:containers
 
       - name: Start CI server and run Cypress
-        uses: cypress-io/github-action@bc982daf1fc26474fa0cf2c355d6c910616ce411 # v7.4.7
+        uses: cypress-io/github-action@18016a55674bd02cabf197de5762a1710cb5577c # v7.4.9
         with:
           start: pnpm run start:ci:${{ matrix.languages }}
           wait-on: http://localhost:8080
