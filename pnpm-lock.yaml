@@ -245,8 +245,8 @@ importers:
         specifier: 26.6.0
         version: 26.6.0(typescript@5.9.3)
       i18next-fs-backend:
-        specifier: 2.6.9
-        version: 2.6.9
+        specifier: 2.6.10
+        version: 2.6.10
       jest:
         specifier: 30.5.2
         version: 30.5.2(@types/node@26.6.6)(supports-color@8.1.1)
@@ -2363,8 +2363,8 @@ packages:
     engines: {node: '>=18'}
     hasBin: true
 
-  i18next-fs-backend@2.6.9:
-    resolution: {integrity: sha512-YZ5PQUV9xnAeh45CCSQW095wYDWZEwKse/1wr3m0z0Mij5zoCFMs67Q3M+w/9un8fUruubMR4DzETnDGH85heQ==}
+  i18next-fs-backend@2.6.10:
+    resolution: {integrity: sha512-xxWaFUxLdNQxTTrsEfVHUD5h+i7fi7LWozPqqir6N+Oak/oB4HILt6pl5RLclv0QUsGI+ivQrVKBlrAFipFAEg==}
 
   i18next@26.6.0:
     resolution: {integrity: sha512-jpb1n5386s9mbBLNF6tSNIVhbBUUNiNeDyjWte+uxHP/Wr+CEy7WBM8q29TkfQ46VbwKeJFYdQJK3pSUhLp4CQ==}
@@ -6079,7 +6079,7 @@ snapshots:
 
   husky@9.1.7: {}
 
-  i18next-fs-backend@2.6.9: {}
+  i18next-fs-backend@2.6.10: {}
 
   i18next@26.6.0(typescript@5.9.3):
     optionalDependencies:
