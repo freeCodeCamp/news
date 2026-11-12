@@ -159,7 +159,7 @@ jobs:
           WEBHOOK_HOST: ${{ secrets.WEBHOOK_HOST }}
           WEBHOOK_SECRET: ${{ secrets.WEBHOOK_SECRET }}
         run: |
-          curl -fsS --max-time 30 -X POST "https://$WEBHOOK_HOST/hooks/run-gantry" \
+          curl --fail-with-body -sS --max-time 360 -X POST "https://$WEBHOOK_HOST/hooks/run-gantry" \
             -H "Content-Type: application/json" \
             -H "X-Webhook-Secret: $WEBHOOK_SECRET" \
             -d '{"GANTRY_SERVICES_FILTERS":"name=prd-news","GANTRY_SERVICES_EXCLUDED":"prd-news_svc-eng"}'
