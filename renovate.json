@@ -2,5 +2,7 @@
   "extends": [
     "github>freecodecamp/renovate-config",
     "github>freecodecamp/renovate-config:automerge"
-  ]
+  ],
+  "prCreation": "immediate",
+  "internalChecksAsSuccess": false
 }
