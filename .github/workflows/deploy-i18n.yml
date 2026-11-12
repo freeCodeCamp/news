@@ -3,15 +3,10 @@ name: i18n - Build and Deploy
 on:
   workflow_dispatch:
 
-concurrency:
-  group: deploy-news-i18n
-  cancel-in-progress: false
-
 jobs:
   build:
     name: Build
     runs-on: ubuntu-26.04
-    timeout-minutes: 30
 
     strategy:
       fail-fast: false
@@ -136,7 +131,6 @@ jobs:
     if: ${{ !cancelled() }}
     permissions: {}
     runs-on: ubuntu-26.04
-    timeout-minutes: 10
     steps:
       - name: Setup and connect to Tailscale network
         uses: tailscale/github-action@064b10558093f38325e838ddea35486bdc6b1d5c # v4.4.0
@@ -177,7 +171,6 @@ jobs:
     permissions:
       actions: read
     runs-on: ubuntu-26.04
-    timeout-minutes: 5
     steps:
       - name: Find the result to report
         id: report
@@ -192,8 +185,8 @@ jobs:
               last=$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID/attempts/$((GITHUB_RUN_ATTEMPT - 1))" \
                 --jq '.conclusion // ""' || true)
             else
-              last=$(gh api "repos/$GITHUB_REPOSITORY/actions/workflows/deploy-i18n.yml/runs?branch=$GITHUB_REF_NAME&status=completed&per_page=10" \
-                --jq '[.workflow_runs[] | select(.conclusion != "cancelled")][0].conclusion // ""' || true)
+              last=$(gh api "repos/$GITHUB_REPOSITORY/actions/workflows/deploy-i18n.yml/runs?branch=$GITHUB_REF_NAME&status=completed&per_page=1" \
+                --jq '.workflow_runs[0].conclusion // ""' || true)
             fi
             if printf '%s\n' "$last" | grep -Eqx "$bad"; then
               echo 'status=ok' >>"$GITHUB_OUTPUT"
