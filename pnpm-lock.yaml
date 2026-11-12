@@ -173,8 +173,8 @@ importers:
         specifier: 3.1.0
         version: 3.1.0
       '@aws-sdk/client-s3':
-        specifier: 3.1162.0
-        version: 3.1162.0
+        specifier: 3.1163.0
+        version: 3.1163.0
       '@eslint/eslintrc':
         specifier: 3.3.7
         version: 3.3.7(supports-color@8.1.1)
@@ -417,8 +417,8 @@ packages:
     resolution: {integrity: sha512-lBwLpni4uWNIH0UxgP8hR3XiGSunn9C7DrhzQzte/uc4chFpghMpf4GkiBrvvygs3NTp1VI5QdD9ZbRA0hM0OQ==}
     engines: {node: '>=20.0.0'}
 
-  '@aws-sdk/client-s3@3.1162.0':
-    resolution: {integrity: sha512-WIPNPTQJnZBpWeeejEp7TPb2Jajy2kHqOkq5GzbI/vCU9Hu8Ks8kdHBFUuu7IC+bZuC/OuvPKL3ciet0RQkiAA==}
+  '@aws-sdk/client-s3@3.1163.0':
+    resolution: {integrity: sha512-exn6SxrqC0NMqJ1YmzbhTDj4hJ4GWnzt2Oq0Rafy2BGSWncFnrquK+RX7mG9DzWxTEyYg/gzbrEk93yvm+ibQA==}
     engines: {node: '>=20.0.0'}
 
   '@aws-sdk/core@3.980.1':
@@ -3950,7 +3950,7 @@ snapshots:
       '@smithy/types': 4.20.0
       tslib: 2.9.1
 
-  '@aws-sdk/client-s3@3.1162.0':
+  '@aws-sdk/client-s3@3.1163.0':
     dependencies:
       '@aws-sdk/checksums': 3.1002.3
       '@aws-sdk/core': 3.980.1
