@@ -14,12 +14,8 @@ concurrency:
 
 jobs:
   test:
-    name: Test (${{ matrix.languages }})
+    name: Test (espanol)
     runs-on: ubuntu-26.04
-    strategy:
-      matrix:
-        node-version: [26.x]
-        languages: [espanol]
 
     env:
       POSTS_PER_PAGE: 25
@@ -27,8 +23,8 @@ jobs:
       ESPANOL_GHOST_API_VERSION: ${{ secrets.CI_ESPANOL_GHOST_API_VERSION }}
       ESPANOL_GHOST_CONTENT_API_KEY: ${{ secrets.CI_ESPANOL_GHOST_CONTENT_API_KEY }}
       SITE_DOMAIN: localhost:8080
-      LOCALE_FOR_UI: ${{ matrix.languages }}
-      LOCALE_FOR_GHOST: ${{ matrix.languages }}
+      LOCALE_FOR_UI: espanol
+      LOCALE_FOR_GHOST: espanol
       VALIDATE_ALL_LOCALES: 'true'
 
     steps:
@@ -38,10 +34,10 @@ jobs:
       - name: Install pnpm
         uses: pnpm/action-setup@0977fd99725f1db4007ccb2928dbb4e90d06cc86 # v6
 
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: Use Node.js
         uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version-file: .nvmrc
           cache: 'pnpm'
 
       - name: Install dependencies
@@ -73,7 +69,6 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        node-version: [26.x]
         languages: [chinese, espanol]
 
     env:
@@ -100,10 +95,10 @@ jobs:
       - name: Install pnpm
         uses: pnpm/action-setup@0977fd99725f1db4007ccb2928dbb4e90d06cc86 # v6
 
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: Use Node.js
         uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version-file: .nvmrc
           cache: 'pnpm'
 
       - name: Install dependencies

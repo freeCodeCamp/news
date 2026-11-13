@@ -12,7 +12,6 @@ jobs:
     strategy:
       matrix:
         browsers: [chrome, firefox]
-        languages: [english]
 
     env:
       HASHNODE_API_URL: api_url_from_hashnode_dashboard
@@ -26,8 +25,8 @@ jobs:
 
       SITE_DOMAIN: localhost:8080
 
-      LOCALE_FOR_UI: ${{ matrix.languages }}
-      LOCALE_FOR_GHOST: ${{ matrix.languages }}
+      LOCALE_FOR_UI: english
+      LOCALE_FOR_GHOST: english
 
     steps:
       - name: Checkout source files
@@ -48,9 +47,9 @@ jobs:
       - name: Start CI server and run Cypress
         uses: cypress-io/github-action@18016a55674bd02cabf197de5762a1710cb5577c # v7.4.9
         with:
-          start: pnpm run start:ci:${{ matrix.languages }}
+          start: pnpm run start:ci:english
           wait-on: http://localhost:8080
           wait-on-timeout: 1200
           browser: ${{ matrix.browsers }}
           headless: true
-          spec: cypress/e2e/${{ matrix.languages }}/**/*
+          spec: cypress/e2e/english/**/*

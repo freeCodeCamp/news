@@ -14,10 +14,6 @@ jobs:
     env:
       VALIDATE_ALL_LOCALES: 'false'
 
-    strategy:
-      matrix:
-        node-version: [26.x]
-
     steps:
       - name: Checkout source code
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
@@ -45,11 +41,6 @@ jobs:
     needs: lint
     runs-on: ubuntu-26.04
 
-    strategy:
-      matrix:
-        node-version: [26.x]
-        languages: [english]
-
     env:
       POSTS_PER_PAGE: ${{ secrets.POSTS_PER_PAGE }}
 
@@ -58,8 +49,8 @@ jobs:
 
       SITE_DOMAIN: localhost:8080
 
-      LOCALE_FOR_UI: ${{ matrix.languages }}
-      LOCALE_FOR_GHOST: ${{ matrix.languages }}
+      LOCALE_FOR_UI: english
+      LOCALE_FOR_GHOST: english
       VALIDATE_ALL_LOCALES: 'false'
 
     steps:
@@ -91,17 +82,15 @@ jobs:
         run: pnpm run type-check
 
       - name: Build serving image
-        if: ${{ matrix.languages == 'english' }}
         run: |
           node ./config/i18n/generate-serve-config.js
           docker build --build-arg BUILD_LANGUAGE=english --file docker/Dockerfile --tag news-serving-test .
 
       - name: Smoke test serving image
-        if: ${{ matrix.languages == 'english' }}
         run: |
           docker run --detach --name news-serving-test --publish 127.0.0.1:3000:3000 news-serving-test
           curl --fail --retry 10 --retry-all-errors --retry-delay 1 http://localhost:3000/ --output /dev/null
 
       - name: Stop serving container
-        if: ${{ always() && matrix.languages == 'english' }}
+        if: always()
         run: docker rm --force news-serving-test
