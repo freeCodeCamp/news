@@ -2,5 +2,14 @@
   "extends": [
     "github>freecodecamp/renovate-config",
     "github>freecodecamp/renovate-config:automerge"
+  ],
+  "prCreation": "immediate",
+  "internalChecksAsSuccess": false,
+  "packageRules": [
+    {
+      "description": "Docker updates wait for a person: no required check builds them.",
+      "matchManagers": ["dockerfile", "docker-compose", "devcontainer"],
+      "automerge": false
+    }
   ]
 }
