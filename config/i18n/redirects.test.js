@@ -1,7 +1,10 @@
 import { config } from '../../config/index.js';
 import { loadJSON } from '../../utils/load-json.js';
-const { locales } = config;
-const testLocales = [...locales, 'dothraki'];
+const { locales, currentLocale_i18n } = config;
+const testLocales =
+  process.env.VALIDATE_ALL_LOCALES === 'false'
+    ? [currentLocale_i18n]
+    : [...locales, 'dothraki'];
 
 const path = `${import.meta.dirname}`;
 

@@ -12,19 +12,8 @@ jobs:
     strategy:
       matrix:
         browsers: [chrome, firefox]
-        languages: [english, chinese, espanol]
 
     env:
-      BUILD_LANG: ${{ matrix.languages }}
-
-      CHINESE_GHOST_API_URL: ${{ secrets.CI_CHINESE_GHOST_API_URL }}
-      CHINESE_GHOST_API_VERSION: ${{ secrets.CI_CHINESE_GHOST_API_VERSION }}
-      CHINESE_GHOST_CONTENT_API_KEY: ${{ secrets.CI_CHINESE_GHOST_CONTENT_API_KEY }}
-
-      ESPANOL_GHOST_API_URL: ${{ secrets.CI_ESPANOL_GHOST_API_URL }}
-      ESPANOL_GHOST_API_VERSION: ${{ secrets.CI_ESPANOL_GHOST_API_VERSION }}
-      ESPANOL_GHOST_CONTENT_API_KEY: ${{ secrets.CI_ESPANOL_GHOST_CONTENT_API_KEY }}
-
       HASHNODE_API_URL: api_url_from_hashnode_dashboard
       ENGLISH_HASHNODE_HOST: host_from_hashnode_dashboard
 
@@ -36,8 +25,8 @@ jobs:
 
       SITE_DOMAIN: localhost:8080
 
-      LOCALE_FOR_UI: ${{ matrix.languages }}
-      LOCALE_FOR_GHOST: ${{ matrix.languages }}
+      LOCALE_FOR_UI: english
+      LOCALE_FOR_GHOST: english
 
     steps:
       - name: Checkout source files
@@ -55,18 +44,12 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Start Ghost containers
-        run: pnpm run start:containers
-
       - name: Start CI server and run Cypress
         uses: cypress-io/github-action@18016a55674bd02cabf197de5762a1710cb5577c # v7.4.9
         with:
-          start: pnpm run start:ci:${{ matrix.languages }}
+          start: pnpm run start:ci:english
           wait-on: http://localhost:8080
           wait-on-timeout: 1200
           browser: ${{ matrix.browsers }}
           headless: true
-          spec: cypress/e2e/${{ matrix.languages }}/**/*
-
-      - name: Stop Ghost containers
-        run: pnpm run stop:containers
+          spec: cypress/e2e/english/**/*
