@@ -5,37 +5,35 @@ import { config } from '../../config/index.js';
 import { loadJSON } from '../../utils/load-json.js';
 import source from '../serve.json' with { type: 'json' };
 
-const { locales } = config;
+const { currentLocale_i18n: language } = config;
 const { writeFileSync, mkdirSync } = gracefulFS;
+const filePath = join(
+  import.meta.dirname,
+  `/locales/${language}/redirects.json`
+);
+const redirects = loadJSON(filePath);
 
-locales.push('dothraki');
-
-for (let language of locales) {
-  const sourceClone = { ...source };
-  const filePath = join(
-    import.meta.dirname,
-    `/locales/${language}/redirects.json`
-  );
-  const redirectsArray = loadJSON(filePath);
-
-  sourceClone.redirects = [
+const serveConfig = {
+  ...source,
+  redirects: [
     {
       source: '/:slug/amp',
       destination:
         language === 'english' ? '/news/:slug' : `/${language}/news/:slug`,
       type: 302
     },
-    ...(redirectsArray.length ? redirectsArray : [])
-  ];
+    ...redirects
+  ]
+};
 
-  mkdirSync(join(import.meta.dirname, `../../docker/languages/${language}`), {
-    recursive: true
-  });
+const outputDirectory = join(
+  import.meta.dirname,
+  `../../docker/languages/${language}`
+);
+mkdirSync(outputDirectory, { recursive: true });
+writeFileSync(
+  join(outputDirectory, 'serve.json'),
+  JSON.stringify(serveConfig, null, 2)
+);
 
-  writeFileSync(
-    join(import.meta.dirname, `../../docker/languages/${language}/serve.json`),
-    JSON.stringify(sourceClone, null, 2)
-  );
-
-  console.log(`Wrote ${language}/serve.json`);
-}
+console.log(`Wrote ${language}/serve.json`);

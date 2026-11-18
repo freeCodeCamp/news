@@ -73,8 +73,8 @@ const langNames = {
 };
 
 const {
-  LOCALE_FOR_UI: localeForUI,
-  LOCALE_FOR_GHOST: localeForGhost,
+  LOCALE_FOR_UI: localeForUI = 'english',
+  LOCALE_FOR_GHOST: localeForGhost = 'english',
   SITE_DOMAIN: siteDomain,
   POSTS_PER_PAGE: postsPerPage,
   ALGOLIA_APP_ID: algoliaAppId,
@@ -139,11 +139,9 @@ export const config = {
   algoliaIndices,
   langNames,
   getSiteURL,
-  currentLocale_i18n: localeForUI || 'italian',
-  currentLocale_i18nISOCode: !localeCodes[localeForUI]
-    ? localeCodes['italian']
-    : localeCodes[localeForUI],
-  currentLocale_ghost: localeForGhost || 'italian',
+  currentLocale_i18n: localeForUI,
+  currentLocale_i18nISOCode: localeCodes[localeForUI],
+  currentLocale_ghost: localeForGhost,
   siteURL,
   postsPerPage: postsPerPage || 25,
   algoliaAppId:
