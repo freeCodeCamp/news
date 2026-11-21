@@ -194,8 +194,8 @@ importers:
         specifier: 7.3.1
         version: 7.3.1
       '@tryghost/content-api':
-        specifier: 1.12.13
-        version: 1.12.13(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1)
+        specifier: 1.12.15
+        version: 1.12.15(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1)
       '@tryghost/helpers':
         specifier: 1.1.109
         version: 1.1.109
@@ -1198,8 +1198,8 @@ packages:
   '@standard-schema/spec@1.1.0':
     resolution: {integrity: sha512-l2aFy5jALhniG5HgqrD6jXLi/rUWrKvqN/qJx6yoJsgKhblVd+iqqU4RCXavm/jPityDo5TCvKMnpjKnOriy0w==}
 
-  '@tryghost/content-api@1.12.13':
-    resolution: {integrity: sha512-/8YHCXqI+oDpRXzTWFvnkyWi72Wab2uJA5xAAPi5EJkmOReqlzGub2S9c5FCC/BMestXmDyOsG2nHq2uUBO8cA==}
+  '@tryghost/content-api@1.12.15':
+    resolution: {integrity: sha512-R0sHW50CtaKEKnmvLcaej8MNY86NgipNqDbIIwcb017kHPAaqUzE6C3d6x3d0PhqtVS60wBR7Z+FGqCbcXSypA==}
 
   '@tryghost/helpers@1.1.109':
     resolution: {integrity: sha512-HIx4njpC3Jg0xD0tGhx5wqq/i50T3+aZwAnoFmBJBxwf9TeoFLH3tazZpVnkhK4GALhC4L4zDpJ6gKaa6/C0cQ==}
@@ -1484,8 +1484,8 @@ packages:
   aws4@1.13.2:
     resolution: {integrity: sha512-lHe62zvbTB5eEABUVi/AwVh0ZKY9rMMDhmm+eeyuuUQbQ3+J+fONVQOZyj+DdrvD4BY33uYniyRJ4UJIaSKAfw==}
 
-  axios@1.20.0:
-    resolution: {integrity: sha512-r8aOh8j9cGKpgQAqpzrUHnSIc6a59Y3Xf/cv8sy1DrHCkZHzQGEuoq1tARk6qSyDdtQGSDgpb9kFlruzPvrgwg==}
+  axios@1.21.1:
+    resolution: {integrity: sha512-6eI5Q/Y4u/Um9dDlsRoq5pY2rxnUTv+L4PpLitnbk/i4jb3MxLZ5CsN5Ih3IysbeRYK4pR+P7qfMsOQl9fwwFQ==}
 
   babel-jest@30.5.2:
     resolution: {integrity: sha512-ES8WeJ2fNWPEDunyAtUfJ12nHyaWUloCHdkfK2oW5uSoQSUmjNKdWiGaXJITJwvFEWoD/evHEg/QoCXAvLaQqQ==}
@@ -4906,9 +4906,9 @@ snapshots:
 
   '@standard-schema/spec@1.1.0': {}
 
-  '@tryghost/content-api@1.12.13(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1)':
+  '@tryghost/content-api@1.12.15(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1)':
     dependencies:
-      axios: 1.20.0(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1)
+      axios: 1.21.1(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1)
     transitivePeerDependencies:
       - debug
       - supports-color
@@ -5146,7 +5146,7 @@ snapshots:
 
   aws4@1.13.2: {}
 
-  axios@1.20.0(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1):
+  axios@1.21.1(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1):
     dependencies:
       follow-redirects: 1.16.2(debug@4.4.3(supports-color@8.1.1))
       form-data: 4.0.6
