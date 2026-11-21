@@ -20,7 +20,7 @@ jobs:
           token: ${{ secrets.CROWDIN_CAMPERBOT_PAT }}
 
       - name: Generate Crowdin Config
-        uses: freecodecamp/crowdin-action@36a78cbf92f5a6c05a3a32dc8bf434a19a7c59e2 # main
+        uses: freecodecamp/crowdin-action@ff9b8f87b6872d069fc8a67731012d899ee91b81 # main
         env:
           PLUGIN: 'generate-config'
           PROJECT_NAME: 'news'
@@ -230,7 +230,7 @@ jobs:
 
       # Create Commit
       - name: Commit Changes
-        uses: freecodecamp/crowdin-action@36a78cbf92f5a6c05a3a32dc8bf434a19a7c59e2 # main
+        uses: freecodecamp/crowdin-action@ff9b8f87b6872d069fc8a67731012d899ee91b81 # main
         env:
           PLUGIN: 'commit-changes'
           GH_USERNAME: 'camperbot'
@@ -242,7 +242,7 @@ jobs:
       # All languages should go ABOVE this. #
 
       - name: Create PR
-        uses: freecodecamp/crowdin-action@36a78cbf92f5a6c05a3a32dc8bf434a19a7c59e2 # main
+        uses: freecodecamp/crowdin-action@ff9b8f87b6872d069fc8a67731012d899ee91b81 # main
         env:
           PLUGIN: 'pull-request'
           GH_TOKEN: ${{ secrets.CROWDIN_CAMPERBOT_PAT }}
