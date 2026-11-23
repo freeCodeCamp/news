@@ -2763,6 +2763,8 @@ a.banner:hover span {
 
 .partner-courses-list li {
   margin: 0;
+  padding: 0;
+  line-height: inherit;
 }
 
 .partner-courses-label {
