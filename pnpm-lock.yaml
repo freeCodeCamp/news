@@ -308,8 +308,8 @@ importers:
         specifier: 11.0.1
         version: 11.0.1
       terser:
-        specifier: 5.51.2
-        version: 5.51.2
+        specifier: 5.51.4
+        version: 5.51.4
       typescript:
         specifier: 5.9.3
         version: 5.9.3
@@ -3506,8 +3506,8 @@ packages:
     os: [darwin, linux, win32, freebsd, openbsd, netbsd, sunos, android]
     hasBin: true
 
-  terser@5.51.2:
-    resolution: {integrity: sha512-bWnjSNscmuI+GJze6ZupnHP8G/cTcsJF+bXCeQknk2SHQsgbNJnLrqiH9jZ2W4STPVXH2mDKKRX3iwPhc9Cn/Q==}
+  terser@5.51.4:
+    resolution: {integrity: sha512-VPi1CkDvCWLGUVIToctNBG+NdHbSXwOPjHJnQ3pdB0XknaldnI76wSkAFOGxV2ZdkzOP5d6gpQ5c58XvDghRvw==}
     engines: {node: '>=10'}
     hasBin: true
 
@@ -7353,7 +7353,7 @@ snapshots:
 
   systeminformation@5.33.19: {}
 
-  terser@5.51.2:
+  terser@5.51.4:
     dependencies:
       '@jridgewell/source-map': 0.3.11
       acorn: 8.19.0
